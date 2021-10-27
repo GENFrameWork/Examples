@@ -1,0 +1,94 @@
+
+ <element name="form" type="form"  xpos="550" ypos="300" width="300" height="100" linecolor="10,10,10,255" color="10,10,10,150">
+      <element name="ID Edit" type="edittext" maxsizetext="10" xpos="20" ypos="20" sizefont="22" bckgrdcolor="159,131,87,255" color="yellow" >0000000</element>      
+    </element> 
+
+
+
+
+    <element name="ListBoxID" type="listbox" xpos="center" ypos="center" defaultoption="0" bckgrdcolor="159,131,87,255" color="yellow" >
+      <element name="ListBoxTextID" type="text" maxsizetext="10" sizefont="22" bckgrdcolor="159,131,87,255" color="yellow" >0000000</element>      
+      <element name="ListBoxMenuID" type="menu"  width="100" height="300" linecolor="black,255" color="10,10,10,150"> </element>  
+    </element>    
+
+
+    <element name="form" type="form"  xpos="550" ypos="300" width="300" height="100" linecolor="10,10,10,255" color="10,10,10,150">
+      <element name="ID Edit" type="edittext" maxsizetext="10" xpos="20" ypos="20" sizefont="22" bckgrdcolor="159,131,87,255" color="yellow" >0000000</element>      
+    </element> 
+
+
+
+
+
+    <element name="form" type="form"  xpos="550" ypos="300" width="300" height="100" linecolor="10,10,10,255" color="10,10,10,150">
+      <element name="ID Edit" type="edittext" maxsizetext="10" xpos="20" ypos="20" sizefont="22" bckgrdcolor="159,131,87,255" color="yellow" >0000000</element>      
+    </element> 
+
+
+
+
+    /<element name="ListBoxID" type="listbox" xpos="30" ypos="100" defaultoption="1" menu="ListBoxMenuID" sizefont="22" bckgrdcolor="159,131,87,50" color="yellow" >------------</element>
+
+
+
+
+      <element name="chromeall-btn" type="multioption" xpos="50" ypos="30">   
+        
+        <element name="chrome-btn" type="button" selectablestatus="active" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Navegador de prueba</element>                       
+        </element>
+        
+        <element name="chrome-btn" type="button" selectablestatus="preselect"  allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,255" >Navegador de prueba</element>                       
+        </element>
+        
+        <element name="chrome-btn" type="button" selectablestatus="selected" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" xpos="center" ypos="20" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,255" >Navegador de prueba</element>                       
+        </element>
+    
+        <element name="chrome-btn" type="button" selectablestatus="deactive" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Navegador de prueba</element>                       
+        </element>   
+        
+      </element>
+          
+      <element name="email-btn" type="button" xpos="290" ypos="30"  allocationtext="down" sizefont="18" visible="yes">       
+        <element name="animation02" type="animation">
+          <image>gmail-logo.png</image>
+        </element>                 
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Email</element>                       
+      </element>
+
+      <element name="youtube-btn" type="button" xpos="450" ypos="30" allocationtext="down" sizefont="18">        
+        <element name="animation03" type="animation">
+          <image>youtube-logo.png</image>
+        </element>                 
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Youtube</element>                               
+      </element>
+                     
+    </element>
+
+    <element name="menu-btn" type="button" xpos="-40" ypos="384" zlevel="10">        
+      <element name="animation00" type="animation">
+        <image>menu_button.png</image>
+      </element>                             
+    </element>      
+    
+
+
+
+
+     
+    

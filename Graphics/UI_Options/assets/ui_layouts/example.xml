@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layouts>
+  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="timesi.ttf" backgroundimg="background.jpg" > </skin>
+
+  <color name="colortext">yellow</color>   
+  <color name="colormenuline">red</color>   
+  <color name="colormenu">black,50</color>
+
+  <text name="button_text">#[TEST_TEXT]</text>
+ 
+  <animation name="gigolord_walk0">gigolord_walk0/LF-WxWalk_01#[02].png</animation>
+
+  <layout name="example"> 
+    
+    <element name="text01" type="text" xpos="Center" ypos="740" sizefont="22" color="black" >Change tests in sentence: #[TEST_TEXT2]</element>    s
+
+    <element name="textbox01" type="textbox"  xpos="550" ypos="475" width="400" height="350" textalignment="center" wordclipping="yes" linespacing="5" sizefont="18" color="red,50">
+      <animation name="gigolord_walk1">gigolord_walk0/LF-WxWalk_02#[02].png</animation>
+      <text>#[TRANSLATE_100]</text>
+      <text>Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados,</text>
+      <text>lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.</text>  
+      <text>El resto della concluían sayo de velarte, calzas de velludo ![IMAGE Icon_36.png]para las fiestas ![IMAGE Icon_36.png], con sus pantuflos de lo mesmo, y los días de  entresemana se honraba con su vellorí de lo más fino.</text>      
+    </element>
+    
+   
+    <element name="progressbarID2" type="progressbar" xpos="100" ypos="350"  allocationtext="down" direction="horizontal"  progressrect="0,0,300,10" continuouscycle="33,10,10"  linecolor="black,60"  color="blue,30"  bckgrdcolor="white">
+    </element>
+
+    <element name="progressbarID" type="progressbar" xpos="100" ypos="410"  allocationtext="down" direction="horizontal"  progressrect="0,0,300,30" linecolor="black,60"  color="blue,30"  bckgrdcolor="white">
+      <element name="text01" type="text" xpos="center" sizefont="18" color="black,100" >#[PROGRESSBAR_PERCENT]</element>
+    </element>
+    
+    <element name="ListBoxMenuID" type="menu"  xpos="100" ypos="250" width="300" height="225" roundrect="15" linecolor="colormenuline" color="colormenu">
+    </element>
+
+    <element name="form" type="form"  xpos="550" ypos="100" width="275" height="75" roundrect="15" linecolor="colormenuline" color="colormenu">
+      <element name="ID Edit" type="edittext" maxsizetext="10" xpos="20" ypos="20" sizefont="22" roundrect="15" bckgrdcolor="159,131,87,100" color="yellow" >0000000</element>
+    </element>    
+    
+    <element name="menu_horz" type="form"  xpos="60" ypos="690"  visiblerect = "0,0,550,70" roundrect="15" linecolor="white,100" color="60,60,60">
+
+      <element name="chromeall-btn" type="multioption" xpos="80" ypos="20">
+
+        <element name="chrome-btn" type="button" selectablestatus="active" allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center" ypos="-10" state="play" timedelay="35">
+            <image>gigolord_walk0</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,100" >button_text</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="preselect"  allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center" ypos="-10" state="play" timedelay="35">
+            <image>gigolord_walk0</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,100" >button_text</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="selected" allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center" ypos="10" state="play" timedelay="35">
+            <image>gigolord_walk0</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,100" >button_text</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="deactive" allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center" ypos="-10" state="play" timedelay="35">
+            <image>gigolord_walk0</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,100" >button_text</element>
+        </element>
+
+      </element>
+
+      <element name="email-btn" type="button" xpos="260" ypos="20"  allocationtext="down" sizefont="18" visible="yes">
+        <element name="animation02" type="animation">
+          <image>gmail-logo.png</image>
+        </element>
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,100" >Email</element>
+      </element>
+
+      <element name="youtube-btn" type="button" xpos="420" ypos="20" allocationtext="down" sizefont="18">
+        <element name="animation03" type="animation">
+          <image>youtube-logo.png</image>
+        </element>
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,100" >Youtube</element>
+      </element>
+
+    </element>
+    
+    <element name="menu-btn" type="button" xpos="5" ypos="704">
+      <element name="animation00" type="animation">
+        <image>menu_button.png</image>
+      </element>
+    </element>
+    
+   
+  </layout>
+  
+ 
+</layouts> 
+
+

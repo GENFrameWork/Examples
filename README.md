@@ -1,3 +1,29 @@
-# Examples
+![GEN FrameWork](GENIcon.png "GEN FrameWork")
 
-Examples of GEN
+# GEN FrameWork
+
+## Examples and unit tests
+
+The GEN FrameWork examples are a set of projects to test the different framework functionalities. They are divided into 3 blocks:
+
+
+- **Base**, They are basic examples, with the minimum overload and dependencies of the framework. They are for use in environments with minimal resources (eg a microcontroller).
+- **Console**, They are examples with console output, valid for the backend functionality of the framework.
+- **Graphics**, Examples that make use of the graphic capabilities of the framework.
+
+
+## Base examples
+- **NoApp**, Minimum application: using the minimum dependencies of the framework.
+- **DataIOStream**, Example of use of Data Input / Out stream class (communications) of the framework.
+
+## Console examples
+
+- **BinConnPro**, How to use the generic binary protocol, automatic connection management, with encryption level.
+- **Databases**, Example of the use of the framework database connector (SQLite, MySQL, PostgreSQL, ...).
+- **MiniWebServer**, Example of using the internal Web server with API-Rest, WebSocket and Plugings management: CGI.
+- **Scripts**, Example of use of the possible Scripts that it manages of the FrameWork: GEN Script, Lua & JavaScript.
+- **Tests**, Project for the management of unit framework tests.
+
+## Graphics examples
+
+- **Canvas2D**, Graphic example in 2D, with support of Bitmaps, Viewports, Sprites, etc ...

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layouts>
+  <skin name="FLAT" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="background.jpg" > </skin>
+
+  <color name="colortext">yellow</color>   
+  <color name="colormenuline">red</color>   
+  <color name="colormenu">black,50</color>
+  
+
+  <layout name="example">
+
+    <element name="ListBoxMenuID" type="menu" xpos="20" ypos="210" width="150" height="100" visible="no" linecolor="colormenuline" color="colormenu">
+
+      <element name="ListBoxMenuButtonID1" type="option" xpos="10" ypos="70" allocationtext="down" sizefont="18" extra="script.js">
+        <element name="text01" type="text" xpos="center" sizefont="22" color="white,255" >Ingles</element>
+      </element>
+      <element name="ListBoxMenuButtonID2" type="option" xpos="10" ypos="40" allocationtext="down" sizefont="18">
+        <element name="text01" type="text" xpos="center" sizefont="22" color="white,255" >Castellano</element>
+      </element>
+      <element name="ListBoxMenuButtonID3" type="option" xpos="10" ypos="10" allocationtext="down" sizefont="18">
+        <element name="text01" type="text" xpos="center" sizefont="22" color="white,255" >Chino</element>
+      </element>
+
+    </element>
+
+    <element name="ListBoxID" type="listbox" xpos="30" ypos="100" defaultoption="1" menu="ListBoxMenuID" sizefont="22" bckgrdcolor="159,131,87,50" color="yellow" >------------</element>
+
+
+    <element name="menu_horz" type="form"  xpos="1" ypos="680"  visibleform = "0,0,600,90" linecolor="white,255" color="60,60,60">
+
+      <element name="chromeall-btn" type="multioption" xpos="50" ypos="30">
+
+        <element name="chrome-btn" type="button" selectablestatus="active" allocationtext="down" sizefont="18">
+          <element name="sanimation01" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Navegador de prueba</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="preselect"  allocationtext="down" sizefont="18">
+          <element name="sanimation02" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,255" >Navegador de prueba</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="selected" allocationtext="down" sizefont="18">
+          <element name="sanimation03" type="animation" xpos="center" ypos="20" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,255" >Navegador de prueba</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="deactive" allocationtext="down" sizefont="18">
+          <element name="sanimation04" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Navegador de prueba</element>
+        </element>
+
+      </element>
+
+
+      <element name="email-btn" type="button" xpos="290" ypos="30"  allocationtext="down" sizefont="18" visible="yes">
+        <element name="animation02" type="animation">
+          <image>gmail-logo.png</image>
+        </element>
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Email</element>
+      </element>
+
+      <element name="youtube-btn" type="button" xpos="450" ypos="30" allocationtext="down" sizefont="18">
+        <element name="animation03" type="animation">
+          <image>youtube-logo.png</image>
+        </element>
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Youtube</element>
+      </element>
+      
+    </element>
+    
+        
+    <element name="menu-btn" type="button" xpos="-40" ypos="684">        
+      <element name="animation00" type="animation">
+        <image>menu_button.png</image>
+      </element>                             
+    </element>  
+    
+    
+  </layout>
+  
+  
+  
+</layouts> 
+
+

@@ -1,0 +1,62 @@
+
+<animation name="gigolord_walk0">gigolord_walk0/LF-WxWalk_01#[02].png</animation>
+
+
+
+
+
+    <element name="menu_horz" type="form"  xpos="10" ypos="640"  visibleform = "0,0,700,90" linecolor="white,255" color="60,60,60">
+
+      <element name="chromeall-btn" type="multioption" xpos="100" ypos="30">
+
+        <element name="chrome-btn" type="button" selectablestatus="active" allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center"  state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Navegador de prueba</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="preselect"  allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center"  state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,255" >Navegador de prueba</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="selected" allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center"  ypos="20" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="yellow,255" >Navegador de prueba</element>
+        </element>
+
+        <element name="chrome-btn" type="button" selectablestatus="deactive" allocationtext="down" sizefont="18">
+          <element name="animation01" type="animation" xpos="center" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>
+          <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Navegador de prueba</element>
+        </element>
+
+      </element>
+
+      <element name="email-btn" type="button" xpos="340" ypos="30"  allocationtext="down" sizefont="18" visible="yes">
+        <element name="animation02" type="animation">
+          <image>gmail-logo.png</image>
+        </element>
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Email</element>
+      </element>
+
+      <element name="youtube-btn" type="button" xpos="500" ypos="30" allocationtext="down" sizefont="18">
+        <element name="animation03" type="animation">
+          <image>youtube-logo.png</image>
+        </element>
+        <element name="text01" type="text" xpos="center" sizefont="18" color="white,255" >Youtube</element>
+      </element>
+
+    </element>
+    
+    <element name="menu-btn" type="button" xpos="0" ypos="634">
+      <element name="animation00" type="animation">
+        <image>menu_button.png</image>
+      </element>
+    </element>

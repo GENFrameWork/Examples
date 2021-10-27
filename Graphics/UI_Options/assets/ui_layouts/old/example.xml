@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layouts>
+
+  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Inter-Black.ttf"> </skin>
+
+  <layout name="startup">                 
+    <element name="text01" type="text" xpos="100" ypos="100" margin="10,10,10,10" aling="none" sizefont="16" color="red,255" >Texto directo en el Layer ...</element>
+    
+    <element name="menu_vert" type="menu"  xpos="650" ypos="700" width="300" height="600" linecolor="white,255" color="10,10,10,150">
+            
+    </element>
+    
+  </layout> 
+
+  
+
+  <layout name="IN_ALL">                 
+      
+    <element name="menu_horz" type="form"  xpos="-8" ypos="680" width="580" height="80" linecolor="white,255" color="10,10,10,150">  
+      
+      <element name="chromeall-btn" type="button"  xpos="100" ypos="30">                
+        <element name="chrome-btn" type="button" selectablestatus="active"  aling="horcenter" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" aling="none" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" sizefont="18" color="white,255" >Navegador</element>                       
+        </element>
+        
+        <element name="chrome-btn" type="button" selectablestatus="preselect"  aling="horcenter" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" aling="none" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" sizefont="18" color="white,255" >Navegador</element>                       
+        </element>
+        
+        <element name="chrome-btn" type="button" selectablestatus="selected" xpos="10" ypos="10" aling="horcenter" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" aling="none" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" sizefont="18" color="white,255" >Navegador</element>                       
+        </element>
+    
+        <element name="chrome-btn" type="button" selectablestatus="deactive" aling="horcenter" allocationtext="down" sizefont="18">        
+          <element name="animation01" type="animation" aling="none" state="play" timedelay="35">
+            <image>gigolord_walk0/LF-WxWalk_01#[02].png</image>
+          </element>                 
+          <element name="text01" type="text" sizefont="18" color="white,255" >Navegador</element>                       
+        </element>                
+      </element>
+                 
+      <element name="email-btn" type="button" xpos="290" ypos="30" aling="horcenter" allocationtext="down" sizefont="18" visible="yes">       
+        <element name="animation02" type="animation" aling="none">
+          <image>gmail-logo.png</image>
+        </element>                 
+        <element name="text01" type="text" sizefont="18" color="white,255" >Email</element>                       
+      </element>
+
+      <element name="youtube-btn" type="button" xpos="450" ypos="30" aling="horcenter" allocationtext="down" sizefont="18">        
+        <element name="animation03" type="animation" aling="none">
+          <image>youtube-logo.png</image>
+        </element>                 
+        <element name="text01" type="text" sizefont="18" color="white,255" >Youtube</element>                               
+      </element>
+                 
+    </element>    
+    
+        
+    <element name="menu-btn" type="button"  xpos="-48" ypos="687" aling="horcenter" allocationtext="down" sizefont="18">        
+      <element name="animation01" type="animation" aling="none" state="play" timedelay="35">
+        <image>menu_button.png</image>
+      </element>                        
+    </element>
+           
+  </layout>
+
+</layouts> 
+
