@@ -2515,7 +2515,7 @@ bool TESTDATAIO::Test_FileFunctions()
 
           XSTRING_CREATEOEM(text, chartext);
           xbuffer.Add((XBYTE*)chartext, text.GetSize());
-          XSTRING_DELETEOEM(chartext);
+          XSTRING_DELETEOEM(text, chartext);
 
           status = xfile->Write(xbuffer);
 

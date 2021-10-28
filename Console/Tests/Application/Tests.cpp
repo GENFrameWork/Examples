@@ -987,7 +987,7 @@ bool TESTS::Test_XString(TESTS* tests)
 
   XSTRING_CREATEOEM(string, charvar)
   printf(charvar);
-  XSTRING_DELETEOEM(charvar)
+  XSTRING_DELETEOEM(string, charvar)
 
 
   substring.AdjustSize(32);
@@ -1688,7 +1688,7 @@ bool TESTS::Test_HASH(TESTS* tests)
 
   XSTRING_CREATEOEM(string, charstr)
   input.Add((XBYTE*)charstr, string.GetSize());
-  XSTRING_DELETEOEM(charstr)
+  XSTRING_DELETEOEM(string, charstr)
 
   for(int c=0;c<8;c++)
     {
