@@ -205,11 +205,11 @@ bool TESTDATAIO::AppProc_Ini()
  
   //--------------------------------------------------------------------------------------------------
   
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  //GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
   
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS        , APPDEFAULT_DIRECTORY_SOUNDS);
+  //GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS        , APPDEFAULT_DIRECTORY_SOUNDS);
   
-  GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
+  //GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
   
   //--------------------------------------------------------------------------------------------------
   
@@ -245,8 +245,8 @@ bool TESTDATAIO::AppProc_FirstUpdate()
 {
   // Test_Random();
   
-  Test_DirFunctions();  
-  Test_FileFunctions();
+  //Test_DirFunctions();  
+  //Test_FileFunctions();
   
   // Test_DIOStreamUART();
   // Test_DIOStreamUSB();
@@ -2035,6 +2035,8 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
         {
           XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("TFT Display ST7789] Resolution %d x %d"), TFTdisplayST7789->GetWidth(), TFTdisplayST7789->GetHeight());
 
+
+             
           status = TFTdisplayST7789->Clear(DIOSPITFTDISPLAYST7789_COLOR_RED);
           XTRACE_PRINTCOLOR(1, __L("[TFT Display ST7789] Clean RED  : %s "), status?__L("Ok!"):__L("Error!"));
           GEN_XSLEEP.Seconds(1);
@@ -2046,9 +2048,12 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
           status = TFTdisplayST7789->Clear(DIOSPITFTDISPLAYST7789_COLOR_BLUE);
           XTRACE_PRINTCOLOR(1, __L("[TFT Display ST7789] Clean BLUE : %s "), status?__L("Ok!"):__L("Error!"));
           GEN_XSLEEP.Seconds(1);
+                     
 
-
-          TFTdisplayST7789->PutPixel(10, 10, DIOSPITFTDISPLAYST7789_COLOR_WHITE);
+          for(int c=0; c<100; c++)   
+            { 
+              TFTdisplayST7789->PutPixel(c, c, DIOSPITFTDISPLAYST7789_COLOR_WHITE);
+            }
           GEN_XSLEEP.Seconds(2);
 
           status = TFTdisplayST7789->End();
@@ -2106,11 +2111,11 @@ bool TESTDATAIO::SPITest_TouchScreenSTMPE610(int port, int chipselect, int timeo
 *---------------------------------------------------------------------------------------------------------------------*/
 bool TESTDATAIO::Test_DIOStreamSPI()
 {  
-  #define TEST_I2C_TIMEOUT  3
+  #define TEST_SPI_TIMEOUT  3
 
   int   port        = 1;
   int   chipselect  = 0;  
-  int   timeout     = TEST_I2C_TIMEOUT;
+  int   timeout     = TEST_SPI_TIMEOUT;
   bool  status      = false;
 
   //----------------------------------------------------------------------------

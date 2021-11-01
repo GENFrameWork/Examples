@@ -849,7 +849,7 @@ bool TESTS::Show_AllStatus()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool TESTS::Do_Tests()
 {
-  TESTS_LIST_FUNCTION listfunctions[] = { { true   , Test_XString                    , __L("Test XString")                    },
+  TESTS_LIST_FUNCTION listfunctions[] = { { false  , Test_XString                    , __L("Test XString")                    },
                                           { false  , Test_XBuffer                    , __L("Test XBuffer")                    },
                                           { false  , Test_XVector                    , __L("Test XVector")                    },
                                           { false  , Test_XTrace                     , __L("Test XTrace")                     },
@@ -863,7 +863,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_SharedMemory               , __L("Test SharedMemory")               },
                                           { false  , Test_GPIO                       , __L("Test GPIO")                       },
                                           { false  , Test_WebClient                  , __L("Test WebClient")                  },
-                                          { false  , Test_ScraperWeb                 , __L("Test Scraper Web")                },
+                                          { true   , Test_ScraperWeb                 , __L("Test Scraper Web")                },
                                           { false  , Test_MPSSE                      , __L("Test MPSSE")                      },
                                           { false  , Test_DNSProtocol                , __L("Test DNS Protocol")               },
                                           { false  , Test_DIOCheckTCPIPConnections   , __L("Test DIOCheckTCPIPConnections")   },
