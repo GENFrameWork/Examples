@@ -24,7 +24,14 @@ set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Acti
 set(XSHAREDMEMORYMANAGER_FEATURE                        true    CACHE BOOL "Activate Shared Memory Manager"                             FORCE)
 set(XPROCESSMANAGER_FEATURE                             true    CACHE BOOL "Activate Process Manager"                                   FORCE)
 
-set(XFIRMWAREUPDATEUTILS_FEATURE                        true    CACHE BOOL "Activate Firmware Update Utils"                             FORCE)
+set(XFILE_HEX_FEATURE                                   true    CACHE BOOL "Activate XFile HEX format"                                  FORCE)  
+set(XFILE_DFU_FEATURE                                   true    CACHE BOOL "Activate XFile DFU format"                                  FORCE)  
+set(XFILE_RIFF_FEATURE                                  true    CACHE BOOL "Activate XFile RIFF format"                                 FORCE)  
+
+
+set(HASH_SHA1_FEATURE                                   true    CACHE BOOL "Activate Hash SHA1"                                         FORCE)    
+set(HASH_SHA2_FEATURE                                   true    CACHE BOOL "Activate Hash SHA2"                                         FORCE)
+set(HASH_WHIRLPOOL_FEATURE                              true    CACHE BOOL "Activate Hash Whirlpool"                                    FORCE)  
                   
 set(DIO_FEATURE                                         true    CACHE BOOL "Activate Data Input/Output"                                 FORCE) 
 set(DIO_STREAMUART_FEATURE                              true    CACHE BOOL "Activate Data Input/Output Stream UART"                     FORCE)
