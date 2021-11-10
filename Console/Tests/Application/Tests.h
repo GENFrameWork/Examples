@@ -147,6 +147,7 @@ class TESTS : public APPCONSOLE, public XFSMACHINE
 
     static bool                     Test_XString                        (TESTS* tests);
     static bool                     Test_XBuffer                        (TESTS* tests);
+    static bool                     Test_XRand                          (TESTS* tests);
     static bool                     Test_XTrace                         (TESTS* tests);
     static bool                     Test_XLogs                          (TESTS* tests);
     static bool                     Test_XVector                        (TESTS* tests);

@@ -37,37 +37,6 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 
-//#define XTRACE_NOINTERNET
-
-/*
-#define XTRACE_ACTIVE
-#define XMEMORY_CONTROL_ACTIVE
-        //#define XTHREADCOLLECTION_ACTIVE
-#define XSHAREDMEMORYMANAGER_ACTIVE
-#define XLOG_ACTIVE
-
-#define APP_ACTIVE
-#define APP_CFG_GENERAL_ACTIVE
-#define APP_CFG_LOG_ACTIVE
-#define APP_CFG_CHECKRESOURCESHARDWARE_ACTIVE
-#define APP_CFG_INTERNETSERVICES_ACTIVE
-#define APP_CFG_DNSRESOLVED_ACTIVE
-#define APP_CFG_DYNDNSMANAGER_ACTIVE
-
-#define DIO_ACTIVE
-#define DIOICMP_ACTIVE
-#define DIOPING_ACTIVE
-#define DIOUART_ACTIVE
-#define DIOUSB_ACTIVE
-#define DIOUDP_ACTIVE
-#define DIOTCPIP_ACTIVE
-#define DIOGPIO_ACTIVE
-    //#define DIOWIFI_ACTIVE
-
-#define APP_CFG   TESTS_CFG::GetInstance()
-
-*/
-
 #endif
 
 

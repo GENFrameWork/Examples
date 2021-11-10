@@ -751,6 +751,20 @@ bool TESTS::Show_AppStatus()
   XSTRING string;
   XSTRING string2;
 
+
+  //-------------------------------------------------------------------------------
+  // Platforms
+
+  XSTRING           platformstr;
+  XSYSTEM_PLATFORM  platform;
+  
+  platform = GEN_XSYSTEM.GetPlatform(&platformstr);
+
+  string  = __L("Plataforma");
+  string2.Format(__L("%s"), platformstr.Get());
+  Show_Line(string, string2);
+
+
   //-------------------------------------------------------------------------------
   // Memory status
 
@@ -852,6 +866,7 @@ bool TESTS::Do_Tests()
   TESTS_LIST_FUNCTION listfunctions[] = { { false  , Test_XString                    , __L("Test XString")                    },
                                           { false  , Test_XBuffer                    , __L("Test XBuffer")                    },
                                           { false  , Test_XVector                    , __L("Test XVector")                    },
+                                          { true   , Test_XRand                      , __L("Test_XRand")                      },
                                           { false  , Test_XTrace                     , __L("Test XTrace")                     },
                                           { false  , Test_XLogs                      , __L("Test XLogs")                      },
                                           { false  , Test_XTree                      , __L("Test XTree")                      },
@@ -863,7 +878,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_SharedMemory               , __L("Test SharedMemory")               },
                                           { false  , Test_GPIO                       , __L("Test GPIO")                       },
                                           { false  , Test_WebClient                  , __L("Test WebClient")                  },
-                                          { true   , Test_ScraperWeb                 , __L("Test Scraper Web")                },
+                                          { false  , Test_ScraperWeb                 , __L("Test Scraper Web")                },
                                           { false  , Test_MPSSE                      , __L("Test MPSSE")                      },
                                           { false  , Test_DNSProtocol                , __L("Test DNS Protocol")               },
                                           { false  , Test_DIOCheckTCPIPConnections   , __L("Test DIOCheckTCPIPConnections")   },
@@ -1130,6 +1145,43 @@ bool TESTS::Test_XBuffer(TESTS* tests)
 
   XTRACE_PRINTDATABLOCK(1, buffer, 1, 16);
   */
+
+  return true;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool TESTS::Test_XRand(TESTS* tests)
+* @brief      Test_XRand
+* @ingroup    APPLICATION
+* 
+* @author     Abraham J. Velez 
+* @date       10/11/2021 17:47:57
+* 
+* @param[in]  tests : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* ---------------------------------------------------------------------------------------------------------------------*/
+bool TESTS::Test_XRand(TESTS* tests)
+{
+  GEN_XRAND.Ini();
+
+  for(int c=0; c<10; c++)
+    {
+      int value = GEN_XRAND.Between(0, 10);
+      tests->console->Printf(__L("   [%2d] Random value: %d\n"), c, value);
+    }
+
+  for(int c=0; c<10; c++)
+    {
+      float value = ((float)GEN_XRAND.Between(0, 50) / (float)GEN_XRAND.Between(2, 9));
+      tests->console->Printf(__L("   [%2d] Random value: %f\n"), c, value);
+    }
+
+  tests->console->Printf(__L("\n"));
 
   return true;
 }
