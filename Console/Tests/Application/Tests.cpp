@@ -646,6 +646,7 @@ bool TESTS::KeyValidSecuences(int key)
   APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
 
   console->Printf(__L("\r    \r"));
+  console->Printf(__L("\n"));
 
   switch(key)
     {
@@ -866,7 +867,7 @@ bool TESTS::Do_Tests()
   TESTS_LIST_FUNCTION listfunctions[] = { { false  , Test_XString                    , __L("Test XString")                    },
                                           { false  , Test_XBuffer                    , __L("Test XBuffer")                    },
                                           { false  , Test_XVector                    , __L("Test XVector")                    },
-                                          { true   , Test_XRand                      , __L("Test_XRand")                      },
+                                          { false  , Test_XRand                      , __L("Test_XRand")                      },
                                           { false  , Test_XTrace                     , __L("Test XTrace")                     },
                                           { false  , Test_XLogs                      , __L("Test XLogs")                      },
                                           { false  , Test_XTree                      , __L("Test XTree")                      },
@@ -875,6 +876,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_DateTime                   , __L("Test_DateTime")                   },
                                           { false  , Test_HASH                       , __L("Test HASH")                       },
                                           { false  , Test_DIOStreamTCPIPConnection   , __L("Test DIOStreamTCPIPConnection")   },
+                                          { true   , Test_XSystem                    , __L("Test System")                     },                                          
                                           { false  , Test_SharedMemory               , __L("Test SharedMemory")               },
                                           { false  , Test_GPIO                       , __L("Test GPIO")                       },
                                           { false  , Test_WebClient                  , __L("Test WebClient")                  },
@@ -924,6 +926,7 @@ bool TESTS::Do_Tests()
          {
            bool status = listfunctions[c].function(this);
 
+           tests->console->Printf(__L("\n"));
            tests->console->Printf(__L("   [%02d] Test %-32s : %s \n"), c, listfunctions[c].namefunction, (status?__L("Ok."):__L("Error!")));
          }
     }
@@ -1828,6 +1831,36 @@ bool TESTS::Test_DIOStreamTCPIPConnection(TESTS* tests)
     }
 
   return status;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool TESTS::Test_System(TESTS* tests)
+* @brief      Test_System
+* @ingroup    APPLICATION
+* 
+* @author     Abraham J. Velez 
+* @date       11/11/2021 10:53:11
+* 
+* @param[in]  tests : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* ---------------------------------------------------------------------------------------------------------------------*/
+bool TESTS::Test_XSystem(TESTS* tests)
+{
+  XSTRING plataform_name;
+  XSTRING OS_ID;
+
+  GEN_XSYSTEM.GetPlatform(&plataform_name);
+  GEN_XSYSTEM.GetOperativeSystemID(OS_ID);
+
+  tests->console->Printf(__L("   Plataform                :  %s  \n"), plataform_name.Get());
+  tests->console->Printf(__L("   Operative System Version :  %s  \n"), OS_ID.Get());
+
+  return true;
 }
 
 

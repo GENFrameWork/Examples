@@ -159,7 +159,8 @@ class TESTS : public APPCONSOLE, public XFSMACHINE
     static bool                     Test_DateTime                       (TESTS* tests);
     static bool                     Test_HASH                           (TESTS* tests);
     static bool                     Test_DIOStreamTCPIPConnection       (TESTS* tests);
-    static bool                     Test_SharedMemory                   (TESTS* tests);
+    static bool                     Test_XSystem                        (TESTS* tests);
+    static bool                     Test_SharedMemory                   (TESTS* tests);    
     static bool                     Test_GPIO                           (TESTS* tests);
     static bool                     Test_WebClient                      (TESTS* tests);
     static bool                     Test_ScraperWeb                     (TESTS* tests);
