@@ -2022,7 +2022,7 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
 {
   bool status = false;    
 
-  DIOSPITFTDISPLAYST7789* TFTdisplayST7789 = new DIOSPITFTDISPLAYST7789(240,240);
+  DIOSPITFTDISPLAYST7789* TFTdisplayST7789 = new DIOSPITFTDISPLAYST7789(10 ,320);
   if(TFTdisplayST7789)
     {                    
       TFTdisplayST7789->SetGPIOEntryID(DIODISPLAYDEVICE_INDEX_GPIOENTRYID_RESET       , TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_RESET);
@@ -2035,8 +2035,6 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
         {
           XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("TFT Display ST7789] Resolution %d x %d"), TFTdisplayST7789->GetWidth(), TFTdisplayST7789->GetHeight());
 
-
-             
           status = TFTdisplayST7789->Clear(DIOSPITFTDISPLAYST7789_COLOR_RED);
           XTRACE_PRINTCOLOR(1, __L("[TFT Display ST7789] Clean RED  : %s "), status?__L("Ok!"):__L("Error!"));
           GEN_XSLEEP.Seconds(1);
