@@ -17,6 +17,8 @@ set(DEBUG_FEATURE                                       true    CACHE BOOL "Acti
 
 set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
 set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Activate XMemory Control"                                   FORCE)
+
+set(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                  true    CACHE BOOL "Activate Linux CodePage Editor Visual Studio CP1252"        FORCE)   
                                     
 set(DIO_FEATURE                                         true    CACHE BOOL "Activate Data Input/Output"                                 FORCE) 
 set(DIO_STREAM_FEATURE                                  true    CACHE BOOL "Activate Data Input/Output Stream"                          FORCE)
