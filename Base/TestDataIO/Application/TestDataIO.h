@@ -63,8 +63,9 @@ enum TESTDATAIO_GPIOENTRYID
   TESTDATAIO_GPIOENTRYID_TEST_INTERRUPT                                       ,  
 
   TESTDATAIO_GPIOENTRYID_I2C_CCS811_WAKEUP                                    ,
-                                                        
-  TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_RESET                                    ,
+  
+  TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_CS                                       ,                                                      
+  TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_RESET                                    ,  
   TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_DC                                       ,
   TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_BACKLIGHT                  
 };

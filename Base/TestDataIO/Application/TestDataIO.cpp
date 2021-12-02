@@ -205,11 +205,11 @@ bool TESTDATAIO::AppProc_Ini()
  
   //--------------------------------------------------------------------------------------------------
   
-  //GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
   
-  //GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS        , APPDEFAULT_DIRECTORY_SOUNDS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS        , APPDEFAULT_DIRECTORY_SOUNDS);
   
-  //GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
+  GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
   
   //--------------------------------------------------------------------------------------------------
   
@@ -245,8 +245,8 @@ bool TESTDATAIO::AppProc_FirstUpdate()
 {
   // Test_Random();
   
-  //Test_DirFunctions();  
-  //Test_FileFunctions();
+  Test_DirFunctions();  
+  Test_FileFunctions();
   
   // Test_DIOStreamUART();
   // Test_DIOStreamUSB();
@@ -2022,13 +2022,16 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
 {
   bool status = false;    
 
-  DIOSPITFTDISPLAYST7789* TFTdisplayST7789 = new DIOSPITFTDISPLAYST7789(10 ,320);
+  DIOSPITFTDISPLAYST7789* TFTdisplayST7789 = new DIOSPITFTDISPLAYST7789(320 ,10);
   if(TFTdisplayST7789)
     {                    
       TFTdisplayST7789->SetGPIOEntryID(DIODISPLAYDEVICE_INDEX_GPIOENTRYID_RESET       , TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_RESET);
       TFTdisplayST7789->SetGPIOEntryID(DIODISPLAYDEVICE_INDEX_GPIOENTRYID_DC          , TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_DC);    
       TFTdisplayST7789->SetGPIOEntryID(DIODISPLAYDEVICE_INDEX_GPIOENTRYID_BACKLIGHT   , TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_BACKLIGHT);    
 
+      GEN_DIOGPIO.SetMode(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_CS    , DIOGPIO_MODE_OUTPUT);  
+      GEN_DIOGPIO.SetValue(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_CS   , true);
+      
       status  = TFTdisplayST7789->Ini(port, chipselect, timeout);
       XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[TFT Display ST7789] Ini Port [%d] Chipselect [%d]  : %s "), port, chipselect, status?__L("Ok!"):__L("Error!"));
       if(status)
@@ -2047,17 +2050,19 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
           XTRACE_PRINTCOLOR(1, __L("[TFT Display ST7789] Clean BLUE : %s "), status?__L("Ok!"):__L("Error!"));
           GEN_XSLEEP.Seconds(1);
                      
-
-          for(int c=0; c<100; c++)   
+          
+          for(XWORD c=0; c<320; c++)   
             { 
-              TFTdisplayST7789->PutPixel(c, c, DIOSPITFTDISPLAYST7789_COLOR_WHITE);
+              TFTdisplayST7789->PutPixel(c, 3, DIOSPITFTDISPLAYST7789_COLOR_GREEN);
             }
-          GEN_XSLEEP.Seconds(2);
-
+          
+          GEN_XSLEEP.Seconds(1);
+          
           status = TFTdisplayST7789->End();
           XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[TFT Display ST7789] End : %s "), status?__L("Ok!"):__L("Error!"));  
-
         }
+      
+      GEN_DIOGPIO.SetValue(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_CS, false);
 
       delete TFTdisplayST7789;
     }

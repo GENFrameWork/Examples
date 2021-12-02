@@ -123,6 +123,7 @@ int STM32_Platform_Ini(void)
   
   //-------------------------------------------------------------------------------------------------------------------
   
+  GEN_DIOGPIO.GPIOEntry_CreateByPin(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_CS         , GPIO_PIN_4  , DIOGPIO_PINSGROUP_A);
   GEN_DIOGPIO.GPIOEntry_CreateByPin(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_RESET      , GPIO_PIN_0  , DIOGPIO_PINSGROUP_A);
   GEN_DIOGPIO.GPIOEntry_CreateByPin(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_DC         , GPIO_PIN_2  , DIOGPIO_PINSGROUP_A);
   GEN_DIOGPIO.GPIOEntry_CreateByPin(TESTDATAIO_GPIOENTRYID_SPI_DISPLAY_BACKLIGHT  , GPIO_PIN_3  , DIOGPIO_PINSGROUP_A);
