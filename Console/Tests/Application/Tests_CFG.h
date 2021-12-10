@@ -76,7 +76,7 @@ class TESTS_CFG : public APPCFG
 
     void                            Clean                                   ();
 
-    static TESTS_CFG*           instance;
+    static TESTS_CFG*               instance;
 
     XSTRING                         db_URL;
     XDWORD                          db_port;

@@ -317,12 +317,17 @@ TESTS_CFG::TESTS_CFG(XCHAR* namefile) : APPCFG(namefile)
   //-----------------------------------------------------
   // DATABASE
 
-  AddValue(XFILECFG_VALUETYPE_STRING  , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_URL                , &db_URL);
-  AddValue(XFILECFG_VALUETYPE_INT     , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_PORT               , &db_port);
-  AddValue(XFILECFG_VALUETYPE_STRING  , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_DATABASENAME       , &db_databasename);
+  AddRemark(TESTSCFG_SECTION_DATABASE, __L("-------------------------------------------------------"), 0, 1);
+  AddRemark(TESTSCFG_SECTION_DATABASE, __L("Database config")                                        , 0, 2);
+  AddRemark(TESTSCFG_SECTION_DATABASE, __L("-------------------------------------------------------"), 0, 3);
+
+  AddValue(XFILECFG_VALUETYPE_STRING  , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_URL                , &db_URL);                       AddRemark(TESTSCFG_SECTION_DATABASE, TESTSCFG_DATABASE_URL          ,  __L("URL for database")  ,60, 0);
+  AddValue(XFILECFG_VALUETYPE_INT     , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_PORT               , &db_port);                      AddRemark(TESTSCFG_SECTION_DATABASE, TESTSCFG_DATABASE_PORT         ,  __L("Port for database") ,60, 0);
+  AddValue(XFILECFG_VALUETYPE_STRING  , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_DATABASENAME       , &db_databasename);              AddRemark(TESTSCFG_SECTION_DATABASE, TESTSCFG_DATABASE_DATABASENAME ,  __L("Database Name")     ,60, 0);
   AddValue(XFILECFG_VALUETYPE_STRING  , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_USER               , &db_user);
   AddValue(XFILECFG_VALUETYPE_STRING  , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_PASSWORD           , &db_password);
   AddValue(XFILECFG_VALUETYPE_INT     , TESTSCFG_SECTION_DATABASE      , TESTSCFG_DATABASE_TIMEOUTCONNECTION  , &db_timeoutconnection);
+
 
   Default();
 
