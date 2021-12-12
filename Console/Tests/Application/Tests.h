@@ -42,6 +42,7 @@
 #include "XScheduler.h"
 
 #include "DIOStream.h"
+#include "DIOPCap.h"
 #include "DIOURL.h"
 
 #include "APPConsole.h"
@@ -189,8 +190,9 @@ class TESTS : public APPCONSOLE, public XFSMACHINE
     static bool                     Test_DIOStreamUSBConnection         (TESTS* tests);
     static bool                     Test_XFileDFU                       (TESTS* tests);  
     static bool                     Test_SystemHostFile                 (TESTS* tests);  
-    static bool                     Test_SystemBatteryLevel             (TESTS* tests);  
+    static bool                     Test_SystemBatteryLevel             (TESTS* tests);      
     static bool                     Test_LedNeoPixelWS2812B             (TESTS* tests);  
+    static bool                     Test_DIOPCap                        (TESTS* tests);
 
     #ifdef WINDOWS
     static bool                     Test_WindowsACL                     (TESTS* tests);

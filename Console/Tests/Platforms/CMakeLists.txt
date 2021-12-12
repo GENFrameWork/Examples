@@ -56,6 +56,7 @@ set(DIO_ONOTIFICATIONS_MANAGER_FEATURE                  true    CACHE BOOL "Acti
 set(DIO_WIFIMANAGERMODE_FEATURE                         true    CACHE BOOL "Activate Data Input/Output Wifi Manager Mode"               FORCE) 
 set(DIO_SNMP_FEATURE                                    true    CACHE BOOL "Activate SNMP (Simple Network Management Protocol)"         FORCE)
 set(DIO_LEDNEOPIXELWS2812B_FEATURE                      true    CACHE BOOL "Activate Data Input/Output Led Neopixel WS2812B"            FORCE)
+set(DIO_PCAP_FEATURE                                    true    CACHE BOOL "Activate Data Input/Output Cap"                             FORCE)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 set(DIO_LINUX_DBUS_FEATURE                              true    CACHE BOOL "Activate Linux DBus"                                        FORCE) 

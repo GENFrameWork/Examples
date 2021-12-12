@@ -62,7 +62,6 @@
 #include "XTranslation.h"
 #include "XScheduler.h"
 #include "XScheduler_XEvent.h"
-#include "XConsole.h"
 #include "XThread.h"
 #include "XTrace.h"
 #include "XObserver.h"
@@ -876,7 +875,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_DateTime                   , __L("Test_DateTime")                   },
                                           { false  , Test_HASH                       , __L("Test HASH")                       },
                                           { false  , Test_DIOStreamTCPIPConnection   , __L("Test DIOStreamTCPIPConnection")   },
-                                          { true   , Test_XSystem                    , __L("Test System")                     },                                          
+                                          { false  , Test_XSystem                    , __L("Test System")                     },                                          
                                           { false  , Test_SharedMemory               , __L("Test SharedMemory")               },
                                           { false  , Test_GPIO                       , __L("Test GPIO")                       },
                                           { false  , Test_WebClient                  , __L("Test WebClient")                  },
@@ -908,6 +907,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_SystemHostFile             , __L("Test System Host File")           },
                                           { false  , Test_SystemBatteryLevel         , __L("Test System Battery Level")       },
                                           { false  , Test_LedNeoPixelWS2812B         , __L("Test Led NeoPixel WS2812B")       }, 
+                                          { true   , Test_DIOPCap                    , __L("Test DIO PCap")                   }, 
 
                                           #ifdef WINDOWS
                                           { false  , Test_WindowsACL                 , __L("Test Windows ACL")                },
@@ -3727,7 +3727,6 @@ bool TESTS::Test_SystemBatteryLevel(TESTS* tests)
 
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool TESTS::Test_LedNeoPixelWS2812B(TESTS* tests)
@@ -3809,6 +3808,114 @@ bool TESTS::Test_LedNeoPixelWS2812B(TESTS* tests)
   GEN_DIOFACTORY.DeleteLedNeopixelWS2812B(ledneopixelws2812b);
   
   return true;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool TESTS::Test_DIOPCap(TESTS* tests)
+* @brief      Test_DIOPCap
+* @ingroup    APPLICATION
+* 
+* @author     Abraham J. Velez 
+* @date       12/12/2021 18:05:56
+* 
+* @param[in]  tests : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* ---------------------------------------------------------------------------------------------------------------------*/
+bool TESTS::Test_DIOPCap(TESTS* tests)
+{
+	#ifdef DIOPCAP_ACTIVE
+
+	DIOPCAP*						 diopcap					 = NULL; 
+	DIOPCAPNETINTERFACE* netinterface			 = NULL;  
+	int                  indexnetinterface = 7;
+
+	diopcap = DIOFACTORY::GetInstance().CreatePCap();
+  if(!diopcap)  return false;
+
+	if(diopcap->Ini())
+    { 
+				tests->console->Printf(__L("Interfaces de red disponibles: \n\n"));
+      for(int c=0; c<(int)diopcap->GetNetInterfaces()->GetSize(); c++)
+        {
+          netinterface = diopcap->GetNetInterface(c);
+          if(netinterface) tests->console->Printf(__L("[%2d] %s, [%s]\n"), c, netinterface->GetName()->Get(), netinterface->GetDescription()->Get());						
+				}
+
+			tests->console->Printf(__L("\n"));
+
+			if(indexnetinterface != -1) 
+				{
+					if(diopcap->Capture_Start(indexnetinterface, true, 100)) 
+						{
+							while(!tests->console->KBHit())
+								{
+									int nsize = diopcap->Frames_Get()->GetSize();
+
+									for(int c=0;c<nsize;c++)
+										{
+											DIOPCAPFRAME* frame = diopcap->Frames_Get(c);
+											if(!frame) break;
+
+											if(tests->console->KBHit()) break;
+									                                                                                                                                   
+											DIOPCAPETHERNETHEADER ethernetheader;                                                                                                             
+											if(frame->GetHeaderEthernet(ethernetheader)) 
+												{                          
+													tests->console->Printf(__L("MAC Source: %02X:%02X:%02X:%02X:%02X:%02X  MAC Target: %02X:%02X:%02X:%02X:%02X:%02X ") , ethernetheader.MACsource[0], ethernetheader.MACsource[1], ethernetheader.MACsource[2], ethernetheader.MACsource[3], ethernetheader.MACsource[4], ethernetheader.MACsource[5]
+																          																																																	  , ethernetheader.MACtarget[0], ethernetheader.MACtarget[1], ethernetheader.MACtarget[2], ethernetheader.MACtarget[3], ethernetheader.MACtarget[4], ethernetheader.MACtarget[5]);
+
+													switch(ethernetheader.type)
+														{
+															case DIOPCAPETHERNETTYPE_IP			: {	DIOPCAPIPHEADER ipheader;																															
+																																	if(frame->GetHeaderIP(ipheader))
+																																		{ 
+																																			DIOIP			ipsourceaddr;
+																																			XSTRING		ipsourcestring;
+																																			DIOIP			iptargetaddr;
+																																			XSTRING   iptargetstring;
+																																																																			
+																																			ipsourceaddr.Set(ipheader.sourceaddr.byte1, ipheader.sourceaddr.byte2, ipheader.sourceaddr.byte3, ipheader.sourceaddr.byte4);
+																																			iptargetaddr.Set(ipheader.targetaddr.byte1, ipheader.targetaddr.byte2, ipheader.targetaddr.byte3, ipheader.targetaddr.byte4);
+
+																																			ipsourceaddr.GetXString(ipsourcestring);
+																																			iptargetaddr.GetXString(iptargetstring);	
+
+																																		  tests->console->Printf(__L("IP Source: %s IP Target: %s"), ipsourcestring.Get(), iptargetstring.Get());
+
+																																		}
+																																} 																																																															
+																																break;
+
+																										default		:	break;
+														}	
+
+												  tests->console->Printf(__L("\n"));
+
+												}
+									
+											diopcap->Frames_Delete(c);
+										}
+								
+								}
+							
+							diopcap->Capture_End();
+						}
+			
+				}	 
+			
+			diopcap->End();														
+		}
+
+	DIOFACTORY::GetInstance().DeletePCap(diopcap);
+
+	#endif
+  
+	return true;
 }
 
 
