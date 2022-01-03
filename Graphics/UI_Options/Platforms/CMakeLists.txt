@@ -17,6 +17,15 @@ set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
 
 
 # --------------------------------------------------------------------
+# Compile Selection
+include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
+
+# --------------------------------------------------------------------
+# Warnings control
+include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+
+
+# --------------------------------------------------------------------
 # Warnings control
 
 include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 

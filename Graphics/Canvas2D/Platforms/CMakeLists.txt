@@ -8,18 +8,18 @@ project(canvas2D)
 
 
 set(GEN_DIRECTORY "../../../../../GENFrameWork") 
-set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk-r21e")
+
+#set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk")
 #set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21e_linux")
-
-
 #set(ANDROID_NDK_ROOT "C:/Users/sirgraham/AppData/Local/Android/Sdk/ndk/21.3.6528147")
 
+# --------------------------------------------------------------------
+# Compile Selection
+include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
 
 # --------------------------------------------------------------------
 # Warnings control
-
 include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
-
 
 
 # --------------------------------------------------------------------

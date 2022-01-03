@@ -6,8 +6,15 @@
 cmake_minimum_required(VERSION 3.3.0)
 project(tests)
 
-
 set(GEN_DIRECTORY "../../../../../GENFrameWork") 
+
+# --------------------------------------------------------------------
+# Compile Selection
+include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
+
+# --------------------------------------------------------------------
+# Warnings control
+include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
