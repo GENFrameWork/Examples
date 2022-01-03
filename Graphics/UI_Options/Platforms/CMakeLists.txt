@@ -22,14 +22,8 @@ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt")
 
 # --------------------------------------------------------------------
 # Warnings control
-include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
-
-
-# --------------------------------------------------------------------
-# Warnings control
 
 include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
-
 
 
 # --------------------------------------------------------------------
