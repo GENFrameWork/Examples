@@ -44,6 +44,7 @@
 #include "DIOStream.h"
 #include "DIOPCap.h"
 #include "DIOURL.h"
+#include "DIOGPIO.h"
 
 #include "APPConsole.h"
 
@@ -66,6 +67,14 @@ enum TESTSXFSMSTATES
   TESTS_XFSMSTATE_END                   ,
 
   TESTS_LASTSTATE
+};
+
+
+
+enum TESTS_GPIOENTRYID
+{
+  TESTS_GPIOENTRYID_TESTGPIO             = DIOGPIO_ID_NOTDEFINED + 1 ,   
+  TESTS_GPIOENTRYID_LED_NEOPIXEL                                             
 };
 
 

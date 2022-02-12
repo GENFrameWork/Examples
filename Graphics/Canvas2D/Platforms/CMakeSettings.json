@@ -83,7 +83,7 @@
             "cmakeCommandArgs": "-DTARGET=Android",
             "buildCommandArgs": "",
             "ctestCommandArgs": "",
-            "inheritEnvironments": [ "clang_cl_arm64" ],
+            "inheritEnvironments": [ "clang_cl_arm64_x64" ],
             "intelliSenseMode": "android-clang-arm64"
         }
     ]

@@ -118,6 +118,17 @@ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Tests.cpp")
 list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Tests_CFG.cpp")
 
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Tests_WindowsPlatform.cpp")
+endif()
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  
+list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Tests_LinuxPlatform.cpp")
+endif()
+
+
+
+
 # --------------------------------------------------------------------
 # Create proyect 
 

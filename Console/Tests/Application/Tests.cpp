@@ -143,12 +143,14 @@
 #include "APPAlerts.h"
 
 #ifdef WINDOWS
+ #include "Tests_WindowsPlatform.h"
  #include "DIOWINDOWSStreamWifiRemoteEnumDevices.h"
  #include "XWINDOWSAccessControlLists.h"
 #endif
 
 
 #ifdef LINUX
+ #include "Tests_LinuxPlatform.h"
  #include "INPLINUXDeviceID.h"
  #include "DIOLINUXDBus.h"
  #include "DIOLINUXNetworkManager.h"
@@ -262,6 +264,21 @@ bool TESTS::InitFSMachine()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool TESTS::AppProc_PlatformIni()
 {
+  //--------------------------------------------------------------------------------------
+  
+  #ifdef WINDOWS
+  Windows_Platform_Ini();
+  #endif  
+
+  //--------------------------------------------------------------------------------------
+  
+  #ifdef LINUX
+  Linux_Platform_Ini();    
+  #endif  
+    
+  //--------------------------------------------------------------------------------------
+
+
   return true;
 }
 
@@ -477,7 +494,7 @@ bool TESTS::AppProc_Update()
                                                         Show_AllStatus();
                                                         xtimerupdateconsole->Reset();
                                                       }
-
+                                                    
                                                     #ifndef TESTS_NOKEY
                                                     if(console->KBHit())
                                                       {
@@ -486,7 +503,7 @@ bool TESTS::AppProc_Update()
                                                         int key = console->GetChar();
                                                         KeyValidSecuences(key);
                                                       }
-                                                    #else
+                                                    #else                                                    
                                                     Do_Tests(); 
                                                     #endif
                   
@@ -780,7 +797,7 @@ bool TESTS::Show_AppStatus()
 
   //-------------------------------------------------------------------------------
   // CPU usage status
-
+  /*
   XSTRING nameapp =  APPLICATION_NAMEFILE;
 
   #ifdef WINDOWS
@@ -790,7 +807,7 @@ bool TESTS::Show_AppStatus()
   string  = __L("Uso de CPU");
   string2.Format(__L("Total %d%% , [%s] aplicacion  %d%%"), GEN_XSYSTEM.GetCPUUsageTotal(), APPLICATION_NAMEAPP, GEN_XSYSTEM.GetCPUUsageForProcessName(nameapp.Get()));
   Show_Line(string, string2);
-
+  */
   //-------------------------------------------------------------------------------
   // Date time
 
@@ -906,8 +923,8 @@ bool TESTS::Do_Tests()
                                           { false  , Test_XFileDFU                   , __L("Test XFile DFU")                  },
                                           { false  , Test_SystemHostFile             , __L("Test System Host File")           },
                                           { false  , Test_SystemBatteryLevel         , __L("Test System Battery Level")       },
-                                          { false  , Test_LedNeoPixelWS2812B         , __L("Test Led NeoPixel WS2812B")       }, 
-                                          { true   , Test_DIOPCap                    , __L("Test DIO PCap")                   }, 
+                                          { true   , Test_LedNeoPixelWS2812B         , __L("Test Led NeoPixel WS2812B")       }, 
+                                          { false  , Test_DIOPCap                    , __L("Test DIO PCap")                   }, 
 
                                           #ifdef WINDOWS
                                           { false  , Test_WindowsACL                 , __L("Test Windows ACL")                },
@@ -1961,19 +1978,14 @@ bool TESTS::Test_GPIO(TESTS* tests)
   
   #ifdef DIOGPIO_ACTIVE
   
-  #define GPIO_DEF 1    
-
-
-  GEN_DIOGPIO.GPIOEntry_CreateByPin(GPIO_DEF, 1);
-  
-  GEN_DIOGPIO.SetMode(GPIO_DEF, DIOGPIO_MODE_OUTPUT);
+  GEN_DIOGPIO.SetMode(TESTS_GPIOENTRYID_TESTGPIO, DIOGPIO_MODE_OUTPUT);
          
   while(!tests->console->KBHit())
     {
-      GEN_DIOGPIO.SetValue(GPIO_DEF, true);
+      GEN_DIOGPIO.SetValue(TESTS_GPIOENTRYID_TESTGPIO, true);
       GEN_XSLEEP.MilliSeconds(50);
              
-      GEN_DIOGPIO.SetValue(GPIO_DEF, false);
+      GEN_DIOGPIO.SetValue(TESTS_GPIOENTRYID_TESTGPIO, false);
       GEN_XSLEEP.MilliSeconds(50);
     }
           
@@ -3743,28 +3755,26 @@ bool TESTS::Test_SystemBatteryLevel(TESTS* tests)
 * ---------------------------------------------------------------------------------------------------------------------*/
 bool TESTS::Test_LedNeoPixelWS2812B(TESTS* tests)
 {
-  #define GPIOENTRYID_LED_NEOPIXEL 1
-
+ 
   DIOLEDNEOPIXELWS2812B* ledneopixelws2812b = GEN_DIOFACTORY.CreateLedNeopixelWS2812B(); 
   if(!ledneopixelws2812b)  return false;
 
-
-  GEN_DIOGPIO.GPIOEntry_CreateByPin(GPIOENTRYID_LED_NEOPIXEL, 1);
   
-  ledneopixelws2812b->SetDataGPIOEntryID(GPIOENTRYID_LED_NEOPIXEL);
-  
+  // ledneopixelws2812b->SetDataGPIOEntryID(TESTS_GPIOENTRYID_LED_NEOPIXEL);                                             
+   
+   
   if(ledneopixelws2812b->Ini(8))
     {      
-      for(int c=0; c<30000; c++)
+      for(int c=0; c<30; c++)
         {
           XBYTE data1[] = { 0xFF, 0xFF, 0xFF,  // White    
-                            0x00, 0x20, 0x00,  // Red
-                            0xFF, 0x00, 0x00,  // Green   
+                            0xFF, 0x00, 0x00,  // Red
+                            0x00, 0xFF, 0x00,  // Green   
                             0x00, 0x00, 0xFF,  // Blue                             
                                                     
                             0xFF, 0xFF, 0xFF,  
-                            0x00, 0xFF, 0x00,
                             0xFF, 0x00, 0x00,
+                            0x00, 0xFF, 0x00,
                             0x00, 0x00, 0xFF,                            
                                                       
                           };
@@ -3772,13 +3782,14 @@ bool TESTS::Test_LedNeoPixelWS2812B(TESTS* tests)
           ledneopixelws2812b->SendData(data1, sizeof(data1));
           GEN_XSLEEP.Seconds(1);
 
+          
           XBYTE data2[] = { 0x00, 0x10, 0x00, 
                             0x00, 0x20, 0x00, 
-                            0x00, 0x40, 0x00, 
+                            0x00, 0x30, 0x00, 
                             0x00, 0x80, 0x00, 
-                            0x00, 0xA4, 0x00, 
+                            0x00, 0xA0, 0x00, 
+                            0x00, 0xB0, 0x00, 
                             0x00, 0xC0, 0x00, 
-                            0x00, 0xE0, 0x00, 
                             0x00, 0xFF, 0x00, 
                           };
 
@@ -3799,13 +3810,16 @@ bool TESTS::Test_LedNeoPixelWS2812B(TESTS* tests)
 
           ledneopixelws2812b->SendData(data3, sizeof(data3));
           GEN_XSLEEP.Seconds(1);
+          
 
         }
 
       ledneopixelws2812b->End();
     }
+  
 
   GEN_DIOFACTORY.DeleteLedNeopixelWS2812B(ledneopixelws2812b);
+  
   
   return true;
 }

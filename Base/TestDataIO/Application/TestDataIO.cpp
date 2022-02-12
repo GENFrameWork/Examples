@@ -286,6 +286,25 @@ bool TESTDATAIO::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool TESTDATAIO::AppProc_LastUpdate()
+* @brief      AppProc_LastUpdate
+* @ingroup    DATAIO
+* 
+* @author     Abraham J. Velez 
+* @date       18/01/2022 20:13:11
+* 
+* @return     bool : true if is succesful. 
+* 
+* ---------------------------------------------------------------------------------------------------------------------*/
+bool TESTDATAIO::AppProc_LastUpdate()
+{
+  return false;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool TESTDATAIO::AppProc_End()
 * @brief      AppProc_End

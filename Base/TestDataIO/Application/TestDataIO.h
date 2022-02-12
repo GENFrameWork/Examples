@@ -86,6 +86,7 @@ class TESTDATAIO : public APPBASE
     bool                AppProc_Ini                         ();
     bool                AppProc_FirstUpdate                 ();
     bool                AppProc_Update                      ();
+    bool                AppProc_LastUpdate                  ();  
     bool                AppProc_End                         ();
     bool                AppProc_PlatformEnd                 ();
 
