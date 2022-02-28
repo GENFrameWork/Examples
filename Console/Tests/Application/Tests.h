@@ -39,6 +39,7 @@
 #include "XFSMachine.h"
 #include "XString.h"
 #include "XTree.h"
+#include "XProperty.h"
 #include "XScheduler.h"
 
 #include "DIOStream.h"
@@ -104,6 +105,105 @@ typedef struct
   XCHAR*          namefunction;
 
 } TESTS_LIST_FUNCTION;
+
+
+
+typedef struct TESTS_PROPERTY
+{ 
+
+  double              x_;
+  double              y_;
+  double              z_;
+
+  public:                                     
+
+                      TESTS_PROPERTY          () : x(this), y(this), z(this)
+                      {
+                        x_ = 0.0f;
+                        y_ = 0.0f;
+                        z_ = 10.0f;
+                      }
+
+                      TESTS_PROPERTY          (double x0, double y0) : x_(x0), y_(y0), x(this), y(this), z(this)
+                      {
+                        z_ = 10.0f;
+                      } 
+
+    void              SetX                    (double x) 
+                      { 
+                        x_ = x; 
+                      }
+
+    double            GetX                    () 
+                      { 
+                        return x_; 
+                      } 
+
+    XPROPERTY<TESTS_PROPERTY, double, &TESTS_PROPERTY::GetX, &TESTS_PROPERTY::SetX> x;
+
+    void              SetY                    (double y) 
+                      { 
+                        y_ = y;                       
+                      }
+
+    double            GetY                    () 
+                      { 
+                        return y_; 
+                      }
+
+   
+    XPROPERTY<TESTS_PROPERTY, double, &TESTS_PROPERTY::GetY, &TESTS_PROPERTY::SetY> y;
+
+
+    double            GetZ                    ()
+                      {
+                        return z_;
+                      }
+
+
+    XPROPERTYG<TESTS_PROPERTY, double, &TESTS_PROPERTY::GetZ> z;
+
+   
+} TYPE_PROPERTY;
+
+
+
+
+typedef struct TESTS_PROPERTY2
+{
+  public:
+                      TESTS_PROPERTY2         () :  data(this)
+                      {
+
+                      }
+
+                      TESTS_PROPERTY2         (TESTS_PROPERTY data0) : data_(data0), data(this)
+                      {
+                      }
+
+    void              Set                     (TESTS_PROPERTY data)
+                      {
+                        data_.x = data.x;
+                      }
+
+    TESTS_PROPERTY    Get                     ()
+                      {
+                        return data_;
+                      }
+
+    
+    XPROPERTY<TESTS_PROPERTY2, TESTS_PROPERTY, &TESTS_PROPERTY2::Get, &TESTS_PROPERTY2::Set>  data;
+
+    TESTS_PROPERTY    data2;
+
+
+  private:
+
+    TESTS_PROPERTY    data_;
+
+} TYPE_PROPERTY2;
+
+
 
 
 #define TESTS_MAXNTHREADS                         5
@@ -202,6 +302,7 @@ class TESTS : public APPCONSOLE, public XFSMACHINE
     static bool                     Test_SystemBatteryLevel             (TESTS* tests);      
     static bool                     Test_LedNeoPixelWS2812B             (TESTS* tests);  
     static bool                     Test_DIOPCap                        (TESTS* tests);
+    static bool                     Test_XProperty                      (TESTS* tests);
 
     #ifdef WINDOWS
     static bool                     Test_WindowsACL                     (TESTS* tests);

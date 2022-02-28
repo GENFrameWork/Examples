@@ -923,8 +923,9 @@ bool TESTS::Do_Tests()
                                           { false  , Test_XFileDFU                   , __L("Test XFile DFU")                  },
                                           { false  , Test_SystemHostFile             , __L("Test System Host File")           },
                                           { false  , Test_SystemBatteryLevel         , __L("Test System Battery Level")       },
-                                          { true   , Test_LedNeoPixelWS2812B         , __L("Test Led NeoPixel WS2812B")       }, 
+                                          { false  , Test_LedNeoPixelWS2812B         , __L("Test Led NeoPixel WS2812B")       }, 
                                           { false  , Test_DIOPCap                    , __L("Test DIO PCap")                   }, 
+                                          { true   , Test_XProperty                  , __L("Test XProperty")                  },
 
                                           #ifdef WINDOWS
                                           { false  , Test_WindowsACL                 , __L("Test Windows ACL")                },
@@ -3931,6 +3932,46 @@ bool TESTS::Test_DIOPCap(TESTS* tests)
   
 	return true;
 }
+
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool TESTS::Test_XProperty(TESTS* tests)
+* @brief      Test_XProperty
+* @ingroup    APPLICATION
+* 
+* @author     Abraham J. Velez 
+* @date       28/02/2022 8:49:00
+* 
+* @param[in]  tests : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* ---------------------------------------------------------------------------------------------------------------------*/
+bool TESTS::Test_XProperty(TESTS* tests)
+{
+  TESTS_PROPERTY    foo = { 10.0f, 10.0f };
+  TESTS_PROPERTY2   foo2(foo);
+
+  foo.x  = foo.z;
+  foo    = foo2.data;
+
+  foo2.data2 = foo;
+ 
+  double x = -(foo2.Get().x);
+  std::cout << x << "\n";
+
+  //double y = foo2.data. 
+  //std::cout << y << "\n";
+
+
+  return true;
+}
+
+
+
 
 
 
