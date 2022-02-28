@@ -909,7 +909,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_BluetoothLEEnum            , __L("Test Bluetooth LE Enum")          },                                          
                                           { false  , Test_NTP_InternetServices       , __L("Test_NTP_InternetServices")       },                                              
                                           { false  , Test_Sound                      , __L("Test Sound")                      },       
-                                          { false  , Test_ProcessManager             , __L("Test Process Manager")            },
+                                          { true   , Test_ProcessManager             , __L("Test Process Manager")            },
                                           { false  , Test_GetUserAndDomain           , __L("Test Get User And Domain")        },
                                           { false  , Test_I2C_GPIO_MCP2317           , __L("Test I2C GPIO MCP2317")           },
                                           { false  , Test_SPI_GPIO_MCP2317           , __L("Test SPI GPIO MCP2317")           },
@@ -2955,11 +2955,12 @@ bool TESTS::Test_Sound(TESTS* tests)
 *---------------------------------------------------------------------------------------------------------------------*/
 bool TESTS::Test_ProcessManager(TESTS* tests)
 {
-  XSTRING command;
-  XSTRING params; 
-  XSTRING in;
-  XSTRING out;
-  int     returncode;
+  XSTRING             command;
+  XSTRING             params; 
+  XSTRING             in;
+  XSTRING             out;
+//int                 returncode;
+  XVECTOR<XPROCESS*>  applist;
   
   /*
   command = __L("/usr/bin/festival");
@@ -2970,6 +2971,7 @@ bool TESTS::Test_ProcessManager(TESTS* tests)
 
   */
 
+  /*
   command = __L("D:\\depen dencies\\net-tools\\bin\\snmpwalk");
   params  = __L("");
   
@@ -2977,6 +2979,28 @@ bool TESTS::Test_ProcessManager(TESTS* tests)
 
 
   XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("Exec: %s "), (status?__L("Ok"):__L("Error!")));
+  */
+
+  bool status = GEN_XPROCESSMANAGER.GetApplicationRunningList(applist);
+
+  if(status)
+    {
+
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("-- Applications ------------------------------------------------------------------"));        
+      for(XDWORD c=0; c<applist.GetSize(); c++)
+        {
+          XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%04d    ID    : %d"), c, applist.Get(c)->GetID());        
+          XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("        Path  : %s")   , applist.Get(c)->GetPath()->Get());        
+          XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("        Name  : %s")   , applist.Get(c)->GetName()->Get());  
+          if(!applist.Get(c)->GetWindowTitle()->IsEmpty())
+            {
+              XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("        Title : [%s]")    , applist.Get(c)->GetWindowTitle()->Get());                     
+            }
+        }
+    }
+    
+  applist.DeleteContents();
+  applist.DeleteAll();
 
   return status;
 }

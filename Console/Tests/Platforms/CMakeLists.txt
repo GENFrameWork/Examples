@@ -1,27 +1,25 @@
-# --------------------------------------------------------------------
-# Tests : Example of console GEN FrameWork
-# 
-# --------------------------------------------------------------------
+ # --------------------------------------------------------------------
+ # Tests : Example of console GEN FrameWork  
+ # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
  project(tests)
 
  set(GEN_DIRECTORY "../../../../../GENFrameWork") 
 
-# --------------------------------------------------------------------
-# Compile Selection
+ # --------------------------------------------------------------------
+ # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
 
-# --------------------------------------------------------------------
-# Warnings control
+ # --------------------------------------------------------------------
+ # Warnings control
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
-# --------------------------------------------------------------------
-# Activate features/Defines
+ # --------------------------------------------------------------------
+ # Activate features/Defines
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Default.txt") 
-
 
  set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                                        FORCE)
  set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
@@ -34,7 +32,6 @@
  set(XFILE_HEX_FEATURE                                   true    CACHE BOOL "Activate XFile HEX format"                                  FORCE)  
  set(XFILE_DFU_FEATURE                                   true    CACHE BOOL "Activate XFile DFU format"                                  FORCE)  
  set(XFILE_RIFF_FEATURE                                  true    CACHE BOOL "Activate XFile RIFF format"                                 FORCE)  
-
 
  set(HASH_SHA1_FEATURE                                   true    CACHE BOOL "Activate Hash SHA1"                                         FORCE)    
  set(HASH_SHA2_FEATURE                                   true    CACHE BOOL "Activate Hash SHA2"                                         FORCE)
@@ -62,7 +59,7 @@
  set(DIO_ONOTIFICATIONS_MANAGER_FEATURE                  true    CACHE BOOL "Activate Notifications Nanager"                             FORCE)
  set(DIO_WIFIMANAGERMODE_FEATURE                         true    CACHE BOOL "Activate Data Input/Output Wifi Manager Mode"               FORCE) 
  set(DIO_SNMP_FEATURE                                    true    CACHE BOOL "Activate SNMP (Simple Network Management Protocol)"         FORCE)
- set(DIO_LEDNEOPIXELWS2812B_FEATURE                      true    CACHE BOOL "Activate Data Input/Output Led Neopixel WS2812B"            FORCE)
+ set(DIO_LEDNEOPIXELWS2812B_FEATURE                      true    CACHE BOOL "Activate Data Input/Output Led Neopixel WS2812B"            FORCE) 
 #set(DIO_PCAP_FEATURE                                    true    CACHE BOOL "Activate Data Input/Output Cap"                             FORCE)
 
  if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -90,29 +87,27 @@
 
 
 
-
-
-# --------------------------------------------------------------------
-# Config Application Macro
+ # --------------------------------------------------------------------
+ # Config Application Macro
 
  set(APP_CFG_TESTS "-DAPP_CFG=TESTS_CFG::GetInstance()")
  add_definitions(${APP_CFG_TESTS})
 
 
-# --------------------------------------------------------------------
-# Source code of the GEN in this Application
+ # --------------------------------------------------------------------
+ # Source code of the GEN in this Application
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists.txt") 
                    
                    
-# --------------------------------------------------------------------
-# Directorys of the Application
+ # --------------------------------------------------------------------
+ # Directorys of the Application
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
  list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
 
-# --------------------------------------------------------------------
-# Source code of the Application
+ # --------------------------------------------------------------------
+ # Source code of the Application
 
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Tests.cpp")
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Tests_CFG.cpp")
@@ -129,14 +124,15 @@
 
 
 
-# --------------------------------------------------------------------
-# Create proyect 
+ # --------------------------------------------------------------------
+ # Create proyect 
 
  include_directories(${INCLUDES_DIR})
 
  add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
-# --------------------------------------------------------------------
-# Add Libraries
+ # --------------------------------------------------------------------
+ # Add Libraries
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Librarys.txt") 
+
