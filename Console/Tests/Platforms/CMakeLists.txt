@@ -28,6 +28,7 @@
 
  set(XSHAREDMEMORYMANAGER_FEATURE                        true    CACHE BOOL "Activate Shared Memory Manager"                             FORCE)
  set(XPROCESSMANAGER_FEATURE                             true    CACHE BOOL "Activate Process Manager"                                   FORCE)
+ set(XLICENSE_FEATURE                                    true    CACHE BOOL "Activate License functions"                                 FORCE)
 
  set(XFILE_HEX_FEATURE                                   true    CACHE BOOL "Activate XFile HEX format"                                  FORCE)  
  set(XFILE_DFU_FEATURE                                   true    CACHE BOOL "Activate XFile DFU format"                                  FORCE)  

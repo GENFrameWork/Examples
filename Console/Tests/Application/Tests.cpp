@@ -67,6 +67,7 @@
 #include "XObserver.h"
 #include "XSharedMemoryManager.h"
 #include "XProcessManager.h"
+#include "XLicense.h"
 
 #include "HashMD5.h"
 #include "HashSHA1.h"
@@ -909,7 +910,7 @@ bool TESTS::Do_Tests()
                                           { false  , Test_BluetoothLEEnum            , __L("Test Bluetooth LE Enum")          },                                          
                                           { false  , Test_NTP_InternetServices       , __L("Test_NTP_InternetServices")       },                                              
                                           { false  , Test_Sound                      , __L("Test Sound")                      },       
-                                          { true   , Test_ProcessManager             , __L("Test Process Manager")            },
+                                          { false  , Test_ProcessManager             , __L("Test Process Manager")            },
                                           { false  , Test_GetUserAndDomain           , __L("Test Get User And Domain")        },
                                           { false  , Test_I2C_GPIO_MCP2317           , __L("Test I2C GPIO MCP2317")           },
                                           { false  , Test_SPI_GPIO_MCP2317           , __L("Test SPI GPIO MCP2317")           },
@@ -925,7 +926,8 @@ bool TESTS::Do_Tests()
                                           { false  , Test_SystemBatteryLevel         , __L("Test System Battery Level")       },
                                           { false  , Test_LedNeoPixelWS2812B         , __L("Test Led NeoPixel WS2812B")       }, 
                                           { false  , Test_DIOPCap                    , __L("Test DIO PCap")                   }, 
-                                          { true   , Test_XProperty                  , __L("Test XProperty")                  },
+                                          { false  , Test_XProperty                  , __L("Test XProperty")                  },
+                                          { true   , Test_XLicense                   , __L("Test XLicense")                   },
 
                                           #ifdef WINDOWS
                                           { false  , Test_WindowsACL                 , __L("Test Windows ACL")                },
@@ -3993,6 +3995,72 @@ bool TESTS::Test_XProperty(TESTS* tests)
 
   return true;
 }
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool TESTS::Test_XLicense(TESTS* tests)
+* @brief      Test_License
+* @ingroup    APPLICATION
+* 
+* @author     Abraham J. Velez 
+* @date       01/03/2022 19:36:51
+* 
+* @param[in]  tests : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* ---------------------------------------------------------------------------------------------------------------------*/
+bool TESTS::Test_XLicense(TESTS* tests)
+{
+	XLICENSE		xlicense;
+	XLICENSEID  xlicenseID;	
+	XBUFFER			licensefile;
+	XBUFFER			license;
+	XSTRING			string;
+		
+	if(xlicense.GenerateMachineID(xlicenseID))
+		{
+			xlicenseID.GetXString(string);
+			tests->console->Printf(__L("ID licencia : %s \n"), string.Get()); 
+			
+			xlicense.GetApplicationID()->Set(__L("GEN  Copyright (C).  All right reserved."));		
+			xlicense.Generate(xlicenseID);
+			xlicense.Get(string);
+			tests->console->Printf(__L("Licencia    : %s \n"), string.Get()); 	
+
+			XPATH		  xpathgeneric;
+			XPATH		  xpath;
+			DIOURL	  url;
+      XSTRING   applicationID;
+
+      url           = __L("http://genframework.com/license");
+      applicationID = __L("TEST Application");
+
+      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpath);
+      xpath.Slash_Add();
+      xpath.Add("test.lic");
+      			
+			url = __L("http://genframework.com/license");
+	
+			if(xlicense.CheckMasterCreation(xpath, xlicenseID, applicationID, 10)) return false;
+
+			if(!xlicense.LoadFromFile(xpath, (*xlicense.GetApplicationID()),  &license)) return false;
+					
+			//xlicense.LoadFromURL(url, 10, NULL, &license);
+
+			tests->console->Printf(__L("Check       : ")); 	
+			if(license.Compare(xlicense.Get()))
+						tests->console->Printf(__L("Ok!\n")); 	
+			 else tests->console->Printf(__L("Error!\n")); 	
+
+		  //CHECKLICENSEFULLLOCAL(xpath)		
+		}
+
+	return true;
+}
+
 
 
 

@@ -303,6 +303,7 @@ class TESTS : public APPCONSOLE, public XFSMACHINE
     static bool                     Test_LedNeoPixelWS2812B             (TESTS* tests);  
     static bool                     Test_DIOPCap                        (TESTS* tests);
     static bool                     Test_XProperty                      (TESTS* tests);
+    static bool                     Test_XLicense                       (TESTS* tests);
 
     #ifdef WINDOWS
     static bool                     Test_WindowsACL                     (TESTS* tests);
