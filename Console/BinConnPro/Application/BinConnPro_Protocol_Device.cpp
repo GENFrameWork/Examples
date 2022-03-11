@@ -7,7 +7,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -52,7 +52,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -74,7 +74,7 @@ BINCONNPRO_PROTOCOL_DEVICE::BINCONNPRO_PROTOCOL_DEVICE()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -93,7 +93,7 @@ BINCONNPRO_PROTOCOL_DEVICE::~BINCONNPRO_PROTOCOL_DEVICE()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     BINCONNPRO_PROTOCOL_DEVICETYPE :
 *
@@ -112,7 +112,7 @@ BINCONNPRO_PROTOCOL_DEVICETYPE BINCONNPRO_PROTOCOL_DEVICE::GetType()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  type :
 *
@@ -133,7 +133,7 @@ void BINCONNPRO_PROTOCOL_DEVICE::SetType(BINCONNPRO_PROTOCOL_DEVICETYPE type)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     XDWORD :
 *
@@ -152,7 +152,7 @@ XDWORD BINCONNPRO_PROTOCOL_DEVICE::GetID()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  ID :
 *
@@ -173,7 +173,7 @@ void BINCONNPRO_PROTOCOL_DEVICE::SetID(XDWORD ID)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  typename :
 *
@@ -203,7 +203,7 @@ bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typestring)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

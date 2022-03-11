@@ -7,7 +7,7 @@
 * @ingroup     GRAPHIC
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -110,7 +110,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -130,7 +130,7 @@ CANVAS2D::CANVAS2D() :  XFSMACHINE(0)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -150,7 +150,7 @@ CANVAS2D::~CANVAS2D()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -188,7 +188,7 @@ bool CANVAS2D::InitFSMachine()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -286,7 +286,7 @@ bool CANVAS2D::AppProc_Ini()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -354,7 +354,7 @@ bool CANVAS2D::AppProc_FirstUpdate()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -411,7 +411,7 @@ bool CANVAS2D::AppProc_Update()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -480,7 +480,7 @@ bool CANVAS2D::AppProc_End()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -561,7 +561,7 @@ bool CANVAS2D::UpdateInput()
 * @ingroup    GRAPHIC
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  screen : 
 * 
@@ -661,7 +661,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -773,7 +773,7 @@ bool CANVAS2D::DrawFrame()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -803,7 +803,7 @@ void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -835,7 +835,7 @@ void CANVAS2D::HandleEvent(XEVENT* xevent)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

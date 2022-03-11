@@ -8,7 +8,7 @@
 * @ingroup    SCRIPT
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -108,15 +108,9 @@ typedef struct
 
 
 
-typedef struct TESTS_PROPERTY
+class TESTS_PROPERTY
 { 
-
-  double              x_;
-  double              y_;
-  double              z_;
-
   public:                                     
-
                       TESTS_PROPERTY          () : x(this), y(this), z(this)
                       {
                         x_ = 0.0f;
@@ -163,13 +157,14 @@ typedef struct TESTS_PROPERTY
 
     XPROPERTYG<TESTS_PROPERTY, double, &TESTS_PROPERTY::GetZ> z;
 
-   
-} TYPE_PROPERTY;
+    double            x_;
+    double            y_;
+    double            z_;   
+};
 
 
 
-
-typedef struct TESTS_PROPERTY2
+class TESTS_PROPERTY2
 {
   public:
                       TESTS_PROPERTY2         () :  data(this)
@@ -181,18 +176,18 @@ typedef struct TESTS_PROPERTY2
                       {
                       }
 
-    void              Set                     (TESTS_PROPERTY data)
+    void              SetX                    (TESTS_PROPERTY data)
                       {
                         data_.x = data.x;
                       }
 
-    TESTS_PROPERTY    Get                     ()
+    TESTS_PROPERTY    GetX                     ()
                       {
                         return data_;
                       }
 
     
-    XPROPERTY<TESTS_PROPERTY2, TESTS_PROPERTY, &TESTS_PROPERTY2::Get, &TESTS_PROPERTY2::Set>  data;
+    XPROPERTY<TESTS_PROPERTY2, TESTS_PROPERTY, &TESTS_PROPERTY2::GetX, &TESTS_PROPERTY2::SetX>  data;
 
     TESTS_PROPERTY    data2;
 
@@ -201,8 +196,7 @@ typedef struct TESTS_PROPERTY2
 
     TESTS_PROPERTY    data_;
 
-} TYPE_PROPERTY2;
-
+};
 
 
 

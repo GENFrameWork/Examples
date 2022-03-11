@@ -7,7 +7,7 @@
 * @ingroup     SCRIPT
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -59,7 +59,7 @@ SCRIPTS_CFG* SCRIPTS_CFG::instance = NULL;
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -78,7 +78,7 @@ bool SCRIPTS_CFG::GetIsInstanced()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     SCRIPTS_CFG& :
 *
@@ -98,7 +98,7 @@ SCRIPTS_CFG& SCRIPTS_CFG::GetInstance()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -125,7 +125,7 @@ bool SCRIPTS_CFG::DelInstance()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -171,7 +171,7 @@ bool SCRIPTS_CFG::Default()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  XCHAR* : name of file of config
 *
@@ -196,7 +196,7 @@ SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -214,7 +214,7 @@ SCRIPTS_CFG::~SCRIPTS_CFG()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

@@ -7,7 +7,7 @@
 * @ingroup    SCRIPT
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -180,7 +180,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -200,7 +200,7 @@ TESTS::TESTS() :  XFSMACHINE(0)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -220,7 +220,7 @@ TESTS::~TESTS()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -258,7 +258,7 @@ bool TESTS::InitFSMachine()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -293,7 +293,7 @@ bool TESTS::AppProc_PlatformIni()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -438,7 +438,7 @@ bool TESTS::AppProc_Ini()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -454,7 +454,10 @@ bool TESTS::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------------
 
-  xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
+  //xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
+
+  GEN_XFACTORY_CREATE(xtimerupdateconsole,CreateTimer())
+
   if(!xtimerupdateconsole) return false;
 
   //--------------------------------------------------------------------------------------
@@ -471,7 +474,7 @@ bool TESTS::AppProc_FirstUpdate()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -545,7 +548,7 @@ bool TESTS::AppProc_Update()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -629,7 +632,7 @@ bool TESTS::AppProc_End()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -648,7 +651,7 @@ bool TESTS::AppProc_PlatformEnd()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  key :
 *
@@ -689,7 +692,7 @@ bool TESTS::KeyValidSecuences(int key)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  string2 :
@@ -730,7 +733,7 @@ bool TESTS::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefeed)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  separator :
 *
@@ -759,7 +762,7 @@ bool TESTS::Show_Header(bool separator)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -846,7 +849,7 @@ bool TESTS::Show_AppStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -874,7 +877,7 @@ bool TESTS::Show_AllStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -970,7 +973,7 @@ bool TESTS::Do_Tests()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -1003,7 +1006,7 @@ bool TESTS::Params_IsModeServer()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1063,7 +1066,7 @@ bool TESTS::Test_XString(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1181,7 +1184,7 @@ bool TESTS::Test_XBuffer(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       10/11/2021 17:47:57
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -1218,7 +1221,7 @@ bool TESTS::Test_XRand(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1274,7 +1277,7 @@ bool TESTS::Test_XVector(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -1339,7 +1342,7 @@ bool TESTS::Test_XTrace(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1401,7 +1404,7 @@ bool TESTS::Test_XLogs(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  node :
 * @param[in]  nchild :
@@ -1450,7 +1453,7 @@ bool TESTS::Test_XTree_AddChilds(XTREE_NODE_TEST* node, int nchild)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  node :
 * @param[in]  indexchild :
@@ -1485,7 +1488,7 @@ bool TESTS::Test_XTree_InsertChilds(XTREE_NODE_TEST* node, int indexchild)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1588,7 +1591,7 @@ bool TESTS::Test_XTree(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1636,7 +1639,7 @@ bool TESTS::Test_XDir(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1682,7 +1685,7 @@ bool TESTS::Test_Threads(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1742,7 +1745,7 @@ bool TESTS::Test_DateTime(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1798,7 +1801,7 @@ bool TESTS::Test_HASH(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1862,7 +1865,7 @@ bool TESTS::Test_DIOStreamTCPIPConnection(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       11/11/2021 10:53:11
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -1892,7 +1895,7 @@ bool TESTS::Test_XSystem(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -1967,7 +1970,7 @@ bool TESTS::Test_SharedMemory(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -2010,7 +2013,7 @@ bool TESTS::Test_GPIO(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -2066,7 +2069,7 @@ bool TESTS::Test_WebClient(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -2301,7 +2304,7 @@ bool TESTS::Test_ScraperWeb(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -2339,7 +2342,7 @@ bool TESTS::Test_MPSSE(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -2388,7 +2391,7 @@ bool TESTS::Test_DNSProtocol(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -2452,7 +2455,7 @@ bool TESTS::Test_DIOCheckTCPIPConnections(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -2491,7 +2494,7 @@ bool TESTS::Test_WifiEnum(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2528,7 +2531,7 @@ bool TESTS::Test_WakeOnLAN(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2598,7 +2601,7 @@ bool TESTS::Test_DIOStreamTLS(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2654,7 +2657,7 @@ bool TESTS::Test_SystemCPUUsage(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2694,7 +2697,7 @@ bool TESTS::Test_AppAlerts(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2757,7 +2760,7 @@ bool TESTS::Test_BluetoothEnum(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2825,7 +2828,7 @@ bool TESTS::Test_BluetoothLEEnum(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2885,7 +2888,7 @@ bool TESTS::Test_NTP_InternetServices(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -2948,7 +2951,7 @@ bool TESTS::Test_Sound(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -3016,7 +3019,7 @@ bool TESTS::Test_ProcessManager(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -3047,7 +3050,7 @@ bool TESTS::Test_GetUserAndDomain(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful. 
 *
@@ -3115,7 +3118,7 @@ bool TESTS::Test_I2C_GPIO_MCP2317(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -3172,7 +3175,7 @@ bool TESTS::Test_SPI_GPIO_MCP2317(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -3243,7 +3246,7 @@ bool TESTS::Test_WifiManagerMode(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3291,7 +3294,7 @@ bool TESTS::Test_NotificationsManager(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3448,7 +3451,7 @@ bool TESTS::Test_ATCommandGSM(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3490,7 +3493,7 @@ bool TESTS::Test_SNMP(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3543,7 +3546,7 @@ bool TESTS::Test_XFileXML(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3578,7 +3581,7 @@ bool TESTS::Test_XFileRIFF(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3677,7 +3680,7 @@ bool TESTS::Test_DIOStreamUSBConnection(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3716,7 +3719,7 @@ bool TESTS::Test_XFileDFU(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3741,7 +3744,7 @@ bool TESTS::Test_SystemHostFile(TESTS* tests)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3773,7 +3776,7 @@ bool TESTS::Test_SystemBatteryLevel(TESTS* tests)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3860,7 +3863,7 @@ bool TESTS::Test_LedNeoPixelWS2812B(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       12/12/2021 18:05:56
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3969,7 +3972,7 @@ bool TESTS::Test_DIOPCap(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       28/02/2022 8:49:00
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -3979,20 +3982,9 @@ bool TESTS::Test_DIOPCap(TESTS* tests)
 bool TESTS::Test_XProperty(TESTS* tests)
 {
   TESTS_PROPERTY    foo = { 10.0f, 10.0f };
-  TESTS_PROPERTY2   foo2(foo);
-
+  
   foo.x  = foo.z;
-  foo    = foo2.data;
-
-  foo2.data2 = foo;
- 
-  double x = -(foo2.Get().x);
-  std::cout << x << "\n";
-
-  //double y = foo2.data. 
-  //std::cout << y << "\n";
-
-
+  
   return true;
 }
 
@@ -4005,7 +3997,7 @@ bool TESTS::Test_XProperty(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2022 19:36:51
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -4075,7 +4067,7 @@ bool TESTS::Test_XLicense(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests :
 *
@@ -4113,7 +4105,7 @@ bool TESTS::Test_WindowsACL(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  tests : 
 *
@@ -4226,7 +4218,7 @@ bool TESTS::Test_DBUS(TESTS* tests)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -4295,7 +4287,7 @@ bool TESTS::Test_NetWorkManager(TESTS* tests)
 * @ingroup    APPLICATION
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  tests : 
 * 
@@ -4479,7 +4471,7 @@ bool TESTS::Test_DeviceBusInputFile(TESTS* tests)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  HASH :
 * @param[in]  input :
@@ -4514,7 +4506,7 @@ bool TESTS::Test_Hash(HASH* HASH, XBUFFER& input, XCHAR* leyend)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -4541,7 +4533,7 @@ void TESTS::HandleEvent_Scheduler(XSCHEDULER_XEVENT* event)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -4596,7 +4588,7 @@ void TESTS::HandleEvent_WebClient(DIOWEBCLIENT_XEVENT* event)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -4634,7 +4626,7 @@ void TESTS::HandleEvent(XEVENT* xevent)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  param :
 *
@@ -4665,7 +4657,7 @@ void TESTS::ThreadRunFunction(void* param)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

@@ -7,7 +7,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -53,7 +53,7 @@
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -75,7 +75,7 @@ MINIWEBSERVER_APIREST::MINIWEBSERVER_APIREST(MINIWEBSERVER* miniwebserver)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -94,7 +94,7 @@ MINIWEBSERVER_APIREST::~MINIWEBSERVER_APIREST()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  request :
 * @param[in]  querystring :
@@ -121,7 +121,7 @@ bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_REQUEST* request, DIOWE
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

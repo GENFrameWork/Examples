@@ -3,7 +3,7 @@
  * @brief    CMSIS Device System Source File for
  *           ARMCM3 Device Series
  * @version  V5.00
- * @date     07. September 2016
+ * @date       01/03/2016 12:00
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2016 ARM Limited. All rights reserved.

@@ -2,7 +2,7 @@
  * @file     mmu_ARMCA5.c
  * @brief    MMU Configuration for ARM Cortex-A5 Device Series
  * @version  V1.1.0
- * @date     23. November 2018
+ * @date       01/03/2016 12:00
  *
  * @note
  *

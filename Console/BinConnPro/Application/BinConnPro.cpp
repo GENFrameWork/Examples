@@ -7,7 +7,7 @@
 * @ingroup
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -112,7 +112,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -132,7 +132,7 @@ BINCONNPRO::BINCONNPRO() :  XFSMACHINE(0)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -152,7 +152,7 @@ BINCONNPRO::~BINCONNPRO()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -190,7 +190,7 @@ bool BINCONNPRO::InitFSMachine()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -318,7 +318,7 @@ bool BINCONNPRO::AppProc_Ini()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -412,7 +412,7 @@ bool BINCONNPRO::AppProc_FirstUpdate()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -479,7 +479,7 @@ bool BINCONNPRO::AppProc_Update()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -570,7 +570,7 @@ bool BINCONNPRO::AppProc_End()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  key :
 *
@@ -605,7 +605,7 @@ bool BINCONNPRO::KeyValidSecuences(int key)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  string2 :
@@ -646,7 +646,7 @@ bool BINCONNPRO::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool line
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  lf :
@@ -671,7 +671,7 @@ bool BINCONNPRO::Show_LineDirect(XSTRING& string, bool lf)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  separator :
 *
@@ -700,7 +700,7 @@ bool BINCONNPRO::Show_Header(bool separator)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -742,7 +742,7 @@ bool BINCONNPRO::Show_AppStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -779,7 +779,7 @@ bool BINCONNPRO::Show_InternetStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -811,7 +811,7 @@ bool BINCONNPRO::Show_ConnectionsStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -927,7 +927,7 @@ bool BINCONNPRO::Show_DeviceConnectedStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -958,7 +958,7 @@ bool BINCONNPRO::Show_AllStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  protocol :
 * @param[in]  applicationdata :
@@ -1049,7 +1049,7 @@ bool BINCONNPRO::InitializeProtocolConnectionServer(BINCONNPRO_PROTOCOL* protoco
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  protocol :
 * @param[in]  applicationdata :
@@ -1117,7 +1117,7 @@ bool BINCONNPRO::InitializeProtocolConnectionClient(BINCONNPRO_PROTOCOL* protoco
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -1181,7 +1181,7 @@ void BINCONNPRO::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMA
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -1231,7 +1231,7 @@ void BINCONNPRO::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMA
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -1268,7 +1268,7 @@ void BINCONNPRO::HandleEvent(XEVENT* xevent)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

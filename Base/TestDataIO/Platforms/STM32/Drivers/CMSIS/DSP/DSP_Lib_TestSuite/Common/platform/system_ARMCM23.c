@@ -3,7 +3,7 @@
  * @brief    CMSIS Device System Source File for
  *           ARMCM23 Device Series
  * @version  V5.00
- * @date     21. October 2016
+ * @date       01/03/2016 12:00
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2016 ARM Limited. All rights reserved.

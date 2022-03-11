@@ -7,7 +7,7 @@
 * @ingroup     SCRIPT
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -62,7 +62,7 @@ MINIWEBSERVER_CFG* MINIWEBSERVER_CFG::instance = NULL;
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -81,7 +81,7 @@ bool MINIWEBSERVER_CFG::GetIsInstanced()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     MINIWEBSERVER_CFG& :
 *
@@ -101,7 +101,7 @@ MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -128,7 +128,7 @@ bool MINIWEBSERVER_CFG::DelInstance()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -185,7 +185,7 @@ bool MINIWEBSERVER_CFG::Default()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  XCHAR* : name of file of config
 *
@@ -211,7 +211,7 @@ MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -231,7 +231,7 @@ MINIWEBSERVER_CFG::~MINIWEBSERVER_CFG()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

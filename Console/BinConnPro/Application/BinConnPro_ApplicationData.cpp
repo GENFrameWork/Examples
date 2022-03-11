@@ -7,7 +7,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -53,7 +53,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -73,7 +73,7 @@ BINCONNPRO_APPLICATIONDATA::BINCONNPRO_APPLICATIONDATA()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -93,7 +93,7 @@ BINCONNPRO_APPLICATIONDATA::~BINCONNPRO_APPLICATIONDATA()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

@@ -2,7 +2,7 @@
  * @file     cmsis_gcc.h
  * @brief    CMSIS compiler GCC header file
  * @version  V5.2.0
- * @date     08. May 2019
+ * @date       01/03/2016 12:00
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.

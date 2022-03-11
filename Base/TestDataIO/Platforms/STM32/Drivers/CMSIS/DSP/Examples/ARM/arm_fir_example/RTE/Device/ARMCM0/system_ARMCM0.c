@@ -3,7 +3,7 @@
  * @brief    CMSIS Device System Source File for
  *           ARMCM0 Device
  * @version  V5.3.1
- * @date     09. July 2018
+ * @date       01/03/2016 12:00
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.

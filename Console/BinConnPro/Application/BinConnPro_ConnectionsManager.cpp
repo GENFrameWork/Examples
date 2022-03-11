@@ -7,7 +7,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -66,7 +66,7 @@
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -88,7 +88,7 @@ BINCONNPRO_CONNECTIONSMANAGER::BINCONNPRO_CONNECTIONSMANAGER() : DIOPROTOCOL_CON
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -108,7 +108,7 @@ BINCONNPRO_CONNECTIONSMANAGER::~BINCONNPRO_CONNECTIONSMANAGER()
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]    isserver : is Server or client mode
 * @param[in]    isenumlocalactive : Is active the enum (local)
@@ -151,7 +151,7 @@ bool BINCONNPRO_CONNECTIONSMANAGER::Ini(bool isserver, bool isenumlocalactive, i
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     int :
 *
@@ -189,7 +189,7 @@ int BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetNConnected()
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  diostream : diostream to search associated connection.
 *
@@ -229,7 +229,7 @@ DIOPROTOCOL_CONNECTION* BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetBy
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -266,7 +266,7 @@ bool BINCONNPRO_CONNECTIONSMANAGER::End()
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     DIOPROTOCOL* : DIO Protocol created
 *
@@ -347,7 +347,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     DIOPROTOCOL* : DIO Protocol created
 *
@@ -408,7 +408,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  dioprotocol : DIO Protocol to delete.
 *
@@ -453,7 +453,7 @@ bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  dioprotocol : DIO Protocol to delete.
 *
@@ -495,7 +495,7 @@ bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

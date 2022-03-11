@@ -7,7 +7,7 @@
 * @ingroup     SCRIPT
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -108,7 +108,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -128,7 +128,7 @@ DATABASES::DATABASES() :  XFSMACHINE(0)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -148,7 +148,7 @@ DATABASES::~DATABASES()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -186,7 +186,7 @@ bool DATABASES::InitFSMachine()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -291,7 +291,7 @@ bool DATABASES::AppProc_Ini()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -320,7 +320,7 @@ bool DATABASES::AppProc_FirstUpdate()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -387,7 +387,7 @@ bool DATABASES::AppProc_Update()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -445,7 +445,7 @@ bool DATABASES::AppProc_End()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  key :
 *
@@ -486,7 +486,7 @@ bool DATABASES::KeyValidSecuences(int key)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  type :
 *
@@ -517,7 +517,7 @@ bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -865,7 +865,7 @@ bool DATABASES::Database_DoTest()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  string2 :
@@ -906,7 +906,7 @@ bool DATABASES::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linef
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  separator :
 *
@@ -935,7 +935,7 @@ bool DATABASES::Show_Header(bool separator)
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -987,7 +987,7 @@ bool DATABASES::Show_AppStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -1017,7 +1017,7 @@ bool DATABASES::Show_DatabasesStatus()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -1047,7 +1047,7 @@ bool DATABASES::Show_AllStatus()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -1081,7 +1081,7 @@ void DATABASES::HandleEvent(XEVENT* xevent)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

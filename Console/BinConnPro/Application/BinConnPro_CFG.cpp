@@ -7,7 +7,7 @@
 * @ingroup     SCRIPT
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -61,7 +61,7 @@ BINCONNPRO_CFG* BINCONNPRO_CFG::instance = NULL;
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -80,7 +80,7 @@ bool BINCONNPRO_CFG::GetIsInstanced()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     BINCONNPRO_CFG& :
 *
@@ -100,7 +100,7 @@ BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -127,7 +127,7 @@ bool BINCONNPRO_CFG::DelInstance()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -146,7 +146,7 @@ bool BINCONNPRO_CFG::Protocol_IsActive()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -165,7 +165,7 @@ bool BINCONNPRO_CFG::Protocol_IsLocalEnumActive()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     int :
 *
@@ -184,7 +184,7 @@ int BINCONNPRO_CFG::Protocol_GetPort()
 * @ingroup    APPLICATION
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     XSTRING* :
 *
@@ -203,7 +203,7 @@ XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -239,7 +239,7 @@ bool BINCONNPRO_CFG::Default()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  XCHAR* : name of file of config
 *
@@ -272,7 +272,7 @@ BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -292,7 +292,7 @@ BINCONNPRO_CFG::~BINCONNPRO_CFG()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

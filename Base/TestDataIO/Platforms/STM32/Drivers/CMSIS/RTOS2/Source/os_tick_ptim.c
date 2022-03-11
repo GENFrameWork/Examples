@@ -2,7 +2,7 @@
  * @file     os_tick_ptim.c
  * @brief    CMSIS OS Tick implementation for Private Timer
  * @version  V1.0.2
- * @date     02. March 2018
+ * @date       01/03/2016 12:00
  ******************************************************************************/
 /*
  * Copyright (c) 2017-2018 Arm Limited. All rights reserved.

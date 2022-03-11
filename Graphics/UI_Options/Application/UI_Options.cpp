@@ -7,7 +7,7 @@
 * @ingroup     GRAPHIC
 *
 * @author      Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright   Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -125,7 +125,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -145,7 +145,7 @@ UI_OPTIONS::UI_OPTIONS() :  XFSMACHINE(0)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 * @return
@@ -165,7 +165,7 @@ UI_OPTIONS::~UI_OPTIONS()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -203,7 +203,7 @@ bool UI_OPTIONS::InitFSMachine()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -301,7 +301,7 @@ bool UI_OPTIONS::AppProc_Ini()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -370,7 +370,7 @@ bool UI_OPTIONS::AppProc_FirstUpdate()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -423,7 +423,7 @@ bool UI_OPTIONS::AppProc_Update()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -489,7 +489,7 @@ bool UI_OPTIONS::AppProc_End()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -653,7 +653,7 @@ bool UI_OPTIONS::UpdateInput()
 * @ingroup    GRAPHIC
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  screen : 
 * 
@@ -696,7 +696,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 * @ingroup    GRAPHIC
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  on : 
 * 
@@ -809,7 +809,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -911,7 +911,7 @@ bool UI_OPTIONS::DrawFrame()
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  element : 
 * 
@@ -977,7 +977,7 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  element_text : 
 * @param[in]  maskvalue : 
@@ -1024,7 +1024,7 @@ bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, 
 * @ingroup    GRAPHIC
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -1172,7 +1172,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
 * @ingroup    GRAPHIC
 * 
 * @author     Abraham J. Velez 
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  event : 
 * 
@@ -1216,7 +1216,7 @@ void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -1245,7 +1245,7 @@ void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -1284,7 +1284,7 @@ void UI_OPTIONS::HandleEvent(XEVENT* xevent)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

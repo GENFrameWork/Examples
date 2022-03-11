@@ -7,7 +7,7 @@
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -55,7 +55,7 @@
 * @ingroup    PLATFORM_COMMON
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  DIOSTREAM* : strean class to use by protocol
 *
@@ -79,7 +79,7 @@ BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(dio
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     Does not return anything.
 *
@@ -97,7 +97,7 @@ BINCONNPRO_PROTOCOL::~BINCONNPRO_PROTOCOL()
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  devicetype :
 * @param[in]  deviceID :
@@ -133,7 +133,7 @@ bool BINCONNPRO_PROTOCOL::CMD_GetDeviceTypeAndID(XDWORD& devicetype, XDWORD& dev
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  protocol :
 * @param[in]  cmd :
@@ -169,7 +169,7 @@ int BINCONNPRO_PROTOCOL::RCV_GetDeviceTypeAndID(DIOPROTOCOL* protocol, DIOPROTOC
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  centername :
 *
@@ -204,7 +204,7 @@ bool BINCONNPRO_PROTOCOL::CMD_GetCenterName(XSTRING& centername)
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  protocol :
 * @param[in]  cmd :
@@ -236,7 +236,7 @@ int BINCONNPRO_PROTOCOL::RCV_GetCenterName(DIOPROTOCOL* protocol, DIOPROTOCOL_CO
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  street :
 * @param[in]  city :
@@ -313,7 +313,7 @@ int BINCONNPRO_PROTOCOL::RCV_GetLocation(DIOPROTOCOL* protocol, DIOPROTOCOL_COMM
 * @ingroup
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

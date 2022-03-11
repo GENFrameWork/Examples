@@ -7,7 +7,7 @@
 * @ingroup    Examples
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @copyright  Copyright(c) 2008 - 2016 GEN Group.
 *
@@ -74,7 +74,7 @@ XSTM32_FATSD_SPI  FATSD_SPI;
 * @ingroup    DATAIO
 *
 * @author     Abraham J. Velez
-* @date       01/03/2016 12:30
+* @date       01/03/2016 12:00
 *
 * @param[in]  void :
 *
@@ -143,7 +143,7 @@ int STM32_Platform_Ini(void)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       31/08/2021 12:33:15
+* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -168,7 +168,7 @@ void STM32_Platform_NonPreemptiveDoTasks(void)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/09/2021 19:54:11
+* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -190,7 +190,7 @@ void* STM32_Platform_GetI2C1(void)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       01/09/2021 19:54:11
+* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -212,7 +212,7 @@ void* STM32_Platform_GetI2C3(void)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       21/09/2021 19:10:25
+* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -234,7 +234,7 @@ void* STM32_Platform_GetSPI1(void)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       21/09/2021 19:10:30
+* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -257,7 +257,7 @@ void* STM32_Platform_GetSPI2(void)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       07/09/2021 17:35:37
+* @date       01/03/2016 12:00
 * 
 * @param[in]  drive : 
 * 
@@ -278,7 +278,7 @@ DSTATUS STM32_SD_Disk_Initialize(BYTE drive)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       07/09/2021 17:35:44
+* @date       01/03/2016 12:00
 * 
 * @param[in]  drive : 
 * 
@@ -299,7 +299,7 @@ DSTATUS STM32_SD_Disk_Status(BYTE drive)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       07/09/2021 17:35:52
+* @date       01/03/2016 12:00
 * 
 * @param[in]  pdrive : 
 * @param[in]  buffer : 
@@ -323,7 +323,7 @@ DRESULT STM32_SD_Disk_Read(BYTE pdrive, BYTE* buffer, DWORD sector, UINT count)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       07/09/2021 17:36:12
+* @date       01/03/2016 12:00
 * 
 * @param[in]  pdrive : 
 * @param[in]  BYTE* buffer : 
@@ -348,7 +348,7 @@ DRESULT STM32_SD_Disk_Write(BYTE pdrive, const BYTE* buffer, DWORD sector, UINT 
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       07/09/2021 17:36:18
+* @date       01/03/2016 12:00
 * 
 * @param[in]  drive : 
 * @param[in]  ctrl : 
@@ -371,7 +371,7 @@ DRESULT STM32_SD_Disk_IOTCL(BYTE drive, BYTE ctrl, void* buffer)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       10/09/2021 8:08:16
+* @date       01/03/2016 12:00
 * 
 * @param[in]  char* mask : 
 * @param[in]  ... : 
@@ -405,7 +405,7 @@ void STM32_Platform_Trace(int iserror, const char* mask, ...)
 * @ingroup    
 * 
 * @author     Abraham J. Velez 
-* @date       09/09/2021 21:10:24
+* @date       01/03/2016 12:00
 * 
 * @return     void : does not return anything. 
 * 
@@ -432,7 +432,7 @@ void STM32_Heap_Usage()
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       15/09/2021 8:26:39
+* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -453,7 +453,7 @@ int STM32_Platform_End(void)
 * @ingroup    DATAIO
 * 
 * @author     Abraham J. Velez 
-* @date       14/09/2021 20:15:15
+* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_pin : 
 * 
