@@ -346,7 +346,7 @@ bool TESTS::AppProc_Ini()
   //XTRACE_SETLOCALIPFILTER(172);
 
 
-  APP_CFG.SetAutomaticTraceTargets();
+  APP_CFG_SETAUTOMATICTRACETARGETS
 
   //--------------------------------------------------------------------------------------
 
