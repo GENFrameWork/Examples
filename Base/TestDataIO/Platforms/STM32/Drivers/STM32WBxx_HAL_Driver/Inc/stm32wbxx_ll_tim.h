@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_tim.h
-  * @author  MCD Application Team
-  * @brief   Header file of TIM LL module.
+    * @brief   Header file of TIM LL module.
   ******************************************************************************
   * @attention
   *

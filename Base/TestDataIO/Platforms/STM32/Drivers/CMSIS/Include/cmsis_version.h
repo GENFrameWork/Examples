@@ -2,8 +2,7 @@
  * @file     cmsis_version.h
  * @brief    CMSIS Core(M) Version definitions
  * @version  V5.0.3
- * @date       01/03/2016 12:00
- ******************************************************************************/
+  ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 ARM Limited. All rights reserved.
  *

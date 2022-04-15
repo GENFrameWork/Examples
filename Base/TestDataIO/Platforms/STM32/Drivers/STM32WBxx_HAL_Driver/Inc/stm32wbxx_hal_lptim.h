@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_lptim.h
-  * @author  MCD Application Team
-  * @brief   Header file of LPTIM HAL module.
+    * @brief   Header file of LPTIM HAL module.
   ******************************************************************************
   * @attention
   *

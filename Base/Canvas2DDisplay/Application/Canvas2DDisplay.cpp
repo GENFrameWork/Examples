@@ -6,10 +6,7 @@
 * @brief      Data I/O stream UART / USB MICROCONTROLLER example class
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -73,7 +70,7 @@ APPLICATIONCREATEINSTANCE(CANVAS2DDISPLAY, uart_usb)
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      13/08/2002 13:15:15
 //
 //  @return
@@ -90,7 +87,7 @@ CANVAS2DDISPLAY::CANVAS2DDISPLAY()
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      13/08/2002 13:15:40
 //
 //  @return
@@ -107,7 +104,7 @@ CANVAS2DDISPLAY::~CANVAS2DDISPLAY()
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      13/08/2002 13:17:31
 //
 //  @return       bool :
@@ -138,7 +135,7 @@ bool CANVAS2DDISPLAY::AppProc_Ini()
 //  CANVAS2DDISPLAY::AppProc_FirstUpdate
 /**
 //
-//  @author        Abraham J. Velez
+//  ""
 //  @version       20/2/2003   16:26:12
 //
 //  @return        bool :
@@ -159,7 +156,7 @@ bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      15/03/2004 16:53:03
 //
 //  @return       bool :
@@ -179,7 +176,7 @@ bool CANVAS2DDISPLAY::AppProc_Update()
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      14/05/2012 19:02:07
 //
 //  @return       bool :
@@ -200,7 +197,7 @@ bool CANVAS2DDISPLAY::AppProc_End()
 //
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      23/09/2016 9:42:03
 //
 //  @return       bool :
@@ -239,7 +236,7 @@ bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
 //
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      28/10/2016 8:35:41
 //
 //  @return       bool :
@@ -414,9 +411,6 @@ bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    TEST
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wb10xx.h
-  * @author  MCD Application Team
-  * @brief   CMSIS Cortex Device Peripheral Access Layer Header File.
+    * @brief   CMSIS Cortex Device Peripheral Access Layer Header File.
   *          This file contains all the peripheral register's definitions, bits
   *          definitions and memory mapping for stm32wb10xx devices.
   *

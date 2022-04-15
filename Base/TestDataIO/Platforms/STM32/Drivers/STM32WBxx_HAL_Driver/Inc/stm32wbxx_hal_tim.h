@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_tim.h
-  * @author  MCD Application Team
-  * @brief   Header file of TIM HAL module.
+    * @brief   Header file of TIM HAL module.
   ******************************************************************************
   * @attention
   *

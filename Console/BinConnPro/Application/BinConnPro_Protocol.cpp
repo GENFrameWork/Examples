@@ -6,10 +6,7 @@
 * @brief      Example Binary Connexion Protocol class
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -54,9 +51,6 @@
 * @brief      Constructor
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  DIOSTREAM* : strean class to use by protocol
 *
 * @return     Does not return anything.
@@ -78,9 +72,6 @@ BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(dio
 * @note       VIRTUAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -95,9 +86,6 @@ BINCONNPRO_PROTOCOL::~BINCONNPRO_PROTOCOL()
 * @fn         bool BINCONNPRO_PROTOCOL::CMD_GetDeviceTypeAndID(XDWORD& devicetype, XDWORD& deviceID)
 * @brief      CMD_GetPOSDeviceTypeAndID
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  devicetype :
 * @param[in]  deviceID :
@@ -132,9 +120,6 @@ bool BINCONNPRO_PROTOCOL::CMD_GetDeviceTypeAndID(XDWORD& devicetype, XDWORD& dev
 * @brief      RCV_GetPOSDeviceTypeAndID
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  protocol :
 * @param[in]  cmd :
 * @param[in]  xbuffer :
@@ -168,9 +153,6 @@ int BINCONNPRO_PROTOCOL::RCV_GetDeviceTypeAndID(DIOPROTOCOL* protocol, DIOPROTOC
 * @brief      CMD_GetCenterName
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  centername :
 *
 * @return     bool : true if is succesful.
@@ -203,9 +185,6 @@ bool BINCONNPRO_PROTOCOL::CMD_GetCenterName(XSTRING& centername)
 * @brief      RCV_GetCenterName
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  protocol :
 * @param[in]  cmd :
 * @param[in]  xbuffer :
@@ -234,9 +213,6 @@ int BINCONNPRO_PROTOCOL::RCV_GetCenterName(DIOPROTOCOL* protocol, DIOPROTOCOL_CO
 * @fn         bool BINCONNPRO_PROTOCOL::CMD_GetLocation(XSTRING& street, XSTRING& city, XSTRING& state, XSTRING& country, XDWORD& postalcode)
 * @brief      CMD_GetLocation
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  street :
 * @param[in]  city :
@@ -276,7 +252,7 @@ bool BINCONNPRO_PROTOCOL::CMD_GetLocation(XSTRING& street, XSTRING& city, XSTRIN
 //
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      24/09/2015 11:08:33
 //
 //  @return       int :
@@ -311,9 +287,6 @@ int BINCONNPRO_PROTOCOL::RCV_GetLocation(DIOPROTOCOL* protocol, DIOPROTOCOL_COMM
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

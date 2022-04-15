@@ -6,10 +6,7 @@
 * @brief       Databases Configuration
 * @ingroup     SCRIPT
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -59,9 +56,6 @@ DATABASES_CFG* DATABASES_CFG::instance = NULL;
 * @brief      GetIsInstanced
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -77,9 +71,6 @@ bool DATABASES_CFG::GetIsInstanced()
 * @fn         DATABASES_CFG& DATABASES_CFG::GetInstance()
 * @brief      GetInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     DATABASES_CFG& :
 *
@@ -97,9 +88,6 @@ DATABASES_CFG& DATABASES_CFG::GetInstance()
 * @fn         bool DATABASES_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -125,9 +113,6 @@ bool DATABASES_CFG::DelInstance()
 * @brief      Database_GetURL
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     XSTRING* :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -143,9 +128,6 @@ XSTRING* DATABASES_CFG::Database_GetURL()
 * @fn         XDWORD DATABASES_CFG::Database_GetPort()
 * @brief      Database_GetPort
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     XDWORD :
 *
@@ -163,9 +145,6 @@ XDWORD DATABASES_CFG::Database_GetPort()
 * @brief      Database_DatabaseName
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     XSTRING* :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -181,9 +160,6 @@ XSTRING* DATABASES_CFG::Database_DatabaseName()
 * @fn         XSTRING* DATABASES_CFG::Database_GetUser()
 * @brief      Database_GetUser
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     XSTRING* :
 *
@@ -201,9 +177,6 @@ XSTRING* DATABASES_CFG::Database_GetUser()
 * @brief      Database_GetPassword
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     XSTRING* :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -220,9 +193,6 @@ XSTRING* DATABASES_CFG::Database_GetPassword()
 * @brief      Database_GetTimeoutConnection
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     int :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -238,9 +208,6 @@ int DATABASES_CFG::Database_GetTimeoutConnection()
 * @fn         bool DATABASES_CFG::Default()
 * @brief      Default config
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -295,9 +262,6 @@ bool DATABASES_CFG::Default()
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  XCHAR* : name of file of config
 *
 * @return     Does not return anything.
@@ -331,9 +295,6 @@ DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @note       VIRTUAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -350,9 +311,6 @@ DATABASES_CFG::~DATABASES_CFG()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

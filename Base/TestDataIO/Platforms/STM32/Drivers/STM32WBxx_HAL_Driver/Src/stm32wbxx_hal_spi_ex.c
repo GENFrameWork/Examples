@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_spi_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   Extended SPI HAL module driver.
   *          This file provides firmware functions to manage the following
   *          SPI peripheral extended functionalities :

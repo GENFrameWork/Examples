@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_cryp_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   CRYPEx HAL module driver.
   *          This file provides firmware functions to manage the extended
   *          functionalities of the Cryptography (CRYP) peripheral.

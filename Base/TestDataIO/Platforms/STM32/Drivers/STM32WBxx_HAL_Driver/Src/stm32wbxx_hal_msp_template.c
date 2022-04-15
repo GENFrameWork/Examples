@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_msp_template.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file contains the HAL System and Peripheral (PPP) MSP initialization
   *          and de-initialization functions.
   *          It should be copied to the application folder and renamed into 'stm32wbxx_hal_msp.c'.           

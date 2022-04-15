@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_lptim.c
-  * @author  MCD Application Team
+  * ""
   * @brief   LPTIM HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the Low Power Timer (LPTIM) peripheral:

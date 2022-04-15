@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_dma.h
-  * @author  MCD Application Team
-  * @brief   Header file of DMA LL module.
+    * @brief   Header file of DMA LL module.
   ******************************************************************************
   * @attention
   *

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_flash.c
-  * @author  MCD Application Team
+  * ""
   * @brief   FLASH HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the internal FLASH memory:

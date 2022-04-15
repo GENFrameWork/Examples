@@ -6,10 +6,7 @@
 * @brief       Example Mini Web Server class
 * @ingroup
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -112,9 +109,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -132,9 +126,6 @@ MINIWEBSERVER::MINIWEBSERVER() :  XFSMACHINE(0)
 * @brief      Destructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -151,9 +142,6 @@ MINIWEBSERVER::~MINIWEBSERVER()
 * @fn         MINIWEBSERVER::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -189,9 +177,6 @@ bool MINIWEBSERVER::InitFSMachine()
 * @fn         MINIWEBSERVER::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -315,9 +300,6 @@ bool MINIWEBSERVER::AppProc_Ini()
 * @brief      First Update
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -410,9 +392,6 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
 * @brief      Update Application
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -476,9 +455,6 @@ bool MINIWEBSERVER::AppProc_Update()
 * @fn         MINIWEBSERVER::AppProc_End
 * @brief      End Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -591,9 +567,6 @@ bool MINIWEBSERVER::AppProc_End()
 * @brief      KeyValidSecuences
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  key :
 *
 * @return     bool : true if is succesful.
@@ -625,9 +598,6 @@ bool MINIWEBSERVER::KeyValidSecuences(int key)
 * @fn         bool SCRIPT::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefeed)
 * @brief      Show_Line
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  string2 :
@@ -667,9 +637,6 @@ bool MINIWEBSERVER::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool l
 * @brief      Show_LineDirect
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  string :
 * @param[in]  lf :
 *
@@ -691,9 +658,6 @@ bool MINIWEBSERVER::Show_LineDirect(XSTRING& string, bool lf)
 * @fn         bool SCRIPT::Show_Header(bool separator)
 * @brief      Show_Header
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  separator :
 *
@@ -721,9 +685,6 @@ bool MINIWEBSERVER::Show_Header(bool separator)
 * @fn         bool MINIWEBSERVER::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -764,9 +725,6 @@ bool MINIWEBSERVER::Show_AppStatus()
 * @brief      ShowInternetStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -801,9 +759,6 @@ bool MINIWEBSERVER::Show_InternetStatus()
 * @fn         bool MINIWEBSERVER::Show_WebServerConfig()
 * @brief      Show_WebServerConfig
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -854,9 +809,6 @@ bool MINIWEBSERVER::Show_WebServerConfig()
 * @fn         bool MINIWEBSERVER::Show_WebSocketConfig()
 * @brief      Show_WebSocketConfig
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -919,9 +871,6 @@ bool MINIWEBSERVER::Show_WebSocketConfig()
 * @brief      Show_AllStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -949,9 +898,6 @@ bool MINIWEBSERVER::Show_AllStatus()
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  event :
 *
@@ -1004,9 +950,6 @@ void MINIWEBSERVER::HandleEvent_WebServer(DIOWEBSERVER_XEVENT* event)
 * @brief      Handle Events
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[]    xevent : event send to control
 *
 * @return     void : does not return anything.
@@ -1036,9 +979,6 @@ void MINIWEBSERVER::HandleEvent(XEVENT* xevent)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_wwdg.h
-  * @author  MCD Application Team
-  * @brief   Header file of WWDG LL module.
+    * @brief   Header file of WWDG LL module.
   ******************************************************************************
   * @attention
   *

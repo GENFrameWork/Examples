@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_cryp_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of CRYPEx HAL module.
+    * @brief   Header file of CRYPEx HAL module.
   ******************************************************************************
   * @attention
   *

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_dma.c
-  * @author  MCD Application Team
+  * ""
   * @brief   DMA HAL module driver.
   *         This file provides firmware functions to manage the following
   *         functionalities of the Direct Memory Access (DMA) peripheral:

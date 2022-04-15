@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_pwr.h
-  * @author  MCD Application Team
-  * @brief   Header file of PWR LL module.
+    * @brief   Header file of PWR LL module.
   ******************************************************************************
   * @attention
   *

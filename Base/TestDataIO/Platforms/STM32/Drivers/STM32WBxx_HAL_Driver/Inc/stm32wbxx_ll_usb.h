@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_usb.h
-  * @author  MCD Application Team
-  * @brief   Header file of USB Low Layer HAL module.
+    * @brief   Header file of USB Low Layer HAL module.
   ******************************************************************************
   * @attention
   *

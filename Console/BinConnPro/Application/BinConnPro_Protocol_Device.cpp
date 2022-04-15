@@ -6,10 +6,7 @@
 * @brief      Example Binary Connexion Protocol Device class
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -51,9 +48,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -73,9 +67,6 @@ BINCONNPRO_PROTOCOL_DEVICE::BINCONNPRO_PROTOCOL_DEVICE()
 * @note       VIRTUAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -92,9 +83,6 @@ BINCONNPRO_PROTOCOL_DEVICE::~BINCONNPRO_PROTOCOL_DEVICE()
 * @brief      GetType
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     BINCONNPRO_PROTOCOL_DEVICETYPE :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -110,9 +98,6 @@ BINCONNPRO_PROTOCOL_DEVICETYPE BINCONNPRO_PROTOCOL_DEVICE::GetType()
 * @fn         void BINCONNPRO_PROTOCOL_DEVICE::SetType(BINCONNPRO_PROTOCOL_DEVICETYPE type)
 * @brief      SetType
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  type :
 *
@@ -132,9 +117,6 @@ void BINCONNPRO_PROTOCOL_DEVICE::SetType(BINCONNPRO_PROTOCOL_DEVICETYPE type)
 * @brief      GetID
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     XDWORD :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -150,9 +132,6 @@ XDWORD BINCONNPRO_PROTOCOL_DEVICE::GetID()
 * @fn         void BINCONNPRO_PROTOCOL_DEVICE::SetID(XDWORD ID)
 * @brief      SetID
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  ID :
 *
@@ -171,9 +150,6 @@ void BINCONNPRO_PROTOCOL_DEVICE::SetID(XDWORD ID)
 * @fn         bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typename)
 * @brief      GetDeviceTypeName
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  typename :
 *
@@ -201,9 +177,6 @@ bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typestring)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

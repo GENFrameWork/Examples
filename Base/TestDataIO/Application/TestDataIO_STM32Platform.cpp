@@ -6,10 +6,7 @@
 * @brief      Test Data IO STM32 Platform functions
 * @ingroup    Examples
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -72,9 +69,6 @@ XSTM32_FATSD_SPI  FATSD_SPI;
 * @fn         int STM32_Platform_Main(void)
 * @brief      TM32_Platform_Main
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  void :
 *
@@ -142,8 +136,6 @@ int STM32_Platform_Ini(void)
 * @brief      TM32_Platform_NonPreemptiveDoTasks
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -167,8 +159,6 @@ void STM32_Platform_NonPreemptiveDoTasks(void)
 * @brief      STM32_Platform_GetI2C1
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -189,8 +179,6 @@ void* STM32_Platform_GetI2C1(void)
 * @brief      STM32_Platform_GetI2C2
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -211,8 +199,6 @@ void* STM32_Platform_GetI2C3(void)
 * @brief      TM32_Platform_GetSPI1
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -233,8 +219,6 @@ void* STM32_Platform_GetSPI1(void)
 * @brief      TM32_Platform_GetSPI2
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -256,8 +240,6 @@ void* STM32_Platform_GetSPI2(void)
 * @brief      STM32_SD_Disk_Initialize
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  drive : 
 * 
@@ -277,8 +259,6 @@ DSTATUS STM32_SD_Disk_Initialize(BYTE drive)
 * @brief      STM32_SD_Disk_Status
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  drive : 
 * 
@@ -298,8 +278,6 @@ DSTATUS STM32_SD_Disk_Status(BYTE drive)
 * @brief      STM32_SD_Disk_Read
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  pdrive : 
 * @param[in]  buffer : 
@@ -322,8 +300,6 @@ DRESULT STM32_SD_Disk_Read(BYTE pdrive, BYTE* buffer, DWORD sector, UINT count)
 * @brief      STM32_SD_Disk_Write
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  pdrive : 
 * @param[in]  BYTE* buffer : 
@@ -347,8 +323,6 @@ DRESULT STM32_SD_Disk_Write(BYTE pdrive, const BYTE* buffer, DWORD sector, UINT 
 * @brief      STM32_SD_Disk_IOTCL
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  drive : 
 * @param[in]  ctrl : 
@@ -370,8 +344,6 @@ DRESULT STM32_SD_Disk_IOTCL(BYTE drive, BYTE ctrl, void* buffer)
 * @brief      TM32_Platform_Trace
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  char* mask : 
 * @param[in]  ... : 
@@ -404,8 +376,6 @@ void STM32_Platform_Trace(int iserror, const char* mask, ...)
 * @brief      TM32_Heap_Usage
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     void : does not return anything. 
 * 
@@ -431,8 +401,6 @@ void STM32_Heap_Usage()
 * @brief      TM32_Platform_End
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  void : 
 * 
@@ -452,8 +420,6 @@ int STM32_Platform_End(void)
 * @brief      AL_GPIO_EXTI_Callback
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_pin : 
 * 

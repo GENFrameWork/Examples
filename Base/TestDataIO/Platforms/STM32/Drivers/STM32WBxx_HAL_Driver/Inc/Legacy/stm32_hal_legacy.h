@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32_hal_legacy.h
-  * @author  MCD Application Team
-  * @brief   This file contains aliases definition for the STM32Cube HAL constants
+    * @brief   This file contains aliases definition for the STM32Cube HAL constants
   *          macros and functions maintained for legacy purpose.
   ******************************************************************************
   * @attention

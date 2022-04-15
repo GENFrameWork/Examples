@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_sai_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of SAI HAL extended module.
+    * @brief   Header file of SAI HAL extended module.
   ******************************************************************************
   * @attention
   *

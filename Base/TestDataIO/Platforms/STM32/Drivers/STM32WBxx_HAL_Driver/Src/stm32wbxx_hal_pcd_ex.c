@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_pcd_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   PCD Extended HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the USB Peripheral Controller:

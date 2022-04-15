@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_adc.h
-  * @author  MCD Application Team
-  * @brief   Header file of ADC HAL module.
+    * @brief   Header file of ADC HAL module.
   ******************************************************************************
   * @attention
   *

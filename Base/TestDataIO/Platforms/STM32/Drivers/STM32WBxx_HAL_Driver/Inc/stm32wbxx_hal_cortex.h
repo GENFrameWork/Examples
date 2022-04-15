@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_cortex.h
-  * @author  MCD Application Team
-  * @brief   Header file of CORTEX HAL module.
+    * @brief   Header file of CORTEX HAL module.
   ******************************************************************************
   * @attention
   *

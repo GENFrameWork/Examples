@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_flash_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of FLASH HAL Extended module.
+    * @brief   Header file of FLASH HAL Extended module.
   ******************************************************************************
   * @attention
   *

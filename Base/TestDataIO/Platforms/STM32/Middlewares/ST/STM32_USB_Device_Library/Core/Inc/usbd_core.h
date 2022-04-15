@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_core.h
-  * @author  MCD Application Team
-  * @brief   Header file for usbd_core.c file
+    * @brief   Header file for usbd_core.c file
   ******************************************************************************
   * @attention
   *

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_tsc.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file provides firmware functions to manage the following
   *          functionalities of the Touch Sensing Controller (TSC) peripheral:
   *           + Initialization and De-initialization

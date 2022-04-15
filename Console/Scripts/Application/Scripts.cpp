@@ -6,10 +6,7 @@
 * @brief       GEN Scripts Example class
 * @ingroup     SCRIPT
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -110,9 +107,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -130,9 +124,6 @@ SCRIPTS::SCRIPTS() :  XFSMACHINE(0)
 * @brief      Destructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -149,9 +140,6 @@ SCRIPTS::~SCRIPTS()
 * @fn         SCRIPTS::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -187,9 +175,6 @@ bool SCRIPTS::InitFSMachine()
 * @fn         SCRIPTS::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -305,9 +290,6 @@ bool SCRIPTS::AppProc_Ini()
 * @brief      First Update
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -335,9 +317,6 @@ bool SCRIPTS::AppProc_FirstUpdate()
 * @fn         SCRIPTS::AppProc_Update
 * @brief      Update Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -409,9 +388,6 @@ bool SCRIPTS::AppProc_Update()
 * @brief      End Application
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -473,9 +449,6 @@ bool SCRIPTS::AppProc_End()
 * @brief      KeyValidSecuences
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  key :
 *
 * @return     bool : true if is succesful.
@@ -526,9 +499,6 @@ bool SCRIPTS::KeyValidSecuences(int key)
 * @fn         bool SCRIPTS::CreateScripToexec()
 * @brief      CreateScripToexec
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -591,9 +561,6 @@ bool SCRIPTS::CreateScripToExec()
 * @brief      DeleteScripToexec
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -624,9 +591,6 @@ bool SCRIPTS::DeleteScripToExec()
 * @fn         bool SCRIPT::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefeed)
 * @brief      Show_Line
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  string2 :
@@ -666,9 +630,6 @@ bool SCRIPTS::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefee
 * @brief      Show_Header
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  separator :
 *
 * @return     bool : true if is succesful.
@@ -694,9 +655,6 @@ bool SCRIPTS::Show_Header(bool separator)
 * @fn         bool SCRIPT::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -748,9 +706,6 @@ bool SCRIPTS::Show_AppStatus()
 * @brief      Show_ScriptStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -776,9 +731,6 @@ bool SCRIPTS::Show_ScriptStatus()
 * @fn         bool SCRIPTS::Show_AllStatus()
 * @brief      Show_AllStatus
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -807,9 +759,6 @@ bool SCRIPTS::Show_AllStatus()
 * @note       INTERNAL
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  event :
 *
 * @return     void : does not return anything.
@@ -835,9 +784,6 @@ void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
 * @fn         SCRIPTS::HandleEvent
 * @brief      Handle Events
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -866,9 +812,6 @@ void SCRIPTS::HandleEvent(XEVENT* xevent)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

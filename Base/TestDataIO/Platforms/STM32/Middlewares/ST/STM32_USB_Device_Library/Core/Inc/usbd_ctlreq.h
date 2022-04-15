@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_req.h
-  * @author  MCD Application Team
-  * @brief   Header file for the usbd_req.c file
+    * @brief   Header file for the usbd_req.c file
   ******************************************************************************
   * @attention
   *

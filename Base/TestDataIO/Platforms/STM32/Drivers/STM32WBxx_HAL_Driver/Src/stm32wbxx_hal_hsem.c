@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_hsem.c
-  * @author  MCD Application Team
+  * ""
   * @brief   HSEM HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the semaphore peripheral:

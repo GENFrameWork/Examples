@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_lcd.c
-  * @author  MCD Application Team
+  * ""
   * @brief   LCD Controller HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the LCD Controller (LCD) peripheral:

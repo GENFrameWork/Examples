@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_iwdg.h
-  * @author  MCD Application Team
-  * @brief   Header file of IWDG HAL module.
+    * @brief   Header file of IWDG HAL module.
   ******************************************************************************
   * @attention
   *

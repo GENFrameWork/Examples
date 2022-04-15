@@ -2,7 +2,7 @@
  * @file     os_systick.c
  * @brief    CMSIS OS Tick SysTick implementation
  * @version  V1.0.1
- * @date       01/03/2016 12:00
+ * ""
  ******************************************************************************/
 /*
  * Copyright (c) 2017-2017 ARM Limited. All rights reserved.

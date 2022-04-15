@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_i2c_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of I2C HAL Extended module.
+    * @brief   Header file of I2C HAL Extended module.
   ******************************************************************************
   * @attention
   *

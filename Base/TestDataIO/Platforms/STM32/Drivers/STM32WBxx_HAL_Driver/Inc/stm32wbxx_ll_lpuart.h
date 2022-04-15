@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_lpuart.h
-  * @author  MCD Application Team
-  * @brief   Header file of LPUART LL module.
+    * @brief   Header file of LPUART LL module.
   ******************************************************************************
   * @attention
   *

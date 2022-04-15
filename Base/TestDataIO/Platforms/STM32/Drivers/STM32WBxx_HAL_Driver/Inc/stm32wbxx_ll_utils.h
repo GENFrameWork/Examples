@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_utils.h
-  * @author  MCD Application Team
-  * @brief   Header file of UTILS LL module.
+    * @brief   Header file of UTILS LL module.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####

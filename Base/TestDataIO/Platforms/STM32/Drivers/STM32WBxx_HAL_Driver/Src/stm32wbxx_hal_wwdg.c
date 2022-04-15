@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_wwdg.c
-  * @author  MCD Application Team
+  * ""
   * @brief   WWDG HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the Window Watchdog (WWDG) peripheral:

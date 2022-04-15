@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_conf_template.h
-  * @author  MCD Application Team
-  * @brief   Header file for the usbd_conf_template.c file
+    * @brief   Header file for the usbd_conf_template.c file
   ******************************************************************************
   * @attention
   *

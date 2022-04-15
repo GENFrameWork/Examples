@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_spi.h
-  * @author  MCD Application Team
-  * @brief   Header file of SPI LL module.
+    * @brief   Header file of SPI LL module.
   ******************************************************************************
   * @attention
   *

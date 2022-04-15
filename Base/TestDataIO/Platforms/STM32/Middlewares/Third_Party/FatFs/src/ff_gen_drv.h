@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    ff_gen_drv.h
-  * @author  MCD Application Team
-  * @brief   Header for ff_gen_drv.c module.
+    * @brief   Header for ff_gen_drv.c module.
   *****************************************************************************
   * @attention
   *

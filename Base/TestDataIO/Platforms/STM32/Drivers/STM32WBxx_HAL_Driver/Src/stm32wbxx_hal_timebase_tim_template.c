@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_timebase_tim_template.c 
-  * @author  MCD Application Team
+  * ""
   * @brief   HAL time base based on the hardware TIM Template.
   *    
   *          This file overrides the native HAL time base functions (defined as weak)

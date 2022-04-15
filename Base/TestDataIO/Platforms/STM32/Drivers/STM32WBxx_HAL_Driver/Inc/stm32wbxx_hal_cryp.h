@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_cryp.h
-  * @author  MCD Application Team
-  * @brief   Header file of CRYP HAL module.
+    * @brief   Header file of CRYP HAL module.
   ******************************************************************************
   * @attention
   *

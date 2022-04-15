@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_core.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file provides all the USBD core functions.
   ******************************************************************************
   * @attention

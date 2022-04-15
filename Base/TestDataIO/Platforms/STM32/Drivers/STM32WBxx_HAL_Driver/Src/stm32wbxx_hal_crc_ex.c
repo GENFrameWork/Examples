@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_crc_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   Extended CRC HAL module driver.
   *          This file provides firmware functions to manage the extended
   *          functionalities of the CRC peripheral.

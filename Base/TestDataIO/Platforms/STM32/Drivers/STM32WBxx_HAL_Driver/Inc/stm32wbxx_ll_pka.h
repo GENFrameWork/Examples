@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_pka.h
-  * @author  MCD Application Team
-  * @brief   Header file of PKA LL module.
+    * @brief   Header file of PKA LL module.
   ******************************************************************************
   * @attention
   *

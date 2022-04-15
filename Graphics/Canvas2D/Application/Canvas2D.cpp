@@ -6,10 +6,7 @@
 * @brief       GEN Canvas 2D Example class
 * @ingroup     GRAPHIC
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -109,9 +106,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -129,9 +123,6 @@ CANVAS2D::CANVAS2D() :  XFSMACHINE(0)
 * @brief      Destructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -148,9 +139,6 @@ CANVAS2D::~CANVAS2D()
 * @fn         CANVAS2D::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -186,9 +174,6 @@ bool CANVAS2D::InitFSMachine()
 * @fn         CANVAS2D::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -285,9 +270,6 @@ bool CANVAS2D::AppProc_Ini()
 * @brief      First Update
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -353,9 +335,6 @@ bool CANVAS2D::AppProc_FirstUpdate()
 * @brief      Update Application
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -409,9 +388,6 @@ bool CANVAS2D::AppProc_Update()
 * @fn         CANVAS2D::AppProc_End
 * @brief      End Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -478,9 +454,6 @@ bool CANVAS2D::AppProc_End()
 * @fn         bool CANVAS2D::UpdateInput()
 * @brief      UpdateInput
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -560,8 +533,6 @@ bool CANVAS2D::UpdateInput()
 * @brief      Ini_Graphics
 * @ingroup    GRAPHIC
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  screen : 
 * 
@@ -651,9 +622,6 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 * @fn         bool CANVAS2D::DrawFrame()
 * @brief      DrawFrame
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -763,9 +731,6 @@ bool CANVAS2D::DrawFrame()
 * @brief      Graphics_HandleEvent
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  event :
 *
 * @return     void : does not return anything.
@@ -792,9 +757,6 @@ void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 * @fn         CANVAS2D::HandleEvent
 * @brief      Handle Events
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -824,9 +786,6 @@ void CANVAS2D::HandleEvent(XEVENT* xevent)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

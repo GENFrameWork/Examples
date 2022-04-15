@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_pka.c
-  * @author  MCD Application Team
+  * ""
   * @brief   PKA HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of public key accelerator(PKA):

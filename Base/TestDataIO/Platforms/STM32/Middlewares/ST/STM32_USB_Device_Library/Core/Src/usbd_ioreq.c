@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_ioreq.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file provides the IO requests APIs for control endpoints.
   ******************************************************************************
   * @attention

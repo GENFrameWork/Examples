@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_rtc.h
-  * @author  MCD Application Team
-  * @brief   Header file of RTC LL module.
+    * @brief   Header file of RTC LL module.
   ******************************************************************************
   * @attention
   *

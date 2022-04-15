@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_smbus.h
-  * @author  MCD Application Team
-  * @brief   Header file of SMBUS HAL module.
+    * @brief   Header file of SMBUS HAL module.
   ******************************************************************************
   * @attention
   *

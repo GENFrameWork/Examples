@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_ioreq.h
-  * @author  MCD Application Team
-  * @brief   Header file for the usbd_ioreq.c file
+    * @brief   Header file for the usbd_ioreq.c file
   ******************************************************************************
   * @attention
   *

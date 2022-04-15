@@ -6,10 +6,7 @@
 * @brief       GEN UI Options Example class
 * @ingroup     GRAPHIC
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -124,9 +121,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -144,9 +138,6 @@ UI_OPTIONS::UI_OPTIONS() :  XFSMACHINE(0)
 * @brief      Destructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -163,9 +154,6 @@ UI_OPTIONS::~UI_OPTIONS()
 * @fn         UI_OPTIONS::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -201,9 +189,6 @@ bool UI_OPTIONS::InitFSMachine()
 * @fn         UI_OPTIONS::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -300,9 +285,6 @@ bool UI_OPTIONS::AppProc_Ini()
 * @brief      First Update
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -369,9 +351,6 @@ bool UI_OPTIONS::AppProc_FirstUpdate()
 * @brief      Update Application
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -421,9 +400,6 @@ bool UI_OPTIONS::AppProc_Update()
 * @fn         UI_OPTIONS::AppProc_End
 * @brief      End Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -487,9 +463,6 @@ bool UI_OPTIONS::AppProc_End()
 * @fn         bool UI_OPTIONS::UpdateInput()
 * @brief      UpdateInput
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -652,8 +625,6 @@ bool UI_OPTIONS::UpdateInput()
 * @brief      Ini_Graphics
 * @ingroup    GRAPHIC
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  screen : 
 * 
@@ -695,8 +666,6 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 * @brief      Ini_UserInterface
 * @ingroup    GRAPHIC
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  on : 
 * 
@@ -808,9 +777,6 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 * @brief      DrawFrame
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -910,8 +876,6 @@ bool UI_OPTIONS::DrawFrame()
 * @brief      UserInterface_ElementSelected
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  element : 
 * 
@@ -976,8 +940,6 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 * @brief      UserInterface_ChangeLiteralText
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  element_text : 
 * @param[in]  maskvalue : 
@@ -1023,8 +985,6 @@ bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, 
 * @brief      UnitTest_AVIVideoWrite
 * @ingroup    GRAPHIC
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -1171,8 +1131,6 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
 * @note       INTERNAL
 * @ingroup    GRAPHIC
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  event : 
 * 
@@ -1215,9 +1173,6 @@ void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
 * @brief      Graphics_HandleEvent
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  event :
 *
 * @return     void : does not return anything.
@@ -1243,9 +1198,6 @@ void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
 * @fn         UI_OPTIONS::HandleEvent
 * @brief      Handle Events
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -1282,9 +1234,6 @@ void UI_OPTIONS::HandleEvent(XEVENT* xevent)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

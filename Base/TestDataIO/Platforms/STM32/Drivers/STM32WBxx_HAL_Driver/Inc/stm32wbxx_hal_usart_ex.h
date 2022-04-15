@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_usart_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of USART HAL Extended module.
+    * @brief   Header file of USART HAL Extended module.
   ******************************************************************************
   * @attention
   *

@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_cortex.h
-  * @author  MCD Application Team
-  * @brief   Header file of CORTEX LL module.
+    * @brief   Header file of CORTEX LL module.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####

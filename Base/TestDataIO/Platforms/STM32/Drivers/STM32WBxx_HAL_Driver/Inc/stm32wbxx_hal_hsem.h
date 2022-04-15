@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_hsem.h
-  * @author  MCD Application Team
-  * @brief   Header file of HSEM HAL module.
+    * @brief   Header file of HSEM HAL module.
   ******************************************************************************
   * @attention
   *

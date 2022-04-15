@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_bus.h
-  * @author  MCD Application Team
-  * @brief   Header file of BUS LL module.
+    * @brief   Header file of BUS LL module.
 
   @verbatim
                       ##### RCC Limitations #####

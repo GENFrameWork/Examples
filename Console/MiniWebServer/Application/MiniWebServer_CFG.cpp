@@ -6,10 +6,7 @@
 * @brief       Example Mini Web Server Configuration class
 * @ingroup     SCRIPT
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -61,9 +58,6 @@ MINIWEBSERVER_CFG* MINIWEBSERVER_CFG::instance = NULL;
 * @brief      GetIsInstanced
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -79,9 +73,6 @@ bool MINIWEBSERVER_CFG::GetIsInstanced()
 * @fn         MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance()
 * @brief      GetInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     MINIWEBSERVER_CFG& :
 *
@@ -99,9 +90,6 @@ MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance()
 * @fn         bool MINIWEBSERVER_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -126,9 +114,6 @@ bool MINIWEBSERVER_CFG::DelInstance()
 * @fn         bool MINIWEBSERVER_CFG::Default()
 * @brief      Default config
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -184,9 +169,6 @@ bool MINIWEBSERVER_CFG::Default()
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  XCHAR* : name of file of config
 *
 * @return     Does not return anything.
@@ -210,9 +192,6 @@ MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @note       VIRTUAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -229,9 +208,6 @@ MINIWEBSERVER_CFG::~MINIWEBSERVER_CFG()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

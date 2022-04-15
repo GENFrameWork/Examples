@@ -1,7 +1,6 @@
 /* ----------------------------------------------------------------------
 * Copyright (C) 2010-2018 Arm Limited. All rights reserved.
 *
-*
 * Project:       CMSIS NN Library
 * Title:         arm_nnexamples_nn_test.cpp
 *

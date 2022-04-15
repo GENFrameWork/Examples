@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_irda_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of IRDA HAL Extended module.
+    * @brief   Header file of IRDA HAL Extended module.
   ******************************************************************************
   * @attention
   *

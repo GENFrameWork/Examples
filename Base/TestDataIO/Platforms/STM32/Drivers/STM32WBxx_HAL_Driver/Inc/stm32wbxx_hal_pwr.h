@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_pwr.h
-  * @author  MCD Application Team
-  * @brief   Header file of PWR HAL module.
+    * @brief   Header file of PWR HAL module.
   ******************************************************************************
   * @attention
   *

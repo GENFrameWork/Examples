@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_cdc_if_template.h
-  * @author  MCD Application Team
-  * @brief   Header for usbd_cdc_if_template.c file.
+    * @brief   Header for usbd_cdc_if_template.c file.
   ******************************************************************************
   * @attention
   *

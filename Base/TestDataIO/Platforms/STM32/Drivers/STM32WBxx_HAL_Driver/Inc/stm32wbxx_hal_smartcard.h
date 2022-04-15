@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_smartcard.h
-  * @author  MCD Application Team
-  * @brief   Header file of SMARTCARD HAL module.
+    * @brief   Header file of SMARTCARD HAL module.
   ******************************************************************************
   * @attention
   *

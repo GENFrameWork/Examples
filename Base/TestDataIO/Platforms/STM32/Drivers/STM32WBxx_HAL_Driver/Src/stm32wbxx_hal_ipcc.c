@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_ipcc.c
-  * @author  MCD Application Team
+  * ""
   * @brief   IPCC HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the Inter-Processor communication controller

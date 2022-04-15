@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_comp.c
-  * @author  MCD Application Team
+  * ""
   * @brief   COMP HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the COMP peripheral:

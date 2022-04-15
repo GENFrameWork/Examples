@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_uart.h
-  * @author  MCD Application Team
-  * @brief   Header file of UART HAL module.
+    * @brief   Header file of UART HAL module.
   ******************************************************************************
   * @attention
   *

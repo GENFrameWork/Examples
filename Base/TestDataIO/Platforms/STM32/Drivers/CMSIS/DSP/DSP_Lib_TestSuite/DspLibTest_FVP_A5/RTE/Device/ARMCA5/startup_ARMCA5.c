@@ -2,7 +2,7 @@
  * @file     startup_ARMCA5.c
  * @brief    CMSIS Device System Source File for Arm Cortex-A5 Device Series
  * @version  V1.00
- * @date       01/03/2016 12:00
+ * ""
  *
  * @note
  *

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_usart_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   Extended USART HAL module driver.
   *          This file provides firmware functions to manage the following extended
   *          functionalities of the Universal Synchronous Receiver Transmitter Peripheral (USART).

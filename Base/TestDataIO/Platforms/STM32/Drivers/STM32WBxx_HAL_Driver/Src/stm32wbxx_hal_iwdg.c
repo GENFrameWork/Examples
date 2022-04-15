@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_iwdg.c
-  * @author  MCD Application Team
+  * ""
   * @brief   IWDG HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the Independent Watchdog (IWDG) peripheral:

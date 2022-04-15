@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_smartcard_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   SMARTCARD HAL module driver.
   *          This file provides extended firmware functions to manage the following
   *          functionalities of the SmartCard.

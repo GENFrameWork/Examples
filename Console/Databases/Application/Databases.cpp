@@ -6,10 +6,7 @@
 * @brief       GEN Databases Example class
 * @ingroup     SCRIPT
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -107,9 +104,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -127,9 +121,6 @@ DATABASES::DATABASES() :  XFSMACHINE(0)
 * @brief      Destructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -146,9 +137,6 @@ DATABASES::~DATABASES()
 * @fn         DATABASES::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -184,9 +172,6 @@ bool DATABASES::InitFSMachine()
 * @fn         DATABASES::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -290,9 +275,6 @@ bool DATABASES::AppProc_Ini()
 * @brief      First Update
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -318,9 +300,6 @@ bool DATABASES::AppProc_FirstUpdate()
 * @fn         DATABASES::AppProc_Update
 * @brief      Update Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -386,9 +365,6 @@ bool DATABASES::AppProc_Update()
 * @brief      End Application
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -444,9 +420,6 @@ bool DATABASES::AppProc_End()
 * @brief      KeyValidSecuences
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  key :
 *
 * @return     bool : true if is succesful.
@@ -485,9 +458,6 @@ bool DATABASES::KeyValidSecuences(int key)
 * @brief      ChangeDataBaseType
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  type :
 *
 * @return     bool : true if is succesful.
@@ -515,9 +485,6 @@ bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
 * @fn         bool DATABASES::DoTestDatabaseSQL()
 * @brief      DoTestDatabaseSQL
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -864,9 +831,6 @@ bool DATABASES::Database_DoTest()
 * @brief      Show_Line
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  string :
 * @param[in]  string2 :
 * @param[in]  tab :
@@ -905,9 +869,6 @@ bool DATABASES::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linef
 * @brief      Show_Header
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  separator :
 *
 * @return     bool : true if is succesful.
@@ -933,9 +894,6 @@ bool DATABASES::Show_Header(bool separator)
 * @fn         bool SCRIPT::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -986,9 +944,6 @@ bool DATABASES::Show_AppStatus()
 * @brief      Show_DatabasesStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -1016,9 +971,6 @@ bool DATABASES::Show_DatabasesStatus()
 * @brief      Show_AllStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -1045,9 +997,6 @@ bool DATABASES::Show_AllStatus()
 * @fn         DATABASES::HandleEvent
 * @brief      Handle Events
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[]    xevent : event send to control
 *
@@ -1079,9 +1028,6 @@ void DATABASES::HandleEvent(XEVENT* xevent)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

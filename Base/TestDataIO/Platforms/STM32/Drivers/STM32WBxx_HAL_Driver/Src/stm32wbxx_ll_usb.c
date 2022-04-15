@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_usb.c
-  * @author  MCD Application Team
+  * ""
   * @brief   USB Low Layer HAL module driver.
   *
   *          This file provides firmware functions to manage the following

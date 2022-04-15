@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_desc_template.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file provides the USBD descriptors and string formatting method.
   *          This template should be copied to the user folder,
   *          renamed and customized following user needs.

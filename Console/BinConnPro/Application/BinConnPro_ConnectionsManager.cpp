@@ -6,10 +6,7 @@
 * @brief      Example Binary Connexion Protocol Connexions class
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -65,9 +62,6 @@
 * @brief      Constructor
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     Does not return anything.
@@ -87,9 +81,6 @@ BINCONNPRO_CONNECTIONSMANAGER::BINCONNPRO_CONNECTIONSMANAGER() : DIOPROTOCOL_CON
 * @brief      Destructor
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -106,9 +97,6 @@ BINCONNPRO_CONNECTIONSMANAGER::~BINCONNPRO_CONNECTIONSMANAGER()
 * @fn         BINCONNPRO_CONNECTIONSMANAGER::Ini
 * @brief      Initialize connection manager
 * @ingroup    PLATFORM_COMMON
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]    isserver : is Server or client mode
 * @param[in]    isenumlocalactive : Is active the enum (local)
@@ -150,9 +138,6 @@ bool BINCONNPRO_CONNECTIONSMANAGER::Ini(bool isserver, bool isenumlocalactive, i
 * @brief      Get number of connections connected
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     int :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -187,9 +172,6 @@ int BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetNConnected()
 * @fn         BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetByDIOStream
 * @brief      Get connections by DIOstream
 * @ingroup    PLATFORM_COMMON
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  diostream : diostream to search associated connection.
 *
@@ -228,9 +210,6 @@ DIOPROTOCOL_CONNECTION* BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetBy
 * @brief      End Connection manager
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -264,9 +243,6 @@ bool BINCONNPRO_CONNECTIONSMANAGER::End()
 * @fn         BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol
 * @brief      Create protocol instance.
 * @ingroup    PLATFORM_COMMON
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     DIOPROTOCOL* : DIO Protocol created
 *
@@ -346,9 +322,6 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 * @brief      Create protocol instance.
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     DIOPROTOCOL* : DIO Protocol created
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -407,9 +380,6 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 * @brief      Delete Protocol instance
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  dioprotocol : DIO Protocol to delete.
 *
 * @return     bool : true if is succesful.
@@ -452,9 +422,6 @@ bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
 * @brief      Delete Protocol instance
 * @ingroup    PLATFORM_COMMON
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  dioprotocol : DIO Protocol to delete.
 *
 * @return     bool : true if is succesful.
@@ -493,9 +460,6 @@ bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal.h
-  * @author  MCD Application Team
-  * @brief   This file contains all the functions prototypes for the HAL
+    * @brief   This file contains all the functions prototypes for the HAL
   *          module driver.
   ******************************************************************************
   * @attention

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_cryp.c
-  * @author  MCD Application Team
+  * ""
   * @brief   CRYP HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the Cryptography (CRYP) peripheral:

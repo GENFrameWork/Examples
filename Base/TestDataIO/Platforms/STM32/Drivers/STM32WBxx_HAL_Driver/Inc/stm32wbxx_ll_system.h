@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_system.h
-  * @author  MCD Application Team
-  * @brief   Header file of SYSTEM LL module.
+    * @brief   Header file of SYSTEM LL module.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####

@@ -6,10 +6,7 @@
 * @brief      Test Data I/O  UART / USB / I2C / GPIO (include microcontroller) class
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -95,9 +92,6 @@ APPLICATIONCREATEINSTANCE(TESTDATAIO, testdataio)
 * @brief      Constructor
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -115,9 +109,6 @@ TESTDATAIO::TESTDATAIO()
 * @note       VIRTUAL
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -133,9 +124,6 @@ TESTDATAIO::~TESTDATAIO()
 * @fn         bool TESTDATAIO::AppProc_PlatformIni()
 * @brief      AppProc_PlatformIni
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -172,9 +160,6 @@ bool TESTDATAIO::AppProc_PlatformIni()
 * @fn         bool TESTDATAIO::AppProc_Ini()
 * @brief      AppProc_Ini
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -235,8 +220,6 @@ bool TESTDATAIO::AppProc_Ini()
 * @brief      AppProc_FirstUpdate
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -271,9 +254,6 @@ bool TESTDATAIO::AppProc_FirstUpdate()
 * @brief      AppProc_Update
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -291,8 +271,6 @@ bool TESTDATAIO::AppProc_Update()
 * @brief      AppProc_LastUpdate
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -310,9 +288,6 @@ bool TESTDATAIO::AppProc_LastUpdate()
 * @brief      AppProc_End
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -329,9 +304,6 @@ bool TESTDATAIO::AppProc_End()
 * @brief      AppProc_PlatformEnd
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -347,9 +319,6 @@ bool TESTDATAIO::AppProc_PlatformEnd()
 * @fn         bool TESTDATAIO::Test_Random()
 * @brief      Test_Random
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -381,9 +350,6 @@ bool TESTDATAIO::Test_Random()
 * @fn         bool TESTDATAIO::Test_DIOStreamUART()
 * @brief      Test_DIOStreamUART
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -452,9 +418,6 @@ bool TESTDATAIO::Test_DIOStreamUART()
 * @brief      Test_DIOStreamUSBReadCommand
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  diostream :
 * @param[in]  command :
 *
@@ -494,9 +457,6 @@ bool TESTDATAIO::Test_DIOStreamUSBReadCommand(DIOSTREAM* diostream, XBUFFER& com
 * @fn         bool TESTDATAIO::Test_DIOStreamUSB()
 * @brief      Test_DIOStreamUSB
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -570,8 +530,6 @@ bool TESTDATAIO::Test_DIOStreamUSB()
 * @brief      I2CTest_6AxisTrackingLSM303DLHC
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -636,8 +594,6 @@ bool TESTDATAIO::I2CTest_6AxisTrackingLSM303DLHC(int port, int timeout)
 * @brief      I2CTest_6AxisTrackingBMI270
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -660,8 +616,6 @@ bool TESTDATAIO::I2CTest_6AxisTrackingBMI270(int port, int timeout)
 * @brief      I2CTest_AxisTrackingMPU9150
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -685,8 +639,6 @@ bool TESTDATAIO::I2CTest_AxisTrackingMPU9150(int port, int timeout)
 * @brief      I2CTest_ADDAConverterPCF8591
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -744,8 +696,6 @@ bool TESTDATAIO::I2CTest_ADDAConverterPCF8591(int port, int timeout)
 * @brief      I2CTest_AirQualityCCS811
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -873,8 +823,6 @@ bool TESTDATAIO::I2CTest_AirQualityCCS811(int port, int timeout)
 * @brief      I2CTest_EEprom24XXX
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1015,8 +963,6 @@ bool TESTDATAIO::I2CTest_EEprom24XXX(int port, int timeout)
 * @brief      I2CTest_GPIOMCP2317
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1085,8 +1031,6 @@ bool TESTDATAIO::I2CTest_GPIOMCP2317(int port, int timeout)
 * @brief      I2CTest_GPIOPCF8574
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1146,8 +1090,6 @@ bool TESTDATAIO::I2CTest_GPIOPCF8574(int port, int timeout)
 * @brief      I2CTest_LightSensorTSL2561
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1208,8 +1150,6 @@ bool TESTDATAIO::I2CTest_LightSensorTSL2561(int port, int timeout)
 * @brief      I2CTest_OLEDDisplaySSD1306
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1269,8 +1209,6 @@ bool TESTDATAIO::I2CTest_OLEDDisplaySSD1306(int port, int timeout)
 * @brief      I2CTest_PWMControlerPCA9685
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1354,8 +1292,6 @@ bool TESTDATAIO::I2CTest_PWMControlerPCA9685(int port, int timeout)
 * @brief      I2CTest_TemHumSensorAM2315
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1407,8 +1343,6 @@ bool TESTDATAIO::I2CTest_TemHumSensorAM2315(int port, int timeout)
 * @brief      I2CTest_TemHumSensorSHT20
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1463,8 +1397,6 @@ bool TESTDATAIO::I2CTest_TemHumSensorSHT20(int port, int timeout)
 * @brief      I2CTest_MonitorGaugeLTC2942
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1511,8 +1443,6 @@ bool TESTDATAIO::I2CTest_MonitorGaugeLTC2942(int port, int timeout)
 * @brief      I2CTest_BatteryChargerBQ24295
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1562,8 +1492,6 @@ bool TESTDATAIO::I2CTest_BatteryChargerBQ24295(int port, int timeout)
 * @brief      I2CTest_TouchSensorAT42QT1060
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  port : 
 * @param[in]  timeout : 
@@ -1609,9 +1537,6 @@ bool TESTDATAIO::I2CTest_TouchSensorAT42QT1060(int port, int timeout)
 * @fn         bool TESTDATAIO::Test_DIOStreamI2C()
 * @brief      Test_DIOStreamI2C
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -1701,8 +1626,6 @@ bool TESTDATAIO::Test_DIOStreamI2C()
 * @brief      SPITest_GPIOMCP23S17
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -1727,8 +1650,6 @@ bool TESTDATAIO::SPITest_GPIOMCP23S17(int port, int chipselect, int timeout)
 * @brief      SPITest_LCDDisplayPCF8833
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -1829,8 +1750,6 @@ bool TESTDATAIO::SPITest_LCDDisplayPCF8833(int port, int chipselect, int timeout
 * @brief      SPITest_OLEDDisplaySSD1306
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -1904,8 +1823,6 @@ bool TESTDATAIO::SPITest_OLEDDisplaySSD1306(int port, int chipselect, int timeou
 * @brief      SPITest_OLEDDisplaySSD1331
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -1965,8 +1882,6 @@ bool TESTDATAIO::SPITest_OLEDDisplaySSD1331(int port, int chipselect, int timeou
 * @brief      SPITest_TFTDisplayILI9341
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -2026,8 +1941,6 @@ bool TESTDATAIO::SPITest_TFTDisplayILI9341(int port, int chipselect, int timeout
 * @brief      SPITest_TFTDisplayST7789
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -2097,8 +2010,6 @@ bool TESTDATAIO::SPITest_TFTDisplayST7789(int port, int chipselect, int timeout)
 * @brief      SPITest_TouchScreenSTMPE610
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  GPIO_entry[] : 
 * @param[in]  port : 
@@ -2124,9 +2035,6 @@ bool TESTDATAIO::SPITest_TouchScreenSTMPE610(int port, int chipselect, int timeo
 * @fn         bool TESTDATAIO::Test_DIOStreamSPI()
 * @brief      Test_DIOStreamSPI
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -2215,9 +2123,6 @@ bool TESTDATAIO::Test_DIOStreamSPI()
 * @brief      Test_DIOGPIO
 * @ingroup    DATAIO
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -2291,8 +2196,6 @@ bool TESTDATAIO::Test_DIOGPIO()
 * @brief      Test_DIOGPIO_Interrupt
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -2327,9 +2230,6 @@ bool TESTDATAIO::Test_DIOGPIO_Interrupt()
 * @fn         bool TESTDATAIO::Test_EEPROMMemory()
 * @brief      Test_EEPROMMemory
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -2389,9 +2289,6 @@ bool TESTDATAIO::Test_EEPROMMemory()
 * @fn         void TESTDATAIO::Test_DIONeoPixel()
 * @brief      Test_DIONeoPixel
 * @ingroup    DATAIO
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *
@@ -2469,8 +2366,6 @@ bool TESTDATAIO::Test_DIONeoPixel()
 * @brief      Test_DirFunctions
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -2514,8 +2409,6 @@ bool TESTDATAIO::Test_DirFunctions()
 * @brief      Test_FileFunctions
 * @ingroup    DATAIO
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -2584,8 +2477,6 @@ bool TESTDATAIO::Test_FileFunctions()
 * @brief      Test_Callback_Interrupt
 * @ingroup    
 * 
-* @author     Abraham J. Velez 
-* @date       01/03/2016 12:00
 * 
 * @param[in]  param : 
 * 
@@ -2605,9 +2496,6 @@ void TESTDATAIO::Test_Callback_Interrupt(void* param)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    TEST
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

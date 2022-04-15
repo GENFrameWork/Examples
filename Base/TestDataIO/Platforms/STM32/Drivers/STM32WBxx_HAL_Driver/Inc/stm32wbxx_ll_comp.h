@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_comp.h
-  * @author  MCD Application Team
-  * @brief   Header file of COMP LL module.
+    * @brief   Header file of COMP LL module.
   ******************************************************************************
   * @attention
   *

@@ -2,8 +2,7 @@
  * @file     system_ARMCA5.h
  * @brief    CMSIS Device System Header File for Arm Cortex-A5 Device Series
  * @version  V1.00
- * @date       01/03/2016 12:00
- *
+  *
  * @note
  *
  ******************************************************************************/

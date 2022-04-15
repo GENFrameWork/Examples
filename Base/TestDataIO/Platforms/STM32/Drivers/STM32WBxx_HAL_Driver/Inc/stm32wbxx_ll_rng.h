@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_rng.h
-  * @author  MCD Application Team
-  * @brief   Header file of RNG LL module.
+    * @brief   Header file of RNG LL module.
   ******************************************************************************
   * @attention
   *

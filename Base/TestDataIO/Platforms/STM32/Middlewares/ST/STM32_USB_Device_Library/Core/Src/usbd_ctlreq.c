@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_req.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file provides the standard USB requests following chapter 9.
   ******************************************************************************
   * @attention

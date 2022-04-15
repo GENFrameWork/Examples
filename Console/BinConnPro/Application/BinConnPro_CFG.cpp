@@ -6,10 +6,7 @@
 * @brief       BinConnPro Configuration
 * @ingroup     SCRIPT
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -60,9 +57,6 @@ BINCONNPRO_CFG* BINCONNPRO_CFG::instance = NULL;
 * @brief      GetIsInstanced
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -78,9 +72,6 @@ bool BINCONNPRO_CFG::GetIsInstanced()
 * @fn         BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance()
 * @brief      GetInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     BINCONNPRO_CFG& :
 *
@@ -98,9 +89,6 @@ BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance()
 * @fn         bool BINCONNPRO_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -126,9 +114,6 @@ bool BINCONNPRO_CFG::DelInstance()
 * @brief      Protocol_IsActive
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -144,9 +129,6 @@ bool BINCONNPRO_CFG::Protocol_IsActive()
 * @fn         bool BINCONNPRO_CFG::Protocol_IsLocalEnumActive()
 * @brief      Protocol_IsLocalEnumActive
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -164,9 +146,6 @@ bool BINCONNPRO_CFG::Protocol_IsLocalEnumActive()
 * @brief      Protocol_GetPort
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     int :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -183,9 +162,6 @@ int BINCONNPRO_CFG::Protocol_GetPort()
 * @brief      Protocol_GetTarget
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     XSTRING* :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -201,9 +177,6 @@ XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
 * @fn         bool BINCONNPRO_CFG::Default()
 * @brief      Default config
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -238,9 +211,6 @@ bool BINCONNPRO_CFG::Default()
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  XCHAR* : name of file of config
 *
 * @return     Does not return anything.
@@ -271,9 +241,6 @@ BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @note       VIRTUAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -290,9 +257,6 @@ BINCONNPRO_CFG::~BINCONNPRO_CFG()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

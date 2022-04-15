@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_rng.h
-  * @author  MCD Application Team
-  * @brief   Header file of RNG HAL module.
+    * @brief   Header file of RNG HAL module.
   ******************************************************************************
   * @attention
   *

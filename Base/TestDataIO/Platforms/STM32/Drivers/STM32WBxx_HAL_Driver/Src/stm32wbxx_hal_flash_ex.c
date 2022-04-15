@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_flash_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   Extended FLASH HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the FLASH extended peripheral:

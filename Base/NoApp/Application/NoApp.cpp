@@ -6,10 +6,7 @@
 * @brief      Data I/O stream UART / USB MICROCONTROLLER example class
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright  Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -61,7 +58,7 @@
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      13/08/2002 13:15:15
 //
 //  @return
@@ -78,7 +75,7 @@ NOAPP::NOAPP()
 /**
 //
 //
-//  @author       Abraham J. Velez
+//  ""
 //  @version      13/08/2002 13:15:40
 //
 //  @return
@@ -98,9 +95,6 @@ NOAPP::~NOAPP()
 * @note       INTERNAL
 * @ingroup    TEST
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -116,9 +110,6 @@ void NOAPP::Clean()
 * @fn         bool Proc_Main_Ini(MAINPROC* main)
 * @brief      roc_Main_Ini
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  main :
 *
@@ -143,9 +134,6 @@ bool Proc_Main_Ini(MAINPROC* main)
 * @brief      roc_Main_Update
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  main :
 *
 * @return     bool : true if is succesful.
@@ -165,9 +153,6 @@ bool Proc_Main_Update(MAINPROC* main)
 * @fn         bool Proc_Main_End(MAINPROC* main)
 * @brief      roc_Main_End
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  main :
 *

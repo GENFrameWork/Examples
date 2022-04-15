@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_dmamux.h
-  * @author  MCD Application Team
-  * @brief   Header file of DMAMUX LL module.
+    * @brief   Header file of DMAMUX LL module.
   ******************************************************************************
   * @attention
   *

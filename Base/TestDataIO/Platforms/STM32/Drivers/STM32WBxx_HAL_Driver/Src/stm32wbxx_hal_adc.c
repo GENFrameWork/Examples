@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_adc.c
-  * @author  MCD Application Team
+  * ""
   * @brief   This file provides firmware functions to manage the following
   *          functionalities of the Analog to Digital Converter (ADC)
   *          peripheral:

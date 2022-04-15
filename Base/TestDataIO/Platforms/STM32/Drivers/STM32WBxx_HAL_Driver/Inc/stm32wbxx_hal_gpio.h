@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_gpio.h
-  * @author  MCD Application Team
-  * @brief   Header file of GPIO HAL module.
+    * @brief   Header file of GPIO HAL module.
   ******************************************************************************
   * @attention
   *

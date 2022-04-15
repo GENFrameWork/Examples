@@ -6,10 +6,7 @@
 * @brief       Example Binary Connexion Protocol Device class
 * @ingroup
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:00
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -111,9 +108,6 @@
 * @brief      Constructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -131,9 +125,6 @@ BINCONNPRO::BINCONNPRO() :  XFSMACHINE(0)
 * @brief      Destructor
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 * @return
 *
@@ -150,9 +141,6 @@ BINCONNPRO::~BINCONNPRO()
 * @fn         BINCONNPRO::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -188,9 +176,6 @@ bool BINCONNPRO::InitFSMachine()
 * @fn         BINCONNPRO::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -317,9 +302,6 @@ bool BINCONNPRO::AppProc_Ini()
 * @brief      First Update
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -411,9 +393,6 @@ bool BINCONNPRO::AppProc_FirstUpdate()
 * @brief      Update Application
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param
 *
 * @return     bool : true if is succesful.
@@ -477,9 +456,6 @@ bool BINCONNPRO::AppProc_Update()
 * @fn         BINCONNPRO::AppProc_End
 * @brief      End Application
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param
 *
@@ -569,9 +545,6 @@ bool BINCONNPRO::AppProc_End()
 * @brief      KeyValidSecuences
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  key :
 *
 * @return     bool : true if is succesful.
@@ -603,9 +576,6 @@ bool BINCONNPRO::KeyValidSecuences(int key)
 * @fn         bool SCRIPT::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefeed)
 * @brief      Show_Line
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  string :
 * @param[in]  string2 :
@@ -645,9 +615,6 @@ bool BINCONNPRO::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool line
 * @brief      Show_LineDirect
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  string :
 * @param[in]  lf :
 *
@@ -669,9 +636,6 @@ bool BINCONNPRO::Show_LineDirect(XSTRING& string, bool lf)
 * @fn         bool SCRIPT::Show_Header(bool separator)
 * @brief      Show_Header
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  separator :
 *
@@ -698,9 +662,6 @@ bool BINCONNPRO::Show_Header(bool separator)
 * @fn         bool SCRIPT::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -741,9 +702,6 @@ bool BINCONNPRO::Show_AppStatus()
 * @brief      ShowInternetStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -778,9 +736,6 @@ bool BINCONNPRO::Show_InternetStatus()
 * @brief      Show_ConnectionsStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -809,9 +764,6 @@ bool BINCONNPRO::Show_ConnectionsStatus()
 * @fn         bool BINCONNPRO::Show_DeviceConnectedStatus()
 * @brief      ShowDeviceConnectedStatus
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     bool : true if is succesful.
 *
@@ -926,9 +878,6 @@ bool BINCONNPRO::Show_DeviceConnectedStatus()
 * @brief      Show_AllStatus
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
@@ -956,9 +905,6 @@ bool BINCONNPRO::Show_AllStatus()
 * @fn         bool BINCONNPRO::InitializeProtocolConnectionServer(BINCONNPRO_PROTOCOL* protocol, BINCONNPRO_APPLICATIONDATA* applicationdata)
 * @brief      InitializeProtocolConnectionServer
 * @ingroup    APPLICATION
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @param[in]  protocol :
 * @param[in]  applicationdata :
@@ -1048,9 +994,6 @@ bool BINCONNPRO::InitializeProtocolConnectionServer(BINCONNPRO_PROTOCOL* protoco
 * @brief      InitializeProtocolConnectionClient
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  protocol :
 * @param[in]  applicationdata :
 *
@@ -1116,9 +1059,6 @@ bool BINCONNPRO::InitializeProtocolConnectionClient(BINCONNPRO_PROTOCOL* protoco
 * @note       INTERNAL
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  event :
 *
 * @return     void : does not return anything.
@@ -1180,9 +1120,6 @@ void BINCONNPRO::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMA
 * @note       INTERNAL
 * @ingroup    APPLICATION
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[in]  event :
 *
 * @return     void : does not return anything.
@@ -1230,9 +1167,6 @@ void BINCONNPRO::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMA
 * @brief      Handle Events
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
-*
 * @param[]    xevent : event send to control
 *
 * @return     void : does not return anything.
@@ -1266,9 +1200,6 @@ void BINCONNPRO::HandleEvent(XEVENT* xevent)
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:00
 *
 * @return     void : does not return anything.
 *

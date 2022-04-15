@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_rtc_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   Extended RTC HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the Real Time Clock (RTC) Extended peripheral:

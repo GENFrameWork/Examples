@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_conf.h
-  * @author  MCD Application Team
-  * @brief   HAL configuration file.
+    * @brief   HAL configuration file.
   ******************************************************************************
   * @attention
   *

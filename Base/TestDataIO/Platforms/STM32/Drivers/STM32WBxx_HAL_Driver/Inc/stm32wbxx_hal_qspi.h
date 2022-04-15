@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_qspi.h
-  * @author  MCD Application Team
-  * @brief   Header file of QSPI HAL module.
+    * @brief   Header file of QSPI HAL module.
   ******************************************************************************
   * @attention
   *

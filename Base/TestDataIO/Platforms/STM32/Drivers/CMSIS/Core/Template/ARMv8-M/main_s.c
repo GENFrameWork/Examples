@@ -2,7 +2,7 @@
  * @file     main_s.c
  * @brief    Code template for secure main function
  * @version  V1.1.1
- * @date       01/03/2016 12:00
+ * ""
  ******************************************************************************/
 /*
  * Copyright (c) 2013-2018 Arm Limited. All rights reserved.

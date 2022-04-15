@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_rcc.h
-  * @author  MCD Application Team
-  * @brief   Header file of RCC HAL module.
+    * @brief   Header file of RCC HAL module.
   ******************************************************************************
   * @attention
   *

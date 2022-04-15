@@ -8,7 +8,6 @@
 *
 * Title:        math_helper.h
 *
-*
 * Description:	Prototypes of all helper functions required.
 *
 * Target Processor: Cortex-M4/Cortex-M3

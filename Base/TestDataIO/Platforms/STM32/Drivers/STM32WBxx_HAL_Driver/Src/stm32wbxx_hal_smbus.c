@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_smbus.c
-  * @author  MCD Application Team
+  * ""
   * @brief   SMBUS HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the System Management Bus (SMBus) peripheral,

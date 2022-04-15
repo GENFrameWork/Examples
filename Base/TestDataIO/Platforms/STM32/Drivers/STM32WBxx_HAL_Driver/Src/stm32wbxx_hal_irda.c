@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_irda.c
-  * @author  MCD Application Team
+  * ""
   * @brief   IRDA HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the IrDA (Infrared Data Association) Peripheral

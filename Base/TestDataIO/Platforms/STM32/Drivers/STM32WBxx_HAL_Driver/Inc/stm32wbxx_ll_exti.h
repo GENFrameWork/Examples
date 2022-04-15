@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_exti.h
-  * @author  MCD Application Team
-  * @brief   Header file of EXTI LL module.
+    * @brief   Header file of EXTI LL module.
   ******************************************************************************
   * @attention
   *

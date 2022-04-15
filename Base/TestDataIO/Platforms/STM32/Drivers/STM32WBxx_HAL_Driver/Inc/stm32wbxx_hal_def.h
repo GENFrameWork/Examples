@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_def.h
-  * @author  MCD Application Team
-  * @brief   This file contains HAL common defines, enumeration, macros and
+    * @brief   This file contains HAL common defines, enumeration, macros and
   *          structures definitions.
   ******************************************************************************
   * @attention

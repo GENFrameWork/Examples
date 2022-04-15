@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_ipcc.h
-  * @author  MCD Application Team
-  * @brief   Header file of Mailbox HAL module.
+    * @brief   Header file of Mailbox HAL module.
   ******************************************************************************
   * @attention
   *

@@ -3,7 +3,7 @@
  * @brief    CMSIS Core Device Startup File for
  *           ARMCM7 Device Series
  * @version  V5.00
- * @date       01/03/2016 12:00
+ * ""
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2016 ARM Limited. All rights reserved.

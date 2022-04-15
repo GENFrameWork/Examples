@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_adc.h
-  * @author  MCD Application Team
-  * @brief   Header file of ADC LL module.
+    * @brief   Header file of ADC LL module.
   ******************************************************************************
   * @attention
   *

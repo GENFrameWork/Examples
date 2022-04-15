@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_comp.h
-  * @author  MCD Application Team
-  * @brief   Header file of COMP HAL module.
+    * @brief   Header file of COMP HAL module.
   ******************************************************************************
   * @attention
   *

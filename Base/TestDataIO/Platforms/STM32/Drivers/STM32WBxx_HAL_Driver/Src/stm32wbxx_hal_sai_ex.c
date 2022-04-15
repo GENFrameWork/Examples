@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_sai_ex.c
-  * @author  MCD Application Team
+  * ""
   * @brief   SAI Extended HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionality of the SAI Peripheral Controller:

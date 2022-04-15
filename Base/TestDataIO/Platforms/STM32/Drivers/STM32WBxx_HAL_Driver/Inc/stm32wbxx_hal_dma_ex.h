@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_dma_ex.h
-  * @author  MCD Application Team
-  * @brief   Header file of DMA HAL extension module.
+    * @brief   Header file of DMA HAL extension module.
   ******************************************************************************
   * @attention
   *

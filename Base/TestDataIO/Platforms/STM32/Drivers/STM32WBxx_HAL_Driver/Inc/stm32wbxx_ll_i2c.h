@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_i2c.h
-  * @author  MCD Application Team
-  * @brief   Header file of I2C LL module.
+    * @brief   Header file of I2C LL module.
   ******************************************************************************
   * @attention
   *

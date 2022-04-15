@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    system_stm32wbxx.h
-  * @author  MCD Application Team
-  * @brief   CMSIS Cortex Device System Source File for STM32WBxx devices.  
+    * @brief   CMSIS Cortex Device System Source File for STM32WBxx devices.  
   ******************************************************************************
   * @attention
   *

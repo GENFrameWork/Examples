@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_usart.h
-  * @author  MCD Application Team
-  * @brief   Header file of USART LL module.
+    * @brief   Header file of USART LL module.
   ******************************************************************************
   * @attention
   *

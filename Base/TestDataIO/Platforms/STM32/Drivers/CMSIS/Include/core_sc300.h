@@ -2,8 +2,7 @@
  * @file     core_sc300.h
  * @brief    CMSIS SC300 Core Peripheral Access Layer Header File
  * @version  V5.0.8
- * @date       01/03/2016 12:00
- ******************************************************************************/
+  ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
  *

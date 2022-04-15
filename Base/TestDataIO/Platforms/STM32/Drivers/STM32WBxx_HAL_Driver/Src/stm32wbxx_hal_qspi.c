@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_qspi.c
-  * @author  MCD Application Team
+  * ""
   * @brief   QSPI HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the QuadSPI interface (QSPI).

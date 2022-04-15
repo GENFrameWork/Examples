@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal_wwdg.h
-  * @author  MCD Application Team
-  * @brief   Header file of WWDG HAL module.
+    * @brief   Header file of WWDG HAL module.
   ******************************************************************************
   * @attention
   *

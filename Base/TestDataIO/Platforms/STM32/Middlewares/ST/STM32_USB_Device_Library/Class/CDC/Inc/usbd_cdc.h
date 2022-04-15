@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    usbd_cdc.h
-  * @author  MCD Application Team
-  * @brief   header file for the usbd_cdc.c file.
+    * @brief   header file for the usbd_cdc.c file.
   ******************************************************************************
   * @attention
   *

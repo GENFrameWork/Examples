@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_hal.c
-  * @author  MCD Application Team
+  * ""
   * @brief   HAL module driver.
   *          This is the common part of the HAL initialization
   *

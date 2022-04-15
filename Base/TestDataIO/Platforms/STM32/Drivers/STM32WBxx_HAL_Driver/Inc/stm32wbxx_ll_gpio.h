@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32wbxx_ll_gpio.h
-  * @author  MCD Application Team
-  * @brief   Header file of GPIO LL module.
+    * @brief   Header file of GPIO LL module.
   ******************************************************************************
   * @attention
   *
