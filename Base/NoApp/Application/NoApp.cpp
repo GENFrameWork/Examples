@@ -4,7 +4,7 @@
 *
 * @class      NOAPP
 * @brief      Data I/O stream UART / USB MICROCONTROLLER example class
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

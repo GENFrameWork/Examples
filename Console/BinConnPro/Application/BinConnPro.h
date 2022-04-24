@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        BinConnPro.h
+* @file       BinConnPro.h
 *
-* @class       BINCONNPRO
-* @brief       Example Binary Connexion Protocol class
-* @ingroup
+* @class      BINCONNPRO
+* @brief      Example Binary Connexion Protocol class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

@@ -4,7 +4,7 @@
 *
 * @class      MINIWEBSERVER_APIREST
 * @brief      Example Mini Web Server API Rest class
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

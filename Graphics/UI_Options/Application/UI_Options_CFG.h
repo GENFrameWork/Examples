@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        UI_Options_CFG.h
+* @file       UI_Options_CFG.h
 *
-* @class       UI_OPTIONS_CFG
-* @brief       GEN UI Options Config Example class
-* @ingroup     GRAPHIC
+* @class      UI_OPTIONS_CFG
+* @brief      GEN UI Options Config Example class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

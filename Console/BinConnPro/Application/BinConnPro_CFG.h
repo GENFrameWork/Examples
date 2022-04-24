@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        BinConnPro_CFG.h
+* @file       BinConnPro_CFG.h
 *
-* @class       BINCONNPRO_CFG
-* @brief       BinConnPro Configuration
-* @ingroup     SCRIPT
+* @class      BINCONNPRO_CFG
+* @brief      BinConnPro Configuration
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

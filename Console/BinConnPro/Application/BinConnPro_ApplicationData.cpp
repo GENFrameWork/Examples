@@ -4,7 +4,7 @@
 *
 * @class      BINCONNPRO_APPLICATIONDATA
 * @brief      Example Binary Connexion Protocol Application Data class
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

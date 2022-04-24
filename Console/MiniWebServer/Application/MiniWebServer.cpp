@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        MiniWebServer.cpp
+* @file       MiniWebServer.cpp
 *
-* @class       MINIWEBSERVER
-* @brief       Example Mini Web Server class
-* @ingroup
+* @class      MINIWEBSERVER
+* @brief      Example Mini Web Server class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

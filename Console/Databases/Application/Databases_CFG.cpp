@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Databases_CFG.cpp
+* @file       Databases_CFG.cpp
 *
-* @class       DATABASES_CFG
-* @brief       Databases Configuration
-* @ingroup     SCRIPT
+* @class      DATABASES_CFG
+* @brief      Databases Configuration
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

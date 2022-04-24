@@ -4,7 +4,7 @@
 *
 * @class      BINCONNPRO_CONNECTIONSMANAGER
 * @brief      Example Binary Connexion Protocol Connexions class
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

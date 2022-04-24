@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        MiniWebServer_CFG.h
+* @file       MiniWebServer_CFG.h
 *
-* @class       MINIWEBSERVER_CFG
-* @brief       Example Mini Web Server Configuration class
-* @ingroup     SCRIPT
+* @class      MINIWEBSERVER_CFG
+* @brief      Example Mini Web Server Configuration class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

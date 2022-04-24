@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Scripts_CFG.h
+* @file       Scripts_CFG.h
 *
-* @class       SCRIPTS_CFG
-* @brief       Scripts Configuration
-* @ingroup     SCRIPT
+* @class      SCRIPTS_CFG
+* @brief      Scripts Configuration
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

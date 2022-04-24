@@ -4,7 +4,7 @@
 *
 * @class      BINCONNPRO_PROTOCOL
 * @brief      Example Binary Connexion Protocol class
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

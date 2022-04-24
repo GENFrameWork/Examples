@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Databases.h
+* @file       Databases.h
 *
-* @class       DATABASES
-* @brief       GEN Databases Example class
-* @ingroup     SCRIPT
+* @class      DATABASES
+* @brief      GEN Databases Example class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

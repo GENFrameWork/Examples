@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Scripts_CFG.cpp
+* @file       Scripts_CFG.cpp
 *
-* @class       SCRIPTS_CFG
-* @brief       Scripts Configuration
-* @ingroup     SCRIPT
+* @class      SCRIPTS_CFG
+* @brief      Scripts Configuration
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

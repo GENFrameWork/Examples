@@ -4,7 +4,7 @@
 *
 * @class      APP_GEN_DEFINES
 * @brief      GEN Defines of the Application
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

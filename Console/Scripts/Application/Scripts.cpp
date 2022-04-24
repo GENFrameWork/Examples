@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Scripts.cpp
+* @file       Scripts.cpp
 *
-* @class       SCRIPTS
-* @brief       GEN Scripts Example class
-* @ingroup     SCRIPT
+* @class      SCRIPTS
+* @brief      GEN Scripts Example class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

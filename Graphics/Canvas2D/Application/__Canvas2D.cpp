@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Canvas2D.cpp
+* @file       Canvas2D.cpp
 *
-* @class       CANVAS2D
-* @brief       GEN Canvas 2D Example class
-* @ingroup     GRAPHIC
+* @class      CANVAS2D
+* @brief      GEN Canvas 2D Example class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

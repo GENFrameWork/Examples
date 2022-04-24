@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Canvas2D_CFG.h
+* @file       Canvas2D_CFG.h
 *
-* @class       CANVAS2D_CFG
-* @brief       GEN Canvas 2D Config Example class
-* @ingroup     GRAPHIC
+* @class      CANVAS2D_CFG
+* @brief      GEN Canvas 2D Config Example class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

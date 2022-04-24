@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        BinConnPro.cpp
+* @file       BinConnPro.cpp
 *
-* @class       BINCONNPRO
-* @brief       Example Binary Connexion Protocol Device class
-* @ingroup
+* @class      BINCONNPRO
+* @brief      Example Binary Connexion Protocol Device class
+* @ingroup    EXAMPLES  
 *
 * @copyright  GEN Group. All right reserved.
 *

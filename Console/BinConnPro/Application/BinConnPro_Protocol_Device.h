@@ -4,7 +4,7 @@
 *
 * @class      BINCONNPRO_PROTOCOL_DEVICE
 * @brief      Example Binary Connexion Protocol Device class
-* @ingroup
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *

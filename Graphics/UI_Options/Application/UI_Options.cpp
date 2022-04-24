@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        UI_Options.cpp
+* @file       UI_Options.cpp
 *
-* @class       UI_OPTIONS
-* @brief       GEN UI Options Example class
-* @ingroup     GRAPHIC
+* @class      UI_OPTIONS
+* @brief      GEN UI Options Example class
+* @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
 *
