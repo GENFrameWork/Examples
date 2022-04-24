@@ -586,14 +586,14 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Main Screen: Width %d, height %d"),  screen->GetWidth(), screen->GetHeight());
 
-  screen->SetWidth(1024);
-  screen->SetHeight(768);
+  //screen->SetWidth(1024);
+  //screen->SetHeight(768);
 
-  /*
+  
   #ifndef ANDROID 
   if(backgroundbmp)
     {
-      screen->SetWidth(1024);
+      screen->SetWidth(600);
       screen->SetHeight(backgroundbmp->GetHeight());
     }
    else
@@ -609,7 +609,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   screen->SetHeight(768);  
  
   #endif 
-  */
+  
  
 
   return true;

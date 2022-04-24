@@ -32,13 +32,13 @@ set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Default.txt") 
 
 #set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                                        FORCE)
-#set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
+ set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
 #set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Activate XMemory Control"                                   FORCE)
 
  set(LINUX_X11_FEATURE                                   true    CACHE BOOL "Activate Linux X11"                                         FORCE)
 
  set(USERINTERFACE_FEATURE                               true    CACHE BOOL "Activate User Interace"                                     FORCE)
- set(USERINTERFACE_DEBUG_FEATURE                         true    CACHE BOOL "Activate Debug User Interace"                               FORCE)
+#set(USERINTERFACE_DEBUG_FEATURE                         true    CACHE BOOL "Activate Debug User Interace"                               FORCE)
         
  set(APP_FEATURE                                         true    CACHE BOOL "Activate Application modules"                               FORCE)
  set(APP_LOG_FEATURE                                     true    CACHE BOOL "Activate Application Log"                                   FORCE)
