@@ -7,7 +7,7 @@
  project(canvas2D)
 
 
- set(GEN_DIRECTORY "../../../../../GENFrameWork") 
+ set(GEN_DIRECTORY "../../../../") 
 
 #set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk")
 #set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21e_linux")

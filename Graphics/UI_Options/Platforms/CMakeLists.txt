@@ -7,7 +7,7 @@
  project(ui_options)
 
 
- set(GEN_DIRECTORY "../../../../../GENFrameWork") 
+ set(GEN_DIRECTORY "../../../../") 
 
 
 #set(ANDROID_NDK_ROOT "C:/Users/sirgraham/AppData/Local/Android/Sdk/ndk/21.0.6113669")

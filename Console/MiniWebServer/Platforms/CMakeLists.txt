@@ -7,7 +7,7 @@
  project(miniwebserver)
 
 
- set(GEN_DIRECTORY "../../../../../GENFrameWork") 
+ set(GEN_DIRECTORY "../../../../") 
 
 
 # --------------------------------------------------------------------

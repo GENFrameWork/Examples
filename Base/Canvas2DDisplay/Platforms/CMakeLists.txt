@@ -6,7 +6,7 @@
  project(canvas2ddisplay)
 
 
- set(GEN_DIRECTORY "../../../../../GENFrameWork") 
+ set(GEN_DIRECTORY "../../../../") 
 
 # --------------------------------------------------------------------
 # Compile Selection

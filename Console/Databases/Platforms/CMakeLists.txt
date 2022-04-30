@@ -7,7 +7,7 @@
  project(databases)
 
 
- set(GEN_DIRECTORY "../../../../../GENFrameWork") 
+ set(GEN_DIRECTORY "../../../../") 
 
 # --------------------------------------------------------------------
 # Compile Selection

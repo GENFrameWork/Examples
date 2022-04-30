@@ -1,9 +1,14 @@
 #!/bin/sh
-echo Generate Project ...
-rm $1 -R
-mkdir $1
+DIR=$1
+echo Generate Project: $DIR
+if [ -d "$DIR" ]; then 
+  rm $1 -R; 
+fi
+if [ ! -d "$DIR" ]; then
+  mkdir $1;
+fi
 cd $1
-cmake -G "Ninja" -DTARGET=pc ../..
+cmake -G "Ninja" -DTARGET=pc ../.. > nul
 echo Compile ...
 ninja
 cd ../../../../../
