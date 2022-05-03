@@ -21,7 +21,6 @@ call compile_windows Console\MiniWebServer\Platforms\Windows\x64
 call compile_windows Console\Scripts\Platforms\Windows\x64
 call compile_windows Graphics\Canvas2D\Platforms\Windows\x64 
 call compile_windows Graphics\UI_Options\Platforms\Windows\x64 
-del NULL
 pause
 
 
