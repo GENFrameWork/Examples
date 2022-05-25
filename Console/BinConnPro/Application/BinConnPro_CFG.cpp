@@ -183,12 +183,6 @@ XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::Default()
 {
-  //------------------------------------------------------------------------------
-
-  internetservices_checkinternetstatuscadence     = 30;
-  internetservices_checkippublicchangecadence     = 60;
-  internetservices_updatetimebyntpcadence         = 4;
-
 
   GEN_XTRACE_NET_CFG_DEFAULT_01
 
