@@ -1,6 +1,5 @@
 # --------------------------------------------------------------------
-# Tests : Example of console GEN FrameWork
-# 
+# DataBases : Example of console GEN FrameWork (Databases connector example) 
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
@@ -9,13 +8,10 @@
 
  set(GEN_DIRECTORY "../../../../") 
 
+
 # --------------------------------------------------------------------
 # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
@@ -40,7 +36,6 @@
  set(DATABASES_SQL_POSTGRESQL_FEATURE                    true    CACHE BOOL "Activate DataBases PostgreSQL"                              FORCE)
 
 
-
 # --------------------------------------------------------------------
 # Config Application Macro
 
@@ -60,6 +55,7 @@
  set(APP_DIRECTORY_APPLICATION   "../Application")
  list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
 
+
 # --------------------------------------------------------------------
 # Source code of the Application
 
@@ -68,13 +64,19 @@
 
 
 # --------------------------------------------------------------------
+# Warnings control
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+
+
+# --------------------------------------------------------------------
 # Create proyect 
 
  include_directories(${INCLUDES_DIR})
-
  add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+
 
 # --------------------------------------------------------------------
 # Add Libraries
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Librarys.txt") 
+ 

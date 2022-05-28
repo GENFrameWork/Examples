@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------
-# noapp : Example of console GEN FrameWork 
+# NoApp : Example  GEN FrameWork (no application modules)
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
@@ -11,10 +11,6 @@
 # --------------------------------------------------------------------
 # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
@@ -49,6 +45,10 @@
 # Source code of the Application
 
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/NoApp.cpp")
+ 
+# --------------------------------------------------------------------
+# Warnings control
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------

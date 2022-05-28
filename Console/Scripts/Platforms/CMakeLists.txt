@@ -1,6 +1,5 @@
 # --------------------------------------------------------------------
-# Scripts : Example of console GEN FrameWork
-# 
+# Scripts : Example of console GEN FrameWork (Script example) 
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
@@ -9,13 +8,10 @@
 
  set(GEN_DIRECTORY "../../../../") 
 
+
 # --------------------------------------------------------------------
 # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
@@ -66,14 +62,19 @@
 
 
 # --------------------------------------------------------------------
+# Warnings control
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+
+
+# --------------------------------------------------------------------
 # Create proyect 
 
  include_directories(${INCLUDES_DIR})
 
  add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
+
 # --------------------------------------------------------------------
 # Add Libraries
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Librarys.txt") 
-

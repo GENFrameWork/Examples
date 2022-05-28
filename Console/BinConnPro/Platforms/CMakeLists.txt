@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------
-# Tests : Example of console GEN FrameWork
+# BinConnPro : Example of console GEN FrameWork (Binary protocol example)
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
@@ -8,20 +8,16 @@
 
  set(GEN_DIRECTORY "../../../../") 
 
+
 # --------------------------------------------------------------------
 # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
 # Activate features/Defines
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Default.txt") 
-
 
  set(DEBUG_FEATURE                           true    CACHE BOOL "Activate Debug mode"                            FORCE)
  set(XTRACE_FEATURE                          true    CACHE BOOL "Activate XTrace"                                FORCE)
@@ -68,6 +64,7 @@
  set(APP_DIRECTORY_APPLICATION   "../Application")
  list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
 
+
 # --------------------------------------------------------------------
 # Source code of the Application
 
@@ -80,11 +77,17 @@
 
 
 # --------------------------------------------------------------------
+# Warnings control
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+
+
+# --------------------------------------------------------------------
 # Create proyect 
 
  include_directories(${INCLUDES_DIR})
 
  add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+
 
 # --------------------------------------------------------------------
 # Add Libraries

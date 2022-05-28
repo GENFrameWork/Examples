@@ -1,6 +1,5 @@
 # --------------------------------------------------------------------
-# UI_Options : Example of UI graphics GEN FrameWork
-# 
+# UI_Options : Example of GEN FrameWork graphics(User Interface example 
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
@@ -18,12 +17,8 @@ set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
 
 # --------------------------------------------------------------------
 # Compile Selection
+
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
-
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
@@ -82,12 +77,17 @@ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/UI_Options_CFG.cpp")
 
 
 # --------------------------------------------------------------------
+# Warnings control
+
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+
+
+# --------------------------------------------------------------------
 # Create proyect 
 
-include_directories(${INCLUDES_DIR})
+ include_directories(${INCLUDES_DIR})
 
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-
+ add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
 
 # --------------------------------------------------------------------

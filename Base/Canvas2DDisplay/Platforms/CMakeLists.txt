@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------
-# noapp : Example of console GEN FrameWork 
+# Canvas2DDisplay : Example of console GEN FrameWork (Canvas minimal app)
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
@@ -8,13 +8,10 @@
 
  set(GEN_DIRECTORY "../../../../") 
 
+
 # --------------------------------------------------------------------
 # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
@@ -34,6 +31,7 @@
 
  set(APP_FEATURE                                         true    CACHE BOOL "Activate Application modules"                               FORCE)
 
+
 # --------------------------------------------------------------------
 # Source code of the GEN in this Application
 
@@ -52,6 +50,11 @@
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Canvas2DDisplay.cpp")
 
 
+# --------------------------------------------------------------------
+# Warnings control
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+ 
+ 
 # --------------------------------------------------------------------
 # Create proyect 
 

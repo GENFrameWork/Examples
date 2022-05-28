@@ -1,6 +1,5 @@
 # --------------------------------------------------------------------
-# Tests : Example of console GEN FrameWork
-# 
+# Canvas2D : Example of console GEN FrameWork (Canvas 2D example) 
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.7.0)
@@ -12,8 +11,6 @@
 #set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk")
 #set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21e_linux")
 #set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk-r23b")
-
-
  set(ANDROID_NDK_ROOT "C:/Microsoft/AndroidNDK/android-ndk-r21e")
 
 
@@ -21,16 +18,11 @@
 # Compile Selection
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
 
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
-
 
 # --------------------------------------------------------------------
 # Activate features/Defines
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Default.txt") 
-
 
  set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                            FORCE)
  set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                FORCE)
@@ -50,7 +42,6 @@
  set(GRP_2D_FEATURE                                      true    CACHE BOOL "Activate Graphics 2D"                           FORCE)
 
  set(INP_FEATURE                                         true    CACHE BOOL "Activate Inputs"                                FORCE)
-
 
 
 # --------------------------------------------------------------------
@@ -80,6 +71,11 @@
 
 
 # --------------------------------------------------------------------
+# Warnings control
+ include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+
+
+# --------------------------------------------------------------------
 # Create proyect 
 
  include_directories(${INCLUDES_DIR})
@@ -90,4 +86,3 @@
 # Add Libraries
 
  include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Librarys.txt") 
-
