@@ -16,13 +16,13 @@
 
 # --------------------------------------------------------------------
 # Compile Selection
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Compile.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
 
 
 # --------------------------------------------------------------------
 # Activate features/Defines
 
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Default.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
 
  set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                            FORCE)
  set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                FORCE)
@@ -54,7 +54,7 @@
 # --------------------------------------------------------------------
 # Source code of the GEN in this Application
 
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists.txt") 
                    
                    
 # --------------------------------------------------------------------
@@ -72,7 +72,7 @@
 
 # --------------------------------------------------------------------
 # Warnings control
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Warnings.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
@@ -85,4 +85,4 @@
 # --------------------------------------------------------------------
 # Add Libraries
 
- include("${GEN_DIRECTORY}/GEN/GEN_CMakeLists_Librarys.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Librarys.txt") 

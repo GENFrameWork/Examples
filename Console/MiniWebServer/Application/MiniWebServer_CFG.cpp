@@ -36,7 +36,7 @@
 
 #include "XLog.h"
 
-#include "GEN_DefaultXTraceCFG.h"
+#include "Common_DefaultXTraceCFG.h"
 
 #include "MiniWebServer.h"
 
