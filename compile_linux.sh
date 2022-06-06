@@ -8,7 +8,7 @@ if [ ! -d "$DIR" ]; then
   mkdir $1;
 fi
 cd $1
-cmake -G "Ninja" -DTARGET=pc ../.. > nul
+cmake -G "Ninja" -DTARGET=pc ../.. 
 echo Compile ...
 ninja
 cd ../../../../../
