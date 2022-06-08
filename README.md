@@ -1,7 +1,5 @@
 ![GEN FrameWork](GENIcon.png "GEN FrameWork")
 
-# GEN FrameWork
-
 ## Examples 
 
 The GEN FrameWork examples are a set of projects to test the different framework functionalities. They are divided into 3 blocks:
