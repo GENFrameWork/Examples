@@ -1,5 +1,5 @@
 #!/bin/sh
-DIR=$1
+DIR=$1$2
 echo Generate Project: $DIR
 if [ -d "$DIR" ]; then 
   rm $1 -R; 
@@ -7,7 +7,14 @@ fi
 if [ ! -d "$DIR" ]; then
   mkdir $1;
 fi
-cd $1
+ 
+if [ -d "$DIR" ]; then 
+  rm $DIR -R; 
+fi
+if [ ! -d "$DIR" ]; then
+  mkdir $DIR;
+fi
+cd $DIR
 cmake -G "Ninja" -DTARGET=pc ../.. 
 echo Compile ...
 ninja
