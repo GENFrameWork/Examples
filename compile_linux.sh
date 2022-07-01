@@ -19,3 +19,4 @@ cmake -G "Ninja" -DTARGET=pc ../..
 echo Compile ...
 ninja
 cd ../../../../../
+
