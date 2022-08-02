@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       NOAPP.cpp
+* @file       NOTAPPEXAMPLE.cpp
 *
-* @class      NOAPP
-* @brief      Data I/O stream UART / USB MICROCONTROLLER example class
+* @class      NOTAPPEXAMPLE
+* @brief      Not Application Example (aplication simple without "application" class of GEN) 
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -37,60 +37,55 @@
 
 #include "XFactory.h"
 #include "XSleep.h"
-#include "XRand.h"
 #include "XTrace.h"
 
 #include "MainProc.h"
 
-#include "NoApp.h"
+#include "NotAppExample.h"
 
 #include "XMemory_Control.h"
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
+
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-
-
-//-------------------------------------------------------------------
-//  NOAPP::NOAPP
-/**
-//
-//
-//  ""
-//  @version      13/08/2002 13:15:15
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
-NOAPP::NOAPP()
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         NOTAPPEXAMPLE::NOTAPPEXAMPLE()
+* @brief      Constructor
+* @ingroup    APPLICATION
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NOTAPPEXAMPLE::NOTAPPEXAMPLE()
 {
   Clean();
 }
 
 
-//-------------------------------------------------------------------
-//  NOAPP::~NOAPP
-/**
-//
-//
-//  ""
-//  @version      13/08/2002 13:15:40
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
-NOAPP::~NOAPP()
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    APPLICATION
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
+
 {
   Clean();
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void NOAPP::Clean()
+* @fn         void NOTAPPEXAMPLE::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    TEST
@@ -98,11 +93,9 @@ NOAPP::~NOAPP()
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void NOAPP::Clean()
+void NOTAPPEXAMPLE::Clean()
 {
-
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -123,9 +116,13 @@ bool Proc_Main_Ini(MAINPROC* main)
 
   XTRACE_ADDTARGET(XTRACE_TYPE_NET, XTRACE_DEFAULT_NETAIM1);
 
+  XTRACE_SCREENCLEAR;
+  XTRACE_STATUSCLEAR;
+
+  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
+
   return true;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -145,7 +142,6 @@ bool Proc_Main_Update(MAINPROC* main)
 
   return false;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------

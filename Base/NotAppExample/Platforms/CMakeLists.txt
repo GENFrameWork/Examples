@@ -1,9 +1,9 @@
 # --------------------------------------------------------------------
-# NoApp : Example  GEN FrameWork (no application modules)
+# NotAppExample : Not Application Example  
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.3.0)
- project(noapp)
+ project(notappexample)
 
 
  set(GEN_DIRECTORY "../../../../") 
@@ -24,12 +24,6 @@
 
  set(XSLEEP_FEATURE                                      true    CACHE BOOL "Activate Sleep functions"                                   FORCE)                                    
 
- set(DIO_FEATURE                                         true    CACHE BOOL "Activate Data Input/Output"                                 FORCE) 
- set(DIO_STREAM_FEATURE                                  true    CACHE BOOL "Activate Data Input/Output Stream"                          FORCE)
- set(DIO_STREAMUART_FEATURE                              true    CACHE BOOL "Activate Data Input/Output Stream UART"                     FORCE)
- set(DIO_STREAMUSB_FEATURE                               true    CACHE BOOL "Activate Data Input/Output Stream USB"                      FORCE)
-
-
 # --------------------------------------------------------------------
 # Source code of the GEN in this Application
 
@@ -44,7 +38,7 @@
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/NoApp.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/NotAppExample.cpp")
  
 # --------------------------------------------------------------------
 # Warnings control

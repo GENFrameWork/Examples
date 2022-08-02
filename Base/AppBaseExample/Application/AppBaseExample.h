@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       APP_GEN_Defines.h
+* @file       AppBaseExample.h
 *
-* @class      APP_GEN_DEFINES
-* @brief      GEN Defines of the Application
+* @class      AppBaseExample
+* @brief      Application Base Example
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -26,25 +26,45 @@
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _APP_GEN_DEFINES_H_
-#define _APP_GEN_DEFINES_H_
+#ifndef _AppBaseExample_H_
+#define _AppBaseExample_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
+#include "APPBase.h"
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
+#define APPLICATION_VERSION               0
+#define APPLICATION_SUBVERSION            1
+#define APPLICATION_SUBVERSIONERR         0
+#define APPLICATION_NAMEAPP               __L("AppBaseExample")
 
-class MAINPROC;
+/*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
 
-bool    Proc_Main_Ini         (MAINPROC* main);
-bool    Proc_Main_Update      (MAINPROC* main);
-bool    Proc_Main_End         (MAINPROC* main);
+class APPBASEEXAMPLE: public APPBASE
+{
+  public:
+                        APPBASEEXAMPLE                      ();
+    virtual            ~APPBASEEXAMPLE                      ();
 
-#define MAIN_FUNCTION_INI     Proc_Main_Ini
-#define MAIN_FUNCTION_UPDATE  Proc_Main_Update
-#define MAIN_FUNCTION_END     Proc_Main_End
+    bool                AppProc_Ini                         ();
+    bool                AppProc_FirstUpdate                 ();
+    bool                AppProc_Update                      ();
+    bool                AppProc_LastUpdate                  ();  
+    bool                AppProc_End                         ();
+   
+  private:
+
+    void                Clean                               ();
+};
+
+
+/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
+
 
 #endif
+
 
 

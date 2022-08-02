@@ -1,7 +1,8 @@
 #!/bin/sh
 echo -------------------------------------------------------------
 echo 64 Bits version
-sh ./../GEN/Batch/compile_linux.sh Base/NoApp/Platforms/Linux /x64
+sh ./../GEN/Batch/compile_linux.sh Base/NotAppExample/Platforms/Linux /x64
+sh ./../GEN/Batch/compile_linux.sh Base/AppBaseExample/Platforms/Linux /x64
 sh ./../GEN/Batch/compile_linux.sh Console/BinConnPro/Platforms/Linux /x64
 sh ./../GEN/Batch/compile_linux.sh Console/Databases/Platforms/Linux /x64
 sh ./../GEN/Batch/compile_linux.sh Console/MiniWebServer/Platforms/Linux /x64

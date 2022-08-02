@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       DataAIOStream.h
+* @file       APP_GEN_Defines.h
 *
-* @class      NOAPP
-* @brief      Data I/O stream UART / USB MICROCONTROLLER example class
+* @class      APP_GEN_DEFINES
+* @brief      GEN Defines of the Application
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -26,39 +26,23 @@
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NOAPP_H_
-#define _NOAPP_H_
+#ifndef _APP_GEN_DEFINES_H_
+#define _APP_GEN_DEFINES_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
-#include "XBuffer.h"
-
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
-#define APPLICATION_VERSION               0
-#define APPLICATION_SUBVERSION            1
-#define APPLICATION_SUBVERSIONERR         0
-#define APPLICATION_NAMEAPP               __L("NoApp")
+class MAINPROC;
 
-/*---- CLASS ---------------------------------------------------------------------------------------------------------*/
+bool    Proc_Main_Ini         (MAINPROC* main);
+bool    Proc_Main_Update      (MAINPROC* main);
+bool    Proc_Main_End         (MAINPROC* main);
 
-
-class NOAPP
-{
-  public:
-                        NOAPP                           ();
-    virtual            ~NOAPP                           ();
-
-
-  private:
-
-    void                Clean                               ();
-};
-
-
-/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
+#define MAIN_FUNCTION_INI     Proc_Main_Ini
+#define MAIN_FUNCTION_UPDATE  Proc_Main_Update
+#define MAIN_FUNCTION_END     Proc_Main_End
 
 #endif
-
 
 
