@@ -1,9 +1,9 @@
 ECHO OFF
 Echo Remove directorys
 Echo Base
+call ..\GEN\Batch\erase_artifacts Base\NotAppExample
+call ..\GEN\Batch\erase_artifacts Base\AppBaseExample
 call ..\GEN\Batch\erase_artifacts Base\Canvas2DDisplay
-call ..\GEN\Batch\erase_artifacts Base\NoApp
-call ..\GEN\Batch\erase_artifacts Base\TestDataIO
 Echo Console
 call ..\GEN\Batch\erase_artifacts Console\BinConnPro
 call ..\GEN\Batch\erase_artifacts Console\Databases
