@@ -39,6 +39,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "Version.h"
+
 #include "XPath.h"
 #include "XDateTime.h"
 #include "XTimer.h"
@@ -52,6 +54,8 @@
 #include "XFileTXT.h"
 #include "XFileCSV.h"
 #include "XFileXML.h"
+#include "XTranslation.h"
+#include "XTranslation_GEN.h"
 #include "XTranslation.h"
 #include "XScheduler.h"
 #include "XScheduler_XEvent.h"
@@ -188,6 +192,8 @@ bool DATABASES::AppProc_Ini()
 
   //-------------------------------------------------------------------------------------------------
 
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+
   GetApplicationName()->Set(APPLICATION_NAMEAPP);
 
   //--------------------------------------------------------------------------------------------------
@@ -255,6 +261,25 @@ bool DATABASES::AppProc_Ini()
 
       stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
       console->PrintMessage(stringresult.Get(), 0, false, true);
+
+      XSTRING SO_ID;
+      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
+
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
+      XTRACE_PRINTSTATUS(__L("S.O. version"), SO_ID.Get()); 
+
+      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
+           
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
+
+      XDWORD total = 0;
+      XDWORD free  = 0;
+
+      GEN_XSYSTEM.GetMemoryInfo(total,free);
+
+      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
     }
 
   //--------------------------------------------------------------------------------------
@@ -263,10 +288,6 @@ bool DATABASES::AppProc_Ini()
 
   return true;
 }
-
-
-
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -289,10 +310,8 @@ bool DATABASES::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------------
 
-
   return true;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -827,70 +846,6 @@ bool DATABASES::Database_DoTest()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool SCRIPT::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefeed)
-* @brief      Show_Line
-* @ingroup    APPLICATION
-*
-* @param[in]  string :
-* @param[in]  string2 :
-* @param[in]  tab :
-* @param[in]  linefeed :
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool DATABASES::Show_Line(XSTRING& string, XSTRING& string2, int tab, bool linefeed)
-{
-  XSTRING line1;
-  XSTRING line2;
-
-  console->Format_Message(string.Get(), tab , false, false, line1);
-  if(tab)
-    {
-      int _tab = tab;
-
-      if(_tab<37) _tab = 37;
-      line1.AdjustSize(_tab, false, __L(" "));
-    }
-
-  console->Format_Message(string2.Get(), 0 , false, linefeed, line2);
-
-  console->Print(line1.Get());
-  console->Print(line2.Get());
-
-  return true;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool SCRIPT::Show_Header(bool separator)
-* @brief      Show_Header
-* @ingroup    APPLICATION
-*
-* @param[in]  separator :
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool DATABASES::Show_Header(bool separator)
-{
-  XSTRING header;
-
-  if(!console->TipicalHeader_Create(APPLICATION_YEAROFCREATION, APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, DATABASES_ENTERPRISE, header)) return false;
-
-  console->Printf(header.Get());
-  console->Printf(__L("\n"));
-  if(separator) console->Printf(__L("\n"));
-
-  return true;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
 * @fn         bool SCRIPT::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    APPLICATION
@@ -937,7 +892,6 @@ bool DATABASES::Show_AppStatus()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool DATABASES::Show_DatabasesStatus()
@@ -963,8 +917,6 @@ bool DATABASES::Show_DatabasesStatus()
 }
 
 
-
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool DATABASES::Show_AllStatus()
@@ -988,8 +940,6 @@ bool DATABASES::Show_AllStatus()
 
   return true;
 }
-
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -1019,7 +969,6 @@ void DATABASES::HandleEvent(XEVENT* xevent)
 
     }
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------

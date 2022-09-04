@@ -37,6 +37,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "Version.h"
+
 #include "XPath.h"
 #include "XDateTime.h"
 #include "XTimer.h"
@@ -51,6 +53,7 @@
 #include "XFileCSV.h"
 #include "XFileXML.h"
 #include "XTranslation.h"
+#include "XTranslation_GEN.h"
 #include "XScheduler.h"
 #include "XScheduler_XEvent.h"
 #include "XConsole.h"
@@ -199,9 +202,11 @@ bool UI_OPTIONS::AppProc_Ini()
 {
   XSTRING string;
   XSTRING stringresult;
-//bool    status;
+  bool    status = false;
 
   //-------------------------------------------------------------------------------------------------
+
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
   GetApplicationName()->Set(APPLICATION_NAMEAPP);
 
@@ -265,9 +270,30 @@ bool UI_OPTIONS::AppProc_Ini()
 
   if(APP_CFG.Log_IsActive())
     {
-      APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
-                                                 , APPLICATION_SUBVERSION
-                                                 , APPLICATION_SUBVERSIONERR);
+      string.Format(__L("Activando sistema LOG"));
+      
+      status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
+                                                          , APPLICATION_SUBVERSION
+                                                          , APPLICATION_SUBVERSIONERR);
+      
+      XSTRING SO_ID;
+      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
+
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
+      XTRACE_PRINTSTATUS(__L("S.O. version"), SO_ID.Get()); 
+
+      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
+           
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
+
+      XDWORD total = 0;
+      XDWORD free  = 0;
+
+      GEN_XSYSTEM.GetMemoryInfo(total,free);
+
+      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
     }
 
   //--------------------------------------------------------------------------------------

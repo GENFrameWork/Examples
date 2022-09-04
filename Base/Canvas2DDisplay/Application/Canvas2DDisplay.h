@@ -36,10 +36,17 @@
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
-#define CANVAS2DDISPLAY_VERSION            0
-#define CANVAS2DDISPLAY_SUBVERSION         1
-#define CANVAS2DDISPLAY_SUBVERSIONERR      0
-#define CANVAS2DDISPLAY_NAMEAPP            __L("TestMicro")
+#define APPLICATION_VERSION                       0
+#define APPLICATION_SUBVERSION                    1
+#define APPLICATION_SUBVERSIONERR                 0
+
+#define APPLICATION_NAMEAPP                       __L("Canvas 2D Display")
+#define APPLICATION_NAMEFILE                      __L("canvas2ddisplay")
+
+#define APPLICATION_OWNER                         __L("GEN Group")
+
+#define APPLICATION_YEAROFCREATION                2022
+
 
 
 #ifdef HW_PC

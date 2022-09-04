@@ -35,10 +35,17 @@
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
-#define APPLICATION_VERSION               0
-#define APPLICATION_SUBVERSION            1
-#define APPLICATION_SUBVERSIONERR         0
-#define APPLICATION_NAMEAPP               __L("NotAppExample")
+#define APPLICATION_VERSION                       0
+#define APPLICATION_SUBVERSION                    1
+#define APPLICATION_SUBVERSIONERR                 0
+
+#define APPLICATION_NAMEAPP                       __L("Not App Example")
+#define APPLICATION_NAMEFILE                      __L("notappexample")
+
+#define APPLICATION_OWNER                         __L("GEN Group")
+
+#define APPLICATION_YEAROFCREATION                2022
+
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 

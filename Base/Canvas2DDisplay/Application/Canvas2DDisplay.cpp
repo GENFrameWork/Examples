@@ -35,6 +35,8 @@
 
 #include <stdio.h>
 
+#include "Version.h"
+
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XRand.h"
@@ -63,60 +65,55 @@ APPLICATIONCREATEINSTANCE(CANVAS2DDISPLAY, uart_usb)
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-
-
-//-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::CANVAS2DDISPLAY
-/**
-//
-//
-//  ""
-//  @version      13/08/2002 13:15:15
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         CANVAS2DDISPLAY::CANVAS2DDISPLAY()
+* @brief      Constructor
+* @ingroup    APPLICATION
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 CANVAS2DDISPLAY::CANVAS2DDISPLAY()
 {
   Clean();
 }
 
 
-//-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::~CANVAS2DDISPLAY
-/**
-//
-//
-//  ""
-//  @version      13/08/2002 13:15:40
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         CANVAS2DDISPLAY::~CANVAS2DDISPLAY()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    APPLICATION
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 CANVAS2DDISPLAY::~CANVAS2DDISPLAY()
 {
   Clean();
 }
 
 
-//-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::AppProc_Ini
-/**
-//
-//
-//  ""
-//  @version      13/08/2002 13:17:31
-//
-//  @return       bool :
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2DDISPLAY::AppProc_Ini()
+* @brief      AppProc_Ini
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_Ini()
 {
   XSTRING string;
 
-  string = CANVAS2DDISPLAY_NAMEAPP;
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+
+  string = APPLICATION_NAMEAPP;
   XTRACE_SETAPPLICATIONNAME(string);
-  XTRACE_SETAPPLICATIONVERSION(CANVAS2DDISPLAY_VERSION, CANVAS2DDISPLAY_SUBVERSION, CANVAS2DDISPLAY_SUBVERSIONERR);
+  XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
 
   #ifdef MICROCONTROLLER
     XTRACE_SETTARGET(0, XTRACE_TYPE_SPECIAL , XTRACE_DEFAULT_SPECIALAIM);
@@ -130,17 +127,15 @@ bool CANVAS2DDISPLAY::AppProc_Ini()
 }
 
 
-
-//-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::AppProc_FirstUpdate
-/**
-//
-//  ""
-//  @version       20/2/2003   16:26:12
-//
-//  @return        bool :
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
+* @brief      AppProc_FirstUpdate
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
 {
   //Test_DIOStreamI2C();
@@ -150,38 +145,30 @@ bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
 }
 
 
-
-//-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::AppProc_Update
-/**
-//
-//
-//  ""
-//  @version      15/03/2004 16:53:03
-//
-//  @return       bool :
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2DDISPLAY::AppProc_Update()
+* @brief      AppProc_Update
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_Update()
 {
   return true;
 }
 
 
-
-
-/*-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::AppProc_End
-*/
-/**
-//
-//
-//  ""
-//  @version      14/05/2012 19:02:07
-//
-//  @return       bool :
-//  */
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2DDISPLAY::AppProc_End()
+* @brief      AppProc_End
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_End()
 {
 
@@ -189,21 +176,15 @@ bool CANVAS2DDISPLAY::AppProc_End()
 }
 
 
-
-/*-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::Test_DIOStreamI2C
-*/
-/**
-//
-//
-//
-//  ""
-//  @version      23/09/2016 9:42:03
-//
-//  @return       bool :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
+* @brief      Test_DIOStreamI2C
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
 {
   //----------------------------------------------------------------------------
@@ -228,21 +209,15 @@ bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
 }
 
 
-
-/*-------------------------------------------------------------------
-//  CANVAS2DDISPLAY::Test_DIOStreamSPI
-*/
-/**
-//
-//
-//
-//  ""
-//  @version      28/10/2016 8:35:41
-//
-//  @return       bool :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
+* @brief      Test_DIOStreamSPI
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
 {
   bool status = false;

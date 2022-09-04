@@ -95,15 +95,16 @@ enum UI_OPTIONS_BUTTONS
 
 #define XTHREADGROUPID_UI_OPTIONS_DRAWFRAME       XTHREADGROUPID_APPOWNER + 100
 
-
 #define APPLICATION_VERSION                       0
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
 #define APPLICATION_NAMEAPP                       __L("UI_Options")
-#define APPLICATION_ENTERPRISE                    __L("GEN Group")
-
 #define APPLICATION_NAMEFILE                      __L("ui_options")
+
+#define APPLICATION_OWNER                         __L("GEN Group")
+
+#define APPLICATION_YEAROFCREATION                2018
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
@@ -158,7 +159,6 @@ class UI_OPTIONS : public APPGRAPHICS, public XFSMACHINE
 
     bool                            UserInterface_ElementSelected           (UI_ELEMENT* element);
     bool                            UserInterface_ChangeLiteralText         (UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresult);
-
 
     bool                            UnitTest_AVIVideoWrite                  ();
 

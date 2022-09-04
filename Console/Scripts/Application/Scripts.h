@@ -79,16 +79,17 @@ enum SCRIPTSTASKID
 };
 
 
-#define APPLICATION_VERSION                     0
-#define APPLICATION_SUBVERSION                  1
-#define APPLICATION_SUBVERSIONERR               0
+#define APPLICATION_VERSION                       0
+#define APPLICATION_SUBVERSION                    1
+#define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                     __L("Scripts")
-#define APPLICATION_ENTERPRISE                  __L("GEN Group")
+#define APPLICATION_NAMEAPP                       __L("Scripts")
+#define APPLICATION_NAMEFILE                      __L("scripts")
 
-#define APPLICATION_NAMEFILE                    __L("scripts")
+#define APPLICATION_OWNER                         __L("GEN Group")
 
-#define APPLICATION_YEAROFCREATION              2018
+#define APPLICATION_YEAROFCREATION                2018
+
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
@@ -128,8 +129,6 @@ class SCRIPTS : public APPCONSOLE, public XFSMACHINE
     bool                            CreateScripToExec                       ();
     bool                            DeleteScripToExec                       ();
 
-    bool                            Show_Line                               (XSTRING& string, XSTRING& string2, int tab = 3, bool linefeed = true);
-    bool                            Show_Header                             (bool separator);
     bool                            Show_AppStatus                          ();
     bool                            Show_ScriptStatus                       ();
     bool                            Show_AllStatus                          ();

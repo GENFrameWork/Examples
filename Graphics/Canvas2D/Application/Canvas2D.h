@@ -85,15 +85,16 @@ enum CANVAS2D_BUTTONS
 };
 
 
-
 #define APPLICATION_VERSION                       0
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
 #define APPLICATION_NAMEAPP                       __L("Canvas2D")
-#define APPLICATION_ENTERPRISE                    __L("GEN Group")
-
 #define APPLICATION_NAMEFILE                      __L("canvas2d")
+
+#define APPLICATION_OWNER                         __L("GEN Group")
+
+#define APPLICATION_YEAROFCREATION                2018
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/

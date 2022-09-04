@@ -1,0 +1,16 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "Scripts",
+      "project": "CMakeLists.txt",
+      "projectTarget": "Scripts.exe",
+      "name": "scripts.exe",
+      "args": [
+        "test.js",
+        ""
+      ]
+    }
+  ]
+}

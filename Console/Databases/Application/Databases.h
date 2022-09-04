@@ -78,11 +78,12 @@ enum DATABASESTASKID
 #define APPLICATION_SUBVERSIONERR                 0
 
 #define APPLICATION_NAMEAPP                       __L("Databases")
-#define DATABASES_ENTERPRISE                      __L("GEN Group")
-
 #define APPLICATION_NAMEFILE                      __L("databases")
 
+#define APPLICATION_OWNER                         __L("GEN Group")
+
 #define APPLICATION_YEAROFCREATION                2018
+
 
 #define DATABASES_TABLE_TEST_NAME                 __L("TableTest")
 #define DATABASES_TABLE_MAXFIELDS                 16
@@ -121,8 +122,6 @@ class DATABASES : public APPCONSOLE, public XFSMACHINE
     bool                            DataBase_ChangeType                     (DB_SQL_DATABASE_TYPE type);
     bool                            Database_DoTest                         ();
 
-    bool                            Show_Line                               (XSTRING& string, XSTRING& string2, int tab = 3, bool linefeed = true);
-    bool                            Show_Header                             (bool separator);
     bool                            Show_AppStatus                          ();
     bool                            Show_DatabasesStatus                    ();
     bool                            Show_AllStatus                          ();

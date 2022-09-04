@@ -75,12 +75,14 @@ enum BINCONNPROTASKID
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                       __L("BinConnPro")
-#define APPLICATION_ENTERPRISE                    __L("GEN Group")
-
+#define APPLICATION_NAMEAPP                       __L("Binary Connexion Protocol")
 #define APPLICATION_NAMEFILE                      __L("binconnpro")
 
+#define APPLICATION_OWNER                         __L("GEN Group")
+
 #define APPLICATION_YEAROFCREATION                2018
+
+
 
 #define BINCONNPRO_OPENSEARCHPROTOCOLCONNECTION   if(connectionsmanager)                                                                                                              \
                                                     {                                                                                                                                 \
@@ -141,9 +143,6 @@ class BINCONNPRO : public APPCONSOLE, public XFSMACHINE
 
     bool                            KeyValidSecuences                       (int key);
 
-    bool                            Show_Line                               (XSTRING& string, XSTRING& string2, int tab = 3, bool linefeed = true);
-    bool                            Show_LineDirect                         (XSTRING& string, bool lf);
-    bool                            Show_Header                             (bool separator);
     bool                            Show_AppStatus                          ();
     bool                            Show_InternetStatus                     ();
     bool                            Show_ConnectionsStatus                  ();

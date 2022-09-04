@@ -33,6 +33,8 @@
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
+#include "Version.h"
+
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XTrace.h"
@@ -111,6 +113,12 @@ bool APPBASEEXAMPLE::AppProc_Ini()
 * ---------------------------------------------------------------------------------------------------------------------*/
 bool APPBASEEXAMPLE::AppProc_FirstUpdate()
 {
+  //-------------------------------------------------------------------------------------------------
+
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+  
+  //-------------------------------------------------------------------------------------------------
+
   XTRACE_SETAPPLICATIONNAME(APPLICATION_NAMEAPP);
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
 

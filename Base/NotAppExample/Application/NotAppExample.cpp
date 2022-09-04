@@ -35,6 +35,8 @@
 
 #include <stdio.h>
 
+#include "Version.h"
+
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XTrace.h"
@@ -111,6 +113,10 @@ void NOTAPPEXAMPLE::Clean()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_Ini(MAINPROC* main)
 {
+
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+
+
   XTRACE_SETAPPLICATIONNAME(APPLICATION_NAMEAPP);
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
 

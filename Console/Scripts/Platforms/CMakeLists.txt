@@ -29,7 +29,7 @@
 
  set(APP_CFG_GENERAL_FEATURE                 true    CACHE BOOL "Activate Application CFG General"               FORCE)  
  set(APP_CFG_LOG_FEATURE                     true    CACHE BOOL "Activate Application CFG LOG"                   FORCE)
-
+ 
  set(SCRIPT_FEATURE                          true    CACHE BOOL "Activate Scripts"                               FORCE)
  set(SCRIPT_LUA_FEATURE                      true    CACHE BOOL "Activate Script LUA Language"                   FORCE)
  set(SCRIPT_JAVASCRIPT_FEATURE               true    CACHE BOOL "Activate Script Javascript Language"            FORCE)

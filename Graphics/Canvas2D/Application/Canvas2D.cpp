@@ -37,6 +37,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "Version.h"
+
 #include "XPath.h"
 #include "XDateTime.h"
 #include "XTimer.h"
@@ -51,6 +53,7 @@
 #include "XFileCSV.h"
 #include "XFileXML.h"
 #include "XTranslation.h"
+#include "XTranslation_GEN.h"
 #include "XScheduler.h"
 #include "XScheduler_XEvent.h"
 #include "XConsole.h"
@@ -87,6 +90,7 @@
 #include "APPLog.h"
 
 #include "Canvas2D_CFG.h"
+
 #include "Canvas2D.h"
 
 #include "XMemory_Control.h"
@@ -99,52 +103,46 @@
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::CANVAS2D
+* 
+* @fn         CANVAS2D::CANVAS2D() : XFSMACHINE(0)
 * @brief      Constructor
-* @ingroup
-*
-* @param
-* @return
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    GRAPHIC
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 CANVAS2D::CANVAS2D() :  XFSMACHINE(0)
 {
   Clean();
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::~CANVAS2D
+* 
+* @fn         CANVAS2D::~CANVAS2D()
 * @brief      Destructor
-* @ingroup
-*
-* @param
-* @return
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @note       VIRTUAL
+* @ingroup    GRAPHIC
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 CANVAS2D::~CANVAS2D()
 {
   Clean();
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::InitFSMachine
-* @brief      Init FS Machine
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool CANVAS2D::InitFSMachine()
+* @brief      InitFSMachine
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::InitFSMachine()
 {
   if(!AddState( CANVAS2D_XFSMSTATE_NONE           ,
@@ -168,25 +166,25 @@ bool CANVAS2D::InitFSMachine()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::AppProc_Ini
-* @brief      Ini Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool CANVAS2D::AppProc_Ini()
+* @brief      AppProc_Ini
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_Ini()
 {
-  XSTRING string;
-  XSTRING stringresult;
-//bool    status;
+  XSTRING   string;
+  XSTRING   stringresult;
+
+  bool      status = false;
 
   //-------------------------------------------------------------------------------------------------
+
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
   GetApplicationName()->Set(APPLICATION_NAMEAPP);
 
@@ -247,34 +245,50 @@ bool CANVAS2D::AppProc_Ini()
 
   if(APP_CFG.Log_IsActive())
     {
-      APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
-                                                 , APPLICATION_SUBVERSION
-                                                 , APPLICATION_SUBVERSIONERR);
+      
+      string.Format(__L("Activando sistema LOG "));
+      
+      status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
+                                                          , APPLICATION_SUBVERSION
+                                                          , APPLICATION_SUBVERSIONERR);
+      
+      XSTRING SO_ID;
+      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
+
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
+      XTRACE_PRINTSTATUS(__L("S.O. version"), SO_ID.Get()); 
+
+      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
+           
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
+
+      XDWORD total = 0;
+      XDWORD free  = 0;
+
+      GEN_XSYSTEM.GetMemoryInfo(total,free);
+
+      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
     }
 
   //--------------------------------------------------------------------------------------
 
   SetEvent(CANVAS2D_XFSMEVENT_INI);
 
-  return true;
+  return status;
 }
 
 
-
-
-
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::AppProc_FirstUpdate
-* @brief      First Update
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool CANVAS2D::AppProc_FirstUpdate()
+* @brief      AppProc_FirstUpdate
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_FirstUpdate()
 {
   //--------------------------------------------------------------------------------------
@@ -328,18 +342,15 @@ bool CANVAS2D::AppProc_FirstUpdate()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::AppProc_Update
-* @brief      Update Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool CANVAS2D::AppProc_Update()
+* @brief      AppProc_Update
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_Update()
 {
   if(GetEvent()==CANVAS2D_XFSMEVENT_NONE) // Not new event
@@ -382,18 +393,15 @@ bool CANVAS2D::AppProc_Update()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::AppProc_End
-* @brief      End Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool CANVAS2D::AppProc_End()
+* @brief      AppProc_End
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_End()
 {
   XSTRING string;
@@ -445,19 +453,15 @@ bool CANVAS2D::AppProc_End()
 }
 
 
-
-
-
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool CANVAS2D::UpdateInput()
 * @brief      UpdateInput
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::UpdateInput()
 {
  
@@ -526,19 +530,17 @@ bool CANVAS2D::UpdateInput()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 * @brief      Ini_Graphics
 * @ingroup    GRAPHIC
 * 
-* 
 * @param[in]  screen : 
 * 
 * @return     bool : true if is succesful. 
 * 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 {
   //--------------------------------------------------------------------------------------
@@ -559,7 +561,6 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
       if(!backgroundbmp) return false;
     }
    
-
   if(!testbmp)
     {
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
@@ -567,7 +568,6 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
       xpath.Add(__L("test.tga"));
       testbmp = bitmapfile->Load(xpath);
     }
-
   
   if(!charactersecuence)
     {
@@ -616,16 +616,15 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool CANVAS2D::DrawFrame()
 * @brief      DrawFrame
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    GRAPHIC
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::DrawFrame()
 {
   GRP2DCOLOR_RGBA8  colorblack(0, 0, 0);
@@ -702,8 +701,6 @@ bool CANVAS2D::DrawFrame()
       if(x<-100) x = 950;
     }
 
-
-
   canvas->CreateRebuildArea(rect->x1 + 50, 50, rect->x1 + 450, 150);
 
   canvas->SetLineWidth(1.5f);
@@ -723,19 +720,18 @@ bool CANVAS2D::DrawFrame()
 }
 
 
-
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         void CANVAS2D::Graphics_HandleEvent(GRPXEVENT* event)
-* @brief      Graphics_HandleEvent
-* @ingroup
-*
-* @param[in]  event :
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    GRAPHIC
+* 
+* @param[in]  event : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 {
   switch(event->GetEventType())
@@ -750,19 +746,18 @@ void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 }
 
 
-
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         CANVAS2D::HandleEvent
-* @brief      Handle Events
-* @ingroup
-*
-* @param[]    xevent : event send to control
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         void CANVAS2D::HandleEvent(XEVENT* xevent)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    GRAPHIC
+* 
+* @param[in]  xevent : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -779,17 +774,16 @@ void CANVAS2D::HandleEvent(XEVENT* xevent)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         void CANVAS2D::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    GRAPHIC
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::Clean()
 {
   xtimer                      = NULL;

@@ -75,12 +75,13 @@ enum MINIWEBSERVERTASKID
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                       __L("MiniWebServer")
-#define APPLICATION_ENTERPRISE                    __L("GEN Group")
-
+#define APPLICATION_NAMEAPP                       __L("Mini Web Server")
 #define APPLICATION_NAMEFILE                      __L("miniwebserver")
 
-#define APPLICATION_YEAROFCREATION                2019
+#define APPLICATION_OWNER                         __L("GEN Group")
+
+#define APPLICATION_YEAROFCREATION                2018
+
 
 #define APPLICATION_DIRECTORY_WEB                 __L("web")
 
@@ -116,10 +117,7 @@ class MINIWEBSERVER : public APPCONSOLE, public XFSMACHINE
     bool                            AppProc_End                             ();
 
     bool                            KeyValidSecuences                       (int key);
-
-    bool                            Show_Line                               (XSTRING& string, XSTRING& string2, int tab = 3, bool linefeed = true);
-    bool                            Show_LineDirect                         (XSTRING& string, bool lf);
-    bool                            Show_Header                             (bool separator);
+   
     bool                            Show_AppStatus                          ();
     bool                            Show_InternetStatus                     ();
     bool                            Show_WebServerConfig                    ();
