@@ -266,7 +266,6 @@ bool SCRIPTS::AppProc_Ini()
       XSTRING SO_ID;
       status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
 
-      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
       XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
       XTRACE_PRINTSTATUS(__L("S.O. version"), SO_ID.Get()); 
 

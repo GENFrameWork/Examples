@@ -8,8 +8,7 @@
       "projectTarget": "Scripts.exe",
       "name": "scripts.exe",
       "args": [
-        "test.js",
-        ""
+        "gameskahoot.lua",
       ]
     }
   ]

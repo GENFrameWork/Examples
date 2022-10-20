@@ -34,22 +34,6 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 
-/*
-#define XTRACE_ACTIVE
-#define XMEMORY_CONTROL_ACTIVE
-
-#define APP_ACTIVE
-#define APP_CFG_GENERAL_ACTIVE
-#define APP_CFG_LOG_ACTIVE
-
-#define DIO_ACTIVE
-#define DIOUART_ACTIVE
-#define DIOUDP_ACTIVE
-#define DIOTCPIP_ACTIVE
-
-#define APP_CFG   SCRIPTS_CFG::GetInstance()
-*/
-
 #endif
 
 
