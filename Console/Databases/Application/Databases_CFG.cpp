@@ -68,16 +68,16 @@ bool DATABASES_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         DATABASES_CFG& DATABASES_CFG::GetInstance()
+* @fn         DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
 * @return     DATABASES_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-DATABASES_CFG& DATABASES_CFG::GetInstance()
+DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new DATABASES_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = new DATABASES_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -106,119 +106,56 @@ bool DATABASES_CFG::DelInstance()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         XSTRING* DATABASES_CFG::Database_GetURL()
-* @brief      Database_GetURL
+* 
+* @fn         bool DATABASES_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
 * @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-XSTRING* DATABASES_CFG::Database_GetURL()
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool DATABASES_CFG::DoVariableMapping()
 {
-  return &db_URL;
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+
+  //-----------------------------------------------------
+  // DATABASE
+
+  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_URL                , &db_URL);
+  AddValue(XFILECFG_VALUETYPE_INT     , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_PORT               , &db_port);
+  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_DATABASENAME       , &db_databasename);
+  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_USER               , &db_user);
+  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_PASSWORD           , &db_password);
+  AddValue(XFILECFG_VALUETYPE_INT     , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_TIMEOUTCONNECTION  , &db_timeoutconnection);
+
+  return true;
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         XDWORD DATABASES_CFG::Database_GetPort()
-* @brief      Database_GetPort
+* 
+* @fn         bool DATABASES_CFG::DoDefault()
+* @brief      DoDefault
 * @ingroup    APPLICATION
-*
-* @return     XDWORD :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-XDWORD DATABASES_CFG::Database_GetPort()
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool DATABASES_CFG::DoDefault()
 {
-  return db_port;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         XSTRING* DATABASES_CFG::Database_DatabaseName()
-* @brief      Database_DatabaseName
-* @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-XSTRING* DATABASES_CFG::Database_DatabaseName()
-{
-  return &db_databasename;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         XSTRING* DATABASES_CFG::Database_GetUser()
-* @brief      Database_GetUser
-* @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-XSTRING* DATABASES_CFG::Database_GetUser()
-{
-  return &db_user;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         XSTRING* DATABASES_CFG::Database_GetPassword()
-* @brief      Database_GetPassword
-* @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-XSTRING* DATABASES_CFG::Database_GetPassword()
-{
-  return &db_password;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         int DATABASES_CFG::Database_GetTimeoutConnection()
-* @brief      Database_GetTimeoutConnection
-* @ingroup    APPLICATION
-*
-* @return     int :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-int DATABASES_CFG::Database_GetTimeoutConnection()
-{
-  return db_timeoutconnection;
-}
-
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool DATABASES_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool DATABASES_CFG::Default()
-{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
 
   //------------------------------------------------------------------------------
 
   GEN_XTRACE_NET_CFG_DEFAULT_01
-
+  
   //------------------------------------------------------------------------------
 
   log_isactive                            = true;
@@ -258,6 +195,97 @@ bool DATABASES_CFG::Default()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
+* @fn         XSTRING* DATABASES_CFG::Database_GetURL()
+* @brief      Database_GetURL
+* @ingroup    APPLICATION
+*
+* @return     XSTRING* :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XSTRING* DATABASES_CFG::Database_GetURL()
+{
+  return &db_URL;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD DATABASES_CFG::Database_GetPort()
+* @brief      Database_GetPort
+* @ingroup    APPLICATION
+*
+* @return     XDWORD :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XDWORD DATABASES_CFG::Database_GetPort()
+{
+  return db_port;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSTRING* DATABASES_CFG::Database_DatabaseName()
+* @brief      Database_DatabaseName
+* @ingroup    APPLICATION
+*
+* @return     XSTRING* :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XSTRING* DATABASES_CFG::Database_DatabaseName()
+{
+  return &db_databasename;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSTRING* DATABASES_CFG::Database_GetUser()
+* @brief      Database_GetUser
+* @ingroup    APPLICATION
+*
+* @return     XSTRING* :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XSTRING* DATABASES_CFG::Database_GetUser()
+{
+  return &db_user;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSTRING* DATABASES_CFG::Database_GetPassword()
+* @brief      Database_GetPassword
+* @ingroup    APPLICATION
+*
+* @return     XSTRING* :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XSTRING* DATABASES_CFG::Database_GetPassword()
+{
+  return &db_password;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         int DATABASES_CFG::Database_GetTimeoutConnection()
+* @brief      Database_GetTimeoutConnection
+* @ingroup    APPLICATION
+*
+* @return     int :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+int DATABASES_CFG::Database_GetTimeoutConnection()
+{
+  return db_timeoutconnection;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
 * @brief      Constructor
 * @ingroup
@@ -271,21 +299,11 @@ DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  //-----------------------------------------------------
-  // DATABASE
-
-  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_URL                , &db_URL);
-  AddValue(XFILECFG_VALUETYPE_INT     , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_PORT               , &db_port);
-  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_DATABASENAME       , &db_databasename);
-  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_USER               , &db_user);
-  AddValue(XFILECFG_VALUETYPE_STRING  , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_PASSWORD           , &db_password);
-  AddValue(XFILECFG_VALUETYPE_INT     , DATABASESCFG_SECTION_DATABASE      , DATABASESCFG_DATABASE_TIMEOUTCONNECTION  , &db_timeoutconnection);
-
-  Default();
-
-  Ini();
+  if(namefile)
+    {
+      Ini<DATABASES_CFG>();
+    }
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -304,7 +322,6 @@ DATABASES_CFG::~DATABASES_CFG()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void DATABASES_CFG::Clean()
@@ -319,7 +336,4 @@ void DATABASES_CFG::Clean()
 {
 
 }
-
-
-
 

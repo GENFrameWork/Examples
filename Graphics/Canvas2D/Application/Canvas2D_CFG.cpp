@@ -65,14 +65,14 @@ bool CANVAS2D_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         CANVAS2D_CFG& CANVAS2D_CFG::GetInstance()
+* @fn         CANVAS2D_CFG& CANVAS2D_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
 * @return     CANVAS2D_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-CANVAS2D_CFG& CANVAS2D_CFG::GetInstance()
+CANVAS2D_CFG& CANVAS2D_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = new CANVAS2D_CFG(APPLICATION_NAMEFILE);
 
@@ -104,23 +104,46 @@ bool CANVAS2D_CFG::DelInstance()
 
 
 
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2D_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool CANVAS2D_CFG::DoVariableMapping()
+{
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+
+  return true;
+}
+
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool CANVAS2D_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool CANVAS2D_CFG::Default()
+* 
+* @fn         bool CANVAS2D_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool CANVAS2D_CFG::DoDefault()
 {
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
 
   //------------------------------------------------------------------------------
 
   GEN_XTRACE_NET_CFG_DEFAULT_01
-
+  
   //------------------------------------------------------------------------------
 
   log_isactive                            = true;
@@ -163,9 +186,10 @@ CANVAS2D_CFG::CANVAS2D_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  Default();
-
-  Ini();
+  if(namefile)
+    {
+      Ini<CANVAS2D_CFG>();
+    }
 }
 
 

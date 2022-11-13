@@ -44,10 +44,11 @@ class CANVAS2D_CFG : public APPCFG
   public:
 
     static bool                     GetIsInstanced                          ();
-    static CANVAS2D_CFG&            GetInstance                             ();
+    static CANVAS2D_CFG&            GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
-    bool                            Default                                 ();
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();
 
   private:
 

@@ -44,16 +44,17 @@ class UI_OPTIONS_CFG : public APPCFG
   public:
 
     static bool                     GetIsInstanced                          ();
-    static UI_OPTIONS_CFG&          GetInstance                             ();
+    static UI_OPTIONS_CFG&          GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
-    bool                            Default                                 ();
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();  
 
   private:
 
-                                    UI_OPTIONS_CFG                            (XCHAR* namefile);
-                                    UI_OPTIONS_CFG                            (UI_OPTIONS_CFG const&);       // Don't implement
-    virtual                        ~UI_OPTIONS_CFG                            ();
+                                    UI_OPTIONS_CFG                          (XCHAR* namefile);
+                                    UI_OPTIONS_CFG                          (UI_OPTIONS_CFG const&);       // Don't implement
+    virtual                        ~UI_OPTIONS_CFG                          ();
 
     void                            operator =                              (UI_OPTIONS_CFG const&);       // Don't implement
 

@@ -51,8 +51,11 @@ class DATABASES_CFG : public APPCFG
 
 
     static bool                     GetIsInstanced                          ();
-    static DATABASES_CFG&           GetInstance                             ();
+    static DATABASES_CFG&           GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
+
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();
 
     XSTRING*                        Database_GetURL                         ();
     XDWORD                          Database_GetPort                        ();
@@ -60,8 +63,6 @@ class DATABASES_CFG : public APPCFG
     XSTRING*                        Database_GetUser                        ();
     XSTRING*                        Database_GetPassword                    ();
     int                             Database_GetTimeoutConnection           ();
-
-    bool                            Default                                 ();
 
   private:
                                     DATABASES_CFG                           (XCHAR* namefile);

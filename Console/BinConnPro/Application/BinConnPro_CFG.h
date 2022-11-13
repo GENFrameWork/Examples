@@ -49,15 +49,16 @@ class BINCONNPRO_CFG : public APPCFG
 
 
     static bool                     GetIsInstanced                          ();
-    static BINCONNPRO_CFG&          GetInstance                             ();
+    static BINCONNPRO_CFG&          GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
+
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();
 
     bool                            Protocol_IsActive                       ();
     bool                            Protocol_IsLocalEnumActive              ();
     int                             Protocol_GetPort                        ();
     XSTRING*                        Protocol_GetTarget                      ();
-
-    bool                            Default                                 ();
 
   private:
                                     BINCONNPRO_CFG                          (XCHAR* namefile);

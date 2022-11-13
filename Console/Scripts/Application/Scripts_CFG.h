@@ -44,11 +44,11 @@ class SCRIPTS_CFG : public APPCFG
   public:
 
     static bool                     GetIsInstanced                          ();
-    static SCRIPTS_CFG&             GetInstance                             ();
+    static SCRIPTS_CFG&             GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
-
-    bool                            Default                                 ();
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();
 
   private:
                                     SCRIPTS_CFG                             (XCHAR* namefile);

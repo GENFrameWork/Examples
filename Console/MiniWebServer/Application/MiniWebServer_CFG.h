@@ -49,10 +49,11 @@ class MINIWEBSERVER_CFG : public APPCFG
 
 
     static bool                     GetIsInstanced                          ();
-    static MINIWEBSERVER_CFG&       GetInstance                             ();
+    static MINIWEBSERVER_CFG&       GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
-    bool                            Default                                 ();
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();
 
   private:
                                     MINIWEBSERVER_CFG                       (XCHAR* namefile);

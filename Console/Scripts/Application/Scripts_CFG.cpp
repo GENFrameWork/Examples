@@ -67,16 +67,16 @@ bool SCRIPTS_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         SCRIPTS_CFG& SCRIPTS_CFG::GetInstance()
+* @fn         SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
 * @return     SCRIPTS_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS_CFG& SCRIPTS_CFG::GetInstance()
+SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new SCRIPTS_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = new SCRIPTS_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -106,20 +106,45 @@ bool SCRIPTS_CFG::DelInstance()
 
 
 
+
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool SCRIPTS_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS_CFG::Default()
+* 
+* @fn         bool SCRIPTS_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool SCRIPTS_CFG::DoVariableMapping()
 {
-  
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool SCRIPTS_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool SCRIPTS_CFG::DoDefault()
+{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
+
   //------------------------------------------------------------------------------
-    
+
   GEN_XTRACE_NET_CFG_DEFAULT_01
   
   //------------------------------------------------------------------------------
@@ -164,9 +189,10 @@ SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  Default();
-
-  Ini();
+  if(namefile)
+    {
+      Ini<SCRIPTS_CFG>();
+    }
 }
 
 

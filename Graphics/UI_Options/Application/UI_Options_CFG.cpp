@@ -65,16 +65,16 @@ bool UI_OPTIONS_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance()
+* @fn         UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
 * @return     UI_OPTIONS_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance()
+UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new UI_OPTIONS_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = new UI_OPTIONS_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -106,21 +106,45 @@ bool UI_OPTIONS_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool UI_OPTIONS_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool UI_OPTIONS_CFG::Default()
+* 
+* @fn         bool UI_OPTIONS_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool UI_OPTIONS_CFG::DoVariableMapping()
 {
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool UI_OPTIONS_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool UI_OPTIONS_CFG::DoDefault()
+{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
 
   //------------------------------------------------------------------------------
 
   GEN_XTRACE_NET_CFG_DEFAULT_01
-
+  
   //------------------------------------------------------------------------------
 
   log_isactive                            = true;
@@ -163,9 +187,10 @@ UI_OPTIONS_CFG::UI_OPTIONS_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  Default();
-
-  Ini();
+  if(namefile)
+    {
+      Ini<UI_OPTIONS_CFG>();
+    }
 }
 
 

@@ -69,16 +69,16 @@ bool BINCONNPRO_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance()
+* @fn         BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
 * @return     BINCONNPRO_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance()
+BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new BINCONNPRO_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = new BINCONNPRO_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -104,6 +104,68 @@ bool BINCONNPRO_CFG::DelInstance()
     }
 
   return false;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool BINCONNPRO_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool BINCONNPRO_CFG::DoVariableMapping()
+{
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+  
+  //-----------------------------------------------------
+  // MACHINE PROTOCOL
+
+  AddValue(XFILECFG_VALUETYPE_BOOLEAN , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_ISACTIVE                      , &protocol_isactive);
+  AddValue(XFILECFG_VALUETYPE_BOOLEAN , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_ISLOCALENUMACTIVE             , &protocol_islocalenumactive);
+  AddValue(XFILECFG_VALUETYPE_INT     , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_PORT                          , &protocol_port);
+  AddValue(XFILECFG_VALUETYPE_STRING  , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_TARGET                        , &protocol_target);
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool BINCONNPRO_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool BINCONNPRO_CFG::DoDefault()
+{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
+
+  //------------------------------------------------------------------------------
+
+  GEN_XTRACE_NET_CFG_DEFAULT_01
+
+  //------------------------------------------------------------------------------
+
+  protocol_isactive                               = false;
+  protocol_islocalenumactive                      = false;
+  protocol_port                                   = BINCONNPRO_CONNECTIONSMANAGER_PROTOCOLPORTBASE;
+
+  //------------------------------------------------------------------------------
+
+
+  return true;
 }
 
 
@@ -172,31 +234,6 @@ XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
 
 
 
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool BINCONNPRO_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool BINCONNPRO_CFG::Default()
-{
-
-  GEN_XTRACE_NET_CFG_DEFAULT_01
-
-  //------------------------------------------------------------------------------
-
-  protocol_isactive                               = false;
-  protocol_islocalenumactive                      = false;
-  protocol_port                                   = BINCONNPRO_CONNECTIONSMANAGER_PROTOCOLPORTBASE;
-
-  //------------------------------------------------------------------------------
-
-  return true;
-}
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -214,16 +251,10 @@ BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  //-----------------------------------------------------
-  // MACHINE PROTOCOL
-  AddValue(XFILECFG_VALUETYPE_BOOLEAN , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_ISACTIVE                      , &protocol_isactive);
-  AddValue(XFILECFG_VALUETYPE_BOOLEAN , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_ISLOCALENUMACTIVE             , &protocol_islocalenumactive);
-  AddValue(XFILECFG_VALUETYPE_INT     , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_PORT                          , &protocol_port);
-  AddValue(XFILECFG_VALUETYPE_STRING  , BINCONNPRO_CFG_SECTION_PROTOCOL       , BINCONNPRO_CFG_PROTOCOL_TARGET                        , &protocol_target);
-
-  Default();
-
-  Ini();
+ if(namefile)
+   {
+     Ini<BINCONNPRO_CFG>();
+   }
 }
 
 

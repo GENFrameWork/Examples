@@ -70,16 +70,16 @@ bool MINIWEBSERVER_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance()
+* @fn         MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
 * @return     MINIWEBSERVER_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance()
+MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new MINIWEBSERVER_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = new MINIWEBSERVER_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -110,20 +110,45 @@ bool MINIWEBSERVER_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool MINIWEBSERVER_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool MINIWEBSERVER_CFG::Default()
+* 
+* @fn         bool MINIWEBSERVER_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool MINIWEBSERVER_CFG::DoVariableMapping()
 {
-  //------------------------------------------------------------------------------------------------------
-  
-  GEN_XTRACE_NET_CFG_DEFAULT_01
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
 
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool MINIWEBSERVER_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool MINIWEBSERVER_CFG::DoDefault()
+{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
+
+  //------------------------------------------------------------------------------
+
+  GEN_XTRACE_NET_CFG_DEFAULT_01
+  
   //------------------------------------------------------------------------------
 
   log_isactive                                      = true;
@@ -153,7 +178,7 @@ bool MINIWEBSERVER_CFG::Default()
   webserver_password                                = __L("");
   webserver_path_resources                          = __L("");
 
-  //------------------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
 
   return true;
 }
@@ -175,9 +200,10 @@ MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  Default();
-
-  Ini();
+  if(namefile)
+    {
+      Ini<MINIWEBSERVER_CFG>();
+    }
 }
 
 
