@@ -17,18 +17,14 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
-# --------------------------------------------------------------------
-# Activate features/Defines
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                   true )
 
- set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                                        FORCE)
- set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
- set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Activate XMemory Control"                                   FORCE)
-
- set(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                  true    CACHE BOOL "Activate Linux CodePage Editor Visual Studio CP1252"        FORCE)   
+ option(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                  "Activate Linux CodePage Editor Visual Studio CP1252"        true )   
                             
- set(APP_FEATURE                                         true    CACHE BOOL "Activate Application modules"                               FORCE)
+ option(APP_FEATURE                                         "Activate Application modules"                               true )
 
 # --------------------------------------------------------------------
 # Source code of the GEN in this Application

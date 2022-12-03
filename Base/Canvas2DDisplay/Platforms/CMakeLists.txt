@@ -14,22 +14,16 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
 
 
-# --------------------------------------------------------------------
-# Activate features/Defines
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
-
- set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                                        FORCE)
-
- set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
- set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Activate XMemory Control"                                   FORCE)
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                   true )
                                     
- set(DIO_FEATURE                                         true    CACHE BOOL "Activate Data Input/Output"                                 FORCE) 
- set(DIO_STREAM_FEATURE                                  true    CACHE BOOL "Activate Data Input/Output Stream"                          FORCE)
- set(DIO_STREAMUART_FEATURE                              true    CACHE BOOL "Activate Data Input/Output Stream UART"                     FORCE)
- set(DIO_STREAMUSB_FEATURE                               true    CACHE BOOL "Activate Data Input/Output Stream USB"                      FORCE)
+ option(DIO_FEATURE                                         "Activate Data Input/Output"                                 true ) 
+ option(DIO_STREAM_FEATURE                                  "Activate Data Input/Output Stream"                          true )
+ option(DIO_STREAMUART_FEATURE                              "Activate Data Input/Output Stream UART"                     true )
+ option(DIO_STREAMUSB_FEATURE                               "Activate Data Input/Output Stream USB"                      true )
 
- set(APP_FEATURE                                         true    CACHE BOOL "Activate Application modules"                               FORCE)
+ option(APP_FEATURE                                         "Activate Application modules"                               true )
 
 
 # --------------------------------------------------------------------
@@ -43,6 +37,7 @@
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
  list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
+
 
 # --------------------------------------------------------------------
 # Source code of the Application
@@ -61,6 +56,7 @@
  include_directories(${INCLUDES_DIR})
 
  add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+
 
 # --------------------------------------------------------------------
 # Add Libraries

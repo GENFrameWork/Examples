@@ -14,35 +14,30 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
 
 
-# --------------------------------------------------------------------
-# Activate features/Defines
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
-
- set(DEBUG_FEATURE                           true    CACHE BOOL "Activate Debug mode"                            FORCE)
- set(XTRACE_FEATURE                          true    CACHE BOOL "Activate XTrace"                                FORCE)
- set(XMEMORY_CONTROL_FEATURE                 true    CACHE BOOL "Activate XMemory Control"                       FORCE)
+ option(DEBUG_FEATURE                           "Activate Debug mode"                            true )
+ option(XTRACE_FEATURE                          "Activate XTrace"                                true )
+ option(XMEMORY_CONTROL_FEATURE                 "Activate XMemory Control"                       true )
                   
- set(DIO_FEATURE                             true    CACHE BOOL "Activate Data Input/Output"                     FORCE) 
- set(DIO_CHECKCONNECTIONS_FEATURE            true    CACHE BOOL "Activate Check Connections"                     FORCE)
- set(DIO_NETWORKTINEPROTOCOL_FEATURE         true    CACHE BOOL "Activate Network Time Protocol"                 FORCE)
- set(DIO_DYNDNS_FEATURE                      true    CACHE BOOL "Activate DynDNS"                                FORCE)
- set(DIO_SCRAPERWEB_FEATURE                  true    CACHE BOOL "Activate Scraper Web"                           FORCE)
+ option(DIO_FEATURE                             "Activate Data Input/Output"                     true ) 
+ option(DIO_CHECKCONNECTIONS_FEATURE            "Activate Check Connections"                     true )
+ option(DIO_NETWORKTINEPROTOCOL_FEATURE         "Activate Network Time Protocol"                 true )
+ option(DIO_DYNDNS_FEATURE                      "Activate DynDNS"                                true )
+ option(DIO_SCRAPERWEB_FEATURE                  "Activate Scraper Web"                           true )
 
- set(DIO_PROTOCOL_FEATURE                    true    CACHE BOOL "Activate Data Input/Output Protocol"            FORCE)
+ option(DIO_PROTOCOL_FEATURE                    "Activate Data Input/Output Protocol"            true )
 
- set(APP_FEATURE                             true    CACHE BOOL "Activate Application modules"                   FORCE)
- set(APP_CHECKRESOURCESHARDWARE_FEATURE      true    CACHE BOOL "Activate Application Check Resources Hardwar"   FORCE)
- set(APP_CONSOLE_FEATURE                     true    CACHE BOOL "Activate Application Console"                   FORCE)
- set(APP_INTERNETSERVICES_FEATURE            true    CACHE BOOL "Activate Application Internet Services"         FORCE)
- set(APP_LOG_FEATURE                         true    CACHE BOOL "Activate Application Log"                       FORCE)
+ option(APP_FEATURE                             "Activate Application modules"                   true )
+ option(APP_CHECKRESOURCESHARDWARE_FEATURE      "Activate Application Check Resources Hardwar"   true )
+ option(APP_CONSOLE_FEATURE                     "Activate Application Console"                   true )
+ option(APP_INTERNETSERVICES_FEATURE            "Activate Application Internet Services"         true )
+ option(APP_LOG_FEATURE                         "Activate Application Log"                       true )
 
- set(APP_CFG_GENERAL_FEATURE                 true    CACHE BOOL "Activate Application CFG General"               FORCE)  
- set(APP_CFG_LOG_FEATURE                     true    CACHE BOOL "Activate Application CFG LOG"                   FORCE)
- set(APP_CFG_INTERNETSERVICES_FEATURE        true    CACHE BOOL "Activate Application CFG Internet services"     FORCE)      
- set(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE  true    CACHE BOOL "Activate Application CFG Check Resorces HW"     FORCE)  
- set(APP_CFG_DNSRESOLVED_FEATURE             true    CACHE BOOL "Activate Application CFG DNS Resolved"          FORCE)   
- set(APP_CFG_LOCATION_FEATURE                true    CACHE BOOL "Activate Application CFG Location"              FORCE)  
+ option(APP_CFG_GENERAL_FEATURE                 "Activate Application CFG General"               true )  
+ option(APP_CFG_LOG_FEATURE                     "Activate Application CFG LOG"                   true )
+ option(APP_CFG_INTERNETSERVICES_FEATURE        "Activate Application CFG Internet services"     true )      
+ option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE  "Activate Application CFG Check Resorces HW"     true )  
+ option(APP_CFG_DNSRESOLVED_FEATURE             "Activate Application CFG DNS Resolved"          true )   
+ option(APP_CFG_LOCATION_FEATURE                "Activate Application CFG Location"              true )  
 
 
 # --------------------------------------------------------------------

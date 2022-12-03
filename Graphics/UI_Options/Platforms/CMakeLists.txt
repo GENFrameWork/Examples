@@ -24,29 +24,28 @@ set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
 
- set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                                        FORCE)
- set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                            FORCE)
- set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Activate XMemory Control"                                   FORCE)
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                   true )
 
- set(LINUX_X11_FEATURE                                   true    CACHE BOOL "Activate Linux X11"                                         FORCE)
+ option(LINUX_X11_FEATURE                                   "Activate Linux X11"                                         true )
 
- set(USERINTERFACE_FEATURE                               true    CACHE BOOL "Activate User Interace"                                     FORCE)
-#set(USERINTERFACE_DEBUG_FEATURE                         true    CACHE BOOL "Activate Debug User Interace"                               FORCE)
+ option(USERINTERFACE_FEATURE                               "Activate User Interace"                                     true )
+#option(USERINTERFACE_DEBUG_FEATURE                         "Activate Debug User Interace"                               true )
         
- set(APP_FEATURE                                         true    CACHE BOOL "Activate Application modules"                               FORCE)
- set(APP_LOG_FEATURE                                     true    CACHE BOOL "Activate Application Log"                                   FORCE)
- set(APP_GRAPHICS_FEATURE                                true    CACHE BOOL "Activate Application Graphics"                              FORCE)
+ option(APP_FEATURE                                         "Activate Application modules"                               true )
+ option(APP_LOG_FEATURE                                     "Activate Application Log"                                   true )
+ option(APP_GRAPHICS_FEATURE                                "Activate Application Graphics"                              true )
 
- set(APP_CFG_GENERAL_FEATURE                             true    CACHE BOOL "Activate Application CFG General"                           FORCE)  
- set(APP_CFG_LOG_FEATURE                                 true    CACHE BOOL "Activate Application CFG LOG"                               FORCE)
+ option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                           true )
+ option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                               true )
 
- set(GRP_FEATURE                                         true    CACHE BOOL "Activate Graphics"                                          FORCE)
- set(GRP_FILE_FEATURE                                    true    CACHE BOOL "Activate Graphics File"                                     FORCE)
- set(GRP_2D_FEATURE                                      true    CACHE BOOL "Activate Graphics 2D"                                       FORCE)
+ option(GRP_FEATURE                                         "Activate Graphics"                                          true )
+ option(GRP_FILE_FEATURE                                    "Activate Graphics File"                                     true )
+ option(GRP_2D_FEATURE                                      "Activate Graphics 2D"                                       true )
 
- set(INP_FEATURE                                         true    CACHE BOOL "Activate Inputs"                                            FORCE)
+ option(INP_FEATURE                                         "Activate Inputs"                                            true )
 
 
 
@@ -68,6 +67,7 @@ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists.txt")
 
 set(APP_DIRECTORY_APPLICATION   "../Application")
 list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
+
 
 # --------------------------------------------------------------------
 # Source code of the Application

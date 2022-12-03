@@ -14,25 +14,20 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
 
 
-# --------------------------------------------------------------------
-# Activate features/Defines
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
-
- set(DEBUG_FEATURE                                       true    CACHE BOOL "Activate Debug mode"                                          FORCE)
- set(XTRACE_FEATURE                                      true    CACHE BOOL "Activate XTrace"                                              FORCE)
- set(XMEMORY_CONTROL_FEATURE                             true    CACHE BOOL "Activate XMemory Control"                                     FORCE)
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                          true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                              true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                     true )
                   
- set(APP_FEATURE                                         true    CACHE BOOL "Activate Application modules"                                 FORCE)
- set(APP_CONSOLE_FEATURE                                 true    CACHE BOOL "Activate Application Console"                                 FORCE)
- set(APP_LOG_FEATURE                                     true    CACHE BOOL "Activate Application Log"                                     FORCE)
+ option(APP_FEATURE                                         "Activate Application modules"                                 true )
+ option(APP_CONSOLE_FEATURE                                 "Activate Application Console"                                 true )
+ option(APP_LOG_FEATURE                                     "Activate Application Log"                                     true )
 
- set(APP_CFG_GENERAL_FEATURE                             true    CACHE BOOL "Activate Application CFG General"                             FORCE)  
- set(APP_CFG_LOG_FEATURE                                 true    CACHE BOOL "Activate Application CFG LOG"                                 FORCE)
+ option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                             true )
+ option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                                 true )
  
- set(SCRIPT_FEATURE                                      true    CACHE BOOL "Activate Scripts"                                             FORCE)
- set(SCRIPT_LUA_FEATURE                                  true    CACHE BOOL "Activate Script LUA Language"                                 FORCE)
- set(SCRIPT_JAVASCRIPT_FEATURE                           true    CACHE BOOL "Activate Script Javascript Language"                          FORCE)
+ option(SCRIPT_FEATURE                                      "Activate Scripts"                                             true )
+ option(SCRIPT_LUA_FEATURE                                  "Activate Script LUA Language"                                 true )
+ option(SCRIPT_JAVASCRIPT_FEATURE                           "Activate Script Javascript Language"                          true )
 
 
 # --------------------------------------------------------------------

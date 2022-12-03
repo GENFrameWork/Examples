@@ -14,33 +14,28 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
 
 
-# --------------------------------------------------------------------
-# Activate features/Defines
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Default.txt") 
-
- set(DEBUG_FEATURE                           true    CACHE BOOL "Activate Debug mode"                            FORCE)
- set(XTRACE_FEATURE                          true    CACHE BOOL "Activate XTrace"                                FORCE)
- set(XMEMORY_CONTROL_FEATURE                 true    CACHE BOOL "Activate XMemory Control"                       FORCE)
+ option(DEBUG_FEATURE                           "Activate Debug mode"                            true )
+ option(XTRACE_FEATURE                          "Activate XTrace"                                true )
+ option(XMEMORY_CONTROL_FEATURE                 "Activate XMemory Control"                       true )
                   
- set(DIO_FEATURE                             true    CACHE BOOL "Activate Data Input/Output"                     FORCE) 
- set(DIO_CHECKCONNECTIONS_FEATURE            true    CACHE BOOL "Activate Check Connections"                     FORCE)
- set(DIO_NETWORKTINEPROTOCOL_FEATURE         true    CACHE BOOL "Activate Network Time Protocol"                 FORCE)
- set(DIO_DYNDNS_FEATURE                      true    CACHE BOOL "Activate DynDNS"                                FORCE)
- set(DIO_WEBSERVER_FEATURE                   true    CACHE BOOL "Activate Web Server"                            FORCE)
- set(DIO_SCRAPERWEB_FEATURE                  true    CACHE BOOL "Activate Scraper Web"                           FORCE)
+ option(DIO_FEATURE                             "Activate Data Input/Output"                     true )
+ option(DIO_CHECKCONNECTIONS_FEATURE            "Activate Check Connections"                     true )
+ option(DIO_NETWORKTINEPROTOCOL_FEATURE         "Activate Network Time Protocol"                 true )
+ option(DIO_DYNDNS_FEATURE                      "Activate DynDNS"                                true )
+ option(DIO_WEBSERVER_FEATURE                   "Activate Web Server"                            true )
+ option(DIO_SCRAPERWEB_FEATURE                  "Activate Scraper Web"                           true )
 
- set(APP_FEATURE                             true    CACHE BOOL "Activate Application modules"                   FORCE)
- set(APP_CONSOLE_FEATURE                     true    CACHE BOOL "Activate Application Console"                   FORCE)
- set(APP_INTERNETSERVICES_FEATURE            true    CACHE BOOL "Activate Application Internet Services"         FORCE)
- set(APP_LOG_FEATURE                         true    CACHE BOOL "Activate Application Log"                       FORCE)
- set(APP_WEBSERVER_FEATURE                   true    CACHE BOOL "Activate Application Web Server"                FORCE)
+ option(APP_FEATURE                             "Activate Application modules"                   true )
+ option(APP_CONSOLE_FEATURE                     "Activate Application Console"                   true )
+ option(APP_INTERNETSERVICES_FEATURE            "Activate Application Internet Services"         true )
+ option(APP_LOG_FEATURE                         "Activate Application Log"                       true )
+ option(APP_WEBSERVER_FEATURE                   "Activate Application Web Server"                true )
 
- set(APP_CFG_GENERAL_FEATURE                 true    CACHE BOOL "Activate Application CFG General"               FORCE)  
- set(APP_CFG_LOG_FEATURE                     true    CACHE BOOL "Activate Application CFG LOG"                   FORCE)
- set(APP_CFG_INTERNETSERVICES_FEATURE        true    CACHE BOOL "Activate Application CFG Internet services"     FORCE)      
- set(APP_CFG_DYNDNSMANAGER_FEATURE           true    CACHE BOOL "Activate Application CFG DynDNS Manager"        FORCE)
- set(APP_CFG_WEBSERVER_FEATURE               true    CACHE BOOL "Activate Application CFG Web Server"            FORCE)
+ option(APP_CFG_GENERAL_FEATURE                 "Activate Application CFG General"               true )
+ option(APP_CFG_LOG_FEATURE                     "Activate Application CFG LOG"                   true )
+ option(APP_CFG_INTERNETSERVICES_FEATURE        "Activate Application CFG Internet services"     true )
+ option(APP_CFG_DYNDNSMANAGER_FEATURE           "Activate Application CFG DynDNS Manager"        true )
+ option(APP_CFG_WEBSERVER_FEATURE               "Activate Application CFG Web Server"            true )
 
 
 # --------------------------------------------------------------------
