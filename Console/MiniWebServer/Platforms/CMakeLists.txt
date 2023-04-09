@@ -17,6 +17,7 @@
  option(DEBUG_FEATURE                           "Activate Debug mode"                            true )
  option(XTRACE_FEATURE                          "Activate XTrace"                                true )
  option(XMEMORY_CONTROL_FEATURE                 "Activate XMemory Control"                       true )
+ option(XSERIALIZABLE_JSON_FEATURE              "Activate Serializable JSON"                     true ) 
                   
  option(DIO_FEATURE                             "Activate Data Input/Output"                     true )
  option(DIO_CHECKCONNECTIONS_FEATURE            "Activate Check Connections"                     true )
@@ -81,5 +82,5 @@
 # --------------------------------------------------------------------
 # Add Libraries
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Librarys.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Libraries.txt") 
  

@@ -55,5 +55,5 @@
 # --------------------------------------------------------------------
 # Add Libraries
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Librarys.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Libraries.txt") 
 

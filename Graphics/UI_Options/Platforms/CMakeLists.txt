@@ -93,4 +93,4 @@ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/UI_Options_CFG.cpp")
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Librarys.txt") 
+include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Libraries.txt") 
