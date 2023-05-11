@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       NOTAPPEXAMPLE.cpp
+* @file       MemCtrlExample.cpp
 *
-* @class      NOTAPPEXAMPLE
-* @brief      Not Application Example (aplication simple without "application" class of GEN) 
+* @class      MEMCTRLEXAMPLE
+* @brief      Memory Control Example
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -34,6 +34,7 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
+#include <malloc.h>
 
 #include "Version.h"
 
@@ -43,7 +44,7 @@
 
 #include "MainProc.h"
 
-#include "NotAppExample.h"
+#include "MemCtrlExample.h"
 
 #include "XMemory_Control.h"
 
@@ -55,14 +56,14 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NOTAPPEXAMPLE::NOTAPPEXAMPLE()
+* @fn         MEMCTRLEXAMPLE::MEMCTRLEXAMPLE()
 * @brief      Constructor
 * @ingroup    APPLICATION
 * 
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NOTAPPEXAMPLE::NOTAPPEXAMPLE()
+MEMCTRLEXAMPLE::MEMCTRLEXAMPLE()
 {
   Clean();
 }
@@ -70,7 +71,7 @@ NOTAPPEXAMPLE::NOTAPPEXAMPLE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
+* @fn         MEMCTRLEXAMPLE::~MEMCTRLEXAMPLE()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup    APPLICATION
@@ -78,7 +79,7 @@ NOTAPPEXAMPLE::NOTAPPEXAMPLE()
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
+MEMCTRLEXAMPLE::~MEMCTRLEXAMPLE()
 
 {
   Clean();
@@ -87,7 +88,7 @@ NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void NOTAPPEXAMPLE::Clean()
+* @fn         void MEMCTRLEXAMPLE::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    TEST
@@ -95,7 +96,7 @@ NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void NOTAPPEXAMPLE::Clean()
+void MEMCTRLEXAMPLE::Clean()
 {
 }
 
@@ -119,7 +120,7 @@ bool Proc_Main_Ini(MAINPROC* main)
   XTRACE_SETAPPLICATIONNAME(APPLICATION_NAMEAPP);
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
 
-  XTRACE_ADDTARGET(XTRACE_TYPE_NET, GEN_XTRACE_NET_DEFAULT_01);
+  XTRACE_ADDTARGET(XTRACE_TYPE_NET, GEN_XTRACE_NET_DEFAULT_01);  
 
   XTRACE_SCREENCLEAR;
   XTRACE_STATUSCLEAR;
@@ -143,7 +144,79 @@ bool Proc_Main_Ini(MAINPROC* main)
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_Update(MAINPROC* main)
 {
-  GEN_XSLEEP.Seconds(3);
+
+  // -----------------------------------------------------------------------------------
+  //  new
+
+  char*  string1  = new char[256];   
+  if(string1)
+    {  
+      memset(string1, 0, 256);
+      strcpy(string1, "Hello, World [new]");
+    }
+
+  // -----------------------------------------------------------------------------------
+
+
+
+  // -----------------------------------------------------------------------------------
+  // malloc
+
+  char*  string2  = (char*)MALLOC(256);   
+  if(string2)
+    {  
+      memset(string2, 0, 256);
+      strcpy(string2, "Hello, World [malloc]");
+    }
+
+  // -----------------------------------------------------------------------------------
+
+
+
+  // -----------------------------------------------------------------------------------
+  // calloc
+
+  char*  string3  = (char*)CALLOC(256, sizeof(char));   
+  if(string3)
+    {
+      memset(string3, 0, 256 * sizeof(char));
+      strcpy(string3, "Hello, World  [calloc]");
+    }
+
+  // -----------------------------------------------------------------------------------
+
+
+
+  // -----------------------------------------------------------------------------------
+  // realloc
+
+  char*  string4  = (char*)MALLOC(128);   
+  if(string4)
+    {  
+      string4  = (char*)REALLOC(string4, 256);    
+      if(string4)
+        {
+          memset(string4, 0, 256);
+          strcpy(string4, "Hello, World [realloc]");
+        }
+    }
+
+  // -----------------------------------------------------------------------------------
+
+
+
+  // -----------------------------------------------------------------------------------
+
+  /*
+  delete string1;
+  FREE(string2);
+  FREE(string3);
+  FREE(string4);
+  */
+
+  // -----------------------------------------------------------------------------------
+
+  GEN_XSLEEP.Seconds(1);
 
   return false;
 }

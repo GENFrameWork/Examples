@@ -1,0 +1,18 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "cppgdb",
+      "name": "Remote ARM",
+      "project": "CMakeLists.txt",
+      "projectTarget": "devtestsdevices",
+      "comment": "Learn how to configure WSL debugging. For more info, see http://aka.ms/vslinuxdebug",
+      "debuggerConfiguration": "gdb",
+      "args": [],
+      "env": {},
+      "targetArchitecture": "arm",
+      "remoteMachineName": "192.168.0.20"
+    }
+  ]
+}
