@@ -42,7 +42,7 @@
 #define APPLICATION_NAMEAPP                   __L("Memory Ctrl Example")
 #define APPLICATION_NAMEFILE                  __L("memctrlexample")
 
-#define APPLICATION_OWNER                     __L("")
+#define APPLICATION_OWNER                     __L("GEN Framework")
 
 #define APPLICATION_YEAROFCREATION            2023
 
