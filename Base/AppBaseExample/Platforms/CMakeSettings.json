@@ -1,7 +1,29 @@
 ﻿{
   "configurations": [
     {
-      "name": "Linux PC x64",
+      "name": "1 - Windows x86",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\Windows\\x86",
+      "installRoot": "${projectDir}\\Windows\\x86",
+      "cmakeCommandArgs": "-DTARGET=pc",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86_x64" ]
+    },
+    {
+      "name": "2 - Windows x64",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\Windows\\x64",
+      "installRoot": "${projectDir}\\Windows\\x64",
+      "cmakeCommandArgs": "-DTARGET=pc",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ]
+    },
+    {
+      "name": "3 - Linux PC x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\x64",
@@ -14,7 +36,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "Linux ARM 64",
+      "name": "4 - Linux ARM 64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm64",
@@ -27,7 +49,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "Linux ARM",
+      "name": "5 - Linux ARM",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm",
@@ -40,7 +62,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "Linux Raspberry Pi",
+      "name": "6 - Linux Raspberry Pi",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\pi",
@@ -53,7 +75,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "Linux Raspberry Pi 64",
+      "name": "7 - Linux Raspberry Pi 64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\pi64",
@@ -63,29 +85,8 @@
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "linux_arm64" ],
-      "wslPath": "${defaultWSLPath}"
-    },
-    {
-      "name": "Windows x64",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Windows\\x64",
-      "installRoot": "${projectDir}\\Windows\\x64",
-      "cmakeCommandArgs": "-DTARGET=pc",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ]
-    },
-    {
-      "name": "Windows x86",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Windows\\x86",
-      "installRoot": "${projectDir}\\Windows\\x86",
-      "cmakeCommandArgs": "-DTARGET=pc",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x86_x64" ]
+      "wslPath": "${defaultWSLPath}",
+      "intelliSenseMode": "linux-gcc-arm"
     }
   ]
 }
