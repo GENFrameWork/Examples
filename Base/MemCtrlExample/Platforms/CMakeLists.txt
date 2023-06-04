@@ -9,7 +9,7 @@
 
 # --------------------------------------------------------------------
 # Compile Selection
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true ) 

@@ -660,6 +660,8 @@ bool UI_OPTIONS::UpdateInput()
 bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 {
   XPATH           xpath;
+
+  /*
   GRPBITMAPFILE*  bitmapfile;
 
   bitmapfile = new GRPBITMAPFILE();
@@ -672,6 +674,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   testbmp = bitmapfile->Load(xpath);
 
   delete bitmapfile;
+  */
 
   screen->SetWidth(1024);
   screen->SetHeight(768);
@@ -718,7 +721,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
  
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
       xpath.Slash_Add();
-      xpath.Add(__L("example.xml"));
+      xpath.Add(__L("example.zip"));
       
       GEN_USERINTERFACE.Skin_CreateAll(screen); 
 

@@ -18,7 +18,7 @@ set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
 # --------------------------------------------------------------------
 # Compile Selection
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Compile.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
 # --------------------------------------------------------------------

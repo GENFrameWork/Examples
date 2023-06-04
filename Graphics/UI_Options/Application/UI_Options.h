@@ -97,7 +97,7 @@ enum UI_OPTIONS_BUTTONS
 
 #define APPLICATION_VERSION                       0
 #define APPLICATION_SUBVERSION                    1
-#define APPLICATION_SUBVERSIONERR                 0
+#define APPLICATION_SUBVERSIONERR                 1
 
 #define APPLICATION_NAMEAPP                       __L("UI_Options")
 #define APPLICATION_NAMEFILE                      __L("ui_options")
@@ -165,9 +165,7 @@ class UI_OPTIONS : public APPGRAPHICS, public XFSMACHINE
     void                            HandleEvent_UserInterface               (UI_XEVENT* event);
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
     void                            HandleEvent                             (XEVENT* xevent);
-
-    static void                     ThreadRunFunction_DrawFrame             (void* param);
-
+    
     void                            Clean                                   ();
 
     XTIMER*                         xtimer;
