@@ -602,7 +602,7 @@ bool BINCONNPRO::Show_AppStatus()
   Show_Line(string, string2);
   
   string  = __L("Fecha ");
-  appinternetservices->DateTime_GetActual()->GetDateTimeToString(XDATETIME_FORMAT_STANDARD | XDATETIME_FORMAT_TEXTMONTH | XDATETIME_FORMAT_ADDDAYOFWEEK, string2);
+  appinternetservices->DateTime_GetLocal()->GetDateTimeToString(XDATETIME_FORMAT_STANDARD | XDATETIME_FORMAT_TEXTMONTH | XDATETIME_FORMAT_ADDDAYOFWEEK, string2);
   Show_Line(string, string2);
 
   if(xtimerglobal)
