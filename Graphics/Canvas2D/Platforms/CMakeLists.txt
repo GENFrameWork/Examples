@@ -2,7 +2,7 @@
 # Canvas2D : Example of console GEN FrameWork (Canvas 2D example) 
 # --------------------------------------------------------------------
 
- cmake_minimum_required(VERSION 3.7.0)
+ cmake_minimum_required(VERSION 3.3.0)
  project(canvas2D)
 
 
