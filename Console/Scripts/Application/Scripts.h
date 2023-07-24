@@ -46,6 +46,7 @@
 #include "Script_Lib_Rand.h"
 #include "Script_Lib_String.h"
 #include "Script_Lib_Timer.h"
+#include "Script_Lib_Process.h"
 
 
 #include "APPConsole.h"
@@ -56,6 +57,7 @@ enum SCRIPTSXFSMEVENTS
 {
   SCRIPTS_XFSMEVENT_NONE                = 0 ,
   SCRIPTS_XFSMEVENT_INI                     ,
+  SCRIPTS_XFSMEVENT_UPDATE                  ,
   SCRIPTS_XFSMEVENT_END                     ,
 
   SCRIPTS_LASTEVENT
@@ -66,6 +68,7 @@ enum SCRIPTSXFSMSTATES
 {
   SCRIPTS_XFSMSTATE_NONE                = 0 ,
   SCRIPTS_XFSMSTATE_INI                     ,
+  SCRIPTS_XFSMSTATE_UPDATE                  ,
   SCRIPTS_XFSMSTATE_END                     ,
 
   SCRIPTS_LASTSTATE
@@ -150,7 +153,8 @@ class SCRIPTS : public APPCONSOLE, public XFSMACHINE
     SCRIPT_LIB_PATH*                scriptlibpath;
     SCRIPT_LIB_RAND*                scriptlibrand;
     SCRIPT_LIB_STRING*              scriptlibstring;
-    SCRIPT_LIB_TIMER *              scriptlibtimer;
+    SCRIPT_LIB_TIMER*               scriptlibtimer;
+    SCRIPT_LIB_PROCESS*             scriptlibprocess;
     SCRIPT*                         script;
 
 };

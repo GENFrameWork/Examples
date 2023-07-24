@@ -18,7 +18,7 @@ function max(num1, num2)
 function main()
 {
   Printf("JavaScript version %s\n", "0.0.0");
-
+ 
   number1 = 3;
   number2 = 8;
   Printf("De %d y %d el mayor es %d \n", number1, number2, max(number1, number2));

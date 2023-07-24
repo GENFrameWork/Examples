@@ -156,14 +156,18 @@ bool SCRIPTS::InitFSMachine()
 
 
   if(!AddState( SCRIPTS_XFSMSTATE_INI             ,
-                SCRIPTS_XFSMEVENT_NONE            , SCRIPTS_XFSMSTATE_NONE          ,
+                SCRIPTS_XFSMEVENT_UPDATE          , SCRIPTS_XFSMSTATE_UPDATE        ,                
                 SCRIPTS_XFSMEVENT_END             , SCRIPTS_XFSMSTATE_END           ,
+                XFSMACHINESTATE_EVENTDEFEND)) return false;
+
+
+  if(!AddState( SCRIPTS_XFSMSTATE_UPDATE          ,               
+                SCRIPTS_XFSMEVENT_END             , SCRIPTS_XFSMSTATE_END           ,                 
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
   if(!AddState( SCRIPTS_XFSMSTATE_END             ,
                 SCRIPTS_XFSMEVENT_NONE            , SCRIPTS_XFSMSTATE_NONE          ,
-                SCRIPTS_XFSMEVENT_INI             , SCRIPTS_XFSMSTATE_INI           ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
   return true;
@@ -337,7 +341,9 @@ bool SCRIPTS::AppProc_Update()
         {
           case SCRIPTS_XFSMSTATE_NONE       : break;
 
-          case SCRIPTS_XFSMSTATE_INI        : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case SCRIPTS_XFSMSTATE_INI        : break;
+
+          case SCRIPTS_XFSMSTATE_UPDATE    : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
@@ -375,7 +381,11 @@ bool SCRIPTS::AppProc_Update()
                                                 {
                                                   SetExitType(APPBASE_EXITTYPE_BY_SERIOUSERROR);
                                                 }
+
+                                              SetEvent(SCRIPTS_XFSMEVENT_UPDATE);
                                               break;
+
+              case SCRIPTS_XFSMSTATE_UPDATE : break;
 
               case SCRIPTS_XFSMSTATE_END    : DeleteScripToExec();
                                               break;
@@ -535,12 +545,13 @@ bool SCRIPTS::CreateScripToExec()
   SubscribeEvent(SCRIPT_XEVENT_TYPE_ERROR, this);
   SubscribeEvent(SCRIPT_XEVENT_TYPE_BREAK, this);
 
-  scriptlibio     = new SCRIPT_LIB_IO();
-  scriptlibmath   = new SCRIPT_LIB_MATH();
-  scriptlibpath   = new SCRIPT_LIB_PATH();
-  scriptlibrand   = new SCRIPT_LIB_RAND();
-  scriptlibstring = new SCRIPT_LIB_STRING();
-  scriptlibtimer  = new SCRIPT_LIB_TIMER();
+  scriptlibio       = new SCRIPT_LIB_IO();
+  scriptlibmath     = new SCRIPT_LIB_MATH();
+  scriptlibpath     = new SCRIPT_LIB_PATH();
+  scriptlibrand     = new SCRIPT_LIB_RAND();
+  scriptlibstring   = new SCRIPT_LIB_STRING();
+  scriptlibtimer    = new SCRIPT_LIB_TIMER();
+  scriptlibprocess  = new SCRIPT_LIB_PROCESS();
 
   script->AddLibrary((SCRIPT_LIB*)scriptlibio);
   script->AddLibrary((SCRIPT_LIB*)scriptlibmath);
@@ -549,6 +560,7 @@ bool SCRIPTS::CreateScripToExec()
   script->AddLibrary((SCRIPT_LIB*)scriptlibstring);
   script->AddLibrary((SCRIPT_LIB*)scriptlibrand);
   script->AddLibrary((SCRIPT_LIB*)scriptlibtimer);
+  script->AddLibrary((SCRIPT_LIB*)scriptlibprocess);
 
   XPATH xpath;
 
@@ -574,12 +586,13 @@ bool SCRIPTS::DeleteScripToExec()
 {
   if(!script) return false;
 
-  if(scriptlibio)     delete scriptlibio;
-  if(scriptlibmath)   delete scriptlibmath;
-  if(scriptlibpath)   delete scriptlibpath;
-  if(scriptlibrand)   delete scriptlibrand;
-  if(scriptlibstring) delete scriptlibstring;
-  if(scriptlibtimer)  delete scriptlibtimer;
+  if(scriptlibio)       delete scriptlibio;
+  if(scriptlibmath)     delete scriptlibmath;
+  if(scriptlibpath)     delete scriptlibpath;
+  if(scriptlibrand)     delete scriptlibrand;
+  if(scriptlibstring)   delete scriptlibstring;
+  if(scriptlibtimer)    delete scriptlibtimer;
+  if(scriptlibprocess)  delete scriptlibprocess;
 
   delete script;
   script = NULL;
@@ -763,6 +776,7 @@ void SCRIPTS::Clean()
   scriptlibrand               = NULL;
   scriptlibstring             = NULL;
   scriptlibtimer              = NULL;
+  scriptlibprocess            = NULL;
 
   script                      = NULL;
 }
