@@ -2,7 +2,7 @@
 # MemCtrExample : Memory control example  
 # --------------------------------------------------------------------
 
- cmake_minimum_required(VERSION 3.3.0)
+ cmake_minimum_required(VERSION 3.6.0)
  project(memctrlexample)
 
  set(GEN_DIRECTORY "../../../../../GENFrameWork") 

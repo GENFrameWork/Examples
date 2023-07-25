@@ -2,7 +2,7 @@
 # Canvas2DDisplay : Example of console GEN FrameWork (Canvas minimal app)
 # --------------------------------------------------------------------
 
- cmake_minimum_required(VERSION 3.3.0)
+ cmake_minimum_required(VERSION 3.6.0)
  project(canvas2ddisplay)
 
 

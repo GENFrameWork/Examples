@@ -2,7 +2,7 @@
 # appbaseexample : app base example 
 # --------------------------------------------------------------------
 
- cmake_minimum_required(VERSION 3.3.0)
+ cmake_minimum_required(VERSION 3.6.0)
  project(appbaseexample)
 
  set(GEN_DIRECTORY "../../../../../GENFrameWork") 
