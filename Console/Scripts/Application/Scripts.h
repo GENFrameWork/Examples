@@ -47,6 +47,7 @@
 #include "Script_Lib_String.h"
 #include "Script_Lib_Timer.h"
 #include "Script_Lib_Process.h"
+#include "Script_Lib_InputSimulate.h"
 
 
 #include "APPConsole.h"
@@ -155,6 +156,7 @@ class SCRIPTS : public APPCONSOLE, public XFSMACHINE
     SCRIPT_LIB_STRING*              scriptlibstring;
     SCRIPT_LIB_TIMER*               scriptlibtimer;
     SCRIPT_LIB_PROCESS*             scriptlibprocess;
+    SCRIPT_LIB_INPUTSIMULATE*       scriptlibinputsimulate;
     SCRIPT*                         script;
 
 };

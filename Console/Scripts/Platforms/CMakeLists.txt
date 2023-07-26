@@ -14,21 +14,21 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
- option(DEBUG_FEATURE                                       "Activate Debug mode"                                          true )
- option(XTRACE_FEATURE                                      "Activate XTrace"                                              true )
- option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                     true )
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
                   
- option(APP_FEATURE                                         "Activate Application modules"                                 true )
- option(APP_CONSOLE_FEATURE                                 "Activate Application Console"                                 true )
- option(APP_LOG_FEATURE                                     "Activate Application Log"                                     true )
+ option(APP_FEATURE                                         "Activate Application modules"                              true )
+ option(APP_CONSOLE_FEATURE                                 "Activate Application Console"                              true )
+ option(APP_LOG_FEATURE                                     "Activate Application Log"                                  true )
 
- option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                             true )
- option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                                 true )
+ option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                          true )
+ option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                              true )
  
- option(SCRIPT_FEATURE                                      "Activate Scripts"                                             true )
- option(SCRIPT_LUA_FEATURE                                  "Activate Script LUA Language"                                 true )
- option(SCRIPT_JAVASCRIPT_FEATURE                           "Activate Script Javascript Language"                          true )
-
+ option(SCRIPT_FEATURE                                      "Activate Scripts"                                          true )
+ option(SCRIPT_LUA_FEATURE                                  "Activate Script LUA Language"                              true )
+ option(SCRIPT_JAVASCRIPT_FEATURE                           "Activate Script Javascript Language"                       true )
+ option(SCRIPT_LIB_INPUTSIMULATE_FEATURE                    "Script Lib Input Simulated"                                true )
 
 # --------------------------------------------------------------------
 # Config Application Macro

@@ -545,13 +545,14 @@ bool SCRIPTS::CreateScripToExec()
   SubscribeEvent(SCRIPT_XEVENT_TYPE_ERROR, this);
   SubscribeEvent(SCRIPT_XEVENT_TYPE_BREAK, this);
 
-  scriptlibio       = new SCRIPT_LIB_IO();
-  scriptlibmath     = new SCRIPT_LIB_MATH();
-  scriptlibpath     = new SCRIPT_LIB_PATH();
-  scriptlibrand     = new SCRIPT_LIB_RAND();
-  scriptlibstring   = new SCRIPT_LIB_STRING();
-  scriptlibtimer    = new SCRIPT_LIB_TIMER();
-  scriptlibprocess  = new SCRIPT_LIB_PROCESS();
+  scriptlibio             = new SCRIPT_LIB_IO();
+  scriptlibmath           = new SCRIPT_LIB_MATH();
+  scriptlibpath           = new SCRIPT_LIB_PATH();
+  scriptlibrand           = new SCRIPT_LIB_RAND();
+  scriptlibstring         = new SCRIPT_LIB_STRING();
+  scriptlibtimer          = new SCRIPT_LIB_TIMER();
+  scriptlibprocess        = new SCRIPT_LIB_PROCESS();
+  scriptlibinputsimulate  = new SCRIPT_LIB_INPUTSIMULATE();
 
   script->AddLibrary((SCRIPT_LIB*)scriptlibio);
   script->AddLibrary((SCRIPT_LIB*)scriptlibmath);
@@ -561,6 +562,7 @@ bool SCRIPTS::CreateScripToExec()
   script->AddLibrary((SCRIPT_LIB*)scriptlibrand);
   script->AddLibrary((SCRIPT_LIB*)scriptlibtimer);
   script->AddLibrary((SCRIPT_LIB*)scriptlibprocess);
+  script->AddLibrary((SCRIPT_LIB*)scriptlibinputsimulate);
 
   XPATH xpath;
 
@@ -586,13 +588,40 @@ bool SCRIPTS::DeleteScripToExec()
 {
   if(!script) return false;
 
-  if(scriptlibio)       delete scriptlibio;
-  if(scriptlibmath)     delete scriptlibmath;
-  if(scriptlibpath)     delete scriptlibpath;
-  if(scriptlibrand)     delete scriptlibrand;
-  if(scriptlibstring)   delete scriptlibstring;
-  if(scriptlibtimer)    delete scriptlibtimer;
-  if(scriptlibprocess)  delete scriptlibprocess;
+  if(scriptlibio)       
+    {
+      delete scriptlibio;
+    }
+
+  if(scriptlibmath)     
+    {
+      delete scriptlibmath;
+    }
+
+  if(scriptlibpath)     
+    {
+      delete scriptlibpath;
+    }
+
+  if(scriptlibrand)     
+    {
+      delete scriptlibrand;
+    }
+
+  if(scriptlibstring)   
+    {
+      delete scriptlibstring;
+    }
+
+  if(scriptlibtimer)    
+    {
+      delete scriptlibtimer;
+    }
+
+  if(scriptlibprocess)  
+    {
+      delete scriptlibprocess;
+    }
 
   delete script;
   script = NULL;
@@ -777,6 +806,7 @@ void SCRIPTS::Clean()
   scriptlibstring             = NULL;
   scriptlibtimer              = NULL;
   scriptlibprocess            = NULL;
+  scriptlibinputsimulate      = NULL;
 
   script                      = NULL;
 }

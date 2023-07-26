@@ -29,7 +29,11 @@ function main()
     	Printf("%d ", RandBetween(1,100));
     } 
  
-	XTRACE_PRINTCOLOR(1, "Prppppueba de envio %.2f con cadena %s", 10.45, "hola radiola");  
+  XTRACE_PRINTCOLOR(1, "Prueba de envio %.2f con cadena %s", 10.45, "hola radiola");  
+  
+  PressKey(0x41, 100);
+  
+  SetPositionCursor(0,0);
   
   Printf("\nIntroduce una tecla:"); 
   Printf("[%c]\n", GetChar()); 
