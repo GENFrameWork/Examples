@@ -19,8 +19,9 @@ function main()
 {
   Printf("JavaScript version %s\n", "0.0.0");
  
-  number1 = 3;
-  number2 = 8;
+  var number1 = 3;
+  var number2 = 8;
+
   Printf("De %d y %d el mayor es %d \n", number1, number2, max(number1, number2));
 
   Printf("Numeros aleatorio de 1 a 100: \n");
@@ -30,10 +31,19 @@ function main()
     } 
  
   XTRACE_PRINTCOLOR(1, "Prueba de envio %.2f con cadena %s", 10.45, "hola radiola");  
+
+  ExecApplication("C:\\Windows\\System32\\calc.exe");
+
+  // PressKey(0x41, 100);
+
+  var posx = 0;
+  var posy = 0;
+
+  GetWindowPosition("CalculatorApp.exe", posx, posy)
   
-  PressKey(0x41, 100);
-  
-  SetPositionCursor(0,0);
+  SetPositionCursor(posx, posy);
+
+  Printf("\nPosition %d, %d\n", posx, posy);
   
   Printf("\nIntroduce una tecla:"); 
   Printf("[%c]\n", GetChar()); 
