@@ -623,6 +623,11 @@ bool SCRIPTS::DeleteScripToExec()
       delete scriptlibprocess;
     }
 
+  if(scriptlibinputsimulate)
+    {
+      delete scriptlibinputsimulate;  
+    }
+
   delete script;
   script = NULL;
 
