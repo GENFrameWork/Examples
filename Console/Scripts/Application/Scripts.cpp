@@ -84,7 +84,6 @@
 
 #include "APPLog.h"
 
-
 #include "Script_G.h"
 #include "Script_Lua.h"
 #include "Script_Javascript.h"
@@ -622,12 +621,12 @@ bool SCRIPTS::DeleteScripToExec()
     {
       delete scriptlibprocess;
     }
-
+  
   if(scriptlibinputsimulate)
     {
       delete scriptlibinputsimulate;  
     }
-
+  
   delete script;
   script = NULL;
 

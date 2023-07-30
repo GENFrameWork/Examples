@@ -17,7 +17,7 @@ function max(num1, num2)
 
 function main()
 {
-  Printf("JavaScript version %s\n", "0.0.0");
+  Printf("JavaScript version %s\n", "0.1.0");
  
   var number1 = 3;
   var number2 = 8;
@@ -30,22 +30,40 @@ function main()
     	Printf("%d ", RandBetween(1,100));
     } 
  
-  XTRACE_PRINTCOLOR(1, "Prueba de envio %.2f con cadena %s", 10.45, "hola radiola");  
+  XTRACE_PRINTCOLOR(1, "Prueba de envio %.2f con cadena %s", 10.45, "hola radiola"); 
 
-  ExecApplication("C:\\Windows\\System32\\calc.exe");
+  // Printf("\nIntroduce una tecla:"); 
+  // Printf("[%c]\n", GetChar());  
+ 
 
-  // PressKey(0x41, 100);
+  // ---------------------  
 
-  var posx = 0;
-  var posy = 0;
+  var name  = "Notepad.exe";
+  var title = "Bloc de notas";
 
-  GetWindowPosition("CalculatorApp.exe", posx, posy)
+  ExecApplication("C:\\Windows\\System32\\" + name);
+
+  var posx  = GetWindowPosX(name, title);
+  var posy  = GetWindowPosY(name, title);
+
+  XTRACE_PRINTCOLOR(1, "Position %d, %d", posx, posy);
   
-  SetPositionCursor(posx, posy);
+  SetMouseClick(posx + 30, posy + 50);
 
-  Printf("\nPosition %d, %d\n", posx, posy);
-  
-  Printf("\nIntroduce una tecla:"); 
-  Printf("[%c]\n", GetChar()); 
+  Sleep(1000);
+
+  SetMouseClick(posx + 30, posy + 50);
+
+  Sleep(1000);
+
+  SetMouseClick(posx + 30, posy + 150);
+
+  Sleep(1000);
+
+  PressKey(0x41, 100);
+
+  Sleep(3000);
+
+  TerminateAplication(name, title);  
 }
 
