@@ -32,38 +32,7 @@ function main()
  
   XTRACE_PRINTCOLOR(1, "Prueba de envio %.2f con cadena %s", 10.45, "hola radiola"); 
 
-  // Printf("\nIntroduce una tecla:"); 
-  // Printf("[%c]\n", GetChar());  
- 
-
-  // ---------------------  
-
-  var name  = "Notepad.exe";
-  var title = "Bloc de notas";
-
-  ExecApplication("C:\\Windows\\System32\\" + name);
-
-  var posx  = GetWindowPosX(name, title);
-  var posy  = GetWindowPosY(name, title);
-
-  XTRACE_PRINTCOLOR(1, "Position %d, %d", posx, posy);
-  
-  SetMouseClick(posx + 30, posy + 50);
-
-  Sleep(1000);
-
-  SetMouseClick(posx + 30, posy + 50);
-
-  Sleep(1000);
-
-  SetMouseClick(posx + 30, posy + 150);
-
-  Sleep(1000);
-
-  PressKey(0x41, 100);
-
-  Sleep(3000);
-
-  TerminateAplication(name, title);  
+  Printf("\nIntroduce una tecla:"); 
+  Printf("[%c]\n", GetChar());  
 }
 
