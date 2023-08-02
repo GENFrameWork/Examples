@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------
+ï»¿// ----------------------------------------------------------------------------
 // Example Scrip + Input Simulate
 // ----------------------------------------------------------------------------
 
@@ -29,46 +29,50 @@ function main() {
 
   Sleep(1000);
 
-  // InpSim_PressKeyByLiteral("A", 100);
-  // InpSim_PressKeyByLiteral("ENTER", 100);
+  //InpSim_PressKeyByLiteral("A", 100);
+  //InpSim_PressKeyByLiteral("ENTER", 100);
 
-  //  InpSim_PressKeyByText("!", 1);
-  //  InpSim_PressKeyByText("\"", 1);
-  //InpSim_PressKeyByText("\xFA" , 1);
-  //  InpSim_PressKeyByText("$", 1);
-  //  InpSim_PressKeyByText("%", 1);
-  //  InpSim_PressKeyByText("&", 1);
-  //  InpSim_PressKeyByText("/", 1);
-  //  InpSim_PressKeyByText("(", 1);
-  //  InpSim_PressKeyByText(")", 1);
-  //  InpSim_PressKeyByText("=", 1);
-  //  InpSim_PressKeyByText("-", 1);
-  //  InpSim_PressKeyByText("+", 1);
-  //  InpSim_PressKeyByText("@", 1);
-  //  InpSim_PressKeyByText("#", 1);
+  /*
+  InpSim_PressKeyByLiteral("!"  , 1);
+  InpSim_PressKeyByLiteral("@"  , 1);
+  InpSim_PressKeyByLiteral("#"  , 1);
+  InpSim_PressKeyByLiteral("$"  , 1);
+  InpSim_PressKeyByLiteral("%"  , 1);
+  InpSim_PressKeyByLiteral("^"  , 1);
+  InpSim_PressKeyByLiteral("&"  , 1);
+  InpSim_PressKeyByLiteral("*"  , 1);
+  InpSim_PressKeyByLiteral("("  , 1);
+  InpSim_PressKeyByLiteral(")"  , 1);
+  InpSim_PressKeyByLiteral("_"  , 1);
+  InpSim_PressKeyByLiteral("+"  , 1);
+  InpSim_PressKeyByLiteral("-"  , 1);
+  InpSim_PressKeyByLiteral("="  , 1);
+  InpSim_PressKeyByLiteral("["  , 1);
+  InpSim_PressKeyByLiteral("]"  , 1);
+  InpSim_PressKeyByLiteral("{"  , 1);
+  InpSim_PressKeyByLiteral("}"  , 1);
+  InpSim_PressKeyByLiteral("|"  , 1);
+  InpSim_PressKeyByLiteral(";"  , 1);
+  InpSim_PressKeyByLiteral(":"  , 1);
+  InpSim_PressKeyByLiteral("'"  , 1);
+  InpSim_PressKeyByLiteral(","  , 1);
+  InpSim_PressKeyByLiteral("."  , 1);
+  InpSim_PressKeyByLiteral("<"  , 1);   
+  InpSim_PressKeyByLiteral("?"  , 1);
+  InpSim_PressKeyByLiteral("/"  , 1);
+  InpSim_PressKeyByLiteral("\\" , 1);
+  InpSim_PressKeyByLiteral("\"" , 1);
+  */
 
-  //InpSim_PressKeyByText("^", 1);
-  //  InpSim_PressKeyByText("*", 1);
-  
-  //  InpSim_PressKeyByText("_", 1);
-  InpSim_PressKeyByText("[", 1);
-  InpSim_PressKeyByText("]", 1);
-  InpSim_PressKeyByText("{", 1);
-  InpSim_PressKeyByText("}", 1);
-  //  InpSim_PressKeyByText("|", 1);
-  //  InpSim_PressKeyByText(";", 1);
-  //  InpSim_PressKeyByText(":", 1);
-  //  InpSim_PressKeyByText(",", 1);
-  //  InpSim_PressKeyByText(".", 1);
-  //InpSim_PressKeyByText("<", 1);
-  //InpSim_PressKeyByText(">", 1);  
+  //InpSim_PressKeyByLiteral("¿"  , 1);
+  //InpSim_PressKeyByLiteral("¡"  , 1);
+  InpSim_PressKeyByLiteral("Ã±"  , 1);
+  //InpSim_PressKeyByLiteral("Ã‘"  , 1);
+  //InpSim_PressKeyByLiteral("·"  , 1);
+ 
+  //InpSim_PressKeyByLiteral("ENTER", 1);
 
-  InpSim_PressKeyByText("'", 1);  
-  InpSim_PressKeyByText("?", 1);  
-   
-  InpSim_PressKeyByLiteral("ENTER", 1);
-
-  // InpSim_PressKeyByText("Texto De Prueba 0123456789 !@#$%^&*()_+-=[]{}|;:',.<>?/", 1);
+  //InpSim_PressKeyByText("Texto De Prueba 0123456789 !@#$%^&*()_+-=[]{}|;:',.<¿¡ñÑ?/\\\"·", 1);
 
   Sleep(1000);
 
