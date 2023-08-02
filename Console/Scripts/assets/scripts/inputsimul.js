@@ -3,12 +3,11 @@
 // ----------------------------------------------------------------------------
 
 
-function main()
-{
-  var appname     = "Notepad.exe";
-  var apppath     = "C:\\Windows\\System32\\" + appname;
+function main() {
+  var appname = "Notepad.exe";
+  var apppath = "C:\\Windows\\System32\\" + appname;
   var windowtitle = "Bloc de notas";
-  
+
   XTRACE_PRINTCOLOR(1, "Exec application: %s", appname);
 
   ExecApplication(apppath);
@@ -17,7 +16,7 @@ function main()
   var posy = InpSim_GetWindowPosY(appname, windowtitle);
 
   XTRACE_PRINTCOLOR(1, "Position of %s %d, %d", appname, posx, posy);
-  
+
   InpSim_SetMouseClick(posx + 30, posy + 50);
 
   Sleep(1000);
@@ -30,16 +29,51 @@ function main()
 
   Sleep(1000);
 
-  InpSim_PressKeyByLiteral("A", 100);
+  // InpSim_PressKeyByLiteral("A", 100);
+  // InpSim_PressKeyByLiteral("ENTER", 100);
 
-  InpSim_PressKeyByLiteral("ENTER", 100);
+  //  InpSim_PressKeyByText("!", 1);
+  //  InpSim_PressKeyByText("\"", 1);
+  //InpSim_PressKeyByText("\xFA" , 1);
+  //  InpSim_PressKeyByText("$", 1);
+  //  InpSim_PressKeyByText("%", 1);
+  //  InpSim_PressKeyByText("&", 1);
+  //  InpSim_PressKeyByText("/", 1);
+  //  InpSim_PressKeyByText("(", 1);
+  //  InpSim_PressKeyByText(")", 1);
+  //  InpSim_PressKeyByText("=", 1);
+  //  InpSim_PressKeyByText("-", 1);
+  //  InpSim_PressKeyByText("+", 1);
+  //  InpSim_PressKeyByText("@", 1);
+  //  InpSim_PressKeyByText("#", 1);
 
-  InpSim_PressKeyByText("TEXTO DE PRUEBA", 1);
+  //InpSim_PressKeyByText("^", 1);
+  //  InpSim_PressKeyByText("*", 1);
+  
+  //  InpSim_PressKeyByText("_", 1);
+  InpSim_PressKeyByText("[", 1);
+  InpSim_PressKeyByText("]", 1);
+  InpSim_PressKeyByText("{", 1);
+  InpSim_PressKeyByText("}", 1);
+  //  InpSim_PressKeyByText("|", 1);
+  //  InpSim_PressKeyByText(";", 1);
+  //  InpSim_PressKeyByText(":", 1);
+  //  InpSim_PressKeyByText(",", 1);
+  //  InpSim_PressKeyByText(".", 1);
+  //InpSim_PressKeyByText("<", 1);
+  //InpSim_PressKeyByText(">", 1);  
+
+  InpSim_PressKeyByText("'", 1);  
+  InpSim_PressKeyByText("?", 1);  
+   
+  InpSim_PressKeyByLiteral("ENTER", 1);
+
+  // InpSim_PressKeyByText("Texto De Prueba 0123456789 !@#$%^&*()_+-=[]{}|;:',.<>?/", 1);
 
   Sleep(1000);
 
-  XTRACE_PRINTCOLOR(1, "Terminate application: %s", appname);
+  // XTRACE_PRINTCOLOR(1, "Terminate application: %s", appname);
 
-  TerminateAplicationWithWindow(appname, windowtitle);  
+  // TerminateAplicationWithWindow(appname, windowtitle);  
 }
 
