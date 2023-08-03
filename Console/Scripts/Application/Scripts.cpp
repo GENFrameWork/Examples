@@ -551,6 +551,7 @@ bool SCRIPTS::CreateScripToExec()
   scriptlibstring         = new SCRIPT_LIB_STRING();
   scriptlibtimer          = new SCRIPT_LIB_TIMER();
   scriptlibprocess        = new SCRIPT_LIB_PROCESS();
+  scriptlibwindow         = new SCRIPT_LIB_WINDOW();  
   scriptlibinputsimulate  = new SCRIPT_LIB_INPUTSIMULATE();
 
   script->AddLibrary((SCRIPT_LIB*)scriptlibio);
@@ -561,6 +562,7 @@ bool SCRIPTS::CreateScripToExec()
   script->AddLibrary((SCRIPT_LIB*)scriptlibrand);
   script->AddLibrary((SCRIPT_LIB*)scriptlibtimer);
   script->AddLibrary((SCRIPT_LIB*)scriptlibprocess);
+  script->AddLibrary((SCRIPT_LIB*)scriptlibwindow);
   script->AddLibrary((SCRIPT_LIB*)scriptlibinputsimulate);
 
   XPATH xpath;
@@ -620,6 +622,11 @@ bool SCRIPTS::DeleteScripToExec()
   if(scriptlibprocess)  
     {
       delete scriptlibprocess;
+    }
+
+  if(scriptlibwindow)
+    {
+      delete scriptlibwindow;
     }
   
   if(scriptlibinputsimulate)
@@ -810,6 +817,7 @@ void SCRIPTS::Clean()
   scriptlibstring             = NULL;
   scriptlibtimer              = NULL;
   scriptlibprocess            = NULL;
+  scriptlibwindow             = NULL;  
   scriptlibinputsimulate      = NULL;
 
   script                      = NULL;
