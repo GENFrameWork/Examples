@@ -5,13 +5,20 @@
 
 function main()
 {
+  var scriptname  = "inputsimul.js";
   var appname     = "Notepad.exe";
   var apppath     = "C:\\Windows\\System32\\" + appname;
   var windowtitle = "Bloc de notas";
 
-  XTRACE_PRINTCOLOR(1, "Exec application: %s", appname);
+  LogAddEntry(1, "Script", "[script %s] Iniciado Test...", scriptname);
 
   ExecApplication(apppath);
+
+  LogAddEntry(1, "Script", "[script %s] Exec application: %s", scriptname, appname);
+ 
+  Window_SetPosition(appname, windowtitle, 10, 10);
+  Window_Resize(appname, windowtitle, 800, 600);
+  Window_SetFocus(appname, windowtitle);
 
   var posx = Window_GetPosX(appname, windowtitle);
   var posy = Window_GetPosY(appname, windowtitle);
@@ -33,6 +40,7 @@ function main()
   InpSim_PressKeyByLiteral("A", 100);
   InpSim_PressKeyByLiteral("ENTER", 100);
 
+  LogAddEntry(1, "Script", "[script %s] Simulate Key A + Enter.", scriptname)
   
   InpSim_PressKeyByLiteral("!"  , 1);
   InpSim_PressKeyByLiteral("@"  , 1);
@@ -64,7 +72,6 @@ function main()
   InpSim_PressKeyByLiteral("\\" , 1);
   InpSim_PressKeyByLiteral("\"" , 1);
   
-
   //InpSim_PressKeyByLiteral("¿"  , 1);
   //InpSim_PressKeyByLiteral("¡"  , 1);
   //InpSim_PressKeyByLiteral("ñ"  , 1);
@@ -77,8 +84,10 @@ function main()
 
   Sleep(1000);
 
-  XTRACE_PRINTCOLOR(1, "Terminate application: %s", appname);
+  LogAddEntry(1, "Script", "[script %s] Terminate application: %s", scriptname, appname);
 
   TerminateAplicationWithWindow(appname, windowtitle);  
+
+  LogAddEntry(1, "Script", "[script %s] End script.", scriptname);
 }
 
