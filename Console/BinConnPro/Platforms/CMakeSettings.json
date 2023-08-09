@@ -1,11 +1,11 @@
 ﻿{
   "configurations": [
     {
-      "name": "1 - Windows x86",
+      "name": "1 - Windows x32",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Windows\\x86",
-      "installRoot": "${projectDir}\\Windows\\x86",
+      "buildRoot": "${projectDir}\\Windows\\x32",
+      "installRoot": "${projectDir}\\Windows\\x32",
       "cmakeCommandArgs": "-DTARGET=pc",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
