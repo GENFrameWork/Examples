@@ -1,79 +1,91 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Scripts_CFG.cpp
-*
+* 
 * @class      SCRIPTS_CFG
-* @brief      Scripts Configuration
+* @brief      GEN Scripts Example Config
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
 
 #include "GEN_Defines.h"
 
+#include "Scripts_CFG.h"
+
+#pragma endregion
+
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
 
 #include "XLog.h"
 
 #include "Scripts.h"
 
-#include "Scripts_CFG.h"
-
 #include "XMemory_Control.h"
 
+#pragma endregion
+
+
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
 SCRIPTS_CFG* SCRIPTS_CFG::instance = NULL;
 
+#pragma endregion
+
+
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool SCRIPTS_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
 * @brief      GetInstance
-* @ingroup
-*
-* @return     SCRIPTS_CFG& :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @param[in]  ini : 
+* 
+* @return     SCRIPTS_CFG& : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = new SCRIPTS_CFG(ini?APPLICATION_NAMEFILE:NULL);
@@ -83,14 +95,14 @@ SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool SCRIPTS_CFG::DelInstance()
 * @brief      DelInstance
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS_CFG::DelInstance()
 {
   if(instance)
@@ -105,13 +117,11 @@ bool SCRIPTS_CFG::DelInstance()
 }
 
 
-
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool SCRIPTS_CFG::DoVariableMapping()
 * @brief      DoVariableMapping
-* @ingroup    APPLICATION
+* @ingroup    SCRIPT
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -131,7 +141,7 @@ bool SCRIPTS_CFG::DoVariableMapping()
 * 
 * @fn         bool SCRIPTS_CFG::DoDefault()
 * @brief      DoDefault
-* @ingroup    APPLICATION
+* @ingroup    SCRIPT
 * 
 * @return     bool : true if is succesful. 
 * 
@@ -175,16 +185,16 @@ bool SCRIPTS_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
+* 
+* @fn         SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile)
 * @brief      Constructor
-* @ingroup
-*
-* @param[in]  XCHAR* : name of file of config
-*
-* @return     Does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @param[in]  XCHAR* : 
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
@@ -197,33 +207,37 @@ SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile) : APPCFG(namefile)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         SCRIPTS_CFG::~SCRIPTS_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
-* @ingroup
-*
-* @return     Does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 SCRIPTS_CFG::~SCRIPTS_CFG()
+
 {
   Clean();
 }
 
+
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         void SCRIPTS_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTS_CFG::Clean()
 {
 
 }
 
+
+#pragma endregion
 

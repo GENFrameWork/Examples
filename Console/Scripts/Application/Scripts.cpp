@@ -1,38 +1,43 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Scripts.cpp
-*
+* 
 * @class      SCRIPTS
 * @brief      GEN Scripts Example class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
 
 #include "GEN_Defines.h"
 
+#include "Scripts.h"
+
+#pragma endregion
+
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -90,45 +95,48 @@
 
 #include "Scripts_CFG.h"
 
-#include "Scripts.h"
-
 #include "XMemory_Control.h"
+
+#pragma endregion
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
- APPLICATIONCREATEINSTANCE(SCRIPTS, scripts)
+APPLICATIONCREATEINSTANCE(SCRIPTS, scripts)
+
+#pragma endregion
+
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::SCRIPTS
+* 
+* @fn         SCRIPTS::SCRIPTS()
 * @brief      Constructor
-* @ingroup
-*
-* @param
-* @return
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS::SCRIPTS() :  XFSMACHINE(0)
+* @ingroup    SCRIPT
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+SCRIPTS::SCRIPTS() : XFSMACHINE(0)
 {
   Clean();
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::~SCRIPTS
+* 
+* @fn         SCRIPTS::~SCRIPTS()
 * @brief      Destructor
-* @ingroup
-*
-* @param
-* @return
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @note       VIRTUAL
+* @ingroup    SCRIPT
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 SCRIPTS::~SCRIPTS()
 {
   Clean();
@@ -136,16 +144,14 @@ SCRIPTS::~SCRIPTS()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::InitFSMachine
-* @brief      Init FS Machine
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool SCRIPTS::InitFSMachine()
+* @brief      InitFSMachine
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::InitFSMachine()
 {
   if(!AddState( SCRIPTS_XFSMSTATE_NONE            ,
@@ -174,16 +180,14 @@ bool SCRIPTS::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::AppProc_Ini
-* @brief      Ini Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool SCRIPTS::AppProc_Ini()
+* @brief      AppProc_Ini
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::AppProc_Ini()
 {
   XSTRING string;
@@ -192,50 +196,28 @@ bool SCRIPTS::AppProc_Ini()
   XPATH   xpath;
   bool    status;
 
-  //-------------------------------------------------------------------------------------------------
-
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
-
   GetApplicationName()->Set(APPLICATION_NAMEAPP);
-
-  //--------------------------------------------------------------------------------------------------
 
   ACTIVATEXTHREADGROUP(XTHREADGROUPID_SCHEDULER);
   ACTIVATEXTHREADGROUP(XTHREADGROUPID_DIOSTREAM);
-
-  //--------------------------------------------------------------------------------------------------
 
   XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
-  //--------------------------------------------------------------------------------------------------
-
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
-
   GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, APPDEFAULT_DIRECTORY_SCRIPTS);
-
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
-  //--------------------------------------------------------------------------------------------------
-
   InitFSMachine();
-
-  //--------------------------------------------------------------------------------------
 
   xmutexshowallstatus = GEN_XFACTORY.Create_Mutex();
   if(!xmutexshowallstatus) return false;
 
-  //--------------------------------------------------------------------------------------
-
   APP_CFG_SETAUTOMATICTRACETARGETS
 
-  //--------------------------------------------------------------------------------------
-
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-
-  //--------------------------------------------------------------------------------------
-
     
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathsection);
   xpath.Create(3 , xpathsection.Get(), APPLICATION_NAMEFILE, XTRANSLATION_NAMEFILEEXT);
@@ -247,12 +229,7 @@ bool SCRIPTS::AppProc_Ini()
     
   GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
 
-  //--------------------------------------------------------------------------------------
-
-  //console->Clear();
   Show_Header(true);
-
-  //--------------------------------------------------------------------------------------
 
   if(APP_CFG.Log_IsActive())
     {
@@ -285,8 +262,6 @@ bool SCRIPTS::AppProc_Ini()
       APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
     }
 
-  //--------------------------------------------------------------------------------------
-
   SetEvent(SCRIPTS_XFSMEVENT_INI);
 
   return true;
@@ -294,47 +269,38 @@ bool SCRIPTS::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::AppProc_FirstUpdate
-* @brief      First Update
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool SCRIPTS::AppProc_FirstUpdate()
+* @brief      AppProc_FirstUpdate
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::AppProc_FirstUpdate()
 {
-  //--------------------------------------------------------------------------------------
-
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
 
   xtimerscriptrun = GEN_XFACTORY.CreateTimer();
   if(!xtimerscriptrun) return false;
 
-  //--------------------------------------------------------------------------------------
-
   return true;
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::AppProc_Update
-* @brief      Update Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool SCRIPTS::AppProc_Update()
+* @brief      AppProc_Update
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::AppProc_Update()
 {
-  if(GetEvent()==SCRIPTS_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==SCRIPTS_XFSMEVENT_NONE) 
     {
       switch(GetCurrentState())
         {
@@ -342,7 +308,7 @@ bool SCRIPTS::AppProc_Update()
 
           case SCRIPTS_XFSMSTATE_INI        : break;
 
-          case SCRIPTS_XFSMSTATE_UPDATE    : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case SCRIPTS_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
@@ -366,7 +332,7 @@ bool SCRIPTS::AppProc_Update()
 
         }
     }
-   else //  New event
+   else 
     {
       if(GetEvent()<SCRIPTS_LASTEVENT)
         {
@@ -396,40 +362,29 @@ bool SCRIPTS::AppProc_Update()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::AppProc_End
-* @brief      End Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool SCRIPTS::AppProc_End()
+* @brief      AppProc_End
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::AppProc_End()
 {
   XSTRING string;
   XSTRING stringresult;
 
-  //--------------------------------------------------------------------------------------
-
   SetEvent(SCRIPTS_XFSMEVENT_END);
 
-  //--------------------------------------------------------------------------------------
-
   DeleteScripToExec();
-
-  //--------------------------------------------------------------------------------------
 
   if(xmutexshowallstatus)
     {
       GEN_XFACTORY.Delete_Mutex(xmutexshowallstatus);
       xmutexshowallstatus = NULL;
     }
-
-  //--------------------------------------------------------------------------------------
 
   if(xtimerscriptrun)
     {
@@ -443,32 +398,25 @@ bool SCRIPTS::AppProc_End()
       xtimerupdateconsole = NULL;
     }
 
-  //--------------------------------------------------------------------------------------
-
   APP_LOG.DelInstance();
 
-  //--------------------------------------------------------------------------------------
-
   APP_CFG.DelInstance();
-
-  //--------------------------------------------------------------------------------------
 
   return true;
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool SCRIPTS::KeyValidSecuences(int key)
 * @brief      KeyValidSecuences
-* @ingroup    APPLICATION
-*
-* @param[in]  key :
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @param[in]  key : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
@@ -507,17 +455,15 @@ bool SCRIPTS::KeyValidSecuences(int key)
 }
 
 
-
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool SCRIPTS::CreateScripToexec()
-* @brief      CreateScripToexec
-* @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool SCRIPTS::CreateScripToExec()
+* @brief      CreateScripToExec
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::CreateScripToExec()
 {
   DeleteScripToExec();
@@ -544,7 +490,8 @@ bool SCRIPTS::CreateScripToExec()
   SubscribeEvent(SCRIPT_XEVENT_TYPE_ERROR, this);
   SubscribeEvent(SCRIPT_XEVENT_TYPE_BREAK, this);
 
-  scriptlibio             = new SCRIPT_LIB_IO();
+  scriptlibconsole        = new SCRIPT_LIB_CONSOLE();
+  scriptliblog            = new SCRIPT_LIB_LOG();
   scriptlibmath           = new SCRIPT_LIB_MATH();
   scriptlibpath           = new SCRIPT_LIB_PATH();
   scriptlibrand           = new SCRIPT_LIB_RAND();
@@ -554,7 +501,8 @@ bool SCRIPTS::CreateScripToExec()
   scriptlibwindow         = new SCRIPT_LIB_WINDOW();  
   scriptlibinputsimulate  = new SCRIPT_LIB_INPUTSIMULATE();
 
-  script->AddLibrary((SCRIPT_LIB*)scriptlibio);
+  script->AddLibrary((SCRIPT_LIB*)scriptlibconsole);
+  script->AddLibrary((SCRIPT_LIB*)scriptliblog);
   script->AddLibrary((SCRIPT_LIB*)scriptlibmath);
   script->AddLibrary((SCRIPT_LIB*)scriptlibpath);
   script->AddLibrary((SCRIPT_LIB*)scriptlibrand);
@@ -575,23 +523,27 @@ bool SCRIPTS::CreateScripToExec()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool SCRIPTS::DeleteScripToExec()
-* @brief      DeleteScripToexec
-* @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @brief      DeleteScripToExec
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::DeleteScripToExec()
 {
   if(!script) return false;
 
-  if(scriptlibio)       
+  if(scriptlibconsole)       
     {
-      delete scriptlibio;
+      delete scriptlibconsole;
+    }
+
+  if(scriptliblog)       
+    {
+      delete scriptliblog;
     }
 
   if(scriptlibmath)     
@@ -645,14 +597,14 @@ bool SCRIPTS::DeleteScripToExec()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool SCRIPT::Show_AppStatus()
+* 
+* @fn         bool SCRIPTS::Show_AppStatus()
 * @brief      Show_AppStatus
-* @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::Show_AppStatus()
 {
   XSTRING string;
@@ -667,7 +619,6 @@ bool SCRIPTS::Show_AppStatus()
   string2.Format(__L("%d Kb, libre %d Kb (el %d%%%%)"), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
   Show_Line(string, string2);
 
-
   XDATETIME* datetime = GEN_XFACTORY.CreateDateTime();
   if(datetime)
     {
@@ -679,7 +630,6 @@ bool SCRIPTS::Show_AppStatus()
 
       GEN_XFACTORY.DeleteDateTime(datetime);
     }
-
 
   if(xtimerglobal)
     {
@@ -693,14 +643,14 @@ bool SCRIPTS::Show_AppStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool SCRIPTS::Show_ScriptStatus()
 * @brief      Show_ScriptStatus
-* @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::Show_ScriptStatus()
 {
   XSTRING string;
@@ -717,14 +667,14 @@ bool SCRIPTS::Show_ScriptStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool SCRIPTS::Show_AllStatus()
 * @brief      Show_AllStatus
-* @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTS::Show_AllStatus()
 {
   console->Clear();
@@ -742,17 +692,17 @@ bool SCRIPTS::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
-* @ingroup    APPLICATION
-*
-* @param[in]  event :
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @param[in]  event : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
 {
   switch(event->GetEventType())
@@ -768,16 +718,17 @@ void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         SCRIPTS::HandleEvent
-* @brief      Handle Events
-* @ingroup
-*
-* @param[]    xevent : event send to control
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         void SCRIPTS::HandleEvent(XEVENT* xevent)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    SCRIPT
+* 
+* @param[in]  xevent : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTS::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -794,15 +745,15 @@ void SCRIPTS::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         void SCRIPTS::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    SCRIPT
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTS::Clean()
 {
   xtimerupdateconsole         = NULL;
@@ -810,7 +761,8 @@ void SCRIPTS::Clean()
 
   xmutexshowallstatus         = NULL;
 
-  scriptlibio                 = NULL;
+  scriptlibconsole            = NULL;
+  scriptliblog                = NULL;
   scriptlibmath               = NULL;
   scriptlibpath               = NULL;
   scriptlibrand               = NULL;
@@ -824,4 +776,5 @@ void SCRIPTS::Clean()
 }
 
 
+#pragma endregion
 

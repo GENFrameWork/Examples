@@ -1,35 +1,36 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Scripts.h
-*
+* 
 * @class      SCRIPTS
 * @brief      GEN Scripts Example class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
 #ifndef _SCRIPTS_H_
 #define _SCRIPTS_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -40,7 +41,8 @@
 #include "DIOURL.h"
 
 #include "Script_XEvent.h"
-#include "Script_Lib_IO.h"
+#include "Script_Lib_Console.h"
+#include "Script_Lib_Log.h"
 #include "Script_Lib_Math.h"
 #include "Script_Lib_Path.h"
 #include "Script_Lib_Rand.h"
@@ -50,10 +52,13 @@
 #include "Script_Lib_Window.h"
 #include "Script_Lib_InputSimulate.h"
 
-
 #include "APPConsole.h"
 
+#pragma endregion
+
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
+#pragma region DEFINES_ENUMS
 
 enum SCRIPTSXFSMEVENTS
 {
@@ -95,8 +100,11 @@ enum SCRIPTSTASKID
 
 #define APPLICATION_YEAROFCREATION                2018
 
+#pragma endregion
+
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
+#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -114,7 +122,6 @@ class GRPBITMAPSECUENCE;
 class GRPXEVENT;
 class SCRIPTS_CFG;
 class SCRIPT;
-
 
 class SCRIPTS : public APPCONSOLE, public XFSMACHINE
 {
@@ -150,7 +157,8 @@ class SCRIPTS : public APPCONSOLE, public XFSMACHINE
 
     XMUTEX*                         xmutexshowallstatus;
 
-    SCRIPT_LIB_IO*                  scriptlibio;
+    SCRIPT_LIB_CONSOLE*             scriptlibconsole;
+    SCRIPT_LIB_LOG*                 scriptliblog;
     SCRIPT_LIB_MATH*                scriptlibmath;
     SCRIPT_LIB_PATH*                scriptlibpath;
     SCRIPT_LIB_RAND*                scriptlibrand;
@@ -160,11 +168,17 @@ class SCRIPTS : public APPCONSOLE, public XFSMACHINE
     SCRIPT_LIB_WINDOW*              scriptlibwindow;
     SCRIPT_LIB_INPUTSIMULATE*       scriptlibinputsimulate;
     SCRIPT*                         script;
-
 };
 
+#pragma endregion
 
-/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
+
+/*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
+#pragma region FUNCTIONS_PROTOTYPES
+
+
+#pragma endregion
+
 
 #endif
 
