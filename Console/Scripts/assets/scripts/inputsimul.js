@@ -10,11 +10,11 @@ function main()
   var apppath     = "C:\\Windows\\System32\\" + appname;
   var windowtitle = "Bloc de notas";
 
-  LogAddEntry(1, "Script", "[script %s] Iniciado Test...", scriptname);
+  Log_AddEntry(1, "Script", "[script %s] Iniciado Test...", scriptname);
 
   ExecApplication(apppath);
 
-  LogAddEntry(1, "Script", "[script %s] Exec application: %s", scriptname, appname);
+  Log_AddEntry(1, "Script", "[script %s] Exec application: %s", scriptname, appname);
  
   Window_SetPosition(appname, windowtitle, 10, 10);
   Window_Resize(appname, windowtitle, 800, 600);
@@ -40,7 +40,7 @@ function main()
   InpSim_PressKeyByLiteral("A", 100);
   InpSim_PressKeyByLiteral("ENTER", 100);
 
-  LogAddEntry(1, "Script", "[script %s] Simulate Key A + Enter.", scriptname)
+  Log_AddEntry(1, "Script", "[script %s] Simulate Key A + Enter.", scriptname)
   
   InpSim_PressKeyByLiteral("!"  , 1);
   InpSim_PressKeyByLiteral("@"  , 1);
@@ -84,10 +84,10 @@ function main()
 
   Sleep(1000);
 
-  LogAddEntry(1, "Script", "[script %s] Terminate application: %s", scriptname, appname);
+  Log_AddEntry(1, "Script", "[script %s] Terminate application: %s", scriptname, appname);
 
   TerminateAplicationWithWindow(appname, windowtitle);  
 
-  LogAddEntry(1, "Script", "[script %s] End script.", scriptname);
+  Log_AddEntry(1, "Script", "[script %s] End script.", scriptname);
 }
 

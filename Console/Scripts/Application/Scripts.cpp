@@ -89,9 +89,9 @@
 
 #include "APPLog.h"
 
-#include "Script_G.h"
-#include "Script_Lua.h"
-#include "Script_Javascript.h"
+#include "Script_Language_G.h"
+#include "Script_Language_Lua.h"
+#include "Script_Language_Javascript.h"
 
 #include "Scripts_CFG.h"
 
@@ -469,7 +469,7 @@ bool SCRIPTS::CreateScripToExec()
   DeleteScripToExec();
 
   XPATH   namefilescript;
-  XSTRING ext;
+  XPATH   xpath;
 
   if(GetExecParams())
     {
@@ -477,50 +477,21 @@ bool SCRIPTS::CreateScripToExec()
       if(param) namefilescript = param->Get();
     }
 
-  if(namefilescript.IsEmpty()) return false;
-
-  namefilescript.GetExt(ext);
-
-  if(!ext.Compare(__L(".g")   , true))   script = new SCRIPT_G();
-  if(!ext.Compare(__L(".lua") , true))   script = new SCRIPT_LUA();
-  if(!ext.Compare(__L(".js")  , true))   script = new SCRIPT_JAVASCRIPT();
-
-  if(!script) return false;
-
-  SubscribeEvent(SCRIPT_XEVENT_TYPE_ERROR, this);
-  SubscribeEvent(SCRIPT_XEVENT_TYPE_BREAK, this);
-
-  scriptlibconsole        = new SCRIPT_LIB_CONSOLE();
-  scriptliblog            = new SCRIPT_LIB_LOG();
-  scriptlibmath           = new SCRIPT_LIB_MATH();
-  scriptlibpath           = new SCRIPT_LIB_PATH();
-  scriptlibrand           = new SCRIPT_LIB_RAND();
-  scriptlibstring         = new SCRIPT_LIB_STRING();
-  scriptlibtimer          = new SCRIPT_LIB_TIMER();
-  scriptlibprocess        = new SCRIPT_LIB_PROCESS();
-  scriptlibwindow         = new SCRIPT_LIB_WINDOW();  
-  scriptlibinputsimulate  = new SCRIPT_LIB_INPUTSIMULATE();
-
-  script->AddLibrary((SCRIPT_LIB*)scriptlibconsole);
-  script->AddLibrary((SCRIPT_LIB*)scriptliblog);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibmath);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibpath);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibrand);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibstring);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibrand);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibtimer);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibprocess);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibwindow);
-  script->AddLibrary((SCRIPT_LIB*)scriptlibinputsimulate);
-
-  XPATH xpath;
+  // namefilescript = __L("test.g");
+  
+  script = SCRIPT::Create(namefilescript.Get());  
+  if(!script) 
+    {
+      return NULL;
+    }
 
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, xpath);
   xpath.Slash_Add();
   xpath += namefilescript;
 
-  return script->Load(xpath);
+  return script->Load(xpath);  
 }
+  
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -535,56 +506,6 @@ bool SCRIPTS::CreateScripToExec()
 bool SCRIPTS::DeleteScripToExec()
 {
   if(!script) return false;
-
-  if(scriptlibconsole)       
-    {
-      delete scriptlibconsole;
-    }
-
-  if(scriptliblog)       
-    {
-      delete scriptliblog;
-    }
-
-  if(scriptlibmath)     
-    {
-      delete scriptlibmath;
-    }
-
-  if(scriptlibpath)     
-    {
-      delete scriptlibpath;
-    }
-
-  if(scriptlibrand)     
-    {
-      delete scriptlibrand;
-    }
-
-  if(scriptlibstring)   
-    {
-      delete scriptlibstring;
-    }
-
-  if(scriptlibtimer)    
-    {
-      delete scriptlibtimer;
-    }
-
-  if(scriptlibprocess)  
-    {
-      delete scriptlibprocess;
-    }
-
-  if(scriptlibwindow)
-    {
-      delete scriptlibwindow;
-    }
-  
-  if(scriptlibinputsimulate)
-    {
-      delete scriptlibinputsimulate;  
-    }
   
   delete script;
   script = NULL;
@@ -760,17 +681,6 @@ void SCRIPTS::Clean()
   xtimerscriptrun             = NULL;
 
   xmutexshowallstatus         = NULL;
-
-  scriptlibconsole            = NULL;
-  scriptliblog                = NULL;
-  scriptlibmath               = NULL;
-  scriptlibpath               = NULL;
-  scriptlibrand               = NULL;
-  scriptlibstring             = NULL;
-  scriptlibtimer              = NULL;
-  scriptlibprocess            = NULL;
-  scriptlibwindow             = NULL;  
-  scriptlibinputsimulate      = NULL;
 
   script                      = NULL;
 }

@@ -3,12 +3,12 @@
   "defaults": {},
   "configurations": [
     {
-      "type": "Scripts",
+      "type": "scripts",
       "project": "CMakeLists.txt",
       "projectTarget": "Scripts.exe",
       "name": "scripts.exe",
       "args": [
-        "inputsimul.js",
+        "test.g",
       ]
     }
   ]

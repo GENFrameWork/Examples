@@ -157,16 +157,6 @@ class SCRIPTS : public APPCONSOLE, public XFSMACHINE
 
     XMUTEX*                         xmutexshowallstatus;
 
-    SCRIPT_LIB_CONSOLE*             scriptlibconsole;
-    SCRIPT_LIB_LOG*                 scriptliblog;
-    SCRIPT_LIB_MATH*                scriptlibmath;
-    SCRIPT_LIB_PATH*                scriptlibpath;
-    SCRIPT_LIB_RAND*                scriptlibrand;
-    SCRIPT_LIB_STRING*              scriptlibstring;
-    SCRIPT_LIB_TIMER*               scriptlibtimer;
-    SCRIPT_LIB_PROCESS*             scriptlibprocess;
-    SCRIPT_LIB_WINDOW*              scriptlibwindow;
-    SCRIPT_LIB_INPUTSIMULATE*       scriptlibinputsimulate;
     SCRIPT*                         script;
 };
 

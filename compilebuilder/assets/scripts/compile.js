@@ -1,16 +1,16 @@
 
-function PrintStatus(status)
+function Console_PrintStatus(status)
 {
   if(status)
     {
-      Printf("Ok");
+      Console_Printf("Ok");
     }
    else
     {
-      Printf("Error!");
+      Console_Printf("Error!");
     }
 
-  Printf("\n");
+  Console_Printf("\n");
 }
 
 
@@ -21,28 +21,27 @@ function CompileProject(projectname, projectcompiledir, projectplatform)
   var pathplatform  = pathproject + "/Platforms/" + projectplatform;
   var status        = false;
 
-  Printf("\nCompile project %-16s ... ", projectname);
-
-  
+  Console_Printf("\nCompile project %-16s ... ", projectname);
+    
   if(IsItExists(pathproject) == false)
     {
-      Printf("Error: Project Not found!\n");
+      Console_Printf("Error: Project Not found!\n");
       return status;
     }
     
   if(IsItExists(pathcmakelist) == false)
     {
-      Printf("Error: CMakeList.txt Not found!\n");
+      Console_Printf("Error: CMakeList.txt Not found!\n");
       return status;
     }
 
   if(IsItExists(pathplatform) == true)
     {
-      Printf("x32 exists\n");
+      Console_Printf("x32 exists\n");
       return status;
     }
 
-  PrintStatus(status);
+  Console_PrintStatus(status);
 
   return status;   
 }
@@ -50,7 +49,7 @@ function CompileProject(projectname, projectcompiledir, projectplatform)
 
 function main()
 {
-  Printf("Compile Examples ... \n");
+  Console_Printf("Compile Examples ... \n");
 
   if(System_GetType() == "Windows")
     {
