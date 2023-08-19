@@ -14,11 +14,14 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
- option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true ) 
- option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
- option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                   true )
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true ) 
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
 
- option(XSLEEP_FEATURE                                      "Activate Sleep functions"                                   true )                                    
+ #option(XSLEEP_FEATURE                                      "Activate Sleep functions"                                  true )  
+ #option(XSYSTEM_FEATURE                                     "System functions"                                          true )
+ #option(XPUBLISHER_FEATURE                                  "XPublisher"                                                true )  
+ 
 
 # --------------------------------------------------------------------
 # Source code of the GEN in this Application

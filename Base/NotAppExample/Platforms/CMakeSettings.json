@@ -87,6 +87,16 @@
       "inheritEnvironments": [ "linux_arm64" ],
       "wslPath": "${defaultWSLPath}",
       "intelliSenseMode": "linux-gcc-arm"
+    },
+    { "name": "8 - Espressif ESP32",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\ESP32",
+      "installRoot": "${projectDir}\\ESP32",
+      "cmakeCommandArgs": "-DTARGET=esp32",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86_x64" ]
     }
-  ]
+]
 }

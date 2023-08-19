@@ -1,9 +1,9 @@
 # --------------------------------------------------------------------
-# Scripts : Example of console GEN FrameWork (Script example) 
+# TSA : Example of console GEN FrameWork (Scripts example) 
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
- project(scripts)
+ project(tsa)
 
 
  set(GEN_DIRECTORY "../../../../") 
@@ -40,7 +40,7 @@
 # --------------------------------------------------------------------
 # Config Application Macro
 
- set(APP_CFG_SCRIPTS "-DAPP_CFG=SCRIPTS_CFG::GetInstance()")
+ set(APP_CFG_SCRIPTS "-DAPP_CFG=TSA_CFG::GetInstance()")
  add_definitions(${APP_CFG_SCRIPTS})
 
 
@@ -59,8 +59,8 @@
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Scripts.cpp")
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/Scripts_CFG.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/TSA.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/TSA_CFG.cpp")
 
 
 # --------------------------------------------------------------------

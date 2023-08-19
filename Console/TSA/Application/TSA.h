@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       Scripts.h
+* @file       TSA.h
 * 
-* @class      SCRIPTS
-* @brief      GEN Scripts Example class
+* @class      TSA
+* @brief      GEN TSA (Test Script Automatic) Example class
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,8 +26,8 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _SCRIPTS_H_
-#define _SCRIPTS_H_
+#ifndef _TSA_H_
+#define _TSA_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -60,32 +60,32 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-enum SCRIPTSXFSMEVENTS
+enum TSAXFSMEVENTS
 {
-  SCRIPTS_XFSMEVENT_NONE                = 0 ,
-  SCRIPTS_XFSMEVENT_INI                     ,
-  SCRIPTS_XFSMEVENT_UPDATE                  ,
-  SCRIPTS_XFSMEVENT_END                     ,
+  TSA_XFSMEVENT_NONE                = 0 ,
+  TSA_XFSMEVENT_INI                     ,
+  TSA_XFSMEVENT_UPDATE                  ,
+  TSA_XFSMEVENT_END                     ,
 
-  SCRIPTS_LASTEVENT
+  TSA_LASTEVENT
 };
 
 
-enum SCRIPTSXFSMSTATES
+enum TSAXFSMSTATES
 {
-  SCRIPTS_XFSMSTATE_NONE                = 0 ,
-  SCRIPTS_XFSMSTATE_INI                     ,
-  SCRIPTS_XFSMSTATE_UPDATE                  ,
-  SCRIPTS_XFSMSTATE_END                     ,
+  TSA_XFSMSTATE_NONE                = 0 ,
+  TSA_XFSMSTATE_INI                     ,
+  TSA_XFSMSTATE_UPDATE                  ,
+  TSA_XFSMSTATE_END                     ,
 
-  SCRIPTS_LASTSTATE
+  TSA_LASTSTATE
 };
 
 
-enum SCRIPTSTASKID
+enum TSATASKID
 {
-  SCRIPTSTASKID_UNKNOWN                 = 0 ,
-  SCRIPTSTASKID_CHECKMEMORYSTATUS           ,
+  TSATASKID_UNKNOWN                 = 0 ,
+  TSATASKID_CHECKMEMORYSTATUS           ,
 };
 
 
@@ -93,7 +93,7 @@ enum SCRIPTSTASKID
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                       __L("Scripts")
+#define APPLICATION_NAMEAPP                       __L("TSA")
 #define APPLICATION_NAMEFILE                      __L("scripts")
 
 #define APPLICATION_OWNER                         __L("GEN Group")
@@ -120,14 +120,14 @@ class DIOSCRAPERWEBGEOLOCATIONIP;
 class DIOSCRAPERWEBUSERAGENTID;
 class GRPBITMAPSECUENCE;
 class GRPXEVENT;
-class SCRIPTS_CFG;
+class TSA_CFG;
 class SCRIPT;
 
-class SCRIPTS : public APPCONSOLE, public XFSMACHINE
+class TSA : public APPCONSOLE, public XFSMACHINE
 {
   public:
-                                    SCRIPTS                                 ();
-    virtual                        ~SCRIPTS                                 ();
+                                    TSA                                     ();
+    virtual                        ~TSA                                     ();
 
     bool                            InitFSMachine                           ();
 

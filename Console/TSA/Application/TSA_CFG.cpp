@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       Scripts_CFG.cpp
+* @file       TSA_CFG.cpp
 * 
-* @class      SCRIPTS_CFG
-* @brief      GEN Scripts Example Config
+* @class      TSA_CFG
+* @brief      GEN TSA (Test Script Automatic) Example Config
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -31,7 +31,7 @@
 
 #include "GEN_Defines.h"
 
-#include "Scripts_CFG.h"
+#include "TSA_CFG.h"
 
 #pragma endregion
 
@@ -41,7 +41,7 @@
 
 #include "XLog.h"
 
-#include "Scripts.h"
+#include "TSA.h"
 
 #include "XMemory_Control.h"
 
@@ -51,7 +51,7 @@
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 #pragma region GENERAL_VARIABLE
 
-SCRIPTS_CFG* SCRIPTS_CFG::instance = NULL;
+TSA_CFG* TSA_CFG::instance = NULL;
 
 #pragma endregion
 
@@ -62,14 +62,14 @@ SCRIPTS_CFG* SCRIPTS_CFG::instance = NULL;
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS_CFG::GetIsInstanced()
+* @fn         bool TSA_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS_CFG::GetIsInstanced()
+bool TSA_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
@@ -77,18 +77,18 @@ bool SCRIPTS_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
+* @fn         TSA_CFG& TSA_CFG::GetInstance(bool ini)
 * @brief      GetInstance
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @param[in]  ini : 
 * 
-* @return     SCRIPTS_CFG& : 
+* @return     TSA_CFG& : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
+TSA_CFG& TSA_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new SCRIPTS_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = new TSA_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -96,14 +96,14 @@ SCRIPTS_CFG& SCRIPTS_CFG::GetInstance(bool ini)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS_CFG::DelInstance()
+* @fn         bool TSA_CFG::DelInstance()
 * @brief      DelInstance
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS_CFG::DelInstance()
+bool TSA_CFG::DelInstance()
 {
   if(instance)
     {
@@ -119,14 +119,14 @@ bool SCRIPTS_CFG::DelInstance()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS_CFG::DoVariableMapping()
+* @fn         bool TSA_CFG::DoVariableMapping()
 * @brief      DoVariableMapping
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS_CFG::DoVariableMapping()
+bool TSA_CFG::DoVariableMapping()
 {
   if(!APPCFG::DoVariableMapping())
     {
@@ -139,14 +139,14 @@ bool SCRIPTS_CFG::DoVariableMapping()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS_CFG::DoDefault()
+* @fn         bool TSA_CFG::DoDefault()
 * @brief      DoDefault
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS_CFG::DoDefault()
+bool TSA_CFG::DoDefault()
 {
   if(!APPCFG::DoDefault()) 
     {
@@ -186,37 +186,37 @@ bool SCRIPTS_CFG::DoDefault()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile)
+* @fn         TSA_CFG::TSA_CFG(XCHAR* namefile)
 * @brief      Constructor
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @param[in]  XCHAR* : 
 * 
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS_CFG::SCRIPTS_CFG(XCHAR* namefile) : APPCFG(namefile)
+TSA_CFG::TSA_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
   if(namefile)
     {
-      Ini<SCRIPTS_CFG>();
+      Ini<TSA_CFG>();
     }
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         SCRIPTS_CFG::~SCRIPTS_CFG()
+* @fn         TSA_CFG::~TSA_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS_CFG::~SCRIPTS_CFG()
+TSA_CFG::~TSA_CFG()
 
 {
   Clean();
@@ -225,15 +225,15 @@ SCRIPTS_CFG::~SCRIPTS_CFG()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void SCRIPTS_CFG::Clean()
+* @fn         void TSA_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void SCRIPTS_CFG::Clean()
+void TSA_CFG::Clean()
 {
 
 }

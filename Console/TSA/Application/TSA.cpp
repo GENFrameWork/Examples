@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       Scripts.cpp
+* @file       TSA.cpp
 * 
-* @class      SCRIPTS
-* @brief      GEN Scripts Example class
+* @class      TSA
+* @brief      GEN TSA (Test Script Automatic) Example class
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -31,7 +31,7 @@
 
 #include "GEN_Defines.h"
 
-#include "Scripts.h"
+#include "TSA.h"
 
 #pragma endregion
 
@@ -93,7 +93,7 @@
 #include "Script_Language_Lua.h"
 #include "Script_Language_Javascript.h"
 
-#include "Scripts_CFG.h"
+#include "TSA_CFG.h"
 
 #include "XMemory_Control.h"
 
@@ -103,7 +103,7 @@
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 #pragma region GENERAL_VARIABLE
 
-APPLICATIONCREATEINSTANCE(SCRIPTS, scripts)
+APPLICATIONCREATEINSTANCE(TSA, scripts)
 
 #pragma endregion
 
@@ -114,14 +114,14 @@ APPLICATIONCREATEINSTANCE(SCRIPTS, scripts)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         SCRIPTS::SCRIPTS()
+* @fn         TSA::TSA()
 * @brief      Constructor
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS::SCRIPTS() : XFSMACHINE(0)
+TSA::TSA() : XFSMACHINE(0)
 {
   Clean();
 }
@@ -129,15 +129,15 @@ SCRIPTS::SCRIPTS() : XFSMACHINE(0)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         SCRIPTS::~SCRIPTS()
+* @fn         TSA::~TSA()
 * @brief      Destructor
 * @note       VIRTUAL
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-SCRIPTS::~SCRIPTS()
+TSA::~TSA()
 {
   Clean();
 }
@@ -145,34 +145,34 @@ SCRIPTS::~SCRIPTS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::InitFSMachine()
+* @fn         bool TSA::InitFSMachine()
 * @brief      InitFSMachine
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::InitFSMachine()
+bool TSA::InitFSMachine()
 {
-  if(!AddState( SCRIPTS_XFSMSTATE_NONE            ,
-                SCRIPTS_XFSMEVENT_INI             , SCRIPTS_XFSMSTATE_INI           ,
-                SCRIPTS_XFSMEVENT_END             , SCRIPTS_XFSMSTATE_END           ,
+  if(!AddState( TSA_XFSMSTATE_NONE            ,
+                TSA_XFSMEVENT_INI             , TSA_XFSMSTATE_INI           ,
+                TSA_XFSMEVENT_END             , TSA_XFSMSTATE_END           ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( SCRIPTS_XFSMSTATE_INI             ,
-                SCRIPTS_XFSMEVENT_UPDATE          , SCRIPTS_XFSMSTATE_UPDATE        ,                
-                SCRIPTS_XFSMEVENT_END             , SCRIPTS_XFSMSTATE_END           ,
+  if(!AddState( TSA_XFSMSTATE_INI             ,
+                TSA_XFSMEVENT_UPDATE          , TSA_XFSMSTATE_UPDATE        ,                
+                TSA_XFSMEVENT_END             , TSA_XFSMSTATE_END           ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( SCRIPTS_XFSMSTATE_UPDATE          ,               
-                SCRIPTS_XFSMEVENT_END             , SCRIPTS_XFSMSTATE_END           ,                 
+  if(!AddState( TSA_XFSMSTATE_UPDATE          ,               
+                TSA_XFSMEVENT_END             , TSA_XFSMSTATE_END           ,                 
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( SCRIPTS_XFSMSTATE_END             ,
-                SCRIPTS_XFSMEVENT_NONE            , SCRIPTS_XFSMSTATE_NONE          ,
+  if(!AddState( TSA_XFSMSTATE_END             ,
+                TSA_XFSMEVENT_NONE            , TSA_XFSMSTATE_NONE          ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
   return true;
@@ -181,14 +181,14 @@ bool SCRIPTS::InitFSMachine()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::AppProc_Ini()
+* @fn         bool TSA::AppProc_Ini()
 * @brief      AppProc_Ini
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::AppProc_Ini()
+bool TSA::AppProc_Ini()
 {
   XSTRING string;
   XSTRING stringresult;
@@ -262,7 +262,7 @@ bool SCRIPTS::AppProc_Ini()
       APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
     }
 
-  SetEvent(SCRIPTS_XFSMEVENT_INI);
+  SetEvent(TSA_XFSMEVENT_INI);
 
   return true;
 }
@@ -270,14 +270,14 @@ bool SCRIPTS::AppProc_Ini()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::AppProc_FirstUpdate()
+* @fn         bool TSA::AppProc_FirstUpdate()
 * @brief      AppProc_FirstUpdate
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::AppProc_FirstUpdate()
+bool TSA::AppProc_FirstUpdate()
 {
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
@@ -291,24 +291,24 @@ bool SCRIPTS::AppProc_FirstUpdate()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::AppProc_Update()
+* @fn         bool TSA::AppProc_Update()
 * @brief      AppProc_Update
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::AppProc_Update()
+bool TSA::AppProc_Update()
 {
-  if(GetEvent()==SCRIPTS_XFSMEVENT_NONE) 
+  if(GetEvent()==TSA_XFSMEVENT_NONE) 
     {
       switch(GetCurrentState())
         {
-          case SCRIPTS_XFSMSTATE_NONE       : break;
+          case TSA_XFSMSTATE_NONE       : break;
 
-          case SCRIPTS_XFSMSTATE_INI        : break;
+          case TSA_XFSMSTATE_INI        : break;
 
-          case SCRIPTS_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case TSA_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
@@ -328,31 +328,31 @@ bool SCRIPTS::AppProc_Update()
                                                 }
                                               break;
 
-          case SCRIPTS_XFSMSTATE_END        : break;
+          case TSA_XFSMSTATE_END        : break;
 
         }
     }
    else 
     {
-      if(GetEvent()<SCRIPTS_LASTEVENT)
+      if(GetEvent()<TSA_LASTEVENT)
         {
           CheckTransition();
 
           switch(GetCurrentState())
             {
-              case SCRIPTS_XFSMSTATE_NONE   : break;
+              case TSA_XFSMSTATE_NONE   : break;
 
-              case SCRIPTS_XFSMSTATE_INI    : if(!CreateScripToExec())
+              case TSA_XFSMSTATE_INI    : if(!CreateScripToExec())
                                                 {
                                                   SetExitType(APPBASE_EXITTYPE_BY_SERIOUSERROR);
                                                 }
 
-                                              SetEvent(SCRIPTS_XFSMEVENT_UPDATE);
+                                              SetEvent(TSA_XFSMEVENT_UPDATE);
                                               break;
 
-              case SCRIPTS_XFSMSTATE_UPDATE : break;
+              case TSA_XFSMSTATE_UPDATE : break;
 
-              case SCRIPTS_XFSMSTATE_END    : DeleteScripToExec();
+              case TSA_XFSMSTATE_END    : DeleteScripToExec();
                                               break;
             }
         }
@@ -364,19 +364,19 @@ bool SCRIPTS::AppProc_Update()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::AppProc_End()
+* @fn         bool TSA::AppProc_End()
 * @brief      AppProc_End
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::AppProc_End()
+bool TSA::AppProc_End()
 {
   XSTRING string;
   XSTRING stringresult;
 
-  SetEvent(SCRIPTS_XFSMEVENT_END);
+  SetEvent(TSA_XFSMEVENT_END);
 
   DeleteScripToExec();
 
@@ -408,16 +408,16 @@ bool SCRIPTS::AppProc_End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::KeyValidSecuences(int key)
+* @fn         bool TSA::KeyValidSecuences(int key)
 * @brief      KeyValidSecuences
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @param[in]  key : 
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::KeyValidSecuences(int key)
+bool TSA::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
 
@@ -457,14 +457,14 @@ bool SCRIPTS::KeyValidSecuences(int key)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::CreateScripToExec()
+* @fn         bool TSA::CreateScripToExec()
 * @brief      CreateScripToExec
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::CreateScripToExec()
+bool TSA::CreateScripToExec()
 {
   DeleteScripToExec();
 
@@ -496,14 +496,14 @@ bool SCRIPTS::CreateScripToExec()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::DeleteScripToExec()
+* @fn         bool TSA::DeleteScripToExec()
 * @brief      DeleteScripToExec
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::DeleteScripToExec()
+bool TSA::DeleteScripToExec()
 {
   if(!script) return false;
   
@@ -519,14 +519,14 @@ bool SCRIPTS::DeleteScripToExec()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::Show_AppStatus()
+* @fn         bool TSA::Show_AppStatus()
 * @brief      Show_AppStatus
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::Show_AppStatus()
+bool TSA::Show_AppStatus()
 {
   XSTRING string;
   XSTRING string2;
@@ -565,14 +565,14 @@ bool SCRIPTS::Show_AppStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::Show_ScriptStatus()
+* @fn         bool TSA::Show_ScriptStatus()
 * @brief      Show_ScriptStatus
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::Show_ScriptStatus()
+bool TSA::Show_ScriptStatus()
 {
   XSTRING string;
   XSTRING string2;
@@ -589,14 +589,14 @@ bool SCRIPTS::Show_ScriptStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool SCRIPTS::Show_AllStatus()
+* @fn         bool TSA::Show_AllStatus()
 * @brief      Show_AllStatus
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool SCRIPTS::Show_AllStatus()
+bool TSA::Show_AllStatus()
 {
   console->Clear();
 
@@ -614,17 +614,17 @@ bool SCRIPTS::Show_AllStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
+* @fn         void TSA::HandleEvent_Script(SCRIPT_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @param[in]  event : 
 * 
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
+void TSA::HandleEvent_Script(SCRIPT_XEVENT* event)
 {
   switch(event->GetEventType())
     {
@@ -640,17 +640,17 @@ void SCRIPTS::HandleEvent_Script(SCRIPT_XEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void SCRIPTS::HandleEvent(XEVENT* xevent)
+* @fn         void TSA::HandleEvent(XEVENT* xevent)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @param[in]  xevent : 
 * 
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void SCRIPTS::HandleEvent(XEVENT* xevent)
+void TSA::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
 
@@ -667,15 +667,15 @@ void SCRIPTS::HandleEvent(XEVENT* xevent)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void SCRIPTS::Clean()
+* @fn         void TSA::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup    SCRIPT
+* @ingroup    EXAMPLES
 * 
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void SCRIPTS::Clean()
+void TSA::Clean()
 {
   xtimerupdateconsole         = NULL;
   xtimerscriptrun             = NULL;

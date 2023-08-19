@@ -1,0 +1,941 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "notappexample.exe"
+		},
+		{
+			"path" : "notappexample.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"add_compile_options",
+			"include",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt",
+			"D:/Projects/GENFrameWork/GEN/CMake/GEN_CMakeLists_Warnings.txt",
+			"D:/Projects/GENFrameWork/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt",
+			"D:/Projects/GENFrameWork/GEN/CMake/GEN_CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 55,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 47,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 12,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 13,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 14,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 15,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 9
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 162,
+				"parent" : 10
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 29,
+				"parent" : 0
+			},
+			{
+				"file" : 3,
+				"parent" : 12
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 412,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 409,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 406,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 400,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 403,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 418,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 424,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 430,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 436,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 391,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 394,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 364,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 370,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 379,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 376,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 385,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 388,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 367,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 373,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 382,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 107,
+				"parent" : 10
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 442,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 289,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 848,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 11,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 53,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "/wd4018"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/wd4091"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "/wd4595"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "/wd4996"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "/wd4624"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 11,
+					"define" : "COMPILER_MSVC"
+				},
+				{
+					"backtrace" : 14,
+					"define" : "GEN_APPALERTS=APPALERTS::GetInstance()"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "GEN_DIOALERTS=DIOALERTS::GetInstance()"
+				},
+				{
+					"backtrace" : 16,
+					"define" : "GEN_DIODNSRESOLVED=DIODNSRESOLVED::GetInstance()"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "GEN_DIOFACTORY=DIOFACTORY::GetInstance()"
+				},
+				{
+					"backtrace" : 18,
+					"define" : "GEN_DIOGPIO=DIOGPIO::GetInstance()"
+				},
+				{
+					"backtrace" : 19,
+					"define" : "GEN_GRPFACTORY=GRPFACTORY::GetInstance()"
+				},
+				{
+					"backtrace" : 20,
+					"define" : "GEN_INPMANAGER=INPMANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 21,
+					"define" : "GEN_SNDFACTORY=SNDFACTORY::GetInstance()"
+				},
+				{
+					"backtrace" : 22,
+					"define" : "GEN_USERINTERFACE=UI_MANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "GEN_XDRIVEIMAGEMANAGER=XDRIVEIMAGEMANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 24,
+					"define" : "GEN_XEEPROMMEMORYMANAGER=XEEPROMMEMORYMANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 25,
+					"define" : "GEN_XFACTORY=XFACTORY::GetInstance()"
+				},
+				{
+					"backtrace" : 26,
+					"define" : "GEN_XLOG=XLOG::GetInstance()"
+				},
+				{
+					"backtrace" : 27,
+					"define" : "GEN_XPATHSMANAGER=XPATHSMANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 28,
+					"define" : "GEN_XPROCESSMANAGER=XPROCESSMANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 29,
+					"define" : "GEN_XPUBLISHER=XPUBLISHER::GetInstance()"
+				},
+				{
+					"backtrace" : 30,
+					"define" : "GEN_XSHAREDMEMORYMANAGER=XSHAREDMEMORYMANAGER::GetInstance()"
+				},
+				{
+					"backtrace" : 31,
+					"define" : "GEN_XSLEEP=XSLEEP::GetInstance()"
+				},
+				{
+					"backtrace" : 32,
+					"define" : "GEN_XSYSTEM=XSYSTEM::GetInstance()"
+				},
+				{
+					"backtrace" : 33,
+					"define" : "GEN_XTRANSLATION=XTRANSLATION::GetInstance()"
+				},
+				{
+					"backtrace" : 34,
+					"define" : "MICROCONTROLLER"
+				},
+				{
+					"backtrace" : 35,
+					"define" : "UNICODE"
+				},
+				{
+					"backtrace" : 36,
+					"define" : "XMEMORY_CONTROL_ACTIVE"
+				},
+				{
+					"backtrace" : 37,
+					"define" : "XTRACE_ACTIVE"
+				},
+				{
+					"backtrace" : 38,
+					"define" : "_DEBUG"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Common"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/MainProc"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Cipher"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Compress"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Drivers"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Drivers/I2C"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Drivers/SPI"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Protocols"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Streams"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Web"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/Nodes"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/DataIO/ScraperWeb"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Graphic"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Graphic/2D"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Graphic/3D"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/UserInterface"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/UserInterface/Skin"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Input"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Application"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/XUtils"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Script"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Script/Lib"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Sound"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Media"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Databases"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Databases/SQL"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Databases/SQL/MySQL"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Databases/SQL/PostgreSQL"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Databases/SQL/SQLite"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Common"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Common/SNDOpenAL"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Windows"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Linux"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Android"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Microcontrollers"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../GEN/Platforms/Microcontrollers/ESP32"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/agg/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/agg/src"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/agg/font_freetype"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/freetype/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/freetype/src"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/OpenAL/sdk/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/sqlite"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/postgresql/src/interfaces/libpq"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/postgresql/src/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/glew/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/glew/src"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/jpeglib"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/libpng"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/stb"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/lua/src"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/duktape/src"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/zlib"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/zlib/contrib/minizip"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/GoogleTest/googletest"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/GoogleTest/googletest/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/GoogleTest/googletest/src"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../../../../ThirdPartyLibraries/nameof/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/../Application"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28
+			]
+		}
+	],
+	"id" : "notappexample::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:X86 /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "notappexample",
+	"nameOnDisk" : "notappexample.exe",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XMemory_Control.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Common/Version.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/MainProc/MainProc.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XBase.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XString.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XBuffer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XVariant.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XPath.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XRect.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XFactory.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XTimer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XDateTime.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XRand.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XDir.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XThread.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XTrace.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XPathsManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/XUtils/XThreadListNonPreemptive.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/MainProcESP32.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Factory.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Trace.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Timer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Rand.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Dir.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Thread.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32System.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32Sleep.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/GEN/Platforms/Microcontrollers/ESP32/XESP32DateTime.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Application/NotAppExample.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

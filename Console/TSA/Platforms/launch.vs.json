@@ -3,10 +3,10 @@
   "defaults": {},
   "configurations": [
     {
-      "type": "scripts",
+      "type": "tsa",
       "project": "CMakeLists.txt",
-      "projectTarget": "Scripts.exe",
-      "name": "scripts.exe",
+      "projectTarget": "tsa.exe",
+      "name": "tsa.exe",
       "args": [
         "test.g",
       ]

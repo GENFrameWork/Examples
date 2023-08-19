@@ -1,0 +1,3 @@
+D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/ESP32/CMakeFiles/notappexample.dir
+D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/ESP32/CMakeFiles/edit_cache.dir
+D:/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/ESP32/CMakeFiles/rebuild_cache.dir
