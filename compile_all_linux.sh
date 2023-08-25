@@ -15,7 +15,7 @@ printf "Examples Console Linux PC x64 ... \n"
 sh ./../GEN/Batch/compile_linux.sh Console/BinConnPro/Platforms/Linux /x64 binconnpro
 sh ./../GEN/Batch/compile_linux.sh Console/Databases/Platforms/Linux /x64 databases
 sh ./../GEN/Batch/compile_linux.sh Console/MiniWebServer/Platforms/Linux /x64 miniwebserver
-sh ./../GEN/Batch/compile_linux.sh Console/Scripts/Platforms/Linux /x64 scripts 
+sh ./../GEN/Batch/compile_linux.sh Console/TSA/Platforms/Linux /x64 tsa 
 
 printf "Examples Graphics Linux PC x64 ... \n"
 sh ./../GEN/Batch/compile_linux.sh Graphics/Canvas2D/Platforms/Linux /x64 canvas2d

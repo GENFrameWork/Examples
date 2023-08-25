@@ -1,5 +1,6 @@
 # --------------------------------------------------------------------
-# appbaseexample : app base example 
+# appbaseexample : minimal base example with APP class
+# GEN FrameWork
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
@@ -17,6 +18,8 @@
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
+# --------------------------------------------------------------------
+# Activate features/Defines
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true )
  option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
@@ -26,10 +29,11 @@
                             
  option(APP_FEATURE                                         "Activate Application modules"                               true )
 
-# --------------------------------------------------------------------
-# Source code of the GEN in this Application
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists.txt") 
+# --------------------------------------------------------------------
+# Main CMakeList of GEN
+
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Main.txt") 
 
                      
 # --------------------------------------------------------------------
@@ -37,6 +41,7 @@
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
  list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
+
 
 # --------------------------------------------------------------------
 # Source code of the Application
@@ -47,9 +52,8 @@
 # --------------------------------------------------------------------
 # Create proyect 
 
- include_directories(${INCLUDES_DIR})
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_CreateProject.txt") 
 
- add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
 # --------------------------------------------------------------------
 # Add Libraries

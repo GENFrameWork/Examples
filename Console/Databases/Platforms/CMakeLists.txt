@@ -1,5 +1,6 @@
 # --------------------------------------------------------------------
-# DataBases : Example of console GEN FrameWork (Databases connector example) 
+# DataBases : Example of console: Databases connector example
+# GEN FrameWork
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
@@ -11,8 +12,12 @@
 
 # --------------------------------------------------------------------
 # Compile Selection
+
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
+
+# --------------------------------------------------------------------
+# Activate features/Defines
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true )
  option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
@@ -39,9 +44,9 @@
 
 
 # --------------------------------------------------------------------
-# Source code of the GEN in this Application
+# Main CMakeList of GEN
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Main.txt") 
                    
                    
 # --------------------------------------------------------------------
@@ -60,14 +65,14 @@
 
 # --------------------------------------------------------------------
 # Warnings control
+
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
 # Create proyect 
 
- include_directories(${INCLUDES_DIR})
- add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_CreateProject.txt") 
 
 
 # --------------------------------------------------------------------

@@ -1,5 +1,6 @@
 # --------------------------------------------------------------------
-# TSA : Example of console GEN FrameWork (Scripts example) 
+# TSA : Example of console: Scripts example
+# GEN FrameWork
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
@@ -11,8 +12,12 @@
 
 # --------------------------------------------------------------------
 # Compile Selection
+
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
+
+# --------------------------------------------------------------------
+# Activate features/Defines
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
  option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
@@ -45,9 +50,9 @@
 
 
 # --------------------------------------------------------------------
-# Source code of the GEN in this Application
+# Main CMakeList of GEN
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Main.txt") 
                    
                    
 # --------------------------------------------------------------------
@@ -55,6 +60,7 @@
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
  list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
+
 
 # --------------------------------------------------------------------
 # Source code of the Application
@@ -65,15 +71,14 @@
 
 # --------------------------------------------------------------------
 # Warnings control
+
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
 # Create proyect 
 
- include_directories(${INCLUDES_DIR})
-
- add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_CreateProject.txt") 
 
 
 # --------------------------------------------------------------------

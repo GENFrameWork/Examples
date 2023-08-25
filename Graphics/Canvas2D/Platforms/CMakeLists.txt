@@ -1,5 +1,6 @@
 # --------------------------------------------------------------------
-# Canvas2D : Example of console GEN FrameWork (Canvas 2D example) 
+# Canvas2D : Example of graphics: Canvas 2D example  
+# GEN FrameWork 
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
@@ -16,6 +17,7 @@
 
 # --------------------------------------------------------------------
 # Compile Selection
+
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
@@ -26,7 +28,7 @@
  option(XTRACE_FEATURE                                      "Activate XTrace"                                true )
  option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                       true )
 
-#option(LINUX_X11_FEATURE                                   "Activate Linux X11"                             true )
+ option(LINUX_X11_FEATURE                                   "Activate Linux X11"                             true )
         
  option(APP_FEATURE                                         "Activate Application modules"                   true )
  option(APP_LOG_FEATURE                                     "Activate Application Log"                       true )
@@ -50,9 +52,9 @@
 
 
 # --------------------------------------------------------------------
-# Source code of the GEN in this Application
+# Main CMakeList of GEN
 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists.txt") 
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Main.txt") 
                    
                    
 # --------------------------------------------------------------------
@@ -71,18 +73,18 @@
 
 # --------------------------------------------------------------------
 # Warnings control
+
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------
 # Create proyect 
 
- include_directories(${INCLUDES_DIR})
-
- add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+ include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_CreateProject.txt")
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Libraries.txt") 
+
