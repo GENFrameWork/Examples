@@ -1,0 +1,636 @@
+Sat 26 Aug 2023 12:32:41 PM CEST
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- [GEN Found CCACHE]
+-- [GEN Target for compile: pc]
+-- [GEN Using Linux to compile]
+-- [GEN Select for compile: GNU Compiler Collection (GCC)]
+-- [GEN Setting build type to Debug specified]
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/Projects/GENFrameWork/Examples/Base/AppBaseExample/Platforms/Linux/x64
+[1/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOMAC.cpp.o
+[2/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XMemory_Control.cpp.o
+[3/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Common/Version.cpp.o
+[4/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/MainProc/MainProc.cpp.o
+[5/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APP_XEvent.cpp.o
+[6/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebPublicIP.cpp.o
+[7/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebSexName.cpp.o
+[8/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebMACManufacturer.cpp.o
+[9/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebCache.cpp.o
+[10/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebUserAgentID.cpp.o
+[11/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfig.cpp.o
+[12/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDevice.cpp.o
+[13/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebGeolocationIP.cpp.o
+[14/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIONotificationsManager.cpp.o
+[15/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient_XEvent.cpp.o
+[16/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODevice.cpp.o
+[17/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPBase.cpp.o
+[18/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOFactory.cpp.o
+[19/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWeb.cpp.o
+[20/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPMain.cpp.o
+[21/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIODNSProtocol.cpp.o
+[22/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODNSResolved.cpp.o
+[23/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebTranslation.cpp.o
+[24/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebWeather.cpp.o
+[25/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebHeader.cpp.o
+[26/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient.cpp.o
+[27/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStream.cpp.o
+[28/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumServers.cpp.o
+[29/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPConfig.cpp.o
+[30/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumDevices.cpp.o
+[31/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDP.cpp.o
+[32/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPLocalEnumServers.cpp.o
+[33/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIP.cpp.o
+[34/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPAcknowledge.cpp.o
+[35/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIPConfig.cpp.o
+[36/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOIP.cpp.o
+[37/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOURL.cpp.o
+[38/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDeviceIP.cpp.o
+[39/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XString.cpp.o
+[40/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamIPLocalEnumDevices.cpp.o
+[41/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfigString.cpp.o
+[42/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBase.cpp.o
+[43/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XVariant.cpp.o
+[44/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDateTime.cpp.o
+[45/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBuffer.cpp.o
+[46/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRect.cpp.o
+[47/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFactory.cpp.o
+[48/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTimer.cpp.o
+[49/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDir.cpp.o
+[50/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTrace.cpp.o
+[51/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSystem.cpp.o
+[52/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRand.cpp.o
+[53/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XThread.cpp.o
+[54/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPath.cpp.o
+[55/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPathsManager.cpp.o
+[56/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XObserver.cpp.o
+[57/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFSMachine.cpp.o
+[58/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPublisher.cpp.o
+[59/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XEvent.cpp.o
+[60/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation.cpp.o
+[61/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLanguage_ISO_639_3.cpp.o
+[62/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSubject.cpp.o
+[63/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation_GEN.cpp.o
+[64/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSleep.cpp.o
+[65/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XProcessManager.cpp.o
+[66/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileXML.cpp.o
+[67/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileTXT.cpp.o
+[68/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileJSON.cpp.o
+[69/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFile.cpp.o
+[70/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHMD5.cpp.o
+[71/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Hash.cpp.o
+[72/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Cipher.cpp.o
+[73/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/CipherKey.cpp.o
+[74/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHCRC32.cpp.o
+[75/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamIPLocalEnumDevices.cpp.o
+[76/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFactory.cpp.o
+[77/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUDP.cpp.o
+[78/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/MainProcLINUX.cpp.o
+[79/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXFactory.cpp.o
+[80/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamTCPIP.cpp.o
+[81/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTrace.cpp.o
+[82/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTimer.cpp.o
+[83/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDir.cpp.o
+[84/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXRand.cpp.o
+[85/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDateTime.cpp.o
+[86/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFile.cpp.o
+[87/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXProcessManager.cpp.o
+[88/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXThread.cpp.o
+[89/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSystem.cpp.o
+[90/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSleep.cpp.o
+[91/92] Building CXX object CMakeFiles/appbaseexample.dir/mnt/d/Projects/GENFrameWork/Examples/Base/AppBaseExample/Application/AppBaseExample.cpp.o
+[92/92] Linking CXX executable appbaseexample
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- [GEN Found CCACHE]
+-- [GEN Target for compile: pc]
+-- [GEN Using Linux to compile]
+-- [GEN Select for compile: GNU Compiler Collection (GCC)]
+-- [GEN Setting build type to Debug specified]
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/Projects/GENFrameWork/Examples/Base/Canvas2DDisplay/Platforms/Linux/x64
+[1/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODevice.cpp.o
+[2/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XMemory_Control.cpp.o
+[3/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Common/Version.cpp.o
+[4/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/MainProc/MainProc.cpp.o
+[5/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPMain.cpp.o
+[6/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APP_XEvent.cpp.o
+[7/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebCache.cpp.o
+[8/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOMAC.cpp.o
+[9/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebMACManufacturer.cpp.o
+[10/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebSexName.cpp.o
+[11/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebPublicIP.cpp.o
+[12/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIONotificationsManager.cpp.o
+[13/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient_XEvent.cpp.o
+[14/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebGeolocationIP.cpp.o
+[15/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfig.cpp.o
+[16/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDevice.cpp.o
+[17/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUARTLocalEnumDevices.cpp.o
+[18/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUARTConfig.cpp.o
+[19/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOFactory.cpp.o
+[20/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPBase.cpp.o
+[21/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODNSResolved.cpp.o
+[22/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIODNSProtocol.cpp.o
+[23/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWeb.cpp.o
+[24/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebHeader.cpp.o
+[25/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient.cpp.o
+[26/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebUserAgentID.cpp.o
+[27/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebWeather.cpp.o
+[28/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebTranslation.cpp.o
+[29/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStream.cpp.o
+[30/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumServers.cpp.o
+[31/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUART.cpp.o
+[32/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUSB.cpp.o
+[33/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumDevices.cpp.o
+[34/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPAcknowledge.cpp.o
+[35/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUSBConfig.cpp.o
+[36/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDeviceUSB.cpp.o
+[37/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUSBLocalEnumDevices.cpp.o
+[38/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPLocalEnumServers.cpp.o
+[39/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDP.cpp.o
+[40/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPConfig.cpp.o
+[41/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIP.cpp.o
+[42/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOIP.cpp.o
+[43/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOURL.cpp.o
+[44/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIPConfig.cpp.o
+[45/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDeviceIP.cpp.o
+[46/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamIPLocalEnumDevices.cpp.o
+[47/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfigString.cpp.o
+[48/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBase.cpp.o
+[49/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFactory.cpp.o
+[50/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XString.cpp.o
+[51/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBuffer.cpp.o
+[52/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRect.cpp.o
+[53/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XVariant.cpp.o
+[54/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTimer.cpp.o
+[55/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDir.cpp.o
+[56/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XThread.cpp.o
+[57/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRand.cpp.o
+[58/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDateTime.cpp.o
+[59/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPathsManager.cpp.o
+[60/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPath.cpp.o
+[61/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSubject.cpp.o
+[62/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTrace.cpp.o
+[63/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPublisher.cpp.o
+[64/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFSMachine.cpp.o
+[65/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSystem.cpp.o
+[66/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLanguage_ISO_639_3.cpp.o
+[67/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation.cpp.o
+[68/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XObserver.cpp.o
+[69/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XEvent.cpp.o
+[70/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation_GEN.cpp.o
+[71/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSleep.cpp.o
+[72/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XProcessManager.cpp.o
+[73/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHMD5.cpp.o
+[74/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Cipher.cpp.o
+[75/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileTXT.cpp.o
+[76/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileJSON.cpp.o
+[77/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileXML.cpp.o
+[78/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Hash.cpp.o
+[79/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFile.cpp.o
+[80/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHCRC32.cpp.o
+[81/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/CipherKey.cpp.o
+[82/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXFactory.cpp.o
+[83/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/MainProcLINUX.cpp.o
+[84/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUSBLocalEnumDevices.cpp.o
+[85/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUART.cpp.o
+[86/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUSB.cpp.o
+[87/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUARTLocalEnumDevices.cpp.o
+[88/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUDP.cpp.o
+[89/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamIPLocalEnumDevices.cpp.o
+[90/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamTCPIP.cpp.o
+[91/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTrace.cpp.o
+[92/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXRand.cpp.o
+[93/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFactory.cpp.o
+[94/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTimer.cpp.o
+[95/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSystem.cpp.o
+[96/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDir.cpp.o
+[97/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDateTime.cpp.o
+[98/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXThread.cpp.o
+[99/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSleep.cpp.o
+[100/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFile.cpp.o
+[101/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXProcessManager.cpp.o
+[102/103] Building CXX object CMakeFiles/canvas2ddisplay.dir/mnt/d/Projects/GENFrameWork/Examples/Base/Canvas2DDisplay/Application/Canvas2DDisplay.cpp.o
+[103/103] Linking CXX executable canvas2ddisplay
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- [GEN Found CCACHE]
+-- [GEN Target for compile: pc]
+-- [GEN Using Linux to compile]
+-- [GEN Select for compile: GNU Compiler Collection (GCC)]
+-- [GEN Setting build type to Debug specified]
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/Projects/GENFrameWork/Examples/Base/MemCtrlExample/Platforms/Linux/x64
+[1/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOMAC.cpp.o
+[2/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XMemory_Control.cpp.o
+[3/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebCache.cpp.o
+[4/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOFactory.cpp.o
+[5/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/MainProc/MainProc.cpp.o
+[6/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Common/Version.cpp.o
+[7/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebTranslation.cpp.o
+[8/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebPublicIP.cpp.o
+[9/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebMACManufacturer.cpp.o
+[10/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebSexName.cpp.o
+[11/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODevice.cpp.o
+[12/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebUserAgentID.cpp.o
+[13/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIONotificationsManager.cpp.o
+[14/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient_XEvent.cpp.o
+[15/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfig.cpp.o
+[16/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDevice.cpp.o
+[17/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPConfig.cpp.o
+[18/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOIP.cpp.o
+[19/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIODNSProtocol.cpp.o
+[20/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODNSResolved.cpp.o
+[21/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWeb.cpp.o
+[22/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamIPLocalEnumDevices.cpp.o
+[23/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebGeolocationIP.cpp.o
+[24/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebWeather.cpp.o
+[25/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIPConfig.cpp.o
+[26/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebHeader.cpp.o
+[27/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient.cpp.o
+[28/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStream.cpp.o
+[29/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumDevices.cpp.o
+[30/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumServers.cpp.o
+[31/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDP.cpp.o
+[32/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPAcknowledge.cpp.o
+[33/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPLocalEnumServers.cpp.o
+[34/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIP.cpp.o
+[35/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOURL.cpp.o
+[36/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDir.cpp.o
+[37/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XString.cpp.o
+[38/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDeviceIP.cpp.o
+[39/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBase.cpp.o
+[40/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfigString.cpp.o
+[41/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XVariant.cpp.o
+[42/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBuffer.cpp.o
+[43/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPublisher.cpp.o
+[44/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRect.cpp.o
+[45/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFactory.cpp.o
+[46/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTimer.cpp.o
+[47/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRand.cpp.o
+[48/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDateTime.cpp.o
+[49/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XThread.cpp.o
+[50/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSleep.cpp.o
+[51/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPath.cpp.o
+[52/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPathsManager.cpp.o
+[53/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTrace.cpp.o
+[54/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFSMachine.cpp.o
+[55/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLanguage_ISO_639_3.cpp.o
+[56/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSubject.cpp.o
+[57/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XEvent.cpp.o
+[58/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XObserver.cpp.o
+[59/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation.cpp.o
+[60/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation_GEN.cpp.o
+[61/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XProcessManager.cpp.o
+[62/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileTXT.cpp.o
+[63/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDir.cpp.o
+[64/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/Examples/Base/MemCtrlExample/Application/MemCtrlExample.cpp.o
+[65/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileJSON.cpp.o
+[66/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileXML.cpp.o
+[67/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFile.cpp.o
+[68/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Hash.cpp.o
+[69/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Cipher.cpp.o
+[70/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHCRC32.cpp.o
+[71/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHMD5.cpp.o
+[72/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/CipherKey.cpp.o
+[73/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/MainProcLINUX.cpp.o
+[74/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXFactory.cpp.o
+[75/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamTCPIP.cpp.o
+[76/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUDP.cpp.o
+[77/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamIPLocalEnumDevices.cpp.o
+[78/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTrace.cpp.o
+[79/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFactory.cpp.o
+[80/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTimer.cpp.o
+[81/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXRand.cpp.o
+[82/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXThread.cpp.o
+[83/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDateTime.cpp.o
+[84/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSleep.cpp.o
+[85/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFile.cpp.o
+[86/87] Building CXX object CMakeFiles/memctrlexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXProcessManager.cpp.o
+[87/87] Linking CXX executable memctrlexample
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- [GEN Found CCACHE]
+-- [GEN Target for compile: pc]
+-- [GEN Using Linux to compile]
+-- [GEN Select for compile: GNU Compiler Collection (GCC)]
+-- [GEN Setting build type to Debug specified]
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/Projects/GENFrameWork/Examples/Base/NotAppExample/Platforms/Linux/x64
+[1/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOMAC.cpp.o
+[2/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XMemory_Control.cpp.o
+[3/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/MainProc/MainProc.cpp.o
+[4/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebCache.cpp.o
+[5/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebPublicIP.cpp.o
+[6/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebMACManufacturer.cpp.o
+[7/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebSexName.cpp.o
+[8/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebTranslation.cpp.o
+[9/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebWeather.cpp.o
+[10/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebGeolocationIP.cpp.o
+[11/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIONotificationsManager.cpp.o
+[12/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient_XEvent.cpp.o
+[13/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDir.cpp.o
+[14/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODevice.cpp.o
+[15/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDevice.cpp.o
+[16/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfig.cpp.o
+[17/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumDevices.cpp.o
+[18/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPConfig.cpp.o
+[19/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOIP.cpp.o
+[20/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOFactory.cpp.o
+[21/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIODNSProtocol.cpp.o
+[22/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODNSResolved.cpp.o
+[23/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWeb.cpp.o
+[24/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebUserAgentID.cpp.o
+[25/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient.cpp.o
+[26/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebHeader.cpp.o
+[27/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStream.cpp.o
+[28/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDP.cpp.o
+[29/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumServers.cpp.o
+[30/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPAcknowledge.cpp.o
+[31/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPLocalEnumServers.cpp.o
+[32/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIP.cpp.o
+[33/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIPConfig.cpp.o
+[34/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamIPLocalEnumDevices.cpp.o
+[35/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOURL.cpp.o
+[36/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDeviceIP.cpp.o
+[37/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XVariant.cpp.o
+[38/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfigString.cpp.o
+[39/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFactory.cpp.o
+[40/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRect.cpp.o
+[41/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPathsManager.cpp.o
+[42/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XThread.cpp.o
+[43/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPath.cpp.o
+[44/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPublisher.cpp.o
+[45/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileXML.cpp.o
+[46/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFSMachine.cpp.o
+[47/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XEvent.cpp.o
+[48/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSleep.cpp.o
+[49/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSubject.cpp.o
+[50/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation.cpp.o
+[51/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XObserver.cpp.o
+[52/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation_GEN.cpp.o
+[53/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFile.cpp.o
+[54/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XProcessManager.cpp.o
+[55/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRand.cpp.o
+[56/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileJSON.cpp.o
+[57/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileTXT.cpp.o
+[58/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBuffer.cpp.o
+[59/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/CipherKey.cpp.o
+[60/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Cipher.cpp.o
+[61/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTrace.cpp.o
+[62/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHCRC32.cpp.o
+[63/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Hash.cpp.o
+[64/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHMD5.cpp.o
+[65/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBase.cpp.o
+[66/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTimer.cpp.o
+[67/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XString.cpp.o
+[68/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXFactory.cpp.o
+[69/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDateTime.cpp.o
+[70/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXRand.cpp.o
+[71/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXThread.cpp.o
+[72/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFactory.cpp.o
+[73/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDir.cpp.o
+[74/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamIPLocalEnumDevices.cpp.o
+[75/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFile.cpp.o
+[76/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/Examples/Base/NotAppExample/Application/NotAppExample.cpp.o
+[77/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTimer.cpp.o
+[78/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTrace.cpp.o
+[79/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/MainProcLINUX.cpp.o
+[80/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUDP.cpp.o
+[81/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamTCPIP.cpp.o
+[82/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSleep.cpp.o
+[83/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Common/Version.cpp.o
+[84/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDateTime.cpp.o
+[85/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLanguage_ISO_639_3.cpp.o
+[86/87] Building CXX object CMakeFiles/notappexample.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXProcessManager.cpp.o
+[87/87] Linking CXX executable notappexample
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- [GEN Found CCACHE]
+-- [GEN Target for compile: pc]
+-- [GEN Using Linux to compile]
+-- [GEN Select for compile: GNU Compiler Collection (GCC)]
+-- [GEN Setting build type to Debug specified]
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Platforms/Linux/x64
+[1/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPCheckResourcesHardware_XEvent.cpp.o
+[2/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPInternetServices_XEvent.cpp.o
+[3/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLocationAddress.cpp.o
+[4/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOMAC.cpp.o
+[5/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIONotificationsManager.cpp.o
+[6/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APP_XEvent.cpp.o
+[7/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebCache.cpp.o
+[8/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODynDNS_Manager.cpp.o
+[9/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/MainProc/MainProc.cpp.o
+[10/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOFactory.cpp.o
+[11/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebMACManufacturer.cpp.o
+[12/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebGeolocationIP.cpp.o
+[13/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebUserAgentID.cpp.o
+[14/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPMain.cpp.o
+[15/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPCheckResourcesHardware.cpp.o
+[16/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPCFG.cpp.o
+[17/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebPublicIP.cpp.o
+[18/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebTranslation.cpp.o
+[19/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebSexName.cpp.o
+[20/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWebWeather.cpp.o
+[21/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStream.cpp.o
+[22/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODNSResolved.cpp.o
+[23/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIONTP.cpp.o
+[24/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIODynDNS.cpp.o
+[25/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XMemory_Control.cpp.o
+[26/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOCheckInternetConnection.cpp.o
+[27/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIODNSProtocol.cpp.o
+[28/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOCheckTCPIPConnections.cpp.o
+[29/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/ScraperWeb/DIOScraperWeb.cpp.o
+[30/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/crc32.c.o
+[31/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOProtocol_ConnectionsManager_XEvent.cpp.o
+[32/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIODevice.cpp.o
+[33/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOPing_XEvent.cpp.o
+[34/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOProtocol_ApplicationData.cpp.o
+[35/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOProtocol_XEvent.cpp.o
+[36/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfig.cpp.o
+[37/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient_XEvent.cpp.o
+[38/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamCipher.cpp.o
+[39/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDevice.cpp.o
+[40/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebHeader.cpp.o
+[41/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumServers.cpp.o
+[42/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOProtocol_ConnectionsManager.cpp.o
+[43/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamICMP.cpp.o
+[44/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamICMPConfig.cpp.o
+[45/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPConfig.cpp.o
+[46/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Web/DIOWebClient.cpp.o
+[47/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamEnumDevices.cpp.o
+[48/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDP.cpp.o
+[49/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOIP.cpp.o
+[50/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIP.cpp.o
+[51/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPLocalEnumServers.cpp.o
+[52/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamUDPAcknowledge.cpp.o
+[53/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOPing.cpp.o
+[54/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/DIOURL.cpp.o
+[55/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamDeviceIP.cpp.o
+[56/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Protocols/DIOProtocol.cpp.o
+[57/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamTCPIPConfig.cpp.o
+[58/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamConfigString.cpp.o
+[59/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRect.cpp.o
+[60/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XVariant.cpp.o
+[61/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/DataIO/Streams/DIOStreamIPLocalEnumDevices.cpp.o
+[62/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Common/Version.cpp.o
+[63/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFactory.cpp.o
+[64/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBase.cpp.o
+[65/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFSMachine.cpp.o
+[66/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XThread.cpp.o
+[67/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPath.cpp.o
+[68/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPLog.cpp.o
+[69/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDir.cpp.o
+[70/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSystem.cpp.o
+[71/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XBuffer.cpp.o
+[72/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPathsManager.cpp.o
+[73/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XEvent.cpp.o
+[74/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPConsole.cpp.o
+[75/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XScheduler_XEvent.cpp.o
+[76/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSubject.cpp.o
+[77/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPBase.cpp.o
+[78/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XPublisher.cpp.o
+[79/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XRand.cpp.o
+[80/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XSleep.cpp.o
+[81/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XScheduler.cpp.o
+[82/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTrace.cpp.o
+[83/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XObserver.cpp.o
+[84/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XConsole.cpp.o
+[85/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XString.cpp.o
+[86/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XProcessManager.cpp.o
+[87/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLog.cpp.o
+[88/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/infback.c.o
+[89/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileINI.cpp.o
+[90/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileCFG.cpp.o
+[91/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileJSON.cpp.o
+[92/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFile.cpp.o
+[93/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileXML.cpp.o
+[94/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileTXT.cpp.o
+[95/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHMD5.cpp.o
+[96/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/HASHCRC32.cpp.o
+[97/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Hash.cpp.o
+[98/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/Cipher.cpp.o
+[99/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/CipherAES.cpp.o
+[100/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Cipher/CipherKey.cpp.o
+[101/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Application/APPInternetServices.cpp.o
+[102/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXFactory.cpp.o
+[103/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileZIP.cpp.o
+[104/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XFileZIP_XEvent.cpp.o
+[105/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXRand.cpp.o
+[106/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFactory.cpp.o
+[107/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/compress.c.o
+[108/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/adler32.c.o
+[109/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/deflate.c.o
+[110/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/inflate.c.o
+[111/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/inffast.c.o
+[112/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/inftrees.c.o
+[113/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/trees.c.o
+[114/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/uncompr.c.o
+[115/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamIPLocalEnumDevices.cpp.o
+[116/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXThread.cpp.o
+[117/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/contrib/minizip/ioapi.c.o
+[118/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTimer.cpp.o
+[119/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation_GEN.cpp.o
+[120/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDateTime.cpp.o
+[121/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTranslation.cpp.o
+[122/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Application/BinConnPro_CFG.cpp.o
+[123/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXDir.cpp.o
+[124/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXTrace.cpp.o
+[125/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/zutil.c.o
+[126/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/contrib/minizip/zip.c.o
+[127/146] Building C object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/ThirdPartyLibraries/zlib/contrib/minizip/unzip.c.o
+[128/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXConsole.cpp.o
+[129/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXFile.cpp.o
+[130/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXPing.cpp.o
+[131/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamICMP.cpp.o
+[132/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamUDP.cpp.o
+[133/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Application/BinConnPro_ApplicationData.cpp.o
+[134/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/DIOLINUXStreamTCPIP.cpp.o
+[135/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Application/BinConnPro_Protocol_Device.cpp.o
+[136/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XLanguage_ISO_639_3.cpp.o
+[137/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Application/BinConnPro_Protocol.cpp.o
+[138/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSleep.cpp.o
+[139/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Application/BinConnPro_ConnectionsManager.cpp.o
+[140/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XTimer.cpp.o
+[141/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/XUtils/XDateTime.cpp.o
+[142/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXProcessManager.cpp.o
+[143/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/Examples/Console/BinConnPro/Application/BinConnPro.cpp.o
+[144/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/MainProcLINUX.cpp.o
+[145/146] Building CXX object CMakeFiles/binconnpro.dir/mnt/d/Projects/GENFrameWork/GEN/Platforms/Linux/XLINUXSystem.cpp.o
+[146/146] Linking CXX executable binconnpro
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- [GEN Found CCACHE]
+-- [GEN Target for compile: pc]
+-- [GEN Using Linux to compile]
+-- [GEN Select for compile: GNU Compiler Collection (GCC)]
+-- [GEN Setting build type to Debug specified]
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/d/Projects/GENFrameWork/Examples/Console/Databases/Platforms/Linux/x64

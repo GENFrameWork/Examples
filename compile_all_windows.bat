@@ -11,8 +11,10 @@ set "OUTFILE=..\..\..\..\..\Output.txt"
 set "PRINTF=..\..\..\..\..\..\Utilities\printf\printf"
 ..\Utilities\printf\printf "Start process ... \n\n"
 echo %DATE% %TIME% > Output.txt
-..\Utilities\printf\printf "[Examples Base Windows PC x32]\n\n"
 call "C:\Program Files\Microsoft Visual Studio\2022\%vctype%\VC\Auxiliary\Build\vcvarsall.bat" amd64_x86
+..\Utilities\printf\printf "\n"
+..\Utilities\printf\printf "[Examples Base Windows PC x32]\n\n"
+
 ..\Utilities\printf\printf "[Examples Base Windows PC x32]\n"
 call ./../GEN/Batch/compile_windows.bat Base/NotAppExample/Platforms/Windows /x32 notappexample
 call ./../GEN/Batch/compile_windows.bat Base/AppBaseExample/Platforms/Windows /x32 appbaseexample
@@ -28,8 +30,10 @@ call ./../GEN/Batch/compile_windows.bat Console/TSA/Platforms/Windows /x32 tsa
 call ./../GEN/Batch/compile_windows.bat Graphics/Canvas2D/Platforms/Windows /x32 canvas2d
 call ./../GEN/Batch/compile_windows.bat Graphics/UI_Options/Platforms/Windows /x32 ui_options
 
+call "C:\Program Files\Microsoft Visual Studio\2022\%vctype%\VC\Auxiliary\Build\vcvarsall.bat" amd64  
+..\Utilities\printf\printf "\n"
 ..\Utilities\printf\printf "[Examples Windows PC x64]\n\n"
-call "C:\Program Files\Microsoft Visual Studio\2022\%vctype%\VC\Auxiliary\Build\vcvarsall.bat" amd64 
+
 ..\Utilities\printf\printf "[Examples Base Windows PC x64]\n"
 call ./../GEN/Batch/compile_windows.bat Base/NotAppExample/Platforms/Windows /x64 notappexample
 call ./../GEN/Batch/compile_windows.bat Base/AppBaseExample/Platforms/Windows /x64 appbaseexample
