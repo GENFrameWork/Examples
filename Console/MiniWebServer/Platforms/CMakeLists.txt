@@ -11,12 +11,6 @@
 
 
 # --------------------------------------------------------------------
-# Compile Selection
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
-
-
-# --------------------------------------------------------------------
 # Activate features/Defines
 
  option(DEBUG_FEATURE                           "Activate Debug mode"                            true )
@@ -70,12 +64,6 @@
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/MiniWebServer.cpp")
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/MiniWebServer_CFG.cpp")
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/MiniWebServer_APIRest.cpp")
-
-
-# --------------------------------------------------------------------
-# Warnings control
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------

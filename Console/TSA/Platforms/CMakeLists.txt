@@ -11,12 +11,6 @@
 
 
 # --------------------------------------------------------------------
-# Compile Selection
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
-
-
-# --------------------------------------------------------------------
 # Activate features/Defines
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
@@ -67,12 +61,6 @@
 
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/TSA.cpp")
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/TSA_CFG.cpp")
-
-
-# --------------------------------------------------------------------
-# Warnings control
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------

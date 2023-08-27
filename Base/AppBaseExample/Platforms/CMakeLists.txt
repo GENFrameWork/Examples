@@ -6,16 +6,8 @@
  cmake_minimum_required(VERSION 3.6.0)
  project(appbaseexample)
 
+
  set(GEN_DIRECTORY "../../../../../GENFrameWork") 
-
-
-# --------------------------------------------------------------------
-# Compile Selection
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
-
-# --------------------------------------------------------------------
-# Warnings control
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------

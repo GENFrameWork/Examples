@@ -11,12 +11,6 @@
 
 
 # --------------------------------------------------------------------
-# Compile Selection
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
-
-
-# --------------------------------------------------------------------
 # Activate features/Defines
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true )
@@ -64,12 +58,6 @@
 
 
 # --------------------------------------------------------------------
-# Warnings control
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
-
-
-# --------------------------------------------------------------------
 # Create proyect 
 
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_CreateProject.txt") 
@@ -79,4 +67,5 @@
 # Add Libraries
 
  include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Libraries.txt") 
+ 
  

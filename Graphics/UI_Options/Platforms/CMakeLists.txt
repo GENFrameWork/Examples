@@ -9,17 +9,10 @@
 
  set(GEN_DIRECTORY "../../../../") 
 
-
 #set(ANDROID_NDK_ROOT "C:/Users/sirgraham/AppData/Local/Android/Sdk/ndk/21.0.6113669")
 #set(ANDROID_NDK_ROOT  "C:/Users/sirgraham/AppData/Local/Android/Sdk/ndk/21.3.6528147")
  set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
 #set(ANDROID_NDK_ROOT "/mnt/AndroidSDK")
-
-
-# --------------------------------------------------------------------
-# Compile Selection
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
 # --------------------------------------------------------------------
@@ -75,12 +68,6 @@
 
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/UI_Options.cpp")
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/UI_Options_CFG.cpp")
-
-
-# --------------------------------------------------------------------
-# Warnings control
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
 
 
 # --------------------------------------------------------------------

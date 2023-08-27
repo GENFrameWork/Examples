@@ -6,12 +6,8 @@
  cmake_minimum_required(VERSION 3.6.0)
  project(memctrlexample)
 
+
  set(GEN_DIRECTORY "../../../../../GENFrameWork") 
-
-# --------------------------------------------------------------------
-# Compile Selection
-
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Platform-Compiler.txt") 
 
 
 # --------------------------------------------------------------------
@@ -20,7 +16,6 @@
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                        true ) 
  option(XTRACE_FEATURE                                      "Activate XTrace"                                            true )
  option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                   true )
-
  option(XSLEEP_FEATURE                                      "Activate Sleep functions"                                   true )                                    
 
 
@@ -42,12 +37,6 @@
 
  list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/MemCtrlExample.cpp")
  
-
-# --------------------------------------------------------------------
-# Warnings control
- 
- include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Warnings.txt") 
-
 
 # --------------------------------------------------------------------
 # Create proyect 

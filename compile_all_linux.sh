@@ -1,8 +1,10 @@
 #!/bin/sh
 echo -------------------------------------------------------------
-START_TIME=$(date +%s)
+OUTFILE="../../../../../Output.txt"
+export OUTFILE
 printf "Start process ... \n\n"
-date > Output.txt
+START_TIME=$(date +%s)
+date >> Output.txt
 printf "Examples Linux PC x64 ... \n\n"
 
 printf "Examples Base Linux PC x64 ... \n"
@@ -26,5 +28,6 @@ ELAPSED_TIME=$((END_TIME - START_TIME))
 HOURS=$((ELAPSED_TIME / 3600))
 MINUTES=$(((ELAPSED_TIME % 3600) / 60 ))
 SECONDS=$((ELAPSED_TIME % 60))
+
 printf "End process.\nProcessing time: %02d:%02d:%02d\n" "$HOURS" "$MINUTES" "$SECONDS"
 

@@ -10,7 +10,7 @@ for /f "tokens=1-4 delims=:.," %%a in ("%time%") do (
 set "OUTFILE=..\..\..\..\..\Output.txt"
 set "PRINTF=..\..\..\..\..\..\Utilities\printf\printf"
 ..\Utilities\printf\printf "Start process ... \n\n"
-echo %DATE% %TIME% > Output.txt
+echo %DATE% %TIME% >> Output.txt
 call "C:\Program Files\Microsoft Visual Studio\2022\%vctype%\VC\Auxiliary\Build\vcvarsall.bat" amd64_x86
 ..\Utilities\printf\printf "\n"
 ..\Utilities\printf\printf "[Examples Base Windows PC x32]\n\n"
