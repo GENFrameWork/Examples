@@ -94,7 +94,7 @@ enum TSATASKID
 #define APPLICATION_SUBVERSIONERR                 0
 
 #define APPLICATION_NAMEAPP                       __L("TSA")
-#define APPLICATION_NAMEFILE                      __L("scripts")
+#define APPLICATION_NAMEFILE                      __L("TSA")
 
 #define APPLICATION_OWNER                         __L("GEN Group")
 

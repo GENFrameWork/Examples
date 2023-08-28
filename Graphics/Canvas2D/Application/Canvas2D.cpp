@@ -520,7 +520,28 @@ bool CANVAS2D::UpdateInput()
                   case CANVAS2D_BUTTON_DOWN   : makeaction = __L("WALK SOUTH");   break;
                   case CANVAS2D_BUTTON_LEFT   : makeaction = __L("WALK WEST" );   break;
                   case CANVAS2D_BUTTON_RIGHT  : makeaction = __L("WALK EAST" );   break;
-                  case CANVAS2D_BUTTON_SPACE  : break;
+
+                  case CANVAS2D_BUTTON_SPACE  : { GRPSCREEN* mainscreen = GetMainScreen();
+
+                                                  if(mainscreen)
+                                                    {
+                                                      GRPBITMAP* bitmap = mainscreen->CaptureContent();    
+                                                      if(bitmap)
+                                                        {
+                                                          GRPVIEWPORT*  viewport = NULL;
+                                                          GRPCANVAS*    canvas   = NULL;
+                                                          
+                                                          viewport = GetMainScreen()->GetViewport(0);
+                                                          if(viewport) canvas =   viewport->GetCanvas();
+                                                          if(!canvas) return false;                                                       
+
+                                                          canvas->PutBitmap(10, 10, bitmap);
+
+                                                          delete bitmap;
+                                                        }
+                                                    }  
+                                                }
+                                                break;
                 }
             }
         }

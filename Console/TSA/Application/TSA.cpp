@@ -207,7 +207,8 @@ bool TSA::AppProc_Ini()
   XTRACE_SETAPPLICATIONID(string);
 
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, APPDEFAULT_DIRECTORY_SCRIPTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS , APPDEFAULT_DIRECTORY_SCRIPTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPDEFAULT_DIRECTORY_GRAPHICS);
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
   InitFSMachine();
@@ -477,7 +478,7 @@ bool TSA::CreateScripToExec()
       if(param) namefilescript = param->Get();
     }
 
-  // namefilescript = __L("test.g");
+  namefilescript = __L("inputsimul.js");
   
   script = SCRIPT::Create(namefilescript.Get());  
   if(!script) 

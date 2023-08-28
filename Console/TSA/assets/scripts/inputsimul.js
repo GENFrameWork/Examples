@@ -5,10 +5,11 @@
 
 function main()
 {
-  var scriptname  = "inputsimul.js";
-  var appname     = "Notepad.exe";
-  var apppath     = "C:\\Windows\\System32\\" + appname;
-  var windowtitle = "Bloc de notas";
+  var scriptname      = "inputsimul.js";
+  var appname         = "Notepad.exe";
+  var apppath         = "C:\\Windows\\System32\\" + appname;
+  var windowtitle     = "Bloc de notas";
+  var maskbitmapname  = "notepad.png"
 
   Log_AddEntry(1, "Script", "[script %s] Iniciado Test...", scriptname);
 
@@ -20,67 +21,67 @@ function main()
   Window_Resize(appname, windowtitle, 800, 600);
   Window_SetFocus(appname, windowtitle);
 
-  var posx = Window_GetPosX(appname, windowtitle);
-  var posy = Window_GetPosY(appname, windowtitle);
+  var posx = Window_GetPosX(appname, windowtitle, maskbitmapname);
+  var posy = Window_GetPosY(appname, windowtitle, maskbitmapname);
 
   XTRACE_PRINTCOLOR(1, "Position of %s %d, %d", appname, posx, posy);
 
-  InpSim_SetMouseClick(posx + 30, posy + 50);
+  InpSim_Mouse_Click(posx + 30, posy + 50);
 
   Sleep(1000);
 
-  InpSim_SetMouseClick(posx + 30, posy + 50);
+  InpSim_Mouse_Click(posx + 30, posy + 50);
 
   Sleep(1000);
 
-  InpSim_SetMouseClick(posx + 30, posy + 150);
+  InpSim_Mouse_Click(posx + 30, posy + 150);
 
   Sleep(1000);
 
-  InpSim_PressKeyByLiteral("A", 100);
-  InpSim_PressKeyByLiteral("ENTER", 100);
+  InpSim_Key_ClickByLiteral("A", 100);
+  InpSim_Key_ClickByLiteral("ENTER", 100);
 
   Log_AddEntry(1, "Script", "[script %s] Simulate Key A + Enter.", scriptname)
   
-  InpSim_PressKeyByLiteral("!"  , 1);
-  InpSim_PressKeyByLiteral("@"  , 1);
-  InpSim_PressKeyByLiteral("#"  , 1);
-  InpSim_PressKeyByLiteral("$"  , 1);
-  InpSim_PressKeyByLiteral("%"  , 1);
-  InpSim_PressKeyByLiteral("^"  , 1);
-  InpSim_PressKeyByLiteral("&"  , 1);
-  InpSim_PressKeyByLiteral("*"  , 1);
-  InpSim_PressKeyByLiteral("("  , 1);
-  InpSim_PressKeyByLiteral(")"  , 1);
-  InpSim_PressKeyByLiteral("_"  , 1);
-  InpSim_PressKeyByLiteral("+"  , 1);
-  InpSim_PressKeyByLiteral("-"  , 1);
-  InpSim_PressKeyByLiteral("="  , 1);
-  InpSim_PressKeyByLiteral("["  , 1);
-  InpSim_PressKeyByLiteral("]"  , 1);
-  InpSim_PressKeyByLiteral("{"  , 1);
-  InpSim_PressKeyByLiteral("}"  , 1);
-  InpSim_PressKeyByLiteral("|"  , 1);
-  InpSim_PressKeyByLiteral(";"  , 1);
-  InpSim_PressKeyByLiteral(":"  , 1);
-  InpSim_PressKeyByLiteral("'"  , 1);
-  InpSim_PressKeyByLiteral(","  , 1);
-  InpSim_PressKeyByLiteral("."  , 1);
-  InpSim_PressKeyByLiteral("<"  , 1);   
-  InpSim_PressKeyByLiteral("?"  , 1);
-  InpSim_PressKeyByLiteral("/"  , 1);
-  InpSim_PressKeyByLiteral("\\" , 1);
-  InpSim_PressKeyByLiteral("\"" , 1);
+  InpSim_Key_ClickByLiteral("!"  , 1);
+  InpSim_Key_ClickByLiteral("@"  , 1);
+  InpSim_Key_ClickByLiteral("#"  , 1);
+  InpSim_Key_ClickByLiteral("$"  , 1);
+  InpSim_Key_ClickByLiteral("%"  , 1);
+  InpSim_Key_ClickByLiteral("^"  , 1);
+  InpSim_Key_ClickByLiteral("&"  , 1);
+  InpSim_Key_ClickByLiteral("*"  , 1);
+  InpSim_Key_ClickByLiteral("("  , 1);
+  InpSim_Key_ClickByLiteral(")"  , 1);
+  InpSim_Key_ClickByLiteral("_"  , 1);
+  InpSim_Key_ClickByLiteral("+"  , 1);
+  InpSim_Key_ClickByLiteral("-"  , 1);
+  InpSim_Key_ClickByLiteral("="  , 1);
+  InpSim_Key_ClickByLiteral("["  , 1);
+  InpSim_Key_ClickByLiteral("]"  , 1);
+  InpSim_Key_ClickByLiteral("{"  , 1);
+  InpSim_Key_ClickByLiteral("}"  , 1);
+  InpSim_Key_ClickByLiteral("|"  , 1);
+  InpSim_Key_ClickByLiteral(";"  , 1);
+  InpSim_Key_ClickByLiteral(":"  , 1);
+  InpSim_Key_ClickByLiteral("'"  , 1);
+  InpSim_Key_ClickByLiteral(","  , 1);
+  InpSim_Key_ClickByLiteral("."  , 1);
+  InpSim_Key_ClickByLiteral("<"  , 1);   
+  InpSim_Key_ClickByLiteral("?"  , 1);
+  InpSim_Key_ClickByLiteral("/"  , 1);
+  InpSim_Key_ClickByLiteral("\\" , 1);
+  InpSim_Key_ClickByLiteral("\"" , 1);
   
-  //InpSim_PressKeyByLiteral("¿"  , 1);
-  //InpSim_PressKeyByLiteral("¡"  , 1);
-  //InpSim_PressKeyByLiteral("ñ"  , 1);
-  //InpSim_PressKeyByLiteral("Ñ"  , 1);
-  //InpSim_PressKeyByLiteral("·"  , 1);
+  //InpSim_Key_ClickByLiteral("¿"  , 1);
+  //InpSim_Key_ClickByLiteral("¡"  , 1);
+  //InpSim_Key_ClickByLiteral("ñ"  , 1);
+  //InpSim_Key_ClickByLiteral("Ñ"  , 1);
+  //InpSim_Key_ClickByLiteral("·"  , 1);
  
-  InpSim_PressKeyByLiteral("ENTER", 1);
+  InpSim_Key_ClickByLiteral("ENTER", 1);
 
-  InpSim_PressKeyByText("Texto De Prueba 0123456789 !@#$%^&*()_+-=[]{}|;:',.<¿¡ñÑ?/\\\"·", 1);
+  InpSim_Key_ClickByText("Texto De Prueba 0123456789 !@#$%^&*()_+-=[]{}|;:',.<¿¡ñÑ?/\\\"·", 1);
 
   Sleep(1000);
 
