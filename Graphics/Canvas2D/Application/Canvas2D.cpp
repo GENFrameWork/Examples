@@ -464,7 +464,6 @@ bool CANVAS2D::AppProc_End()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::UpdateInput()
 {
- 
   if(cursor)
     {     
       if(cursor->GetMotion()->IsReadyToTest())
@@ -521,7 +520,8 @@ bool CANVAS2D::UpdateInput()
                   case CANVAS2D_BUTTON_LEFT   : makeaction = __L("WALK WEST" );   break;
                   case CANVAS2D_BUTTON_RIGHT  : makeaction = __L("WALK EAST" );   break;
 
-                  case CANVAS2D_BUTTON_SPACE  : { GRPSCREEN* mainscreen = GetMainScreen();
+                  case CANVAS2D_BUTTON_SPACE  : /*
+                                                { GRPSCREEN* mainscreen = GetMainScreen();
 
                                                   if(mainscreen)
                                                     {
@@ -541,6 +541,7 @@ bool CANVAS2D::UpdateInput()
                                                         }
                                                     }  
                                                 }
+                                                */                                                
                                                 break;
                 }
             }
@@ -576,10 +577,55 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
     {
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
       xpath.Slash_Add();
-      xpath.Add(__L("background.jpg"));
+      xpath.Add(__L("background.png"));
 
       backgroundbmp = bitmapfile->Load(xpath, GetMainScreen()->GetMode());
       if(!backgroundbmp) return false;
+  
+      
+      XPATH xpathbitmapref;  
+        
+      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpathbitmapref);
+      xpathbitmapref.Slash_Add();
+      xpathbitmapref.Add(__L("ref.png"));
+
+      GRPBITMAPFILE* bitmapfileref = new GRPBITMAPFILE(xpathbitmapref);
+      if(bitmapfileref)
+        {                                         
+          GRPBITMAP* bitmapref = bitmapfileref->Load();         
+          if(bitmapref)
+            {                                      
+              int x = 0;
+              int y = 0;
+    
+              if(backgroundbmp->FindSubBitmap(bitmapref, x, y))
+                {
+
+                }
+            }
+        } 
+      
+      /*
+      GRPRECTINT  rect;
+                  
+      rect.x1 = 75;
+      rect.x2 = rect.x1 + 100;
+
+      rect.y1 = 310;
+      rect.y2 = rect.y1 + 100;    
+
+      GRPBITMAP* bitmapref = backgroundbmp->GetSubBitmap(rect);        
+      if(bitmapref)
+        {                                      
+          int x = 0;
+          int y = 0;
+    
+          if(backgroundbmp->FindSubBitmap(bitmapref, x, y))
+            {
+
+            }
+        }         
+      */
     }
    
   if(!testbmp)
