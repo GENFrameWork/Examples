@@ -581,8 +581,11 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
       backgroundbmp = bitmapfile->Load(xpath, GetMainScreen()->GetMode());
       if(!backgroundbmp) return false;
-  
-      
+   
+      /*
+      int x = 0;
+      int y = 0;
+
       XPATH xpathbitmapref;  
         
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpathbitmapref);
@@ -595,16 +598,14 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
           GRPBITMAP* bitmapref = bitmapfileref->Load();         
           if(bitmapref)
             {                                      
-              int x = 0;
-              int y = 0;
-    
               if(backgroundbmp->FindSubBitmap(bitmapref, x, y))
                 {
 
                 }
             }
         } 
-      
+      */
+
       /*
       GRPRECTINT  rect;
                   
@@ -616,16 +617,18 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
       GRPBITMAP* bitmapref = backgroundbmp->GetSubBitmap(rect);        
       if(bitmapref)
-        {                                      
-          int x = 0;
-          int y = 0;
-    
+        { 
           if(backgroundbmp->FindSubBitmap(bitmapref, x, y))
             {
 
             }
         }         
       */
+
+      int a=0;
+      a++;
+
+
     }
    
   if(!testbmp)

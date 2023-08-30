@@ -6,10 +6,10 @@
 function main()
 {
   var scriptname      = "inputsimul.js";
-  var appname         = "Notepad.exe";
-  var apppath         = "C:\\Windows\\System32\\" + appname;
-  var windowtitle     = "Bloc de notas";
-  var maskbitmapname  = "notepad.png"
+  var appname         = "wordpad.exe";
+  var apppath         = "C:\\Program Files (x86)\\Windows NT\\Accessories\\" + appname;
+  var windowtitle     = "WordPad";
+  var maskbitmapname  = "inputsimul.png"
 
   Log_AddEntry(1, "Script", "[script %s] Iniciado Test...", scriptname);
 
@@ -26,6 +26,7 @@ function main()
 
   XTRACE_PRINTCOLOR(1, "Position of %s %d, %d", appname, posx, posy);
 
+  /*
   InpSim_Mouse_Click(posx + 30, posy + 50);
 
   Sleep(1000);
@@ -33,8 +34,9 @@ function main()
   InpSim_Mouse_Click(posx + 30, posy + 50);
 
   Sleep(1000);
+  
 
-  InpSim_Mouse_Click(posx + 30, posy + 150);
+  InpSim_Mouse_Click(posx + 80, posy + 450);
 
   Sleep(1000);
 
@@ -82,6 +84,7 @@ function main()
   InpSim_Key_ClickByLiteral("ENTER", 1);
 
   InpSim_Key_ClickByText("Texto De Prueba 0123456789 !@#$%^&*()_+-=[]{}|;:',.<¿¡ñÑ?/\\\"·", 1);
+  */
 
   Sleep(1000);
 
@@ -90,5 +93,6 @@ function main()
   TerminateAplicationWithWindow(appname, windowtitle);  
 
   Log_AddEntry(1, "Script", "[script %s] End script.", scriptname);
+  
 }
 
