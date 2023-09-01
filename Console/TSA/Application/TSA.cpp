@@ -310,24 +310,24 @@ bool TSA::AppProc_Update()
           case TSA_XFSMSTATE_INI        : break;
 
           case TSA_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+                                            {
+                                              if(xtimerupdateconsole)
                                                 {
-                                                  if(xtimerupdateconsole)
+                                                  if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
                                                     {
-                                                      if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
-                                                        {
-                                                          Show_AllStatus();
-                                                          xtimerupdateconsole->Reset();
-                                                        }
+                                                      Show_AllStatus();
+                                                      xtimerupdateconsole->Reset();
+                                                    }
 
 
-                                                      if(console->KBHit())
-                                                        {
-                                                          int key = console->GetChar();
-                                                          KeyValidSecuences(key);
-                                                        }
+                                                  if(console->KBHit())
+                                                    {
+                                                      int key = console->GetChar();
+                                                      KeyValidSecuences(key);
                                                     }
                                                 }
-                                              break;
+                                            }
+                                          break;
 
           case TSA_XFSMSTATE_END        : break;
 
@@ -344,17 +344,17 @@ bool TSA::AppProc_Update()
               case TSA_XFSMSTATE_NONE   : break;
 
               case TSA_XFSMSTATE_INI    : if(!CreateScripToExec())
-                                                {
-                                                  SetExitType(APPBASE_EXITTYPE_BY_SERIOUSERROR);
-                                                }
+                                            {
+                                              SetExitType(APPBASE_EXITTYPE_BY_SERIOUSERROR);
+                                            }
 
-                                              SetEvent(TSA_XFSMEVENT_UPDATE);
-                                              break;
+                                          SetEvent(TSA_XFSMEVENT_UPDATE);
+                                          break;
 
               case TSA_XFSMSTATE_UPDATE : break;
 
               case TSA_XFSMSTATE_END    : DeleteScripToExec();
-                                              break;
+                                          break;
             }
         }
     }
@@ -378,8 +378,6 @@ bool TSA::AppProc_End()
   XSTRING stringresult;
 
   SetEvent(TSA_XFSMEVENT_END);
-
-  DeleteScripToExec();
 
   if(xmutexshowallstatus)
     {
@@ -435,7 +433,10 @@ bool TSA::KeyValidSecuences(int key)
 
       case 'R'  : { if(xtimerscriptrun) xtimerscriptrun->Reset();
 
-                    if(script) script->Run();
+                    if(script) 
+                      {
+                        script->Run();
+                      }
 
                     XQWORD timereleapsed      =  xtimerscriptrun->GetMeasureMilliSeconds();
                     double timereleapsedfloat = ((double)timereleapsed/(double)1000);
@@ -630,10 +631,10 @@ void TSA::HandleEvent_Script(SCRIPT_XEVENT* event)
   switch(event->GetEventType())
     {
       case SCRIPT_XEVENT_TYPE_ERROR    : XTRACE_PRINTCOLOR(4,__L("Script ERROR [%d]: %s line %d -> \"%s\""), event->GetError(), event->GetErrorText()->Get(), event->GetNLine(), event->GetCurrentToken()->Get());
-                                        break;
+                                         break;
 
       case SCRIPT_XEVENT_TYPE_BREAK    : XTRACE_PRINTCOLOR(4,__L("Script BREAK: line %d -> \"%s\""), event->GetNLine(), event->GetCurrentToken()->Get());
-                                        break;
+                                         break;
 
     }
 }

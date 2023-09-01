@@ -41,16 +41,6 @@
 #include "DIOURL.h"
 
 #include "Script_XEvent.h"
-#include "Script_Lib_Console.h"
-#include "Script_Lib_Log.h"
-#include "Script_Lib_Math.h"
-#include "Script_Lib_Path.h"
-#include "Script_Lib_Rand.h"
-#include "Script_Lib_String.h"
-#include "Script_Lib_Timer.h"
-#include "Script_Lib_Process.h"
-#include "Script_Lib_Window.h"
-#include "Script_Lib_InputSimulate.h"
 
 #include "APPConsole.h"
 
@@ -120,8 +110,9 @@ class DIOSCRAPERWEBGEOLOCATIONIP;
 class DIOSCRAPERWEBUSERAGENTID;
 class GRPBITMAPSECUENCE;
 class GRPXEVENT;
-class TSA_CFG;
 class SCRIPT;
+class TSA_CFG;
+
 
 class TSA : public APPCONSOLE, public XFSMACHINE
 {
