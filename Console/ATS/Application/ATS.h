@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       TSA.h
+* @file       ATS.h
 * 
-* @class      TSA
-* @brief      GEN TSA (Test Script Automatic) Example class
+* @class      ATS
+* @brief      GEN ATS (Test Script Automatic) Example class
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,8 +26,8 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _TSA_H_
-#define _TSA_H_
+#ifndef _ATS_H_
+#define _ATS_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -50,32 +50,32 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-enum TSAXFSMEVENTS
+enum ATSXFSMEVENTS
 {
-  TSA_XFSMEVENT_NONE                = 0 ,
-  TSA_XFSMEVENT_INI                     ,
-  TSA_XFSMEVENT_UPDATE                  ,
-  TSA_XFSMEVENT_END                     ,
+  ATS_XFSMEVENT_NONE                = 0 ,
+  ATS_XFSMEVENT_INI                     ,
+  ATS_XFSMEVENT_UPDATE                  ,
+  ATS_XFSMEVENT_END                     ,
 
-  TSA_LASTEVENT
+  ATS_LASTEVENT
 };
 
 
-enum TSAXFSMSTATES
+enum ATSXFSMSTATES
 {
-  TSA_XFSMSTATE_NONE                = 0 ,
-  TSA_XFSMSTATE_INI                     ,
-  TSA_XFSMSTATE_UPDATE                  ,
-  TSA_XFSMSTATE_END                     ,
+  ATS_XFSMSTATE_NONE                = 0 ,
+  ATS_XFSMSTATE_INI                     ,
+  ATS_XFSMSTATE_UPDATE                  ,
+  ATS_XFSMSTATE_END                     ,
 
-  TSA_LASTSTATE
+  ATS_LASTSTATE
 };
 
 
-enum TSATASKID
+enum ATSTASKID
 {
-  TSATASKID_UNKNOWN                 = 0 ,
-  TSATASKID_CHECKMEMORYSTATUS           ,
+  ATSTASKID_UNKNOWN                 = 0 ,
+  ATSTASKID_CHECKMEMORYSTATUS           ,
 };
 
 
@@ -83,8 +83,8 @@ enum TSATASKID
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                       __L("TSA")
-#define APPLICATION_NAMEFILE                      __L("TSA")
+#define APPLICATION_NAMEAPP                       __L("ATS")
+#define APPLICATION_NAMEFILE                      __L("ATS")
 
 #define APPLICATION_OWNER                         __L("GEN Group")
 
@@ -111,14 +111,14 @@ class DIOSCRAPERWEBUSERAGENTID;
 class GRPBITMAPSECUENCE;
 class GRPXEVENT;
 class SCRIPT;
-class TSA_CFG;
+class ATS_CFG;
 
 
-class TSA : public APPCONSOLE, public XFSMACHINE
+class ATS : public APPCONSOLE, public XFSMACHINE
 {
   public:
-                                    TSA                                     ();
-    virtual                        ~TSA                                     ();
+                                    ATS                                     ();
+    virtual                        ~ATS                                     ();
 
     bool                            InitFSMachine                           ();
 
@@ -128,12 +128,8 @@ class TSA : public APPCONSOLE, public XFSMACHINE
     bool                            AppProc_End                             ();
 
     bool                            KeyValidSecuences                       (int key);
-
-    bool                            CreateScripToExec                       ();
-    bool                            DeleteScripToExec                       ();
-
+   
     bool                            Show_AppStatus                          ();
-    bool                            Show_ScriptStatus                       ();
     bool                            Show_AllStatus                          ();
 
   private:
@@ -147,8 +143,6 @@ class TSA : public APPCONSOLE, public XFSMACHINE
     XTIMER*                         xtimerscriptrun;
 
     XMUTEX*                         xmutexshowallstatus;
-
-    SCRIPT*                         script;
 };
 
 #pragma endregion

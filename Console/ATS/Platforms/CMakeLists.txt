@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------
-# TSA : Example of console: Scripts example
+# ATS : Example of console: Automatic Tests Scripts example
 # GEN FrameWork
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
- project(tsa)
+ project(ats)
 
 
  set(GEN_DIRECTORY "../../../../") 
@@ -23,6 +23,7 @@
 
  option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                          true )
  option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                              true )
+ option(APP_CFG_SCRIPTS_FEATURE                             "Application Scripts List"                                  true )  
  
  option(SCRIPT_FEATURE                                      "Activate Scripts"                                          true )
  option(SCRIPT_G_FEATURE                                    "Activate Script G Language"                                true )
@@ -39,7 +40,7 @@
 # --------------------------------------------------------------------
 # Config Application Macro
 
- set(APP_CFG_SCRIPTS "-DAPP_CFG=TSA_CFG::GetInstance()")
+ set(APP_CFG_SCRIPTS "-DAPP_CFG=ATS_CFG::GetInstance()")
  add_definitions(${APP_CFG_SCRIPTS})
 
 
@@ -59,8 +60,8 @@
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/TSA.cpp")
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/TSA_CFG.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ATS.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ATS_CFG.cpp")
 
 
 # --------------------------------------------------------------------

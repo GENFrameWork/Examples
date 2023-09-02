@@ -24,7 +24,7 @@ call ./../GEN/Batch/compile_windows.bat Base/MemCtrlExample/Platforms/Windows /x
 call ./../GEN/Batch/compile_windows.bat Console/BinConnPro/Platforms/Windows /x32 binconnpro
 call ./../GEN/Batch/compile_windows.bat Console/Databases/Platforms/Windows /x32 databases
 call ./../GEN/Batch/compile_windows.bat Console/MiniWebServer/Platforms/Windows /x32 miniwebserver
-call ./../GEN/Batch/compile_windows.bat Console/TSA/Platforms/Windows /x32 tsa 
+call ./../GEN/Batch/compile_windows.bat Console/ATS/Platforms/Windows /x32 ats 
 
 ..\Utilities\printf\printf "[Examples Graphics Windows PC x32]\n"
 call ./../GEN/Batch/compile_windows.bat Graphics/Canvas2D/Platforms/Windows /x32 canvas2d
@@ -43,7 +43,7 @@ call ./../GEN/Batch/compile_windows.bat Base/MemCtrlExample/Platforms/Windows /x
 call ./../GEN/Batch/compile_windows.bat Console/BinConnPro/Platforms/Windows /x64 binconnpro
 call ./../GEN/Batch/compile_windows.bat Console/Databases/Platforms/Windows /x64 databases
 call ./../GEN/Batch/compile_windows.bat Console/MiniWebServer/Platforms/Windows /x64 miniwebserver
-call ./../GEN/Batch/compile_windows.bat Console/TSA/Platforms/Windows /x64 tsa 
+call ./../GEN/Batch/compile_windows.bat Console/ATS/Platforms/Windows /x64 ats 
 
 ..\Utilities\printf\printf "[Examples Graphics Windows PC x64]\n"
 call ./../GEN/Batch/compile_windows.bat Graphics/Canvas2D/Platforms/Windows /x64 canvas2d

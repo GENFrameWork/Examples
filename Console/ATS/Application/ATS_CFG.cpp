@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       TSA_CFG.cpp
+* @file       ATS_CFG.cpp
 * 
-* @class      TSA_CFG
-* @brief      GEN TSA (Test Script Automatic) Example Config
+* @class      ATS_CFG
+* @brief      GEN ATS (Automatic Test Script) Example Config
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -31,17 +31,17 @@
 
 #include "GEN_Defines.h"
 
-#include "TSA_CFG.h"
-
 #pragma endregion
 
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
+#include "ATS_CFG.h"
+
 #include "XLog.h"
 
-#include "TSA.h"
+#include "ATS.h"
 
 #include "XMemory_Control.h"
 
@@ -51,7 +51,7 @@
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 #pragma region GENERAL_VARIABLE
 
-TSA_CFG* TSA_CFG::instance = NULL;
+ATS_CFG* ATS_CFG::instance = NULL;
 
 #pragma endregion
 
@@ -62,14 +62,14 @@ TSA_CFG* TSA_CFG::instance = NULL;
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool TSA_CFG::GetIsInstanced()
+* @fn         bool ATS_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool TSA_CFG::GetIsInstanced()
+bool ATS_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
@@ -77,18 +77,18 @@ bool TSA_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         TSA_CFG& TSA_CFG::GetInstance(bool ini)
+* @fn         ATS_CFG& ATS_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup    EXAMPLES
 * 
 * @param[in]  ini : 
 * 
-* @return     TSA_CFG& : 
+* @return     ATS_CFG& : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-TSA_CFG& TSA_CFG::GetInstance(bool ini)
+ATS_CFG& ATS_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new TSA_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = new ATS_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -96,14 +96,14 @@ TSA_CFG& TSA_CFG::GetInstance(bool ini)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool TSA_CFG::DelInstance()
+* @fn         bool ATS_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool TSA_CFG::DelInstance()
+bool ATS_CFG::DelInstance()
 {
   if(instance)
     {
@@ -119,14 +119,14 @@ bool TSA_CFG::DelInstance()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool TSA_CFG::DoVariableMapping()
+* @fn         bool ATS_CFG::DoVariableMapping()
 * @brief      DoVariableMapping
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool TSA_CFG::DoVariableMapping()
+bool ATS_CFG::DoVariableMapping()
 {
   if(!APPCFG::DoVariableMapping())
     {
@@ -139,14 +139,14 @@ bool TSA_CFG::DoVariableMapping()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool TSA_CFG::DoDefault()
+* @fn         bool ATS_CFG::DoDefault()
 * @brief      DoDefault
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool TSA_CFG::DoDefault()
+bool ATS_CFG::DoDefault()
 {
   if(!APPCFG::DoDefault()) 
     {
@@ -186,7 +186,7 @@ bool TSA_CFG::DoDefault()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         TSA_CFG::TSA_CFG(XCHAR* namefile)
+* @fn         ATS_CFG::ATS_CFG(XCHAR* namefile)
 * @brief      Constructor
 * @ingroup    EXAMPLES
 * 
@@ -195,20 +195,20 @@ bool TSA_CFG::DoDefault()
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-TSA_CFG::TSA_CFG(XCHAR* namefile) : APPCFG(namefile)
+ATS_CFG::ATS_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
   if(namefile)
     {
-      Ini<TSA_CFG>();
+      Ini<ATS_CFG>();
     }
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         TSA_CFG::~TSA_CFG()
+* @fn         ATS_CFG::~ATS_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
@@ -216,7 +216,7 @@ TSA_CFG::TSA_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-TSA_CFG::~TSA_CFG()
+ATS_CFG::~ATS_CFG()
 
 {
   Clean();
@@ -225,7 +225,7 @@ TSA_CFG::~TSA_CFG()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void TSA_CFG::Clean()
+* @fn         void ATS_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    EXAMPLES
@@ -233,7 +233,7 @@ TSA_CFG::~TSA_CFG()
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void TSA_CFG::Clean()
+void ATS_CFG::Clean()
 {
 
 }

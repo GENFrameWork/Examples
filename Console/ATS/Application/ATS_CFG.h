@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       TSA_CFG.h
+* @file       ATS_CFG.h
 * 
-* @class      TSA_CFG
-* @brief      GEN TSA (Test Script Automatic) Example Config
+* @class      ATS_CFG
+* @brief      GEN ATS (Automatic Test Script) Example Config
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,8 +26,8 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _TSA_CFG_H_
-#define _TSA_CFG_H_
+#ifndef _ATS_CFG_H_
+#define _ATS_CFG_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -46,27 +46,27 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class TSA_CFG : public APPCFG
+class ATS_CFG : public APPCFG
 {
   public:
 
     static bool                     GetIsInstanced                          ();
-    static TSA_CFG&                 GetInstance                             (bool ini = true);
+    static ATS_CFG&                 GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
     bool                            DoVariableMapping                       (); 
     bool                            DoDefault                               ();
 
   private:
-                                    TSA_CFG                                 (XCHAR* namefile);
-                                    TSA_CFG                                 (TSA_CFG const&);        // Don't implement
-    virtual                        ~TSA_CFG                                 ();
+                                    ATS_CFG                                 (XCHAR* namefile);
+                                    ATS_CFG                                 (ATS_CFG const&);        // Don't implement
+    virtual                        ~ATS_CFG                                 ();
 
-    void                            operator =                              (TSA_CFG const&);        // Don't implement
+    void                            operator =                              (ATS_CFG const&);        // Don't implement
 
     void                            Clean                                   ();
 
-     static TSA_CFG*                instance;
+     static ATS_CFG*                instance;
 };
 
 #pragma endregion
