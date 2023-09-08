@@ -136,6 +136,8 @@ class ATS : public APPCONSOLE, public XFSMACHINE
 
     void                            Clean                                   ();
 
+    static void                     AdjustLibraries                         (SCRIPT* script);
+
     void                            HandleEvent_Script                      (SCRIPT_XEVENT* event);
     void                            HandleEvent                             (XEVENT* xevent);
 

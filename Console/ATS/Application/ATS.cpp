@@ -89,6 +89,10 @@
 
 #include "APPLog.h"
 
+#ifdef SCRIPT_LIB_CFG_ACTIVE
+#include "Script_Lib_CFG.h"
+#endif
+#include "Script.h"
 #include "Script_Language_G.h"
 #include "Script_Language_Lua.h"
 #include "Script_Language_Javascript.h"
@@ -424,7 +428,7 @@ bool ATS::KeyValidSecuences(int key)
 
       case 'R'  : { if(xtimerscriptrun) xtimerscriptrun->Reset();
 
-                    SCRIPT::LoadScriptAndRun(APP_CFG.Scripts_GetAll());
+                    SCRIPT::LoadScriptAndRun(APP_CFG.Scripts_GetAll(), ATS::AdjustLibraries);
 
                     XQWORD timereleapsed      =  xtimerscriptrun->GetMeasureMilliSeconds();
                     double timereleapsedfloat = ((double)timereleapsed/(double)1000);
@@ -514,6 +518,27 @@ bool ATS::Show_AllStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         SCRFUNCADJUSTLIBRARYS ATS::AdjustLibraries(SCRIPT* script)
+* @brief      AdjustLibraries
+* @ingroup    APPLICATION
+* 
+* @param[in]  script : 
+* 
+* @return     SCRFUNCADJUSTLIBRARYS : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void ATS::AdjustLibraries(SCRIPT* script)
+{
+  #ifdef SCRIPT_LIB_CFG_ACTIVE
+  
+  SCRIPT_SET_LIB_CFG(script, APP_CFG);
+
+  #endif
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         void ATS::HandleEvent_Script(SCRIPT_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
@@ -527,7 +552,8 @@ bool ATS::Show_AllStatus()
 void ATS::HandleEvent_Script(SCRIPT_XEVENT* event)
 {
   switch(event->GetEventType())
-    {
+    {      
+
       case SCRIPT_XEVENT_TYPE_ERROR    : XTRACE_PRINTCOLOR(4,__L("Script ERROR [%d]: %s line %d -> \"%s\""), event->GetError(), event->GetErrorText()->Get(), event->GetNLine(), event->GetCurrentToken()->Get());
                                          break;
 
@@ -556,11 +582,11 @@ void ATS::HandleEvent(XEVENT* xevent)
 
   switch(xevent->GetEventFamily())
     {
-       case XEVENT_TYPE_SCRIPT     : { SCRIPT_XEVENT* event = (SCRIPT_XEVENT*)xevent;
-                                      if(!event) return;
+       case XEVENT_TYPE_SCRIPT        : { SCRIPT_XEVENT* event = (SCRIPT_XEVENT*)xevent;
+                                          if(!event) return;
 
-                                      HandleEvent_Script(event);
-                                    }
+                                          HandleEvent_Script(event);
+                                        }
     }
 }
 

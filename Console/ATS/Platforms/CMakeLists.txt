@@ -33,6 +33,7 @@
  option(SCRIPT_LIB_PROCESS_FEATURE                          "Script Lib Process"                                        true )    
  option(SCRIPT_LIB_LOG_FEATURE                              "Script Lib Log"                                            true )    
  option(SCRIPT_LIB_CONSOLE_FEATURE                          "Script Lib Console"                                        true ) 
+ option(SCRIPT_LIB_CFG_FEATURE                              "Script Lib Config File"                                    true )          
  option(SCRIPT_LIB_WINDOW_FEATURE                           "Script Lib Window"                                         true ) 
  option(SCRIPT_LIB_INPUTSIMULATE_FEATURE                    "Script Lib Input Simulated"                                true )    
 
