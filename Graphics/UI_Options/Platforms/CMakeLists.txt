@@ -20,6 +20,7 @@
 
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
  option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
+ option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
  option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
 
  option(LINUX_X11_FEATURE                                   "Activate Linux X11"                                        true )

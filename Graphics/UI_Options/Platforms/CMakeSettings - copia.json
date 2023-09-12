@@ -36,23 +36,6 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "3 - Linux PC x64 (Samba)",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "cmakeExecutable": "cmake",
-      "cmakeCommandArgs": "-DTARGET=PC",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_x64" ],
-      "variables": [],
-      "remoteMachineName": "${defaultRemoteMachineName}",
-      "remoteCMakeListsRoot": "/mnt/GENFrameWork/Examples/Console/ATS/Platforms/",
-      "remoteBuildRoot": "/mnt/GENFrameWork/Examples/Console/ATS/Platforms/Linux/x64smb/",
-      "remoteInstallRoot": "/mnt/GENFrameWork/Examples/Console/ATS/Platforms/Linux/x64smb/",
-      "remoteCopySources": false,
-      "remoteCopyBuildOutput": false, 
-    },
-    {
       "name": "4 - Linux ARM 64",
       "generator": "Ninja",
       "configurationType": "Debug",
