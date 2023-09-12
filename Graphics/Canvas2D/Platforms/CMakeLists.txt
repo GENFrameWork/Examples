@@ -18,24 +18,25 @@
 # --------------------------------------------------------------------
 # Activate features/Defines
 
- option(DEBUG_FEATURE                                       "Activate Debug mode"                            true )
- option(XTRACE_FEATURE                                      "Activate XTrace"                                true )
- option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                       true )
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
+ option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
 
- option(LINUX_X11_FEATURE                                   "Activate Linux X11"                             true )
+ option(LINUX_X11_FEATURE                                   "Activate Linux X11"                                        true )
         
- option(APP_FEATURE                                         "Activate Application modules"                   true )
- option(APP_LOG_FEATURE                                     "Activate Application Log"                       true )
- option(APP_GRAPHICS_FEATURE                                "Activate Application Graphics"                  true )
+ option(APP_FEATURE                                         "Activate Application modules"                              true )
+ option(APP_LOG_FEATURE                                     "Activate Application Log"                                  true )
+ option(APP_GRAPHICS_FEATURE                                "Activate Application Graphics"                             true )
 
- option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"               true )  
- option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                   true )
+ option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                          true )  
+ option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                              true )
 
- option(GRP_FEATURE                                         "Activate Graphics"                              true )
- option(GRP_FILE_FEATURE                                    "Activate Graphics File"                         true )
- option(GRP_2D_FEATURE                                      "Activate Graphics 2D"                           true )
+ option(GRP_FEATURE                                         "Activate Graphics"                                         true )
+ option(GRP_FILE_FEATURE                                    "Activate Graphics File"                                    true )
+ option(GRP_2D_FEATURE                                      "Activate Graphics 2D"                                      true )
 
- option(INP_FEATURE                                         "Activate Inputs"                                true )
+ option(INP_FEATURE                                         "Activate Inputs"                                           true )
 
 
 # --------------------------------------------------------------------
