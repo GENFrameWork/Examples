@@ -1,18 +1,6 @@
-
-function Console_PrintStatus(status)
-{
-  if(status)
-    {
-      Console_Printf("Ok");
-    }
-   else
-    {
-      Console_Printf("Error!");
-    }
-
-  Console_Printf("\n");
-}
-
+// -------------------------------------------------------------------------------------------------------
+// Compile: CMake + Ninja
+// ------------------------------------------------------------------------------------------------------- 
 
 function CompileProject(projectname, projectcompiledir, projectplatform)
 {
@@ -36,10 +24,26 @@ function CompileProject(projectname, projectcompiledir, projectplatform)
     }
 
   if(IsItExists(pathplatform) == true)
-    {
-      Console_Printf("x32 exists\n");
-      return status;
+    {   
+      if(RemoveDir(pathplatform) == false)
+        {
+          return status;
+        }               
     }
+    
+  if(MakeDir(pathplatform) == false)
+    {
+      return status;
+    } 
+
+  if(ChangeDir(pathplatform) == false)
+    {
+      return status;
+    } 
+
+  status = MakeCommand("\"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat\" amd64_x86")
+  
+  status = MakeCommand("cmake -G Ninja ../.. ")
 
   Console_PrintStatus(status);
 
