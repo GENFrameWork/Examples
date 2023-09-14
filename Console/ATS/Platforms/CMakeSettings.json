@@ -39,6 +39,8 @@
       "name": "3 - Linux PC x64 (Samba)",
       "generator": "Ninja",
       "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\Linux\\x64",
+      "installRoot": "${projectDir}\\Linux\\x64",
       "cmakeExecutable": "cmake",
       "cmakeCommandArgs": "-DTARGET=PC",
       "buildCommandArgs": "",
@@ -50,7 +52,7 @@
       "remoteBuildRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ATS/Platforms/Linux/x64smb/",
       "remoteInstallRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ATS/Platforms/Linux/x64smb/",
       "remoteCopySources": false,
-      "remoteCopyBuildOutput": false, 
+      "remoteCopyBuildOutput": false
     },
     {
       "name": "4 - Linux ARM 64",
