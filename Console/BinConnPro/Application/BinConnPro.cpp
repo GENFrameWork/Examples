@@ -272,7 +272,7 @@ bool BINCONNPRO::AppProc_Ini()
 
       XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
       XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
-      XTRACE_PRINTSTATUS(__L("S.O. version"), SO_ID.Get()); 
+      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get()); 
 
       stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
       APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());

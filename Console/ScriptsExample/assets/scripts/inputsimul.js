@@ -10,6 +10,10 @@ function main()
   var apppath         = "C:\\Program Files (x86)\\Windows NT\\Accessories\\" + appname;
   var windowtitle     = "WordPad";
   var maskbitmapname  = "inputsimul.png"
+  
+ 
+  TraceClearScreen(true);
+  TraceClearMsgsStatus(true);
 
   Log_AddEntry(1, "Script", "[script %s] Iniciado Test...", scriptname);
 
@@ -24,7 +28,9 @@ function main()
   var posx = Window_GetPosX(appname, windowtitle, maskbitmapname);
   var posy = Window_GetPosY(appname, windowtitle, maskbitmapname);
 
-  XTRACE_PRINTCOLOR(1, "Position of %s %d, %d", appname, posx, posy);
+  TracePrintColor(1, "Position of %s %d, %d", appname, posx, posy);
+
+  InpSim_Mouse_Click(posx, posy);
 
   /*
   InpSim_Mouse_Click(posx + 30, posy + 50);

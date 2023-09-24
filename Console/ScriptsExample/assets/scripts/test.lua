@@ -30,7 +30,7 @@ function main()
     Console_Printf("%d ", RandBetween(1,100));
   end
   
-  XTRACE_PRINTCOLOR(1, "Prueba de envio %.2f con cadena %s\n", 10.45, "hola radiola"); 
+  TracePrintColor(1, "Prueba de envio %.2f con cadena %s\n", 10.45, "hola radiola"); 
   
   Console_Printf("\nIntroduce una tecla:");
   Console_Printf("[%c]\n", Console_GetChar());
