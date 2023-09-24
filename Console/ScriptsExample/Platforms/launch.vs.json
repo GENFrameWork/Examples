@@ -5,10 +5,10 @@
     {
       "type": "tsa",
       "project": "CMakeLists.txt",
-      "projectTarget": "tsa.exe",
-      "name": "tsa.exe",
+      "projectTarget": "scriptsexample.exe",
+      "name": "scriptsexample.exe",
       "args": [
-        "test.g",
+        "scriptsexample.g",
       ]
     }
   ]

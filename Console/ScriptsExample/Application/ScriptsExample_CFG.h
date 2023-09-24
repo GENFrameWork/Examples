@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       ATS_CFG.h
+* @file       SCRIPTSEXAMPLE_CFG.h
 * 
-* @class      ATS_CFG
-* @brief      GEN ATS (Automatic Test Script) Example Config
+* @class      Scripts Example Config class 
+* @brief      Scripts Example Config 
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,8 +26,8 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _ATS_CFG_H_
-#define _ATS_CFG_H_
+#ifndef _SCRIPTSEXAMPLE_CFG_H_
+#define _SCRIPTSEXAMPLE_CFG_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -46,27 +46,27 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class ATS_CFG : public APPCFG
+class SCRIPTSEXAMPLE_CFG : public APPCFG
 {
   public:
 
     static bool                     GetIsInstanced                          ();
-    static ATS_CFG&                 GetInstance                             (bool ini = true);
+    static SCRIPTSEXAMPLE_CFG&      GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
     bool                            DoVariableMapping                       (); 
     bool                            DoDefault                               ();
 
   private:
-                                    ATS_CFG                                 (XCHAR* namefile);
-                                    ATS_CFG                                 (ATS_CFG const&);        // Don't implement
-    virtual                        ~ATS_CFG                                 ();
+                                    SCRIPTSEXAMPLE_CFG                      (XCHAR* namefile);
+                                    SCRIPTSEXAMPLE_CFG                      (SCRIPTSEXAMPLE_CFG const&);        // Don't implement
+    virtual                        ~SCRIPTSEXAMPLE_CFG                      ();
 
-    void                            operator =                              (ATS_CFG const&);        // Don't implement
+    void                            operator =                              (SCRIPTSEXAMPLE_CFG const&);        // Don't implement
 
     void                            Clean                                   ();
 
-     static ATS_CFG*                instance;
+     static SCRIPTSEXAMPLE_CFG*     instance;
 };
 
 #pragma endregion

@@ -48,9 +48,9 @@
       "inheritEnvironments": [ "linux_x64" ],
       "variables": [],
       "remoteMachineName": "${defaultRemoteMachineName}",
-      "remoteCMakeListsRoot": "/mnt/Projects/GENFrameWork/Examples/Console/ATS/Platforms/",
-      "remoteBuildRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ATS/Platforms/Linux/x64smb/",
-      "remoteInstallRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ATS/Platforms/Linux/x64smb/",
+      "remoteCMakeListsRoot": "/mnt/Projects/GENFrameWork/Examples/Console/ScriptsExample/Platforms/",
+      "remoteBuildRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ScriptsExample/Platforms/Linux/x64smb/",
+      "remoteInstallRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ScriptsExample/Platforms/Linux/x64smb/",
       "remoteCopySources": false,
       "remoteCopyBuildOutput": false
     },

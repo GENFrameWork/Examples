@@ -9,9 +9,8 @@ echo Console
 call ..\GEN\Batch\erase_artifacts Console\BinConnPro
 call ..\GEN\Batch\erase_artifacts Console\Databases
 call ..\GEN\Batch\erase_artifacts Console\MiniWebServer
-call ..\GEN\Batch\erase_artifacts Console\ATS
+call ..\GEN\Batch\erase_artifacts Console\ScriptsExample
 echo Graphics
 call ..\GEN\Batch\erase_artifacts Graphics\Canvas2D
 call ..\GEN\Batch\erase_artifacts Graphics\UI_Options
-
 

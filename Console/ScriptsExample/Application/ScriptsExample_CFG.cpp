@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       ATS_CFG.cpp
+* @file       ScriptsExample_CFG.cpp
 * 
-* @class      ATS_CFG
-* @brief      GEN ATS (Automatic Test Script) Example Config
+* @class      Scripts Example Config class 
+* @brief      Scripts Example Config
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -37,11 +37,11 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "ATS_CFG.h"
+#include "ScriptsExample_CFG.h"
 
 #include "XLog.h"
 
-#include "ATS.h"
+#include "ScriptsExample.h"
 
 #include "XMemory_Control.h"
 
@@ -51,7 +51,7 @@
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 #pragma region GENERAL_VARIABLE
 
-ATS_CFG* ATS_CFG::instance = NULL;
+SCRIPTSEXAMPLE_CFG* SCRIPTSEXAMPLE_CFG::instance = NULL;
 
 #pragma endregion
 
@@ -62,14 +62,14 @@ ATS_CFG* ATS_CFG::instance = NULL;
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS_CFG::GetIsInstanced()
+* @fn         bool SCRIPTSEXAMPLE_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS_CFG::GetIsInstanced()
+bool SCRIPTSEXAMPLE_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
@@ -77,18 +77,18 @@ bool ATS_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         ATS_CFG& ATS_CFG::GetInstance(bool ini)
+* @fn         SCRIPTSEXAMPLE_CFG& SCRIPTSEXAMPLE_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup    EXAMPLES
 * 
 * @param[in]  ini : 
 * 
-* @return     ATS_CFG& : 
+* @return     SCRIPTSEXAMPLE_CFG& : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-ATS_CFG& ATS_CFG::GetInstance(bool ini)
+SCRIPTSEXAMPLE_CFG& SCRIPTSEXAMPLE_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new ATS_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = new SCRIPTSEXAMPLE_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -96,14 +96,14 @@ ATS_CFG& ATS_CFG::GetInstance(bool ini)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS_CFG::DelInstance()
+* @fn         bool SCRIPTSEXAMPLE_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS_CFG::DelInstance()
+bool SCRIPTSEXAMPLE_CFG::DelInstance()
 {
   if(instance)
     {
@@ -119,14 +119,14 @@ bool ATS_CFG::DelInstance()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS_CFG::DoVariableMapping()
+* @fn         bool SCRIPTSEXAMPLE_CFG::DoVariableMapping()
 * @brief      DoVariableMapping
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS_CFG::DoVariableMapping()
+bool SCRIPTSEXAMPLE_CFG::DoVariableMapping()
 {
   if(!APPCFG::DoVariableMapping())
     {
@@ -139,14 +139,14 @@ bool ATS_CFG::DoVariableMapping()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS_CFG::DoDefault()
+* @fn         bool SCRIPTSEXAMPLE_CFG::DoDefault()
 * @brief      DoDefault
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS_CFG::DoDefault()
+bool SCRIPTSEXAMPLE_CFG::DoDefault()
 {
   if(!APPCFG::DoDefault()) 
     {
@@ -186,7 +186,7 @@ bool ATS_CFG::DoDefault()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         ATS_CFG::ATS_CFG(XCHAR* namefile)
+* @fn         SCRIPTSEXAMPLE_CFG::SCRIPTSEXAMPLE_CFG(XCHAR* namefile)
 * @brief      Constructor
 * @ingroup    EXAMPLES
 * 
@@ -195,20 +195,20 @@ bool ATS_CFG::DoDefault()
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-ATS_CFG::ATS_CFG(XCHAR* namefile) : APPCFG(namefile)
+SCRIPTSEXAMPLE_CFG::SCRIPTSEXAMPLE_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
   if(namefile)
     {
-      Ini<ATS_CFG>();
+      Ini<SCRIPTSEXAMPLE_CFG>();
     }
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         ATS_CFG::~ATS_CFG()
+* @fn         SCRIPTSEXAMPLE_CFG::~SCRIPTSEXAMPLE_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
@@ -216,7 +216,7 @@ ATS_CFG::ATS_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-ATS_CFG::~ATS_CFG()
+SCRIPTSEXAMPLE_CFG::~SCRIPTSEXAMPLE_CFG()
 
 {
   Clean();
@@ -225,7 +225,7 @@ ATS_CFG::~ATS_CFG()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void ATS_CFG::Clean()
+* @fn         void SCRIPTSEXAMPLE_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    EXAMPLES
@@ -233,7 +233,7 @@ ATS_CFG::~ATS_CFG()
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void ATS_CFG::Clean()
+void SCRIPTSEXAMPLE_CFG::Clean()
 {
 
 }

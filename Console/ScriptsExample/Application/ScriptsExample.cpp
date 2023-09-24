@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       ATS.cpp
+* @file       ScriptsExample.cpp
 * 
-* @class      ATS
-* @brief      GEN ATS (Automatic Test Script) Example class
+* @class      Scripts Example class 
+* @brief      Scripts Example 
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -37,7 +37,7 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "ATS.h"
+#include "ScriptsExample.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -97,7 +97,7 @@
 #include "Script_Language_Lua.h"
 #include "Script_Language_Javascript.h"
 
-#include "ATS_CFG.h"
+#include "ScriptsExample_CFG.h"
 
 #include "XMemory_Control.h"
 
@@ -107,7 +107,7 @@
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 #pragma region GENERAL_VARIABLE
 
-APPLICATIONCREATEINSTANCE(ATS, ats)
+APPLICATIONCREATEINSTANCE(SCRIPTSEXAMPLE, scriptsexample)
 
 #pragma endregion
 
@@ -125,7 +125,7 @@ APPLICATIONCREATEINSTANCE(ATS, ats)
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-ATS::ATS() : XFSMACHINE(0)
+SCRIPTSEXAMPLE::SCRIPTSEXAMPLE() : XFSMACHINE(0)
 {
   Clean();
 }
@@ -133,7 +133,7 @@ ATS::ATS() : XFSMACHINE(0)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         ATS::~ATS()
+* @fn         SCRIPTSEXAMPLE::~SCRIPTSEXAMPLE()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
@@ -141,7 +141,7 @@ ATS::ATS() : XFSMACHINE(0)
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-ATS::~ATS()
+SCRIPTSEXAMPLE::~SCRIPTSEXAMPLE()
 {
   Clean();
 }
@@ -149,34 +149,34 @@ ATS::~ATS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::InitFSMachine()
+* @fn         bool SCRIPTSEXAMPLE::InitFSMachine()
 * @brief      InitFSMachine
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::InitFSMachine()
+bool SCRIPTSEXAMPLE::InitFSMachine()
 {
-  if(!AddState( ATS_XFSMSTATE_NONE            ,
-                ATS_XFSMEVENT_INI             , ATS_XFSMSTATE_INI           ,
-                ATS_XFSMEVENT_END             , ATS_XFSMSTATE_END           ,
+  if(!AddState( SCRIPTSEXAMPLE_XFSMSTATE_NONE            ,
+                SCRIPTSEXAMPLE_XFSMEVENT_INI             , SCRIPTSEXAMPLE_XFSMSTATE_INI           ,
+                SCRIPTSEXAMPLE_XFSMEVENT_END             , SCRIPTSEXAMPLE_XFSMSTATE_END           ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( ATS_XFSMSTATE_INI             ,
-                ATS_XFSMEVENT_UPDATE          , ATS_XFSMSTATE_UPDATE        ,                
-                ATS_XFSMEVENT_END             , ATS_XFSMSTATE_END           ,
+  if(!AddState( SCRIPTSEXAMPLE_XFSMSTATE_INI             ,
+                SCRIPTSEXAMPLE_XFSMEVENT_UPDATE          , SCRIPTSEXAMPLE_XFSMSTATE_UPDATE        ,                
+                SCRIPTSEXAMPLE_XFSMEVENT_END             , SCRIPTSEXAMPLE_XFSMSTATE_END           ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( ATS_XFSMSTATE_UPDATE          ,               
-                ATS_XFSMEVENT_END             , ATS_XFSMSTATE_END           ,                 
+  if(!AddState( SCRIPTSEXAMPLE_XFSMSTATE_UPDATE          ,               
+                SCRIPTSEXAMPLE_XFSMEVENT_END             , SCRIPTSEXAMPLE_XFSMSTATE_END           ,                 
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( ATS_XFSMSTATE_END             ,
-                ATS_XFSMEVENT_NONE            , ATS_XFSMSTATE_NONE          ,
+  if(!AddState( SCRIPTSEXAMPLE_XFSMSTATE_END             ,
+                SCRIPTSEXAMPLE_XFSMEVENT_NONE            , SCRIPTSEXAMPLE_XFSMSTATE_NONE          ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
   return true;
@@ -185,14 +185,14 @@ bool ATS::InitFSMachine()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::AppProc_Ini()
+* @fn         bool SCRIPTSEXAMPLE::AppProc_Ini()
 * @brief      AppProc_Ini
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::AppProc_Ini()
+bool SCRIPTSEXAMPLE::AppProc_Ini()
 {
   XSTRING string;
   XSTRING stringresult;
@@ -264,7 +264,7 @@ bool ATS::AppProc_Ini()
       APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
     }
 
-  SetEvent(ATS_XFSMEVENT_INI);
+  SetEvent(SCRIPTSEXAMPLE_XFSMEVENT_INI);
 
   return true;
 }
@@ -272,14 +272,14 @@ bool ATS::AppProc_Ini()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::AppProc_FirstUpdate()
+* @fn         bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
 * @brief      AppProc_FirstUpdate
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::AppProc_FirstUpdate()
+bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
 {
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
@@ -293,63 +293,63 @@ bool ATS::AppProc_FirstUpdate()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::AppProc_Update()
+* @fn         bool SCRIPTSEXAMPLE::AppProc_Update()
 * @brief      AppProc_Update
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::AppProc_Update()
+bool SCRIPTSEXAMPLE::AppProc_Update()
 {
-  if(GetEvent()==ATS_XFSMEVENT_NONE) 
+  if(GetEvent()==SCRIPTSEXAMPLE_XFSMEVENT_NONE) 
     {
       switch(GetCurrentState())
         {
-          case ATS_XFSMSTATE_NONE       : break;
+          case SCRIPTSEXAMPLE_XFSMSTATE_NONE        : break;
 
-          case ATS_XFSMSTATE_INI        : break;
+          case SCRIPTSEXAMPLE_XFSMSTATE_INI         : break;
 
-          case ATS_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
-                                            {
-                                              if(xtimerupdateconsole)
-                                                {
-                                                  if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
-                                                    {
-                                                      Show_AllStatus();
-                                                      xtimerupdateconsole->Reset();
-                                                    }
+          case SCRIPTSEXAMPLE_XFSMSTATE_UPDATE      : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+                                                        {
+                                                          if(xtimerupdateconsole)
+                                                            {
+                                                              if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
+                                                                {
+                                                                  Show_AllStatus();
+                                                                  xtimerupdateconsole->Reset();
+                                                                }
 
 
-                                                  if(console->KBHit())
-                                                    {
-                                                      int key = console->GetChar();
-                                                      KeyValidSecuences(key);
-                                                    }
-                                                }
-                                            }
-                                          break;
+                                                              if(console->KBHit())
+                                                                {
+                                                                  int key = console->GetChar();
+                                                                  KeyValidSecuences(key);
+                                                                }
+                                                            }
+                                                        }
+                                                      break;
 
-          case ATS_XFSMSTATE_END        : break;
+          case SCRIPTSEXAMPLE_XFSMSTATE_END         : break;
 
         }
     }
    else 
     {
-      if(GetEvent()<ATS_LASTEVENT)
+      if(GetEvent()<SCRIPTSEXAMPLE_LASTEVENT)
         {
           CheckTransition();
 
           switch(GetCurrentState())
             {
-              case ATS_XFSMSTATE_NONE   : break;
+              case SCRIPTSEXAMPLE_XFSMSTATE_NONE    : break;
 
-              case ATS_XFSMSTATE_INI    : SetEvent(ATS_XFSMEVENT_UPDATE);
-                                          break;
+              case SCRIPTSEXAMPLE_XFSMSTATE_INI     : SetEvent(SCRIPTSEXAMPLE_XFSMEVENT_UPDATE);
+                                                      break;
 
-              case ATS_XFSMSTATE_UPDATE : break;
+              case SCRIPTSEXAMPLE_XFSMSTATE_UPDATE  : break;
 
-              case ATS_XFSMSTATE_END    : break;
+              case SCRIPTSEXAMPLE_XFSMSTATE_END     : break;
             }
         }
     }
@@ -360,19 +360,19 @@ bool ATS::AppProc_Update()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::AppProc_End()
+* @fn         bool SCRIPTSEXAMPLE::AppProc_End()
 * @brief      AppProc_End
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::AppProc_End()
+bool SCRIPTSEXAMPLE::AppProc_End()
 {
   XSTRING string;
   XSTRING stringresult;
 
-  SetEvent(ATS_XFSMEVENT_END);
+  SetEvent(SCRIPTSEXAMPLE_XFSMEVENT_END);
 
   if(xmutexshowallstatus)
     {
@@ -402,7 +402,7 @@ bool ATS::AppProc_End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::KeyValidSecuences(int key)
+* @fn         bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
 * @brief      KeyValidSecuences
 * @ingroup    EXAMPLES
 * 
@@ -411,7 +411,7 @@ bool ATS::AppProc_End()
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::KeyValidSecuences(int key)
+bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
 
@@ -428,7 +428,7 @@ bool ATS::KeyValidSecuences(int key)
 
       case 'R'  : { if(xtimerscriptrun) xtimerscriptrun->Reset();
 
-                    SCRIPT::LoadScriptAndRun(APP_CFG.Scripts_GetAll(), ATS::AdjustLibraries);
+                    SCRIPT::LoadScriptAndRun(APP_CFG.Scripts_GetAll(), SCRIPTSEXAMPLE::AdjustLibraries);
 
                     XQWORD timereleapsed      =  xtimerscriptrun->GetMeasureMilliSeconds();
                     double timereleapsedfloat = ((double)timereleapsed/(double)1000);
@@ -447,14 +447,14 @@ bool ATS::KeyValidSecuences(int key)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::Show_AppStatus()
+* @fn         bool SCRIPTSEXAMPLE::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::Show_AppStatus()
+bool SCRIPTSEXAMPLE::Show_AppStatus()
 {
   XSTRING string;
   XSTRING string2;
@@ -494,14 +494,14 @@ bool ATS::Show_AppStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool ATS::Show_AllStatus()
+* @fn         bool SCRIPTSEXAMPLE::Show_AllStatus()
 * @brief      Show_AllStatus
 * @ingroup    EXAMPLES
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool ATS::Show_AllStatus()
+bool SCRIPTSEXAMPLE::Show_AllStatus()
 {
   console->Clear();
 
@@ -518,7 +518,7 @@ bool ATS::Show_AllStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         SCRFUNCADJUSTLIBRARYS ATS::AdjustLibraries(SCRIPT* script)
+* @fn         SCRFUNCADJUSTLIBRARYS SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
 * @brief      AdjustLibraries
 * @ingroup    APPLICATION
 * 
@@ -527,7 +527,7 @@ bool ATS::Show_AllStatus()
 * @return     SCRFUNCADJUSTLIBRARYS : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void ATS::AdjustLibraries(SCRIPT* script)
+void SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
 {
   #ifdef SCRIPT_LIB_CFG_ACTIVE
   
@@ -539,7 +539,7 @@ void ATS::AdjustLibraries(SCRIPT* script)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void ATS::HandleEvent_Script(SCRIPT_XEVENT* event)
+* @fn         void SCRIPTSEXAMPLE::HandleEvent_Script(SCRIPT_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
 * @ingroup    EXAMPLES
@@ -549,7 +549,7 @@ void ATS::AdjustLibraries(SCRIPT* script)
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void ATS::HandleEvent_Script(SCRIPT_XEVENT* event)
+void SCRIPTSEXAMPLE::HandleEvent_Script(SCRIPT_XEVENT* event)
 {
   switch(event->GetEventType())
     {      
@@ -566,7 +566,7 @@ void ATS::HandleEvent_Script(SCRIPT_XEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void ATS::HandleEvent(XEVENT* xevent)
+* @fn         void SCRIPTSEXAMPLE::HandleEvent(XEVENT* xevent)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
 * @ingroup    EXAMPLES
@@ -576,7 +576,7 @@ void ATS::HandleEvent_Script(SCRIPT_XEVENT* event)
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void ATS::HandleEvent(XEVENT* xevent)
+void SCRIPTSEXAMPLE::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
 
@@ -593,7 +593,7 @@ void ATS::HandleEvent(XEVENT* xevent)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void ATS::Clean()
+* @fn         void SCRIPTSEXAMPLE::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    EXAMPLES
@@ -601,7 +601,7 @@ void ATS::HandleEvent(XEVENT* xevent)
 * @return     void : does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void ATS::Clean()
+void SCRIPTSEXAMPLE::Clean()
 {
   xtimerupdateconsole         = NULL;
   xtimerscriptrun             = NULL;

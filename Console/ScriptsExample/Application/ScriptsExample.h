@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       ATS.h
+* @file       ScriptsExample.h
 * 
-* @class      ATS
-* @brief      GEN ATS (Test Script Automatic) Example class
+* @class      Scripts Example class 
+* @brief      Scripts Example 
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,8 +26,8 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _ATS_H_
-#define _ATS_H_
+#ifndef _SCRIPTSEXAMPLE_H_
+#define _SCRIPTSEXAMPLE_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -50,32 +50,32 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-enum ATSXFSMEVENTS
+enum SCRIPTSEXAMPLEXFSMEVENTS
 {
-  ATS_XFSMEVENT_NONE                = 0 ,
-  ATS_XFSMEVENT_INI                     ,
-  ATS_XFSMEVENT_UPDATE                  ,
-  ATS_XFSMEVENT_END                     ,
+  SCRIPTSEXAMPLE_XFSMEVENT_NONE                = 0 ,
+  SCRIPTSEXAMPLE_XFSMEVENT_INI                     ,
+  SCRIPTSEXAMPLE_XFSMEVENT_UPDATE                  ,
+  SCRIPTSEXAMPLE_XFSMEVENT_END                     ,
 
-  ATS_LASTEVENT
+  SCRIPTSEXAMPLE_LASTEVENT
 };
 
 
-enum ATSXFSMSTATES
+enum SCRIPTSEXAMPLEXFSMSTATES
 {
-  ATS_XFSMSTATE_NONE                = 0 ,
-  ATS_XFSMSTATE_INI                     ,
-  ATS_XFSMSTATE_UPDATE                  ,
-  ATS_XFSMSTATE_END                     ,
+  SCRIPTSEXAMPLE_XFSMSTATE_NONE                = 0 ,
+  SCRIPTSEXAMPLE_XFSMSTATE_INI                     ,
+  SCRIPTSEXAMPLE_XFSMSTATE_UPDATE                  ,
+  SCRIPTSEXAMPLE_XFSMSTATE_END                     ,
 
-  ATS_LASTSTATE
+  SCRIPTSEXAMPLE_LASTSTATE
 };
 
 
-enum ATSTASKID
+enum SCRIPTSEXAMPLETASKID
 {
-  ATSTASKID_UNKNOWN                 = 0 ,
-  ATSTASKID_CHECKMEMORYSTATUS           ,
+  SCRIPTSEXAMPLETASKID_UNKNOWN                 = 0 ,
+  SCRIPTSEXAMPLETASKID_CHECKMEMORYSTATUS           ,
 };
 
 
@@ -83,8 +83,8 @@ enum ATSTASKID
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                       __L("ATS")
-#define APPLICATION_NAMEFILE                      __L("ATS")
+#define APPLICATION_NAMEAPP                       __L("Scripts Example")
+#define APPLICATION_NAMEFILE                      __L("scriptsexample")
 
 #define APPLICATION_OWNER                         __L("GEN Group")
 
@@ -111,14 +111,14 @@ class DIOSCRAPERWEBUSERAGENTID;
 class GRPBITMAPSECUENCE;
 class GRPXEVENT;
 class SCRIPT;
-class ATS_CFG;
+class SCRIPTSEXAMPLE_CFG;
 
 
-class ATS : public APPCONSOLE, public XFSMACHINE
+class SCRIPTSEXAMPLE : public APPCONSOLE, public XFSMACHINE
 {
   public:
-                                    ATS                                     ();
-    virtual                        ~ATS                                     ();
+                                    SCRIPTSEXAMPLE                          ();
+    virtual                        ~SCRIPTSEXAMPLE                          ();
 
     bool                            InitFSMachine                           ();
 

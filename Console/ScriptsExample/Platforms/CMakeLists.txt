@@ -1,11 +1,10 @@
 # --------------------------------------------------------------------
-# ATS : Example of console: Automatic Tests Scripts example
+# ScriptsExample : Example of console of Scripts
 # GEN FrameWork
 # --------------------------------------------------------------------
 
  cmake_minimum_required(VERSION 3.6.0)
- project(ats)
-
+ project(scriptsexample)
 
  set(GEN_DIRECTORY "../../../../") 
 
@@ -42,7 +41,7 @@
 # --------------------------------------------------------------------
 # Config Application Macro
 
- set(APP_CFG_SCRIPTS "-DAPP_CFG=ATS_CFG::GetInstance()")
+ set(APP_CFG_SCRIPTS "-DAPP_CFG=SCRIPTSEXAMPLE_CFG::GetInstance()")
  add_definitions(${APP_CFG_SCRIPTS})
 
 
@@ -62,8 +61,8 @@
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ATS.cpp")
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ATS_CFG.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ScriptsExample.cpp")
+ list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ScriptsExample_CFG.cpp")
 
 
 # --------------------------------------------------------------------
