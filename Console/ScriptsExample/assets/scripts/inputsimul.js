@@ -5,11 +5,26 @@
 
 function main()
 {
-  var scriptname      = "inputsimul.js";
+
+  var scriptlog;
+  var scriptname;
   var appname         = "wordpad.exe";
   var apppath         = "C:\\Program Files (x86)\\Windows NT\\Accessories\\" + appname;
   var windowtitle     = "WordPad";
   var maskbitmapname  = "inputsimul.png"
+
+  scriptlog   = GetPathScript() +  GetNameScript() + ".log";
+  scriptname  = GetNameScript() + ".js";
+
+  
+  if(!Log_Ini(scriptlog, "ScriptsExample"))
+    {
+      return;  
+    }
+  
+  Log_CFG_SetLimit(30000, 3);
+  Log_CFG_SetFilters("Script", 0x000F);
+  Log_CFG_SetBackup(true, 10, true);     
   
  
   TraceClearScreen(true);
