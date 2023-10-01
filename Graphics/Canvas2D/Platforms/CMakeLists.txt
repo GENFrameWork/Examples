@@ -12,8 +12,8 @@
 #set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk")
 #set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21e_linux")
 #set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk-r23b")
- set(ANDROID_NDK_ROOT "C:/Microsoft/AndroidNDK/android-ndk-r21e")
-
+ set(ANDROID_NDK_ROOT "C:/Microsoft/AndroidNDK/android-ndk-r23c")
+                      
 
 # --------------------------------------------------------------------
 # Activate features/Defines

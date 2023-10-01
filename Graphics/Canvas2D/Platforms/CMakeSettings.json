@@ -87,6 +87,18 @@
       "inheritEnvironments": [ "linux_arm64" ],
       "wslPath": "${defaultWSLPath}",
       "intelliSenseMode": "linux-gcc-arm"
+    },
+    {
+      "name": "8 - Android",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\Android",
+      "installRoot": "${projectDir}\\Android",
+      "cmakeCommandArgs": "-DTARGET=ANDROID",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "clang_cl_arm64_x64" ],
+      "intelliSenseMode": "android-clang-arm64"
     }
   ]
 }
