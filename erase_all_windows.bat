@@ -13,4 +13,4 @@ call ..\GEN\Batch\erase_artifacts Console\ScriptsExample
 echo Graphics
 call ..\GEN\Batch\erase_artifacts Graphics\Canvas2D
 call ..\GEN\Batch\erase_artifacts Graphics\UI_Options
-
+pause

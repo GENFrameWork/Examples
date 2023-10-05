@@ -1,6 +1,5 @@
 @echo off
 call erase_all_windows.bat
-pause
 set vctype=%1
 if "%vctype%"=="" (set vctype=Enterprise)
 echo -------------------------------------------------------------
