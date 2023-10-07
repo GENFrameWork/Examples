@@ -465,7 +465,7 @@ bool SCRIPTSEXAMPLE::Show_AppStatus()
   GEN_XSYSTEM.GetMemoryInfo(total,free);
 
   string  = __L("Memoria total");
-  string2.Format(__L("%d Kb, libre %d Kb (el %d%%%%)"), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
+  string2.Format(__L("%d Kb, libre %d Kb (el %d%%)"), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
   Show_Line(string, string2);
 
   XDATETIME* datetime = GEN_XFACTORY.CreateDateTime();
