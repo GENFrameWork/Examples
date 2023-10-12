@@ -40,6 +40,8 @@ function main()
   Window_Resize(appname, windowtitle, 800, 600);
   Window_SetFocus(appname, windowtitle);
 
+  Window_SetBmpFindCFG(2, 0);
+
   var posx = Window_GetPosX(appname, windowtitle, maskbitmapname);
   var posy = Window_GetPosY(appname, windowtitle, maskbitmapname);
 
