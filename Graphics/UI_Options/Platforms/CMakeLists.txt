@@ -16,32 +16,32 @@
 
 
 # --------------------------------------------------------------------
-# Activate features/Defines
+# features/Defines
 
- option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
- option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
+ option(DEBUG_FEATURE                                       "Debug mode"                                                true )
+ option(XTRACE_FEATURE                                      "XTrace"                                                    true )
  option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
- option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
+ option(XMEMORY_CONTROL_FEATURE                             "XMemory Control"                                           true )
 
- option(LINUX_X11_FEATURE                                   "Activate Linux X11"                                        true )
+ option(LINUX_X11_FEATURE                                   "Linux X11"                                                 true )
 
- option(USERINTERFACE_FEATURE                               "Activate User Interace"                                    true )
-#option(USERINTERFACE_DEBUG_FEATURE                         "Activate Debug User Interace"                              true )
+ option(USERINTERFACE_FEATURE                               "User Interace"                                             true )
+#option(USERINTERFACE_DEBUG_FEATURE                         "Debug User Interace"                                       true )
         
- option(APP_FEATURE                                         "Activate Application modules"                              true )
- option(APP_LOG_FEATURE                                     "Activate Application Log"                                  true )
- option(APP_GRAPHICS_FEATURE                                "Activate Application Graphics"                             true )
+ option(APP_FEATURE                                         "Application modules"                                       true )
+ option(APP_LOG_FEATURE                                     "Application Log"                                           true )
+ option(APP_GRAPHICS_FEATURE                                "Application Graphics"                                      true )
 
- option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                          true )
- option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                              true )
+ option(APP_CFG_GENERAL_FEATURE                             "Application CFG General"                                   true )
+ option(APP_CFG_LOG_FEATURE                                 "Application CFG LOG"                                       true )
 
- option(GRP_FEATURE                                         "Activate Graphics"                                         true )
- option(GRP_FILE_FEATURE                                    "Activate Graphics File"                                    true )
+ option(GRP_FEATURE                                         "Graphics"                                                  true )
+ option(GRP_BITMAP_FILE_FEATURE                             "Graphics Files Bitmap Type"                                true )
  option(GRP_VIDEO_FILE_FEATURE                              "Graphics Video File"                                       true )
  option(GRP_VIDEO_FILE_AVI_FEATURE                          "Graphics Video File AVI"                                   true )
- option(GRP_2D_FEATURE                                      "Activate Graphics 2D"                                      true )
+ option(GRP_2D_FEATURE                                      "Graphics 2D"                                               true )
 
- option(INP_FEATURE                                         "Activate Inputs"                                           true )
+ option(INP_FEATURE                                         "Inputs"                                                    true )
 
 
 # --------------------------------------------------------------------
