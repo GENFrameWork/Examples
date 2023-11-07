@@ -331,9 +331,18 @@ bool CANVAS2D::AppProc_FirstUpdate()
 
   if(canvas)
     {
+      XPATH xpath;
+
       if(backgroundbmp) canvas->PutBitmapNoAlpha(0, 0, backgroundbmp);
 
       canvas->RasterFont_Select(__L("verdana18"));
+
+      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_FONTS, xpath);   
+      xpath.Slash_Add();
+      xpath.Add(__L("Augusta.ttf"));
+     
+      canvas->Vectorfont_GetConfig()->SetHeight(35.0f);
+      canvas->VectorFont_Load(xpath);
     }
 
   //--------------------------------------------------------------------------------
@@ -623,14 +632,9 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
             }
         }         
-      */
-
-      int a=0;
-      a++;
-
-
+      */      
     }
-   
+
   if(!testbmp)
     {
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
@@ -663,7 +667,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   #ifndef ANDROID 
   if(backgroundbmp)
     {
-      screen->SetWidth(600);
+      screen->SetWidth(640);
       screen->SetHeight(backgroundbmp->GetHeight());
     }
    else
@@ -771,18 +775,21 @@ bool CANVAS2D::DrawFrame()
       if(x<-100) x = 950;
     }
 
-  canvas->CreateRebuildArea(rect->x1 + 50, 50, rect->x1 + 450, 150);
+  canvas->CreateRebuildArea(rect->x1 + 80, 50, rect->x1 + 550, 150);
 
   canvas->SetLineWidth(1.5f);
   canvas->SetLineColor(&colorwhite);
   canvas->SetFillColor(&colorgray);
 
-  canvas->RoundRect(rect->x1 + 50, 50, rect->x1 + 450, 150, 20, true);
+  canvas->RoundRect(rect->x1 + 80, 50, rect->x1 + 550, 150, 20, true);
 
 
-  canvas->RasterFont_SetColor(&colorwhite);
-  canvas->RasterFont_Printf(rect->x1 + 60, 80, __L("Erase una vez ... "));
+  //canvas->RasterFont_SetColor(&colorwhite);
+  //canvas->RasterFont_Printf(rect->x1 + 60, 80, __L("Erase una vez ... "));
 
+  canvas->Vectorfont_GetConfig()->SetColor(&colorwhite);
+  canvas->VectorFont_Printf(rect->x1 + 100,  90, __L("Once upon a time... "));
+  canvas->VectorFont_Printf(rect->x1 + 130, 130, __L("in a kingdom far, far away... "));
 
   canvas->DrawFramerate(2,20, GetMainScreen());
 
