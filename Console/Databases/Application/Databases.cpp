@@ -1,38 +1,43 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Databases.cpp
-*
+* 
 * @class      DATABASES
-* @brief      GEN Databases Example class
+* @brief      Example Databases class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
 
 #include "GEN_Defines.h"
 
+#pragma endregion
+
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
+
+#include "Databases.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -89,64 +94,63 @@
 
 #include "Databases_CFG.h"
 
-#include "Databases.h"
-
 #include "XMemory_Control.h"
+
+#pragma endregion
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
- APPLICATIONCREATEINSTANCE(DATABASES, databases)
+APPLICATIONCREATEINSTANCE(DATABASES, databases)
+
+#pragma endregion
+
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::DATABASES
-* @brief      Constructor
-* @ingroup
-*
-* @param
-* @return
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+
+@fn         DATABASES::DATABASES()
+@brief      Constructor
+@ingroup    APPLICATION
+
+@return     Does not return anything. 
+
+--------------------------------------------------------------------------------------------------------------------*/
 DATABASES::DATABASES() :  XFSMACHINE(0)
 {
   Clean();
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::~DATABASES
+* 
+* @fn         DATABASES::~DATABASES()
 * @brief      Destructor
-* @ingroup
-*
-* @param
-* @return
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @note       VIRTUAL
+* @ingroup    APPLICATION
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 DATABASES::~DATABASES()
 {
   Clean();
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::InitFSMachine
-* @brief      Init FS Machine
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool DATABASES::InitFSMachine()
+* @brief      InitFSMachine
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::InitFSMachine()
 {
   if(!AddState( DATABASES_XFSMSTATE_NONE            ,
@@ -170,18 +174,15 @@ bool DATABASES::InitFSMachine()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::AppProc_Ini
-* @brief      Ini Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool DATABASES::AppProc_Ini()
+* @brief      AppProc_Ini
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_Ini()
 {
   XSTRING string;
@@ -291,16 +292,14 @@ bool DATABASES::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::AppProc_FirstUpdate
-* @brief      First Update
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool DATABASES::AppProc_FirstUpdate()
+* @brief      AppProc_FirstUpdate
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_FirstUpdate()
 {
   //--------------------------------------------------------------------------------------
@@ -315,16 +314,14 @@ bool DATABASES::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::AppProc_Update
-* @brief      Update Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool DATABASES::AppProc_Update()
+* @brief      AppProc_Update
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_Update()
 {
   if(GetEvent()==DATABASES_XFSMEVENT_NONE) // Not new event
@@ -377,18 +374,15 @@ bool DATABASES::AppProc_Update()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::AppProc_End
-* @brief      End Application
-* @ingroup
-*
-* @param
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         bool DATABASES::AppProc_End()
+* @brief      AppProc_End
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_End()
 {
   XSTRING string;
@@ -432,18 +426,17 @@ bool DATABASES::AppProc_End()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool DATABASES::KeyValidSecuences(int key)
 * @brief      KeyValidSecuences
 * @ingroup    APPLICATION
-*
-* @param[in]  key :
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @param[in]  key : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
@@ -469,19 +462,17 @@ bool DATABASES::KeyValidSecuences(int key)
 }
 
 
-
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
-* @brief      ChangeDataBaseType
+* @brief      DataBase_ChangeType
 * @ingroup    APPLICATION
-*
-* @param[in]  type :
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @param[in]  type : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
 {
   if(database)
@@ -498,16 +489,15 @@ bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool DATABASES::DoTestDatabaseSQL()
-* @brief      DoTestDatabaseSQL
+* 
+* @fn         bool DATABASES::Database_DoTest()
+* @brief      Database_DoTest
 * @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Database_DoTest()
 {
   XCHAR*              fields[DATABASES_TABLE_MAXFIELDS];
@@ -845,14 +835,14 @@ bool DATABASES::Database_DoTest()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool SCRIPT::Show_AppStatus()
+* 
+* @fn         bool DATABASES::Show_AppStatus()
 * @brief      Show_AppStatus
 * @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Show_AppStatus()
 {
   XSTRING string;
@@ -918,14 +908,14 @@ bool DATABASES::Show_DatabasesStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool DATABASES::Show_AllStatus()
 * @brief      Show_AllStatus
 * @ingroup    APPLICATION
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Show_AllStatus()
 {
   console->Clear();
@@ -943,16 +933,17 @@ bool DATABASES::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES::HandleEvent
-* @brief      Handle Events
-* @ingroup
-*
-* @param[]    xevent : event send to control
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @fn         void DATABASES::HandleEvent(XEVENT* xevent)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    APPLICATION
+* 
+* @param[in]  xevent : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void DATABASES::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -972,15 +963,15 @@ void DATABASES::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         void DATABASES::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void DATABASES::Clean()
 {
   xtimerupdateconsole         = NULL;
@@ -989,3 +980,6 @@ void DATABASES::Clean()
 
   database                    = NULL;
 }
+
+
+#pragma endregion

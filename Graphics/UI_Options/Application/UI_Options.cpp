@@ -1,36 +1,43 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       UI_Options.cpp
-*
+* 
 * @class      UI_OPTIONS
-* @brief      GEN UI Options Example class
+* @brief      Graphics UI Options Example class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
 
 #include "GEN_Defines.h"
 
+#pragma endregion
+
+
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
+
+#include "UI_Options.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -104,18 +111,21 @@
 #include "APPLog.h"
 
 #include "UI_Options_CFG.h"
-
-#include "UI_Options.h"
-
 #include "XMemory_Control.h"
+
+#pragma endregion
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
  APPLICATIONCREATEINSTANCE(UI_OPTIONS, canvas2d)
 
-/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma endregion
 
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -134,7 +144,6 @@ UI_OPTIONS::UI_OPTIONS() :  XFSMACHINE(0)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         UI_OPTIONS::~UI_OPTIONS
@@ -149,7 +158,6 @@ UI_OPTIONS::~UI_OPTIONS()
 {
   Clean();
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -184,7 +192,6 @@ bool UI_OPTIONS::InitFSMachine()
 
   return true;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -304,7 +311,6 @@ bool UI_OPTIONS::AppProc_Ini()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         UI_OPTIONS::AppProc_FirstUpdate
@@ -370,7 +376,6 @@ bool UI_OPTIONS::AppProc_FirstUpdate()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         UI_OPTIONS::AppProc_Update
@@ -418,7 +423,6 @@ bool UI_OPTIONS::AppProc_Update()
 
   return true;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -481,7 +485,6 @@ bool UI_OPTIONS::AppProc_End()
 
   return true;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -688,7 +691,6 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool UI_OPTIONS::Ini_UserInterface(bool on)
@@ -797,9 +799,6 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 }
 
 
-
-
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_OPTIONS::DrawFrame()
@@ -898,7 +897,6 @@ bool UI_OPTIONS::DrawFrame()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
@@ -962,7 +960,6 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresolved)
@@ -1005,7 +1002,6 @@ bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, 
  
   return true;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -1100,9 +1096,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
   delete xfileAVI;                                                      
 
   dataimgs.DeleteContents();
-  dataimgs.DeleteAll();
-  
-  
+  dataimgs.DeleteAll();  
      
   /*              
   // -------------------------------------------------------------------------------
@@ -1152,7 +1146,6 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
@@ -1195,7 +1188,6 @@ void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void UI_OPTIONS::Graphics_HandleEvent(GRPXEVENT* event)
@@ -1219,7 +1211,6 @@ void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
                                               break;
     }
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -1256,7 +1247,6 @@ void UI_OPTIONS::HandleEvent(XEVENT* xevent)
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void UI_OPTIONS::Clean()
@@ -1279,3 +1269,7 @@ void UI_OPTIONS::Clean()
   
   testbmp     = NULL;    
 }
+
+
+#pragma endregion
+

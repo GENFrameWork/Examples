@@ -3,7 +3,7 @@
 * @file       NotAppExample.cpp
 * 
 * @class      NOTAPPEXAMPLE
-* @brief      Not Application Example (aplication simple without "application" class of GEN)
+* @brief      Not Application Example (aplication simple without "application" class)
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.

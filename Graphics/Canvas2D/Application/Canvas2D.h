@@ -1,35 +1,36 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Canvas2D.h
-*
+* 
 * @class      CANVAS2D
-* @brief      GEN Canvas 2D Example class
+* @brief      Graphics Canvas 2D Example class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
 #ifndef _CANVAS2D_H_
 #define _CANVAS2D_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -39,9 +40,15 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
+#include "SNDPlayCFG.h"
+
 #include "APPGraphics.h"
 
+#pragma endregion
+
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
+#pragma region DEFINES_ENUMS
 
 enum CANVAS2DXFSMEVENTS
 {
@@ -97,7 +104,11 @@ enum CANVAS2D_BUTTONS
 #define APPLICATION_YEAROFCREATION                2018
 
 
+#pragma endregion
+
+
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
+#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -119,6 +130,8 @@ class UI_XEVENT;
 class GRPXEVENT;
 class GRPBITMAP;
 class GRPBITMAPSEQUENCE;
+class SNDFACTORY_XEVENT;
+class SNDITEM;
 class CANVAS2D_CFG;
 
 
@@ -140,13 +153,17 @@ class CANVAS2D : public APPGRAPHICS, public XFSMACHINE
     bool                            UpdateInput                             ();
 
     bool                            Ini_Graphics                            (GRPSCREEN* screen);
+
+    bool                            DrawStep                                (GRPCANVAS* canvas, int x, int y, bool type);
     bool                            DrawFrame                               ();
 
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
+    void                            HandleEvent_Sound                       (SNDFACTORY_XEVENT* event);
     void                            HandleEvent                             (XEVENT* xevent);
 
     void                            Clean                                   ();
 
+    XRAND*                          rand;
     XTIMER*                         xtimer;
 
     INPBUTTON*                      button[CANVAS2D_BUTTON_MAX];
@@ -157,10 +174,21 @@ class CANVAS2D : public APPGRAPHICS, public XFSMACHINE
     GRPBITMAP*                      backgroundbmp;
     GRPBITMAP*                      testbmp;
     GRPBITMAPSEQUENCE*              charactersecuence;
+
+    SNDPLAYCFG                      playCFGsound;
+    SNDITEM*                        backgroundsound;
+    SNDITEM*                        armorwalkingsounds[2];
 };
 
 
-/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
+#pragma endregion
+
+
+/*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
+#pragma region FUNCTIONS_PROTOTYPES
+
+
+#pragma endregion
+
 
 #endif
-

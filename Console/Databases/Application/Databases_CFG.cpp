@@ -1,80 +1,91 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Databases_CFG.cpp
-*
+* 
 * @class      DATABASES_CFG
-* @brief      Databases Configuration
+* @brief      Example Databases Config class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
 
 #include "GEN_Defines.h"
 
+#pragma endregion
+
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
+
+#include "Databases_CFG.h"
 
 #include "XLog.h"
 
 #include "Databases.h"
 
-#include "Databases_CFG.h"
-
 #include "XMemory_Control.h"
 
+#pragma endregion
+
+
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
 DATABASES_CFG* DATABASES_CFG::instance = NULL;
 
-/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma endregion
 
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool DATABASES_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 * @brief      GetInstance
-* @ingroup
-*
-* @return     DATABASES_CFG& :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @param[in]  ini : 
+* 
+* @return     DATABASES_CFG& : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = new DATABASES_CFG(ini?APPLICATION_NAMEFILE:NULL);
@@ -84,14 +95,14 @@ DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         bool DATABASES_CFG::DelInstance()
 * @brief      DelInstance
-* @ingroup
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::DelInstance()
 {
   if(instance)
@@ -192,16 +203,15 @@ bool DATABASES_CFG::DoDefault()
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         XSTRING* DATABASES_CFG::Database_GetURL()
 * @brief      Database_GetURL
 * @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_GetURL()
 {
   return &db_URL;
@@ -209,14 +219,14 @@ XSTRING* DATABASES_CFG::Database_GetURL()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         XDWORD DATABASES_CFG::Database_GetPort()
 * @brief      Database_GetPort
 * @ingroup    APPLICATION
-*
-* @return     XDWORD :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     XDWORD : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 XDWORD DATABASES_CFG::Database_GetPort()
 {
   return db_port;
@@ -224,14 +234,14 @@ XDWORD DATABASES_CFG::Database_GetPort()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         XSTRING* DATABASES_CFG::Database_DatabaseName()
 * @brief      Database_DatabaseName
 * @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_DatabaseName()
 {
   return &db_databasename;
@@ -239,14 +249,14 @@ XSTRING* DATABASES_CFG::Database_DatabaseName()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         XSTRING* DATABASES_CFG::Database_GetUser()
 * @brief      Database_GetUser
 * @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_GetUser()
 {
   return &db_user;
@@ -254,30 +264,29 @@ XSTRING* DATABASES_CFG::Database_GetUser()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         XSTRING* DATABASES_CFG::Database_GetPassword()
 * @brief      Database_GetPassword
 * @ingroup    APPLICATION
-*
-* @return     XSTRING* :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_GetPassword()
 {
   return &db_password;
 }
 
 
-
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         int DATABASES_CFG::Database_GetTimeoutConnection()
 * @brief      Database_GetTimeoutConnection
 * @ingroup    APPLICATION
-*
-* @return     int :
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* @return     int : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 int DATABASES_CFG::Database_GetTimeoutConnection()
 {
   return db_timeoutconnection;
@@ -285,16 +294,16 @@ int DATABASES_CFG::Database_GetTimeoutConnection()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
+* 
+* @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
 * @brief      Constructor
-* @ingroup
-*
-* @param[in]  XCHAR* : name of file of config
-*
-* @return     Does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @param[in]  XCHAR* : 
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
@@ -307,15 +316,15 @@ DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         DATABASES_CFG::~DATABASES_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
-* @ingroup
-*
-* @return     Does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG::~DATABASES_CFG()
 {
   Clean();
@@ -323,17 +332,20 @@ DATABASES_CFG::~DATABASES_CFG()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @fn         void DATABASES_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    APPLICATION
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 void DATABASES_CFG::Clean()
 {
 
 }
+
+#pragma endregion
+
 

@@ -13,31 +13,31 @@
 # --------------------------------------------------------------------
 # Activate features/Defines
 
- option(DEBUG_FEATURE                           "Activate Debug mode"                            true )
- option(XTRACE_FEATURE                          "Activate XTrace"                                true )
+ option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
+ option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
  option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
- option(XMEMORY_CONTROL_FEATURE                 "Activate XMemory Control"                       true )
+ option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
                   
- option(DIO_FEATURE                             "Activate Data Input/Output"                     true ) 
- option(DIO_CHECKCONNECTIONS_FEATURE            "Activate Check Connections"                     true )
- option(DIO_NETWORKTINEPROTOCOL_FEATURE         "Activate Network Time Protocol"                 true )
- option(DIO_DYNDNS_FEATURE                      "Activate DynDNS"                                true )
- option(DIO_SCRAPERWEB_FEATURE                  "Activate Scraper Web"                           true )
+ option(DIO_FEATURE                                         "Activate Data Input/Output"                                true ) 
+ option(DIO_CHECKCONNECTIONS_FEATURE                        "Activate Check Connections"                                true )
+ option(DIO_NETWORKTINEPROTOCOL_FEATURE                     "Activate Network Time Protocol"                            true )
+ option(DIO_DYNDNS_FEATURE                                  "Activate DynDNS"                                           true )
+ option(DIO_SCRAPERWEB_FEATURE                              "Activate Scraper Web"                                      true )
 
- option(DIO_PROTOCOL_FEATURE                    "Activate Data Input/Output Protocol"            true )
+ option(DIO_PROTOCOL_FEATURE                                "Activate Data Input/Output Protocol"                       true )
 
- option(APP_FEATURE                             "Activate Application modules"                   true )
- option(APP_CHECKRESOURCESHARDWARE_FEATURE      "Activate Application Check Resources Hardwar"   true )
- option(APP_CONSOLE_FEATURE                     "Activate Application Console"                   true )
- option(APP_INTERNETSERVICES_FEATURE            "Activate Application Internet Services"         true )
- option(APP_LOG_FEATURE                         "Activate Application Log"                       true )
+ option(APP_FEATURE                                         "Activate Application modules"                              true )
+ option(APP_CHECKRESOURCESHARDWARE_FEATURE                  "Activate Application Check Resources Hardwar"              true )
+ option(APP_CONSOLE_FEATURE                                 "Activate Application Console"                              true )
+ option(APP_INTERNETSERVICES_FEATURE                        "Activate Application Internet Services"                    true )
+ option(APP_LOG_FEATURE                                     "Activate Application Log"                                  true )
 
- option(APP_CFG_GENERAL_FEATURE                 "Activate Application CFG General"               true )  
- option(APP_CFG_LOG_FEATURE                     "Activate Application CFG LOG"                   true )
- option(APP_CFG_INTERNETSERVICES_FEATURE        "Activate Application CFG Internet services"     true )      
- option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE  "Activate Application CFG Check Resorces HW"     true )  
- option(APP_CFG_DNSRESOLVED_FEATURE             "Activate Application CFG DNS Resolved"          true )   
- option(APP_CFG_LOCATION_FEATURE                "Activate Application CFG Location"              true )  
+ option(APP_CFG_GENERAL_FEATURE                             "Activate Application CFG General"                          true )  
+ option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                              true )
+ option(APP_CFG_INTERNETSERVICES_FEATURE                    "Activate Application CFG Internet services"                true )      
+ option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE              "Activate Application CFG Check Resorces HW"                true )  
+ option(APP_CFG_DNSRESOLVED_FEATURE                         "Activate Application CFG DNS Resolved"                     true )   
+ option(APP_CFG_LOCATION_FEATURE                            "Activate Application CFG Location"                         true )  
 
 
 # --------------------------------------------------------------------

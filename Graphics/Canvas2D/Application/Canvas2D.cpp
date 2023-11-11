@@ -1,36 +1,43 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       Canvas2D.cpp
-*
+* 
 * @class      CANVAS2D
-* @brief      GEN Canvas 2D Example class
+* @brief      Graphics Canvas 2D Example class
 * @ingroup    EXAMPLES
-*
-* @copyright  GEN Group. All right reserved.
-*
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
 
 #include "GEN_Defines.h"
 
+#pragma endregion
+
+
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
+
+#include "Canvas2D.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -87,20 +94,29 @@
 
 #include "INPManager.h"
 
+#include "SNDFactory_XEvent.h"
+#include "SNDItem.h"
+#include "SNDFactory.h"
+
 #include "APPLog.h"
 
 #include "Canvas2D_CFG.h"
 
-#include "Canvas2D.h"
-
 #include "XMemory_Control.h"
+
+#pragma endregion
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
- APPLICATIONCREATEINSTANCE(CANVAS2D, canvas2d)
+APPLICATIONCREATEINSTANCE(CANVAS2D, canvas2d)
+
+#pragma endregion
+
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -208,6 +224,7 @@ bool CANVAS2D::AppProc_Ini()
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
 
   GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS      , APPDEFAULT_DIRECTORY_GRAPHICS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS        , APPDEFAULT_DIRECTORY_SOUNDS);
   GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_FONTS         , APPDEFAULT_DIRECTORY_FONTS);
   GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS    , APPDEFAULT_DIRECTORY_UI_LAYOUTS);
 
@@ -218,10 +235,19 @@ bool CANVAS2D::AppProc_Ini()
 
   InitFSMachine();
 
+  rand = GEN_XFACTORY.CreateRand();
+  if(!rand) 
+    {
+      return false;
+    }
+
   //--------------------------------------------------------------------------------------
 
   xtimer = GEN_XFACTORY.CreateTimer();
-  if(!xtimer) return false;
+  if(!xtimer) 
+    {
+      return false;
+    }
 
   //--------------------------------------------------------------------------------------
 
@@ -347,6 +373,37 @@ bool CANVAS2D::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------
 
+  { XPATH xpathsounds;
+    XPATH xpath;
+    GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_SOUNDS, xpathsounds);   
+    xpathsounds.Slash_Add();
+
+    xpath = xpathsounds;
+    xpath.Add(__L("greensleeves.ogg"));
+
+    backgroundsound = GEN_SNDFACTORY.CreateItem(xpath);
+    if(backgroundsound)
+      {        
+        GEN_SNDFACTORY.Sound_Play(backgroundsound, &playCFGsound, SNDFACTORY_INLOOP); 
+      }
+
+    xpath = xpathsounds;
+    xpath.Add(__L("armour-walking1.ogg"));
+    armorwalkingsounds[0] = GEN_SNDFACTORY.CreateItem(xpath);
+   
+    xpath = xpathsounds;
+    xpath.Add(__L("armour-walking2.ogg"));
+    armorwalkingsounds[1] = GEN_SNDFACTORY.CreateItem(xpath);
+     
+    SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_INI   , &GEN_SNDFACTORY.GetInstance());
+    SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_PLAY  , &GEN_SNDFACTORY.GetInstance());
+    SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_PAUSE , &GEN_SNDFACTORY.GetInstance());
+    SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_STOP  , &GEN_SNDFACTORY.GetInstance());
+    SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_END   , &GEN_SNDFACTORY.GetInstance());
+  }
+
+  //--------------------------------------------------------------------------------
+
   return true;
 }
 
@@ -421,6 +478,18 @@ bool CANVAS2D::AppProc_End()
   SetCurrentState(CANVAS2D_XFSMSTATE_END);
 
   //--------------------------------------------------------------------------------------
+ 
+  UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_INI   , &GEN_SNDFACTORY.GetInstance());
+  UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_PLAY  , &GEN_SNDFACTORY.GetInstance());
+  UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_PAUSE , &GEN_SNDFACTORY.GetInstance());
+  UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_STOP  , &GEN_SNDFACTORY.GetInstance());
+  UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_END   , &GEN_SNDFACTORY.GetInstance());
+ 
+  GEN_SNDFACTORY.Sound_StopAll();
+
+  GEN_SNDFACTORY.DeleteAllItems();
+
+  //--------------------------------------------------------------------------------------
 
   if(backgroundbmp)
     {
@@ -446,6 +515,12 @@ bool CANVAS2D::AppProc_End()
     {
       GEN_XFACTORY.DeleteTimer(xtimer);
       xtimer = NULL;
+    }
+
+  if(rand)
+    {
+      GEN_XFACTORY.DeleteRand(rand);
+      rand = NULL;
     }
 
   //--------------------------------------------------------------------------------------
@@ -692,6 +767,45 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
+* @brief      DrawStep
+* @ingroup    GRAPHIC
+* 
+* @param[in]  canvas : 
+* @param[in]  x : 
+* @param[in]  y : 
+* @param[in]  type : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
+{
+  GRP2DCOLOR_RGBA8 color(80, 80, 80);
+  
+  for(int c=0; c<rand->Between(7, 15); c++)
+    {      
+      for(int d=0; d<rand->Between(1, 6); d++)
+        {       
+          if(rand->Between(0, 1))
+            {
+              int _x = x + 52 + c + (type?3:5);
+              int _y = y - 18 - (type?0:5);
+
+              _y += rand->Between(0, 2);
+              _y -= rand->Between(0, 2);
+            
+              canvas->PutBlendPixel(_x, _y, &color, rand->Between(1, 10)); 
+            }
+        }
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         bool CANVAS2D::DrawFrame()
 * @brief      DrawFrame
 * @ingroup    GRAPHIC
@@ -706,11 +820,16 @@ bool CANVAS2D::DrawFrame()
   GRP2DCOLOR_RGBA8  colorred(255, 0, 0);
   GRP2DCOLOR_RGBA8  colorgreen(0, 255, 0);
   GRP2DCOLOR_RGBA8  colorblue(0, 0, 255);
+  GRP2DCOLOR_RGBA8  coloryellow(255, 255, 0);
   GRP2DCOLOR_RGBA8  colorgray(10, 10, 10, 150);
 
   GRPVIEWPORT*      viewport = NULL;
   GRPCANVAS*        canvas   = NULL;
   GRPRECTINT*       rect     = NULL;
+
+  static int        x        = 950;
+  static int        y        = 310;
+
 
   viewport = GetMainScreen()->GetViewport(0);
   if(viewport) canvas =   viewport->GetCanvas();
@@ -761,11 +880,32 @@ bool CANVAS2D::DrawFrame()
   canvas->RebuildAllAreas();
   canvas->DeleteAllRebuildAreas();
 
-  static int x = 950;
-  static int y = 310;
+  if(charactersecuence->GetActualFrameIndex() == 4)  
+    {    
+      if(armorwalkingsounds[0]->GetStatus() != SNDITEM_STATUS_PLAY)         
+        {
+          playCFGsound.SetVolume(10);
+          GEN_SNDFACTORY.Sound_Play(armorwalkingsounds[0], &playCFGsound, 1); 
+        }   
+      
+      DrawStep(canvas, x, y + charactersecuence->GetActualFrame()->GetBitmap()->GetHeight(), false);
+    }
+  
+  if(charactersecuence->GetActualFrameIndex() == 17)  
+    {    
+      if(armorwalkingsounds[1]->GetStatus() != SNDITEM_STATUS_PLAY)        
+        {
+          playCFGsound.SetVolume(10);
+          GEN_SNDFACTORY.Sound_Play(armorwalkingsounds[1], &playCFGsound, 1);         
+        }      
 
+      DrawStep(canvas, x, y + charactersecuence->GetActualFrame()->GetBitmap()->GetHeight(), true);
+    }
+  
   canvas->CreateRebuildArea(x, y, charactersecuence->GetActualFrame()->GetBitmap()->GetWidth(), charactersecuence->GetActualFrame()->GetBitmap()->GetHeight());
+ 
   canvas->PutBitmapFrame(x, y, charactersecuence->GetActualFrame());
+
 
   if(xtimer->GetMeasureMilliSeconds() > 30)
     {
@@ -783,11 +923,10 @@ bool CANVAS2D::DrawFrame()
 
   canvas->RoundRect(rect->x1 + 80, 50, rect->x1 + 550, 150, 20, true);
 
-
   //canvas->RasterFont_SetColor(&colorwhite);
   //canvas->RasterFont_Printf(rect->x1 + 60, 80, __L("Erase una vez ... "));
 
-  canvas->Vectorfont_GetConfig()->SetColor(&colorwhite);
+  canvas->Vectorfont_GetConfig()->SetColor(&coloryellow);
   canvas->VectorFont_Printf(rect->x1 + 100,  90, __L("Once upon a time... "));
   canvas->VectorFont_Printf(rect->x1 + 130, 130, __L("in a kingdom far, far away... "));
 
@@ -825,6 +964,43 @@ void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    GRAPHIC
+* 
+* @param[in]  event : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
+{  
+  switch(event->GetEventType())
+    {
+      case SNDFACTORY_XEVENT_TYPE_SOUND_INI     : 
+      case SNDFACTORY_XEVENT_TYPE_SOUND_PLAY    : 
+      case SNDFACTORY_XEVENT_TYPE_SOUND_PAUSE   : 
+      case SNDFACTORY_XEVENT_TYPE_SOUND_STOP    : 
+      case SNDFACTORY_XEVENT_TYPE_SOUND_END     : { XSTRING  typestr;
+                                                    XSTRING  statusstr;
+                                                    XSTRING* ID;  
+                                                    
+                                                    event->GetItem()->GetType(typestr);
+                                                    event->GetItem()->GetStatus(statusstr);
+                                                    ID = event->GetItem()->GetID();      
+
+                                                    XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Sound] [%08X] %s (%s) -> %s"), event->GetItem(), typestr.Get(), ID->Get(), statusstr.Get());    
+                                                  } 
+                                                  break;
+    } 
+  
+
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         void CANVAS2D::HandleEvent(XEVENT* xevent)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
@@ -841,12 +1017,19 @@ void CANVAS2D::HandleEvent(XEVENT* xevent)
 
   switch(xevent->GetEventFamily())
     {
-      case XEVENT_TYPE_GRAPHICS       : { GRPXEVENT* event = (GRPXEVENT*)xevent;
-                                          if(!event) return;
+      case XEVENT_TYPE_GRAPHICS         : { GRPXEVENT* event = (GRPXEVENT*)xevent;
+                                            if(!event) return;
 
-                                          HandleEvent_Graphics(event);
-                                        }
-                                        break;
+                                            HandleEvent_Graphics(event);
+                                          }
+                                          break;
+
+      case XEVENT_TYPE_SOUND            : { SNDFACTORY_XEVENT* event = (SNDFACTORY_XEVENT*)xevent;
+                                            if(!event) return;
+
+                                            HandleEvent_Sound(event);
+                                          }
+                                          break;
     }
 }
 
@@ -863,6 +1046,7 @@ void CANVAS2D::HandleEvent(XEVENT* xevent)
 * --------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::Clean()
 {
+  rand                        = NULL;
   xtimer                      = NULL;
 
   for(int c=0; c<CANVAS2D_BUTTON_MAX; c++)
@@ -875,4 +1059,11 @@ void CANVAS2D::Clean()
   backgroundbmp               = NULL;
   testbmp                     = NULL;
   charactersecuence           = NULL;
+
+  backgroundsound             = NULL;
+  armorwalkingsounds[0]       = NULL;
+  armorwalkingsounds[1]       = NULL;
 }
+
+#pragma endregion
+
