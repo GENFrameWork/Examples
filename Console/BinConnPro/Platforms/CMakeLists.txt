@@ -36,7 +36,7 @@
  option(APP_CFG_LOG_FEATURE                                 "Activate Application CFG LOG"                              true )
  option(APP_CFG_INTERNETSERVICES_FEATURE                    "Activate Application CFG Internet services"                true )      
  option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE              "Activate Application CFG Check Resorces HW"                true )  
- option(APP_CFG_DNSRESOLVED_FEATURE                         "Activate Application CFG DNS Resolved"                     true )   
+ option(APP_CFG_DNSRESOLVER_FEATURE                         "Activate Application CFG DNS "                     true )   
  option(APP_CFG_LOCATION_FEATURE                            "Activate Application CFG Location"                         true )  
 
 

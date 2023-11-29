@@ -35,7 +35,8 @@
  option(SCRIPT_LIB_CONSOLE_FEATURE                          "Script Lib Console"                                        true ) 
  option(SCRIPT_LIB_CFG_FEATURE                              "Script Lib Config File"                                    true )          
  option(SCRIPT_LIB_WINDOW_FEATURE                           "Script Lib Window"                                         true ) 
- option(SCRIPT_LIB_INPUTSIMULATE_FEATURE                    "Script Lib Input Simulated"                                true )    
+ option(SCRIPT_LIB_INPUTSIMULATE_FEATURE                    "Script Lib Input Simulated"                                true )   
+ option(SCRIPT_LIB_DEVTEST_FEATURE                          "Script Lib Developed Test Funcions"                        true )    
 
 
 # --------------------------------------------------------------------

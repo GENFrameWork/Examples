@@ -175,9 +175,13 @@ class CANVAS2D : public APPGRAPHICS, public XFSMACHINE
     GRPBITMAP*                      testbmp;
     GRPBITMAPSEQUENCE*              charactersecuence;
 
+    #if SND_ACTIVE
+
     SNDPLAYCFG                      playCFGsound;
     SNDITEM*                        backgroundsound;
     SNDITEM*                        armorwalkingsounds[2];
+    
+    #endif
 };
 
 

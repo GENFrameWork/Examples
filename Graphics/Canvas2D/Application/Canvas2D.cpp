@@ -44,7 +44,7 @@
 #include <string.h>
 #include <math.h>
 
-#include "Version.h"
+#include "VersionFrameWork.h"
 
 #include "XPath.h"
 #include "XDateTime.h"
@@ -94,9 +94,13 @@
 
 #include "INPManager.h"
 
-#include "SNDFactory_XEvent.h"
-#include "SNDItem.h"
-#include "SNDFactory.h"
+#if SND_ACTIVE
+  
+  #include "SNDFactory_XEvent.h"
+  #include "SNDItem.h"
+  #include "SNDFactory.h"
+
+#endif
 
 #include "APPLog.h"
 
@@ -373,6 +377,8 @@ bool CANVAS2D::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------
 
+  #if SND_ACTIVE
+
   { XPATH xpathsounds;
     XPATH xpath;
     GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_SOUNDS, xpathsounds);   
@@ -401,6 +407,8 @@ bool CANVAS2D::AppProc_FirstUpdate()
     SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_STOP  , &GEN_SNDFACTORY.GetInstance());
     SubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_END   , &GEN_SNDFACTORY.GetInstance());
   }
+
+  #endif
 
   //--------------------------------------------------------------------------------
 
@@ -479,6 +487,8 @@ bool CANVAS2D::AppProc_End()
 
   //--------------------------------------------------------------------------------------
  
+  #if SND_ACTIVE
+
   UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_INI   , &GEN_SNDFACTORY.GetInstance());
   UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_PLAY  , &GEN_SNDFACTORY.GetInstance());
   UnSubscribeEvent(SNDFACTORY_XEVENT_TYPE_SOUND_PAUSE , &GEN_SNDFACTORY.GetInstance());
@@ -488,6 +498,8 @@ bool CANVAS2D::AppProc_End()
   GEN_SNDFACTORY.Sound_StopAll();
 
   GEN_SNDFACTORY.DeleteAllItems();
+
+  #endif
 
   //--------------------------------------------------------------------------------------
 
@@ -880,6 +892,8 @@ bool CANVAS2D::DrawFrame()
   canvas->RebuildAllAreas();
   canvas->DeleteAllRebuildAreas();
 
+  #if SND_ACTIVE
+
   if(charactersecuence->GetActualFrameIndex() == 4)  
     {    
       if(armorwalkingsounds[0]->GetStatus() != SNDITEM_STATUS_PLAY)         
@@ -901,7 +915,9 @@ bool CANVAS2D::DrawFrame()
 
       DrawStep(canvas, x, y + charactersecuence->GetActualFrame()->GetBitmap()->GetHeight(), true);
     }
-  
+
+  #endif  
+
   canvas->CreateRebuildArea(x, y, charactersecuence->GetActualFrame()->GetBitmap()->GetWidth(), charactersecuence->GetActualFrame()->GetBitmap()->GetHeight());
  
   canvas->PutBitmapFrame(x, y, charactersecuence->GetActualFrame());
@@ -976,6 +992,7 @@ void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 * --------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
 {  
+  #if SND_ACTIVE
   switch(event->GetEventType())
     {
       case SNDFACTORY_XEVENT_TYPE_SOUND_INI     : 
@@ -995,7 +1012,7 @@ void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
                                                   break;
     } 
   
-
+  #endif
 }
 
 
@@ -1060,9 +1077,13 @@ void CANVAS2D::Clean()
   testbmp                     = NULL;
   charactersecuence           = NULL;
 
+  #if SND_ACTIVE
+
   backgroundsound             = NULL;
   armorwalkingsounds[0]       = NULL;
   armorwalkingsounds[1]       = NULL;
+
+  #endif
 }
 
 #pragma endregion
