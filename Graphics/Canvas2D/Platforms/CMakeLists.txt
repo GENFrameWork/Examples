@@ -23,7 +23,7 @@ option(XTRACE_FEATURE                                      "XTrace"             
 option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
 option(XMEMORY_CONTROL_FEATURE                             "XMemory Control"                                           true )
 
-option(LINUX_X11_FEATURE                                   "Linux X11"                                                 true )
+#option(LINUX_X11_FEATURE                                   "Linux X11"                                                 true )
         
 option(APP_FEATURE                                         "Application modules"                                       true )
 option(APP_LOG_FEATURE                                     "Application Log"                                           true )

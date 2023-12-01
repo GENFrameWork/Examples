@@ -363,7 +363,10 @@ bool CANVAS2D::AppProc_FirstUpdate()
     {
       XPATH xpath;
 
-      if(backgroundbmp) canvas->PutBitmapNoAlpha(0, 0, backgroundbmp);
+      if(backgroundbmp) 
+        {
+          canvas->PutBitmapNoAlpha(0, -(backgroundbmp->GetHeight() - 768.0f), backgroundbmp);
+        }
 
       canvas->RasterFont_Select(__L("verdana18"));
 
@@ -391,6 +394,7 @@ bool CANVAS2D::AppProc_FirstUpdate()
     if(backgroundsound)
       {        
         GEN_SNDFACTORY.Sound_Play(backgroundsound, &playCFGsound, SNDFACTORY_INLOOP); 
+        GEN_SNDFACTORY.Sound_SetVolume(backgroundsound, 25);
       }
 
     xpath = xpathsounds;
@@ -509,16 +513,13 @@ bool CANVAS2D::AppProc_End()
       backgroundbmp = NULL;
     }
 
-  if(testbmp)
+  for(XDWORD c=0; c<2; c++)
     {
-      delete testbmp;
-      testbmp = NULL;
-    }
-
-  if(charactersecuence)
-    {
-      delete charactersecuence;
-      charactersecuence = NULL;
+      if(charactersecuence[c])
+        {
+          delete charactersecuence[c];
+          charactersecuence[c] = NULL;
+        }
     }
 
   //--------------------------------------------------------------------------------------
@@ -616,29 +617,7 @@ bool CANVAS2D::UpdateInput()
                   case CANVAS2D_BUTTON_LEFT   : makeaction = __L("WALK WEST" );   break;
                   case CANVAS2D_BUTTON_RIGHT  : makeaction = __L("WALK EAST" );   break;
 
-                  case CANVAS2D_BUTTON_SPACE  : /*
-                                                { GRPSCREEN* mainscreen = GetMainScreen();
-
-                                                  if(mainscreen)
-                                                    {
-                                                      GRPBITMAP* bitmap = mainscreen->CaptureContent();    
-                                                      if(bitmap)
-                                                        {
-                                                          GRPVIEWPORT*  viewport = NULL;
-                                                          GRPCANVAS*    canvas   = NULL;
-                                                          
-                                                          viewport = GetMainScreen()->GetViewport(0);
-                                                          if(viewport) canvas =   viewport->GetCanvas();
-                                                          if(!canvas) return false;                                                       
-
-                                                          canvas->PutBitmap(10, 10, bitmap);
-
-                                                          delete bitmap;
-                                                        }
-                                                    }  
-                                                }
-                                                */                                                
-                                                break;
+                  case CANVAS2D_BUTTON_SPACE  : break;
                 }
             }
         }
@@ -660,9 +639,7 @@ bool CANVAS2D::UpdateInput()
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
-{
-  //--------------------------------------------------------------------------------------
-
+{  
   XPATH           xpath;
   GRPBITMAPFILE*  bitmapfile;
 
@@ -673,64 +650,14 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
     {
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
       xpath.Slash_Add();
-      xpath.Add(__L("background.png"));
+      xpath.Add(__L("background.jpg"));
 
       backgroundbmp = bitmapfile->Load(xpath, GetMainScreen()->GetMode());
       if(!backgroundbmp) return false;
-   
-      /*
-      int x = 0;
-      int y = 0;
-
-      XPATH xpathbitmapref;  
-        
-      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpathbitmapref);
-      xpathbitmapref.Slash_Add();
-      xpathbitmapref.Add(__L("ref.png"));
-
-      GRPBITMAPFILE* bitmapfileref = new GRPBITMAPFILE(xpathbitmapref);
-      if(bitmapfileref)
-        {                                         
-          GRPBITMAP* bitmapref = bitmapfileref->Load();         
-          if(bitmapref)
-            {                                      
-              if(backgroundbmp->FindSubBitmap(bitmapref, x, y))
-                {
-
-                }
-            }
-        } 
-      */
-
-      /*
-      GRPRECTINT  rect;
-                  
-      rect.x1 = 75;
-      rect.x2 = rect.x1 + 100;
-
-      rect.y1 = 310;
-      rect.y2 = rect.y1 + 100;    
-
-      GRPBITMAP* bitmapref = backgroundbmp->GetSubBitmap(rect);        
-      if(bitmapref)
-        { 
-          if(backgroundbmp->FindSubBitmap(bitmapref, x, y))
-            {
-
-            }
-        }         
-      */      
-    }
-
-  if(!testbmp)
-    {
-      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
-      xpath.Slash_Add();
-      xpath.Add(__L("test.tga"));
-      testbmp = bitmapfile->Load(xpath);
     }
   
-  if(!charactersecuence)
+  
+  if(!charactersecuence[0])
     {
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
       xpath.Slash_Add();
@@ -738,23 +665,42 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
       bitmapfile->SetPath(xpath);
 
-      charactersecuence = bitmapfile->LoadSequence(__L("LF-WxWalk_01%02d.png"), 1);
+      charactersecuence[0] = bitmapfile->LoadSequence(__L("LF-WxWalk_01%02d.png"), 1);
+      charactersecuence[1] = charactersecuence[0]->Copy();
 
-      if(charactersecuence) charactersecuence->Play();
+      charactersecuence[1]->Flip(true);
+
+      if(charactersecuence[0]) 
+        {
+          charactersecuence[0]->Play();      
+        }
+
+      if(charactersecuence[1]) 
+        {
+          charactersecuence[1]->Play();      
+        }
     }
 
   delete bitmapfile;
 
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Main Screen: Width %d, height %d"),  screen->GetWidth(), screen->GetHeight());
 
-  //screen->SetWidth(1024);
-  //screen->SetHeight(768);
+  screen->SetWidth(1024);
+  screen->SetHeight(768);
 
-  
+  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth(), (float)screen->GetHeight(),  0,  0, (backgroundbmp->GetWidth()) , (backgroundbmp->GetHeight()));
+
+  GRPVIEWPORT* viewport = NULL;
+  GRPCANVAS*   canvas   = NULL;
+
+  viewport = GetMainScreen()->GetViewport(0);
+  if(viewport) canvas =   viewport->GetCanvas();
+
+  /*
   #ifndef ANDROID 
   if(backgroundbmp)
     {
-      screen->SetWidth(640);
+      screen->SetWidth(1080);
       screen->SetHeight(backgroundbmp->GetHeight());
     }
    else
@@ -770,9 +716,8 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   screen->SetHeight(768);  
  
   #endif 
-  
+  */
  
-
   return true;
 }
 
@@ -818,6 +763,33 @@ bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
+* @brief      DrawShadow
+* @ingroup    GRAPHIC
+* 
+* @param[in]  canvas : 
+* @param[in]  x : 
+* @param[in]  y : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
+{
+  GRP2DCOLOR_RGBA8  colorshadow(10, 10, 10, rand->Between(40,50));
+
+  canvas->SetLineWidth(0.0f);
+  canvas->SetFillColor(&colorshadow);
+  //canvas->Ellipse(x + 75, y + 130, rand->Between(30, 35), rand->Between(11, 15), true);
+
+  canvas->Ellipse(x + 75, y + 130, 40, 8, true);
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         bool CANVAS2D::DrawFrame()
 * @brief      DrawFrame
 * @ingroup    GRAPHIC
@@ -834,31 +806,54 @@ bool CANVAS2D::DrawFrame()
   GRP2DCOLOR_RGBA8  colorblue(0, 0, 255);
   GRP2DCOLOR_RGBA8  coloryellow(255, 255, 0);
   GRP2DCOLOR_RGBA8  colorgray(10, 10, 10, 150);
-
+  
   GRPVIEWPORT*      viewport = NULL;
   GRPCANVAS*        canvas   = NULL;
   GRPRECTINT*       rect     = NULL;
-
-  static int        x        = 950;
-  static int        y        = 310;
-
 
   viewport = GetMainScreen()->GetViewport(0);
   if(viewport) canvas =   viewport->GetCanvas();
   if(!canvas) return false;
 
-  int width  = GetMainScreen()->GetWidth();
-  int height = GetMainScreen()->GetHeight();
+  int           width   = GetMainScreen()->GetWidth();
+  int           height  = GetMainScreen()->GetHeight();  
+
+  static int    x           = 1600;
+  static int    y           = height - 180;
+  static bool   tofront     = true;
+  static int    scrollstep  = 0;
+  static int    nupdates    = 0;
+
+  int           indexcharactersequence = tofront?0:1;
+
+  rand->Ini();
 
   canvas->ReleaseDrawFramerate();  
 
   rect = canvas->GetScreenZone();
   if(rect)
     {
+      if(!nupdates)
+        {
+          rect->x1 += 680;
+          rect->x2 += 680;
+        }
+
       if(makeaction.Compare(__L("WALK NORTH"), true))   { rect->y1++; rect->y2++; }
       if(makeaction.Compare(__L("WALK WEST" ), true))   { rect->x1++; rect->x2++; }
       if(makeaction.Compare(__L("WALK EAST" ), true))   { rect->x1--; rect->x2--; }
-      if(makeaction.Compare(__L("WALK SOUTH"), true))   { rect->y1--; rect->y2--; }
+      if(makeaction.Compare(__L("WALK SOUTH"), true))   { rect->y1--; rect->y2--; }      
+    }
+
+  if(!makeaction.IsEmpty())
+    {
+      scrollstep++;
+
+      if(scrollstep > 20)
+        {
+          scrollstep = 0;
+          makeaction.Empty();
+        }
     }
 
   if(rect->x1 < 0)
@@ -894,7 +889,7 @@ bool CANVAS2D::DrawFrame()
 
   #if SND_ACTIVE
 
-  if(charactersecuence->GetActualFrameIndex() == 4)  
+  if(charactersecuence[indexcharactersequence]->GetActualFrameIndex() == 4)  
     {    
       if(armorwalkingsounds[0]->GetStatus() != SNDITEM_STATUS_PLAY)         
         {
@@ -902,10 +897,10 @@ bool CANVAS2D::DrawFrame()
           GEN_SNDFACTORY.Sound_Play(armorwalkingsounds[0], &playCFGsound, 1); 
         }   
       
-      DrawStep(canvas, x, y + charactersecuence->GetActualFrame()->GetBitmap()->GetHeight(), false);
+      DrawStep(canvas, x, y + charactersecuence[indexcharactersequence]->GetActualFrame()->GetBitmap()->GetHeight(), false);
     }
   
-  if(charactersecuence->GetActualFrameIndex() == 17)  
+  if(charactersecuence[indexcharactersequence]->GetActualFrameIndex() == 17)  
     {    
       if(armorwalkingsounds[1]->GetStatus() != SNDITEM_STATUS_PLAY)        
         {
@@ -913,22 +908,39 @@ bool CANVAS2D::DrawFrame()
           GEN_SNDFACTORY.Sound_Play(armorwalkingsounds[1], &playCFGsound, 1);         
         }      
 
-      DrawStep(canvas, x, y + charactersecuence->GetActualFrame()->GetBitmap()->GetHeight(), true);
+      DrawStep(canvas, x, y + charactersecuence[indexcharactersequence]->GetActualFrame()->GetBitmap()->GetHeight(), true);
     }
 
   #endif  
 
-  canvas->CreateRebuildArea(x, y, charactersecuence->GetActualFrame()->GetBitmap()->GetWidth(), charactersecuence->GetActualFrame()->GetBitmap()->GetHeight());
+  canvas->CreateRebuildArea(x, y, charactersecuence[indexcharactersequence]->GetActualFrame()->GetBitmap()->GetWidth() + 15, charactersecuence[0]->GetActualFrame()->GetBitmap()->GetHeight() + 15);
+  
+  DrawShadow(canvas, x, y);
  
-  canvas->PutBitmapFrame(x, y, charactersecuence->GetActualFrame());
+  canvas->PutBitmapFrame(x, y, charactersecuence[indexcharactersequence]->GetActualFrame());
 
 
   if(xtimer->GetMeasureMilliSeconds() > 30)
     {
-      charactersecuence->Update();
+      charactersecuence[indexcharactersequence]->Update();
       xtimer->Reset();
-      x -= 4;
-      if(x<-100) x = 950;
+
+      if(tofront)
+        {
+          x -= 4;
+          if(x < 670) 
+            {
+              tofront = !tofront;
+            }
+        }
+       else 
+        {
+          x += 4;
+          if(x > 1600) 
+            {
+              tofront = !tofront;
+            }
+        }
     }
 
   canvas->CreateRebuildArea(rect->x1 + 80, 50, rect->x1 + 550, 150);
@@ -947,6 +959,8 @@ bool CANVAS2D::DrawFrame()
   canvas->VectorFont_Printf(rect->x1 + 130, 130, __L("in a kingdom far, far away... "));
 
   canvas->DrawFramerate(2,20, GetMainScreen());
+
+  nupdates++;
 
   return true;
 }
@@ -1074,8 +1088,8 @@ void CANVAS2D::Clean()
   cursor                      = NULL;
 
   backgroundbmp               = NULL;
-  testbmp                     = NULL;
-  charactersecuence           = NULL;
+  charactersecuence[0]        = NULL;
+  charactersecuence[1]        = NULL;
 
   #if SND_ACTIVE
 
