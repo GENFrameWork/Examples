@@ -374,7 +374,7 @@ bool CANVAS2D::AppProc_FirstUpdate()
       xpath.Slash_Add();
       xpath.Add(__L("Augusta.ttf"));
      
-      canvas->Vectorfont_GetConfig()->SetHeight(35.0f);
+      canvas->Vectorfont_GetConfig()->SetHeight(40.0f);
       canvas->VectorFont_Load(xpath);
     }
 
@@ -685,16 +685,15 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Main Screen: Width %d, height %d"),  screen->GetWidth(), screen->GetHeight());
 
+  #if !defined(LINUX) && !defined(LINUX_X11_ACTIVE)
+  
   screen->SetWidth(1024);
   screen->SetHeight(768);
 
+  #endif
+
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth(), (float)screen->GetHeight(),  0,  0, (backgroundbmp->GetWidth()) , (backgroundbmp->GetHeight()));
 
-  GRPVIEWPORT* viewport = NULL;
-  GRPCANVAS*   canvas   = NULL;
-
-  viewport = GetMainScreen()->GetViewport(0);
-  if(viewport) canvas =   viewport->GetCanvas();
 
   /*
   #ifndef ANDROID 
@@ -776,7 +775,7 @@ bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
 * --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
 {
-  GRP2DCOLOR_RGBA8  colorshadow(10, 10, 10, rand->Between(40,50));
+  GRP2DCOLOR_RGBA8  colorshadow(10, 10, 10, 30);
 
   canvas->SetLineWidth(0.0f);
   canvas->SetFillColor(&colorshadow);
@@ -943,22 +942,24 @@ bool CANVAS2D::DrawFrame()
         }
     }
 
-  canvas->CreateRebuildArea(rect->x1 + 80, 50, rect->x1 + 550, 150);
+  int pos_signboard = (width - 570) / 2;
+
+  canvas->CreateRebuildArea(rect->x1 +  pos_signboard, 50, rect->x1 + pos_signboard + 570 , 150);
 
   canvas->SetLineWidth(1.5f);
   canvas->SetLineColor(&colorwhite);
   canvas->SetFillColor(&colorgray);
 
-  canvas->RoundRect(rect->x1 + 80, 50, rect->x1 + 550, 150, 20, true);
+  canvas->RoundRect(rect->x1 +  pos_signboard, 50, rect->x1 + pos_signboard + 570 , 150, 20, true);
 
   //canvas->RasterFont_SetColor(&colorwhite);
   //canvas->RasterFont_Printf(rect->x1 + 60, 80, __L("Erase una vez ... "));
 
   canvas->Vectorfont_GetConfig()->SetColor(&coloryellow);
-  canvas->VectorFont_Printf(rect->x1 + 100,  90, __L("Once upon a time... "));
-  canvas->VectorFont_Printf(rect->x1 + 130, 130, __L("in a kingdom far, far away... "));
+  canvas->VectorFont_Printf(rect->x1 + pos_signboard + 20,  90, __L("Once upon a time,"));
+  canvas->VectorFont_Printf(rect->x1 + pos_signboard + 90, 130, __L("in a kingdom far, far away... "));
 
-  canvas->DrawFramerate(2,20, GetMainScreen());
+  canvas->DrawFramerate(rect->x1 +  pos_signboard + 465, 60, GetMainScreen());
 
   nupdates++;
 
