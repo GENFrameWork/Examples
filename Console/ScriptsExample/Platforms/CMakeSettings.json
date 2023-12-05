@@ -36,25 +36,6 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "3 - Linux PC x64 (Samba)",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Linux\\x64smb",
-      "installRoot": "${projectDir}\\Linux\\x64smb",
-      "cmakeExecutable": "cmake",
-      "cmakeCommandArgs": "-DTARGET=PC",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_x64" ],
-      "variables": [],
-      "remoteMachineName": "${defaultRemoteMachineName}",
-      "remoteCMakeListsRoot": "/mnt/Projects/GENFrameWork/Examples/Console/ScriptsExample/Platforms/",
-      "remoteBuildRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ScriptsExample/Platforms/Linux/x64smb/",
-      "remoteInstallRoot": "/mnt//Projects/GENFrameWork/Examples/Console/ScriptsExample/Platforms/Linux/x64smb/",
-      "remoteCopySources": false,
-      "remoteCopyBuildOutput": false
-    },
-    {
       "name": "4 - Linux ARM 64",
       "generator": "Ninja",
       "configurationType": "Debug",
@@ -106,6 +87,16 @@
       "inheritEnvironments": [ "linux_arm64" ],
       "wslPath": "${defaultWSLPath}",
       "intelliSenseMode": "linux-gcc-arm"
+    },
+    { "name": "8 - Espressif ESP32",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\ESP32",
+      "installRoot": "${projectDir}\\ESP32",
+      "cmakeCommandArgs": "-DTARGET=ESP32",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86_x64" ]
     }
-  ]
+]
 }

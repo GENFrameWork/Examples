@@ -36,26 +36,6 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "3 - Linux PC x64 (Samba)",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "cmakeExecutable": "cmake",
-      "cmakeCommandArgs": "-DTARGET=PC",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_x64" ],
-      "variables": [],
-      "remoteMachineName": "${defaultRemoteMachineName}",
-      "remoteCMakeListsRoot": "/mnt/Projects/GENFrameWork/Examples/Graphics/UI_Options/Platforms/",
-      "remoteBuildRoot": "/mnt/Projects/GENFrameWork/Examples/Graphics/UI_Options/Platforms/Linux/x64smb/",
-      "remoteInstallRoot": "/mnt/Projects/GENFrameWork/Examples/Graphics/UI_Options/Platforms/Linux/x64smb/",
-      "remoteCopySources": false,
-      "rsyncCommandArgs": "-t --delete --delete-excluded",
-      "remoteCopyBuildOutput": false,
-      "remoteCopySourcesMethod": "rsync",
-      "addressSanitizerRuntimeFlags": "detect_leaks=0"
-    },
-    {
       "name": "4 - Linux ARM 64",
       "generator": "Ninja",
       "configurationType": "Debug",
@@ -107,6 +87,18 @@
       "inheritEnvironments": [ "linux_arm64" ],
       "wslPath": "${defaultWSLPath}",
       "intelliSenseMode": "linux-gcc-arm"
+    },
+    {
+      "name": "8 - Android",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\Android",
+      "installRoot": "${projectDir}\\Android",
+      "cmakeCommandArgs": "-DTARGET=ANDROID",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "clang_cl_arm64_x64" ],
+      "intelliSenseMode": "android-clang-arm64"
     }
   ]
 }
