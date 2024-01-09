@@ -33,7 +33,7 @@
 
 #include "XBase.h"
 #include "XFactory.h"
-#include "XLocationAddress.h"
+#include "LocationAddress.h"
 
 #include "DIOProtocol_ApplicationData.h"
 
@@ -51,7 +51,7 @@ class BINCONNPRO_APPLICATIONDATA : public DIOPROTOCOL_APPLICATIONDATA
 
     BINCONNPRO_PROTOCOL_DEVICE    device;
     XSTRING                       centername;
-    XLOCATIONADDRESS              location;
+    LOCATIONADDRESS               location;
 
   private:
 
