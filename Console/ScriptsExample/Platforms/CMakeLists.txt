@@ -15,6 +15,7 @@
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
  option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
  option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
+ option(XTHREADCOLLECTED_FEATURE                            "Thread Collected"                                          true )
  option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
                   
  option(APP_FEATURE                                         "Activate Application modules"                              true )

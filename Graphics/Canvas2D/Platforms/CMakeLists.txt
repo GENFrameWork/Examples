@@ -21,6 +21,7 @@ set(ANDROID_NDK_ROOT "C:/Microsoft/AndroidNDK/android-ndk-r23c")
 option(DEBUG_FEATURE                                       "Debug mode"                                                true )
 option(XTRACE_FEATURE                                      "XTrace"                                                    true )
 option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
+option(XTHREADCOLLECTED_FEATURE                            "Thread Collected"                                          true )
 option(XMEMORY_CONTROL_FEATURE                             "XMemory Control"                                           true )
 
 #option(LINUX_X11_FEATURE                                   "Linux X11"                                                 true )

@@ -89,7 +89,7 @@
 
 #include "GRPCanvas.h"
 #include "GRPScreen.h"
-#include "GRPViewPort.h"
+#include "GRPViewport.h"
 #include "GRPBitmapFile.h"
 #include "GRPBitmapFileJPG.h"
 #include "GRPVideoFileAVI.h"
