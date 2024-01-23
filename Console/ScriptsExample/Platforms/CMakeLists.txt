@@ -57,14 +57,14 @@
 # Directorys of the Application
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
- list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
+ list(APPEND INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 
 
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ScriptsExample.cpp")
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ScriptsExample_CFG.cpp")
+ list(APPEND SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/ScriptsExample.cpp")
+ list(APPEND SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/ScriptsExample_CFG.cpp")
 
 
 # --------------------------------------------------------------------
