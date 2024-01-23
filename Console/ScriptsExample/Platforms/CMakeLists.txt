@@ -15,7 +15,6 @@
  option(DEBUG_FEATURE                                       "Activate Debug mode"                                       true )
  option(XTRACE_FEATURE                                      "Activate XTrace"                                           true )
  option(XTRACE_NOINTERNET_FEATURE                           "No need for trace dependencies with Internet"              true )
- option(XTHREADCOLLECTED_FEATURE                            "Thread Collected"                                          true )
  option(XMEMORY_CONTROL_FEATURE                             "Activate XMemory Control"                                  true )
                   
  option(APP_FEATURE                                         "Activate Application modules"                              true )
@@ -57,14 +56,14 @@
 # Directorys of the Application
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
- list(APPEND INCLUDES_DIR ${APP_DIRECTORY_APPLICATION})
+ list(APPEND INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 
 
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ScriptsExample.cpp")
- list(APPEND SOURCES "${APP_DIRECTORY_APPLICATION}/ScriptsExample_CFG.cpp")
+ list(APPEND SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/ScriptsExample.cpp")
+ list(APPEND SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/ScriptsExample_CFG.cpp")
 
 
 # --------------------------------------------------------------------
