@@ -32,13 +32,13 @@
 # Directorys of the Application
 
  set(APP_DIRECTORY_APPLICATION   "../Application")
- list(APPEND INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
+ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 
 
 # --------------------------------------------------------------------
 # Source code of the Application
 
- list(APPEND SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/AppBaseExample.cpp")
+ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/AppBaseExample.cpp")
  
 
 # --------------------------------------------------------------------
