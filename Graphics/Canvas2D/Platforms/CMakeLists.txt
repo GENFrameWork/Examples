@@ -54,7 +54,7 @@ add_definitions(${APP_CFG_CANVAS2D})
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Main.txt") 
                    
                    
 # --------------------------------------------------------------------
@@ -74,11 +74,11 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/Canvas2D_CFG.
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_CreateProject.txt")
+include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_CreateProject.txt")
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/GEN/CMake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Libraries.txt") 
 
