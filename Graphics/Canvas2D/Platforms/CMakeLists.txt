@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------
-# Canvas2D : Example of graphics: Canvas 2D example  
+# Canvas2D : Example of graphics Canvas 2D example  
 # GEN FrameWork 
 # --------------------------------------------------------------------
 
@@ -9,14 +9,12 @@ project(canvas2D)
 
 set(GEN_DIRECTORY "../../../../") 
 
-#set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk")
-#set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21e_linux")
-#set(ANDROID_NDK_ROOT "${GEN_DIRECTORY}/ThirdPartyLibraries/android-ndk-r23b")
-set(ANDROID_NDK_ROOT "C:/Microsoft/AndroidNDK/android-ndk-r23c")
-                      
 
 # --------------------------------------------------------------------
-# features/Defines
+# Delete CMake Cache
+
+include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeList_DeleteCache.txt") 
+
 
 option(DEBUG_FEATURE                                       "Debug mode"                                                true )
 option(XTRACE_FEATURE                                      "XTrace"                                                    true )
@@ -24,7 +22,7 @@ option(XTRACE_NOINTERNET_FEATURE                           "No need for trace de
 option(XTHREADCOLLECTED_FEATURE                            "Thread Collected"                                          true )
 option(XMEMORY_CONTROL_FEATURE                             "XMemory Control"                                           true )
 
-#option(LINUX_X11_FEATURE                                   "Linux X11"                                                 true )
+option(LINUX_X11_FEATURE                                   "Linux X11"                                                 true )
         
 option(APP_FEATURE                                         "Application modules"                                       true )
 option(APP_LOG_FEATURE                                     "Application Log"                                           true )
