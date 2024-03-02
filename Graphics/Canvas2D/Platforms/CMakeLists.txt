@@ -10,12 +10,6 @@ project(canvas2D)
 set(GEN_DIRECTORY "../../../../") 
 
 
-# --------------------------------------------------------------------
-# Delete CMake Cache
-
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeList_DeleteCache.txt") 
-
-
 option(DEBUG_FEATURE                                          "Debug mode"                                              true )
 option(XTRACE_FEATURE                                         "XTrace"                                                  true )
 option(XTRACE_NOINTERNET_FEATURE                              "No need for trace dependencies with Internet"            true )
