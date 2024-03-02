@@ -685,12 +685,12 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Main Screen: Width %d, height %d"),  screen->GetWidth(), screen->GetHeight());
 
-  #if !defined(LINUX) && !defined(LINUX_X11_ACTIVE)
+  //#if !defined(LINUX) && !defined(LINUX_X11_ACTIVE)
   
   screen->SetWidth(1024);
   screen->SetHeight(768);
 
-  #endif
+  //#endif
 
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth(), (float)screen->GetHeight(),  0,  0, (backgroundbmp->GetWidth()) , (backgroundbmp->GetHeight()));
 
