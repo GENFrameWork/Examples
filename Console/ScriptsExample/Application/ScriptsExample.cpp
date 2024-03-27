@@ -96,6 +96,10 @@
 #include "Script_Language_G.h"
 #include "Script_Language_Lua.h"
 #include "Script_Language_Javascript.h"
+#ifdef SCRIPT_CACHE_ACTIVE
+#include "Script_Cache.h"
+#endif
+
 
 #include "ScriptsExample_CFG.h"
 
@@ -281,6 +285,21 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
 {
+
+  #ifdef SCRIPT_CACHE_ACTIVE
+
+  XPATH xpath;
+
+  GEN_SCRIPT_CACHE.Cache_DelAll();
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, xpath);
+
+  GEN_SCRIPT_CACHE.Cache_AllDirectory(xpath);
+  GEN_SCRIPT_CACHE.Cache_AllList(APP_CFG.Scripts_GetAll());
+
+  #endif
+
+
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
 
