@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "NetCapture",
+      "project": "CMakeLists.txt",
+      "projectTarget": "netpcature.exe",
+      "name": "netcapture.exe",
+      "args": [
+        ""
+      ]
+    }
+  ]
+}

@@ -1,0 +1,509 @@
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @file       NetCapture.cpp
+* 
+* @class      NETCAPTURE
+* @brief      Net Capture Example class 
+* @ingroup    EXAMPLES
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+
+
+/*---- PRECOMPILATION INCLUDES ----------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_INCLUDES
+
+#include "GEN_Defines.h"
+
+#pragma endregion
+
+
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
+
+#include "NetCapture.h"
+
+#include "VersionFrameWork.h"
+
+#include "XPath.h"
+#include "XDateTime.h"
+#include "XTimer.h"
+#include "XFactory.h"
+#include "XRand.h"
+#include "XDir.h"
+#include "XString.h"
+#include "XSystem.h"
+#include "XLog.h"
+#include "XTranslation.h"
+#include "XTranslation_GEN.h"
+#include "XConsole.h"
+#include "XThread.h"
+#include "XTrace.h"
+#include "XObserver.h"
+#include "XProcessManager.h"
+
+#include "APPCFG.h"
+#include "APPLog.h"
+
+#include "NetCapture_CFG.h"
+
+#include "XMemory_Control.h"
+
+
+#pragma endregion
+
+
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
+
+APPLICATIONCREATEINSTANCE(NETCAPTURE, netcapture)
+
+#pragma endregion
+
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma region CLASS_MEMBERS
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         NETCAPTURE::NETCAPTURE()
+* @brief      Constructor
+* @ingroup    
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NETCAPTURE::NETCAPTURE() : XFSMACHINE(0)
+{
+  Clean();
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         NETCAPTURE::~NETCAPTURE()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    
+* 
+* @return     Does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NETCAPTURE::~NETCAPTURE()
+{
+  Clean();
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::InitFSMachine()
+* @brief      InitFSMachine
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::InitFSMachine()
+{
+  if(!AddState( NETCAPTURE_XFSMSTATE_NONE            ,
+                NETCAPTURE_XFSMEVENT_INI             , NETCAPTURE_XFSMSTATE_INI           ,
+                NETCAPTURE_XFSMEVENT_END             , NETCAPTURE_XFSMSTATE_END           ,
+                XFSMACHINESTATE_EVENTDEFEND)) return false;
+
+
+  if(!AddState( NETCAPTURE_XFSMSTATE_INI             ,
+                NETCAPTURE_XFSMEVENT_UPDATE          , NETCAPTURE_XFSMSTATE_UPDATE        ,
+                NETCAPTURE_XFSMEVENT_END             , NETCAPTURE_XFSMSTATE_END           ,
+                XFSMACHINESTATE_EVENTDEFEND)) return false;
+
+  if (!AddState(NETCAPTURE_XFSMSTATE_UPDATE,
+                NETCAPTURE_XFSMEVENT_END             , NETCAPTURE_XFSMSTATE_END           ,
+                XFSMACHINESTATE_EVENTDEFEND)) return false;
+
+  if(!AddState( NETCAPTURE_XFSMSTATE_END             ,
+                NETCAPTURE_XFSMEVENT_NONE            , NETCAPTURE_XFSMSTATE_NONE          ,
+                XFSMACHINESTATE_EVENTDEFEND)) return false;
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::AppProc_Ini()
+* @brief      AppProc_Ini
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::AppProc_Ini()
+{
+  XSTRING string;
+  XSTRING stringresult;
+  XPATH   xpathsection;
+  XPATH   xpath;
+  bool    status;
+
+  //-------------------------------------------------------------------------------------------------
+
+  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+
+  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+
+  //--------------------------------------------------------------------------------------------------
+
+  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
+  XTRACE_SETAPPLICATIONID(string);
+
+  //--------------------------------------------------------------------------------------------------
+
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, APPDEFAULT_DIRECTORY_SCRIPTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPDEFAULT_DIRECTORY_GRAPHICS);
+
+  GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
+
+  //--------------------------------------------------------------------------------------------------
+
+  InitFSMachine();
+
+  //--------------------------------------------------------------------------------------
+
+  xmutexshowallstatus = GEN_XFACTORY.Create_Mutex();
+  if(!xmutexshowallstatus) return false;
+
+  //--------------------------------------------------------------------------------------
+
+  APP_CFG_SETAUTOMATICTRACETARGETS
+
+  //--------------------------------------------------------------------------------------
+
+  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
+
+  //--------------------------------------------------------------------------------------
+
+    
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathsection);
+  xpath.Create(3 , xpathsection.Get(), APPLICATION_NAMEFILE, XTRANSLATION_NAMEFILEEXT);
+
+  if(!GEN_XTRANSLATION.Ini(xpath))
+    {
+      return false;
+    }
+    
+  GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
+
+  //--------------------------------------------------------------------------------------
+
+  //console->Clear();
+  Show_Header(true);
+
+  //--------------------------------------------------------------------------------------
+
+  if(APP_CFG.Log_IsActive())
+    {
+      string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Activando sistema LOG"));
+      console->PrintMessage(string.Get(), 1, true, false);
+
+      status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
+                                                          , APPLICATION_SUBVERSION
+                                                          , APPLICATION_SUBVERSIONERR);
+
+      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
+      console->PrintMessage(stringresult.Get(), 0, false, true);
+
+      XSTRING SO_ID;
+      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
+
+      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
+      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get()); 
+
+      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
+           
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
+
+      XDWORD total = 0;
+      XDWORD free  = 0;
+
+      GEN_XSYSTEM.GetMemoryInfo(total,free);
+
+      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
+    }
+
+  //--------------------------------------------------------------------------------------
+
+  SetEvent(NETCAPTURE_XFSMEVENT_INI);
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::AppProc_FirstUpdate()
+* @brief      AppProc_FirstUpdate
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::AppProc_FirstUpdate()
+{
+  //--------------------------------------------------------------------------------------
+
+  xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
+  if(!xtimerupdateconsole) return false;
+
+  xtimerscriptrun = GEN_XFACTORY.CreateTimer();
+  if(!xtimerscriptrun) return false;
+
+  //--------------------------------------------------------------------------------------
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::AppProc_Update()
+* @brief      AppProc_Update
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::AppProc_Update()
+{
+  if(GetEvent()==NETCAPTURE_XFSMEVENT_NONE) // Not new event
+    {
+      switch(GetCurrentState())
+        {
+          case NETCAPTURE_XFSMSTATE_NONE        : break;
+
+          case NETCAPTURE_XFSMSTATE_INI         : SetEvent(NETCAPTURE_XFSMEVENT_UPDATE);
+                                                  break;
+
+          case NETCAPTURE_XFSMSTATE_UPDATE      : SetEvent(NETCAPTURE_XFSMEVENT_END);                                 
+                                                  break;
+
+          case NETCAPTURE_XFSMSTATE_END         : SetExitType(APPBASE_EXITTYPE_BY_USER);
+                                                  break;
+
+        }
+    }
+   else //  New event
+    {
+      if(GetEvent()<NETCAPTURE_LASTEVENT)
+        {
+          CheckTransition();
+
+          switch(GetCurrentState())
+            {
+              case NETCAPTURE_XFSMSTATE_NONE    : break;
+
+              case NETCAPTURE_XFSMSTATE_INI     : SetEvent(NETCAPTURE_XFSMEVENT_UPDATE);
+                                                  break;
+
+              case NETCAPTURE_XFSMSTATE_UPDATE  : break;
+
+              case NETCAPTURE_XFSMSTATE_END     : break;
+            }
+        }
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::AppProc_End()
+* @brief      AppProc_End
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::AppProc_End()
+{
+  XSTRING string;
+  XSTRING stringresult;
+
+  //--------------------------------------------------------------------------------------
+
+  SetEvent(NETCAPTURE_XFSMEVENT_END);
+
+  //--------------------------------------------------------------------------------------
+
+  if(xmutexshowallstatus)
+    {
+      GEN_XFACTORY.Delete_Mutex(xmutexshowallstatus);
+      xmutexshowallstatus = NULL;
+    }
+
+  //--------------------------------------------------------------------------------------
+
+  if(xtimerscriptrun)
+    {
+      GEN_XFACTORY.DeleteTimer(xtimerscriptrun);
+      xtimerscriptrun = NULL;
+    }
+
+  if(xtimerupdateconsole)
+    {
+      GEN_XFACTORY.DeleteTimer(xtimerupdateconsole);
+      xtimerupdateconsole = NULL;
+    }
+
+  //--------------------------------------------------------------------------------------
+
+  APP_LOG.DelInstance();
+
+  //--------------------------------------------------------------------------------------
+
+  APP_CFG.DelInstance();
+
+  //--------------------------------------------------------------------------------------
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::Show_AppStatus()
+* @brief      Show_AppStatus
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::Show_AppStatus()
+{
+  XSTRING string;
+  XSTRING string2;
+
+  XDWORD  total;
+  XDWORD  free;
+
+  GEN_XSYSTEM.GetMemoryInfo(total,free);
+
+  string  = __L("Memoria total");
+  string2.Format(__L("%d Kb, libre %d Kb (el %d%%%%)"), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
+  Show_Line(string, string2);
+
+  XDATETIME* datetime = GEN_XFACTORY.CreateDateTime();
+  if(datetime)
+    {
+      datetime->Read();
+
+      string  = __L("Fecha ");
+      datetime->GetDateTimeToString(XDATETIME_FORMAT_STANDARD | XDATETIME_FORMAT_TEXTMONTH | XDATETIME_FORMAT_ADDDAYOFWEEK, string2);
+      Show_Line(string, string2);
+
+      GEN_XFACTORY.DeleteDateTime(datetime);
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::Show_AllStatus()
+* @brief      Show_AllStatus
+* @ingroup    
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::Show_AllStatus()
+{
+  console->Clear();
+
+  if(xmutexshowallstatus) xmutexshowallstatus->Lock();
+
+  if(Show_Header(false))  console->PrintMessage(__L(""),0, false, true);
+  if(Show_AppStatus())    console->PrintMessage(__L(""),0, false, true);
+  
+  if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCAPTURE::HandleEvent(XEVENT* xevent)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    
+* 
+* @param[in]  xevent : 
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCAPTURE::HandleEvent(XEVENT* xevent)
+{
+  if(!xevent) return;
+
+  /*
+  switch(xevent->GetEventFamily())
+    {
+       case XEVENT_TYPE_SCRIPT     : { SCRIPT_XEVENT* event = (SCRIPT_XEVENT*)xevent;
+                                       if(!event) return;
+
+                                       HandleEvent_Script(event);
+                                     }
+                                     break; 
+    }
+  */
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCAPTURE::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    
+* 
+* @return     void : does not return anything. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCAPTURE::Clean()
+{
+  xtimerupdateconsole         = NULL;
+  xtimerscriptrun             = NULL;
+
+  xmutexshowallstatus         = NULL;
+
+}
+
+
+#pragma endregion
+
