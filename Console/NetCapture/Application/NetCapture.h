@@ -90,6 +90,7 @@ enum NETCAPTUREXFSMSTATES
 class XTIMER;
 class XMUTEX;
 class NETCAPTURE_CFG;
+class NETCAPTURE_SNIFFER;
 
 class NETCAPTURE : public APPCONSOLE, public XFSMACHINE
 {
@@ -102,7 +103,10 @@ class NETCAPTURE : public APPCONSOLE, public XFSMACHINE
     bool                            AppProc_Ini                 ();
     bool                            AppProc_FirstUpdate         ();
     bool                            AppProc_Update              ();
+    bool                            AppProc_LastUpdate          ();
     bool                            AppProc_End                 ();
+
+    bool                            KeyValidSecuences           (int key);
     
     bool                            Show_AppStatus              ();
     bool                            Show_AllStatus              ();
@@ -113,10 +117,10 @@ class NETCAPTURE : public APPCONSOLE, public XFSMACHINE
 
     void                            Clean                       ();
 
-    XTIMER*                         xtimerupdateconsole;
-    XTIMER*                         xtimerscriptrun;
-
+    XTIMER*                         xtimerupdateconsole;  
     XMUTEX*                         xmutexshowallstatus;    
+
+    NETCAPTURE_SNIFFER*             sniffer;  
 };
 
 #pragma endregion

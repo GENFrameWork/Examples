@@ -59,10 +59,14 @@
 #include "XObserver.h"
 #include "XProcessManager.h"
 
+#include "DIOPCap.h"
+#include "DIOPCap_Filters.h"
+
 #include "APPCFG.h"
 #include "APPLog.h"
 
 #include "NetCapture_CFG.h"
+#include "NetCapture_Sniffer.h"
 
 #include "XMemory_Control.h"
 
@@ -277,9 +281,22 @@ bool NETCAPTURE::AppProc_FirstUpdate()
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
 
-  xtimerscriptrun = GEN_XFACTORY.CreateTimer();
-  if(!xtimerscriptrun) return false;
+  //--------------------------------------------------------------------------------------
 
+  sniffer =  new NETCAPTURE_SNIFFER();
+  if(!sniffer)
+    {
+      return false;
+    }
+
+  sniffer->Capture_Ini();
+
+  DIOPCAP_FILTERS* filters = sniffer->GetDIOPCap()->GetFilters();
+  if(filters)
+    {
+      filters->Entrys_Add(__L("DNS"), DIOPCAPPROTOCOL_TYPE_UDP | DIOPCAPPROTOCOL_TYPE_TCP, 1, 53);
+    }
+      
   //--------------------------------------------------------------------------------------
 
   return true;
@@ -306,7 +323,24 @@ bool NETCAPTURE::AppProc_Update()
           case NETCAPTURE_XFSMSTATE_INI         : SetEvent(NETCAPTURE_XFSMEVENT_UPDATE);
                                                   break;
 
-          case NETCAPTURE_XFSMSTATE_UPDATE      : SetEvent(NETCAPTURE_XFSMEVENT_END);                                 
+          case NETCAPTURE_XFSMSTATE_UPDATE      : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+                                                    {
+                                                      if(xtimerupdateconsole)
+                                                        {
+                                                          if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
+                                                            {
+                                                              Show_AllStatus();
+                                                              xtimerupdateconsole->Reset();
+                                                            }
+
+
+                                                          if(console->KBHit())
+                                                            {
+                                                              int key = console->GetChar();
+                                                              KeyValidSecuences(key);
+                                                            }
+                                                        }
+                                                    }                                
                                                   break;
 
           case NETCAPTURE_XFSMSTATE_END         : SetExitType(APPBASE_EXITTYPE_BY_USER);
@@ -332,6 +366,29 @@ bool NETCAPTURE::AppProc_Update()
               case NETCAPTURE_XFSMSTATE_END     : break;
             }
         }
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::AppProc_LastUpdate()
+* @brief      AppProc_LastUpdate
+* @ingroup    EXAMPLES
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::AppProc_LastUpdate()
+{
+  if(sniffer)
+    {
+      sniffer->Capture_End();
+
+      delete sniffer;
+      sniffer = NULL;
     }
 
   return true;
@@ -366,12 +423,6 @@ bool NETCAPTURE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  if(xtimerscriptrun)
-    {
-      GEN_XFACTORY.DeleteTimer(xtimerscriptrun);
-      xtimerscriptrun = NULL;
-    }
-
   if(xtimerupdateconsole)
     {
       GEN_XFACTORY.DeleteTimer(xtimerupdateconsole);
@@ -387,6 +438,42 @@ bool NETCAPTURE::AppProc_End()
   APP_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCAPTURE::KeyValidSecuences(int key)
+* @brief      KeyValidSecuences
+* @ingroup    EXAMPLES
+* 
+* @param[in]  key : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCAPTURE::KeyValidSecuences(int key)
+{
+  XCHAR character = (XCHAR)key;
+
+  if((character<32) || (character>127)) character = __C('?');
+  APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
+
+  console->Printf(__L("\r    \r"));
+
+  switch(key)
+    {
+      case 'Q'  : // ESC Exit application
+                  SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  break;
+
+      case 'R'  : break;
+
+      case 'S'  : break;
+
+    }
 
   return true;
 }
@@ -498,10 +585,9 @@ void NETCAPTURE::HandleEvent(XEVENT* xevent)
 void NETCAPTURE::Clean()
 {
   xtimerupdateconsole         = NULL;
-  xtimerscriptrun             = NULL;
-
   xmutexshowallstatus         = NULL;
 
+  sniffer                     = NULL;
 }
 
 
