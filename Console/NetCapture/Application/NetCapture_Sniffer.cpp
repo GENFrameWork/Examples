@@ -210,7 +210,7 @@ NETCAPTURE_SNIFFER::~NETCAPTURE_SNIFFER()
 bool NETCAPTURE_SNIFFER::Capture_Ini()
 {
   DIOPCAPNETINTERFACE* netinterface			 = NULL; 
-	int                  indexnetinterface = 0; // -1;
+	int                  indexnetinterface = 1; // -1;
   bool                 status            =  false;   
 
   diopcap = GEN_DIOFACTORY.CreatePCap();
