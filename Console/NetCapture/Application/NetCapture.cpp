@@ -294,7 +294,7 @@ bool NETCAPTURE::AppProc_FirstUpdate()
   DIOPCAP_FILTERS* filters = sniffer->GetDIOPCap()->GetFilters();
   if(filters)
     {
-      filters->Entrys_Add(__L("DNS"), DIOPCAPPROTOCOL_TYPE_UDP | DIOPCAPPROTOCOL_TYPE_TCP, 1, 53);
+      // filters->Entrys_Add(__L("DNS"), DIOPCAPPROTOCOL_TYPE_UDP | DIOPCAPPROTOCOL_TYPE_TCP, 1, 53);
     }
       
   //--------------------------------------------------------------------------------------

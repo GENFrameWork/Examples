@@ -210,7 +210,7 @@ NETCAPTURE_SNIFFER::~NETCAPTURE_SNIFFER()
 bool NETCAPTURE_SNIFFER::Capture_Ini()
 {
   DIOPCAPNETINTERFACE* netinterface			 = NULL; 
-	int                  indexnetinterface = 1; // -1;
+	int                  indexnetinterface = 4; // -1;
   bool                 status            =  false;   
 
   diopcap = GEN_DIOFACTORY.CreatePCap();
@@ -612,9 +612,29 @@ void NETCAPTURE_SNIFFER::ThreadRunFunctionSniffer(void* param)
       DIOPCAPFRAME* frame = diopcap->Frames_Get(c);
 	    if(frame) 
         {
-          if(diopcap->GetFilters()->Entrys_Check(frame))
-            {              
+          //if(diopcap->GetFilters()->Entrys_Check(frame))
+            { 
+              XSTRING protocoltypestr;
+              XSTRING sourceMAC;
+              XSTRING sourceIP;
+              XSTRING targetMAC;
+              XSTRING targetIP;
+
+              frame->GetProtocolTypeString(protocoltypestr);
+              frame->GetSourceMAC()->GetXString(sourceMAC);
+              frame->GetSourceIP()->GetXString(sourceIP);
+              frame->GetTargetMAC()->GetXString(targetMAC);
+              frame->GetTargetIP()->GetXString(targetIP);
+             
               XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("----------------------------------------------------------------------------------------------------"));
+
+              XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("%s    [%s](%s) -> [%s](%s)  port [%d]") , protocoltypestr.Get()
+                                                                                                  , sourceMAC.Get()
+                                                                                                  , sourceIP.Get()
+                                                                                                  , targetMAC.Get()
+                                                                                                  , targetIP.Get()
+                                                                                                  , frame->GetSourcePort());
+
               XTRACE_PRINTDATABLOCKCOLOR(XTRACE_COLOR_BLUE, frame->GetDataPayload(), frame->GetDataPayLoadSize()); 
             }       
 
