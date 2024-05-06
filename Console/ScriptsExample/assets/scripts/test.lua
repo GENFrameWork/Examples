@@ -34,8 +34,10 @@ function main()
   
   Console_Printf("\nIntroduce una tecla:");
   Console_Printf("[%c]\n", Console_GetChar());
+
+  return 25
   
-end
+end 
 
 
-main();
+return main()
