@@ -20,7 +20,7 @@ option(XMEMORY_CONTROL_FEATURE                                "XMemory Control" 
                     
 option(DIO_FEATURE                                            "Data Input/Output"                                       true ) 
 option(DIO_CHECKCONNECTIONS_FEATURE                           "Check Connections"                                       true )
-option(DIO_NETWORKTINEPROTOCOL_FEATURE                        "Network Time Protocol"                                   true )
+option(DIO_NETWORKTIMEPROTOCOL_FEATURE                        "Network Time Protocol"                                   true )
 option(DIO_DYNDNS_FEATURE                                     "DynDNS"                                                  true )
 option(DIO_SCRAPERWEB_FEATURE                                 "Scraper Web"                                             true )
     

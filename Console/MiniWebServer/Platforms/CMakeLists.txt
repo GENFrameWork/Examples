@@ -21,7 +21,7 @@ option(XSERIALIZABLE_JSON_FEATURE                             "Activate Serializ
                     
 option(DIO_FEATURE                                            "Activate Data Input/Output"                              true )
 option(DIO_CHECKCONNECTIONS_FEATURE                           "Activate Check Connections"                              true )
-option(DIO_NETWORKTINEPROTOCOL_FEATURE                        "Activate Network Time Protocol"                          true )
+option(DIO_NETWORKTIMEPROTOCOL_FEATURE                        "Activate Network Time Protocol"                          true )
 option(DIO_DYNDNS_FEATURE                                     "Activate DynDNS"                                         true )
 option(DIO_WEBSERVER_FEATURE                                  "Activate Web Server"                                     true )
 option(DIO_SCRAPERWEB_FEATURE                                 "Activate Scraper Web"                                    true )
