@@ -762,7 +762,14 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
               option_cfg.width        = element_menu->GetBoundaryLine()->width-30;
               option_cfg.height       = option_height;
 
-              UI_ELEMENT_OPTION* element_option = element_menu->Option_AddText(option_cfg);               
+              UI_ELEMENT_OPTION* element_option = element_menu->Option_AddText(option_cfg);   
+              if(element_option)
+                {
+                  //element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_ACTIVE);     
+                  //element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_DEACTIVE);
+                  element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_PRESELECT);
+                  element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_SELECT);                          
+                }
             }
                          
           GEN_USERINTERFACE.Skin_Selected()->CalculeBoundaryLine_AllElements(element_menu, true); 
