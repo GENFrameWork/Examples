@@ -13,19 +13,19 @@ set(GEN_DIRECTORY "../../../../")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                            "Debug mode"                                              true )
-option(XTRACE_FEATURE                                           "XTrace"                                                  true )
-option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            true )                  
-option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         true )
+option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
+option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
+option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )                  
+option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
                  
-option(APP_FEATURE                                              "Application modules"                                     true )
-option(APP_CONSOLE_FEATURE                                      "Application Console"                                     true )
-option(APP_LOG_FEATURE                                          "Application Log"                                         true )
+option(APP_FEATURE                                              "Application modules"                                     ON )
+option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )
+option(APP_LOG_FEATURE                                          "Application Log"                                         ON )
 
-option(APP_CFG_GENERAL_FEATURE                                  "Application CFG General"                                 true )
-option(APP_CFG_LOG_FEATURE                                      "Application CFG LOG"                                     true )
+option(APP_CFG_GENERAL_FEATURE                                  "Application CFG General"                                 ON )
+option(APP_CFG_LOG_FEATURE                                      "Application CFG LOG"                                     ON )
 
-option(DIO_PCAP_FEATURE                                         "PCap Library"                                            true )
+option(DIO_PCAP_FEATURE                                         "PCap Library"                                            ON )
  
 
 # --------------------------------------------------------------------

@@ -18,33 +18,33 @@ set(ANDROID_NDK_ROOT "/mnt/GENFrameWork/ThirdPartyLibraries/android-ndk-r21b")
 # --------------------------------------------------------------------
 # features/Defines
 
-option(DEBUG_FEATURE                                          "Debug mode"                                              true )
-option(XTRACE_FEATURE                                         "XTrace"                                                  true )
-option(XTRACE_NOINTERNET_FEATURE                              "No need for trace dependencies with Internet"            true )
-option(XTHREADCOLLECTED_FEATURE                               "Thread Collected"                                        true )
-option(XMEMORY_CONTROL_FEATURE                                "XMemory Control"                                         true )
+option(DEBUG_FEATURE                                          "Debug mode"                                              ON )
+option(XTRACE_FEATURE                                         "XTrace"                                                  ON )
+option(XTRACE_NOINTERNET_FEATURE                              "No need for trace dependencies with Internet"            ON )
+option(XTHREADCOLLECTED_FEATURE                               "Thread Collected"                                        ON )
+option(XMEMORY_CONTROL_FEATURE                                "XMemory Control"                                         ON )
 
-option(LINUX_X11_FEATURE                                      "Linux X11"                                               true )
+option(LINUX_X11_FEATURE                                      "Linux X11"                                               ON )
 
-option(USERINTERFACE_FEATURE                                  "User Interace"                                           true )
-#option(USERINTERFACE_DEBUG_FEATURE                            "Debug User Interace"                                     true )
+option(USERINTERFACE_FEATURE                                  "User Interace"                                           ON )
+#option(USERINTERFACE_DEBUG_FEATURE                            "Debug User Interace"                                     ON )
         
-option(APP_FEATURE                                            "Application modules"                                     true )
-option(APP_LOG_FEATURE                                        "Application Log"                                         true )
-option(APP_GRAPHICS_FEATURE                                   "Application Graphics"                                    true )
+option(APP_FEATURE                                            "Application modules"                                     ON )
+option(APP_LOG_FEATURE                                        "Application Log"                                         ON )
+option(APP_GRAPHICS_FEATURE                                   "Application Graphics"                                    ON )
 
-option(APP_CFG_GENERAL_FEATURE                                "Application CFG General"                                 true )
-option(APP_CFG_LOG_FEATURE                                    "Application CFG LOG"                                     true )
+option(APP_CFG_GENERAL_FEATURE                                "Application CFG General"                                 ON )
+option(APP_CFG_LOG_FEATURE                                    "Application CFG LOG"                                     ON )
 
-option(GRP_FEATURE                                            "Graphics"                                                true )
-option(GRP_BITMAP_FILE_BMP_FEATURE                            "Graphics Bitmap File BMP"                                true )
-option(GRP_BITMAP_FILE_JPG_FEATURE                            "Graphics Bitmap File JPG"                                true )
-option(GRP_BITMAP_FILE_PNG_FEATURE                            "Graphics Bitmap File PNG"                                true )
-option(GRP_BITMAP_FILE_TGA_FEATURE                            "Graphics Bitmap File TGA"                                true )
-option(GRP_VIDEO_FILE_AVI_FEATURE                             "Graphics Video File AVI"                                 true )
-option(GRP_2D_FEATURE                                         "Graphics 2D"                                             true )
+option(GRP_FEATURE                                            "Graphics"                                                ON )
+option(GRP_BITMAP_FILE_BMP_FEATURE                            "Graphics Bitmap File BMP"                                ON )
+option(GRP_BITMAP_FILE_JPG_FEATURE                            "Graphics Bitmap File JPG"                                ON )
+option(GRP_BITMAP_FILE_PNG_FEATURE                            "Graphics Bitmap File PNG"                                ON )
+option(GRP_BITMAP_FILE_TGA_FEATURE                            "Graphics Bitmap File TGA"                                ON )
+option(GRP_VIDEO_FILE_AVI_FEATURE                             "Graphics Video File AVI"                                 ON )
+option(GRP_2D_FEATURE                                         "Graphics 2D"                                             ON )
 
-option(INP_FEATURE                                            "Inputs"                                                  true )
+option(INP_FEATURE                                            "Inputs"                                                  ON )
 
 
 # --------------------------------------------------------------------

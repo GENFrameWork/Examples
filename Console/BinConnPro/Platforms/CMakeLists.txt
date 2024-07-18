@@ -13,31 +13,31 @@ set(GEN_DIRECTORY "../../../../")
 # --------------------------------------------------------------------
 # features/Defines
 
-option(DEBUG_FEATURE                                          "Debug mode"                                              true )
-option(XTRACE_FEATURE                                         "XTrace"                                                  true )
-option(XTRACE_NOINTERNET_FEATURE                              "No need for trace dependencies with Internet"            true )
-option(XMEMORY_CONTROL_FEATURE                                "XMemory Control"                                         true )
+option(DEBUG_FEATURE                                          "Debug mode"                                              ON )
+option(XTRACE_FEATURE                                         "XTrace"                                                  ON )
+option(XTRACE_NOINTERNET_FEATURE                              "No need for trace dependencies with Internet"            ON )
+option(XMEMORY_CONTROL_FEATURE                                "XMemory Control"                                         ON )
                     
-option(DIO_FEATURE                                            "Data Input/Output"                                       true ) 
-option(DIO_CHECKCONNECTIONS_FEATURE                           "Check Connections"                                       true )
-option(DIO_NETWORKTIMEPROTOCOL_FEATURE                        "Network Time Protocol"                                   true )
-option(DIO_DYNDNS_FEATURE                                     "DynDNS"                                                  true )
-option(DIO_SCRAPERWEB_FEATURE                                 "Scraper Web"                                             true )
+option(DIO_FEATURE                                            "Data Input/Output"                                       ON ) 
+option(DIO_CHECKCONNECTIONS_FEATURE                           "Check Connections"                                       ON )
+option(DIO_NETWORKTIMEPROTOCOL_FEATURE                        "Network Time Protocol"                                   ON )
+option(DIO_DYNDNS_FEATURE                                     "DynDNS"                                                  ON )
+option(DIO_SCRAPERWEB_FEATURE                                 "Scraper Web"                                             ON )
     
-option(DIO_PROTOCOL_FEATURE                                   "Data Input/Output Protocol"                              true )
+option(DIO_PROTOCOL_FEATURE                                   "Data Input/Output Protocol"                              ON )
     
-option(APP_FEATURE                                            "Application modules"                                     true )
-option(APP_CHECKRESOURCESHARDWARE_FEATURE                     "Application Check Resources Hardwar"                     true )
-option(APP_CONSOLE_FEATURE                                    "Application Console"                                     true )
-option(APP_INTERNETSERVICES_FEATURE                           "Application Internet Services"                           true )
-option(APP_LOG_FEATURE                                        "Application Log"                                         true )
+option(APP_FEATURE                                            "Application modules"                                     ON )
+option(APP_CHECKRESOURCESHARDWARE_FEATURE                     "Application Check Resources Hardwar"                     ON )
+option(APP_CONSOLE_FEATURE                                    "Application Console"                                     ON )
+option(APP_INTERNETSERVICES_FEATURE                           "Application Internet Services"                           ON )
+option(APP_LOG_FEATURE                                        "Application Log"                                         ON )
     
-option(APP_CFG_GENERAL_FEATURE                                "Application CFG General"                                 true )  
-option(APP_CFG_LOG_FEATURE                                    "Application CFG LOG"                                     true )
-option(APP_CFG_INTERNETSERVICES_FEATURE                       "Application CFG Internet services"                       true )      
-option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE                 "Application CFG Check Resorces HW"                       true )  
-option(APP_CFG_DNSRESOLVER_FEATURE                            "Application CFG DNS "                                    true )   
-option(APP_CFG_DIOLOCATION_FEATURE                            "Application CFG DIO Location"                            true )          
+option(APP_CFG_GENERAL_FEATURE                                "Application CFG General"                                 ON )  
+option(APP_CFG_LOG_FEATURE                                    "Application CFG LOG"                                     ON )
+option(APP_CFG_INTERNETSERVICES_FEATURE                       "Application CFG Internet services"                       ON )      
+option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE                 "Application CFG Check Resorces HW"                       ON )  
+option(APP_CFG_DNSRESOLVER_FEATURE                            "Application CFG DNS "                                    ON )   
+option(APP_CFG_DIOLOCATION_FEATURE                            "Application CFG DIO Location"                            ON )          
 
 # --------------------------------------------------------------------
 # Config Application Macro

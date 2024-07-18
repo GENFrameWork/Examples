@@ -1212,6 +1212,13 @@ void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
     {
       case GRPXEVENT_TYPE_SCREEN_CREATING   : { GRPSCREEN* screen  = event->GetScreen();
                                                 if(!screen) break;
+                                                
+                                                /*          
+                                                screen->Style_Remove(GRPSCREENSTYLE_DEFAULT);  
+                                                screen->Style_Add(GRPSCREENSTYLE_ONTOP);
+                                                screen->Style_Add(GRPSCREENSTYLE_TRANSPARENT);
+                                                screen->Style_Add(GRPSCREENSTYLE_NOICONTASKBAR);
+                                                */
 
                                                 Ini_Graphics(screen);                                         
                                               }
