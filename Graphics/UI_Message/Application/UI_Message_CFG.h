@@ -1,15 +1,12 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Canvas2D_CFG.h
+* @file       UI_Message_CFG.h
 *
-* @class       CANVAS2D_CFG
-* @brief       GEN Canvas 2D Config Example class
-* @ingroup     GRAPHIC
+* @class      UI_MESSAGE_CFG
+* @brief      GEN UI Message Config Example class
+* @ingroup    EXAMPLES
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:30
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -29,8 +26,8 @@
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _CANVAS2DCFG_H_
-#define _CANVAS2DCFG_H_
+#ifndef _UI_MESSAGECFG_H_
+#define _UI_MESSAGECFG_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
@@ -38,31 +35,32 @@
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
-#define CANVAS2DCFG_SECTIONGENERAL    __L("general")
+#define UI_MESSAGECFG_SECTIONGENERAL    __L("general")
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
-class CANVAS2D_CFG : public APPCFG
+class UI_MESSAGE_CFG : public APPCFG
 {
   public:
 
     static bool                     GetIsInstanced                          ();
-    static CANVAS2D_CFG&            GetInstance                             ();
+    static UI_MESSAGE_CFG&          GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
-    bool                            Default                                 ();
+    bool                            DoVariableMapping                       (); 
+    bool                            DoDefault                               ();  
 
   private:
 
-                                    CANVAS2D_CFG                            (XCHAR* namefile);
-                                    CANVAS2D_CFG                            (CANVAS2D_CFG const&);       // Don't implement
-    virtual                        ~CANVAS2D_CFG                            ();
+                                    UI_MESSAGE_CFG                          (XCHAR* namefile);
+                                    UI_MESSAGE_CFG                          (UI_MESSAGE_CFG const&);       // Don't implement
+    virtual                        ~UI_MESSAGE_CFG                          ();
 
-    void                            operator =                              (CANVAS2D_CFG const&);       // Don't implement
+    void                            operator =                              (UI_MESSAGE_CFG const&);       // Don't implement
 
     void                            Clean                                   ();
 
-    static CANVAS2D_CFG*            instance;
+    static UI_MESSAGE_CFG*          instance;
 };
 
 

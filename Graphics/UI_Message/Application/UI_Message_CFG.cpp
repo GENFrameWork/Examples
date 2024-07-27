@@ -1,15 +1,12 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file        Canvas2D_CFG.cpp
+* @file       UI_Messages_CFG.cpp
 *
-* @class       CANVAS2D_CFG
-* @brief       GEN Canvas 2D Config Example class
-* @ingroup     GRAPHIC
+* @class      UI_MESSAGE_CFG
+* @brief      GEN UI Messages Config Example class
+* @ingroup    EXAMPLES
 *
-* @author      Abraham J. Velez
-* @date       01/03/2016 12:30
-*
-* @copyright   Copyright(c) 2008 - 2016 GEN Group.
+* @copyright  GEN Group. All right reserved.
 *
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -37,32 +34,29 @@
 
 #include "XLog.h"
 
-#include "Canvas2D.h"
+#include "UI_Message.h"
 
-#include "Canvas2D_CFG.h"
+#include "UI_Message_CFG.h"
 
 #include "XMemory_Control.h"
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
-CANVAS2D_CFG* CANVAS2D_CFG::instance = NULL;
+UI_MESSAGE_CFG* UI_MESSAGE_CFG::instance = NULL;
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool CANVAS2D_CFG::GetIsInstanced()
+* @fn         bool UI_MESSAGE_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool CANVAS2D_CFG::GetIsInstanced()
+bool UI_MESSAGE_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
@@ -71,19 +65,16 @@ bool CANVAS2D_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         CANVAS2D_CFG& CANVAS2D_CFG::GetInstance()
+* @fn         UI_MESSAGE_CFG& UI_MESSAGE_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
-*
-* @return     CANVAS2D_CFG& :
+* @return     UI_MESSAGE_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-CANVAS2D_CFG& CANVAS2D_CFG::GetInstance()
+UI_MESSAGE_CFG& UI_MESSAGE_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new CANVAS2D_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = new UI_MESSAGE_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -91,17 +82,14 @@ CANVAS2D_CFG& CANVAS2D_CFG::GetInstance()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool CANVAS2D_CFG::DelInstance()
+* @fn         bool UI_MESSAGE_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool CANVAS2D_CFG::DelInstance()
+bool UI_MESSAGE_CFG::DelInstance()
 {
   if(instance)
     {
@@ -118,24 +106,45 @@ bool CANVAS2D_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool CANVAS2D_CFG::Default()
-* @brief      Default config
-* @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool CANVAS2D_CFG::Default()
+* 
+* @fn         bool UI_MESSAGE_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool UI_MESSAGE_CFG::DoVariableMapping()
 {
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool UI_MESSAGE_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool UI_MESSAGE_CFG::DoDefault()
+{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
 
   //------------------------------------------------------------------------------
 
   GEN_XTRACE_NET_CFG_DEFAULT_01
-
+  
   //------------------------------------------------------------------------------
 
   log_isactive                            = true;
@@ -165,42 +174,37 @@ bool CANVAS2D_CFG::Default()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         CANVAS2D_CFG::CANVAS2D_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
+* @fn         UI_MESSAGE_CFG::UI_MESSAGE_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
 * @brief      Constructor
 * @ingroup
-*
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
 *
 * @param[in]  XCHAR* : name of file of config
 *
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-CANVAS2D_CFG::CANVAS2D_CFG(XCHAR* namefile) : APPCFG(namefile)
+UI_MESSAGE_CFG::UI_MESSAGE_CFG(XCHAR* namefile) : APPCFG(namefile)
 {
   Clean();
 
-  Default();
-
-  Ini();
+  if(namefile)
+    {
+      Ini<UI_MESSAGE_CFG>();
+    }
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         CANVAS2D_CFG::~CANVAS2D_CFG()
+* @fn         UI_MESSAGE_CFG::~UI_MESSAGE_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
-*
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-CANVAS2D_CFG::~CANVAS2D_CFG()
+UI_MESSAGE_CFG::~UI_MESSAGE_CFG()
 {
   Clean();
 }
@@ -209,18 +213,15 @@ CANVAS2D_CFG::~CANVAS2D_CFG()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void CANVAS2D_CFG::Clean()
+* @fn         void UI_MESSAGE_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
 *
-* @author     Abraham J. Velez
-* @date       01/03/2016 12:30
-*
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void CANVAS2D_CFG::Clean()
+void UI_MESSAGE_CFG::Clean()
 {
 
 }
