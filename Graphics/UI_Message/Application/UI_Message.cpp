@@ -278,29 +278,31 @@ bool UI_MESSAGE::AppProc_Ini()
   if(APP_CFG.Log_IsActive())
     {
       string.Format(__L("Activando sistema LOG"));
-      
+    
       status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
                                                           , APPLICATION_SUBVERSION
                                                           , APPLICATION_SUBVERSIONERR);
-      
       XSTRING SO_ID;
-      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
-
-      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
-      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get()); 
-
-      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
-           
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
-
-      XDWORD total = 0;
-      XDWORD free  = 0;
+      XDWORD  total = 0;
+      XDWORD  free  = 0;
 
       GEN_XSYSTEM.GetMemoryInfo(total,free);
+      GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
+   
+      if(status)
+        {       
+          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("Version")      , GEN_VERSION.GetAppVersion()->Get());
+          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("S.O. version") , SO_ID.Get());    
+          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("ROOT path")    , GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());                    
+          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
+        }
+      
+      XTRACE_PRINTMSGSTATUS(__L("version"),  GEN_VERSION.GetAppVersion()->Get());
+      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get());    
+      XTRACE_PRINTMSGSTATUS(__L("ROOT path"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
 
-      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
+      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
+      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());    
     }
 
   //--------------------------------------------------------------------------------------
@@ -615,13 +617,14 @@ bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
     }
 
   screen->Style_Remove(GRPSCREENSTYLE_DEFAULT);  
-  //screen->Style_Add(GRPSCREENSTYLE_FULLSCREEN);
+  screen->Style_Add(GRPSCREENSTYLE_FULLSCREEN);
+  //screen->Style_Add(GRPSCREENSTYLE_FULLSCREENMAIN);
   //screen->Style_Add(GRPSCREENSTYLE_FULLSCREEN_WITHOUTTASKBAR);
   //screen->Style_Add(GRPSCREENSTYLE_FULLSCREEN_ADJUSTRESOLUTION);
 
   screen->Style_Add(GRPSCREENSTYLE_ONTOP);
-  screen->Style_Add(GRPSCREENSTYLE_TRANSPARENT);
-  screen->Style_Add(GRPSCREENSTYLE_NOICONTASKBAR);
+  //screen->Style_Add(GRPSCREENSTYLE_TRANSPARENT);
+  //screen->Style_Add(GRPSCREENSTYLE_NOICONTASKBAR);
 
   screen->GetTitle()->Set(__L("Hola radiola"));  
 
@@ -711,8 +714,7 @@ bool UI_MESSAGE::Ini_UserInterface(bool on)
       if(screen->Style_Is(GRPSCREENSTYLE_TRANSPARENT))
         {
           canvas->Buffer_SetToZero();
-        }
-                          
+        }                          
     }
    else
     {
@@ -897,12 +899,12 @@ void UI_MESSAGE::HandleEvent_Graphics(GRPXEVENT* event)
                                                     }
                                                     break;
 
-      case GRPXEVENT_TYPE_SCREEN_CANVASCREATING  : { GRPSCREEN* screen  = event->GetScreen();
-                                                     if(!screen) break;
+      case GRPXEVENT_TYPE_SCREEN_CANVASCREATING   : { GRPSCREEN* screen  = event->GetScreen();
+                                                      if(!screen) break;
                                                 
-                                                     Ini_Canvas(screen);                                         
-                                                   }
-                                                   break;
+                                                      Ini_Canvas(screen);                                         
+                                                    }
+                                                    break;
     }
 }
 
@@ -924,19 +926,19 @@ void UI_MESSAGE::HandleEvent(XEVENT* xevent)
 
   switch(xevent->GetEventFamily())
     {
-      case XEVENT_TYPE_GRAPHICS       : { GRPXEVENT* event = (GRPXEVENT*)xevent;
-                                          if(!event) return;
+      case XEVENT_TYPE_GRAPHICS                   : { GRPXEVENT* event = (GRPXEVENT*)xevent;
+                                                      if(!event) return;
 
-                                          HandleEvent_Graphics(event);
-                                        }
-                                        break;
+                                                      HandleEvent_Graphics(event);
+                                                    }
+                                                    break;
 
-      case XEVENT_TYPE_USERINTERFACE  : { UI_XEVENT* event = (UI_XEVENT*)xevent;
-                                          if(!event) return;
+      case XEVENT_TYPE_USERINTERFACE              : { UI_XEVENT* event = (UI_XEVENT*)xevent;
+                                                      if(!event) return;
 
-                                          HandleEvent_UserInterface(event);
-                                        }
-                                        break;
+                                                      HandleEvent_UserInterface(event);
+                                                    }
+                                                    break;
     }
 }
 
