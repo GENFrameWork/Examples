@@ -24,6 +24,8 @@ option(APP_LOG_FEATURE                                          "Activate Applic
 option(APP_CFG_GENERAL_FEATURE                                  "Activate Application CFG General"                        ON )
 option(APP_CFG_LOG_FEATURE                                      "Activate Application CFG LOG"                            ON )
 option(APP_CFG_SCRIPTS_FEATURE                                  "Application Scripts List"                                ON )  
+
+option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
     
 option(SCRIPT_FEATURE                                           "Activate Scripts"                                        ON )
 option(SCRIPT_G_FEATURE                                         "Activate Script G Language"                              ON )
