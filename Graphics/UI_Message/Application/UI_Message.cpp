@@ -615,27 +615,25 @@ bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
     {
       return false;
     }
-
   
   screen->Style_Remove(GRPSCREENSTYLE_DEFAULT);  
   
   //screen->Style_Add(GRPSCREENSTYLE_FULLSCREEN);
   //screen->Style_Add(GRPSCREENSTYLE_FULLSCREEN_ADJUSTRESOLUTION);
-  
 
   screen->Style_Add(GRPSCREENSTYLE_ONTOP);
- //screen->Style_Add(GRPSCREENSTYLE_TRANSPARENT);
+  screen->Style_Add(GRPSCREENSTYLE_TRANSPARENT);
   screen->Style_Add(GRPSCREENSTYLE_NOWINDOWICONS);
-  //screen->Style_Add(GRPSCREENSTYLE_HEIGHTWITHOUTTASKBAR);
+  screen->Style_Add(GRPSCREENSTYLE_HEIGHTWITHOUTTASKBAR);
   screen->Style_Add(GRPSCREENSTYLE_NOICONTASKBAR);
 
   screen->GetTitle()->Set(__L("Hola radiola"));  
 
-  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
 
   screen->SetPosition(100, 100);
-  screen->SetWidth(600);
-  screen->SetHeight(300);
+  screen->SetWidth(800);
+  screen->SetHeight(600);
   
   /*
   bool status = screen->CreateViewport(APPLICATION_GUI_MESSAGE_VIEWPORT_ID  , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight()

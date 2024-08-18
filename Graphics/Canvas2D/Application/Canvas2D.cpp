@@ -687,8 +687,13 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
   //#if !defined(LINUX) && !defined(LINUX_X11_ACTIVE)
   
+  screen->SetPosition(GRPPROPERTYMODE_SCREEN_CENTER, GRPPROPERTYMODE_SCREEN_CENTER);
   screen->SetWidth(1024);
   screen->SetHeight(768);
+  
+  screen->GetTitle()->Set(__L("Canvas 2D"));
+  
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
 
   //#endif
 
