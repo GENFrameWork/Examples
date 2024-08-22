@@ -109,6 +109,7 @@
 #include "UI_SkinCanvas.h"
 
 #include "APPLog.h"
+#include "APPExtended.h"
 
 #include "UI_Message_CFG.h"
 #include "XMemory_Control.h"
@@ -275,35 +276,7 @@ bool UI_MESSAGE::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  if(APP_CFG.Log_IsActive())
-    {
-      string.Format(__L("Activando sistema LOG"));
-    
-      status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
-                                                          , APPLICATION_SUBVERSION
-                                                          , APPLICATION_SUBVERSIONERR);
-      XSTRING SO_ID;
-      XDWORD  total = 0;
-      XDWORD  free  = 0;
-
-      GEN_XSYSTEM.GetMemoryInfo(total,free);
-      GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
-   
-      if(status)
-        {       
-          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("Version")      , GEN_VERSION.GetAppVersion()->Get());
-          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("S.O. version") , SO_ID.Get());    
-          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("ROOT path")    , GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());                    
-          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
-        }
-      
-      XTRACE_PRINTMSGSTATUS(__L("version"),  GEN_VERSION.GetAppVersion()->Get());
-      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get());    
-      XTRACE_PRINTMSGSTATUS(__L("ROOT path"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-
-      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());    
-    }
+  APP_EXTENDED.APPStart(&APP_CFG);
 
   //--------------------------------------------------------------------------------------
 
@@ -490,11 +463,9 @@ bool UI_MESSAGE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_LOG.DelInstance();
-
-  //--------------------------------------------------------------------------------------
-
+  APP_LOG.DelInstance();  
   APP_CFG.DelInstance();
+  APP_EXTENDED.DelInstance();
 
   //--------------------------------------------------------------------------------------
 

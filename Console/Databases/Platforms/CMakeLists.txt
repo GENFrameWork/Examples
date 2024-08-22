@@ -13,22 +13,23 @@ set(GEN_DIRECTORY "../../../../")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                          "Activate Debug mode"                                     ON )
-option(XTRACE_FEATURE                                         "Activate XTrace"                                         ON )
-option(XTRACE_NOINTERNET_FEATURE                              "No need for trace dependencies with Internet"            ON )
-option(XMEMORY_CONTROL_FEATURE                                "Activate XMemory Control"                                ON )
+option(DEBUG_FEATURE                                            "Activate Debug mode"                                     ON )
+option(XTRACE_FEATURE                                           "Activate XTrace"                                         ON )
+option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
+option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
                       
-option(APP_FEATURE                                            "Activate Application modules"                            ON )
-option(APP_CONSOLE_FEATURE                                    "Activate Application Console"                            ON )
-option(APP_LOG_FEATURE                                        "Activate Application Log"                                ON )
+option(APP_FEATURE                                              "Activate Application modules"                            ON )
+option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
+option(APP_CONSOLE_FEATURE                                      "Activate Application Console"                            ON )
+option(APP_LOG_FEATURE                                          "Activate Application Log"                                ON )
     
-option(APP_CFG_GENERAL_FEATURE                                "Activate Application CFG General"                        ON )
-option(APP_CFG_LOG_FEATURE                                    "Activate Application CFG LOG"                            ON )
+option(APP_CFG_GENERAL_FEATURE                                  "Activate Application CFG General"                        ON )
+option(APP_CFG_LOG_FEATURE                                      "Activate Application CFG LOG"                            ON )
     
-option(DATABASES_SQL_FEATURE                                  "Activate DataBases SQL"                                  ON )
-option(DATABASES_SQL_SQLITE_FEATURE                           "Activate DataBases SQLite"                               ON )
-option(DATABASES_SQL_MYSQL_FEATURE                            "Activate DataBases MySQL"                                ON )
-option(DATABASES_SQL_POSTGRESQL_FEATURE                       "Activate DataBases PostgreSQL"                           ON )
+option(DATABASES_SQL_FEATURE                                    "Activate DataBases SQL"                                  ON )
+option(DATABASES_SQL_SQLITE_FEATURE                             "Activate DataBases SQLite"                               ON )
+option(DATABASES_SQL_MYSQL_FEATURE                              "Activate DataBases MySQL"                                ON )
+option(DATABASES_SQL_POSTGRESQL_FEATURE                         "Activate DataBases PostgreSQL"                           ON )
 
 
 # --------------------------------------------------------------------

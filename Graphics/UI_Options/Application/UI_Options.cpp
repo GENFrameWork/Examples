@@ -109,6 +109,7 @@
 #include "UI_SkinCanvas.h"
 
 #include "APPLog.h"
+#include "APPExtended.h"
 
 #include "UI_Options_CFG.h"
 #include "XMemory_Control.h"
@@ -275,33 +276,7 @@ bool UI_OPTIONS::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  if(APP_CFG.Log_IsActive())
-    {
-      string.Format(__L("Activando sistema LOG"));
-      
-      status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
-                                                          , APPLICATION_SUBVERSION
-                                                          , APPLICATION_SUBVERSIONERR);
-      
-      XSTRING SO_ID;
-      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
-
-      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
-      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get()); 
-
-      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
-           
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
-
-      XDWORD total = 0;
-      XDWORD free  = 0;
-
-      GEN_XSYSTEM.GetMemoryInfo(total,free);
-
-      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
-    }
+  APP_EXTENDED.APPStart(&APP_CFG);
 
   //--------------------------------------------------------------------------------------
 
@@ -475,11 +450,9 @@ bool UI_OPTIONS::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_LOG.DelInstance();
-
-  //--------------------------------------------------------------------------------------
-
+  APP_LOG.DelInstance();  
   APP_CFG.DelInstance();
+  APP_EXTENDED.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -662,28 +635,11 @@ bool UI_OPTIONS::UpdateInput()
 * ---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 {
-  XPATH           xpath;
-
-  /*
-  GRPBITMAPFILE*  bitmapfile;
-
-  bitmapfile = new GRPBITMAPFILE();
-  if(!bitmapfile) return false;
-  
-  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
-  xpath.Slash_Add();
-  xpath.Add(__L("bitmap.png"));
-
-  testbmp = bitmapfile->Load(xpath);
-
-  delete bitmapfile;
-  */
-
   screen->SetWidth(1024);
   screen->SetHeight(768);
 
-  //screen->SetWidth(800);
-  //screen->SetHeight(480);
+  screen->GetTitle()->Set(__L("User Interface Canvas"));  
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
 
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
                                           

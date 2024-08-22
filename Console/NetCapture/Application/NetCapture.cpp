@@ -64,6 +64,7 @@
 
 #include "APPCFG.h"
 #include "APPLog.h"
+#include "APPExtended.h"
 
 #include "NetCapture_CFG.h"
 #include "NetCapture_Sniffer.h"
@@ -166,8 +167,7 @@ bool NETCAPTURE::AppProc_Ini()
   XSTRING stringresult;
   XPATH   xpathsection;
   XPATH   xpath;
-  bool    status;
-
+  
   //-------------------------------------------------------------------------------------------------
 
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
@@ -201,11 +201,7 @@ bool NETCAPTURE::AppProc_Ini()
   //--------------------------------------------------------------------------------------
 
   APP_CFG_SETAUTOMATICTRACETARGETS
-
-  //--------------------------------------------------------------------------------------
-
-  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-
+  
   //--------------------------------------------------------------------------------------
 
     
@@ -226,36 +222,7 @@ bool NETCAPTURE::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  if(APP_CFG.Log_IsActive())
-    {
-      string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Activando sistema LOG"));
-      console->PrintMessage(string.Get(), 1, true, false);
-
-      status = APP_LOG.Ini(&APP_CFG, APPLICATION_NAMEFILE , APPLICATION_VERSION
-                                                          , APPLICATION_SUBVERSION
-                                                          , APPLICATION_SUBVERSIONERR);
-
-      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
-      console->PrintMessage(stringresult.Get(), 0, false, true);
-
-      XSTRING SO_ID;
-      status = GEN_XSYSTEM.GetOperativeSystemID(SO_ID);
-
-      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("%s"),  GEN_VERSION.GetAppVersion()->Get());   
-      XTRACE_PRINTMSGSTATUS(__L("S.O. version"), SO_ID.Get()); 
-
-      stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
-           
-      APP_LOG_ENTRY(((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), APP_CFG_LOG_SECTIONID_INITIATION, false,  __L("Identificacion SO: %s"), SO_ID.Get());
-
-      XDWORD total = 0;
-      XDWORD free  = 0;
-
-      GEN_XSYSTEM.GetMemoryInfo(total,free);
-
-      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_INITIATION, false, XT_L(XTRANSLATION_GEN_ID_APPLOG_TOTALMEMORY), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
-    }
+  APP_EXTENDED.APPStart(&APP_CFG, console);
 
   //--------------------------------------------------------------------------------------
 
@@ -431,11 +398,9 @@ bool NETCAPTURE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_LOG.DelInstance();
-
-  //--------------------------------------------------------------------------------------
-
+  APP_LOG.DelInstance();  
   APP_CFG.DelInstance();
+  APP_EXTENDED.DelInstance();
 
   //--------------------------------------------------------------------------------------
 

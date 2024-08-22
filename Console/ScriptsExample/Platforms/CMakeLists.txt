@@ -18,6 +18,7 @@ option(XTRACE_NOINTERNET_FEATURE                                "No need for tra
 option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
                     
 option(APP_FEATURE                                              "Activate Application modules"                            ON )
+option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
 option(APP_CONSOLE_FEATURE                                      "Activate Application Console"                            ON )
 option(APP_LOG_FEATURE                                          "Activate Application Log"                                ON )
     
