@@ -506,9 +506,10 @@ bool BINCONNPRO::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_LOG.DelInstance();  
+  APP_EXTENDED.APPEnd(&APP_CFG, console);
+  APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
-  APP_EXTENDED.DelInstance();
+
 
   //--------------------------------------------------------------------------------------
 

@@ -450,9 +450,9 @@ bool UI_OPTIONS::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_LOG.DelInstance();  
+  APP_EXTENDED.APPEnd(&APP_CFG);
+  APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
-  APP_EXTENDED.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
