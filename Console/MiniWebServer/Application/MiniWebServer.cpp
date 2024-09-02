@@ -195,7 +195,6 @@ bool MINIWEBSERVER::AppProc_Ini()
   XSTRING stringresult;
   XPATH   xpathsection;
   XPATH   xpath;
-  bool    status;
 
   //-------------------------------------------------------------------------------------------------
 
@@ -228,11 +227,6 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  console->Clear();
-  Show_Header(true);
-
-  //--------------------------------------------------------------------------------------------------
-
   xmutexshowallstatus = GEN_XFACTORY.Create_Mutex();
   if(!xmutexshowallstatus) return false;
 
@@ -256,31 +250,7 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, console);
-
-  //--------------------------------------------------------------------------------------
-
-  status = false;
-
-  string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Activando servicios Internet"));
-  console->PrintMessage(string.Get(),1,true,false);
-
-  appinternetservices = new APPINTERNETSERVICES();
-  status = (appinternetservices)?true:false;
-  if(status) status = appinternetservices->Ini(&APP_CFG);
-
-  stringresult.Format((status)?__L("Ok."):__L("ERROR!"));
-  console->PrintMessage(stringresult.Get(), 0, false, true);
-
-  APP_LOG_ENTRY((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
-
-  if(!status) return false;
-
-  if(appinternetservices->GetDynDNSManager())
-    {
-      //appinternetservices->GetDynDNSManager()->GetLogin()->Set(__L(""));
-      //appinternetservices->GetDynDNSManager()->GetPassword()->Set(__L(""));
-    }
+  APP_EXTENDED.APPStart(&APP_CFG, this);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -476,18 +446,6 @@ bool MINIWEBSERVER::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  string.Format(APPCONSOLE_DEFAULTMESSAGEMASK,__L("Desactivando servicios Internet"));
-  console->PrintMessage(string.Get(),1,true,false);
-
-  delete appinternetservices;
-  appinternetservices = NULL;
-
-  stringresult = __L("Ok.");
-  console->PrintMessage(stringresult.Get(), 0, false, true);
-  APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_ENDING, false, __L("%s: %s")  , string.Get(), stringresult.Get());
-
-  //--------------------------------------------------------------------------------------
-
   if(appwebserver)
     {
       string.Format(APPCONSOLE_DEFAULTMESSAGEMASK,__L("Desactivando servidor web"));
@@ -538,7 +496,7 @@ bool MINIWEBSERVER::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd(&APP_CFG, console);
+  APP_EXTENDED.APPEnd();
   APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
 
@@ -581,78 +539,6 @@ bool MINIWEBSERVER::KeyValidSecuences(int key)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool MINIWEBSERVER::Show_AppStatus()
-* @brief      Show_AppStatus
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool MINIWEBSERVER::Show_AppStatus()
-{
-  XSTRING string;
-  XSTRING string2;
-
-  XDWORD  total;
-  XDWORD  free;
-
-  GEN_XSYSTEM.GetMemoryInfo(total,free);
-
-  string  = __L("Memoria total");
-  string2.Format(__L("%d Kb, libre %d Kb (el %d%%)"), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
-  Show_Line(string, string2);
-  
-  string  = __L("Fecha ");
-  appinternetservices->DateTime_GetLocal()->GetDateTimeToString(XDATETIME_FORMAT_STANDARD | XDATETIME_FORMAT_TEXTMONTH | XDATETIME_FORMAT_ADDDAYOFWEEK, string2);
-  Show_Line(string, string2);
-
-  if(xtimerglobal)
-    {
-      string  = __L("Tiempo de funcionamiento");
-      xtimerglobal->GetMeasureString(string2, true);
-      Show_Line(string, string2);
-    }
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool MINIWEBSERVER::Show_InternetStatus()
-* @brief      Show_InternetStatus
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool MINIWEBSERVER::Show_InternetStatus()
-{
-  XSTRING string;
-  XSTRING string2;
-
-  string.Format(__L("Local  IP"));
-  string2.Format(__L("[%s]"), appinternetservices->GetAutomaticLocalIP()->Get());
-  Show_Line(string, string2);
-
-  string.Format(__L("Conexion con Internet"));
-  string2.Format(__L("%s. "), appinternetservices->HaveInternetConnection()?__L("Si"):__L("No"));
-  Show_Line(string, string2);
-
-  if(appinternetservices->HaveInternetConnection())
-    {
-      string.Format(__L("Public IP"));
-      string2.Format(__L("[%s]"), appinternetservices->GetPublicIP()->Get());
-      Show_Line(string, string2);
-
-    } else console->PrintMessage(__L(""), 0, false, true);
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
 * @fn         bool MINIWEBSERVER::Show_WebServerConfig()
 * @brief      Show_WebServerConfig
 * @ingroup    APPLICATION
@@ -679,7 +565,6 @@ bool MINIWEBSERVER::Show_WebServerConfig()
 
 
   string.Format(__L("Plugin(s) Activo(s)"));
-
   XDWORD nplugins = appwebserver->GetWebServer()->GetPluginsManager()->Plugins_GetNPlugins();
   string2.Format(__L("%d "), appwebserver->GetWebServer()->GetPluginsManager()->Plugins_GetNPlugins());
 
@@ -775,9 +660,8 @@ bool MINIWEBSERVER::Show_AllStatus()
 
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  if(Show_Header(false))      console->PrintMessage(__L(""),0, false, true);
-  if(Show_AppStatus())        console->PrintMessage(__L(""),0, false, true);
-  if(Show_InternetStatus())   console->PrintMessage(__L(""),0, false, true);
+  APP_EXTENDED.ShowAll();
+
   if(Show_WebServerConfig())  console->PrintMessage(__L(""),0, false, true);
   if(Show_WebSocketConfig())  console->PrintMessage(__L(""),0, false, true);
 
@@ -880,9 +764,7 @@ void MINIWEBSERVER::Clean()
   xtimerupdateconsole       = NULL;
 
   xmutexshowallstatus       = NULL;
-
-  appinternetservices       = NULL;
-
+  
   appwebserver              = NULL;
   apirest                   = NULL;
   appwebsocket              = NULL;

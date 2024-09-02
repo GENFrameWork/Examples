@@ -214,15 +214,10 @@ bool NETCAPTURE::AppProc_Ini()
     }
     
   GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
-
+  
   //--------------------------------------------------------------------------------------
 
-  //console->Clear();
-  Show_Header(true);
-
-  //--------------------------------------------------------------------------------------
-
-  APP_EXTENDED.APPStart(&APP_CFG, console);
+  APP_EXTENDED.APPStart(&APP_CFG, this);
 
   //--------------------------------------------------------------------------------------
 
@@ -398,7 +393,7 @@ bool NETCAPTURE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd(&APP_CFG, console);
+  APP_EXTENDED.APPEnd();
   APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
 
@@ -446,45 +441,6 @@ bool NETCAPTURE::KeyValidSecuences(int key)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCAPTURE::Show_AppStatus()
-* @brief      Show_AppStatus
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCAPTURE::Show_AppStatus()
-{
-  XSTRING string;
-  XSTRING string2;
-
-  XDWORD  total;
-  XDWORD  free;
-
-  GEN_XSYSTEM.GetMemoryInfo(total,free);
-
-  string  = __L("Memoria total");
-  string2.Format(__L("%d Kb, libre %d Kb (el %d%%%%)"), total, free, GEN_XSYSTEM.GetFreeMemoryPercent());
-  Show_Line(string, string2);
-
-  XDATETIME* datetime = GEN_XFACTORY.CreateDateTime();
-  if(datetime)
-    {
-      datetime->Read();
-
-      string  = __L("Fecha ");
-      datetime->GetDateTimeToString(XDATETIME_FORMAT_STANDARD | XDATETIME_FORMAT_TEXTMONTH | XDATETIME_FORMAT_ADDDAYOFWEEK, string2);
-      Show_Line(string, string2);
-
-      GEN_XFACTORY.DeleteDateTime(datetime);
-    }
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
 * @fn         bool NETCAPTURE::Show_AllStatus()
 * @brief      Show_AllStatus
 * @ingroup    
@@ -493,13 +449,10 @@ bool NETCAPTURE::Show_AppStatus()
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::Show_AllStatus()
-{
-  console->Clear();
-
+{  
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  if(Show_Header(false))  console->PrintMessage(__L(""),0, false, true);
-  if(Show_AppStatus())    console->PrintMessage(__L(""),0, false, true);
+  APP_EXTENDED.ShowAll();
   
   if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
 

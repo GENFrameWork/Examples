@@ -204,40 +204,62 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
   XPATH   xpathsection;
   XPATH   xpath;
   
+  //-------------------------------------------------------------------------------------------------
+
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+
   GetApplicationName()->Set(APPLICATION_NAMEAPP);
+
+  //--------------------------------------------------------------------------------------------------
+
+  ACTIVATEXTHREADGROUP(XTHREADGROUPID_SCHEDULER);
+  ACTIVATEXTHREADGROUP(XTHREADGROUPID_DIOSTREAM);
+
+  //--------------------------------------------------------------------------------------------------
 
   XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
+
+  //--------------------------------------------------------------------------------------------------
 
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
   GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS , APPDEFAULT_DIRECTORY_SCRIPTS);
   GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPDEFAULT_DIRECTORY_GRAPHICS);
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
+  //--------------------------------------------------------------------------------------------------
+
   InitFSMachine();
+
+  //--------------------------------------------------------------------------------------------------
 
   xmutexshowallstatus = GEN_XFACTORY.Create_Mutex();
   if(!xmutexshowallstatus) return false;
 
+  //--------------------------------------------------------------------------------------------------
+
   APP_CFG_SETAUTOMATICTRACETARGETS
 
-  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-    
+  //--------------------------------------------------------------------------------------------------
+
+  /*
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathsection);
-  xpath.Create(3 , xpathsection.Get(), APPLICATION_NAMEFILE, XTRANSLATION_NAMEFILEEXT);
+  xpath.Create(3 , xpathsection.Get(), BINCONNPRO_LNG_NAMEFILE, XTRANSLATION_NAMEFILEEXT);
 
   if(!GEN_XTRANSLATION.Ini(xpath))
     {
       return false;
     }
-    
+  */
+
   GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
 
-  Show_Header(true);
+  //--------------------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, console);
+  APP_EXTENDED.APPStart(&APP_CFG, this);
+
+  //--------------------------------------------------------------------------------------------------
 
   SetEvent(SCRIPTSEXAMPLE_XFSMEVENT_INI);
 
@@ -269,7 +291,6 @@ bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
   GEN_SCRIPT_CACHE.Cache_AllList(APP_CFG.Scripts_GetAll());
 
   #endif
-
 
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
@@ -309,7 +330,6 @@ bool SCRIPTSEXAMPLE::AppProc_Update()
                                                                   Show_AllStatus();
                                                                   xtimerupdateconsole->Reset();
                                                                 }
-
 
                                                               if(console->KBHit())
                                                                 {
@@ -364,11 +384,7 @@ bool SCRIPTSEXAMPLE::AppProc_End()
 
   SetEvent(SCRIPTSEXAMPLE_XFSMEVENT_END);
 
-  if(xmutexshowallstatus)
-    {
-      GEN_XFACTORY.Delete_Mutex(xmutexshowallstatus);
-      xmutexshowallstatus = NULL;
-    }
+  //--------------------------------------------------------------------------------------
 
   if(xtimerscriptrun)
     {
@@ -376,15 +392,29 @@ bool SCRIPTSEXAMPLE::AppProc_End()
       xtimerscriptrun = NULL;
     }
 
+  //--------------------------------------------------------------------------------------
+
+  if(xmutexshowallstatus)
+    {
+      GEN_XFACTORY.Delete_Mutex(xmutexshowallstatus);
+      xmutexshowallstatus = NULL;
+    }
+
+  //--------------------------------------------------------------------------------------
+
   if(xtimerupdateconsole)
     {
       GEN_XFACTORY.DeleteTimer(xtimerupdateconsole);
       xtimerupdateconsole = NULL;
     }
 
-  APP_EXTENDED.APPEnd(&APP_CFG, console);
+  //--------------------------------------------------------------------------------------
+
+  APP_EXTENDED.APPEnd();
   APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
+
+  //--------------------------------------------------------------------------------------
 
   return true;
 }
@@ -497,8 +527,7 @@ bool SCRIPTSEXAMPLE::Show_AllStatus()
 
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  if(Show_Header(false))  console->PrintMessage(__L(""),0, false, true);
-  if(Show_AppStatus())    console->PrintMessage(__L(""),0, false, true);
+  APP_EXTENDED.ShowAll();
   
   if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
 

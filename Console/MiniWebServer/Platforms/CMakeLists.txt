@@ -19,7 +19,8 @@ option(XTRACE_NOINTERNET_FEATURE                                "No need for tra
 option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
 option(XSERIALIZABLE_JSON_FEATURE                               "Activate Serializable JSON"                              ON ) 
                     
-option(DIO_FEATURE                                              "Activate Data Input/Output"                              ON )
+option(DIO_FEATURE                                              "Input/Output"                                            ON )
+option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
 option(DIO_CHECKCONNECTIONS_FEATURE                             "Activate Check Connections"                              ON )
 option(DIO_NETWORKTIMEPROTOCOL_FEATURE                          "Activate Network Time Protocol"                          ON )
 option(DIO_DYNDNS_FEATURE                                       "Activate DynDNS"                                         ON )
@@ -27,14 +28,16 @@ option(DIO_WEBSERVER_FEATURE                                    "Activate Web Se
 option(DIO_SCRAPERWEB_FEATURE                                   "Activate Scraper Web"                                    ON )
     
 option(APP_FEATURE                                              "Activate Application modules"                            ON )
-option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
 option(APP_CONSOLE_FEATURE                                      "Activate Application Console"                            ON )
-option(APP_INTERNETSERVICES_FEATURE                             "Activate Application Internet Services"                  ON )
 option(APP_LOG_FEATURE                                          "Activate Application Log"                                ON )
+option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
+option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
+option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
 option(APP_WEBSERVER_FEATURE                                    "Activate Application Web Server"                         ON )
     
 option(APP_CFG_GENERAL_FEATURE                                  "Activate Application CFG General"                        ON )
 option(APP_CFG_LOG_FEATURE                                      "Activate Application CFG LOG"                            ON )
+option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE                   "Application CFG Check Resorces HW"                       ON )  
 option(APP_CFG_INTERNETSERVICES_FEATURE                         "Activate Application CFG Internet services"              ON )
 option(APP_CFG_DYNDNSMANAGER_FEATURE                            "Activate Application CFG DynDNS Manager"                 ON )
 option(APP_CFG_WEBSERVER_FEATURE                                "Activate Application CFG Web Server"                     ON )

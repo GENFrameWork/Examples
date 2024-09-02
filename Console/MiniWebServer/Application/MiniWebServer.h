@@ -126,10 +126,9 @@ class MINIWEBSERVER : public APPCONSOLE, public XFSMACHINE
 
     bool                            KeyValidSecuences                       (int key);
    
-    bool                            Show_AppStatus                          ();
-    bool                            Show_InternetStatus                     ();
     bool                            Show_WebServerConfig                    ();
     bool                            Show_WebSocketConfig                    ();
+
     bool                            Show_AllStatus                          ();
 
   private:
@@ -141,9 +140,7 @@ class MINIWEBSERVER : public APPCONSOLE, public XFSMACHINE
 
     XTIMER*                         xtimerupdateconsole;
     XMUTEX*                         xmutexshowallstatus;
-
-    APPINTERNETSERVICES*            appinternetservices;
-
+    
     APPWEBSERVER*                   appwebserver;
     MINIWEBSERVER_APIREST*          apirest;
     APPWEBSERVER*                   appwebsocket;

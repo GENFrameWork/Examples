@@ -143,8 +143,6 @@ class BINCONNPRO : public APPCONSOLE, public XFSMACHINE
 
     bool                            KeyValidSecuences                       (int key);
 
-    bool                            Show_AppStatus                          ();
-    bool                            Show_InternetStatus                     ();
     bool                            Show_ConnectionsStatus                  ();
     bool                            Show_DeviceConnectedStatus              ();
     bool                            Show_AllStatus                          ();
@@ -161,10 +159,7 @@ class BINCONNPRO : public APPCONSOLE, public XFSMACHINE
     void                            Clean                                   ();
 
     XTIMER*                         xtimerupdateconsole;
-
-    XMUTEX*                         xmutexshowallstatus;
-
-    APPINTERNETSERVICES*            appinternetservices;
+    XMUTEX*                         xmutexshowallstatus;    
 
     bool                            modeserver;
     BINCONNPRO_CONNECTIONSMANAGER*  connectionsmanager;

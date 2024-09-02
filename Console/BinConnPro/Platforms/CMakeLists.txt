@@ -27,9 +27,12 @@ option(DIO_SCRAPERWEB_FEATURE                                   "Scraper Web"   
 option(DIO_PROTOCOL_FEATURE                                     "Data Input/Output Protocol"                              ON )
     
 option(APP_FEATURE                                              "Application modules"                                     ON )
-option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
-option(APP_CHECKRESOURCESHARDWARE_FEATURE                       "Application Check Resources Hardwar"                     ON )
 option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )
+option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
+option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
+option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
+option(APP_EXTENDED_INTERNETSTATUS_FEATURE                      "Application Extended Internet Status"                    ON )  
+option(APP_CHECKRESOURCESHARDWARE_FEATURE                       "Application Check Resources Hardwar"                     ON )
 option(APP_INTERNETSERVICES_FEATURE                             "Application Internet Services"                           ON )
 option(APP_LOG_FEATURE                                          "Application Log"                                         ON )
     

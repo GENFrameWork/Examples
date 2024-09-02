@@ -16,9 +16,14 @@ option(DEBUG_FEATURE                                            "Activate Debug 
 option(XTRACE_FEATURE                                           "Activate XTrace"                                         ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
 option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
-                    
+            
+option(DIO_FEATURE                                              "Input/Output"                                            ON )
+option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
+
 option(APP_FEATURE                                              "Activate Application modules"                            ON )
 option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
+option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
+option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
 option(APP_CONSOLE_FEATURE                                      "Activate Application Console"                            ON )
 option(APP_LOG_FEATURE                                          "Activate Application Log"                                ON )
     
@@ -41,6 +46,8 @@ option(SCRIPT_LIB_CFG_FEATURE                                   "Script Lib Conf
 option(SCRIPT_LIB_WINDOW_FEATURE                                "Script Lib Window"                                       ON ) 
 option(SCRIPT_LIB_INPUTSIMULATE_FEATURE                         "Script Lib Input Simulated"                              ON )   
 option(SCRIPT_LIB_DEVTEST_FEATURE                               "Script Lib Developed Test Funcions"                      ON )    
+
+option(DIO_FEATURE                                              "Input/Output"                                            ON )
 
 
 # --------------------------------------------------------------------

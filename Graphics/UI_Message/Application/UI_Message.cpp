@@ -463,7 +463,7 @@ bool UI_MESSAGE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd(&APP_CFG);
+  APP_EXTENDED.APPEnd();
   APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
 

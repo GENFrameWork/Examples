@@ -247,12 +247,7 @@ bool DATABASES::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  console->Clear();
-  Show_Header(true);
-
-  //--------------------------------------------------------------------------------------
-
-  APP_EXTENDED.APPStart(&APP_CFG, console);
+  APP_EXTENDED.APPStart(&APP_CFG, this);
 
   //--------------------------------------------------------------------------------------
 
@@ -385,7 +380,7 @@ bool DATABASES::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd(&APP_CFG, console);
+  APP_EXTENDED.APPEnd();
   APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
 
@@ -887,13 +882,14 @@ bool DATABASES::Show_DatabasesStatus()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Show_AllStatus()
 {
-  console->Clear();
-
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  if(Show_Header(false))      console->PrintMessage(__L(""),0, false, true);
-  if(Show_AppStatus())        console->PrintMessage(__L(""),0, false, true);
-  if(Show_DatabasesStatus())  console->PrintMessage(__L(""),0, false, true);
+  APP_EXTENDED.ShowAll();
+ 
+  if(Show_DatabasesStatus())  
+    {
+      console->PrintMessage(__L(""),0, false, true);
+    }
 
   if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
 

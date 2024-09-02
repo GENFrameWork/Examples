@@ -17,17 +17,21 @@ option(DEBUG_FEATURE                                            "Debug mode"    
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )                  
 option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
-                 
+               
+option(DIO_FEATURE                                              "Input/Output"                                            ON )
+option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
+option(DIO_PCAP_FEATURE                                         "PCap Library"                                            ON )
+
 option(APP_FEATURE                                              "Application modules"                                     ON )
 option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
+option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
+option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
 option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )
 option(APP_LOG_FEATURE                                          "Application Log"                                         ON )
 
 option(APP_CFG_GENERAL_FEATURE                                  "Application CFG General"                                 ON )
 option(APP_CFG_LOG_FEATURE                                      "Application CFG LOG"                                     ON )
 
-option(DIO_PCAP_FEATURE                                         "PCap Library"                                            ON )
- 
 
 # --------------------------------------------------------------------
 # Config Application Macro
