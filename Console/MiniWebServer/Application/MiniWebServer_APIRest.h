@@ -37,6 +37,7 @@
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
+class DIOWEBSERVER_XEVENT;
 class MINIWEBSERVER;
 
 class MINIWEBSERVER_APIREST : public DIOWEBSERVER_APIREST
@@ -45,7 +46,7 @@ class MINIWEBSERVER_APIREST : public DIOWEBSERVER_APIREST
                                  MINIWEBSERVER_APIREST      (MINIWEBSERVER* miniwebserver);
     virtual                     ~MINIWEBSERVER_APIREST      ();
 
-    virtual bool                 ResolveEndPoint            (DIOWEBSERVER_REQUEST* request, DIOWEBSERVER_QUERYSTRINGS* querystring, DIOWEBHEADER_RESULT* result, XSTRING* output);
+    virtual bool                 ResolveEndPoint            (DIOWEBSERVER_XEVENT* event);
 
   private:
 

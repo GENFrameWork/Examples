@@ -698,15 +698,7 @@ void MINIWEBSERVER::HandleEvent_WebServer(DIOWEBSERVER_XEVENT* event)
       case DIOWEBSERVER_XEVENT_TYPE_CHECKAUTHENTICATE     : event->SetIsRequestAuthenticate(true);
                                                             break;
 
-      case DIOWEBSERVER_XEVENT_TYPE_REQUEST_ENDPOINT      : { DIOWEBHEADER_RESULT result = DIOWEBHEADER_RESULT_OK;
-                                                              XSTRING             output;
-
-                                                              event->SetStatus(apirest->ResolveEndPoint(event->GetRequest(), event->GetQueryString(), &result, &output));
-
-                                                              event->SetIsRequestAuthenticate(true);
-                                                              event->SetResult(result);
-                                                              event->GetOutput()->Set(output);
-                                                            }
+      case DIOWEBSERVER_XEVENT_TYPE_REQUEST_ENDPOINT      : apirest->ResolveEndPoint(event);                                                            
                                                             break;
 
       case DIOWEBSERVER_XEVENT_TYPE_WEBSOCKET_CONNECTED   : // Accepted connection

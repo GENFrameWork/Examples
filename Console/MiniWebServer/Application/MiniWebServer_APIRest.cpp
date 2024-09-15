@@ -39,6 +39,8 @@
 
 #include "MiniWebServer_APIRest.h"
 
+#include "DIOWebServer_XEvent.h"
+
 #include "MiniWebServer.h"
 
 #include "XMemory_Control.h"
@@ -90,20 +92,17 @@ MINIWEBSERVER_APIREST::~MINIWEBSERVER_APIREST()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_REQUEST* request, DIOWEBSERVER_QUERYSTRINGS* querystring, DIOWEBHEADER_RESULT* result, XSTRING* output)
+* 
+* @fn         bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_XEVENT* event)
 * @brief      ResolveEndPoint
-* @ingroup    APPLICATION
-*
-* @param[in]  request :
-* @param[in]  querystring :
-* @param[in]  result :
-* @param[in]  output :
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_REQUEST* request, DIOWEBSERVER_QUERYSTRINGS* querystring, DIOWEBHEADER_RESULT* result, XSTRING* output)
+* @ingroup    EXAMPLES
+* 
+* @param[in]  event : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_XEVENT* event)
 {
   if(!miniwebserver) return false;
 
