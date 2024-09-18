@@ -14,9 +14,10 @@ set(GEN_DIRECTORY "../../../../")
 # Activate features/Defines
 
 option(DEBUG_FEATURE                                            "Activate Debug mode"                                     ON )
+option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
 option(XTRACE_FEATURE                                           "Activate XTrace"                                         ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
-option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
+
 option(XSERIALIZABLE_JSON_FEATURE                               "Activate Serializable JSON"                              ON ) 
                     
 option(DIO_FEATURE                                              "Input/Output"                                            ON )

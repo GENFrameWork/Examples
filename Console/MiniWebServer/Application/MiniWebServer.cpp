@@ -204,8 +204,8 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  ACTIVATEXTHREADGROUP(XTHREADGROUPID_SCHEDULER);
-  ACTIVATEXTHREADGROUP(XTHREADGROUPID_DIOSTREAM);
+  // ACTIVATEXTHREADGROUP(XTHREADGROUPID_SCHEDULER);
+  // ACTIVATEXTHREADGROUP(XTHREADGROUPID_DIOSTREAM);
 
   //--------------------------------------------------------------------------------------------------
 
