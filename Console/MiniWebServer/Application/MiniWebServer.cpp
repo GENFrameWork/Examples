@@ -528,7 +528,7 @@ bool MINIWEBSERVER::KeyValidSecuences(int key)
 
   switch(key)
     {
-      case 'Q'  : // ESC Exit application
+      case 0x1B : // ESC Exit application
                   SetExitType(APPBASE_EXITTYPE_BY_USER);
                   break;
     }

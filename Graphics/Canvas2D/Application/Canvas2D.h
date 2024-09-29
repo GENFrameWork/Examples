@@ -36,6 +36,8 @@
 #include "XFSMachine.h"
 #include "XString.h"
 #include "XScheduler.h"
+#include "XObserver.h"
+#include "XSubject.h"
 
 #include "DIOStream.h"
 #include "DIOURL.h"

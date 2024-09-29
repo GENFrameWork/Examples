@@ -111,7 +111,7 @@ class APPINTERNETSERVICES;
 class APPWEBSERVER;
 
 
-class MINIWEBSERVER : public APPCONSOLE, public XFSMACHINE
+class MINIWEBSERVER : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
 {
   public:
                                     MINIWEBSERVER                           ();

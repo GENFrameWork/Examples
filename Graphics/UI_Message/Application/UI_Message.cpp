@@ -600,7 +600,7 @@ bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
 
   screen->GetTitle()->Set(__L("Hola radiola"));  
 
-  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
   screen->SetPosition(100, 100);
   screen->SetWidth(800);
@@ -654,49 +654,65 @@ bool UI_MESSAGE::Ini_Canvas(GRPSCREEN* screen)
 * ---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::Ini_UserInterface(bool on)
 {  
-  if(on)
+  if(!on)
     { 
-      GRPSCREEN*    screen    = NULL;
-      GRPVIEWPORT*  viewport  = NULL;
-      GRPCANVAS*    canvas    = NULL;
-      XPATH         xpath;
-     
-      screen = GetMainScreen();
-      if(!screen)   return false;  
-
-      viewport = screen->GetViewport(0);
-      if(!viewport) return false;
-
-      canvas = viewport->GetCanvas();
-      if(!canvas)   return false;
- 
-      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
-      xpath.Slash_Add();
-      xpath.Add(__L("message.zip"));
-      
-      GEN_USERINTERFACE.Skin_CreateAll(screen); 
-
-      if(!GEN_USERINTERFACE.Load(xpath)) return false;
-
-      if(!GEN_USERINTERFACE.Layouts_SetSelected(__L("message"))) return false;
-
-      GEN_USERINTERFACE.SubscribeInputEvents(true);
-      GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
-      
-      GEN_USERINTERFACE.Elements_SetToRedraw();  
-
-      if(screen->Style_Is(GRPSCREENSTYLE_TRANSPARENT))
-        {
-          canvas->Buffer_SetToZero();
-        }                          
-    }
-   else
-    {
       GEN_USERINTERFACE.SubscribeOutputEvents(false, this, &GEN_USERINTERFACE.GetInstance());
       GEN_USERINTERFACE.SubscribeInputEvents(false);
       GEN_USERINTERFACE.DelInstance();
+
+      return true;
     }
 
+
+  GRPSCREEN*    screen    = NULL;
+  GRPVIEWPORT*  viewport  = NULL;
+  GRPCANVAS*    canvas    = NULL;
+  XPATH         xpath;
+  
+  screen = GetMainScreen();
+  if(!screen)   
+    {
+      return false;  
+    }
+
+  viewport = screen->GetViewport(0);
+  if(!viewport) 
+    {
+      return false;
+    }
+
+  canvas = viewport->GetCanvas();
+  if(!canvas)   
+    {
+      return false;
+    }
+ 
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("message.zip"));
+  
+  GEN_USERINTERFACE.Skin_CreateAll(screen); 
+
+  if(!GEN_USERINTERFACE.Load(xpath)) 
+    {
+      return false;
+    }
+
+  if(!GEN_USERINTERFACE.Layouts_SetSelected(__L("message"))) 
+    {
+      return false;
+    }
+
+  GEN_USERINTERFACE.SubscribeInputEvents(true);
+  GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
+  
+  GEN_USERINTERFACE.Elements_SetToRedraw();  
+
+  if(screen->Style_Is(GRPSCREENSTYLE_TRANSPARENT))
+    {
+      canvas->Buffer_SetToZero();
+    }                          
+  
   return true;
 }
 

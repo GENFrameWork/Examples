@@ -128,7 +128,7 @@ class BINCONNPRO_APPLICATIONDATA;
 class BINCONNPRO_CONNECTIONSMANAGER;
 
 
-class BINCONNPRO : public APPCONSOLE, public XFSMACHINE
+class BINCONNPRO : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
 {
   public:
                                     BINCONNPRO                              ();

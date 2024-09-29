@@ -33,6 +33,7 @@ option(APP_FEATURE                                              "Application mod
 option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
 option(APP_LOG_FEATURE                                          "Application Log"                                         ON )
 option(APP_GRAPHICS_FEATURE                                     "Application Graphics"                                    ON )
+option(APP_GRAPHICS_NOTCONSOLE_FEATURE                          "Application Graphics (Deactive Console)"                 ON ) 
 
 option(APP_CFG_GENERAL_FEATURE                                  "Application CFG General"                                 ON )
 option(APP_CFG_LOG_FEATURE                                      "Application CFG LOG"                                     ON )

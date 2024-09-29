@@ -639,7 +639,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   screen->SetHeight(768);
 
   screen->GetTitle()->Set(__L("User Interface Canvas"));  
-  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
                                           
@@ -661,102 +661,115 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 * ---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::Ini_UserInterface(bool on)
 {  
-  if(on)
+  if(!on)
     { 
-      GRPSCREEN*    screen    = NULL;
-      GRPVIEWPORT*  viewport  = NULL;
-      GRPCANVAS*    canvas    = NULL;
-      XPATH         xpath;
-     
-      screen = GetMainScreen();
-      if(!screen)   return false;  
-
-      viewport = screen->GetViewport(0);
-      if(!viewport) return false;
-
-      canvas = viewport->GetCanvas();
-      if(!canvas)   return false;
- 
-      GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
-      xpath.Slash_Add();
-      xpath.Add(__L("example.zip"));
-      
-      GEN_USERINTERFACE.Skin_CreateAll(screen); 
-
-      if(!GEN_USERINTERFACE.Load(xpath)) return false;
-
-      if(!GEN_USERINTERFACE.Layouts_SetSelected(__L("example"))) return false;
-
-      GEN_USERINTERFACE.SubscribeInputEvents(true);
-      GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
-
-      GEN_USERINTERFACE.CreaterVirtualKeyboard(screen, GEN_USERINTERFACE.Layouts_GetSelectedLayout(), GEN_USERINTERFACE.Skin_Selected());   
-
-      GEN_USERINTERFACE.Background_Put();
-
-      GEN_USERINTERFACE.Elements_SetToRedraw();
-            
-      UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.GetElement(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
-      if(element_menu)
-        {
-          XSTRING                     option_text; 
-          double                      option_marginheight = 10; 
-          double                      option_height       = 35; 
-          UI_ELEMENT_MENU_OPTION_CFG  option_cfg;
-
-          for(int c=0; c<8; c++)
-            {      
-              option_text.Format(__L("Option %02d"), c+1);
-
-              option_cfg.index        = c+1;
-              option_cfg.nameoption   = option_text.Get();
-              option_cfg.leyend       = option_text.Get();
-              option_cfg.colorstr     = __L("white,255");
-              option_cfg.sizefont     = 22;
-              option_cfg.marginwidth  = 10;
-              option_cfg.marginheight = 15;
-              option_cfg.width        = element_menu->GetBoundaryLine()->width-30;
-              option_cfg.height       = option_height;
-
-              UI_ELEMENT_OPTION* element_option = element_menu->Option_AddText(option_cfg);   
-              if(element_option)
-                {
-                  //element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_ACTIVE);     
-                  //element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_DEACTIVE);
-                  element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_PRESELECT);
-                  element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_SELECT);                          
-                }
-            }
-                         
-          GEN_USERINTERFACE.Skin_Selected()->CalculeBoundaryLine_AllElements(element_menu, true); 
-
-          UI_PROPERTY_SCROLLEABLE* property_scrolleable = dynamic_cast<UI_PROPERTY_SCROLLEABLE*>(element_menu);
-          if(property_scrolleable) 
-            {
-              //property_scrolleable->SetLimit(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, -((double)element_menu->GetComposeElements()->GetSize() * (double)(option_height-option_marginheight)) - option_marginheight);
-
-              //double fullheight = (option_cfg.height + option_cfg.marginheight);  
-              double fullheight = (element_menu->GetComposeElements()->GetSize() * (option_height + option_cfg.marginheight))  - element_menu->GetBoundaryLine()->height + option_cfg.marginheight;
-              property_scrolleable->Scroll_SetLimit(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, -fullheight);
-            }
-              
-          element_menu->GetVisibleRect()->CopyFrom((*element_menu->GetBoundaryLine()));
-          element_menu->GetVisibleRect()->x = element_menu->GetXPosition();
-          element_menu->GetVisibleRect()->y = element_menu->GetYPosition();
-        
-          element_menu->SetFather(NULL);   
-
-          //UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.GetElement(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
-          //if(element_progressbar)  element_progressbar->ContinuousCycle_Set(true, 33, 10, 10); 
-        }
-           
-    }
-   else
-    {
       GEN_USERINTERFACE.SubscribeOutputEvents(false, this, &GEN_USERINTERFACE.GetInstance());
       GEN_USERINTERFACE.SubscribeInputEvents(false);
       GEN_USERINTERFACE.DelInstance();
+   
+      return true;
+
     }
+
+  GRPSCREEN*    screen    = NULL;
+  GRPVIEWPORT*  viewport  = NULL;
+  GRPCANVAS*    canvas    = NULL;
+  XPATH         xpath;
+  
+  screen = GetMainScreen();
+  if(!screen)   
+    {
+      return false;
+    } 
+
+  viewport = screen->GetViewport(0);
+  if(!viewport) 
+    {
+      return false;
+    }
+
+  canvas = viewport->GetCanvas();
+  if(!canvas)   
+    {
+      return false;
+    }
+ 
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("example.zip"));
+  
+  GEN_USERINTERFACE.Skin_CreateAll(screen); 
+
+  if(!GEN_USERINTERFACE.Load(xpath)) 
+    {
+      return false;
+    }
+
+  if(!GEN_USERINTERFACE.Layouts_SetSelected(__L("example"))) return false;
+
+  GEN_USERINTERFACE.SubscribeInputEvents(true);
+  GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
+
+  GEN_USERINTERFACE.CreaterVirtualKeyboard(screen, GEN_USERINTERFACE.Layouts_GetSelectedLayout(), GEN_USERINTERFACE.Skin_Selected());   
+
+  GEN_USERINTERFACE.Background_Put();
+
+  GEN_USERINTERFACE.Elements_SetToRedraw();
+        
+  UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.GetElement(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
+  if(element_menu)
+    {
+      XSTRING                     option_text; 
+      double                      option_marginheight = 10; 
+      double                      option_height       = 35; 
+      UI_ELEMENT_MENU_OPTION_CFG  option_cfg;
+
+      for(int c=0; c<8; c++)
+        {      
+          option_text.Format(__L("Option %02d"), c+1);
+
+          option_cfg.index        = c+1;
+          option_cfg.nameoption   = option_text.Get();
+          option_cfg.leyend       = option_text.Get();
+          option_cfg.colorstr     = __L("white,255");
+          option_cfg.sizefont     = 22;
+          option_cfg.marginwidth  = 10;
+          option_cfg.marginheight = 15;
+          option_cfg.width        = element_menu->GetBoundaryLine()->width-30;
+          option_cfg.height       = option_height;
+
+          UI_ELEMENT_OPTION* element_option = element_menu->Option_AddText(option_cfg);   
+          if(element_option)
+            {
+              //element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_ACTIVE);     
+              //element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_DEACTIVE);
+              element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_PRESELECT);
+              element_option->SetVisibleLimitType(element_option->GetVisibleLimitType() | UI_ELEMENT_OPTION_VISIBLE_LIMIT_SELECT);                          
+            }
+        }
+                     
+      GEN_USERINTERFACE.Skin_Selected()->CalculeBoundaryLine_AllElements(element_menu, true); 
+
+      UI_PROPERTY_SCROLLEABLE* property_scrolleable = dynamic_cast<UI_PROPERTY_SCROLLEABLE*>(element_menu);
+      if(property_scrolleable) 
+        {
+          //property_scrolleable->SetLimit(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, -((double)element_menu->GetComposeElements()->GetSize() * (double)(option_height-option_marginheight)) - option_marginheight);
+
+          //double fullheight = (option_cfg.height + option_cfg.marginheight);  
+          double fullheight = (element_menu->GetComposeElements()->GetSize() * (option_height + option_cfg.marginheight))  - element_menu->GetBoundaryLine()->height + option_cfg.marginheight;
+          property_scrolleable->Scroll_SetLimit(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, -fullheight);
+        }
+          
+      element_menu->GetVisibleRect()->CopyFrom((*element_menu->GetBoundaryLine()));
+      element_menu->GetVisibleRect()->x = element_menu->GetXPosition();
+      element_menu->GetVisibleRect()->y = element_menu->GetYPosition();
+    
+      element_menu->SetFather(NULL);   
+
+      //UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.GetElement(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
+      //if(element_progressbar)  element_progressbar->ContinuousCycle_Set(true, 33, 10, 10); 
+    }
+       
 
   return true;
 }
@@ -788,13 +801,22 @@ bool UI_OPTIONS::DrawFrame()
 
 
   screen = GetMainScreen();
-  if(!screen) return false;  
+  if(!screen) 
+    {
+      return false;  
+    }
 
   viewport = screen->GetViewport(0);
-  if(!viewport) return false;
+  if(!viewport) 
+    {
+      return false;
+    }
 
   canvas =   viewport->GetCanvas();
-  if(!canvas) return false;
+  if(!canvas) 
+    {
+      return false;
+    }
  
   width  = screen->GetWidth();
   height = screen->GetHeight();
