@@ -542,7 +542,7 @@ bool UI_OPTIONS::UpdateInput()
               switch(c)
                 {
                   
-                  case UI_OPTIONS_BUTTON_F1       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.GetElement(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                  case UI_OPTIONS_BUTTON_F1       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
                                                       if(element_progressbar) 
                                                         { 
                                                           float level =element_progressbar->GetLevel();
@@ -554,7 +554,7 @@ bool UI_OPTIONS::UpdateInput()
                                                     }
                                                     break;
 
-                  case UI_OPTIONS_BUTTON_F2       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.GetElement(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                  case UI_OPTIONS_BUTTON_F2       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
                                                       if(element_progressbar) 
                                                         { 
                                                           float level =element_progressbar->GetLevel();
@@ -594,7 +594,7 @@ bool UI_OPTIONS::UpdateInput()
               switch(c)
                 {
                   case UI_OPTIONS_BUTTON_UP     : 
-                  case UI_OPTIONS_BUTTON_DOWN   : { UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.GetElement(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
+                  case UI_OPTIONS_BUTTON_DOWN   : { UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.Element_Get(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
                                                     if(element_menu) 
                                                       {                                                                                                                         
                                                         UI_PROPERTY_SCROLLEABLE* property_scrolleable = dynamic_cast<UI_PROPERTY_SCROLLEABLE*>(element_menu);
@@ -697,26 +697,22 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
   xpath.Slash_Add();
   xpath.Add(__L("example.zip"));
-  
-  GEN_USERINTERFACE.Skin_CreateAll(screen); 
-
-  if(!GEN_USERINTERFACE.Load(xpath)) 
+    
+  if(!GEN_USERINTERFACE.Load(xpath, screen, 0)) 
     {
       return false;
     }
 
-  if(!GEN_USERINTERFACE.Layouts_SetSelected(__L("example"))) return false;
-
   GEN_USERINTERFACE.SubscribeInputEvents(true);
   GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
 
-  GEN_USERINTERFACE.CreaterVirtualKeyboard(screen, GEN_USERINTERFACE.Layouts_GetSelectedLayout(), GEN_USERINTERFACE.Skin_Selected());   
+  GEN_USERINTERFACE.CreaterVirtualKeyboard(GEN_USERINTERFACE.Layouts_Get(__L("example")), screen);   
 
-  GEN_USERINTERFACE.Background_Put();
+  GEN_USERINTERFACE.Layout_PutBackground(__L("example"));
 
   GEN_USERINTERFACE.Elements_SetToRedraw();
         
-  UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.GetElement(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
+  UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.Element_Get(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
   if(element_menu)
     {
       XSTRING                     option_text; 
@@ -748,7 +744,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
             }
         }
                      
-      GEN_USERINTERFACE.Skin_Selected()->CalculeBoundaryLine_AllElements(element_menu, true); 
+      GEN_USERINTERFACE.Layouts_Get(__L("example"))->GetSkin()->CalculeBoundaryLine_AllElements(element_menu, true); 
 
       UI_PROPERTY_SCROLLEABLE* property_scrolleable = dynamic_cast<UI_PROPERTY_SCROLLEABLE*>(element_menu);
       if(property_scrolleable) 
@@ -769,7 +765,6 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
       //UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.GetElement(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
       //if(element_progressbar)  element_progressbar->ContinuousCycle_Set(true, 33, 10, 10); 
     }
-       
 
   return true;
 }
@@ -846,7 +841,7 @@ bool UI_OPTIONS::DrawFrame()
     }
   */
 
-  UI_ELEMENT_BUTTON* element_button_mainmenu = (UI_ELEMENT_BUTTON*)GEN_USERINTERFACE.GetElement(__L("menu-btn"), UI_ELEMENT_TYPE_BUTTON);
+  UI_ELEMENT_BUTTON* element_button_mainmenu = (UI_ELEMENT_BUTTON*)GEN_USERINTERFACE.Element_Get(__L("menu-btn"), UI_ELEMENT_TYPE_BUTTON);
   if(element_button_mainmenu) GEN_USERINTERFACE.Elements_SetToRedraw(element_button_mainmenu);    
 
 
@@ -860,9 +855,9 @@ bool UI_OPTIONS::DrawFrame()
   canvas->Rectangle(100, 100, 250, 150, true);
   */
   
-  GEN_USERINTERFACE.Elements_RebuildDrawAreas();
+  GEN_USERINTERFACE.Elements_RebuildDrawAreas(__L("example"));
   
-  GEN_USERINTERFACE.Update();
+  GEN_USERINTERFACE.Update(__L("example"));
 
   canvas->DrawFramerate(6, 20, screen);
 
@@ -902,11 +897,11 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 
   elementname = element->GetName()->Get();
 
- //XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("UI Element [%s]: Selected! "), element->GetName()->Get());
+  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("UI Element [%s]: Selected! "), element->GetName()->Get());
                                                             
   if(!elementname.Compare(__L("menu-btn"), true))
     {
-      UI_LAYOUT* layout = GEN_USERINTERFACE.Layouts_GetSelectedLayout();
+      UI_LAYOUT* layout = GEN_USERINTERFACE.Layouts_Get(__L("example"));
       if(layout) 
         {
           UI_ELEMENT* _element = layout->Elements_Get(__L("menu_horz"));
@@ -919,13 +914,13 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
                                                       
   if(elementname.Find(__L("ListBoxMenuButtonID"), true) != XSTRING_NOTFOUND)
     {
-      UI_LAYOUT* layout = GEN_USERINTERFACE.Layouts_GetSelectedLayout();
+      UI_LAYOUT* layout = GEN_USERINTERFACE.Layouts_Get(__L("example"));
       if(layout) 
         {
           UI_ELEMENT_LISTBOX* element_listbox = (UI_ELEMENT_LISTBOX*)layout->Elements_Get(__L("ListBoxID"));
           if(element_listbox)
             {
-              UI_LAYOUT* layout_menu = GEN_USERINTERFACE.GetElementLayout(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
+              UI_LAYOUT* layout_menu = GEN_USERINTERFACE.Element_GetLayout(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
 
               UI_ELEMENT_TEXT* element_text = (UI_ELEMENT_TEXT*)element->GetComposeElements()->Get(0);
               if(element_text) 
@@ -935,7 +930,7 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
                 }
 
               GEN_USERINTERFACE.Elements_SetToRedraw();
-              GEN_USERINTERFACE.SetModalElement(NULL);
+              GEN_USERINTERFACE.Element_SetModal(NULL);
               if(element->GetFather()) element->GetFather()->SetVisible(false);
             }
         }

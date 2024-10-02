@@ -690,19 +690,14 @@ bool UI_MESSAGE::Ini_UserInterface(bool on)
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
   xpath.Slash_Add();
   xpath.Add(__L("message.zip"));
-  
-  GEN_USERINTERFACE.Skin_CreateAll(screen); 
+    
 
-  if(!GEN_USERINTERFACE.Load(xpath)) 
+  if(!GEN_USERINTERFACE.Load(xpath, screen, 0)) 
     {
       return false;
     }
 
-  if(!GEN_USERINTERFACE.Layouts_SetSelected(__L("message"))) 
-    {
-      return false;
-    }
-
+ 
   GEN_USERINTERFACE.SubscribeInputEvents(true);
   GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
   
@@ -755,7 +750,7 @@ bool UI_MESSAGE::DrawFrame()
  
   canvas->ReleaseDrawFramerate();
 
-  GEN_USERINTERFACE.Elements_RebuildDrawAreas();  
+  GEN_USERINTERFACE.Elements_RebuildDrawAreas(__L("message"));  
   GEN_USERINTERFACE.Update();
 
   canvas->DrawFramerate(10, 30, screen);
