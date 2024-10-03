@@ -708,7 +708,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 
   GEN_USERINTERFACE.CreaterVirtualKeyboard(GEN_USERINTERFACE.Layouts_Get(__L("example")), screen);   
 
-  GEN_USERINTERFACE.Layout_PutBackground(__L("example"));
+  GEN_USERINTERFACE.Layout_PutBackground();
 
   GEN_USERINTERFACE.Elements_SetToRedraw();
         
@@ -855,9 +855,9 @@ bool UI_OPTIONS::DrawFrame()
   canvas->Rectangle(100, 100, 250, 150, true);
   */
   
-  GEN_USERINTERFACE.Elements_RebuildDrawAreas(__L("example"));
+  GEN_USERINTERFACE.Elements_RebuildDrawAreas();
   
-  GEN_USERINTERFACE.Update(__L("example"));
+  GEN_USERINTERFACE.Update();
 
   canvas->DrawFramerate(6, 20, screen);
 
