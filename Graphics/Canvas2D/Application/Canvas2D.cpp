@@ -612,6 +612,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 {  
   XPATH           xpath;
   GRPBITMAPFILE*  bitmapfile;
+  bool            status;  
 
   bitmapfile = new GRPBITMAPFILE();
   if(!bitmapfile) return false;
@@ -655,7 +656,6 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Main Screen: Width %d, height %d"),  screen->GetWidth(), screen->GetHeight());
 
-  //#if !defined(LINUX) && !defined(LINUX_X11_ACTIVE)
   
   screen->SetPosition(GRPPROPERTYMODE_SCREEN_CENTER, GRPPROPERTYMODE_SCREEN_CENTER);
   screen->SetWidth(1024);
@@ -663,11 +663,9 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   
   screen->GetTitle()->Set(__L("Canvas 2D"));
   
-  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
+  screen->SetDesktopScreenSelected(GRPDISPLAYTYPE_DESKTOP_SCREEN1);
 
-  //#endif
-
-  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth(), (float)screen->GetHeight(),  0,  0, (backgroundbmp->GetWidth()) , (backgroundbmp->GetHeight()));
+  status = screen->CreateViewport(APPLICATION_GUI_MAIN_VIEWPORT_ID, 0.0f, 0.0f, (float)screen->GetWidth(), (float)screen->GetHeight(),  0,  0, (backgroundbmp->GetWidth()) , (backgroundbmp->GetHeight()));
 
 
   /*
@@ -692,7 +690,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   #endif 
   */
  
-  return true;
+  return status;
 }
 
 
@@ -754,8 +752,7 @@ bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
 
   canvas->SetLineWidth(0.0f);
   canvas->SetFillColor(&colorshadow);
-  //canvas->Ellipse(x + 75, y + 130, rand->Between(30, 35), rand->Between(11, 15), true);
-
+  
   canvas->Ellipse(x + 75, y + 130, 40, 8, true);
 
   return true;
@@ -773,52 +770,55 @@ bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
 * --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::DrawFrame()
 {
-  GRP2DCOLOR_RGBA8  colorblack(0, 0, 0);
+  if(!GetMainScreen())
+    {
+      return false;
+    }
+
   GRP2DCOLOR_RGBA8  colorwhite(255, 255, 255);
-  GRP2DCOLOR_RGBA8  colorred(255, 0, 0);
-  GRP2DCOLOR_RGBA8  colorgreen(0, 255, 0);
-  GRP2DCOLOR_RGBA8  colorblue(0, 0, 255);
   GRP2DCOLOR_RGBA8  coloryellow(255, 255, 0);
   GRP2DCOLOR_RGBA8  colorgray(10, 10, 10, 150);
   
-  GRPVIEWPORT*      viewport = NULL;
-  GRPCANVAS*        canvas   = NULL;
-  GRPRECTINT*       rect     = NULL;
+  GRPVIEWPORT*      viewport                = NULL;
+  GRPCANVAS*        canvas                  = NULL;
+  static int        scrollposx              = 680;
+
+  int               width                   = GetMainScreen()->GetWidth();
+  int               height                  = GetMainScreen()->GetHeight();  
+
+  static int        x                       = 1600;
+  static int        y                       = height - 180;
+  static bool       tofront                 = true;
+  static int        scrollstep              = 0;
+  static int        nupdates                = 0;
+
+  int               indexcharactersequence  = tofront?0:1;
 
   viewport = GetMainScreen()->GetViewport(0);
-  if(viewport) canvas =   viewport->GetCanvas();
-  if(!canvas) return false;
-
-  int           width   = GetMainScreen()->GetWidth();
-  int           height  = GetMainScreen()->GetHeight();  
-
-  static int    x           = 1600;
-  static int    y           = height - 180;
-  static bool   tofront     = true;
-  static int    scrollstep  = 0;
-  static int    nupdates    = 0;
-
-  int           indexcharactersequence = tofront?0:1;
-
-  rand->Ini();
-
-  canvas->ReleaseDrawFramerate();  
-
-  rect = canvas->GetScreenZone();
-  if(rect)
+  if(viewport) 
     {
-      if(!nupdates)
-        {
-          rect->x1 += 680;
-          rect->x2 += 680;
-        }
-
-      if(makeaction.Compare(__L("WALK NORTH"), true))   { rect->y1++; rect->y2++; }
-      if(makeaction.Compare(__L("WALK WEST" ), true))   { rect->x1++; rect->x2++; }
-      if(makeaction.Compare(__L("WALK EAST" ), true))   { rect->x1--; rect->x2--; }
-      if(makeaction.Compare(__L("WALK SOUTH"), true))   { rect->y1--; rect->y2--; }      
+      canvas =   viewport->GetCanvas();
     }
 
+  if(!canvas) 
+    {
+      return false;
+    }
+  
+  rand->Ini();
+
+  canvas->ReleaseDrawFramerate();       
+  
+  if(makeaction.Compare(__L("WALK WEST" ), true))   
+    { 
+      scrollposx++; 
+    }
+
+  if(makeaction.Compare(__L("WALK EAST" ), true))   
+    { 
+      scrollposx--;
+    }
+     
   if(!makeaction.IsEmpty())
     {
       scrollstep++;
@@ -830,33 +830,15 @@ bool CANVAS2D::DrawFrame()
         }
     }
 
-  if(rect->x1 < 0)
+  if(scrollposx < 0)
     {
-      rect->x1 = 0;
-      rect->x2 = width;
+      scrollposx = 0;      
       makeaction.Empty();
     }
 
-  if(rect->y1 < 0)
-    {
-      rect->y1 = 0;
-      rect->y2 = height;
-      makeaction.Empty();
-    }
+  viewport->SetCanvasPosition((float)scrollposx, 0);
 
-  if((rect->x1 + width) > (int)canvas->GetWidth())
-    {
-      rect->x2 = canvas->GetWidth();
-      rect->x1 = rect->x2 - width;
-    }
-
-  if((rect->y1 + height) > (int)canvas->GetHeight())
-    {
-      rect->y2 = canvas->GetHeight();
-      rect->y1 = rect->y2 - height;
-    }
-
-  //canvas->Clear(&colorwhite);  
+  scrollposx = viewport->GetCanvasPositionX();
 
   canvas->RebuildAllAreas();
   canvas->DeleteAllRebuildAreas();
@@ -919,22 +901,19 @@ bool CANVAS2D::DrawFrame()
 
   int pos_signboard = (width - 570) / 2;
 
-  canvas->CreateRebuildArea(rect->x1 +  pos_signboard, 50, rect->x1 + pos_signboard + 570 , 150);
+  canvas->CreateRebuildArea(scrollposx + pos_signboard, 50, scrollposx + pos_signboard + 570 , 150);
 
   canvas->SetLineWidth(1.5f);
   canvas->SetLineColor(&colorwhite);
   canvas->SetFillColor(&colorgray);
 
-  canvas->RoundRect(rect->x1 +  pos_signboard, 50, rect->x1 + pos_signboard + 570 , 150, 20, true);
-
-  //canvas->RasterFont_SetColor(&colorwhite);
-  //canvas->RasterFont_Printf(rect->x1 + 60, 80, __L("Erase una vez ... "));
+  canvas->RoundRect(scrollposx +  pos_signboard, 50, scrollposx + pos_signboard + 570 , 150, 20, true);
 
   canvas->Vectorfont_GetConfig()->SetColor(&coloryellow);
-  canvas->VectorFont_Printf(rect->x1 + pos_signboard + 20,  90, __L("Once upon a time,"));
-  canvas->VectorFont_Printf(rect->x1 + pos_signboard + 90, 130, __L("in a kingdom far, far away... "));
-
-  canvas->DrawFramerate(rect->x1 +  pos_signboard + 465, 60, GetMainScreen());
+  canvas->VectorFont_Printf(scrollposx + pos_signboard + 20,  90, __L("Once upon a time,"));
+  canvas->VectorFont_Printf(scrollposx + pos_signboard + 90, 130, __L("in a kingdom far, far away... "));
+  
+  canvas->DrawFramerate(scrollposx +  pos_signboard + 465, 60, GetMainScreen());
 
   nupdates++;
 

@@ -105,6 +105,8 @@ enum CANVAS2D_BUTTONS
 
 #define APPLICATION_YEAROFCREATION                2018
 
+#define APPLICATION_GUI_MAIN_VIEWPORT_ID          __L("main_viewport")
+
 
 #pragma endregion
 

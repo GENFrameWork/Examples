@@ -600,7 +600,7 @@ bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
 
   screen->GetTitle()->Set(__L("Hola radiola"));  
 
-  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
+  screen->SetDesktopScreenSelected(GRPDISPLAYTYPE_DESKTOP_MAIN);
 
   screen->SetPosition(100, 100);
   screen->SetWidth(800);
