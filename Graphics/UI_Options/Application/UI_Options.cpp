@@ -859,7 +859,7 @@ bool UI_OPTIONS::DrawFrame()
   
   GEN_USERINTERFACE.Update();
 
-  canvas->DrawFramerate(6, 20, screen);
+  canvas->DrawFramerate(screen, 6, 20);
 
   // --------------------------------------------------------------------
   // center

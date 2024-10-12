@@ -753,7 +753,7 @@ bool UI_MESSAGE::DrawFrame()
   GEN_USERINTERFACE.Elements_RebuildDrawAreas(__L("message"));  
   GEN_USERINTERFACE.Update();
 
-  canvas->DrawFramerate(10, 30, screen);
+  canvas->DrawFramerate(screen, 10, 30);
 
   return true;
 }

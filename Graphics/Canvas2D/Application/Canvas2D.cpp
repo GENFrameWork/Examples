@@ -913,7 +913,7 @@ bool CANVAS2D::DrawFrame()
   canvas->VectorFont_Printf(scrollposx + pos_signboard + 20,  90, __L("Once upon a time,"));
   canvas->VectorFont_Printf(scrollposx + pos_signboard + 90, 130, __L("in a kingdom far, far away... "));
   
-  canvas->DrawFramerate(scrollposx +  pos_signboard + 465, 60, GetMainScreen());
+  canvas->DrawFramerate(GetMainScreen(), scrollposx + 10, 30);
 
   nupdates++;
 
