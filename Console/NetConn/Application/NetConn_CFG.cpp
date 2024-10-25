@@ -1,93 +1,192 @@
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @file       AppBaseExample.cpp
-* 
-* @class      APPBASEEXAMPLE
-* @brief      Application Base Example 
+*
+* @file       NetConn_CFG.cpp
+*
+* @class      NETCONN_CFG
+* @brief      Net Connection CFG class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
-* 
-* @copyright  GEN Group. All rights reserved.
-* 
+*
+* @copyright  GEN Group. All right reserved.
+*
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-/*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_INCLUDES
+
+/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
 
 #include "GEN_Defines.h"
 
-#pragma endregion
-
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
-#include "AppBaseExample.h"
+#include "XLog.h"
 
-#include "VersionFrameWork.h"
+#include "NetConn.h"
 
-#include "XFactory.h"
-#include "XSleep.h"
-#include "XTrace.h"
+#include "NetConn_CFG.h"
 
 #include "XMemory_Control.h"
 
-#pragma endregion
-
-
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
-#pragma region GENERAL_VARIABLE
 
-APPLICATIONCREATEINSTANCE(APPBASEEXAMPLE, appbaseexample)
-
-#pragma endregion
-
+NETCONN_CFG* NETCONN_CFG::instance = NULL;
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         APPBASEEXAMPLE::APPBASEEXAMPLE()
-* @brief      Constructor
-* @ingroup    DATAIO
+* @fn         bool NETCONN_CFG::GetIsInstanced()
+* @brief      GetIsInstanced
+* @ingroup
 *
-* @return     Does not return anything.
+* @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-APPBASEEXAMPLE::APPBASEEXAMPLE()
+bool NETCONN_CFG::GetIsInstanced()
 {
-  Clean();
+  return instance!=NULL;
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         APPBASEEXAMPLE::~APPBASEEXAMPLE()
+* @fn         NETCONN_CFG& NETCONN_CFG::GetInstance(bool ini)
+* @brief      GetInstance
+* @ingroup
+*
+* @return     NETCONN_CFG& :
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+NETCONN_CFG& NETCONN_CFG::GetInstance(bool ini)
+{
+  if(!instance) instance = new NETCONN_CFG(ini?APPLICATION_NAMEFILE:NULL);
+
+  return (*instance);
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool NETCONN_CFG::DelInstance()
+* @brief      DelInstance
+* @ingroup
+*
+* @return     bool : true if is succesful.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_CFG::DelInstance()
+{
+  if(instance)
+    {
+      delete instance;
+      instance = NULL;
+
+      return true;
+    }
+
+  return false;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_CFG::DoVariableMapping()
+* @brief      DoVariableMapping
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_CFG::DoVariableMapping()
+{
+  if(!APPCFG::DoVariableMapping())
+    {
+      return false;
+    }
+  
+  //-----------------------------------------------------
+  // MACHINE PROTOCOL
+
+  
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_CFG::DoDefault()
+* @brief      DoDefault
+* @ingroup    APPLICATION
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_CFG::DoDefault()
+{
+  if(!APPCFG::DoDefault()) 
+    {
+      return false;
+    }
+
+  //------------------------------------------------------------------------------
+
+  GEN_XTRACE_NET_CFG_DEFAULT_01
+
+  //------------------------------------------------------------------------------
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
+* @brief      Constructor
+* @ingroup
+*
+* @param[in]  XCHAR* : name of file of config
+*
+* @return     Does not return anything.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPCFG(namefile)
+{
+  Clean();
+
+ if(namefile)
+   {
+     Ini<NETCONN_CFG>();
+   }
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         NETCONN_CFG::~NETCONN_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
-* @ingroup    DATAIO
+* @ingroup
 *
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-APPBASEEXAMPLE::~APPBASEEXAMPLE()
+NETCONN_CFG::~NETCONN_CFG()
 {
   Clean();
 }
@@ -95,112 +194,17 @@ APPBASEEXAMPLE::~APPBASEEXAMPLE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool APPBASEEXAMPLE::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    DATAIO
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool APPBASEEXAMPLE::AppProc_Ini()
-{
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool APPBASEEXAMPLE::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    
-* 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
-bool APPBASEEXAMPLE::AppProc_FirstUpdate()
-{
-  //-------------------------------------------------------------------------------------------------
-
-  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
-  
-  //-------------------------------------------------------------------------------------------------
-
-  XTRACE_SETAPPLICATIONNAME(APPLICATION_NAMEAPP);
-  XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
-
-  XTRACE_ADDTARGET(XTRACE_TYPE_NET, GEN_XTRACE_NET_DEFAULT_01);
-
-  XTRACE_CLEARSCREEN;
-  XTRACE_CLEARMSGSSTATUS;
-
-  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Application ROOT path: %s"),  GEN_XPATHSMANAGER.GetPathSection(XPATHSMANAGERSECTIONTYPE_ROOT)->xpath->Get());
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool APPBASEEXAMPLE::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    DATAIO
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool APPBASEEXAMPLE::AppProc_Update()
-{
-  return false;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool APPBASEEXAMPLE::AppProc_LastUpdate()
-* @brief      AppProc_LastUpdate
-* @ingroup    DATAIO
-* 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
-bool APPBASEEXAMPLE::AppProc_LastUpdate()
-{
-  return false;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         bool APPBASEEXAMPLE::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    DATAIO
-*
-* @return     bool : true if is succesful.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-bool APPBASEEXAMPLE::AppProc_End()
-{
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         void APPBASEEXAMPLE::Clean()
+* @fn         void NETCONN_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
-* @ingroup    TEST
+* @ingroup
 *
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void APPBASEEXAMPLE::Clean()
+void NETCONN_CFG::Clean()
 {
 
+
 }
-
-
-#pragma endregion
 
