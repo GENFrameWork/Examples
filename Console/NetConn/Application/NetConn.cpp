@@ -479,7 +479,7 @@ bool NETCONN::Show_ConnectionsStatus()
     {
       string  = __L("Connexion status");
       
-      switch(protocolCFG->GetDIOStream()->GetConnectStatus())
+      switch(protocolCFG->GetDIOStream()->GetStatus())
         {
           case DIOSTREAMSTATUS_DISCONNECTED      : string2.Format(__L("Disconnected"));              break;
           case DIOSTREAMSTATUS_CONNECTED         : string2.Format(__L("Connected"));                 break; 
