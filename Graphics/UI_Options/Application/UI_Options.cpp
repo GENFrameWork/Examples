@@ -639,7 +639,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   screen->SetHeight(768);
 
   screen->GetTitle()->Set(__L("User Interface Canvas"));  
-  screen->SetDesktopScreenSelected(GRPDISPLAYTYPE_DESKTOP_MAIN);
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
                                           

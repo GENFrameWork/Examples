@@ -475,6 +475,7 @@ bool NETCONN::Show_ConnectionsStatus()
     else  string2.Format(__L("Client"));
   Show_Line(string, string2);
 
+  /*
   if(protocolCFG->GetDIOStream())
     {
       string  = __L("Connexion status");
@@ -488,6 +489,7 @@ bool NETCONN::Show_ConnectionsStatus()
 
       Show_Line(string, string2);
     }
+  */
 
   return true;
 }

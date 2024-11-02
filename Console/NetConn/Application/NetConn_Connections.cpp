@@ -98,32 +98,37 @@ NETCONN_CONNECTIONS::~NETCONN_CONNECTIONS()
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CONNECTIONS::Ini(bool isserver)
-{
-  bool status = false;
+{  
+  protocolCFG.SetIsServer(isserver);  
+  protocolCFG.SetCompressContent(true);
 
-  DIOSTREAMTCPIPCONFIG*  diostreamCFG = new DIOSTREAMTCPIPCONFIG();
-  DIOSTREAM*             diostream    = NULL;
+  // ------------------------------------------------------------------------------------------------------
+
+  DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = new DIOSTREAMTCPIPCONFIG();
+  DIOSTREAM*             diostreamTCPIP    = NULL;
   
-  diostreamCFG->GetRemoteURL()->Set(__L("127.0.0.1"));
-  diostreamCFG->SetMode(isserver?DIOSTREAMMODE_SERVER:DIOSTREAMMODE_CLIENT);
-  diostreamCFG->SetRemotePort(1230);
+  diostreamTCPIPCFG->GetRemoteURL()->Set(__L("127.0.0.1"));
+  diostreamTCPIPCFG->SetMode(isserver?DIOSTREAMMODE_SERVERMULTISOCKET:DIOSTREAMMODE_CLIENT);
+  diostreamTCPIPCFG->SetRemotePort(1230);
 
-  diostream = GEN_DIOFACTORY.CreateStreamIO(diostreamCFG);
-  if(!diostream) 
+  diostreamTCPIP = GEN_DIOFACTORY.CreateStreamIO(diostreamTCPIPCFG);
+  if(!diostreamTCPIP) 
     {
-      delete diostreamCFG;
+      delete diostreamTCPIPCFG;
+      return false;
+    }
+
+  if(!protocolCFG.DIOStream_Add(diostreamTCPIPCFG, diostreamTCPIP))
+    {
+      delete diostreamTCPIPCFG;
+      delete diostreamTCPIP;
 
       return false;
     }
 
-  protocolCFG.SetIsServer(isserver);  
-  protocolCFG.SetCompressContent(true);
-  protocolCFG.SetDIOStreamCFG(diostreamCFG);
-  protocolCFG.SetDIOStream(diostream);
+  // ------------------------------------------------------------------------------------------------------
 
-  status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini(&protocolCFG);  
-
-  return status;
+  return DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini(&protocolCFG);  
 }
 
 
@@ -142,18 +147,8 @@ bool NETCONN_CONNECTIONS::End()
 
   status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::End();
 
-  if(protocolCFG.GetDIOStream())
-    {
-      delete protocolCFG.GetDIOStream();
-      protocolCFG.SetDIOStream(NULL);
-    }
-
-  if(protocolCFG.GetDIOStreamCFG())
-    {
-      delete protocolCFG.GetDIOStreamCFG();
-      protocolCFG.SetDIOStreamCFG(NULL);
-    }
-  
+  protocolCFG.DIOStream_DeleteAll();
+    
   return status;
 }
 

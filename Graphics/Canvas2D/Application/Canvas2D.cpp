@@ -663,7 +663,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   
   screen->GetTitle()->Set(__L("Canvas 2D"));
   
-  screen->SetDesktopScreenSelected(GRPDISPLAYTYPE_DESKTOP_SCREEN1);
+  screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_SCREEN1);
 
   status = screen->CreateViewport(APPLICATION_GUI_MAIN_VIEWPORT_ID, 0.0f, 0.0f, (float)screen->GetWidth(), (float)screen->GetHeight(),  0,  0, (backgroundbmp->GetWidth()) , (backgroundbmp->GetHeight()));
 
