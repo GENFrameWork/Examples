@@ -33,7 +33,7 @@
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
-#include "NetConn_Connections.h"
+#include "NetConn_ConnectionsManager.h"
 
 #include "XPublisher.h"
 
@@ -130,7 +130,7 @@ bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 
   // ------------------------------------------------------------------------------------------------------
 
-  return DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini(&protocolCFG);  
+  return DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini();  
 }
 
 
@@ -157,21 +157,6 @@ bool NETCONN_CONNECTIONSMANAGER::End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         DIOCOREPROTOCOL_CFG* NETCONN_CONNECTIONS::GetProtocolCFG()
-* @brief      GetProtocolCFG
-* @ingroup    EXAMPLES
-* 
-* @return     DIOCOREPROTOCOL_CFG* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-DIOCOREPROTOCOL_CFG* NETCONN_CONNECTIONSMANAGER::GetProtocolCFG()
-{
-  return &protocolCFG;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
 * @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
 * @brief      CreateProtocol
 * @ingroup    EXAMPLES
@@ -183,7 +168,7 @@ DIOCOREPROTOCOL_CFG* NETCONN_CONNECTIONSMANAGER::GetProtocolCFG()
 * --------------------------------------------------------------------------------------------------------------------*/
 DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
 {
-  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream);
+  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, &ID_machine);
 
   return protocol;  
 }

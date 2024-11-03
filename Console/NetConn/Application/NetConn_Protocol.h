@@ -53,7 +53,7 @@ class DIOSTREAM;
 class NETCONN_PROTOCOL : public DIOCOREPROTOCOL
 {
   public:
-                       NETCONN_PROTOCOL        (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream);
+                       NETCONN_PROTOCOL        (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream, XUUID* ID_machine);
     virtual           ~NETCONN_PROTOCOL        ();
 
   protected:

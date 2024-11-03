@@ -90,7 +90,7 @@
 #include "APPExtended.h"
 
 #include "NetConn_CFG.h"
-#include "NetConn_Connections.h"
+#include "NetConn_ConnectionsManager.h"
 
 #include "XMemory_Control.h"
 
