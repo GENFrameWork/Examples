@@ -99,7 +99,7 @@ class DIOSCRAPERWEBPUBLICIP;
 class DIOSCRAPERWEBGEOLOCATIONIP;
 class DIOSCRAPERWEBUSERAGENTID;
 class APPINTERNETSERVICES;
-class NETCONN_CONNECTIONS;
+class NETCONN_CONNECTIONSMANAGER;
 
 
 class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
@@ -115,7 +115,7 @@ class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
     bool                            AppProc_Update                          ();
     bool                            AppProc_End                             ();
 
-    bool                            KeyValidSecuences                       (int key);
+    bool                            KeyValidSecuences                       (int key);  
 
     bool                            Show_ConnectionsStatus                  ();
     bool                            Show_AllStatus                          ();
@@ -131,7 +131,7 @@ class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
 
     bool                            modeserver;   
 
-    NETCONN_CONNECTIONS*            connections; 
+    NETCONN_CONNECTIONSMANAGER*     connectionsmanager; 
 };
 
 

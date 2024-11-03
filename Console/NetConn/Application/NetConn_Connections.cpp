@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       NetConn_Connections.cpp
+* @file       NetConn_ConnectionsManager.cpp
 *
-* @class      NETCONN_CONNECTIONS
-* @brief      Net Connection Connections class (DIOCoreProtol example)
+* @class      NETCONN_CONNECTIONSMANAGER
+* @brief      Net Connection Connections Manager class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -42,6 +42,8 @@
 #include "DIOStream.h"
 #include "DIOCoreProtocol_ConnectionsManager.h"
 
+#include "NetConn_Protocol.h"
+
 #include "XMemory_Control.h"
 
 
@@ -53,7 +55,7 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONS::NETCONN_CONNECTIONS
+* @fn         NETCONN_CONNECTIONSMANAGER::NETCONN_CONNECTIONSMANAGER
 * @brief      Constructor
 * @ingroup    PLATFORM_COMMON
 *
@@ -62,7 +64,7 @@
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-NETCONN_CONNECTIONS::NETCONN_CONNECTIONS() 
+NETCONN_CONNECTIONSMANAGER::NETCONN_CONNECTIONSMANAGER() 
 {
   Clean();
 }
@@ -77,7 +79,7 @@ NETCONN_CONNECTIONS::NETCONN_CONNECTIONS()
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-NETCONN_CONNECTIONS::~NETCONN_CONNECTIONS()
+NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
 {
   Clean();
 }
@@ -85,7 +87,7 @@ NETCONN_CONNECTIONS::~NETCONN_CONNECTIONS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONS::Ini
+* @fn         NETCONN_CONNECTIONSMANAGER::Ini
 * @brief      Initialize connection manager
 * @ingroup    PLATFORM_COMMON
 *
@@ -97,7 +99,7 @@ NETCONN_CONNECTIONS::~NETCONN_CONNECTIONS()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_CONNECTIONS::Ini(bool isserver)
+bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 {  
   protocolCFG.SetIsServer(isserver);  
   protocolCFG.SetCompressContent(true);
@@ -134,14 +136,14 @@ bool NETCONN_CONNECTIONS::Ini(bool isserver)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONS::End
+* @fn         NETCONN_CONNECTIONSMANAGER::End
 * @brief      End Connection manager
 * @ingroup    PLATFORM_COMMON
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_CONNECTIONS::End()
+bool NETCONN_CONNECTIONSMANAGER::End()
 {
   bool status =  false;
 
@@ -162,9 +164,28 @@ bool NETCONN_CONNECTIONS::End()
 * @return     DIOCOREPROTOCOL_CFG* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-DIOCOREPROTOCOL_CFG* NETCONN_CONNECTIONS::GetProtocolCFG()
+DIOCOREPROTOCOL_CFG* NETCONN_CONNECTIONSMANAGER::GetProtocolCFG()
 {
   return &protocolCFG;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
+* @brief      CreateProtocol
+* @ingroup    EXAMPLES
+* 
+* @param[in]  diostream : 
+* 
+* @return     DIOCOREPROTOCOL* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
+{
+  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream);
+
+  return protocol;  
 }
 
 
@@ -178,7 +199,7 @@ DIOCOREPROTOCOL_CFG* NETCONN_CONNECTIONS::GetProtocolCFG()
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_CONNECTIONS::Clean()
+void NETCONN_CONNECTIONSMANAGER::Clean()
 {
   
 }

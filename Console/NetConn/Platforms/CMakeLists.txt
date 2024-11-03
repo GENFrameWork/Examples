@@ -23,8 +23,9 @@ option(DIO_CHECKCONNECTIONS_FEATURE                             "Check Connectio
 option(DIO_NETWORKTIMEPROTOCOL_FEATURE                          "Network Time Protocol"                                   ON )
 option(DIO_DYNDNS_FEATURE                                       "DynDNS"                                                  ON )
 option(DIO_SCRAPERWEB_FEATURE                                   "Scraper Web"                                             ON )
+option(DIO_COREPROTOCOL_FEATURE                                 "Data Input/Output Protocol"                              ON )
 
-option(DIO_COREPROTOCOL_FEATURE                                 "Data Input/Output Protocol"                              ON )    
+option(HASH_SHA2_FEATURE                                        "Hash SHA2"                                               ON )
     
 option(APP_FEATURE                                              "Application modules"                                     ON )
 option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )
@@ -68,6 +69,7 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 
 list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn.cpp")
 list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CFG.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_Protocol.cpp")
 list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_Connections.cpp")
 
 

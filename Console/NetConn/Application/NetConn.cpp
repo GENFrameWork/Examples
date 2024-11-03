@@ -73,6 +73,7 @@
 #include "DIOStreamIPLocalEnumDevices.h"
 #include "DIOStreamTCPIPConfig.h"
 #include "DIOStreamTCPIP.h"
+#include "DIOCoreProtocol_Connection.h"
 #include "DIOWebClient_XEvent.h"
 #include "DIOWebClient.h"
 
@@ -276,10 +277,10 @@ bool NETCONN::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------------------------
 
-  connections = new NETCONN_CONNECTIONS();
-  if(connections)
+  connectionsmanager = new NETCONN_CONNECTIONSMANAGER();
+  if(connectionsmanager)
     {
-      if(!connections->Ini(modeserver))
+      if(!connectionsmanager->Ini(modeserver))
         {
           return false;
         }
@@ -378,11 +379,11 @@ bool NETCONN::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  if(connections)
+  if(connectionsmanager)
     {
-      connections->End();
-      delete connections;
-      connections = NULL;        
+      connectionsmanager->End();
+      delete connectionsmanager;
+      connectionsmanager = NULL;        
     }
 
   //--------------------------------------------------------------------------------------
@@ -458,12 +459,12 @@ bool NETCONN::Show_ConnectionsStatus()
   XSTRING string;
   XSTRING string2;
 
-  if(!connections)
+  if(!connectionsmanager)
     {
       return false;
     }
 
-  DIOCOREPROTOCOL_CFG* protocolCFG = connections->GetProtocolCFG();
+  DIOCOREPROTOCOL_CFG* protocolCFG = connectionsmanager->GetProtocolCFG();
   if(!protocolCFG)
     {
       return false;
@@ -475,21 +476,39 @@ bool NETCONN::Show_ConnectionsStatus()
     else  string2.Format(__L("Client"));
   Show_Line(string, string2);
 
-  /*
-  if(protocolCFG->GetDIOStream())
+  if(connectionsmanager)
     {
-      string  = __L("Connexion status");
-      
-      switch(protocolCFG->GetDIOStream()->GetStatus())
+      if(connectionsmanager->Connection_GetXMutex())
         {
-          case DIOSTREAMSTATUS_DISCONNECTED      : string2.Format(__L("Disconnected"));              break;
-          case DIOSTREAMSTATUS_CONNECTED         : string2.Format(__L("Connected"));                 break; 
-          case DIOSTREAMSTATUS_GETTINGCONNECTION : string2.Format(__L("Getting connexion..."));      break; 
+          connectionsmanager->Connection_GetXMutex()->Lock();
         }
 
-      Show_Line(string, string2);
+      console->Printf(__L("   Connexions: \n"));
+
+      for(XDWORD c=0; c<connectionsmanager->Connection_GetAll()->GetSize(); c++)
+        {
+          DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connection_GetAll()->Get(c);
+          XSTRING                     measurestatus;
+          XSTRING                     statusstring;
+
+          if(connection)
+            {         
+              connection->GetXTimerStatus()->GetMeasureString(measurestatus);
+         
+              connection->GetStatusString(statusstring);
+              string.Format(__L("   %03d  %-10s  %-15s \n"), c+1, measurestatus.Get(), statusstring.Get());   
+
+              console->Printf(string.Get());
+            }
+        }
+      
+      if(connectionsmanager->Connection_GetXMutex())
+        {
+          connectionsmanager->Connection_GetXMutex()->UnLock();
+        }
+
+
     }
-  */
 
   return true;
 }
@@ -679,5 +698,5 @@ void NETCONN::Clean()
 
   modeserver                  = false;
  
-  connections                 = NULL; 
+  connectionsmanager          = NULL; 
 }

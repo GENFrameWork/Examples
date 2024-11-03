@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       NetConn_Connections.h
+* @file       NetConn_ConnectionsManager.h
 *
-* @class      NETCONN_CONNECTIONS
-* @brief      Net Connection Connections class (DIOCoreProtol example)
+* @class      NETCONN_CONNECTIONSMANAGER
+* @brief      Net Connection Connections Manager class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -44,16 +44,18 @@ class DIOCOREPROTOCOL_CFG;
 class DIOCOREPROTOCOL_CONNECTIONSMANAGER;
 
 
-class NETCONN_CONNECTIONS :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
+class NETCONN_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
 {
   public:
-                                          NETCONN_CONNECTIONS                   ();
-                                         ~NETCONN_CONNECTIONS                   ();
+                                          NETCONN_CONNECTIONSMANAGER            ();
+                                         ~NETCONN_CONNECTIONSMANAGER            ();
 
     bool                                  Ini                                   (bool isserver);
     bool                                  End                                   ();
 
     DIOCOREPROTOCOL_CFG*                  GetProtocolCFG                        ();
+
+    DIOCOREPROTOCOL*                      CreateProtocol                        (DIOSTREAM* diostream);     
    
   private:
 
