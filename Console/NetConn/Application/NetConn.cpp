@@ -111,7 +111,7 @@
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN::NETCONN() :  XFSMACHINE(0)
+NETCONN::NETCONN() : XFSMACHINE(0)
 {
   Clean();
 }
@@ -144,21 +144,21 @@ NETCONN::~NETCONN()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::InitFSMachine()
 {
-  if(!AddState( NETCONN_XFSMSTATE_NONE           ,
-                NETCONN_XFSMEVENT_INI              , NETCONN_XFSMSTATE_INI            ,
-                NETCONN_XFSMEVENT_END              , NETCONN_XFSMSTATE_END            ,
+  if(!AddState( NETCONN_XFSMSTATE_NONE            ,
+                NETCONN_XFSMEVENT_INI             , NETCONN_XFSMSTATE_INI             ,
+                NETCONN_XFSMEVENT_END             , NETCONN_XFSMSTATE_END             ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( NETCONN_XFSMSTATE_INI              ,
-                NETCONN_XFSMEVENT_NONE           , NETCONN_XFSMSTATE_NONE         ,
-                NETCONN_XFSMEVENT_END              , NETCONN_XFSMSTATE_END            ,
+  if(!AddState( NETCONN_XFSMSTATE_INI             ,
+                NETCONN_XFSMEVENT_NONE            , NETCONN_XFSMSTATE_NONE            ,
+                NETCONN_XFSMEVENT_END             , NETCONN_XFSMSTATE_END             ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( NETCONN_XFSMSTATE_END              ,
-                NETCONN_XFSMEVENT_NONE           , NETCONN_XFSMSTATE_NONE         ,
-                NETCONN_XFSMEVENT_INI              , NETCONN_XFSMSTATE_INI            ,
+  if(!AddState( NETCONN_XFSMSTATE_END             ,
+                NETCONN_XFSMEVENT_NONE            , NETCONN_XFSMSTATE_NONE            ,
+                NETCONN_XFSMEVENT_INI             , NETCONN_XFSMSTATE_INI             ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
   return true;
@@ -184,9 +184,18 @@ bool NETCONN::AppProc_Ini()
 
   //-------------------------------------------------------------------------------------------------
 
-  GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+  if(GetExecParams())
+    {
+      XSTRING* param = (XSTRING*)GetExecParams()->Get(0);
+      if(param)
+        {
+          if(!param->Compare(__L("SERVER"), true))  modeserver = true;
+        }
+    }
 
-  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+  GetApplicationName()->AddFormat(__L("%s %s"), APPLICATION_NAMEAPP, modeserver?__L("Server"):__L("Client")); 
+
+  GEN_SET_VERSION(GetApplicationName()->Get(), APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
   
   //--------------------------------------------------------------------------------------------------
 
@@ -204,17 +213,6 @@ bool NETCONN::AppProc_Ini()
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
-
-  //--------------------------------------------------------------------------------------------------
-
-  if(GetExecParams())
-    {
-      XSTRING* param = (XSTRING*)GetExecParams()->Get(0);
-      if(param)
-        {
-          if(!param->Compare(__L("SERVER"), true))  modeserver = true;
-        }
-    }
 
   //--------------------------------------------------------------------------------------------------
 
@@ -241,7 +239,7 @@ bool NETCONN::AppProc_Ini()
     }
   */
 
-  GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
+  GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_ENG);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -501,6 +499,8 @@ bool NETCONN::Show_ConnectionsStatus()
               console->Printf(string.Get());
             }
         }
+
+      console->Printf(__L("\n"));
       
       if(connectionsmanager->Connection_GetXMutex())
         {

@@ -35,12 +35,17 @@
 
 #include "NetConn_ConnectionsManager.h"
 
+#include "XFactory.h"
 #include "XPublisher.h"
+#include "XRand.h"
+#include "XSleep.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamTCPIPConfig.h"
 #include "DIOStream.h"
 #include "DIOCoreProtocol_ConnectionsManager.h"
+
+#include "CipherAES.h"
 
 #include "NetConn_Protocol.h"
 
@@ -102,13 +107,20 @@ NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
 bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 {  
   protocolCFG.SetIsServer(isserver);  
+  protocolCFG.SetCompressHeader(true);
   protocolCFG.SetCompressContent(true);
 
   // ------------------------------------------------------------------------------------------------------
 
-  DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = new DIOSTREAMTCPIPCONFIG();
+  DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = NULL;
   DIOSTREAM*             diostreamTCPIP    = NULL;
   
+  diostreamTCPIPCFG = new DIOSTREAMTCPIPCONFIG();
+  if(!diostreamTCPIPCFG)
+    {
+      return false;
+    }
+
   diostreamTCPIPCFG->GetRemoteURL()->Set(__L("127.0.0.1"));
   diostreamTCPIPCFG->SetMode(isserver?DIOSTREAMMODE_SERVERMULTISOCKET:DIOSTREAMMODE_CLIENT);
   diostreamTCPIPCFG->SetRemotePort(1230);
@@ -120,7 +132,7 @@ bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
       return false;
     }
 
-  if(!protocolCFG.DIOStream_Add(diostreamTCPIPCFG, diostreamTCPIP))
+  if(!DIOStream_Add(diostreamTCPIPCFG, diostreamTCPIP))
     {
       delete diostreamTCPIPCFG;
       delete diostreamTCPIP;
@@ -149,7 +161,7 @@ bool NETCONN_CONNECTIONSMANAGER::End()
 
   status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::End();
 
-  protocolCFG.DIOStream_DeleteAll();
+  DIOStream_DeleteAll();
     
   return status;
 }
@@ -157,18 +169,19 @@ bool NETCONN_CONNECTIONSMANAGER::End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
+* @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream, XUUID* ID_machine)
 * @brief      CreateProtocol
 * @ingroup    EXAMPLES
 * 
 * @param[in]  diostream : 
+* @param[in]  ID_machine : 
 * 
 * @return     DIOCOREPROTOCOL* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
+DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream, XUUID* ID_machine)
 {
-  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, &ID_machine);
+  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, ID_machine);
 
   return protocol;  
 }

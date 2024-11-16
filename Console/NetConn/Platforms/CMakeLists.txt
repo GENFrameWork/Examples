@@ -26,6 +26,7 @@ option(DIO_SCRAPERWEB_FEATURE                                   "Scraper Web"   
 option(DIO_COREPROTOCOL_FEATURE                                 "Data Input/Output Protocol"                              ON )
 
 option(HASH_SHA2_FEATURE                                        "Hash SHA2"                                               ON )
+option(CIPHER_SYMMETRIC_AES_FEATURE                             "Cipher Symetric AES"                                     ON )
     
 option(APP_FEATURE                                              "Application modules"                                     ON )
 option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )

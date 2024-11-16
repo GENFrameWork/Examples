@@ -39,6 +39,12 @@
 
 #include "NetConn_Protocol.h"
 
+#include "XFactory.h"
+#include "XRand.h"
+
+#include "CipherAES.h"
+
+
 #include "XMemory_Control.h"
 
 #pragma endregion
@@ -81,6 +87,91 @@ NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
 {
   Clean();
 }
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
+* @brief      GenerateAuthenticationChallenge
+* @ingroup    EXAMPLES
+* 
+* @param[in]  autentication_challange : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
+{
+  XRAND* rand = GEN_XFACTORY.CreateRand();
+  if(!rand)
+    {
+      return false;
+    }
+
+  for(XDWORD c=0; c<64; c++)
+    {  
+      autentication_challange.Add((XBYTE)rand->Max(255));
+    }
+
+  GEN_XFACTORY.DeleteRand(rand);
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
+* @brief      GenerateAuthenticationResponse
+* @ingroup    EXAMPLES
+* 
+* @param[in]  autentication_challange : 
+* @param[in]  autentication_response : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
+{
+  #define NETCONN_INI   { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F }
+  #define NETCONN_KEY   { 0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81, 0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4 }
+
+  XBYTE                 ini_data[] = NETCONN_INI;
+  XBYTE                 key_data[] = NETCONN_KEY;
+  CIPHERKEYSYMMETRICAL  key;
+  bool                  status     = false;
+
+  CIPHERAES* cipher = new CIPHERAES();
+  if(!cipher) 
+    {
+      return false;
+    }
+
+  cipher->SetChainingMode(CIPHERCHAININGMODE_CBC);
+  cipher->SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS);
+  cipher->SetInitVector(ini_data, sizeof(ini_data));
+
+  key.Set(key_data, sizeof(key_data));
+
+  cipher->SetKey(&key);
+
+  cipher->Cipher(autentication_challange);
+  
+  int    resultsize;
+  XBYTE* result = cipher->GetResult(resultsize);
+  if(result)
+    {
+      autentication_response.Empty();
+      autentication_response.Add(result, resultsize);
+
+      status = true;
+    }
+
+  delete cipher;
+
+  return status;
+}
+
 
 
 /**-------------------------------------------------------------------------------------------------------------------

@@ -52,9 +52,9 @@ class NETCONN_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
 
     bool                                  Ini                                   (bool isserver);
     bool                                  End                                   ();
+        
+    DIOCOREPROTOCOL*                      CreateProtocol                        (DIOSTREAM* diostream, XUUID* ID_machine);    
     
-    DIOCOREPROTOCOL*                      CreateProtocol                        (DIOSTREAM* diostream);     
-   
   private:
 
     void                                  Clean                                 ();    

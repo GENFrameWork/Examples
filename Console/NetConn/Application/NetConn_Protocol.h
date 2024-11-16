@@ -53,14 +53,15 @@ class DIOSTREAM;
 class NETCONN_PROTOCOL : public DIOCOREPROTOCOL
 {
   public:
-                       NETCONN_PROTOCOL        (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream, XUUID* ID_machine);
-    virtual           ~NETCONN_PROTOCOL        ();
+                       NETCONN_PROTOCOL                     (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream, XUUID* ID_machine);
+    virtual           ~NETCONN_PROTOCOL                     ();
 
-  protected:
+    bool               GenerateAuthenticationChallenge      (XBUFFER& autentication_challange);
+    bool               GenerateAuthenticationResponse       (XBUFFER& autentication_challange, XBUFFER& autentication_response);
 
   private:
 
-    void               Clean                   ();
+    void               Clean                                ();
 };
 
 #pragma endregion

@@ -75,7 +75,7 @@ enum NETCONNTASKID
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 0
 
-#define APPLICATION_NAMEAPP                       __L("Net Connection")
+#define APPLICATION_NAMEAPP                       __L("Net Conn")
 #define APPLICATION_NAMEFILE                      __L("netconn")
 
 #define APPLICATION_OWNER                         __L("GEN Group")
