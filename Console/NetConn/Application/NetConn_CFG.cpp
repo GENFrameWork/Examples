@@ -34,11 +34,11 @@
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
+#include "NetConn_CFG.h"
+
 #include "XLog.h"
 
 #include "NetConn.h"
-
-#include "NetConn_CFG.h"
 
 #include "XMemory_Control.h"
 

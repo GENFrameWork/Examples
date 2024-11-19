@@ -108,7 +108,9 @@ bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_ch
       return false;
     }
 
-  for(XDWORD c=0; c<64; c++)
+  rand->Ini();
+
+  for(XDWORD c=0; c<NETCONN_PROTOCOL_MAXCHALLANGE; c++)
     {  
       autentication_challange.Add((XBYTE)rand->Max(255));
     }
@@ -133,45 +135,44 @@ bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_ch
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
 {
-  #define NETCONN_INI   { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F }
-  #define NETCONN_KEY   { 0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81, 0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4 }
-
-  XBYTE                 ini_data[] = NETCONN_INI;
-  XBYTE                 key_data[] = NETCONN_KEY;
+  XBYTE                 ini_data[] = NETCONN_PROTOCOL_AUTHENTICATION_INI;
+  XBYTE                 key_data[] = NETCONN_PROTOCOL_AUTHENTICATION_KEY;
   CIPHERKEYSYMMETRICAL  key;
   bool                  status     = false;
 
-  CIPHERAES* cipher = new CIPHERAES();
-  if(!cipher) 
-    {
-      return false;
+  for(XDWORD c=0; c<sizeof(ini_data); c+=2)
+    {    
+      ini_data[c]   ^= 0xAA;
+      ini_data[c+1] ^= 0x55;
     }
 
-  cipher->SetChainingMode(CIPHERCHAININGMODE_CBC);
-  cipher->SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS);
-  cipher->SetInitVector(ini_data, sizeof(ini_data));
+  for(XDWORD c=0; c<sizeof(key_data); c+=2)
+    {    
+      key_data[c]   ^= 0x55;
+      key_data[c+1] ^= 0xAA;
+    }
+
+  cipherAES.SetChainingMode(CIPHERCHAININGMODE_CBC);
+  cipherAES.SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS);
+  cipherAES.SetInitVector(ini_data, sizeof(ini_data));
 
   key.Set(key_data, sizeof(key_data));
 
-  cipher->SetKey(&key);
-
-  cipher->Cipher(autentication_challange);
+  cipherAES.SetKey(&key);
+  cipherAES.Cipher(autentication_challange);
   
   int    resultsize;
-  XBYTE* result = cipher->GetResult(resultsize);
+  XBYTE* result = cipherAES.GetResult(resultsize);
   if(result)
     {
       autentication_response.Empty();
-      autentication_response.Add(result, resultsize);
+      autentication_response.Add(result, NETCONN_PROTOCOL_MAXCHALLANGE);
 
       status = true;
     }
 
-  delete cipher;
-
   return status;
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------

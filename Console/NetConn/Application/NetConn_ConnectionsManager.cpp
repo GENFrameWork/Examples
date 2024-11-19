@@ -107,6 +107,7 @@ NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
 bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 {  
   protocolCFG.SetIsServer(isserver);  
+  protocolCFG.SetIsCipher(true);
   protocolCFG.SetCompressHeader(true);
   protocolCFG.SetCompressContent(true);
 
