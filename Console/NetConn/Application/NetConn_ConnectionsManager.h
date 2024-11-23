@@ -47,17 +47,21 @@ class DIOCOREPROTOCOL_CONNECTIONSMANAGER;
 class NETCONN_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
 {
   public:
-                                          NETCONN_CONNECTIONSMANAGER            ();
-                                         ~NETCONN_CONNECTIONSMANAGER            ();
+                                          NETCONN_CONNECTIONSMANAGER                    ();
+                                         ~NETCONN_CONNECTIONSMANAGER                    ();
 
-    bool                                  Ini                                   (bool isserver);
-    bool                                  End                                   ();
+    bool                                  Ini                                           (bool isserver);
+    bool                                  End                                           ();
         
-    DIOCOREPROTOCOL*                      CreateProtocol                        (DIOSTREAM* diostream, XUUID* ID_machine);    
+    DIOCOREPROTOCOL*                      CreateProtocol                                (DIOSTREAM* diostream, XUUID* ID_machine);    
+
+    bool                                  Received_AdditionsCommand                     (DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message);
     
   private:
 
-    void                                  Clean                                 ();    
+    virtual void                          HandleEvent_CoreProtocolConnectionsManager    (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
+
+    void                                  Clean                                         ();    
  };
 
 /*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/

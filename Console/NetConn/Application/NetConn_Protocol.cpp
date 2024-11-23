@@ -140,17 +140,8 @@ bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_cha
   CIPHERKEYSYMMETRICAL  key;
   bool                  status     = false;
 
-  for(XDWORD c=0; c<sizeof(ini_data); c+=2)
-    {    
-      ini_data[c]   ^= 0xAA;
-      ini_data[c+1] ^= 0x55;
-    }
-
-  for(XDWORD c=0; c<sizeof(key_data); c+=2)
-    {    
-      key_data[c]   ^= 0x55;
-      key_data[c+1] ^= 0xAA;
-    }
+  MaskKey(ini_data, sizeof(ini_data), NETCONN_PROTOCOL_VERSION);
+  MaskKey(key_data, sizeof(key_data), NETCONN_PROTOCOL_SUBVERSION);
 
   cipherAES.SetChainingMode(CIPHERCHAININGMODE_CBC);
   cipherAES.SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS);

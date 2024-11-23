@@ -39,7 +39,6 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-#define DIOCOREPROTOCOL_DEBUG_ACTIVE
 #define DIOCOREPROTOCOL_HUMANFORMAT_ACTIVE
 
 #pragma endregion

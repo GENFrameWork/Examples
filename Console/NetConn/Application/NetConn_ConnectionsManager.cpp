@@ -43,6 +43,8 @@
 #include "DIOFactory.h"
 #include "DIOStreamTCPIPConfig.h"
 #include "DIOStream.h"
+#include "DIOCoreProtocol.h"
+#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
 #include "DIOCoreProtocol_ConnectionsManager.h"
 
 #include "CipherAES.h"
@@ -106,6 +108,8 @@ NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 {  
+  bool status = false;
+
   protocolCFG.SetIsServer(isserver);  
   protocolCFG.SetIsCipher(true);
   protocolCFG.SetCompressHeader(true);
@@ -143,7 +147,19 @@ bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 
   // ------------------------------------------------------------------------------------------------------
 
-  return DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini();  
+  status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini(); 
+
+  // ------------------------------------------------------------------------------------------------------
+
+  if(status)
+    {
+      
+
+
+
+    }
+
+  return status;
 }
 
 
@@ -185,6 +201,93 @@ DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream
   DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, ID_machine);
 
   return protocol;  
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message)
+* @brief      Received_AdditionsCommand
+* @ingroup    EXAMPLES
+* 
+* @param[in]  connection : 
+* @param[in]  message : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message)
+{
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @brief      Handle Event for the observer manager of this class
+* @note       INTERNAL
+* @ingroup    EXAMPLES
+* 
+* @param[in]  event : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+{
+  if(!event) 
+    {
+      return;
+    }
+
+  switch(event->GetEventType())
+    {
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_CHANGESTATUS  : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
+                                                                            if(connection)          
+                                                                              {
+                                                                                XSTRING actualstatusstring;
+                                                                                XSTRING nextstatusstring;
+
+                                                                                connection->Status_GetString(event->GetActualStatus(), actualstatusstring);
+                                                                                connection->Status_GetString(event->GetNextStatus()  , nextstatusstring);
+
+                                                                                XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Net Conn] Change connection status: %s --> %s"), actualstatusstring.Get(), nextstatusstring.Get());
+                                                                              }
+                                                                          }
+                                                                          break;
+
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG       :
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG      :  { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
+                                                                            if(connection)          
+                                                                              {
+                                                                                DIOCOREPROTOCOL*         protocol = connection->GetCoreProtocol();
+                                                                                DIOCOREPROTOCOL_MESSAGE* message  = event->GetMsg(); 
+                                                                                if(message && protocol)
+                                                                                  {    
+                                                                                    DIOCOREPROTOCOL_HEADER* header  = message->GetHeader();
+                                                                                    XBUFFER*                content = message->GetContent();
+
+                                                                                    if(protocol && header && content)
+                                                                                      {    
+
+                                                                                        switch(event->GetEventType())
+                                                                                          {
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : XTRACE_PRINTCOLOR(XTRACE_COLOR_GREEN, __L("[Net Conn] Read message: "));
+                                                                                                                                                            protocol->ShowDebug(false, header, (*content));        
+                                                                                                                                                            break;
+    
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("[Net Conn] Write message: "));
+                                                                                                                                                            protocol->ShowDebug(true, header, (*content));  
+                                                                                                                                                            break;  
+                                                                                          }
+                                                                                                      
+                                                                                      }
+                                                                                  }
+                                                                              }
+
+                                                                          }
+                                                                          break;
+    }
 }
 
 

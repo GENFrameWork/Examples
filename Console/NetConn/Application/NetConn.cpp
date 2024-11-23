@@ -476,25 +476,27 @@ bool NETCONN::Show_ConnectionsStatus()
 
   if(connectionsmanager)
     {
-      if(connectionsmanager->Connection_GetXMutex())
+      if(connectionsmanager->Connections_GetXMutex())
         {
-          connectionsmanager->Connection_GetXMutex()->Lock();
+          connectionsmanager->Connections_GetXMutex()->Lock();
         }
 
       console->Printf(__L("   Connexions: \n"));
 
-      for(XDWORD c=0; c<connectionsmanager->Connection_GetAll()->GetSize(); c++)
+      for(XDWORD c=0; c<connectionsmanager->Connections_GetAll()->GetSize(); c++)
         {
-          DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connection_GetAll()->Get(c);
+          DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_GetAll()->Get(c);
           XSTRING                     measurestatus;
+          XSTRING                     measurewithoutconnexion;
           XSTRING                     statusstring;
 
           if(connection)
             {         
-              connection->GetXTimerStatus()->GetMeasureString(measurestatus);
-         
-              connection->GetStatusString(statusstring);
-              string.Format(__L("   %03d  %-10s  %-15s \n"), c+1, measurestatus.Get(), statusstring.Get());   
+              connection->GetXTimerStatus()->GetMeasureString(measurestatus);         
+              connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
+              connection->Status_GetString(statusstring);
+
+              string.Format(__L("   %03d  %-10s  %-15s [not msg %s]\n"), c+1, measurestatus.Get(), statusstring.Get(), measurewithoutconnexion.Get());   
 
               console->Printf(string.Get());
             }
@@ -502,9 +504,9 @@ bool NETCONN::Show_ConnectionsStatus()
 
       console->Printf(__L("\n"));
       
-      if(connectionsmanager->Connection_GetXMutex())
+      if(connectionsmanager->Connections_GetXMutex())
         {
-          connectionsmanager->Connection_GetXMutex()->UnLock();
+          connectionsmanager->Connections_GetXMutex()->UnLock();
         }
 
 
