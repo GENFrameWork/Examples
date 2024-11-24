@@ -200,6 +200,12 @@ DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream
 {
   DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, ID_machine);
 
+  if(protocol)
+    {
+      protocol->Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION    , __L("getversion"));
+      protocol->Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND  , __L("othercommand"));
+    }
+
   return protocol;  
 }
 
@@ -218,6 +224,34 @@ DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message)
 {
+  bool managermessage = false;
+  bool status         = false;
+
+  if(!connection)
+    {
+      return false;
+    }
+
+  if(!message)
+    {
+      return false;
+    }
+
+  DIOCOREPROTOCOL* protocol = connection->GetCoreProtocol();
+  if(!protocol)
+    {
+      return false;
+    }
+
+  if(!message->GetHeader()->GetOperationParam()->Compare(protocol->Commands_Get(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION), true))
+    {
+      XSTRING version;
+      
+      version.Format(__L("protocol version %d.%d"), NETCONN_PROTOCOL_VERSION, NETCONN_PROTOCOL_SUBVERSION);
+
+      managermessage = connection->DoCommand(message->GetHeader()->GetIDMessage(), DIOCOREPROTOCOL_COMMAND_TYPE_HEARTBEAT, 10, version);       
+    }
+
 
   return true;
 }

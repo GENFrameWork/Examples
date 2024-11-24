@@ -48,6 +48,14 @@
 #define NETCONN_PROTOCOL_VERSION                  1
 #define NETCONN_PROTOCOL_SUBVERSION               0
 
+
+enum NETCONN_PROTOCOL_COMMAND_TYPE
+{
+  NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION         = DIOCOREPROTOCOL_COMMAND_TYPE_LASTINTERNAL ,
+  NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND                                                   ,
+};
+
+
 #pragma endregion
 
 

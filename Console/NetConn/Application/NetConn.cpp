@@ -151,7 +151,12 @@ bool NETCONN::InitFSMachine()
 
 
   if(!AddState( NETCONN_XFSMSTATE_INI             ,
-                NETCONN_XFSMEVENT_NONE            , NETCONN_XFSMSTATE_NONE            ,
+                NETCONN_XFSMEVENT_UPDATE          , NETCONN_XFSMSTATE_UPDATE          ,
+                NETCONN_XFSMEVENT_END             , NETCONN_XFSMSTATE_END             ,
+                XFSMACHINESTATE_EVENTDEFEND)) return false;
+
+
+  if(!AddState( NETCONN_XFSMSTATE_UPDATE          ,                
                 NETCONN_XFSMEVENT_END             , NETCONN_XFSMSTATE_END             ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
@@ -311,16 +316,18 @@ bool NETCONN::AppProc_Update()
     {
       switch(GetCurrentState())
         {
-          case NETCONN_XFSMSTATE_NONE      : break;
+          case NETCONN_XFSMSTATE_NONE       : break;
 
-          case NETCONN_XFSMSTATE_INI       : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case NETCONN_XFSMSTATE_INI        : break;
+
+          case NETCONN_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
                                                       if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
                                                         {
                                                           Show_AllStatus();
-                                                          xtimerupdateconsole->Reset();
+                                                          xtimerupdateconsole->Reset(); 
                                                         }
 
                                                       if(console->KBHit())
@@ -330,7 +337,7 @@ bool NETCONN::AppProc_Update()
                                                         }
                                                     }
                                                 }
-                                              break;
+                                             break;
 
           case NETCONN_XFSMSTATE_END       : break;
 
@@ -344,11 +351,14 @@ bool NETCONN::AppProc_Update()
 
           switch(GetCurrentState())
             {
-              case NETCONN_XFSMSTATE_NONE  : break;
+              case NETCONN_XFSMSTATE_NONE   : break;
 
-              case NETCONN_XFSMSTATE_INI   : break;
+              case NETCONN_XFSMSTATE_INI    : SetEvent(NETCONN_XFSMEVENT_UPDATE);
+                                              break;
 
-              case NETCONN_XFSMSTATE_END   : break;
+              case NETCONN_XFSMSTATE_UPDATE : break;
+
+              case NETCONN_XFSMSTATE_END    : break;
             }
         }
     }
@@ -496,7 +506,7 @@ bool NETCONN::Show_ConnectionsStatus()
               connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
               connection->Status_GetString(statusstring);
 
-              string.Format(__L("   %03d  %-10s  %-15s [not msg %s]\n"), c+1, measurestatus.Get(), statusstring.Get(), measurewithoutconnexion.Get());   
+              string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]\n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get());   
 
               console->Printf(string.Get());
             }

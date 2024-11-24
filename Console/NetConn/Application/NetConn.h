@@ -47,6 +47,7 @@ enum NETCONNXFSMEVENTS
 {
   NETCONN_XFSMEVENT_NONE                 = 0 ,
   NETCONN_XFSMEVENT_INI                      ,
+  NETCONN_XFSMEVENT_UPDATE                   ,
   NETCONN_XFSMEVENT_END                      ,
 
   NETCONN_LASTEVENT
@@ -57,6 +58,7 @@ enum NETCONNXFSMSTATES
 {
   NETCONN_XFSMSTATE_NONE                 = 0 ,
   NETCONN_XFSMSTATE_INI                      ,
+  NETCONN_XFSMSTATE_UPDATE                   ,
   NETCONN_XFSMSTATE_END                      ,
 
   NETCONN_LASTSTATE
