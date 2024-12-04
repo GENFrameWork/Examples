@@ -110,6 +110,8 @@ bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 {  
   bool status = false;
 
+  // ------------------------------------------------------------------------------------------------------
+
   protocolCFG.SetIsServer(isserver);  
   protocolCFG.SetIsCipher(true);
   protocolCFG.SetCompressHeader(true);
@@ -150,14 +152,6 @@ bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
   status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini(); 
 
   // ------------------------------------------------------------------------------------------------------
-
-  if(status)
-    {
-      
-
-
-
-    }
 
   return status;
 }
@@ -244,16 +238,21 @@ bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNE
     }
 
   if(!message->GetHeader()->GetOperationParam()->Compare(protocol->Commands_Get(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION), true))
-    {
+    { 
       XSTRING version;
       
       version.Format(__L("protocol version %d.%d"), NETCONN_PROTOCOL_VERSION, NETCONN_PROTOCOL_SUBVERSION);
 
-      managermessage = connection->DoCommand(message->GetHeader()->GetIDMessage(), DIOCOREPROTOCOL_COMMAND_TYPE_HEARTBEAT, 10, version);       
+      managermessage = connection->DoCommand(message->GetHeader()->GetIDMessage(), NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 10, version);       
+
+      if(managermessage)
+        {
+          message->SetIsConsumed(true);          
+          status = true;
+        }
     }
 
-
-  return true;
+  return status;
 }
 
 
@@ -302,19 +301,17 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
                                                                                     XBUFFER*                content = message->GetContent();
 
                                                                                     if(protocol && header && content)
-                                                                                      {    
-
+                                                                                      {                                                                                            
                                                                                         switch(event->GetEventType())
                                                                                           {
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : XTRACE_PRINTCOLOR(XTRACE_COLOR_GREEN, __L("[Net Conn] Read message: "));
-                                                                                                                                                            protocol->ShowDebug(false, header, (*content));        
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : //XTRACE_PRINTCOLOR(XTRACE_COLOR_GREEN, __L("[Net Conn] Read message: "));
+                                                                                                                                                            //protocol->ShowDebug(false, header, (*content));        
                                                                                                                                                             break;
     
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("[Net Conn] Write message: "));
-                                                                                                                                                            protocol->ShowDebug(true, header, (*content));  
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : //XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("[Net Conn] Write message: "));
+                                                                                                                                                            //protocol->ShowDebug(true, header, (*content));  
                                                                                                                                                             break;  
-                                                                                          }
-                                                                                                      
+                                                                                          }                                                                                                     
                                                                                       }
                                                                                   }
                                                                               }

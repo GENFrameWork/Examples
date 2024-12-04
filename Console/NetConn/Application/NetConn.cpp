@@ -91,6 +91,7 @@
 
 #include "NetConn_CFG.h"
 #include "NetConn_ConnectionsManager.h"
+#include "NetConn_Protocol.h"
 
 #include "XMemory_Control.h"
 
@@ -447,6 +448,17 @@ bool NETCONN::KeyValidSecuences(int key)
       case 0x1B : // ESC Exit application
                   SetExitType(APPBASE_EXITTYPE_BY_USER);
                   break;
+
+      case 'T'  : if(connectionsmanager)
+                    { 
+                      DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
+                      XBUFFER                     param;
+                      XBUFFER                     result;
+                      bool                        status;
+
+                      status = connectionsmanager->DoCommand(connection, NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 100, param, result, 10);
+                  }
+                  break;
     }
 
   return true;
@@ -506,8 +518,8 @@ bool NETCONN::Show_ConnectionsStatus()
               connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
               connection->Status_GetString(statusstring);
 
-              string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]\n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get());   
-
+              string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]  n msg [%d] \n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get(),  connection->Messages_GetAll()->GetAll()->GetSize());   
+              
               console->Printf(string.Get());
             }
         }
