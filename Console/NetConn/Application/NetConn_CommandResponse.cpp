@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_Protocol.cpp
+* @file       NetConn_CommandResponse.cpp
 * 
-* @class      NETCONN_PROTOCOL
-* @brief      Net Connection Protocol class (DIOCoreProtol example)
+* @class      NETCONN_COMMANDRESPONSE
+* @brief      Net Conn Command Response class
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -37,13 +37,11 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
+#include "NetConn_CommandResponse.h"
+
+#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
+
 #include "NetConn_Protocol.h"
-
-#include "XFactory.h"
-#include "XRand.h"
-
-#include "CipherAES.h"
-
 
 #include "XMemory_Control.h"
 
@@ -62,31 +60,26 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCONN_PROTOCOL::NETCONN_PROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG)
+* @fn         NETCONN_COMMANDRESPONSE::NETCONN_COMMANDRESPONSE()
 * @brief      Constructor
 * @ingroup    EXAMPLES
 * 
-* @param[in]  DIOCOREPROTOCOL_CFG* : 
-* 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_PROTOCOL::NETCONN_PROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream, XUUID* ID_machine) : DIOCOREPROTOCOL(protocolCFG, diostream, ID_machine)
+NETCONN_COMMANDRESPONSE::NETCONN_COMMANDRESPONSE()
 {
   Clean();
-
-  Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION    , NETCONN_PROTOCOL_COMMAND_TYPE_STRING_GETVERSION);
-  Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND  , NETCONN_PROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND);
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
+* @fn         NETCONN_COMMANDRESPONSE::~NETCONN_COMMANDRESPONSE()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
+NETCONN_COMMANDRESPONSE::~NETCONN_COMMANDRESPONSE()
 {
   Clean();
 }
@@ -94,75 +87,50 @@ NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
-* @brief      GenerateAuthenticationChallenge
+* @fn         bool NETCONN_COMMANDRESPONSE::Response(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @brief      Response
 * @ingroup    EXAMPLES
 * 
-* @param[in]  autentication_challange : 
+* @param[in]  event : 
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
+bool NETCONN_COMMANDRESPONSE::Response(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
-  XRAND* rand = GEN_XFACTORY.CreateRand();
-  if(!rand)
+  bool status = false;
+
+  DIOCOREPROTOCOL_MESSAGE* message = event->GetMsg();
+  if(!message)
     {
-      return false;
+      return status;
     }
 
-  rand->Ini();
-
-  for(XDWORD c=0; c<NETCONN_PROTOCOL_MAXCHALLANGE; c++)
-    {  
-      autentication_challange.Add((XBYTE)rand->Max(255));
+  DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();
+  if(!connection)
+    {
+      return status;
     }
 
-  GEN_XFACTORY.DeleteRand(rand);
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
-* @brief      GenerateAuthenticationResponse
-* @ingroup    EXAMPLES
-* 
-* @param[in]  autentication_challange : 
-* @param[in]  autentication_response : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
-{
-  XBYTE                 ini_data[] = NETCONN_PROTOCOL_AUTHENTICATION_INI;
-  XBYTE                 key_data[] = NETCONN_PROTOCOL_AUTHENTICATION_KEY;
-  CIPHERKEYSYMMETRICAL  key;
-  bool                  status     = false;
-
-  MaskKey(ini_data, sizeof(ini_data), NETCONN_PROTOCOL_VERSION);
-  MaskKey(key_data, sizeof(key_data), NETCONN_PROTOCOL_SUBVERSION);
-
-  cipherAES.SetChainingMode(CIPHERCHAININGMODE_CBC);
-  cipherAES.SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS);
-  cipherAES.SetInitVector(ini_data, sizeof(ini_data));
-
-  key.Set(key_data, sizeof(key_data));
-
-  cipherAES.SetKey(&key);
-  cipherAES.Cipher(autentication_challange);
-  
-  int    resultsize;
-  XBYTE* result = cipherAES.GetResult(resultsize);
-  if(result)
+  DIOCOREPROTOCOL* protocol = connection->GetCoreProtocol();
+  if(protocol)
     {
-      autentication_response.Empty();
-      autentication_response.Add(result, NETCONN_PROTOCOL_MAXCHALLANGE);
+      for(XDWORD c=DIOCOREPROTOCOL_COMMAND_TYPE_LASTINTERNAL; c<protocol->Commands_GetAll()->GetSize()+1; c++)        
+        {  
+          if(!message->GetHeader()->GetOperationParam()->Compare(protocol->Commands_Get(c), true))
+            {
+              switch(c)
+                {
+                  case NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION     : status = Response_GetVersion(event); 
+                                                                      break;
 
-      status = true;
+                  case NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND   : status = Response_OtherCommand(event); 
+                                                                      break;    
+                }
+            }
+             
+                                                                              
+        }                                                                            
     }
 
   return status;
@@ -171,15 +139,52 @@ bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_cha
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void NETCONN_PROTOCOL::Clean()
+* @fn         bool NETCONN_COMMANDRESPONSE::Response_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @brief      Response_GetVersion
+* @ingroup    EXAMPLES
+* 
+* @param[in]  event : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_COMMANDRESPONSE::Response_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+{
+  event->GetContenteResponseString()->Format(__L("protocol version %d.%d"), NETCONN_PROTOCOL_VERSION, NETCONN_PROTOCOL_SUBVERSION);      
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_COMMANDRESPONSE::Response_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @brief      Response_OtherCommand
+* @ingroup    EXAMPLES
+* 
+* @param[in]  event : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_COMMANDRESPONSE::Response_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+{
+  event->GetContenteResponseString()->Format(__L("Other command"));      
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_COMMANDRESPONSE::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    EXAMPLES
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_PROTOCOL::Clean()
+void NETCONN_COMMANDRESPONSE::Clean()
 {
-
 }
 
 

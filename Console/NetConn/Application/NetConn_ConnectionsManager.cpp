@@ -194,65 +194,7 @@ DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream
 {
   DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, ID_machine);
 
-  if(protocol)
-    {
-      protocol->Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION    , __L("getversion"));
-      protocol->Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND  , __L("othercommand"));
-    }
-
   return protocol;  
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message)
-* @brief      Received_AdditionsCommand
-* @ingroup    EXAMPLES
-* 
-* @param[in]  connection : 
-* @param[in]  message : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message)
-{
-  bool managermessage = false;
-  bool status         = false;
-
-  if(!connection)
-    {
-      return false;
-    }
-
-  if(!message)
-    {
-      return false;
-    }
-
-  DIOCOREPROTOCOL* protocol = connection->GetCoreProtocol();
-  if(!protocol)
-    {
-      return false;
-    }
-
-  if(!message->GetHeader()->GetOperationParam()->Compare(protocol->Commands_Get(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION), true))
-    { 
-      XSTRING version;
-      
-      version.Format(__L("protocol version %d.%d"), NETCONN_PROTOCOL_VERSION, NETCONN_PROTOCOL_SUBVERSION);
-
-      managermessage = connection->DoCommand(message->GetHeader()->GetIDMessage(), NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 10, version);       
-
-      if(managermessage)
-        {
-          message->SetIsConsumed(true);          
-          status = true;
-        }
-    }
-
-  return status;
 }
 
 
@@ -260,7 +202,7 @@ bool NETCONN_CONNECTIONSMANAGER::Received_AdditionsCommand(DIOCOREPROTOCOL_CONNE
 * 
 * @fn         void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
-* @note       INTERNAL
+* @note       INTERNAL  (Only Information)
 * @ingroup    EXAMPLES
 * 
 * @param[in]  event : 
@@ -275,7 +217,7 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
 
   switch(event->GetEventType())
     {
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_CHANGESTATUS  : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_STATUSCHANGE  : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
                                                                             if(connection)          
                                                                               {
                                                                                 XSTRING actualstatusstring;
@@ -304,12 +246,12 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
                                                                                       {                                                                                            
                                                                                         switch(event->GetEventType())
                                                                                           {
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : //XTRACE_PRINTCOLOR(XTRACE_COLOR_GREEN, __L("[Net Conn] Read message: "));
-                                                                                                                                                            //protocol->ShowDebug(false, header, (*content));        
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : XTRACE_PRINTCOLOR(XTRACE_COLOR_GREEN, __L("[Net Conn] Read message: "));
+                                                                                                                                                            protocol->ShowDebug(false, header, (*content));        
                                                                                                                                                             break;
     
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : //XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("[Net Conn] Write message: "));
-                                                                                                                                                            //protocol->ShowDebug(true, header, (*content));  
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("[Net Conn] Write message: "));
+                                                                                                                                                            protocol->ShowDebug(true, header, (*content));  
                                                                                                                                                             break;  
                                                                                           }                                                                                                     
                                                                                       }

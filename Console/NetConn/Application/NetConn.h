@@ -41,6 +41,8 @@
 
 #include "APPConsole.h"
 
+#include "NetConn_CommandResponse.h"
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 enum NETCONNXFSMEVENTS
@@ -100,6 +102,7 @@ class DIOCHECKINTERNETCONNECTION;
 class DIOSCRAPERWEBPUBLICIP;
 class DIOSCRAPERWEBGEOLOCATIONIP;
 class DIOSCRAPERWEBUSERAGENTID;
+class DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT;
 class APPINTERNETSERVICES;
 class NETCONN_CONNECTIONSMANAGER;
 
@@ -107,26 +110,27 @@ class NETCONN_CONNECTIONSMANAGER;
 class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
 {
   public:
-                                    NETCONN                                 ();
-    virtual                        ~NETCONN                                 ();
+                                    NETCONN                                     ();
+    virtual                        ~NETCONN                                     ();
 
-    bool                            InitFSMachine                           ();
+    bool                            InitFSMachine                               ();
 
-    bool                            AppProc_Ini                             ();
-    bool                            AppProc_FirstUpdate                     ();
-    bool                            AppProc_Update                          ();
-    bool                            AppProc_End                             ();
+    bool                            AppProc_Ini                                 ();
+    bool                            AppProc_FirstUpdate                         ();
+    bool                            AppProc_Update                              ();
+    bool                            AppProc_End                                 ();
 
-    bool                            KeyValidSecuences                       (int key);  
+    bool                            KeyValidSecuences                           (int key);  
 
-    bool                            Show_ConnectionsStatus                  ();
-    bool                            Show_AllStatus                          ();
+    bool                            Show_ConnectionsStatus                      ();
+    bool                            Show_AllStatus                              ();
 
   private:
 
-    void                            HandleEvent                             (XEVENT* xevent);
+    void                            HandleEvent_CoreProtocolConnectionManager   (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);    
+    void                            HandleEvent                                 (XEVENT* xevent);
 
-    void                            Clean                                   ();
+    void                            Clean                                       ();
 
     XTIMER*                         xtimerupdateconsole;
     XMUTEX*                         xmutexshowallstatus;    
@@ -134,6 +138,7 @@ class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
     bool                            modeserver;   
 
     NETCONN_CONNECTIONSMANAGER*     connectionsmanager; 
+    NETCONN_COMMANDRESPONSE         commandresponse;
 };
 
 

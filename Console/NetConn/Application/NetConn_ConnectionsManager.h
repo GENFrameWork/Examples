@@ -54,8 +54,6 @@ class NETCONN_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
     bool                                  End                                           ();
         
     DIOCOREPROTOCOL*                      CreateProtocol                                (DIOSTREAM* diostream, XUUID* ID_machine);    
-
-    bool                                  Received_AdditionsCommand                     (DIOCOREPROTOCOL_CONNECTION* connection, DIOCOREPROTOCOL_MESSAGE* message);
     
   private:
 

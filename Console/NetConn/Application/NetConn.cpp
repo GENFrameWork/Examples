@@ -85,6 +85,8 @@
 #include "DIOScraperWebGeolocationIP.h"
 #include "DIOScraperWebUserAgentID.h"
 
+#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
+
 #include "APPLog.h"
 #include "APPInternetServices.h"
 #include "APPExtended.h"
@@ -288,6 +290,8 @@ bool NETCONN::AppProc_FirstUpdate()
         {
           return false;
         }
+
+      SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);      
     }
   
   //--------------------------------------------------------------------------------------------------
@@ -390,6 +394,8 @@ bool NETCONN::AppProc_End()
 
   if(connectionsmanager)
     {
+      UnSubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);
+      
       connectionsmanager->End();
       delete connectionsmanager;
       connectionsmanager = NULL;        
@@ -457,7 +463,18 @@ bool NETCONN::KeyValidSecuences(int key)
                       bool                        status;
 
                       status = connectionsmanager->DoCommand(connection, NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 100, param, result, 10);
-                  }
+                    }
+                  break;
+
+      case 'Y'  : if(connectionsmanager)
+                    { 
+                      DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
+                      XBUFFER                     param;
+                      XBUFFER                     result;
+                      bool                        status;
+
+                      status = connectionsmanager->DoCommand(connection, NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND, 100, param, result, 10);
+                    }
                   break;
     }
 
@@ -562,113 +579,26 @@ bool NETCONN::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         void NETCONN::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* 
+* @fn         void NETCONN::HandleEvent_ConnectionManager(NETCONN_CONNECTIONSMANAGER_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL
-* @ingroup    APPLICATION
-*
-* @param[in]  event :
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-/*
-void NETCONN::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @ingroup    EXAMPLES
+* 
+* @param[in]  event : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   switch(event->GetEventType())
     {
-      case DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_CONNECTEDCONNECTION    : break;
-
-      case DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_INITPROTOCOL           : { DIOPROTOCOL_CONNECTION*  protocolconnection  =  event->GetProtocolConnection();
-                                                                                  NETCONN_PROTOCOL*    protocol            =  NULL;
-                                                                                  XSTRING                 IPstring;
-                                                                                  bool                    status              = false;
-
-                                                                                  if(!protocolconnection)  break;
-
-                                                                                  protocol= (NETCONN_PROTOCOL*)protocolconnection->GetDIOProtocol();
-                                                                                  if(!protocol)
-                                                                                    {
-                                                                                      XTRACE_PRINTCOLOR(4, __L("Ini Server protocol: Not instance protocol."));
-                                                                                      break;
-                                                                                    }
-
-                                                                                  NETCONN_APPLICATIONDATA* applicationdata = (NETCONN_APPLICATIONDATA*)protocol->GetApplicationData();
-                                                                                  if(!applicationdata)
-                                                                                    {
-                                                                                      XTRACE_PRINTCOLOR(4, __L("Ini Server protocol from %s: Not instance protocol data."), IPstring.Get());
-                                                                                      break;
-                                                                                    }
-
-                                                                                  status = InitializeProtocolConnectionServer(protocol, applicationdata);
-
-                                                                                  protocol->SetIsInitialized(status);
-                                                                                }
-                                                                                break;
-
-      case DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_DISCONNECTEDCONNECTION :  { DIOPROTOCOL_CONNECTION* protocolconnection = event->GetProtocolConnection();
-                                                                                  if(!protocolconnection)  break;
-
-                                                                                  NETCONN_PROTOCOL* protocol = (NETCONN_PROTOCOL*)protocolconnection->GetDIOProtocol();
-                                                                                  if(!protocol) break;
-
-                                                                                  NETCONN_APPLICATIONDATA* applicationdata = (NETCONN_APPLICATIONDATA*)protocol->GetApplicationData();
-                                                                                  if(!applicationdata) break;
-                                                                                }
-                                                                                break;
-
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE : if(!commandresponse.Response(event))
+                                                                              {
+                                                                                event->GetContenteResponseString()->Format(__L("[Error] Unkown command !!!"));
+                                                                              }
+                                                                            break;      
     }
 }
-*/
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         void NETCONN::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
-* @note       INTERNAL
-* @ingroup    APPLICATION
-*
-* @param[in]  event :
-*
-* @return     void : does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-/*
-void NETCONN::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-{
-  switch(event->GetEventType())
-    {
-      case DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_CONNECTEDCONNECTION       : break;
-
-      case DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_INITPROTOCOL              : { DIOPROTOCOL_CONNECTION*  protocolconnection = event->GetProtocolConnection();
-                                                                                    NETCONN_PROTOCOL*     protocol           = NULL;
-                                                                                    bool                     status             = false;
-
-                                                                                    if(protocolconnection) protocol = (NETCONN_PROTOCOL*)protocolconnection->GetDIOProtocol();
-                                                                                    if(!protocol) break;
-
-                                                                                    NETCONN_APPLICATIONDATA* applicationdata = (NETCONN_APPLICATIONDATA*)protocol->GetApplicationData();
-                                                                                    if(!applicationdata) break;
-
-                                                                                    status = InitializeProtocolConnectionClient(protocol, applicationdata);
-
-                                                                                    protocol->SetIsInitialized(status);
-                                                                                  }
-                                                                                  break;
-
-      case DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_DISCONNECTEDCONNECTION  : { DIOPROTOCOL_CONNECTION* protocolconnection =  event->GetProtocolConnection();
-                                                                                  DIOPROTOCOL*            protocol          =  NULL;
-
-                                                                                  if(protocolconnection) protocol =  protocolconnection->GetDIOProtocol();
-                                                                                  if(!protocol)  break;
-                                                                                }
-                                                                                break;
-
-    }
-}
-*/
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -685,23 +615,16 @@ void NETCONN::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAG
 void NETCONN::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
-
-  /*
+  
   switch(xevent->GetEventFamily())
     {
+      case XEVENT_TYPE_COREPROTOCOLCONNECTIONSMANAGER   : { DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event = (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT*)xevent;
+                                                            if(!event) return;
 
-      case XEVENT_TYPE_PROTOCOLCONNECTIONS     : { DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event = (DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT*)xevent;
-                                                  if(!event) return;
-
-                                                  if(modeserver)
-                                                         HandleEvent_ServerProtocolConnections(event);
-                                                    else HandleEvent_ClientProtocolConnections(event);
-                                                }
-                                                break;
-
-
+                                                            HandleEvent_CoreProtocolConnectionManager(event);
+                                                          }
+                                                          break;
     }
-  */
 }
 
 
