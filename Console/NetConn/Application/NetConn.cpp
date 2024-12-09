@@ -291,7 +291,8 @@ bool NETCONN::AppProc_FirstUpdate()
           return false;
         }
 
-      SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);      
+      SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);     
+      SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     , connectionsmanager);     
     }
   
   //--------------------------------------------------------------------------------------------------
@@ -395,6 +396,7 @@ bool NETCONN::AppProc_End()
   if(connectionsmanager)
     {
       UnSubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);
+      UnSubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     , connectionsmanager);
       
       connectionsmanager->End();
       delete connectionsmanager;
