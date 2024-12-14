@@ -460,22 +460,25 @@ bool NETCONN::KeyValidSecuences(int key)
       case 'T'  : if(connectionsmanager)
                     { 
                       DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
-                      XBUFFER                     param;
-                      XBUFFER                     result;
+                      XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->DoCommand(connection, NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 100, param, result, 10);
+                      status = connectionsmanager->Command_Do(connection, NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 100, result, 10);
+                      if(status)
+                        {
+                          XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Result GetVersion] \"%s\""), result.Get());
+                        }
                     }
                   break;
 
       case 'Y'  : if(connectionsmanager)
                     { 
                       DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
-                      XBUFFER                     param;
-                      XBUFFER                     result;
+                      XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->DoCommand(connection, NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND, 100, param, result, 10);
+                      status = connectionsmanager->Command_Do(connection, NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND, 100, result, 10);
+                      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Result Other Command] \"%s\""), result.Get());
                     }
                   break;
     }

@@ -246,12 +246,10 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
                                                                                       {                                                                                            
                                                                                         switch(event->GetEventType())
                                                                                           {
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : XTRACE_PRINTCOLOR(XTRACE_COLOR_GREEN, __L("[Net Conn] Read message: "));
-                                                                                                                                                            protocol->ShowDebug(false, header, (*content));        
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), false);        
                                                                                                                                                             break;
     
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : XTRACE_PRINTCOLOR(XTRACE_COLOR_PURPLE, __L("[Net Conn] Write message: "));
-                                                                                                                                                            protocol->ShowDebug(true, header, (*content));  
+                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), false);  
                                                                                                                                                             break;  
                                                                                           }                                                                                                     
                                                                                       }
