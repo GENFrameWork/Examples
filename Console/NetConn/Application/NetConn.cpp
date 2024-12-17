@@ -463,11 +463,8 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->Command_Do(connection, NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, 100, result, 10);
-                      if(status)
-                        {
-                          XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Result GetVersion] \"%s\""), result.Get());
-                        }
+                      status = connectionsmanager->Command_Do(connection, 100,  NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result GetVersion] \"%s\""), status?result.Get():__L("Error!"));                        
                     }
                   break;
 
@@ -477,10 +474,29 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->Command_Do(connection, NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND, 100, result, 10);
-                      XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Result Other Command] \"%s\""), result.Get());
+                      status = connectionsmanager->Command_Do(connection, 100, NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result Other Command] \"%s\""), status?result.Get():__L("Error!"));
                     }
                   break;
+
+
+      case 'U'  : if(connectionsmanager)
+                    { 
+                      DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
+                      XFILEJSON                   result;
+                      XSTRING                     resultstr;
+                      bool                        status;
+
+                      status = connectionsmanager->UpdateClass_Do(connection, 100, __L("pepe"), result, 10);
+
+                      result.EncodeAllLines(false);  
+                      result.GetAllInOneLine(resultstr);
+                      
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result Other Command] \"%s\""), status?resultstr.Get():__L("Error!"));
+                    }
+                  break;
+
+
     }
 
   return true;
