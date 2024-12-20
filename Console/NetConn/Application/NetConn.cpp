@@ -296,7 +296,6 @@ bool NETCONN::AppProc_FirstUpdate()
     }
   
   //--------------------------------------------------------------------------------------------------
-
   
   //console->PrintMessage(__L(" "), 0, false, true);
   //console->WaitKey(__L("  Pulsa una tecla para continuar... (%d)"), 1, false, 5);
@@ -485,9 +484,9 @@ bool NETCONN::KeyValidSecuences(int key)
                       DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
                       XFILEJSON                   result;
                       XSTRING                     resultstr;
-                      bool                        status;
-
-                      status = connectionsmanager->UpdateClass_Do(connection, 100, __L("pepe"), result, 10);
+                      bool                        status = false;
+                                         
+                      //status = connectionsmanager->UpdateClass_Do(connection, 100, __L("pepe"), result, 10);
 
                       result.EncodeAllLines(false);  
                       result.GetAllInOneLine(resultstr);
@@ -568,8 +567,6 @@ bool NETCONN::Show_ConnectionsStatus()
         {
           connectionsmanager->Connections_GetXMutex()->UnLock();
         }
-
-
     }
 
   return true;

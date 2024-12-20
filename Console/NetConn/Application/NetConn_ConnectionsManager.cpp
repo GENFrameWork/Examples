@@ -50,6 +50,7 @@
 #include "CipherAES.h"
 
 #include "NetConn_Protocol.h"
+#include "NetConn_RegisterData.h"
 
 #include "XMemory_Control.h"
 
@@ -217,47 +218,65 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
 
   switch(event->GetEventType())
     {
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_STATUSCHANGE  : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
-                                                                            if(connection)          
-                                                                              {
-                                                                                XSTRING actualstatusstring;
-                                                                                XSTRING nextstatusstring;
-
-                                                                                connection->Status_GetString(event->GetActualStatus(), actualstatusstring);
-                                                                                connection->Status_GetString(event->GetNextStatus()  , nextstatusstring);
-
-                                                                                XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Net Conn] Change connection status: %s --> %s"), actualstatusstring.Get(), nextstatusstring.Get());
-                                                                              }
-                                                                          }
-                                                                          break;
-
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG       :
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG      :  { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
-                                                                            if(connection)          
-                                                                              {
-                                                                                DIOCOREPROTOCOL*         protocol = connection->GetCoreProtocol();
-                                                                                DIOCOREPROTOCOL_MESSAGE* message  = event->GetMsg(); 
-                                                                                if(message && protocol)
-                                                                                  {    
-                                                                                    DIOCOREPROTOCOL_HEADER* header  = message->GetHeader();
-                                                                                    XBUFFER*                content = message->GetContent();
-
-                                                                                    if(protocol && header && content)
-                                                                                      {                                                                                            
-                                                                                        switch(event->GetEventType())
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_CREATECONNECTION  : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
+                                                                                if(connection)          
+                                                                                  {
+                                                                                    if(!connection->GetRegisterData())
+                                                                                      {
+                                                                                        NETCONN_REGISTERDATA* registerdata = new NETCONN_REGISTERDATA();
+                                                                                        if(registerdata)
                                                                                           {
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), false);        
-                                                                                                                                                            break;
-    
-                                                                                            case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), false);  
-                                                                                                                                                            break;  
-                                                                                          }                                                                                                     
+                                                                                            connection->SetRegisterData(registerdata);
+                                                                                          }
                                                                                       }
+
+                                                                                    XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Net Conn] Create connection"));
                                                                                   }
                                                                               }
+                                                                              break;
 
-                                                                          }
-                                                                          break;
+
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_STATUSCHANGE      : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
+                                                                                if(connection)          
+                                                                                  {
+                                                                                    XSTRING actualstatusstring;
+                                                                                    XSTRING nextstatusstring;
+
+                                                                                    connection->Status_GetString(event->GetActualStatus(), actualstatusstring);
+                                                                                    connection->Status_GetString(event->GetNextStatus()  , nextstatusstring);
+
+                                                                                    XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[Net Conn] Change connection status: %s --> %s"), actualstatusstring.Get(), nextstatusstring.Get());
+                                                                                  }
+                                                                              }
+                                                                              break;
+
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG           :
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG          : { DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();                                                                                                 
+                                                                                if(connection)          
+                                                                                  {
+                                                                                    DIOCOREPROTOCOL*         protocol = connection->GetCoreProtocol();
+                                                                                    DIOCOREPROTOCOL_MESSAGE* message  = event->GetMsg(); 
+                                                                                    if(message && protocol)
+                                                                                      {    
+                                                                                        DIOCOREPROTOCOL_HEADER* header  = message->GetHeader();
+                                                                                        XBUFFER*                content = message->GetContent();
+
+                                                                                        if(protocol && header && content)
+                                                                                          {                                                                                            
+                                                                                            switch(event->GetEventType())
+                                                                                              {
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), false);        
+                                                                                                                                                                break;
+    
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), false);  
+                                                                                                                                                                break;  
+                                                                                              }                                                                                                     
+                                                                                          }
+                                                                                      }
+                                                                                  }
+
+                                                                              }
+                                                                              break;
     }
 }
 
