@@ -71,7 +71,7 @@ class DIOSTREAM;
 class NETCONN_PROTOCOL : public DIOCOREPROTOCOL
 {
   public:
-                       NETCONN_PROTOCOL                     (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream, XUUID* ID_machine);
+                       NETCONN_PROTOCOL                     (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream);
     virtual           ~NETCONN_PROTOCOL                     ();
 
     bool               GenerateAuthenticationChallenge      (XBUFFER& autentication_challange);

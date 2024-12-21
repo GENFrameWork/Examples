@@ -181,19 +181,18 @@ bool NETCONN_CONNECTIONSMANAGER::End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream, XUUID* ID_machine)
+* @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
 * @brief      CreateProtocol
 * @ingroup    EXAMPLES
 * 
 * @param[in]  diostream : 
-* @param[in]  ID_machine : 
 * 
 * @return     DIOCOREPROTOCOL* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream, XUUID* ID_machine)
+DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
 {
-  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream, ID_machine);
+  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream);
 
   return protocol;  
 }
@@ -225,7 +224,7 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
                                                                                       {
                                                                                         NETCONN_REGISTERDATA* registerdata = new NETCONN_REGISTERDATA();
                                                                                         if(registerdata)
-                                                                                          {
+                                                                                          {                                                                                           
                                                                                             connection->SetRegisterData(registerdata);
                                                                                           }
                                                                                       }

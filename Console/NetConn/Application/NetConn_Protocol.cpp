@@ -69,7 +69,7 @@
 * @param[in]  DIOCOREPROTOCOL_CFG* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_PROTOCOL::NETCONN_PROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream, XUUID* ID_machine) : DIOCOREPROTOCOL(protocolCFG, diostream, ID_machine)
+NETCONN_PROTOCOL::NETCONN_PROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream) : DIOCOREPROTOCOL(protocolCFG, diostream)
 {
   Clean();
 

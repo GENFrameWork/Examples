@@ -37,11 +37,11 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
+#include "NetConn_RegisterData.h"
+
 #include "XSystem.h"
 
 #include "HashSHA2.h"
-
-#include "NetConn_RegisterData.h"
 
 #include "XMemory_Control.h"
 
@@ -87,6 +87,61 @@ NETCONN_REGISTERDATA::~NETCONN_REGISTERDATA()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         bool NETCONN_REGISTERDATA::InitializeData(bool isserver)
+* @brief      InitializeData
+* @ingroup    EXAMPLES
+* 
+* @param[in]  isserver : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_REGISTERDATA::InitializeData(bool isserver)
+{
+  bool status = DIOCOREPROTOCOL_REGISTERDATA::InitializeData(isserver);
+
+  if(isserver)
+    {
+      group    = __L("Main Group");
+      subgroup = __L("Sub Group");
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XSTRING* NETCONN_REGISTERDATA::GetGroup()
+* @brief      GetGroup
+* @ingroup    EXAMPLES
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_REGISTERDATA::GetGroup()
+{
+  return &group;
+}
+    
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XSTRING* NETCONN_REGISTERDATA::GetSubGroup()
+* @brief      GetSubGroup
+* @ingroup    EXAMPLES
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_REGISTERDATA::GetSubGroup()
+{
+  return &subgroup;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         bool NETCONN_REGISTERDATA::Serialize()
 * @brief      Serialize
 * @ingroup    DATAIO
@@ -95,8 +150,13 @@ NETCONN_REGISTERDATA::~NETCONN_REGISTERDATA()
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_REGISTERDATA::Serialize()
-{
-  return DIOCOREPROTOCOL_REGISTERDATA::Serialize();
+{ 
+  bool status = DIOCOREPROTOCOL_REGISTERDATA::Serialize();
+
+  Primitive_Add<XSTRING*>(&group   , NETCONN_REGISTERDATA_HEADER_VAR_GROUP);  
+  Primitive_Add<XSTRING*>(&subgroup, NETCONN_REGISTERDATA_HEADER_VAR_SUBGROUP);  
+
+  return status;
 }
 
 
@@ -111,7 +171,12 @@ bool NETCONN_REGISTERDATA::Serialize()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_REGISTERDATA::Deserialize()
 {   
-  return DIOCOREPROTOCOL_REGISTERDATA::Deserialize();
+  bool status = DIOCOREPROTOCOL_REGISTERDATA::Deserialize();
+
+  Primitive_Extract<XSTRING&>(group   , NETCONN_REGISTERDATA_HEADER_VAR_GROUP);
+  Primitive_Extract<XSTRING&>(subgroup, NETCONN_REGISTERDATA_HEADER_VAR_SUBGROUP);
+
+  return status;
 }
 
 

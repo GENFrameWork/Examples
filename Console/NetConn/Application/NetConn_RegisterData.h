@@ -40,6 +40,9 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
+#define NETCONN_REGISTERDATA_HEADER_VAR_GROUP       __L("group")
+#define NETCONN_REGISTERDATA_HEADER_VAR_SUBGROUP    __L("subgroup")
+
 #pragma endregion
 
 
@@ -51,6 +54,11 @@ class NETCONN_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
   public:
                             NETCONN_REGISTERDATA            ();
     virtual                ~NETCONN_REGISTERDATA            ();
+
+    bool                    InitializeData                  (bool isserver);
+
+    XSTRING*                GetGroup                        ();
+    XSTRING*                GetSubGroup                     ();    
     
     bool                    Serialize                       ();    
     bool                    Deserialize                     ();  
@@ -58,6 +66,9 @@ class NETCONN_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
   private:
 
     void                    Clean                           ();
+  
+    XSTRING                 group;
+    XSTRING                 subgroup;  
 };
 
 #pragma endregion
