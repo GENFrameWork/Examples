@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_CommandResponse.cpp
+* @file       NetConn_CoreProtocol_Connection.cpp
 * 
-* @class      NETCONN_COMMANDRESPONSE
-* @brief      Net Conn Command Response class
+* @class      NETCONN_COREPROTOCOL_CONNECTION
+* @brief      Net Connection Core Protocol Connection class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -37,11 +37,7 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "NetConn_CommandResponse.h"
-
-#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
-
-#include "NetConn_Protocol.h"
+#include "NetConn_CoreProtocol_Connection.h"
 
 #include "XMemory_Control.h"
 
@@ -60,12 +56,12 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCONN_COMMANDRESPONSE::NETCONN_COMMANDRESPONSE()
+* @fn         NETCONN_COREPROTOCOL_CONNECTION::NETCONN_COREPROTOCOL_CONNECTION()
 * @brief      Constructor
 * @ingroup    EXAMPLES
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_COMMANDRESPONSE::NETCONN_COMMANDRESPONSE()
+NETCONN_COREPROTOCOL_CONNECTION::NETCONN_COREPROTOCOL_CONNECTION()
 {
   Clean();
 }
@@ -73,13 +69,13 @@ NETCONN_COMMANDRESPONSE::NETCONN_COMMANDRESPONSE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCONN_COMMANDRESPONSE::~NETCONN_COMMANDRESPONSE()
+* @fn         NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_COMMANDRESPONSE::~NETCONN_COMMANDRESPONSE()
+NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
 {
   Clean();
 }
@@ -87,107 +83,48 @@ NETCONN_COMMANDRESPONSE::~NETCONN_COMMANDRESPONSE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCONN_COMMANDRESPONSE::Response(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Response
+* @fn         NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
+* @brief      GetAgentState
 * @ingroup    EXAMPLES
 * 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
+* @return     NETCONN_AGENTSTATE* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_COMMANDRESPONSE::Response(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
 {
-  bool status = false;
-
-  DIOCOREPROTOCOL_MESSAGE* message = event->GetMsg();
-  if(!message)
-    {
-      return status;
-    }
-
-  DIOCOREPROTOCOL_CONNECTION* connection = event->GetConnection();
-  if(!connection)
-    {
-      return status;
-    }
-
-  DIOCOREPROTOCOL* protocol = connection->GetCoreProtocol();
-  if(protocol)
-    {
-      for(XDWORD c=DIOCOREPROTOCOL_COMMAND_TYPE_LASTINTERNAL; c<protocol->Commands_GetAll()->GetSize()+1; c++)        
-        {  
-          if(!message->GetHeader()->GetOperationParam()->Compare(protocol->Commands_Get(c), true))
-            {
-              switch(c)
-                {
-                  case NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION     : status = Response_GetVersion(event); 
-                                                                      break;
-
-                  case NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND   : status = Response_OtherCommand(event); 
-                                                                      break;    
-                }
-            }
-             
-                                                                              
-        }                                                                            
-    }
-
-  return status;
+  return &netconn_agentstate;
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCONN_COMMANDRESPONSE::Response_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Response_GetVersion
+* @fn         NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
+* @brief      GetTestUpdateClass
 * @ingroup    EXAMPLES
 * 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
+* @return     NETCONN_TESTUPDATECLASS* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_COMMANDRESPONSE::Response_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
 {
-  event->GetContenteResponseString()->Format(__L("protocol version %d.%d"), NETCONN_PROTOCOL_VERSION, NETCONN_PROTOCOL_SUBVERSION);      
-
-  return true;
+  return &netconn_testupdateclass;
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCONN_COMMANDRESPONSE::Response_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Response_OtherCommand
-* @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_COMMANDRESPONSE::Response_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-{
-  event->GetContenteResponseString()->Format(__L("Other command"));      
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         void NETCONN_COMMANDRESPONSE::Clean()
+* @fn         void NETCONN_COREPROTOCOL_CONNECTION::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup    EXAMPLES
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_COMMANDRESPONSE::Clean()
+void NETCONN_COREPROTOCOL_CONNECTION::Clean()
 {
+
+
 }
 
 
 #pragma endregion
-
 

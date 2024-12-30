@@ -1,10 +1,10 @@
-/**-------------------------------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------/**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_CommandResponse.h
+* @file       NetConn_CoreProtocol_RegisterData.h
 * 
-* @class      NETCONN_COMMANDRESPONSE
-* @brief      Net Conn Command Response class
-* @ingroup    EXAMPLES
+* @class      NETCONN_COREPROTOCOL_REGISTERDATA
+* @brief      Net Connection Core Protocol Register Data class
+* @ingroup    DATAIO
 * 
 * @copyright  GEN Group. All rights reserved.
 * 
@@ -26,13 +26,13 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_COMMANDRESPONSE_H_
-#define _NETCONN_COMMANDRESPONSE_H_
+#ifndef _NETCONN_COREPROTOCOL_REGISTERDATA_H_
+#define _NETCONN_COREPROTOCOL_REGISTERDATA_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
+#include "DIOCoreProtocol_RegisterData.h"
 
 #pragma endregion
 
@@ -40,6 +40,8 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
+#define NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_GROUP       __L("group")
+#define NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_SUBGROUP    __L("subgroup")
 
 #pragma endregion
 
@@ -47,20 +49,26 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class NETCONN_COMMANDRESPONSE
+class NETCONN_COREPROTOCOL_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
 {
   public:
-                    NETCONN_COMMANDRESPONSE     ();
-    virtual        ~NETCONN_COMMANDRESPONSE     ();
+                            NETCONN_COREPROTOCOL_REGISTERDATA       ();
+    virtual                ~NETCONN_COREPROTOCOL_REGISTERDATA       ();
 
-    bool            Response                    (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
+    bool                    InitializeData                          (bool isserver);
+
+    XSTRING*                GetGroup                                ();
+    XSTRING*                GetSubGroup                             ();    
+    
+    bool                    Serialize                               ();    
+    bool                    Deserialize                             ();  
 
   private:
 
-    bool            Response_GetVersion         (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-    bool            Response_OtherCommand       (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-
-    void            Clean    ();
+    void                    Clean                                   ();
+  
+    XSTRING                 group;
+    XSTRING                 subgroup;  
 };
 
 #pragma endregion
@@ -74,5 +82,4 @@ class NETCONN_COMMANDRESPONSE
 
 
 #endif
-
 

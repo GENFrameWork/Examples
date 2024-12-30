@@ -1,10 +1,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_Protocol.cpp
+* @file       NetConn_CoreProtocol_RegisterData.cpp
 * 
-* @class      NETCONN_PROTOCOL
-* @brief      Net Connection Protocol class (DIOCoreProtol example)
-* @ingroup    EXAMPLES
+* @class      NETCONN_COREPROTOCOL_REGISTERDATA
+* @brief      Net Connection Core Protocol Register Data class
+* @ingroup    DATAIO
 * 
 * @copyright  GEN Group. All rights reserved.
 * 
@@ -37,13 +37,11 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "NetConn_Protocol.h"
+#include "NetConn_CoreProtocol_RegisterData.h"
 
-#include "XFactory.h"
-#include "XRand.h"
+#include "XSystem.h"
 
-#include "CipherAES.h"
-
+#include "HashSHA2.h"
 
 #include "XMemory_Control.h"
 
@@ -62,31 +60,26 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCONN_PROTOCOL::NETCONN_PROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG)
+* @fn         NETCONN_COREPROTOCOL_REGISTERDATA::NETCONN_COREPROTOCOL_REGISTERDATA()
 * @brief      Constructor
-* @ingroup    EXAMPLES
-* 
-* @param[in]  DIOCOREPROTOCOL_CFG* : 
+* @ingroup    DATAIO
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_PROTOCOL::NETCONN_PROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream) : DIOCOREPROTOCOL(protocolCFG, diostream)
+NETCONN_COREPROTOCOL_REGISTERDATA::NETCONN_COREPROTOCOL_REGISTERDATA()
 {
   Clean();
-
-  Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION    , NETCONN_PROTOCOL_COMMAND_TYPE_STRING_GETVERSION, DIOCOREPROTOCOL_COMMAND_BIDIRECTIONALITYMODE_BOTH);
-  Commands_Add(NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND  , NETCONN_PROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND, DIOCOREPROTOCOL_COMMAND_BIDIRECTIONALITYMODE_TOCLIENT);
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
+* @fn         NETCONN_COREPROTOCOL_REGISTERDATA::~NETCONN_COREPROTOCOL_REGISTERDATA()
 * @brief      Destructor
 * @note       VIRTUAL
-* @ingroup    EXAMPLES
+* @ingroup    DATAIO
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
+NETCONN_COREPROTOCOL_REGISTERDATA::~NETCONN_COREPROTOCOL_REGISTERDATA()
 {
   Clean();
 }
@@ -94,31 +87,24 @@ NETCONN_PROTOCOL::~NETCONN_PROTOCOL()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
-* @brief      GenerateAuthenticationChallenge
+* @fn         bool NETCONN_COREPROTOCOL_REGISTERDATA::InitializeData(bool isserver)
+* @brief      InitializeData
 * @ingroup    EXAMPLES
 * 
-* @param[in]  autentication_challange : 
+* @param[in]  isserver : 
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
+bool NETCONN_COREPROTOCOL_REGISTERDATA::InitializeData(bool isserver)
 {
-  XRAND* rand = GEN_XFACTORY.CreateRand();
-  if(!rand)
+  bool status = DIOCOREPROTOCOL_REGISTERDATA::InitializeData(isserver);
+
+  if(isserver)
     {
-      return false;
+      group    = __L("Main Group");
+      subgroup = __L("Sub Group");
     }
-
-  rand->Ini();
-
-  for(XDWORD c=0; c<NETCONN_PROTOCOL_MAXCHALLANGE; c++)
-    {  
-      autentication_challange.Add((XBYTE)rand->Max(255));
-    }
-
-  GEN_XFACTORY.DeleteRand(rand);
 
   return true;
 }
@@ -126,44 +112,49 @@ bool NETCONN_PROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_ch
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
-* @brief      GenerateAuthenticationResponse
+* @fn         XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetGroup()
+* @brief      GetGroup
 * @ingroup    EXAMPLES
 * 
-* @param[in]  autentication_challange : 
-* @param[in]  autentication_response : 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetGroup()
+{
+  return &group;
+}
+    
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetSubGroup()
+* @brief      GetSubGroup
+* @ingroup    EXAMPLES
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetSubGroup()
+{
+  return &subgroup;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_COREPROTOCOL_REGISTERDATA::Serialize()
+* @brief      Serialize
+* @ingroup    DATAIO
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
-{
-  XBYTE                 ini_data[] = NETCONN_PROTOCOL_AUTHENTICATION_INI;
-  XBYTE                 key_data[] = NETCONN_PROTOCOL_AUTHENTICATION_KEY;
-  CIPHERKEYSYMMETRICAL  key;
-  bool                  status     = false;
+bool NETCONN_COREPROTOCOL_REGISTERDATA::Serialize()
+{ 
+  bool status = DIOCOREPROTOCOL_REGISTERDATA::Serialize();
 
-  MaskKey(ini_data, sizeof(ini_data), NETCONN_PROTOCOL_VERSION);
-  MaskKey(key_data, sizeof(key_data), NETCONN_PROTOCOL_SUBVERSION);
-
-  cipherAES.SetChainingMode(CIPHERCHAININGMODE_CBC);
-  cipherAES.SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS);
-  cipherAES.SetInitVector(ini_data, sizeof(ini_data));
-
-  key.Set(key_data, sizeof(key_data));
-
-  cipherAES.SetKey(&key);
-  cipherAES.Cipher(autentication_challange);
-  
-  int    resultsize;
-  XBYTE* result = cipherAES.GetResult(resultsize);
-  if(result)
-    {
-      autentication_response.Empty();
-      autentication_response.Add(result, NETCONN_PROTOCOL_MAXCHALLANGE);
-
-      status = true;
-    }
+  Primitive_Add<XSTRING*>(&group   , NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_GROUP);  
+  Primitive_Add<XSTRING*>(&subgroup, NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_SUBGROUP);  
 
   return status;
 }
@@ -171,15 +162,34 @@ bool NETCONN_PROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_cha
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void NETCONN_PROTOCOL::Clean()
-* @brief      Clean the attributes of the class: Default initialice
-* @note       INTERNAL
-* @ingroup    EXAMPLES
+* @fn         bool NETCONN_COREPROTOCOL_REGISTERDATA::Deserialize()
+* @brief      Deserialize
+* @ingroup    DATAIO
+* 
+* @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_PROTOCOL::Clean()
-{
+bool NETCONN_COREPROTOCOL_REGISTERDATA::Deserialize()
+{   
+  bool status = DIOCOREPROTOCOL_REGISTERDATA::Deserialize();
 
+  Primitive_Extract<XSTRING&>(group   , NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_GROUP);
+  Primitive_Extract<XSTRING&>(subgroup, NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_SUBGROUP);
+
+  return status;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_COREPROTOCOL_REGISTERDATA::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    DATAIO
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_COREPROTOCOL_REGISTERDATA::Clean()
+{
 }
 
 

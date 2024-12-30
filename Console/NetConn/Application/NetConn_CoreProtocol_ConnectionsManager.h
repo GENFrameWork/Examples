@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       NetConn_ConnectionsManager.h
+* @file       NetConn_CoreProtocol_ConnectionsManager.h
 *
-* @class      NETCONN_CONNECTIONSMANAGER
-* @brief      Net Connection Connections Manager class (DIOCoreProtol example)
+* @class      NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
+* @brief      Net Connection Core Protocol Connections Manager class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -26,8 +26,8 @@
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_CONNECTIONS_H_
-#define _NETCONN_CONNECTIONS_H_
+#ifndef _NETCONN_COREPROTCOL_CONNECTIONSMANAGER_H_
+#define _NETCONN_COREPROTCOL_CONNECTIONSMANAGER_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
@@ -41,19 +41,21 @@
 
 
 class DIOCOREPROTOCOL_CFG;
+class DIOCOREPROTOCOL_CONNECTION;
 class DIOCOREPROTOCOL_CONNECTIONSMANAGER;
 
 
-class NETCONN_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
+class NETCONN_COREPROTOCOL_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTIONSMANAGER
 {
   public:
-                                          NETCONN_CONNECTIONSMANAGER                    ();
-                                         ~NETCONN_CONNECTIONSMANAGER                    ();
+                                          NETCONN_COREPROTOCOL_CONNECTIONSMANAGER       ();
+                                         ~NETCONN_COREPROTOCOL_CONNECTIONSMANAGER       ();
 
     bool                                  Ini                                           (bool isserver);
     bool                                  End                                           ();
         
-    DIOCOREPROTOCOL*                      CreateProtocol                                (DIOSTREAM* diostream);    
+    DIOCOREPROTOCOL_CONNECTION*           CreateConnection                              ();
+    DIOCOREPROTOCOL*                      CreateProtocol                                (DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream);    
     
   private:
 

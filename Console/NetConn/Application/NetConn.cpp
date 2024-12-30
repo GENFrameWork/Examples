@@ -92,8 +92,10 @@
 #include "APPExtended.h"
 
 #include "NetConn_CFG.h"
-#include "NetConn_ConnectionsManager.h"
-#include "NetConn_Protocol.h"
+#include "NetConn_CoreProtocol.h"
+#include "NetConn_CoreProtocol_Connection.h"
+#include "NetConn_CoreProtocol_ConnectionsManager.h"
+#include "NetConn_CoreProtocol_Response.h"
 
 #include "XMemory_Control.h"
 
@@ -283,7 +285,7 @@ bool NETCONN::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------------------------
 
-  connectionsmanager = new NETCONN_CONNECTIONSMANAGER();
+  connectionsmanager = new NETCONN_COREPROTOCOL_CONNECTIONSMANAGER();
   if(connectionsmanager)
     {
       if(!connectionsmanager->Ini(modeserver))
@@ -462,7 +464,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->Command_Do(connection, 100,  NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
+                      status = connectionsmanager->Command_Do(connection, 100,  NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result GetVersion] \"%s\""), status?result.Get():__L("Error!"));                        
                     }
                   break;
@@ -473,7 +475,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->Command_Do(connection, 100, NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
+                      status = connectionsmanager->Command_Do(connection, 100, NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result Other Command] \"%s\""), status?result.Get():__L("Error!"));
                     }
                   break;
@@ -481,17 +483,16 @@ bool NETCONN::KeyValidSecuences(int key)
 
       case 'U'  : if(connectionsmanager)
                     { 
-                      DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
-                      XFILEJSON                   result;
-                      XSTRING                     resultstr;
-                      bool                        status = false;
-                                         
-                      //status = connectionsmanager->UpdateClass_Do(connection, 100, __L("pepe"), result, 10);
-
-                      result.EncodeAllLines(false);  
-                      result.GetAllInOneLine(resultstr);
-                      
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result Other Command] \"%s\""), status?resultstr.Get():__L("Error!"));
+                      NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
+                      bool                              status      = false;
+  
+                      if(!connection->IsServer())
+                        {  
+                          connection->GetTestUpdateClass()->Update();                                         
+                          status = connectionsmanager->UpdateClass_Do(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
+                        }
+                                            
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
 
@@ -610,11 +611,17 @@ void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTI
 {
   switch(event->GetEventType())
     {
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE : if(!commandresponse.Response(event))
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE : if(!response.CommandResponse(event))
                                                                               {
                                                                                 event->GetContenteResponseString()->Format(__L("[Error] Unkown command !!!"));
                                                                               }
-                                                                            break;      
+                                                                            break;  
+
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     : if(!response.UpdateClassResponse(event))
+                                                                              {
+                                                                                event->GetContenteResponseString()->Format(__L("[Error] Unkown class !!!"));
+                                                                              }                                                                            
+                                                                            break;
     }
 }
 

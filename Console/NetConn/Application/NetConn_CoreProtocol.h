@@ -1,9 +1,9 @@
  /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_Protocol.h
+* @file       NetConn_CoreProtocol.h
 * 
-* @class      NETCONN_PROTOCOL
-* @brief      Net Connection Protocol class (DIOCoreProtol example)
+* @class      NETCONN_COREPROTOCOL
+* @brief      Net Connection Core Protocol class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -42,22 +42,22 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-#define NETCONN_PROTOCOL_AUTHENTICATION_INI       { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F }
-#define NETCONN_PROTOCOL_AUTHENTICATION_KEY       { 0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81, 0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4 }
-#define NETCONN_PROTOCOL_MAXCHALLANGE             64
-#define NETCONN_PROTOCOL_VERSION                  1
-#define NETCONN_PROTOCOL_SUBVERSION               0
+#define NETCONN_COREPROTOCOL_AUTHENTICATION_INI       { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F }
+#define NETCONN_COREPROTOCOL_AUTHENTICATION_KEY       { 0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81, 0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4 }
+#define NETCONN_COREPROTOCOL_MAXCHALLANGE             64
+#define NETCONN_COREPROTOCOL_VERSION                  1
+#define NETCONN_COREPROTOCOL_SUBVERSION               0
 
 
-enum NETCONN_PROTOCOL_COMMAND_TYPE
+enum NETCONN_COREPROTOCOL_COMMAND_TYPE
 {
-  NETCONN_PROTOCOL_COMMAND_TYPE_GETVERSION         = DIOCOREPROTOCOL_COMMAND_TYPE_LASTINTERNAL ,
-  NETCONN_PROTOCOL_COMMAND_TYPE_OTHERCOMMAND                                                   ,
+  NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION         = DIOCOREPROTOCOL_COMMAND_TYPE_LASTINTERNAL ,
+  NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND                                                   ,
 };
 
 
-#define NETCONN_PROTOCOL_COMMAND_TYPE_STRING_GETVERSION       __L("getversion")
-#define NETCONN_PROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND     __L("othercommand")
+#define NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION       __L("getversion")
+#define NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND     __L("othercommand")
 
 #pragma endregion
 
@@ -68,11 +68,11 @@ enum NETCONN_PROTOCOL_COMMAND_TYPE
 class DIOCOREPROTOCOL_CFG; 
 class DIOSTREAM;
 
-class NETCONN_PROTOCOL : public DIOCOREPROTOCOL
+class NETCONN_COREPROTOCOL : public DIOCOREPROTOCOL
 {
   public:
-                       NETCONN_PROTOCOL                     (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream);
-    virtual           ~NETCONN_PROTOCOL                     ();
+                       NETCONN_COREPROTOCOL                 (DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream);
+    virtual           ~NETCONN_COREPROTOCOL                 ();
 
     bool               GenerateAuthenticationChallenge      (XBUFFER& autentication_challange);
     bool               GenerateAuthenticationResponse       (XBUFFER& autentication_challange, XBUFFER& autentication_response);

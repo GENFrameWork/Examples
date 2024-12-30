@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       NetConn_ConnectionsManager.cpp
+* @file       NetConn_CoreProtocol_ConnectionsManager.cpp
 *
-* @class      NETCONN_CONNECTIONSMANAGER
-* @brief      Net Connection Connections Manager class (DIOCoreProtol example)
+* @class      NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
+* @brief      Net Connection Core Protocol Connections Manager class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 *
 * @copyright  GEN Group. All right reserved.
@@ -33,7 +33,7 @@
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
-#include "NetConn_ConnectionsManager.h"
+#include "NetConn_CoreProtocol_ConnectionsManager.h"
 
 #include "XFactory.h"
 #include "XPublisher.h"
@@ -49,8 +49,9 @@
 
 #include "CipherAES.h"
 
-#include "NetConn_Protocol.h"
-#include "NetConn_RegisterData.h"
+#include "NetConn_CoreProtocol.h"
+#include "NetConn_CoreProtocol_Connection.h"
+#include "NetConn_CoreProtocol_RegisterData.h"
 
 #include "XMemory_Control.h"
 
@@ -63,7 +64,7 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONSMANAGER::NETCONN_CONNECTIONSMANAGER
+* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
 * @brief      Constructor
 * @ingroup    PLATFORM_COMMON
 *
@@ -72,7 +73,7 @@
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-NETCONN_CONNECTIONSMANAGER::NETCONN_CONNECTIONSMANAGER() 
+NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::NETCONN_COREPROTOCOL_CONNECTIONSMANAGER() 
 {
   Clean();
 }
@@ -87,7 +88,7 @@ NETCONN_CONNECTIONSMANAGER::NETCONN_CONNECTIONSMANAGER()
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
+NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::~NETCONN_COREPROTOCOL_CONNECTIONSMANAGER()
 {
   Clean();
 }
@@ -95,7 +96,7 @@ NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONSMANAGER::Ini
+* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini
 * @brief      Initialize connection manager
 * @ingroup    PLATFORM_COMMON
 *
@@ -107,7 +108,7 @@ NETCONN_CONNECTIONSMANAGER::~NETCONN_CONNECTIONSMANAGER()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
+bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
 {  
   bool status = false;
 
@@ -160,14 +161,14 @@ bool NETCONN_CONNECTIONSMANAGER::Ini(bool isserver)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONSMANAGER::End
+* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End
 * @brief      End Connection manager
 * @ingroup    PLATFORM_COMMON
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_CONNECTIONSMANAGER::End()
+bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End()
 {
   bool status =  false;
 
@@ -181,18 +182,48 @@ bool NETCONN_CONNECTIONSMANAGER::End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
+* @fn         DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConnection()
+* @brief      CreateConnection
+* @ingroup    EXAMPLES
+* 
+* @return     DIOCOREPROTOCOL_CONNECTION* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConnection()
+{
+  DIOCOREPROTOCOL_CONNECTION* connection = (DIOCOREPROTOCOL_CONNECTION*)new NETCONN_COREPROTOCOL_CONNECTION();
+
+  return connection;  
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream)
 * @brief      CreateProtocol
 * @ingroup    EXAMPLES
 * 
+* @param[in]  connection : 
 * @param[in]  diostream : 
 * 
 * @return     DIOCOREPROTOCOL* : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream)
+DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream)
 {
-  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_PROTOCOL(&protocolCFG, diostream);
+  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_COREPROTOCOL(&protocolCFG, diostream);
+
+  if(protocol)
+    { 
+      protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION   , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION   , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_BOTH);
+      protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
+
+      NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
+      if(netconn_connection)
+        {   
+          protocol->UpdateClass_Add(__L("agentstate"), netconn_connection->GetAgentState(), 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+        }
+    }
 
   return protocol;  
 }
@@ -200,7 +231,7 @@ DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @fn         void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 * @brief      Handle Event for the observer manager of this class
 * @note       INTERNAL  (Only Information)
 * @ingroup    EXAMPLES
@@ -208,7 +239,7 @@ DIOCOREPROTOCOL* NETCONN_CONNECTIONSMANAGER::CreateProtocol(DIOSTREAM* diostream
 * @param[in]  event : 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   if(!event) 
     {
@@ -222,7 +253,7 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
                                                                                   {
                                                                                     if(!connection->GetRegisterData())
                                                                                       {
-                                                                                        NETCONN_REGISTERDATA* registerdata = new NETCONN_REGISTERDATA();
+                                                                                        NETCONN_COREPROTOCOL_REGISTERDATA* registerdata = new NETCONN_COREPROTOCOL_REGISTERDATA();
                                                                                         if(registerdata)
                                                                                           {                                                                                           
                                                                                             connection->SetRegisterData(registerdata);
@@ -290,7 +321,7 @@ void NETCONN_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOC
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_CONNECTIONSMANAGER::Clean()
+void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Clean()
 {
   
 }

@@ -1,10 +1,10 @@
-/**-------------------------------------------------------------------------------------------------------------------/**-------------------------------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_Register.h
+* @file       NetConn_CoreProtocol_Connection.h
 * 
-* @class      NETCONN_REGISTERDATA
-* @brief      Net Connection Register Data class
-* @ingroup    DATAIO
+* @class      NETCONN_COREPROTOCOL_CONNECTION
+* @brief      Net Connection Core Protocol Connection class (DIOCoreProtol example)
+* @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
 * 
@@ -26,13 +26,15 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_REGISTERDATA_H_
-#define _NETCONN_REGISTERDATA_H_
+#ifndef _NETCONN_COREPROTOCOL_CONNECTION_H_
+#define _NETCONN_COREPROTOCOL_CONNECTION_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "DIOCoreProtocol_RegisterData.h"
+#include "DIOCoreProtocol_Connection.h"
+
+#include "NetConn_CoreProtocol_Response.h"
 
 #pragma endregion
 
@@ -40,8 +42,6 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-#define NETCONN_REGISTERDATA_HEADER_VAR_GROUP       __L("group")
-#define NETCONN_REGISTERDATA_HEADER_VAR_SUBGROUP    __L("subgroup")
 
 #pragma endregion
 
@@ -49,26 +49,21 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class NETCONN_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
+class NETCONN_COREPROTOCOL_CONNECTION : public DIOCOREPROTOCOL_CONNECTION 
 {
   public:
-                            NETCONN_REGISTERDATA            ();
-    virtual                ~NETCONN_REGISTERDATA            ();
+                                  NETCONN_COREPROTOCOL_CONNECTION     ();
+    virtual                      ~NETCONN_COREPROTOCOL_CONNECTION     ();
 
-    bool                    InitializeData                  (bool isserver);
-
-    XSTRING*                GetGroup                        ();
-    XSTRING*                GetSubGroup                     ();    
-    
-    bool                    Serialize                       ();    
-    bool                    Deserialize                     ();  
+    NETCONN_AGENTSTATE*           GetAgentState                       ();
+    NETCONN_TESTUPDATECLASS*      GetTestUpdateClass                  ();
 
   private:
 
-    void                    Clean                           ();
-  
-    XSTRING                 group;
-    XSTRING                 subgroup;  
+    void                          Clean                               ();
+
+    NETCONN_AGENTSTATE            netconn_agentstate;
+    NETCONN_TESTUPDATECLASS       netconn_testupdateclass;
 };
 
 #pragma endregion
