@@ -39,8 +39,6 @@
 
 #include "NetConn_CoreProtocol_Response.h"
 
-#include "XSystem.h"
-
 #include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
 #include "DIOCoreProtocol_ConnectionsManager.h"
 
@@ -59,207 +57,6 @@
 
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-#pragma region CLASS_NETCONN_AGENTSTATE
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN_AGENTSTATE::NETCONN_AGENTSTATE()
-* @brief      Constructor
-* @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_AGENTSTATE::NETCONN_AGENTSTATE()
-{
-  Clean();
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN_AGENTSTATE::~NETCONN_AGENTSTATE()
-* @brief      Destructor
-* @note       VIRTUAL
-* @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_AGENTSTATE::~NETCONN_AGENTSTATE()
-{
-  Clean();
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_AGENTSTATE::Update()
-* @brief      Update
-* @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_AGENTSTATE::Update()
-{
-  GEN_XSYSTEM.GetMemoryInfo(total_memory, free_memory);
-
-  return true;
-}
-
-  
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_AGENTSTATE::Serialize()
-* @brief      Serialize
-* @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_AGENTSTATE::Serialize()
-{
-  Primitive_Add<XDWORD>(total_memory  , NETCONN_AGENTSTATE_TOTALMEMORY_STR);  
-  Primitive_Add<XDWORD>(free_memory   , NETCONN_AGENTSTATE_FREEMEMORY_STR);  
-
-  return true;
-}
-    
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_AGENTSTATE::Deserialize()
-* @brief      Deserialize
-* @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_AGENTSTATE::Deserialize()
-{
-  Primitive_Extract<XDWORD&>(total_memory , NETCONN_AGENTSTATE_TOTALMEMORY_STR);
-  Primitive_Extract<XDWORD&>(free_memory  , NETCONN_AGENTSTATE_FREEMEMORY_STR);
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         void NETCONN_AGENTSTATE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
-* @note       INTERNAL
-* @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_AGENTSTATE::Clean()
-{
-  total_memory  = 0;
-  free_memory   = 0;
-}
-
-
-#pragma endregion
-
-
-#pragma region CLASS_NETCONN_TESTUPDATECLASS
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN_TESTUPDATECLASS::NETCONN_TESTUPDATECLASS()
-* @brief      Constructor
-* @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_TESTUPDATECLASS::NETCONN_TESTUPDATECLASS()
-{
-  Clean();
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN_TESTUPDATECLASS::~NETCONN_TESTUPDATECLASS()
-* @brief      Destructor
-* @note       VIRTUAL
-* @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-NETCONN_TESTUPDATECLASS::~NETCONN_TESTUPDATECLASS()
-{
-  Clean();
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_TESTUPDATECLASS::Update()
-* @brief      Update
-* @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_TESTUPDATECLASS::Update()
-{
-  number = 10;
-  string = __L("hello, how are you?");
-
-  return true;
-}
-
-  
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_TESTUPDATECLASS::Serialize()
-* @brief      Serialize
-* @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_TESTUPDATECLASS::Serialize()
-{
-  Primitive_Add<XDWORD>(number    , NETCONN_TESTUPDATECLASS_NUMBER_STR);  
-  Primitive_Add<XSTRING*>(&string  , NETCONN_TESTUPDATECLASS_STRING_STR);  
-
-  return true;
-}
-    
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_TESTUPDATECLASS::Deserialize()
-* @brief      Deserialize
-* @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_TESTUPDATECLASS::Deserialize()
-{
-  Primitive_Extract<XDWORD&>(number   , NETCONN_TESTUPDATECLASS_NUMBER_STR);
-  Primitive_Extract<XSTRING&>(string  , NETCONN_TESTUPDATECLASS_STRING_STR);
-
-  return true;
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         void NETCONN_TESTUPDATECLASS::Clean()
-* @brief      Clean the attributes of the class: Default initialice
-* @note       INTERNAL
-* @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-void NETCONN_TESTUPDATECLASS::Clean()
-{
-  number = 0;  
-}
-
-
-#pragma endregion
-
 
 #pragma region CLASS_NETCONN_COREPROTOCOL_RESPONSE
 
@@ -413,7 +210,47 @@ bool NETCONN_COREPROTOCOL_RESPONSE::UpdateClassResponse(DIOCOREPROTOCOL_CONNECTI
     {
       if(!message->GetHeader()->GetOperationParam()->Compare(__L("testupdateclass"), true))
         {
-          status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClassDeserialize(message, connection->GetAgentState());
+          status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClassDeserialize(message, connection->GetTestUpdateClass());
+        }
+    }
+
+  return status; 
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_COREPROTOCOL_RESPONSE::AskUpdateClassResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @brief      AskUpdateClassResponse
+* @ingroup    EXAMPLES
+* 
+* @param[in]  event : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_COREPROTOCOL_RESPONSE::AskUpdateClassResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+{
+  bool status = false;
+
+  DIOCOREPROTOCOL_MESSAGE* message = event->GetMsg();
+  if(!message)
+    {
+      return status;
+    }
+
+  NETCONN_COREPROTOCOL_CONNECTION* connection = (NETCONN_COREPROTOCOL_CONNECTION*)event->GetConnection();
+  if(!connection)
+    {
+      return status;
+    }
+
+  DIOCOREPROTOCOL* protocol = connection->GetCoreProtocol();
+  if(protocol)
+    {
+      if(!message->GetHeader()->GetOperationParam()->Compare(__L("testupdateclass"), true))
+        {
+          status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClassSerialize(message, connection->GetTestUpdateClass());
         }
     }
 

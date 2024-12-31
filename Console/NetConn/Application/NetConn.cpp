@@ -295,6 +295,7 @@ bool NETCONN::AppProc_FirstUpdate()
 
       SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);     
       SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     , connectionsmanager);     
+      SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  , connectionsmanager);     
     }
   
   //--------------------------------------------------------------------------------------------------
@@ -398,6 +399,7 @@ bool NETCONN::AppProc_End()
     {
       UnSubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE , connectionsmanager);
       UnSubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     , connectionsmanager);
+      UnSubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  , connectionsmanager);
       
       connectionsmanager->End();
       delete connectionsmanager;
@@ -491,6 +493,18 @@ bool NETCONN::KeyValidSecuences(int key)
                           connection->GetTestUpdateClass()->Update();                                         
                           status = connectionsmanager->UpdateClass_Do(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                         }
+                                            
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
+                    }
+                  break;
+
+      case 'I'  : if(connectionsmanager)
+                    { 
+                      NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
+                      bool                              status      = false;
+  
+                      connection->GetTestUpdateClass()->Update();                                         
+                      status = connectionsmanager->UpdateClass_DoAsk(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                                             
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
@@ -618,6 +632,12 @@ void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTI
                                                                             break;  
 
       case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     : if(!response.UpdateClassResponse(event))
+                                                                              {
+                                                                                event->GetContenteResponseString()->Format(__L("[Error] Unkown class !!!"));
+                                                                              }                                                                            
+                                                                            break;
+
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  : if(!response.AskUpdateClassResponse(event))
                                                                               {
                                                                                 event->GetContenteResponseString()->Format(__L("[Error] Unkown class !!!"));
                                                                               }                                                                            

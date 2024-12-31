@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_CoreProtocol_Response.h
+* @file       NetConn_TestUpdateClass.h
 * 
-* @class      NETCONN_COREPROTOCOL_RESPONSE
-* @brief      Net Conn Core Protocol Response class
+* @class      NETCONN_TESTUPDATECLASS
+* @brief      Net Conn Test UpdateClass  class
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,24 +26,21 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_COREPROTOCOL_RESPONSE_H_
-#define _NETCONN_COREPROTOCOL_RESPONSE_H_
+#ifndef _NETCONN_TESTUPDATECLASS_H_
+#define _NETCONN_TESTUPDATECLASS_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
+#include "XString.h"
 #include "XSerializable.h"
 
-#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
 
 #pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
-
-#define NETCONN_AGENTSTATE_TOTALMEMORY_STR    __L("total_memory") 
-#define NETCONN_AGENTSTATE_FREEMEMORY_STR     __L("free_memory")
 
 #define NETCONN_TESTUPDATECLASS_NUMBER_STR    __L("number") 
 #define NETCONN_TESTUPDATECLASS_STRING_STR    __L("string")
@@ -53,26 +50,6 @@
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
-
-
-class NETCONN_AGENTSTATE : public XSERIALIZABLE
-{
-  public:
-                    NETCONN_AGENTSTATE                ();
-    virtual        ~NETCONN_AGENTSTATE                ();
-
-    bool            Update                            ();  
-  
-    bool            Serialize                         ();    
-    bool            Deserialize                       ();  
-
-  private:
-  
-    void            Clean                             ();
-
-    XDWORD          total_memory;
-    XDWORD          free_memory;
-};
 
 
 class NETCONN_TESTUPDATECLASS : public XSERIALIZABLE
@@ -95,24 +72,6 @@ class NETCONN_TESTUPDATECLASS : public XSERIALIZABLE
 };
 
 
-
-class NETCONN_COREPROTOCOL_RESPONSE
-{
-  public:
-                    NETCONN_COREPROTOCOL_RESPONSE     ();
-    virtual        ~NETCONN_COREPROTOCOL_RESPONSE     ();
-
-    bool            CommandResponse                   (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-    bool            UpdateClassResponse               (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-
-  private:
-
-    bool            CommandResponse_GetVersion        (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-    bool            CommandResponse_OtherCommand      (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-
-    void            Clean                             ();
-};
-
 #pragma endregion
 
 
@@ -124,5 +83,14 @@ class NETCONN_COREPROTOCOL_RESPONSE
 
 
 #endif
+
+
+
+
+
+
+
+
+
 
 

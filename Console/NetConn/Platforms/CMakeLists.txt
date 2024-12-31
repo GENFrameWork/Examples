@@ -61,20 +61,24 @@ include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Main.txt")
 # --------------------------------------------------------------------
 # Directorys of the Application
 
-set(APP_DIRECTORY_APPLICATION   "../Application")
-list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
+set(APP_DIRECTORY_APPLICATION               "../Application")
+set(APP_DIRECTORY_APPLICATION_COREPROTOCOL  "${APP_DIRECTORY_APPLICATION}/CoreProtocol")
 
+list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
+list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION_COREPROTOCOL})
 
 # --------------------------------------------------------------------
 # Source code of the Application
 
 list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn.cpp")
 list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CFG.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CoreProtocol_Response.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CoreProtocol_RegisterData.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CoreProtocol.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CoreProtocol_Connection.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CoreProtocol_ConnectionsManager.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_AgentState.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_TestUpdateClass.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_Response.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_RegisterData.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_Connection.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_ConnectionsManager.cpp")
 
 
 # --------------------------------------------------------------------

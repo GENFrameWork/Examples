@@ -221,7 +221,7 @@ DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCORE
       NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
       if(netconn_connection)
         {   
-          protocol->UpdateClass_Add(__L("agentstate"), netconn_connection->GetAgentState(), 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+          protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
         }
     }
 

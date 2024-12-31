@@ -1,9 +1,9 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       NetConn_CoreProtocol_Connection.h
+* @file       NetConn_CoreProtocol_Response.h
 * 
-* @class      NETCONN_COREPROTOCOL_CONNECTION
-* @brief      Net Connection Core Protocol Connection class (DIOCoreProtol example)
+* @class      NETCONN_COREPROTOCOL_RESPONSE
+* @brief      Net Conn Core Protocol Response class
 * @ingroup    EXAMPLES
 * 
 * @copyright  GEN Group. All rights reserved.
@@ -26,15 +26,13 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_COREPROTOCOL_CONNECTION_H_
-#define _NETCONN_COREPROTOCOL_CONNECTION_H_
+#ifndef _NETCONN_COREPROTOCOL_RESPONSE_H_
+#define _NETCONN_COREPROTOCOL_RESPONSE_H_
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "DIOCoreProtocol_Connection.h"
-
-#include "NetConn_CoreProtocol_Response.h"
+#include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
 
 #pragma endregion
 
@@ -49,22 +47,25 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class NETCONN_COREPROTOCOL_CONNECTION : public DIOCOREPROTOCOL_CONNECTION 
+
+class NETCONN_COREPROTOCOL_RESPONSE
 {
   public:
-                                  NETCONN_COREPROTOCOL_CONNECTION     ();
-    virtual                      ~NETCONN_COREPROTOCOL_CONNECTION     ();
+                    NETCONN_COREPROTOCOL_RESPONSE       ();
+    virtual        ~NETCONN_COREPROTOCOL_RESPONSE       ();
 
-    NETCONN_AGENTSTATE*           GetAgentState                       ();
-    NETCONN_TESTUPDATECLASS*      GetTestUpdateClass                  ();
+    bool            CommandResponse                     (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
+    bool            UpdateClassResponse                 (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
+    bool            AskUpdateClassResponse              (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
 
   private:
 
-    void                          Clean                               ();
+    bool            CommandResponse_GetVersion          (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
+    bool            CommandResponse_OtherCommand        (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
 
-    NETCONN_AGENTSTATE            netconn_agentstate;
-    NETCONN_TESTUPDATECLASS       netconn_testupdateclass;
+    void            Clean                               ();
 };
+
 
 #pragma endregion
 
@@ -77,4 +78,5 @@ class NETCONN_COREPROTOCOL_CONNECTION : public DIOCOREPROTOCOL_CONNECTION
 
 
 #endif
+
 
