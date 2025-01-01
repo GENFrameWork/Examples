@@ -86,6 +86,51 @@ NETCONN_TESTUPDATECLASS::~NETCONN_TESTUPDATECLASS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         XDWORD NETCONN_TESTUPDATECLASS::GetNumber()
+* @brief      GetNumber
+* @ingroup    EXAMPLES
+* 
+* @return     XDWORD : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XDWORD NETCONN_TESTUPDATECLASS::GetNumber()
+{
+  return number;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_TESTUPDATECLASS::SetNumber(XDWORD number)
+* @brief      SetNumber
+* @ingroup    EXAMPLES
+* 
+* @param[in]  number : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_TESTUPDATECLASS::SetNumber(XDWORD number)
+{
+  this->number = number;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XSTRING* NETCONN_TESTUPDATECLASS::GetString()
+* @brief      GetString
+* @ingroup    EXAMPLES
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_TESTUPDATECLASS::GetString()
+{
+  return &string;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         bool NETCONN_TESTUPDATECLASS::Update()
 * @brief      Update
 * @ingroup    EXAMPLES

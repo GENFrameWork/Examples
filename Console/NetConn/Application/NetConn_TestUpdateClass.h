@@ -58,6 +58,11 @@ class NETCONN_TESTUPDATECLASS : public XSERIALIZABLE
                     NETCONN_TESTUPDATECLASS           ();
     virtual        ~NETCONN_TESTUPDATECLASS           ();
 
+    XDWORD          GetNumber                         ();
+    void            SetNumber                         (XDWORD number);
+
+    XSTRING*        GetString                         ();
+
     bool            Update                            ();  
   
     bool            Serialize                         ();    

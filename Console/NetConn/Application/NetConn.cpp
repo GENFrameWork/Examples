@@ -489,8 +489,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       bool                              status      = false;
   
                       if(!connection->IsServer())
-                        {  
-                          connection->GetTestUpdateClass()->Update();                                         
+                        {                            
                           status = connectionsmanager->UpdateClass_Do(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                         }
                                             
@@ -502,9 +501,23 @@ bool NETCONN::KeyValidSecuences(int key)
                     { 
                       NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
                       bool                              status      = false;
-  
-                      connection->GetTestUpdateClass()->Update();                                         
+                        
                       status = connectionsmanager->UpdateClass_DoAsk(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
+                                            
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
+                    }
+                  break;
+
+      case 'O'  : if(connectionsmanager)
+                    { 
+                      NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0); 
+                      bool                              status      = false;  
+
+                      if(connection->GetTestUpdateClass())
+                        {
+                          connection->GetTestUpdateClass()->SetHasBeenChanged(true);
+                          status = true;                              
+                        }
                                             
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
@@ -559,10 +572,11 @@ bool NETCONN::Show_ConnectionsStatus()
 
       for(XDWORD c=0; c<connectionsmanager->Connections_GetAll()->GetSize(); c++)
         {
-          DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_GetAll()->Get(c);
-          XSTRING                     measurestatus;
-          XSTRING                     measurewithoutconnexion;
-          XSTRING                     statusstring;
+          NETCONN_COREPROTOCOL_CONNECTION*  connection = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_GetAll()->Get(c);
+          XSTRING                           connectionID;
+          XSTRING                           measurestatus;
+          XSTRING                           measurewithoutconnexion;
+          XSTRING                           statusstring;
 
           if(connection)
             {         
@@ -570,7 +584,11 @@ bool NETCONN::Show_ConnectionsStatus()
               connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
               connection->Status_GetString(statusstring);
 
-              string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]  n msg [%d] \n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get(),  connection->Messages_GetAll()->GetAll()->GetSize());   
+              //string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]  n msg [%d] \n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get(),  connection->Messages_GetAll()->GetAll()->GetSize());   
+
+              connection->GetIDConnection()->GetToString(connectionID);
+
+              string.Format(__L("   %03d %-10s %-20s %-15s %03d %s \n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
               
               console->Printf(string.Get());
             }
