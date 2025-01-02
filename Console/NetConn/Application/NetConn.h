@@ -105,6 +105,8 @@ class DIOSCRAPERWEBUSERAGENTID;
 class DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT;
 class APPINTERNETSERVICES;
 class NETCONN_COREPROTOCOL_CONNECTIONSMANAGER;
+class NETCONN_AGENTSTATE;
+class NETCONN_TESTUPDATECLASS;
 
 
 class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
@@ -120,7 +122,12 @@ class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
     bool                                        AppProc_Update                                ();
     bool                                        AppProc_End                                   ();
 
-    bool                                        KeyValidSecuences                             (int key);  
+    static bool                                 IsServer                                      ();      
+
+    bool                                        KeyValidSecuences                             (int key); 
+
+    NETCONN_AGENTSTATE*                         GetAgentState                                 ();    
+    NETCONN_TESTUPDATECLASS*                    GetTestUpdateClass                            (); 
 
     bool                                        Show_ConnectionsStatus                        ();
     bool                                        Show_AllStatus                                ();
@@ -139,10 +146,15 @@ class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
 
     NETCONN_COREPROTOCOL_CONNECTIONSMANAGER*    connectionsmanager; 
     NETCONN_COREPROTOCOL_RESPONSE               response;
+
+    NETCONN_AGENTSTATE*                         agentstate;
+    NETCONN_TESTUPDATECLASS*                    testupdateclass;
 };
 
 
 /*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
+
+extern NETCONN* netconn;
 
 #endif
 

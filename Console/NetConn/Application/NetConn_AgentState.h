@@ -56,10 +56,10 @@ class NETCONN_AGENTSTATE : public XSERIALIZABLE
     virtual        ~NETCONN_AGENTSTATE                ();
 
     XDWORD          GetTotalMemory                    ();
-    void            SetTotalMemory                    (XDWORD totalmemory);
+    void            SetTotalMemory                    (XDWORD total_memory);
 
     XDWORD          GetFreeMmemory                    ();
-    void            SetFreeMemory                     (XDWORD freememory);
+    void            SetFreeMemory                     (XDWORD free_memory);
 
     bool            Update                            ();  
   

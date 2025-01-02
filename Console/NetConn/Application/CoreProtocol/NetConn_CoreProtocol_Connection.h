@@ -57,14 +57,17 @@ class NETCONN_COREPROTOCOL_CONNECTION : public DIOCOREPROTOCOL_CONNECTION
     virtual                      ~NETCONN_COREPROTOCOL_CONNECTION     ();
 
     NETCONN_AGENTSTATE*           GetAgentState                       ();
+    void                          SetAgentState                       (NETCONN_AGENTSTATE* agentstate);
+
     NETCONN_TESTUPDATECLASS*      GetTestUpdateClass                  ();
+    void                          SetTestUpdateClass                  (NETCONN_TESTUPDATECLASS* testupdateclass);
 
   private:
 
     void                          Clean                               ();
 
-    NETCONN_AGENTSTATE            netconn_agentstate;
-    NETCONN_TESTUPDATECLASS       netconn_testupdateclass;
+    NETCONN_AGENTSTATE*           agentstate;
+    NETCONN_TESTUPDATECLASS*      testupdateclass;
 };
 
 #pragma endregion

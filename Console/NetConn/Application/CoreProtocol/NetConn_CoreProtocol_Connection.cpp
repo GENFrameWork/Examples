@@ -77,6 +77,12 @@ NETCONN_COREPROTOCOL_CONNECTION::NETCONN_COREPROTOCOL_CONNECTION()
 * --------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
 {
+  if(IsServer())
+    {
+      delete agentstate;
+      delete testupdateclass;
+    }
+
   Clean();
 }
 
@@ -92,7 +98,22 @@ NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
 * --------------------------------------------------------------------------------------------------------------------*/
 NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
 {
-  return &netconn_agentstate;
+  return agentstate;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_COREPROTOCOL_CONNECTION::SetAgentState(NETCONN_AGENTSTATE* agentstate)
+* @brief      SetAgentState
+* @ingroup    EXAMPLES
+* 
+* @param[in]  agentstate : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_COREPROTOCOL_CONNECTION::SetAgentState(NETCONN_AGENTSTATE* agentstate)
+{
+  this->agentstate = agentstate;
 }
 
 
@@ -107,7 +128,22 @@ NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
 * --------------------------------------------------------------------------------------------------------------------*/
 NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
 {
-  return &netconn_testupdateclass;
+  return testupdateclass;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_COREPROTOCOL_CONNECTION::SetTestUpdateClass(NETCONN_TESTUPDATECLASS* testupdateclass)
+* @brief      SetTestUpdateClass
+* @ingroup    EXAMPLES
+* 
+* @param[in]  testupdateclass : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_COREPROTOCOL_CONNECTION::SetTestUpdateClass(NETCONN_TESTUPDATECLASS* testupdateclass)
+{
+  this->testupdateclass = testupdateclass;
 }
 
 
@@ -121,7 +157,8 @@ NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
 * --------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_CONNECTION::Clean()
 {
-
+  agentstate      = NULL;
+  testupdateclass = NULL;
 }
 
 

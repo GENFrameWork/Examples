@@ -53,6 +53,8 @@
 #include "NetConn_CoreProtocol_Connection.h"
 #include "NetConn_CoreProtocol_RegisterData.h"
 
+#include "NetConn.h"
+
 #include "XMemory_Control.h"
 
 
@@ -191,7 +193,28 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End()
 * --------------------------------------------------------------------------------------------------------------------*/
 DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConnection()
 {
-  DIOCOREPROTOCOL_CONNECTION* connection = (DIOCOREPROTOCOL_CONNECTION*)new NETCONN_COREPROTOCOL_CONNECTION();
+  NETCONN_COREPROTOCOL_CONNECTION* connection = new NETCONN_COREPROTOCOL_CONNECTION();
+
+  if(NETCONN::IsServer())
+    {
+      NETCONN_AGENTSTATE* agentstate            = new NETCONN_AGENTSTATE();
+      NETCONN_TESTUPDATECLASS* testupdateclass  = new NETCONN_TESTUPDATECLASS();
+
+      if(agentstate) 
+        {
+          connection->SetAgentState(agentstate);
+        }
+
+      if(testupdateclass)  
+        {
+          connection->SetTestUpdateClass(testupdateclass);
+        }
+    }
+   else
+    {
+      connection->SetAgentState(netconn->GetAgentState());
+      connection->SetTestUpdateClass(netconn->GetTestUpdateClass());
+    }
 
   return connection;  
 }
@@ -221,8 +244,8 @@ DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCORE
       NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
       if(netconn_connection)
         {   
-          protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
-          protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_BOTH);
+          protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), true, 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+          protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), true, DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
         }
     }
 

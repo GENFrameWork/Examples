@@ -161,7 +161,7 @@ bool NETCONN_TESTUPDATECLASS::Update()
   return true;
 }
 
-  
+
 /**-------------------------------------------------------------------------------------------------------------------
 * 
 * @fn         bool NETCONN_TESTUPDATECLASS::Serialize()

@@ -97,6 +97,9 @@
 #include "NetConn_CoreProtocol_ConnectionsManager.h"
 #include "NetConn_CoreProtocol_Response.h"
 
+#include "NetConn_AgentState.h"
+#include "NetConn_TestUpdateClass.h"
+
 #include "XMemory_Control.h"
 
 
@@ -282,6 +285,23 @@ bool NETCONN::AppProc_FirstUpdate()
 
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();
   if(!xtimerupdateconsole) return false;
+  
+  //--------------------------------------------------------------------------------------------------
+
+  if(!modeserver)
+    {
+      agentstate = new NETCONN_AGENTSTATE();
+      if(agentstate)
+        {
+          agentstate->Update();
+        }
+
+      testupdateclass = new NETCONN_TESTUPDATECLASS();
+      if(testupdateclass)
+        {
+          testupdateclass->Update();
+        }
+    }
 
   //--------------------------------------------------------------------------------------------------
 
@@ -297,7 +317,7 @@ bool NETCONN::AppProc_FirstUpdate()
       SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     , connectionsmanager);     
       SubscribeEvent(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  , connectionsmanager);     
     }
-  
+
   //--------------------------------------------------------------------------------------------------
   
   //console->PrintMessage(__L(" "), 0, false, true);
@@ -389,6 +409,7 @@ bool NETCONN::AppProc_End()
   XSTRING string;
   XSTRING stringresult;
 
+
   //--------------------------------------------------------------------------------------
 
   SetEvent(NETCONN_XFSMEVENT_END);
@@ -424,6 +445,23 @@ bool NETCONN::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
+  if(!modeserver)
+    {      
+      if(agentstate)
+        {
+          delete agentstate;
+          agentstate = NULL;  
+        }
+
+      if(testupdateclass)
+        {
+          delete testupdateclass;
+          testupdateclass = NULL;
+        }
+    }
+
+  //--------------------------------------------------------------------------------------
+
   APP_EXTENDED.APPEnd();
   APP_EXTENDED.DelInstance();  
   APP_CFG.DelInstance();
@@ -431,6 +469,21 @@ bool NETCONN::AppProc_End()
   //--------------------------------------------------------------------------------------
 
   return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN::IsServer()
+* @brief      IsServer
+* @ingroup    EXAMPLES
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN::IsServer()
+{
+  return netconn->modeserver;
 }
 
 
@@ -467,7 +520,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       bool                        status;
 
                       status = connectionsmanager->Command_Do(connection, 100,  NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result GetVersion] \"%s\""), status?result.Get():__L("Error!"));                        
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Core Protocol Command: Get version] Result: \"%s\""), status?result.Get():__L("Error!"));                        
                     }
                   break;
 
@@ -478,7 +531,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       bool                        status;
 
                       status = connectionsmanager->Command_Do(connection, 100, NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Result Other Command] \"%s\""), status?result.Get():__L("Error!"));
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Core Protocol Command: Other command] Result: \"%s\""), status?result.Get():__L("Error!"));
                     }
                   break;
 
@@ -493,7 +546,7 @@ bool NETCONN::KeyValidSecuences(int key)
                           status = connectionsmanager->UpdateClass_Do(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                         }
                                             
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
 
@@ -504,7 +557,7 @@ bool NETCONN::KeyValidSecuences(int key)
                         
                       status = connectionsmanager->UpdateClass_DoAsk(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                                             
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Server Ask Client] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
 
@@ -519,7 +572,22 @@ bool NETCONN::KeyValidSecuences(int key)
                           status = true;                              
                         }
                                             
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class] \"%s\""), status?__L("Ok"):__L("Error!"));
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Change active] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
+                    }
+                  break;
+
+
+      case 'W'  : if(connectionsmanager)
+                    { 
+                      NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
+                      bool                              status      = false;
+  
+                      if(!connection->IsServer())
+                        {                            
+                          connection->GetTestUpdateClass()->Update();
+                        }
+                                            
+                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
 
@@ -527,6 +595,36 @@ bool NETCONN::KeyValidSecuences(int key)
     }
 
   return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         NETCONN_AGENTSTATE* NETCONN::GetAgentState()
+* @brief      GetAgentState
+* @ingroup    EXAMPLES
+* 
+* @return     NETCONN_AGENTSTATE* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NETCONN_AGENTSTATE* NETCONN::GetAgentState()
+{
+  return agentstate;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         NETCONN_TESTUPDATECLASS* NETCONN::GetTestUpdateClass()
+* @brief      GetTestUpdateClass
+* @ingroup    EXAMPLES
+* 
+* @return     NETCONN_TESTUPDATECLASS* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NETCONN_TESTUPDATECLASS* NETCONN::GetTestUpdateClass()
+{
+  return testupdateclass;
 }
 
 
@@ -588,7 +686,10 @@ bool NETCONN::Show_ConnectionsStatus()
 
               connection->GetIDConnection()->GetToString(connectionID);
 
-              string.Format(__L("   %03d %-10s %-20s %-15s %03d %s \n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+              if(connection->GetTestUpdateClass())  
+                {
+                  string.Format(__L("   %03d %-10s %-20s %-15s %03d %s \n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                }
               
               console->Printf(string.Get());
             }
@@ -709,4 +810,7 @@ void NETCONN::Clean()
   modeserver                  = false;
  
   connectionsmanager          = NULL; 
+
+  agentstate                  = NULL;
+  testupdateclass             = NULL;
 }

@@ -85,6 +85,66 @@ NETCONN_AGENTSTATE::~NETCONN_AGENTSTATE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
+* @fn         XDWORD NETCONN_AGENTSTATE::GetTotalMemory()
+* @brief      GetTotalMemory
+* @ingroup    EXAMPLES
+* 
+* @return     XDWORD : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XDWORD NETCONN_AGENTSTATE::GetTotalMemory()
+{
+  return total_memory;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_AGENTSTATE::SetTotalMemory(XDWORD total_memory)
+* @brief      SetTotalMemory
+* @ingroup    EXAMPLES
+* 
+* @param[in]  total_memory : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_AGENTSTATE::SetTotalMemory(XDWORD total_memory)
+{
+  this->total_memory = total_memory;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XDWORD NETCONN_AGENTSTATE::GetFreeMmemory()
+* @brief      GetFreeMmemory
+* @ingroup    EXAMPLES
+* 
+* @return     XDWORD : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XDWORD NETCONN_AGENTSTATE::GetFreeMmemory()
+{
+  return free_memory;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void NETCONN_AGENTSTATE::SetFreeMemory(XDWORD free_memory)
+* @brief      SetFreeMemory
+* @ingroup    EXAMPLES
+* 
+* @param[in]  free_memory : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void NETCONN_AGENTSTATE::SetFreeMemory(XDWORD free_memory)
+{
+  this->free_memory = free_memory;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
 * @fn         bool NETCONN_AGENTSTATE::Update()
 * @brief      Update
 * @ingroup    EXAMPLES
@@ -98,6 +158,7 @@ bool NETCONN_AGENTSTATE::Update()
 
   return true;
 }
+
 
   
 /**-------------------------------------------------------------------------------------------------------------------
