@@ -129,6 +129,7 @@ class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
     NETCONN_AGENTSTATE*                         GetAgentState                                 ();    
     NETCONN_TESTUPDATECLASS*                    GetTestUpdateClass                            (); 
 
+    bool                                        Show_TestUpdateClass                          ();
     bool                                        Show_ConnectionsStatus                        ();
     bool                                        Show_AllStatus                                ();
 

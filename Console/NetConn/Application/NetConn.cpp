@@ -293,7 +293,7 @@ bool NETCONN::AppProc_FirstUpdate()
       agentstate = new NETCONN_AGENTSTATE();
       if(agentstate)
         {
-          agentstate->Update();
+          agentstate->Update();          
         }
 
       testupdateclass = new NETCONN_TESTUPDATECLASS();
@@ -561,23 +561,8 @@ bool NETCONN::KeyValidSecuences(int key)
                     }
                   break;
 
+   
       case 'O'  : if(connectionsmanager)
-                    { 
-                      NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0); 
-                      bool                              status      = false;  
-
-                      if(connection->GetTestUpdateClass())
-                        {
-                          connection->GetTestUpdateClass()->SetHasBeenChanged(true);
-                          status = true;                              
-                        }
-                                            
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Change active] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
-                    }
-                  break;
-
-
-      case 'W'  : if(connectionsmanager)
                     { 
                       NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
                       bool                              status      = false;
@@ -625,6 +610,44 @@ NETCONN_AGENTSTATE* NETCONN::GetAgentState()
 NETCONN_TESTUPDATECLASS* NETCONN::GetTestUpdateClass()
 {
   return testupdateclass;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN::Show_TestUpdateClass()
+* @brief      Show_TestUpdateClass
+* @ingroup    EXAMPLES
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN::Show_TestUpdateClass()
+{ 
+  XSTRING string;
+  XSTRING string2;
+
+  if(!connectionsmanager)
+    {
+      return false;
+    }
+
+  if(modeserver)
+    {
+      return false;
+    }
+
+  string  = __L("Client Data");
+  string2.Format(__L("number %d"), GetTestUpdateClass()->GetNumber());   
+  Show_Line(string, string2);
+
+  string  = __L("");
+  string2.Format(__L("string %s"), GetTestUpdateClass()->GetString()->Get());   
+  Show_Line(string, string2);
+
+  console->Printf(__L("\n"));
+
+  return true;
 }
 
 
@@ -686,9 +709,16 @@ bool NETCONN::Show_ConnectionsStatus()
 
               connection->GetIDConnection()->GetToString(connectionID);
 
-              if(connection->GetTestUpdateClass())  
+              if(modeserver)
+                {    
+                  if(connection->GetTestUpdateClass())  
+                    {
+                      string.Format(__L("   %03d %-10s %-20s %-15s %03d %s \n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                    }
+                }
+               else 
                 {
-                  string.Format(__L("   %03d %-10s %-20s %-15s %03d %s \n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                  string.Format(__L("   %03d %-10s %-20s %-15s\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get());   
                 }
               
               console->Printf(string.Get());
@@ -721,7 +751,8 @@ bool NETCONN::Show_AllStatus()
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
   APP_EXTENDED.ShowAll();
-
+  
+  Show_TestUpdateClass();
   Show_ConnectionsStatus();
 
   if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
