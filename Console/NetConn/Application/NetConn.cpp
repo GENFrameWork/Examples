@@ -1,38 +1,41 @@
 /**-------------------------------------------------------------------------------------------------------------------
-*
+* 
 * @file       NetConn.cpp
-*
+* 
 * @class      NETCONN
-* @brief      Net Connection class (DIOCoreProtol example)
-* @ingroup    EXAMPLES  
-*
-* @copyright  GEN Group. All right reserved.
-*
+* @brief      Net Connection class (DIOCoreProtocol example)
+* @ingroup    EXAMPLES
+* 
+* @copyright  GEN Group. All rights reserved.
+* 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
 * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
+* 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
 * the Software.
-*
+* 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 * @endcond
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 
-
-/*---- PRECOMPILATION CONTROL ----------------------------------------------------------------------------------------*/
+/*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
+#pragma endregion
+
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
+#pragma region INCLUDES
 
 #include "NetConn.h"
 
@@ -100,14 +103,28 @@
 #include "NetConn_AgentState.h"
 #include "NetConn_TestUpdateClass.h"
 
-#include "XMemory_Control.h"
+#pragma endregion
+
+
+/*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_DEFINES_INCLUDE
+
+#include "GEN_Control.h"
+
+#pragma endregion
+
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+#pragma region GENERAL_VARIABLE
 
- APPLICATIONCREATEINSTANCE(NETCONN, netconn)
+APPLICATIONCREATEINSTANCE(NETCONN, netconn)
+
+#pragma endregion
+
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
+#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -519,7 +536,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->Command_Do(connection, 100,  NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
+                      status = connectionsmanager->Command_Do(connection, NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Core Protocol Command: Get version] Result: \"%s\""), status?result.Get():__L("Error!"));                        
                     }
                   break;
@@ -530,7 +547,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
-                      status = connectionsmanager->Command_Do(connection, 100, NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
+                      status = connectionsmanager->Command_Do(connection, NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Core Protocol Command: Other command] Result: \"%s\""), status?result.Get():__L("Error!"));
                     }
                   break;
@@ -543,7 +560,7 @@ bool NETCONN::KeyValidSecuences(int key)
   
                       if(!connection->IsServer())
                         {                            
-                          status = connectionsmanager->UpdateClass_Do(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
+                          status = connectionsmanager->UpdateClass_Do(connection, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                         }
                                             
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
@@ -555,7 +572,7 @@ bool NETCONN::KeyValidSecuences(int key)
                       NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
                       bool                              status      = false;
                         
-                      status = connectionsmanager->UpdateClass_DoAsk(connection, 100, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
+                      status = connectionsmanager->UpdateClass_DoAsk(connection, __L("testupdateclass"), connection->GetTestUpdateClass(), 10);
                                             
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Server Ask Client] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
@@ -781,13 +798,8 @@ void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTI
                                                                               }
                                                                             break;  
 
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     : if(!response.UpdateClassResponse(event))
-                                                                              {
-                                                                                event->GetContenteResponseString()->Format(__L("[Error] Unkown class !!!"));
-                                                                              }                                                                            
-                                                                            break;
-
-      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  : if(!response.AskUpdateClassResponse(event))
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     :
+      case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  : if(!response.UpdateClassResponse(event))
                                                                               {
                                                                                 event->GetContenteResponseString()->Format(__L("[Error] Unkown class !!!"));
                                                                               }                                                                            
@@ -845,3 +857,7 @@ void NETCONN::Clean()
   agentstate                  = NULL;
   testupdateclass             = NULL;
 }
+
+
+#pragma endregion
+

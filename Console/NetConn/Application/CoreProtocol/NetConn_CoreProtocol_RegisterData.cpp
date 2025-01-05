@@ -27,7 +27,7 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_INCLUDES
+#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
@@ -43,9 +43,16 @@
 
 #include "HashSHA2.h"
 
-#include "XMemory_Control.h"
+#pragma endregion
+
+
+/*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_CONTROL_INCLUDE
+
+#include "GEN_Control.h"
 
 #pragma endregion
+
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
@@ -101,7 +108,7 @@ bool NETCONN_COREPROTOCOL_REGISTERDATA::InitializeData(bool isserver)
   bool status = DIOCOREPROTOCOL_REGISTERDATA::InitializeData(isserver);
 
   if(isserver)
-    {
+    {      
       group    = __L("Main Group");
       subgroup = __L("Sub Group");
     }

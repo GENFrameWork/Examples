@@ -56,8 +56,7 @@ class NETCONN_COREPROTOCOL_RESPONSE
 
     bool            CommandResponse                     (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
     bool            UpdateClassResponse                 (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-    bool            AskUpdateClassResponse              (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);
-
+    
   private:
 
     bool            CommandResponse_GetVersion          (DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event);

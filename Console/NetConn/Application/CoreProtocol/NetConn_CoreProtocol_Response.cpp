@@ -27,7 +27,7 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_INCLUDES
+#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
@@ -45,9 +45,16 @@
 #include "NetConn_CoreProtocol.h"
 #include "NetConn_CoreProtocol_Connection.h"
 
-#include "XMemory_Control.h"
+#pragma endregion
+
+
+/*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
+#pragma region PRECOMPILATION_CONTROL_INCLUDE
+
+#include "GEN_Control.h"
 
 #pragma endregion
+
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
@@ -211,46 +218,6 @@ bool NETCONN_COREPROTOCOL_RESPONSE::UpdateClassResponse(DIOCOREPROTOCOL_CONNECTI
       if(!message->GetHeader()->GetOperationParam()->Compare(__L("testupdateclass"), true))
         {
           status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClassDeserialize(message, connection->GetTestUpdateClass());
-        }
-    }
-
-  return status; 
-}
-
-
-/**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         bool NETCONN_COREPROTOCOL_RESPONSE::AskUpdateClassResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      AskUpdateClassResponse
-* @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
-bool NETCONN_COREPROTOCOL_RESPONSE::AskUpdateClassResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-{
-  bool status = false;
-
-  DIOCOREPROTOCOL_MESSAGE* message = event->GetMsg();
-  if(!message)
-    {
-      return status;
-    }
-
-  NETCONN_COREPROTOCOL_CONNECTION* connection = (NETCONN_COREPROTOCOL_CONNECTION*)event->GetConnection();
-  if(!connection)
-    {
-      return status;
-    }
-
-  DIOCOREPROTOCOL* protocol = connection->GetCoreProtocol();
-  if(protocol)
-    {
-      if(!message->GetHeader()->GetOperationParam()->Compare(__L("testupdateclass"), true))
-        {
-          status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClassSerialize(message, connection->GetTestUpdateClass());
         }
     }
 
