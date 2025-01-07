@@ -137,6 +137,7 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
   protocolCFG.SetIsCipher(true);
   protocolCFG.SetCompressHeader(true);
   protocolCFG.SetCompressContent(true);
+  protocolCFG.SetTimeToEliminateConnectionDisconnect(1);
 
   // ------------------------------------------------------------------------------------------------------
 
@@ -149,7 +150,7 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
       return false;
     }
 
-  diostreamTCPIPCFG->GetRemoteURL()->Set(__L("127.0.0.1"));
+  diostreamTCPIPCFG->GetRemoteURL()->Set(isserver?__L(""):__L("192.168.1.3"));
   diostreamTCPIPCFG->SetMode(isserver?DIOSTREAMMODE_SERVERMULTISOCKET:DIOSTREAMMODE_CLIENT);
   diostreamTCPIPCFG->SetRemotePort(1230);
 
@@ -336,10 +337,10 @@ void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnection
                                                                                           {                                                                                            
                                                                                             switch(event->GetEventType())
                                                                                               {
-                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), false);        
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), message->GetSizeAllMessage(), false);        
                                                                                                                                                                 break;
     
-                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), false);  
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), message->GetSizeAllMessage(), false);  
                                                                                                                                                                 break;  
                                                                                               }                                                                                                     
                                                                                           }
@@ -369,9 +370,4 @@ void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Clean()
 
 
 #pragma endregion
-
-
-
-
-
 

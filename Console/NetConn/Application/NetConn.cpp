@@ -586,7 +586,7 @@ bool NETCONN::KeyValidSecuences(int key)
   
                       if(!connection->IsServer())
                         {                            
-                          connection->GetTestUpdateClass()->Update();
+                          status = connection->GetTestUpdateClass()->Update();
                         }
                                             
                       XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
@@ -659,7 +659,7 @@ bool NETCONN::Show_TestUpdateClass()
   Show_Line(string, string2);
 
   string  = __L("");
-  string2.Format(__L("string %s"), GetTestUpdateClass()->GetString()->Get());   
+  string2.Format(__L("string \"%s\""), GetTestUpdateClass()->GetString()->Get());   
   Show_Line(string, string2);
 
   console->Printf(__L("\n"));
@@ -728,9 +728,9 @@ bool NETCONN::Show_ConnectionsStatus()
 
               if(modeserver)
                 {    
-                  if(connection->GetTestUpdateClass())  
+                  if(connection->GetTestUpdateClass() && connection->GetCoreProtocol()->UpdateClass_IsAllInitialized())  
                     {
-                      string.Format(__L("   %03d %-10s %-20s %-15s %03d %s \n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                      string.Format(__L("   %03d %-10s %-20s %-15s %d,\"%s\"\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
                     }
                 }
                else 
