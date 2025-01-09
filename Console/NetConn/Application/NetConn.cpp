@@ -369,7 +369,7 @@ bool NETCONN::AppProc_Update()
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
-                                                      if(xtimerupdateconsole->GetMeasureSeconds() >= 1)
+                                                      if(xtimerupdateconsole->GetMeasureMilliSeconds() >= 100)
                                                         {
                                                           Show_AllStatus();
                                                           xtimerupdateconsole->Reset(); 
@@ -717,28 +717,33 @@ bool NETCONN::Show_ConnectionsStatus()
           XSTRING                           statusstring;
 
           if(connection)
-            {         
-              connection->GetXTimerStatus()->GetMeasureString(measurestatus);         
-              connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
-              connection->Status_GetString(statusstring);
+            {                                                  
+              if((connection->Status_Get() == DIOCOREPROTOCOL_CONNECTION_STATUS_READY)        || 
+                 (connection->Status_Get() == DIOCOREPROTOCOL_CONNECTION_STATUS_INSTABILITY)  ||    
+                 (connection->Status_Get() == DIOCOREPROTOCOL_CONNECTION_STATUS_DISCONNECTED))
+                {       
+                  connection->GetXTimerStatus()->GetMeasureString(measurestatus);         
+                  connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
+                  connection->Status_GetString(statusstring);
 
-              //string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]  n msg [%d] \n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get(),  connection->Messages_GetAll()->GetAll()->GetSize());   
+                  //string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]  n msg [%d] \n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get(),  connection->Messages_GetAll()->GetAll()->GetSize());   
 
-              connection->GetIDConnection()->GetToString(connectionID);
+                  connection->GetIDConnection()->GetToString(connectionID);
 
-              if(modeserver)
-                {    
-                  if(connection->GetTestUpdateClass() && connection->GetCoreProtocol()->UpdateClass_IsAllInitialized())  
-                    {
-                      string.Format(__L("   %03d %-10s %-20s %-15s %d,\"%s\"\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                  if(modeserver)
+                    {    
+                      if(connection->GetTestUpdateClass() && connection->GetCoreProtocol()->UpdateClass_IsAllInitialized())  
+                        {
+                          string.Format(__L("   %03d %-10s %-20s %-15s %d,\"%s\"\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                        }
                     }
-                }
-               else 
-                {
-                  string.Format(__L("   %03d %-10s %-20s %-15s\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get());   
-                }
+                   else 
+                    {
+                      string.Format(__L("   %03d %-10s %-20s %-15s\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get());   
+                    }
               
-              console->Printf(string.Get());
+                  console->Printf(string.Get());
+                }
             }
         }
 
