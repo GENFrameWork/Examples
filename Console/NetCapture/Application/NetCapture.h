@@ -40,7 +40,7 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
-#include "APPConsole.h"
+#include "APPFlowConsole.h"
 
 #pragma endregion
 
@@ -92,7 +92,7 @@ class XMUTEX;
 class NETCAPTURE_CFG;
 class NETCAPTURE_SNIFFER;
 
-class NETCAPTURE : public APPCONSOLE, public XFSMACHINE
+class NETCAPTURE : public APPFLOWCONSOLE, public XFSMACHINE
 {
   public:
                                     NETCAPTURE                  ();

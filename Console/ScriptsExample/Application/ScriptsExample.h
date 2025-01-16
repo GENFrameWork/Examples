@@ -42,7 +42,7 @@
 
 #include "Script_XEvent.h"
 
-#include "APPConsole.h"
+#include "APPFlowConsole.h"
 
 #pragma endregion
 
@@ -114,7 +114,7 @@ class SCRIPT;
 class SCRIPTSEXAMPLE_CFG;
 
 
-class SCRIPTSEXAMPLE : public APPCONSOLE, public XFSMACHINE
+class SCRIPTSEXAMPLE : public APPFLOWCONSOLE, public XFSMACHINE
 {
   public:
                                     SCRIPTSEXAMPLE                          ();

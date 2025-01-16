@@ -39,7 +39,7 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
-#include "APPConsole.h"
+#include "APPFlowConsole.h"
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
@@ -122,13 +122,13 @@ class DIOSCRAPERWEBPUBLICIP;
 class DIOSCRAPERWEBGEOLOCATIONIP;
 class DIOSCRAPERWEBUSERAGENTID;
 class DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT;
-class APPINTERNETSERVICES;
+class APPFLOWINTERNETSERVICES;
 class BINCONNPRO_PROTOCOL;
 class BINCONNPRO_APPLICATIONDATA;
 class BINCONNPRO_CONNECTIONSMANAGER;
 
 
-class BINCONNPRO : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
+class BINCONNPRO : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
 {
   public:
                                     BINCONNPRO                              ();

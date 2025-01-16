@@ -135,7 +135,7 @@ bool NETCAPTURE_CFG::DelInstance()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_CFG::DoVariableMapping()
 {
-  if(!APPCFG::DoVariableMapping())
+  if(!APPFLOWCFG::DoVariableMapping())
     {
       return false;
     }
@@ -155,7 +155,7 @@ bool NETCAPTURE_CFG::DoVariableMapping()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_CFG::DoDefault()
 {
-  if(!APPCFG::DoDefault()) 
+  if(!APPFLOWCFG::DoDefault()) 
     {
       return false;
     }
@@ -177,13 +177,13 @@ bool NETCAPTURE_CFG::DoDefault()
 
   log_activesectionsID.Empty();
 
-  log_activesectionsID                 += APP_CFG_LOG_SECTIONID_INITIATION;
+  log_activesectionsID                 += APPFLOW_CFG_LOG_SECTIONID_INITIATION;
   log_activesectionsID                 += __L(",");
-  log_activesectionsID                 += APP_CFG_LOG_SECTIONID_GENERIC;
+  log_activesectionsID                 += APPFLOW_CFG_LOG_SECTIONID_GENERIC;
   log_activesectionsID                 += __L(",");
-  log_activesectionsID                 += APP_CFG_LOG_SECTIONID_STATUSAPP;
+  log_activesectionsID                 += APPFLOW_CFG_LOG_SECTIONID_STATUSAPP;
   log_activesectionsID                 += __L(",");
-  log_activesectionsID                 += APP_CFG_LOG_SECTIONID_ENDING;
+  log_activesectionsID                 += APPFLOW_CFG_LOG_SECTIONID_ENDING;
 
   log_levelmask                         = XLOGLEVEL_ALL;
   log_maxsize                           = 3000;
@@ -197,7 +197,7 @@ bool NETCAPTURE_CFG::DoDefault()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPCFG(namefile)
+* @fn         NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 * @brief      Constructor
 * @ingroup    
 * 
@@ -206,7 +206,7 @@ bool NETCAPTURE_CFG::DoDefault()
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPCFG(namefile)
+NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 
 {
   Clean();

@@ -39,7 +39,7 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
-#include "APPConsole.h"
+#include "APPFlowConsole.h"
 
 #include "MiniWebServer_APIRest.h"
 
@@ -107,11 +107,11 @@ class XDIR;
 class XSCHEDULER;
 class XSCHEDULER_XEVENT;
 class DIOWEBSERVER_XEVENT;
-class APPINTERNETSERVICES;
-class APPWEBSERVER;
+class APPFLOWINTERNETSERVICES;
+class APPFLOWWEBSERVER;
 
 
-class MINIWEBSERVER : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
+class MINIWEBSERVER : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
 {
   public:
                                     MINIWEBSERVER                           ();
@@ -141,9 +141,9 @@ class MINIWEBSERVER : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
     XTIMER*                         xtimerupdateconsole;
     XMUTEX*                         xmutexshowallstatus;
     
-    APPWEBSERVER*                   appwebserver;
+    APPFLOWWEBSERVER*               appwebserver;
     MINIWEBSERVER_APIREST*          apirest;
-    APPWEBSERVER*                   appwebsocket;
+    APPFLOWWEBSERVER*               appwebsocket;
 };
 
 #pragma endregion

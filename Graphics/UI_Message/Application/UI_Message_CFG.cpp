@@ -116,7 +116,7 @@ bool UI_MESSAGE_CFG::DelInstance()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE_CFG::DoVariableMapping()
 {
-  if(!APPCFG::DoVariableMapping())
+  if(!APPFLOWCFG::DoVariableMapping())
     {
       return false;
     }
@@ -136,7 +136,7 @@ bool UI_MESSAGE_CFG::DoVariableMapping()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE_CFG::DoDefault()
 {
-  if(!APPCFG::DoDefault()) 
+  if(!APPFLOWCFG::DoDefault()) 
     {
       return false;
     }
@@ -154,13 +154,13 @@ bool UI_MESSAGE_CFG::DoDefault()
 
   log_activesectionsID.Empty();
 
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_INITIATION;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_INITIATION;
   log_activesectionsID                  += __L(",");
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_GENERIC;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_GENERIC;
   log_activesectionsID                  += __L(",");
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_STATUSAPP;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_STATUSAPP;
   log_activesectionsID                  += __L(",");
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_ENDING;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_ENDING;
 
   log_levelmask                         = XLOGLEVEL_ALL;
   log_maxsize                           = 3000;
@@ -183,7 +183,7 @@ bool UI_MESSAGE_CFG::DoDefault()
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-UI_MESSAGE_CFG::UI_MESSAGE_CFG(XCHAR* namefile) : APPCFG(namefile)
+UI_MESSAGE_CFG::UI_MESSAGE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
 

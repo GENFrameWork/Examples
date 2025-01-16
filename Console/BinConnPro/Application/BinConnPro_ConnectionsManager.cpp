@@ -280,8 +280,8 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
               protocol->SetConnectionsManager(this);
               protocol->SetMaskID(BINCONNPRO_CONNECTIONSMANAGER_PROTOCOLMASKID | (isserver?DIOPROTOCOL_CMDTYPE_ISSERVER:0));
               protocol->SetProtocolVersion(BINCONNPRO_PROTOCOL_VERSION, BINCONNPRO_PROTOCOL_SUBVERSION, BINCONNPRO_PROTOCOL_SUBVERSIONERR);
-              protocol->SetApplicationVersion(applicationversion, applicationsubversion, applicationsubversionerr);
-              protocol->GetApplicationName()->Set(applicationname);
+              protocol->Application_SetVersion(applicationversion, applicationsubversion, applicationsubversionerr);
+              protocol->Application_GetName()->Set(applicationname);
 
 
               if(isserver)

@@ -14,9 +14,9 @@ set(GEN_DIRECTORY "../../../../")
 # features/Defines
 
 option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
+option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
-option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
                     
 option(DIO_FEATURE                                              "Data Input/Output"                                       ON ) 
 option(DIO_CHECKCONNECTIONS_FEATURE                             "Check Connections"                                       ON )
@@ -28,27 +28,27 @@ option(DIO_COREPROTOCOL_FEATURE                                 "Data Input/Outp
 option(HASH_SHA2_FEATURE                                        "Hash SHA2"                                               ON )
 option(CIPHER_SYMMETRIC_AES_FEATURE                             "Cipher Symetric AES"                                     ON )
     
-option(APP_FEATURE                                              "Application modules"                                     ON )
-option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )
-option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
-option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
-option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
-option(APP_EXTENDED_INTERNETSTATUS_FEATURE                      "Application Extended Internet Status"                    ON )  
-option(APP_CHECKRESOURCESHARDWARE_FEATURE                       "Application Check Resources Hardwar"                     ON )
-option(APP_INTERNETSERVICES_FEATURE                             "Application Internet Services"                           ON )
-option(APP_LOG_FEATURE                                          "Application Log"                                         ON )
-    
-option(APP_CFG_GENERAL_FEATURE                                  "Application CFG General"                                 ON )  
-option(APP_CFG_LOG_FEATURE                                      "Application CFG LOG"                                     ON )
-option(APP_CFG_INTERNETSERVICES_FEATURE                         "Application CFG Internet services"                       ON )      
-option(APP_CFG_CHECKRESOURCESHARDWARE_FEATURE                   "Application CFG Check Resorces HW"                       ON )  
-option(APP_CFG_DNSRESOLVER_FEATURE                              "Application CFG DNS "                                    ON )   
-option(APP_CFG_DIOLOCATION_FEATURE                              "Application CFG DIO Location"                            ON )          
+option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
+option(APPFLOW_CONSOLE_FEATURE                                  "Application Flow Console"                                ON )
+option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  
+option(APPFLOW_EXTENDED_APPLICATIONHEADER_FEATURE               "Application Flow Extended Aplication Header"             ON )  
+option(APPFLOW_EXTENDED_APPLICATIONSTATUS_FEATURE               "Application Flow Extended Aplication Status"             ON )  
+option(APPFLOW_EXTENDED_INTERNETSTATUS_FEATURE                  "Application Flow Extended Internet Status"               ON )  
+option(APPFLOW_CHECKRESOURCESHARDWARE_FEATURE                   "Application Flow Check Resources Hardwar"                ON )
+option(APPFLOW_INTERNETSERVICES_FEATURE                         "Application Flow Internet Services"                      ON )
+option(APPFLOW_LOG_FEATURE                                      "Application Flow Log"                                    ON )
+                                                                           
+option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flow CFG General"                            ON )  
+option(APPFLOW_CFG_LOG_FEATURE                                  "Application Flow CFG LOG"                                ON )
+option(APPFLOW_CFG_INTERNETSERVICES_FEATURE                     "Application Flow CFG Internet services"                  ON )      
+option(APPFLOW_CFG_CHECKRESOURCESHARDWARE_FEATURE               "Application Flow CFG Check Resorces HW"                  ON )  
+option(APPFLOW_CFG_DNSRESOLVER_FEATURE                          "Application Flow CFG DNS "                               ON )   
+option(APPFLOW_CFG_DIOLOCATION_FEATURE                          "Application Flow CFG DIO Location"                       ON )          
 
 # --------------------------------------------------------------------
 # Config Application Macro
 
-set(APP_CFG_NETCONN "-DAPP_CFG=NETCONN_CFG::GetInstance()")
+set(APP_CFG_NETCONN "-DAPPFLOW_CFG=NETCONN_CFG::GetInstance()")
 add_definitions(${APP_CFG_NETCONN})
 
 

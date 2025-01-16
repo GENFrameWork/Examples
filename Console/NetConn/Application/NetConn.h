@@ -40,7 +40,7 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
-#include "APPConsole.h"
+#include "APPFlowConsole.h"
 
 #include "NetConn_CoreProtocol_Response.h"
 
@@ -113,13 +113,13 @@ class DIOSCRAPERWEBPUBLICIP;
 class DIOSCRAPERWEBGEOLOCATIONIP;
 class DIOSCRAPERWEBUSERAGENTID;
 class DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT;
-class APPINTERNETSERVICES;
+class APPFLOWINTERNETSERVICES;
 class NETCONN_COREPROTOCOL_CONNECTIONSMANAGER;
 class NETCONN_AGENTSTATE;
 class NETCONN_TESTUPDATECLASS;
 
 
-class NETCONN : public APPCONSOLE, public XOBSERVER, public XFSMACHINE
+class NETCONN : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
 {
   public:
                                                 NETCONN                                       ();

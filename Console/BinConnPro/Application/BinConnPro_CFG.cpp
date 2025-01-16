@@ -118,7 +118,7 @@ bool BINCONNPRO_CFG::DelInstance()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::DoVariableMapping()
 {
-  if(!APPCFG::DoVariableMapping())
+  if(!APPFLOWCFG::DoVariableMapping())
     {
       return false;
     }
@@ -146,7 +146,7 @@ bool BINCONNPRO_CFG::DoVariableMapping()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::DoDefault()
 {
-  if(!APPCFG::DoDefault()) 
+  if(!APPFLOWCFG::DoDefault()) 
     {
       return false;
     }
@@ -246,7 +246,7 @@ XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPCFG(namefile)
+BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
 

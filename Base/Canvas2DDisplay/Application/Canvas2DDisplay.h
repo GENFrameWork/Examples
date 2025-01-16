@@ -33,7 +33,7 @@
 #pragma region INCLUDES
 
 #include "XBuffer.h"
-#include "APPBase.h"
+#include "APPFlowBase.h"
 
 
 #pragma endregion
@@ -111,7 +111,7 @@
 class DIOSTREAM;
 class MAIN;
 
-class CANVAS2DDISPLAY : public APPBASE
+class CANVAS2DDISPLAY : public APPFLOWBASE
 {
   public:
                         CANVAS2DDISPLAY                     ();

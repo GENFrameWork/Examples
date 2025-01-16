@@ -32,7 +32,7 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "APPCFG.h"
+#include "APPFlowCFG.h"
 
 #pragma endregion
 
@@ -46,7 +46,7 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class SCRIPTSEXAMPLE_CFG : public APPCFG
+class SCRIPTSEXAMPLE_CFG : public APPFLOWCFG
 {
   public:
 

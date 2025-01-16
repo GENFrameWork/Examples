@@ -90,9 +90,9 @@
 
 #include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
 
-#include "APPLog.h"
-#include "APPInternetServices.h"
-#include "APPExtended.h"
+#include "APPFlowLog.h"
+#include "APPFlowInternetServices.h"
+#include "APPFlowExtended.h"
 
 #include "NetConn_CFG.h"
 #include "NetConn_CoreProtocol.h"
@@ -223,9 +223,9 @@ bool NETCONN::AppProc_Ini()
         }
     }
 
-  GetApplicationName()->AddFormat(__L("%s %s"), APPLICATION_NAMEAPP, modeserver?__L("Server"):__L("Client")); 
+  Application_GetName()->AddFormat(__L("%s %s"), APPLICATION_NAMEAPP, modeserver?__L("Server"):__L("Client")); 
 
-  GEN_SET_VERSION(GetApplicationName()->Get(), APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+  GEN_SET_VERSION(Application_GetName()->Get(), APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
   
   //--------------------------------------------------------------------------------------------------
 
@@ -234,13 +234,13 @@ bool NETCONN::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
   //--------------------------------------------------------------------------------------------------
 
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
@@ -255,7 +255,7 @@ bool NETCONN::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_CFG_SETAUTOMATICTRACETARGETS
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
 
   //--------------------------------------------------------------------------------------------------
 
@@ -273,7 +273,7 @@ bool NETCONN::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, this);
+  APPFLOW_EXTENDED.APPStart(&APPFLOW_CFG, this);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -365,7 +365,7 @@ bool NETCONN::AppProc_Update()
 
           case NETCONN_XFSMSTATE_INI        : break;
 
-          case NETCONN_XFSMSTATE_UPDATE     : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case NETCONN_XFSMSTATE_UPDATE     : if(GetExitType() == APPFLOWBASE_EXITTYPE_UNKNOWN)
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
@@ -479,9 +479,9 @@ bool NETCONN::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd();
-  APP_EXTENDED.DelInstance();  
-  APP_CFG.DelInstance();
+  APPFLOW_EXTENDED.APPEnd();
+  APPFLOW_EXTENDED.DelInstance();  
+  APPFLOW_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -520,14 +520,14 @@ bool NETCONN::KeyValidSecuences(int key)
   XCHAR character = (XCHAR)key;
 
   if((character<32) || (character>127)) character = __C('?');
-  APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
+  APPFLOW_LOG_ENTRY(XLOGLEVEL_WARNING, APPFLOW_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
 
   console->Printf(__L("\r    \r"));
 
   switch(key)
     {
       case 0x1B : // ESC Exit application
-                  SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                   break;
 
       case 'T'  : if(connectionsmanager)
@@ -772,7 +772,7 @@ bool NETCONN::Show_AllStatus()
 {
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  APP_EXTENDED.ShowAll();
+  APPFLOW_EXTENDED.ShowAll();
   
   Show_TestUpdateClass();
   Show_ConnectionsStatus();

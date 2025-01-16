@@ -39,35 +39,6 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-#ifdef WINDOWS
-
-#pragma warning (disable : 4091)   // warning C4091: 'typedef ': ignored on left of 'xxx' when no variable is declared
-#pragma warning (disable : 4595)   // warning C4595: 'xxx': non-member operator new or delete functions may not be declared inline
-#pragma warning (disable : 4996)   // warning C4996: 'xxx': was declared deprecated
-                                   // warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
-#endif
-
-//#define XTRACE_ACTIVE
-//#define XMEMORY_CONTROL_ACTIVE
-
-//#ifndef UNICODE
-//#define UNICODE
-//#endif
-
-//#define APP_ACTIVE
-//#define APP_CFG_GENERAL_ACTIVE
-//#define APP_CFG_LOG_ACTIVE
-//#define APP_CFG_INTERNETSERVICES_ACTIVE
-//#define APP_CFG_DYNDNSMANAGER_ACTIVE
-//#define APP_CFG_WEBSERVER_ACTIVE
-
-//#define DIO_ACTIVE
-//#define DIOPING_ACTIVE
-//#define DIOTCPIP_ACTIVE
-//#define DIOICMP_ACTIVE
-//#define DIOUDP_ACTIVE
-
-//#define APP_CFG   MINIWEBSERVER_CFG::GetInstance()
 
 #pragma endregion
 

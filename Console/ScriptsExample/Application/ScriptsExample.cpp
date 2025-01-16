@@ -87,8 +87,8 @@
 #include "DIOScraperWebGeolocationIP.h"
 #include "DIOScraperWebUserAgentID.h"
 
-#include "APPLog.h"
-#include "APPExtended.h"
+#include "APPFlowLog.h"
+#include "APPFlowExtended.h"
 
 #ifdef SCRIPT_LIB_CFG_ACTIVE
 #include "Script_Lib_CFG.h"
@@ -215,7 +215,7 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
 
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
-  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+  Application_GetName()->Set(APPLICATION_NAMEAPP);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -224,15 +224,15 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
   //--------------------------------------------------------------------------------------------------
 
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS , APPDEFAULT_DIRECTORY_SCRIPTS);
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPDEFAULT_DIRECTORY_GRAPHICS);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS , APPFLOW_DEFAULT_DIRECTORY_SCRIPTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPFLOW_DEFAULT_DIRECTORY_GRAPHICS);
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
   //--------------------------------------------------------------------------------------------------
@@ -246,7 +246,7 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_CFG_SETAUTOMATICTRACETARGETS
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
 
   //--------------------------------------------------------------------------------------------------
 
@@ -264,7 +264,7 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, this);
+  APPFLOW_EXTENDED.APPStart(&APPFLOW_CFG, this);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -295,7 +295,7 @@ bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, xpath);
 
   GEN_SCRIPT_CACHE.Cache_AllDirectory(xpath);
-  GEN_SCRIPT_CACHE.Cache_AllList(APP_CFG.Scripts_GetAll());
+  GEN_SCRIPT_CACHE.Cache_AllList(APPFLOW_CFG.Scripts_GetAll());
 
   #endif
 
@@ -328,7 +328,7 @@ bool SCRIPTSEXAMPLE::AppProc_Update()
 
           case SCRIPTSEXAMPLE_XFSMSTATE_INI         : break;
 
-          case SCRIPTSEXAMPLE_XFSMSTATE_UPDATE      : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case SCRIPTSEXAMPLE_XFSMSTATE_UPDATE      : if(GetExitType() == APPFLOWBASE_EXITTYPE_UNKNOWN)
                                                         {
                                                           if(xtimerupdateconsole)
                                                             {
@@ -417,9 +417,9 @@ bool SCRIPTSEXAMPLE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd();
-  APP_EXTENDED.DelInstance();  
-  APP_CFG.DelInstance();
+  APPFLOW_EXTENDED.APPEnd();
+  APPFLOW_EXTENDED.DelInstance();  
+  APPFLOW_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -443,19 +443,19 @@ bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
   XCHAR character = (XCHAR)key;
 
   if((character<32) || (character>127)) character = __C('?');
-  APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
+  APPFLOW_LOG_ENTRY(XLOGLEVEL_WARNING, APPFLOW_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
 
   console->Printf(__L("\r    \r"));
 
   switch(key)
     {
       case 0x1B : // ESC Exit application
-                  SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                   break;
 
       case 'R'  : { if(xtimerscriptrun) xtimerscriptrun->Reset();
 
-                    SCRIPT::LoadScriptAndRun(APP_CFG.Scripts_GetAll(), SCRIPTSEXAMPLE::AdjustLibraries);
+                    SCRIPT::LoadScriptAndRun(APPFLOW_CFG.Scripts_GetAll(), SCRIPTSEXAMPLE::AdjustLibraries);
 
                     XQWORD timereleapsed      =  xtimerscriptrun->GetMeasureMilliSeconds();
                     double timereleapsedfloat = ((double)timereleapsed/(double)1000);
@@ -534,7 +534,7 @@ bool SCRIPTSEXAMPLE::Show_AllStatus()
 
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  APP_EXTENDED.ShowAll();
+  APPFLOW_EXTENDED.ShowAll();
   
   if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
 
@@ -557,7 +557,7 @@ void SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
 {
   #ifdef SCRIPT_LIB_CFG_ACTIVE
   
-  SCRIPT_SET_LIB_CFG(script, APP_CFG);
+  SCRIPT_SET_LIB_CFG(script, APPFLOW_CFG);
 
   #endif
 }

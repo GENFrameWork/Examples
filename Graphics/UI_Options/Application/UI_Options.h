@@ -40,7 +40,7 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
-#include "APPGraphics.h"
+#include "APPFlowGraphics.h"
 
 #pragma endregion
 
@@ -143,7 +143,7 @@ class UI_ELEMENT_TEXT;
 class UI_OPTIONS_CFG;
 
 
-class UI_OPTIONS : public APPGRAPHICS, public XFSMACHINE
+class UI_OPTIONS : public APPFLOWGRAPHICS, public XFSMACHINE
 {
   public:
                                     UI_OPTIONS                              ();

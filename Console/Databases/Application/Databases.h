@@ -43,7 +43,7 @@
 #include "DB_SQL_Factory.h"
 #include "DB_SQL_Database.h"
 
-#include "APPConsole.h"
+#include "APPFlowConsole.h"
 
 #pragma endregion
 
@@ -113,7 +113,7 @@ class DIOSCRAPERWEBPUBLICIP;
 class DIOSCRAPERWEBUSERAGENTID;
 
 
-class DATABASES : public APPCONSOLE, public XFSMACHINE
+class DATABASES : public APPFLOWCONSOLE, public XFSMACHINE
 {
   public:
                                     DATABASES                               ();

@@ -13,16 +13,16 @@ set(GEN_DIRECTORY "../../../../")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                          "Activate Debug mode"                                     ON )
-option(XTRACE_FEATURE                                         "Activate XTrace"                                         ON )
-option(XMEMORY_CONTROL_FEATURE                                "Activate XMemory Control"                                ON )
-                                      
-option(DIO_FEATURE                                            "Activate Data Input/Output"                              ON ) 
-option(DIO_STREAM_FEATURE                                     "Activate Data Input/Output Stream"                       ON )
-option(DIO_STREAMUART_FEATURE                                 "Activate Data Input/Output Stream UART"                  ON )
-option(DIO_STREAMUSB_FEATURE                                  "Activate Data Input/Output Stream USB"                   ON )
-    
-option(APP_FEATURE                                            "Activate Application modules"                            ON )
+option(DEBUG_FEATURE                                            "Debug mode"                                                                                        ON )
+option(XTRACE_FEATURE                                           "XTrace"                                                                                            ON )
+option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                                                                   ON )
+                                                                                                
+option(DIO_FEATURE                                              "Data Input/Output"                                                                                 ON ) 
+option(DIO_STREAM_FEATURE                                       "Data Input/Output Stream"                                                                          ON )
+option(DIO_STREAMUART_FEATURE                                   "Data Input/Output Stream UART"                                                                     ON )
+option(DIO_STREAMUSB_FEATURE                                    "Data Input/Output Stream USB"                                                                      ON )
+                                                              
+option(APPFLOW_FEATURE                                          "Application flow modules"                                                                          ON )
 
 
 # --------------------------------------------------------------------

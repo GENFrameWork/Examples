@@ -32,7 +32,7 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "APPCFG.h"
+#include "APPFlowCFG.h"
 
 #pragma endregion
 
@@ -52,7 +52,7 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class MINIWEBSERVER_CFG : public APPCFG
+class MINIWEBSERVER_CFG : public APPFLOWCFG
 {
   public:
 

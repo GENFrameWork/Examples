@@ -20,16 +20,16 @@ option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemor
 option(DIO_FEATURE                                              "Input/Output"                                            ON )
 option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
 
-option(APP_FEATURE                                              "Activate Application modules"                            ON )
-option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
-option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
-option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
-option(APP_CONSOLE_FEATURE                                      "Activate Application Console"                            ON )
-option(APP_LOG_FEATURE                                          "Activate Application Log"                                ON )
-    
-option(APP_CFG_GENERAL_FEATURE                                  "Activate Application CFG General"                        ON )
-option(APP_CFG_LOG_FEATURE                                      "Activate Application CFG LOG"                            ON )
-option(APP_CFG_SCRIPTS_FEATURE                                  "Application Scripts List"                                ON )  
+option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
+option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  
+option(APPFLOW_EXTENDED_APPLICATIONHEADER_FEATURE               "Application Flow Extended Aplication Header"             ON )  
+option(APPFLOW_EXTENDED_APPLICATIONSTATUS_FEATURE               "Application Flow Extended Aplication Status"             ON )  
+option(APPFLOW_CONSOLE_FEATURE                                  "Application Flow Console"                                ON )
+option(APPFLOW_LOG_FEATURE                                      "Application Flow Log"                                    ON )
+                                                                             
+option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flow CFG General"                            ON )
+option(APPFLOW_CFG_LOG_FEATURE                                  "Application Flow CFG LOG"                                ON )
+option(APPFLOW_CFG_SCRIPTS_FEATURE                              "Application Flow Scripts List"                           ON )  
 
 option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
     
@@ -53,7 +53,7 @@ option(DIO_FEATURE                                              "Input/Output"  
 # --------------------------------------------------------------------
 # Config Application Macro
 
-set(APP_CFG_SCRIPTS "-DAPP_CFG=SCRIPTSEXAMPLE_CFG::GetInstance()")
+set(APP_CFG_SCRIPTS "-DAPPFLOW_CFG=SCRIPTSEXAMPLE_CFG::GetInstance()")
 add_definitions(${APP_CFG_SCRIPTS})
 
 

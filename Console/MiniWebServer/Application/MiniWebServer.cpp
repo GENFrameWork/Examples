@@ -92,11 +92,11 @@
 #include "DIOScraperWebGeolocationIP.h"
 #include "DIOScraperWebUserAgentID.h"
 
-#include "APPBase.h"
-#include "APPLog.h"
-#include "APPInternetServices.h"
-#include "APPWebServer.h"
-#include "APPExtended.h"
+#include "APPFlowBase.h"
+#include "APPFlowLog.h"
+#include "APPFlowInternetServices.h"
+#include "APPFlowWebServer.h"
+#include "APPFlowExtended.h"
 
 #include "MiniWebServer_CFG.h"
 
@@ -207,7 +207,7 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
-  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+  Application_GetName()->Set(APPLICATION_NAMEAPP);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -216,15 +216,15 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
   //--------------------------------------------------------------------------------------------------
 
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_WEB,  APPDEFAULT_DIRECTORY_WEB);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_WEB,  APPFLOW_DEFAULT_DIRECTORY_WEB);
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
@@ -239,7 +239,7 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_CFG_SETAUTOMATICTRACETARGETS
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
 
   //--------------------------------------------------------------------------------------------------
 
@@ -257,7 +257,7 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, this);
+  APPFLOW_EXTENDED.APPStart(&APPFLOW_CFG, this);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -291,15 +291,15 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
 
   status = false;
 
-  if(APP_CFG.WebServer_GetPort())
+  if(APPFLOW_CFG.WebServer_GetPort())
     {
-      string.Format(APPCONSOLE_DEFAULTMESSAGEMASK,__L("Inicializando Web Server"));
+      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando Web Server"));
       console->PrintMessage(string.Get(),1,true,false);
 
-      appwebserver = new APPWEBSERVER();
+      appwebserver = new APPFLOWWEBSERVER();
       if(appwebserver) status = true;
 
-      if(status) status = appwebserver->Ini(&APP_CFG, true, false, false);
+      if(status) status = appwebserver->Ini(&APPFLOW_CFG, true, false, false);
 
       stringresult = (status)?__L("Ok."):__L("ERROR!");
       console->PrintMessage(stringresult.Get(), 0, false, true);
@@ -315,20 +315,20 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
           if(!apirest) return false;
         }
 
-      APP_LOG_ENTRY((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
+      APPFLOW_LOG_ENTRY((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR, APPFLOW_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
     }
 
   //--------------------------------------------------------------------------------------------------
 
   status = false;
 
-  string.Format(APPCONSOLE_DEFAULTMESSAGEMASK,__L("Inicializando WebSocket"));
+  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando WebSocket"));
   console->PrintMessage(string.Get(),1,true,false);
 
-  appwebsocket = new APPWEBSERVER();
+  appwebsocket = new APPFLOWWEBSERVER();
   if(appwebsocket) status = true;
 
-  if(status) status = appwebsocket->Ini(17009, true, APP_CFG.WebServer_GetTimeoutToServerPage(), APP_CFG.WebServer_GetLocalAddress());
+  if(status) status = appwebsocket->Ini(17009, true, APPFLOW_CFG.WebServer_GetTimeoutToServerPage(), APPFLOW_CFG.WebServer_GetLocalAddress());
 
   stringresult = (status)?__L("Ok."):__L("ERROR!");
   console->PrintMessage(stringresult.Get(), 0, false, true);
@@ -343,7 +343,7 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
       SubscribeEvent(DIOWEBSERVER_XEVENT_TYPE_WEBSOCKET_DISCONNECTED , (XSUBJECT *)appwebsocket);
     }
 
-  APP_LOG_ENTRY((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR, APP_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
+  APPFLOW_LOG_ENTRY((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR, APPFLOW_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
 
   //--------------------------------------------------------------------------------------------------
 
@@ -373,7 +373,7 @@ bool MINIWEBSERVER::AppProc_Update()
         {
           case MINIWEBSERVER_XFSMSTATE_NONE       : break;
 
-          case MINIWEBSERVER_XFSMSTATE_INI        : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case MINIWEBSERVER_XFSMSTATE_INI        : if(GetExitType() == APPFLOWBASE_EXITTYPE_UNKNOWN)
                                                       {
                                                         if(xtimerupdateconsole)
                                                           {
@@ -455,7 +455,7 @@ bool MINIWEBSERVER::AppProc_End()
 
   if(appwebserver)
     {
-      string.Format(APPCONSOLE_DEFAULTMESSAGEMASK,__L("Desactivando servidor web"));
+      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Desactivando servidor web"));
       console->PrintMessage(string.Get(),1,true,false);
 
       UnSubscribeEvent(DIOWEBSERVER_XEVENT_TYPE_REQUEST             , (XSUBJECT *)appwebserver);
@@ -469,7 +469,7 @@ bool MINIWEBSERVER::AppProc_End()
       stringresult = __L("Ok.");
 
       console->PrintMessage(stringresult.Get(), 0, false, true);
-      XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_ENDING, false, __L("%s: %s") , string.Get(), stringresult.Get());
+      XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_ENDING, false, __L("%s: %s") , string.Get(), stringresult.Get());
     }
 
   if(apirest)
@@ -482,7 +482,7 @@ bool MINIWEBSERVER::AppProc_End()
 
   if(appwebsocket)
     {
-      string.Format(APPCONSOLE_DEFAULTMESSAGEMASK,__L("Desactivando WebSocket"));
+      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Desactivando WebSocket"));
       console->PrintMessage(string.Get(),1,true,false);
 
       UnSubscribeEvent(DIOWEBSERVER_XEVENT_TYPE_REQUEST                 , (XSUBJECT *)appwebsocket);
@@ -498,14 +498,14 @@ bool MINIWEBSERVER::AppProc_End()
       stringresult = __L("Ok.");
 
       console->PrintMessage(stringresult.Get(), 0, false, true);
-      XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_ENDING, false, __L("%s: %s") , string.Get(), stringresult.Get());
+      XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_ENDING, false, __L("%s: %s") , string.Get(), stringresult.Get());
     }
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd();
-  APP_EXTENDED.DelInstance();  
-  APP_CFG.DelInstance();
+  APPFLOW_EXTENDED.APPEnd();
+  APPFLOW_EXTENDED.DelInstance();  
+  APPFLOW_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -529,14 +529,14 @@ bool MINIWEBSERVER::KeyValidSecuences(int key)
   XCHAR character = (XCHAR)key;
 
   if((character<32) || (character>127)) character = __C('?');
-  APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
+  APPFLOW_LOG_ENTRY(XLOGLEVEL_WARNING, APPFLOW_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
 
   console->Printf(__L("\r    \r"));
 
   switch(key)
     {
       case 0x1B : // ESC Exit application
-                  SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                   break;
     }
 
@@ -667,7 +667,7 @@ bool MINIWEBSERVER::Show_AllStatus()
 
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  APP_EXTENDED.ShowAll();
+  APPFLOW_EXTENDED.ShowAll();
 
   if(Show_WebServerConfig())  console->PrintMessage(__L(""),0, false, true);
   if(Show_WebSocketConfig())  console->PrintMessage(__L(""),0, false, true);

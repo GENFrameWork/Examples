@@ -90,8 +90,8 @@
 
 #include "DB_SQL_Result.h"
 
-#include "APPLog.h"
-#include "APPExtended.h"
+#include "APPFlowLog.h"
+#include "APPFlowExtended.h"
 
 #include "Databases_CFG.h"
 
@@ -203,7 +203,7 @@ bool DATABASES::AppProc_Ini()
 
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
-  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+  Application_GetName()->Set(APPLICATION_NAMEAPP);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -212,15 +212,15 @@ bool DATABASES::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
   //--------------------------------------------------------------------------------------------------
 
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_DATABASES, APPDEFAULT_DIRECTORY_DATABASES);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_DATABASES, APPFLOW_DEFAULT_DIRECTORY_DATABASES);
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
@@ -235,7 +235,7 @@ bool DATABASES::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  APP_CFG_SETAUTOMATICTRACETARGETS
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
 
   //--------------------------------------------------------------------------------------
 
@@ -254,7 +254,7 @@ bool DATABASES::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, this);
+  APPFLOW_EXTENDED.APPStart(&APPFLOW_CFG, this);
 
   //--------------------------------------------------------------------------------------
 
@@ -303,7 +303,7 @@ bool DATABASES::AppProc_Update()
         {
           case DATABASES_XFSMSTATE_NONE       : break;
 
-          case DATABASES_XFSMSTATE_INI        : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case DATABASES_XFSMSTATE_INI        : if(GetExitType() == APPFLOWBASE_EXITTYPE_UNKNOWN)
                                                 {
                                                   if(xtimerupdateconsole)
                                                     {
@@ -387,9 +387,9 @@ bool DATABASES::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd();
-  APP_EXTENDED.DelInstance();  
-  APP_CFG.DelInstance();
+  APPFLOW_EXTENDED.APPEnd();
+  APPFLOW_EXTENDED.DelInstance();  
+  APPFLOW_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -413,12 +413,12 @@ bool DATABASES::KeyValidSecuences(int key)
   XCHAR character = (XCHAR)key;
 
   if((character<32) || (character>127)) character = __C('?');
-  APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
+  APPFLOW_LOG_ENTRY(XLOGLEVEL_WARNING, APPFLOW_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
 
   switch(key)
     {
       case 0x1B : // ESC Exit application
-                  SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                   break;
 
       case 'M'  : DataBase_ChangeType(DB_SQL_DATABASE_TYPE_MYSQL);       break;
@@ -487,22 +487,22 @@ bool DATABASES::Database_DoTest()
 
   connection  = database->CreateConnection();
 
-  string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Creando Conexion "));
+  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Creando Conexion "));
   console->PrintMessage(string.Get(), 1, true,false);
 
   stringresult = connection?__L("Ok."):__L("Error!");
   console->PrintMessage(stringresult.Get(), 0, false, true);
-  APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+  APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
   if(connection)
     {
       XSTRING str;
 
-      if(APP_CFG.Database_GetURL()->IsEmpty())
+      if(APPFLOW_CFG.Database_GetURL()->IsEmpty())
              connection->SetOption(__L("URL")      , __L("127.0.0.1"));
-        else connection->SetOption(__L("URL")      , APP_CFG.Database_GetURL()->Get());
+        else connection->SetOption(__L("URL")      , APPFLOW_CFG.Database_GetURL()->Get());
 
-      connection->SetOption(__L("DATABASE") , APP_CFG.Database_DatabaseName()->Get());
+      connection->SetOption(__L("DATABASE") , APPFLOW_CFG.Database_DatabaseName()->Get());
 
       if(database->GetType() ==  DB_SQL_DATABASE_TYPE_SQLITE)
         {
@@ -513,41 +513,41 @@ bool DATABASES::Database_DoTest()
         }
        else
         {
-          if(APP_CFG.Database_GetPort())
-                 str.Format(__L("%d") , APP_CFG.Database_GetPort());
+          if(APPFLOW_CFG.Database_GetPort())
+                 str.Format(__L("%d") , APPFLOW_CFG.Database_GetPort());
             else str.Format(__L("%d") , database->GetDefaultPort());
 
           connection->SetOption(__L("PORT"), str.Get());
         }
 
-      connection->SetOption(__L("USER")     , APP_CFG.Database_GetUser()->Get());
-      connection->SetOption(__L("PASSWORD") , APP_CFG.Database_GetPassword()->Get());
+      connection->SetOption(__L("USER")     , APPFLOW_CFG.Database_GetUser()->Get());
+      connection->SetOption(__L("PASSWORD") , APPFLOW_CFG.Database_GetPassword()->Get());
 
-      str.Format(__L("%d"), APP_CFG.Database_GetTimeoutConnection());
+      str.Format(__L("%d"), APPFLOW_CFG.Database_GetTimeoutConnection());
       connection->SetOption(__L("TIMEOUT")  , str.Get());
 
 
-      string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Abriendo/conectando Base de datos"));
+      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Abriendo/conectando Base de datos"));
       console->PrintMessage(string.Get(), 1, true,false);
 
       status = database->Open();
 
       stringresult.Format(__L("%s Thread Safe: %s"), (status?__L("Ok."):__L("Error!")), (database->IsThreadSafe()?__L("Si"):__L("No")));
       console->PrintMessage(stringresult.Get(), 0, false, true);
-      APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+      APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
       if(status)
         {
           /*--- ERASE TABLE -----------------------------------------------------------------------------------------------------*/
 
-          string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Borrando tabla"));
+          string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Borrando tabla"));
           console->PrintMessage(string.Get(), 1, true,false);
 
           status = database->Table_Delete(DATABASES_TABLE_TEST_NAME);
 
           stringresult.Format((status?__L("Ok."):__L("Error!")));
           console->PrintMessage(stringresult.Get(), 0, false, true);
-          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+          APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
           /*--- CREATE TABLE ----------------------------------------------------------------------------------------------------*/
 
@@ -608,14 +608,14 @@ bool DATABASES::Database_DoTest()
                                                               break;
                 }
 
-              string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Creando tabla"));
+              string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Creando tabla"));
               console->PrintMessage(string.Get(), 1, true,false);
 
               status = database->Table_Create(DATABASES_TABLE_TEST_NAME, fields, nfields);
 
               stringresult.Format((status?__L("Ok."):__L("Error!")));
               console->PrintMessage(stringresult.Get(), 0, false, true);
-              APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+              APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
             }
 
@@ -666,14 +666,14 @@ bool DATABASES::Database_DoTest()
                           query->Bind(2, registers[c].value);
                           query->Bind(3, (*datetime));
 
-                          string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Escribiendo registro"));
+                          string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Escribiendo registro"));
                           console->PrintMessage(string.Get(), 1, true,false);
 
                           status = database->Execute(query);
 
                           stringresult.Format(__L("name %s -> %s"), registers[c].name, (status?__L("Ok."):__L("Error!")));
                           console->PrintMessage(stringresult.Get(), 0, false, true);
-                          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+                          APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
                           query->UnbindAll();
                         }
@@ -687,14 +687,14 @@ bool DATABASES::Database_DoTest()
                           query->Bind(2, 10.5f);
                           query->Bind(3, (*datetime));
 
-                          string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Escribiendo registro"));
+                          string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Escribiendo registro"));
                           console->PrintMessage(string.Get(), 1, true,false);
 
                           status = database->Execute(query);
 
                           stringresult.Format((status?__L("Ok.\r"):__L("Error!\n")));
                           console->PrintMessage(stringresult.Get(), 0, false, false);
-                          APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+                          APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
                           query->UnbindAll();
                         }
@@ -704,7 +704,7 @@ bool DATABASES::Database_DoTest()
 
                   /*--- READ No REGISTERS -----------------------------------------------------------------------------------------------*/
 
-                  string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Numero registros tabla"));
+                  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Numero registros tabla"));
                   console->PrintMessage(string.Get(), 1, true,false);
 
                   XQWORD nrecords = 0;
@@ -712,7 +712,7 @@ bool DATABASES::Database_DoTest()
 
                   stringresult.Format(__L("%d registro(s)"), nrecords);
                   console->PrintMessage(stringresult.Get(), 0, false, true);
-                  APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+                  APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
 
                   /*--- READ REGISTER  --------------------------------------------------------------------------------------------------*/
@@ -720,14 +720,14 @@ bool DATABASES::Database_DoTest()
                   querystring.Format(__L("SELECT id,name,value,date FROM %s WHERE name=\'Sir Grah\xA0m\';"), DATABASES_TABLE_TEST_NAME);
                   query->Set(querystring.Get());
 
-                  string.Format(APPCONSOLE_DEFAULTMESSAGEMASK, __L("Leyendo registro"));
+                  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Leyendo registro"));
                   console->PrintMessage(string.Get(), 1, true,false);
 
                   status = database->Execute(query);
 
                   stringresult.Format((status?__L("Ok."):__L("Error!")));
                   console->PrintMessage(stringresult.Get(), 0, false, true);
-                  APP_LOG_ENTRY(XLOGLEVEL_INFO, APP_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
+                  APPFLOW_LOG_ENTRY(XLOGLEVEL_INFO, APPFLOW_CFG_LOG_SECTIONID_GENERIC, false, __L("%s: %s")  , string.Get(), stringresult.Get());
 
                   if(status)
                     {
@@ -891,7 +891,7 @@ bool DATABASES::Show_AllStatus()
 {
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  APP_EXTENDED.ShowAll();
+  APPFLOW_EXTENDED.ShowAll();
  
   if(Show_DatabasesStatus())  
     {

@@ -40,7 +40,7 @@
 #include "DIOStream.h"
 #include "DIOURL.h"
 
-#include "APPGraphics.h"
+#include "APPFlowGraphics.h"
 
 #pragma endregion
 
@@ -147,7 +147,7 @@ class GRPBITMAPSEQUENCE;
 class UI_MESSAGE_CFG;
 
 
-class UI_MESSAGE : public APPGRAPHICS, public XFSMACHINE
+class UI_MESSAGE : public APPFLOWGRAPHICS, public XFSMACHINE
 {
   public:
                                     UI_MESSAGE                              ();

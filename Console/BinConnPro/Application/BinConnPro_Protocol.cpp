@@ -46,23 +46,20 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL
+* 
+* @fn         BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(diostream)
 * @brief      Constructor
-* @ingroup    PLATFORM_COMMON
-*
-* @param[in]  DIOSTREAM* : strean class to use by protocol
-*
-* @return     Does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+* 
+* @param[in]  DIOSTREAM* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(diostream)
 {
   AddCommand(BINCONNPRO_PROTOCOL_CMDTYPE_GETDEVICETYPEANDID       , __L("")           , __L("DD")                 , RCV_GetDeviceTypeAndID        , __L("GetDeviceTypeAndID")         );
   AddCommand(BINCONNPRO_PROTOCOL_CMDTYPE_GETCENTERNAME            , __L("")           , __L("S")                  , RCV_GetCenterName             , __L("GetCenterName")              );
   AddCommand(BINCONNPRO_PROTOCOL_CMDTYPE_GETLOCATION              , __L("")           , __L("SSSSD")              , RCV_GetLocation               , __L("GetLocation")                );
 }
-
 
 
 /**-------------------------------------------------------------------------------------------------------------------

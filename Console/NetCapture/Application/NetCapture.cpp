@@ -62,9 +62,9 @@
 #include "DIOPCap.h"
 #include "DIOPCap_Filters.h"
 
-#include "APPCFG.h"
-#include "APPLog.h"
-#include "APPExtended.h"
+#include "APPFlowCFG.h"
+#include "APPFlowLog.h"
+#include "APPFlowExtended.h"
 
 #include "NetCapture_CFG.h"
 #include "NetCapture_Sniffer.h"
@@ -178,20 +178,20 @@ bool NETCAPTURE::AppProc_Ini()
 
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
-  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+  Application_GetName()->Set(APPLICATION_NAMEAPP);
 
   //--------------------------------------------------------------------------------------------------
 
-  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
   //--------------------------------------------------------------------------------------------------
 
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, APPDEFAULT_DIRECTORY_SCRIPTS);
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPDEFAULT_DIRECTORY_GRAPHICS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_SCRIPTS, APPFLOW_DEFAULT_DIRECTORY_SCRIPTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, APPFLOW_DEFAULT_DIRECTORY_GRAPHICS);
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
@@ -206,7 +206,7 @@ bool NETCAPTURE::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  APP_CFG_SETAUTOMATICTRACETARGETS
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
   
   //--------------------------------------------------------------------------------------
 
@@ -223,7 +223,7 @@ bool NETCAPTURE::AppProc_Ini()
   
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG, this);
+  APPFLOW_EXTENDED.APPStart(&APPFLOW_CFG, this);
 
   //--------------------------------------------------------------------------------------
 
@@ -291,7 +291,7 @@ bool NETCAPTURE::AppProc_Update()
           case NETCAPTURE_XFSMSTATE_INI         : SetEvent(NETCAPTURE_XFSMEVENT_UPDATE);
                                                   break;
 
-          case NETCAPTURE_XFSMSTATE_UPDATE      : if(GetExitType() == APPBASE_EXITTYPE_UNKNOWN)
+          case NETCAPTURE_XFSMSTATE_UPDATE      : if(GetExitType() == APPFLOWBASE_EXITTYPE_UNKNOWN)
                                                     {
                                                       if(xtimerupdateconsole)
                                                         {
@@ -311,7 +311,7 @@ bool NETCAPTURE::AppProc_Update()
                                                     }                                
                                                   break;
 
-          case NETCAPTURE_XFSMSTATE_END         : SetExitType(APPBASE_EXITTYPE_BY_USER);
+          case NETCAPTURE_XFSMSTATE_END         : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                                                   break;
 
         }
@@ -399,9 +399,9 @@ bool NETCAPTURE::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd();
-  APP_EXTENDED.DelInstance();  
-  APP_CFG.DelInstance();
+  APPFLOW_EXTENDED.APPEnd();
+  APPFLOW_EXTENDED.DelInstance();  
+  APPFLOW_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -425,14 +425,14 @@ bool NETCAPTURE::KeyValidSecuences(int key)
   XCHAR character = (XCHAR)key;
 
   if((character<32) || (character>127)) character = __C('?');
-  APP_LOG_ENTRY(XLOGLEVEL_WARNING, APP_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
+  APPFLOW_LOG_ENTRY(XLOGLEVEL_WARNING, APPFLOW_CFG_LOG_SECTIONID_STATUSAPP, false, __L("Key pressed: 0x%02X [%c]"), key, character);
 
   console->Printf(__L("\r    \r"));
 
   switch(key)
     {
       case 0x1B : // ESC Exit application
-                  SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                   break;
 
       case 'R'  : break;
@@ -458,7 +458,7 @@ bool NETCAPTURE::Show_AllStatus()
 {  
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
 
-  APP_EXTENDED.ShowAll();
+  APPFLOW_EXTENDED.ShowAll();
   
   if(xmutexshowallstatus) xmutexshowallstatus->UnLock();
 

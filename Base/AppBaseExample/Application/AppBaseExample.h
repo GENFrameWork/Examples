@@ -32,7 +32,7 @@
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
 
-#include "APPBase.h"
+#include "APPFlowBase.h"
 
 #pragma endregion
 
@@ -57,7 +57,7 @@
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 #pragma region CLASS
 
-class APPBASEEXAMPLE: public APPBASE
+class APPBASEEXAMPLE: public APPFLOWBASE
 {
   public:
                         APPBASEEXAMPLE                      ();

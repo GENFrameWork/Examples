@@ -44,7 +44,7 @@
 
 #include "SNDPlayCFG.h"
 
-#include "APPGraphics.h"
+#include "APPFlowGraphics.h"
 
 #pragma endregion
 
@@ -139,7 +139,7 @@ class SNDITEM;
 class CANVAS2D_CFG;
 
 
-class CANVAS2D : public APPGRAPHICS, public XFSMACHINE
+class CANVAS2D : public APPFLOWGRAPHICS, public XFSMACHINE
 {
   public:
                                     CANVAS2D                                ();

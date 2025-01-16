@@ -22,21 +22,21 @@ option(DIO_FEATURE                                              "Input/Output"  
 option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
 option(DIO_PCAP_FEATURE                                         "PCap Library"                                            ON )
 
-option(APP_FEATURE                                              "Application modules"                                     ON )
-option(APP_EXTENDED_FEATURE                                     "Application Extended"                                    ON )  
-option(APP_EXTENDED_APPLICATIONHEADER_FEATURE                   "Application Extended Aplication Header"                  ON )  
-option(APP_EXTENDED_APPLICATIONSTATUS_FEATURE                   "Application Extended Aplication Status"                  ON )  
-option(APP_CONSOLE_FEATURE                                      "Application Console"                                     ON )
-option(APP_LOG_FEATURE                                          "Application Log"                                         ON )
-
-option(APP_CFG_GENERAL_FEATURE                                  "Application CFG General"                                 ON )
-option(APP_CFG_LOG_FEATURE                                      "Application CFG LOG"                                     ON )
+option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
+option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  
+option(APPFLOW_EXTENDED_APPLICATIONHEADER_FEATURE               "Application Flow Extended Aplication Header"             ON )  
+option(APPFLOW_EXTENDED_APPLICATIONSTATUS_FEATURE               "Application Flow Extended Aplication Status"             ON )  
+option(APPFLOW_CONSOLE_FEATURE                                  "Application Flow Console"                                ON )
+option(APPFLOW_LOG_FEATURE                                      "Application Flow Log"                                    ON )
+                                                                              
+option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flow CFG General"                            ON )
+option(APPFLOW_CFG_LOG_FEATURE                                  "Application Flow CFG LOG"                                ON )
 
 
 # --------------------------------------------------------------------
 # Config Application Macro
 
-set(APP_CFG_SCRIPTS "-DAPP_CFG=NETCAPTURE_CFG::GetInstance()")
+set(APP_CFG_SCRIPTS "-DAPPFLOW_CFG=NETCAPTURE_CFG::GetInstance()")
 add_definitions(${APP_CFG_SCRIPTS})
 
 

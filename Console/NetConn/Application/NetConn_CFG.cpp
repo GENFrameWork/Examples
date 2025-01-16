@@ -133,7 +133,7 @@ bool NETCONN_CFG::DelInstance()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::DoVariableMapping()
 {
-  if(!APPCFG::DoVariableMapping())
+  if(!APPFLOWCFG::DoVariableMapping())
     {
       return false;
     }
@@ -157,7 +157,7 @@ bool NETCONN_CFG::DoVariableMapping()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::DoDefault()
 {
-  if(!APPCFG::DoDefault()) 
+  if(!APPFLOWCFG::DoDefault()) 
     {
       return false;
     }
@@ -173,17 +173,15 @@ bool NETCONN_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-*
-* @fn         NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
+* 
+* @fn         NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 * @brief      Constructor
-* @ingroup
-*
-* @param[in]  XCHAR* : name of file of config
-*
-* @return     Does not return anything.
-*
-*---------------------------------------------------------------------------------------------------------------------*/
-NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPCFG(namefile)
+* @ingroup    EXAMPLES
+* 
+* @param[in]  namefile : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
 

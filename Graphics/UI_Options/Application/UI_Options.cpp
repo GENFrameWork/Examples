@@ -108,8 +108,8 @@
 #include "UI_Element_ProgressBar.h"
 #include "UI_SkinCanvas.h"
 
-#include "APPLog.h"
-#include "APPExtended.h"
+#include "APPFlowLog.h"
+#include "APPFlowExtended.h"
 
 #include "UI_Options_CFG.h"
 #pragma endregion
@@ -223,11 +223,11 @@ bool UI_OPTIONS::AppProc_Ini()
 
   GEN_SET_VERSION(APPLICATION_NAMEAPP, APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
 
-  GetApplicationName()->Set(APPLICATION_NAMEAPP);
+  Application_GetName()->Set(APPLICATION_NAMEAPP);
 
-  SetInitOptions( APPGRAPHICS_INIOPTION_CREATEMAINSCREEN    |
-                  APPGRAPHICS_INIOPTION_SHOWMAINSCREEN      |
-                  APPGRAPHICS_INIOPTION_INPUT);
+  SetInitOptions( APPFLOWGRAPHICS_INIOPTION_CREATEMAINSCREEN    |
+                  APPFLOWGRAPHICS_INIOPTION_SHOWMAINSCREEN      |
+                  APPFLOWGRAPHICS_INIOPTION_INPUT);
 
   //--------------------------------------------------------------------------------------------------
 
@@ -236,17 +236,17 @@ bool UI_OPTIONS::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------------------
 
-  XTRACE_SETAPPLICATIONNAME((*GetApplicationName()));
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
   XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
   XTRACE_SETAPPLICATIONID(string);
 
   //--------------------------------------------------------------------------------------------------
 
-  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPDEFAULT_DIRECTORY_ROOT);
+  GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS      , APPDEFAULT_DIRECTORY_GRAPHICS);
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_FONTS         , APPDEFAULT_DIRECTORY_FONTS);
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS    , APPDEFAULT_DIRECTORY_UI_LAYOUTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS      , APPFLOW_DEFAULT_DIRECTORY_GRAPHICS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_FONTS         , APPFLOW_DEFAULT_DIRECTORY_FONTS);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS    , APPFLOW_DEFAULT_DIRECTORY_UI_LAYOUTS);
 
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
@@ -279,11 +279,11 @@ bool UI_OPTIONS::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  APP_CFG_SETAUTOMATICTRACETARGETS
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPStart(&APP_CFG);
+  APPFLOW_EXTENDED.APPStart(&APPFLOW_CFG);
 
   //--------------------------------------------------------------------------------------
 
@@ -457,9 +457,9 @@ bool UI_OPTIONS::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
-  APP_EXTENDED.APPEnd();
-  APP_EXTENDED.DelInstance();  
-  APP_CFG.DelInstance();
+  APPFLOW_EXTENDED.APPEnd();
+  APPFLOW_EXTENDED.DelInstance();  
+  APPFLOW_CFG.DelInstance();
 
   //--------------------------------------------------------------------------------------
 
@@ -591,7 +591,7 @@ bool UI_OPTIONS::UpdateInput()
                                                     }
                                                     break;
 
-                  case UI_OPTIONS_BUTTON_ESC      : SetExitType(APPBASE_EXITTYPE_BY_USER);
+                  case UI_OPTIONS_BUTTON_ESC      : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                                                     break;
                 }
             }

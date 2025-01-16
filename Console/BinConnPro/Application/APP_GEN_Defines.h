@@ -39,25 +39,6 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-/*
-#define XTRACE_ACTIVE
-#define XMEMORY_CONTROL_ACTIVE
-
-#define APP_ACTIVE
-#define APP_CFG_GENERAL_ACTIVE
-#define APP_CFG_INTERNETSERVICES_ACTIVE
-#define APP_CFG_DIOLOCATION_ACTIVE
-#define APP_CFG_LOG_ACTIVE
-
-#define DIO_ACTIVE
-#define DIOUART_ACTIVE
-#define DIOUDP_ACTIVE
-#define DIOICMP_ACTIVE
-#define DIOTCPIP_ACTIVE
-#define DIOPING_ACTIVE
-
-#define APP_CFG   BINCONNPRO_CFG::GetInstance()
-*/
 
 #pragma endregion
 

@@ -135,7 +135,7 @@ bool DATABASES_CFG::DelInstance()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::DoVariableMapping()
 {
-  if(!APPCFG::DoVariableMapping())
+  if(!APPFLOWCFG::DoVariableMapping())
     {
       return false;
     }
@@ -165,7 +165,7 @@ bool DATABASES_CFG::DoVariableMapping()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::DoDefault()
 {
-  if(!APPCFG::DoDefault()) 
+  if(!APPFLOWCFG::DoDefault()) 
     {
       return false;
     }
@@ -183,13 +183,13 @@ bool DATABASES_CFG::DoDefault()
 
   log_activesectionsID.Empty();
 
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_INITIATION;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_INITIATION;
   log_activesectionsID                  += __L(",");
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_GENERIC;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_GENERIC;
   log_activesectionsID                  += __L(",");
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_STATUSAPP;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_STATUSAPP;
   log_activesectionsID                  += __L(",");
-  log_activesectionsID                  += APP_CFG_LOG_SECTIONID_ENDING;
+  log_activesectionsID                  += APPFLOW_CFG_LOG_SECTIONID_ENDING;
 
   log_levelmask                         = XLOGLEVEL_ALL;
   log_maxsize                           = 3000;
@@ -302,7 +302,7 @@ int DATABASES_CFG::Database_GetTimeoutConnection()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
+* @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 * @brief      Constructor
 * @ingroup    APPLICATION
 * 
@@ -311,7 +311,7 @@ int DATABASES_CFG::Database_GetTimeoutConnection()
 * @return     Does not return anything. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPCFG(namefile)
+DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
 
