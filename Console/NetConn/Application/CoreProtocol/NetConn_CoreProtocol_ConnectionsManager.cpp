@@ -46,6 +46,7 @@
 
 #include "DIOFactory.h"
 #include "DIOStreamTCPIPConfig.h"
+#include "DIOStreamUARTConfig.h"
 #include "DIOStream.h"
 #include "DIOCoreProtocol.h"
 #include "DIOCoreProtocol_ConnectionsManager_XEvent.h"
@@ -141,6 +142,7 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
 
   // ------------------------------------------------------------------------------------------------------
 
+  /*
   DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = NULL;
   DIOSTREAM*             diostreamTCPIP    = NULL;
   
@@ -150,8 +152,8 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
       return false;
     }
 
-  diostreamTCPIPCFG->GetRemoteURL()->Set(isserver?__L(""):__L("192.168.1.3"));
   diostreamTCPIPCFG->SetMode(isserver?DIOSTREAMMODE_SERVERMULTISOCKET:DIOSTREAMMODE_CLIENT);
+  diostreamTCPIPCFG->GetRemoteURL()->Set(isserver?__L(""):__L("192.168.1.3")); 
   diostreamTCPIPCFG->SetRemotePort(1230);
 
   diostreamTCPIP = GEN_DIOFACTORY.CreateStreamIO(diostreamTCPIPCFG);
@@ -168,6 +170,39 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
 
       return false;
     }
+  */
+
+
+  // ------------------------------------------------------------------------------------------------------
+
+  
+  DIOSTREAMUARTCONFIG*    diostreamUARTCFG = NULL;
+  DIOSTREAM*              diostreamUART    = NULL;
+  
+  diostreamUARTCFG = new DIOSTREAMUARTCONFIG();
+  if(!diostreamUARTCFG)
+    {
+      return false;
+    }
+  diostreamUARTCFG->SetMode(isserver?DIOSTREAMMODE_SERVER:DIOSTREAMMODE_CLIENT);
+  //diostreamUARTCFG->
+  
+
+  diostreamUART = GEN_DIOFACTORY.CreateStreamIO(diostreamUARTCFG);
+  if(!diostreamUART) 
+    {
+      delete diostreamUARTCFG;
+      return false;
+    }
+
+  if(!DIOStream_Add(diostreamUARTCFG, diostreamUART))
+    {
+      delete diostreamUARTCFG;
+      delete diostreamUART;
+
+      return false;
+    }
+  
 
   // ------------------------------------------------------------------------------------------------------
 
