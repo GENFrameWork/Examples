@@ -40,7 +40,15 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 #pragma region DEFINES_ENUMS
 
-#define NETCONN_CFG_SECTION_PROTOCOL                          __L("protocol")
+#define NETCONN_CFG_SECTION_GENERAL                           __L("general")
+
+#define NETCONN_CFG_SECTION_CONNECTION                        __L("connection")
+#define NETCONN_CFG_CONNECTION_ISSERVER                       __L("isserver")
+#define NETCONN_CFG_CONNECTION_TRANSPORTTYPE                  __L("transporttype")
+#define NETCONN_CFG_CONNECTION_TRANSPORTCONFIG                __L("transportconfig")
+
+
+#define NETCONN_APPFLOW_CFG_DEFAULT_REMARK_COLUMN             98
 
 #pragma endregion
 
@@ -54,24 +62,32 @@ class NETCONN_CFG : public APPFLOWCFG
   public:
 
 
-    static bool                     GetIsInstanced          ();
-    static NETCONN_CFG&             GetInstance             (bool ini = true);
-    static bool                     DelInstance             ();
+    static bool                     GetIsInstanced                    ();
+    static NETCONN_CFG&             GetInstance                       (bool ini = true);
+    static bool                     DelInstance                       ();
 
-    bool                            DoVariableMapping       (); 
-    bool                            DoDefault               ();
+    bool                            DoVariableMapping                 (); 
+    bool                            DoDefault                         ();
+
+    bool                            Connection_IsServer               ();  
+    XSTRING*                        Connection_GetTransportType       ();
+    XSTRING*                        Connection_GetTransportConfig     ();
    
   private:
-                                    NETCONN_CFG             (XCHAR* namefile);
-                                    NETCONN_CFG             (NETCONN_CFG const&);        // Don't implement
-    virtual                        ~NETCONN_CFG             ();
+                                    NETCONN_CFG                       (XCHAR* namefile);
+                                    NETCONN_CFG                       (NETCONN_CFG const&);        // Don't implement
+    virtual                        ~NETCONN_CFG                       ();
 
-    void                            operator =              (NETCONN_CFG const&);        // Don't implement
+    void                            operator =                        (NETCONN_CFG const&);        // Don't implement
 
 
-    void                            Clean                   ();
+    void                            Clean                             ();
 
     static NETCONN_CFG*             instance;
+
+    bool                            connection_isserver;  
+    XSTRING                         connection_transporttype;
+    XSTRING                         connection_transportconfig;
 };
 
 #pragma endregion

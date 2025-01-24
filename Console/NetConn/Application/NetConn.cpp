@@ -205,7 +205,7 @@ bool NETCONN::InitFSMachine()
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::AppProc_Ini()
-{
+{  
   XSTRING string;
   XSTRING stringresult;
   XPATH   xpathsection;
@@ -213,51 +213,12 @@ bool NETCONN::AppProc_Ini()
   bool    status = false;
 
   //-------------------------------------------------------------------------------------------------
-
-  if(GetExecParams())
-    {
-      XSTRING* param = (XSTRING*)GetExecParams()->Get(0);
-      if(param)
-        {
-          if(!param->Compare(__L("SERVER"), true))  modeserver = true;
-        }
-    }
-
-  Application_GetName()->AddFormat(__L("%s %s"), APPLICATION_NAMEAPP, modeserver?__L("Server"):__L("Client")); 
-
-  GEN_SET_VERSION(Application_GetName()->Get(), APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
-  
-  //--------------------------------------------------------------------------------------------------
-
-  ACTIVATEXTHREADGROUP(XTHREADGROUPID_SCHEDULER);
-  ACTIVATEXTHREADGROUP(XTHREADGROUPID_DIOSTREAM);
-
-  //--------------------------------------------------------------------------------------------------
-
-  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
-  XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
-  XTRACE_SETAPPLICATIONID(string);
-
-  //--------------------------------------------------------------------------------------------------
-
+ 
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
-  GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
+  GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk(); 
 
-  //--------------------------------------------------------------------------------------------------
-
-  InitFSMachine();
-
-  //--------------------------------------------------------------------------------------------------
-
-  xmutexshowallstatus = GEN_XFACTORY.Create_Mutex();
-  if(!xmutexshowallstatus) return false;
-
-  //--------------------------------------------------------------------------------------------------
-
-  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
-
-  //--------------------------------------------------------------------------------------------------
+ //--------------------------------------------------------------------------------------------------
 
   /*
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathsection);
@@ -270,6 +231,52 @@ bool NETCONN::AppProc_Ini()
   */
 
   GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_ENG);
+
+  //--------------------------------------------------------------------------------------------------
+
+  if(GetExecParams())
+    {
+      XSTRING* param = (XSTRING*)GetExecParams()->Get(0);
+      if(param)
+        {
+          modeserver = APPFLOW_CFG.Connection_IsServer();
+
+          if(!param->Compare(__L("SERVER"), true))  
+            {
+              modeserver = true;
+            }
+
+          if(!param->Compare(__L("CLIENT"), true))  
+            {
+              modeserver = false;
+            }
+        }
+    }
+
+  //--------------------------------------------------------------------------------------------------
+
+  Application_GetName()->AddFormat(__L("%s %s"), APPLICATION_NAMEAPP, modeserver?__L("Server"):__L("Client")); 
+
+  GEN_SET_VERSION(Application_GetName()->Get(), APPLICATION_NAMEFILE, APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR, APPLICATION_OWNER, APPLICATION_YEAROFCREATION)
+  
+  //--------------------------------------------------------------------------------------------------
+
+  XTRACE_SETAPPLICATIONNAME((*Application_GetName()));
+  XTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
+  XTRACE_SETAPPLICATIONID(string);
+
+  //--------------------------------------------------------------------------------------------------
+
+  APPFLOW_CFG_SETAUTOMATICTRACETARGETS
+
+  //--------------------------------------------------------------------------------------------------
+
+  InitFSMachine();
+
+  //--------------------------------------------------------------------------------------------------
+
+  xmutexshowallstatus = GEN_XFACTORY.Create_Mutex();
+  if(!xmutexshowallstatus) return false;
 
   //--------------------------------------------------------------------------------------------------
 
@@ -694,9 +701,8 @@ bool NETCONN::Show_ConnectionsStatus()
     }
 
   string  = __L("Connexion mode");
-  if(protocolCFG->GetIsServer())
-          string2.Format(__L("Server"));
-    else  string2.Format(__L("Client"));
+  string2.Format(__L("%s - %s : %s"), protocolCFG->GetIsServer()?__L("Server"):__L("Client"), APPFLOW_CFG.Connection_GetTransportType()->Get(), APPFLOW_CFG.Connection_GetTransportConfig()->Get());
+
   Show_Line(string, string2);
 
   if(connectionsmanager)

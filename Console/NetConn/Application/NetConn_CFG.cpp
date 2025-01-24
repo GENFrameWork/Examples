@@ -137,10 +137,13 @@ bool NETCONN_CFG::DoVariableMapping()
     {
       return false;
     }
-  
-  //-----------------------------------------------------
-  // MACHINE PROTOCOL
 
+  //-----------------------------------------------------
+  // Connection
+
+  AddValue(XFILECFG_VALUETYPE_BOOLEAN   , NETCONN_CFG_SECTION_CONNECTION        , NETCONN_CFG_CONNECTION_ISSERVER                , &connection_isserver                                 , __L("Is server active")                                                                 , APPFLOW_CFG_DEFAULT_REMARK_COLUMN);
+  AddValue(XFILECFG_VALUETYPE_STRING    , NETCONN_CFG_SECTION_CONNECTION        , NETCONN_CFG_CONNECTION_TRANSPORTTYPE           , &connection_transporttype                            , __L("Transport type")                                                                   , APPFLOW_CFG_DEFAULT_REMARK_COLUMN);
+  AddValue(XFILECFG_VALUETYPE_STRING    , NETCONN_CFG_SECTION_CONNECTION        , NETCONN_CFG_CONNECTION_TRANSPORTCONFIG         , &connection_transportconfig                          , __L("Transport config")                                                                 , APPFLOW_CFG_DEFAULT_REMARK_COLUMN);
   
   return true;
 }
@@ -168,7 +171,58 @@ bool NETCONN_CFG::DoDefault()
 
   //------------------------------------------------------------------------------
 
+  connection_isserver         = true;  
+  connection_transporttype    = __L("TCPIP");
+  connection_transportconfig  = __L("192.168.1.3:1234");
+
+  //------------------------------------------------------------------------------
+
   return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool NETCONN_CFG::Connection_IsServer()
+* @brief      connection  is server
+* @ingroup    EXAMPLES
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool NETCONN_CFG::Connection_IsServer()
+{
+  return connection_isserver;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XSTRING* NETCONN_CFG::Connection_GetTransportType()
+* @brief      connection  get transport type
+* @ingroup    EXAMPLES
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_CFG::Connection_GetTransportType()
+{
+  return &connection_transporttype;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         XSTRING* NETCONN_CFG::Connection_GetTransportConfig()
+* @brief      connection  get transport config
+* @ingroup    EXAMPLES
+* 
+* @return     XSTRING* : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+XSTRING* NETCONN_CFG::Connection_GetTransportConfig()
+{
+  return &connection_transportconfig;
 }
 
 
@@ -220,8 +274,9 @@ NETCONN_CFG::~NETCONN_CFG()
 *---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_CFG::Clean()
 {
-
-
+  connection_isserver         = false;  
+  connection_transporttype    = __L("");
+  connection_transportconfig  = __L("");
 }
 
 

@@ -59,6 +59,7 @@
 #include "NetConn_CoreProtocol_RegisterData.h"
 
 #include "NetConn.h"
+#include "NetConn_CFG.h"
 
 #pragma endregion
 
@@ -136,74 +137,86 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
 
   protocolCFG.SetIsServer(isserver);  
   protocolCFG.SetIsCipher(true);
-  protocolCFG.SetCompressHeader(true);
-  protocolCFG.SetCompressContent(true);
+  //protocolCFG.SetCompressHeader(true);
+  //protocolCFG.SetCompressContent(true);
+
+  protocolCFG.SetCompressHeader(false);
+  protocolCFG.SetCompressContent(false);
+
+
   protocolCFG.SetTimeToEliminateConnectionDisconnect(1);
 
   // ------------------------------------------------------------------------------------------------------
 
-  /*
-  DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = NULL;
-  DIOSTREAM*             diostreamTCPIP    = NULL;
+  if(!APPFLOW_CFG.Connection_GetTransportType()->Compare(__L("TCPIP"), true))
+    {
+      DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = NULL;
+      DIOSTREAM*             diostreamTCPIP    = NULL;
   
-  diostreamTCPIPCFG = new DIOSTREAMTCPIPCONFIG();
-  if(!diostreamTCPIPCFG)
-    {
-      return false;
+      diostreamTCPIPCFG = new DIOSTREAMTCPIPCONFIG();
+      if(!diostreamTCPIPCFG)
+        {
+          return false;
+        }
+
+      diostreamTCPIPCFG->SetMode(isserver?DIOSTREAMMODE_SERVERMULTISOCKET:DIOSTREAMMODE_CLIENT);
+  
+      diostreamTCPIPCFG->SetFromString(APPFLOW_CFG.Connection_GetTransportConfig()->Get());
+      if(isserver) diostreamTCPIPCFG->GetRemoteURL()->Set(__L("")); 
+
+      diostreamTCPIP = GEN_DIOFACTORY.CreateStreamIO(diostreamTCPIPCFG);
+      if(!diostreamTCPIP) 
+        {
+          delete diostreamTCPIPCFG;
+          return false;
+        }
+
+      if(!DIOStream_Add(diostreamTCPIPCFG, diostreamTCPIP))
+        {
+          delete diostreamTCPIPCFG;
+          delete diostreamTCPIP;
+
+          return false;
+        }
     }
-
-  diostreamTCPIPCFG->SetMode(isserver?DIOSTREAMMODE_SERVERMULTISOCKET:DIOSTREAMMODE_CLIENT);
-  diostreamTCPIPCFG->GetRemoteURL()->Set(isserver?__L(""):__L("192.168.1.3")); 
-  diostreamTCPIPCFG->SetRemotePort(1230);
-
-  diostreamTCPIP = GEN_DIOFACTORY.CreateStreamIO(diostreamTCPIPCFG);
-  if(!diostreamTCPIP) 
-    {
-      delete diostreamTCPIPCFG;
-      return false;
-    }
-
-  if(!DIOStream_Add(diostreamTCPIPCFG, diostreamTCPIP))
-    {
-      delete diostreamTCPIPCFG;
-      delete diostreamTCPIP;
-
-      return false;
-    }
-  */
-
-
+  
   // ------------------------------------------------------------------------------------------------------
 
-  
-  DIOSTREAMUARTCONFIG*    diostreamUARTCFG = NULL;
-  DIOSTREAM*              diostreamUART    = NULL;
-  
-  diostreamUARTCFG = new DIOSTREAMUARTCONFIG();
-  if(!diostreamUARTCFG)
+  if(!APPFLOW_CFG.Connection_GetTransportType()->Compare(__L("SERIAL"), true))
     {
-      return false;
-    }
-  diostreamUARTCFG->SetMode(isserver?DIOSTREAMMODE_SERVER:DIOSTREAMMODE_CLIENT);
-  //diostreamUARTCFG->
+      DIOSTREAMUARTCONFIG*  diostreamUARTCFG = NULL;
+      DIOSTREAM*            diostreamUART    = NULL;
   
+      diostreamUARTCFG = new DIOSTREAMUARTCONFIG();
+      if(!diostreamUARTCFG)
+        {
+          return false;
+        }
 
-  diostreamUART = GEN_DIOFACTORY.CreateStreamIO(diostreamUARTCFG);
-  if(!diostreamUART) 
-    {
-      delete diostreamUARTCFG;
-      return false;
-    }
+      diostreamUARTCFG->SetMode(isserver?DIOSTREAMMODE_SERVER:DIOSTREAMMODE_CLIENT);
 
-  if(!DIOStream_Add(diostreamUARTCFG, diostreamUART))
-    {
-      delete diostreamUARTCFG;
-      delete diostreamUART;
+      //XSYSTEM_PLATFORM platform = GEN_XSYSTEM.GetPlatform();
+      //diostreamUARTCFG->SetFromString(__L("COM3,9600,8,N,1,NONE"));        
+      //diostreamUARTCFG->SetFromString(__L("/dev/ttyUSB0,9600,8,N,1,NONE"));  
+        
+      diostreamUARTCFG->SetFromString(APPFLOW_CFG.Connection_GetTransportConfig()->Get());
 
-      return false;
+      diostreamUART = GEN_DIOFACTORY.CreateStreamIO(diostreamUARTCFG);
+      if(!diostreamUART) 
+        {
+          delete diostreamUARTCFG;
+          return false;
+        }
+
+      if(!DIOStream_Add(diostreamUARTCFG, diostreamUART))
+        {
+          delete diostreamUARTCFG;
+          delete diostreamUART;
+
+          return false;
+        }
     }
   
-
   // ------------------------------------------------------------------------------------------------------
 
   status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::Ini(); 
