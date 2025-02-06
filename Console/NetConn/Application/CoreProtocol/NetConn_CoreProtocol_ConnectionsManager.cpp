@@ -136,14 +136,15 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
   // ------------------------------------------------------------------------------------------------------
 
   protocolCFG.SetIsServer(isserver);  
+
   protocolCFG.SetIsCipher(true);
-  //protocolCFG.SetCompressHeader(true);
-  //protocolCFG.SetCompressContent(true);
 
-  protocolCFG.SetCompressHeader(false);
-  protocolCFG.SetCompressContent(false);
+  protocolCFG.SetIsCompressHeader(true);
+  protocolCFG.SetIsCompressContent(true);
 
+  protocolCFG.SetIsEncapsulatedBase64(true);
 
+  protocolCFG.SetTimeOutNoResponse(30);
   protocolCFG.SetTimeToEliminateConnectionDisconnect(1);
 
   // ------------------------------------------------------------------------------------------------------
@@ -301,20 +302,34 @@ DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConne
 DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream)
 {
   DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_COREPROTOCOL(&protocolCFG, diostream);
-
-  if(protocol)
-    { 
-      protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION   , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION   , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_BOTH);
-      protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
-
-      NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
-      if(netconn_connection)
-        {   
-          protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), true, 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
-          protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), true, DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
-        }
+  
+  if(!protocol)
+    {
+      return NULL;
     }
 
+  /*
+  protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION   , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION   , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_BOTH);
+  protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
+
+  NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
+  if(netconn_connection)
+    {   
+      protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), true, 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+      protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), true, DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+    }
+  */
+
+  protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION   , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION   , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
+  protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
+
+  NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
+  if(netconn_connection)
+    {   
+      //protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), true, 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+      protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), true, DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+    }
+      
   return protocol;  
 }
 
@@ -385,10 +400,10 @@ void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnection
                                                                                           {                                                                                            
                                                                                             switch(event->GetEventType())
                                                                                               {
-                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), message->GetSizeAllMessage(), false);        
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), message->GetSizeAllMessage(), true);        
                                                                                                                                                                 break;
     
-                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), message->GetSizeAllMessage(), false);  
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), message->GetSizeAllMessage(), true);  
                                                                                                                                                                 break;  
                                                                                               }                                                                                                     
                                                                                           }

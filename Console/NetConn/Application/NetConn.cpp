@@ -711,9 +711,7 @@ bool NETCONN::Show_ConnectionsStatus()
         {
           connectionsmanager->Connections_GetXMutex()->Lock();
         }
-
-      console->Printf(__L("   Connexions: \n"));
-
+   
       for(XDWORD c=0; c<connectionsmanager->Connections_GetAll()->GetSize(); c++)
         {
           NETCONN_COREPROTOCOL_CONNECTION*  connection = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_GetAll()->Get(c);
@@ -727,28 +725,38 @@ bool NETCONN::Show_ConnectionsStatus()
               if((connection->Status_Get() == DIOCOREPROTOCOL_CONNECTION_STATUS_READY)        || 
                  (connection->Status_Get() == DIOCOREPROTOCOL_CONNECTION_STATUS_INSTABILITY)  ||    
                  (connection->Status_Get() == DIOCOREPROTOCOL_CONNECTION_STATUS_DISCONNECTED))
-                {       
+                {                      
                   connection->GetXTimerStatus()->GetMeasureString(measurestatus);         
                   connection->GetXTimerWithoutConnexion()->GetMeasureString(measurewithoutconnexion);    
-                  connection->Status_GetString(statusstring);
-
-                  //string.Format(__L("   %03d  %-10s  %-15s [not msg try (%d) [%s]  n msg [%d] \n"), c+1, measurestatus.Get(), statusstring.Get(), connection->GetHeartBetsCounter(), measurewithoutconnexion.Get(),  connection->Messages_GetAll()->GetAll()->GetSize());   
-
+                  connection->Status_GetString(statusstring);                  
                   connection->GetIDConnection()->GetToString(connectionID);
 
-                  if(modeserver)
-                    {    
-                      if(connection->GetTestUpdateClass() && connection->GetCoreProtocol()->UpdateClass_IsAllInitialized())  
-                        {
-                          string.Format(__L("   %03d %-10s %-20s %-15s %d,\"%s\"\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
-                        }
-                    }
-                   else 
+                  if(connection->GetCoreProtocol()->UpdateClass_IsAllInitialized())
                     {
-                      string.Format(__L("   %03d %-10s %-20s %-15s\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get());   
+                      if(modeserver)
+                        {    
+                          if(connection->GetTestUpdateClass())  
+                            {
+                              if(!c)
+                                {
+                                  console->Printf(__L("   Connexions: \n"));
+                                } 
+
+                              string.Format(__L("    %03d %-10s %-20s %-15s %d,\"%s\"\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get(), connection->GetTestUpdateClass()->GetNumber(), connection->GetTestUpdateClass()->GetString()->Get());   
+                              console->Printf(string.Get());
+                            }
+                        }
+                       else 
+                        {
+                          if(!c)
+                            {
+                              console->Printf(__L("   Connexions: \n"));
+                            } 
+
+                          string.Format(__L("    %03d %-10s %-20s %-15s\n"), c+1, measurestatus.Get(), connectionID.Get(), statusstring.Get());   
+                          console->Printf(string.Get());
+                        }          
                     }
-              
-                  console->Printf(string.Get());
                 }
             }
         }
