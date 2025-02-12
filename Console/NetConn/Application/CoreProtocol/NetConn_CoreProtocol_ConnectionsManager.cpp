@@ -308,28 +308,16 @@ DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCORE
       return NULL;
     }
 
-  /*
   protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION   , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION   , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_BOTH);
   protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
 
   NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
   if(netconn_connection)
     {   
-      protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), true, 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
-      protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), true, DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
+      protocol->UpdateClass_Add(__L("agentstate")       , netconn_connection->GetAgentState(), true, 10);
+      protocol->UpdateClass_Add(__L("testupdateclass")  , netconn_connection->GetTestUpdateClass(), true, 0, DIOCOREPROTOCOL_UPDATECLASS_FLAG_FORCHANGE);
     }
-  */
 
-  protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION   , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION   , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
-  protocol->Commands_Add(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND , NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND , DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOCLIENT);
-
-  NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
-  if(netconn_connection)
-    {   
-      //protocol->UpdateClass_Add(false, __L("agentstate"), netconn_connection->GetAgentState(), true, 10, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
-      protocol->UpdateClass_Add(false, __L("testupdateclass"), netconn_connection->GetTestUpdateClass(), true, DIOCOREPROTOCOL_UPDATECLASS_FORCHANGE, DIOCOREPROTOCOL_BIDIRECTIONALITYMODE_TOSERVER);
-    }
-      
   return protocol;  
 }
 
@@ -400,10 +388,10 @@ void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnection
                                                                                           {                                                                                            
                                                                                             switch(event->GetEventType())
                                                                                               {
-                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), message->GetSizeAllMessage(), true);        
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_READMSG   : protocol->ShowDebug(false, header, (*content), message->GetSizeAllMessage(), false);        
                                                                                                                                                                 break;
     
-                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), message->GetSizeAllMessage(), true);  
+                                                                                                case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_WRITEMSG  : protocol->ShowDebug(true, header, (*content), message->GetSizeAllMessage(), false);  
                                                                                                                                                                 break;  
                                                                                               }                                                                                                     
                                                                                           }
