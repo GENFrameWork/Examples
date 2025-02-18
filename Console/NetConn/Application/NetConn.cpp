@@ -543,19 +543,29 @@ bool NETCONN::KeyValidSecuences(int key)
                       XSTRING                     result;
                       bool                        status;
 
+                      if(!connection)
+                        {
+                          break;
+                        }
+
                       status = connection->Command_Do(NETCONN_COREPROTOCOL_COMMAND_TYPE_GETVERSION, result, 10);
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Core Protocol Command: Get version] Result: \"%s\""), status?result.Get():__L("Error!"));                        
+                      XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[NetConn Command Get version] Result: \"%s\""), status?result.Get():__L("Error!"));                        
                     }
                   break;
 
-      case 'Y'  : if(connectionsmanager)
+      case 'Y'  : if(connectionsmanager && modeserver)
                     { 
                       DIOCOREPROTOCOL_CONNECTION* connection = connectionsmanager->Connections_Get((XDWORD)0);
                       XSTRING                     result;
                       bool                        status;
 
+                      if(!connection)
+                        {
+                          break;
+                        }
+
                       status = connection->Command_Do(NETCONN_COREPROTOCOL_COMMAND_TYPE_OTHERCOMMAND, result, 10);
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Core Protocol Command: Other command] Result: \"%s\""), status?result.Get():__L("Error!"));
+                      XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[NetConn Command Other command] Result: \"%s\""), status?result.Get():__L("Error!"));
                     }
                   break;
 
@@ -565,8 +575,13 @@ bool NETCONN::KeyValidSecuences(int key)
                       NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
                       bool                              status      = false;
   
+                      if(!connection)
+                        {
+                          break;
+                        }
+
                       status = connection->UpdateClass_Do(__L("testupdateclass"), connection->GetTestUpdateClass(), 10);                                            
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
+                      XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[NetConn Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
 
@@ -574,9 +589,14 @@ bool NETCONN::KeyValidSecuences(int key)
                     { 
                       NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
                       bool                              status      = false;
+
+                      if(!connection)
+                        {
+                          break;
+                        }
                         
                       status = connection->UpdateClass_DoAsk(__L("testupdateclass"), connection->GetTestUpdateClass(), 10);                                            
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Server Ask Client] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
+                      XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[NetConn Update class Test Update Class Server Ask Client] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
 
@@ -585,11 +605,33 @@ bool NETCONN::KeyValidSecuences(int key)
                     { 
                       NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);                                                                
                       bool                              status      = false;
-  
+
+                      if(!connection)
+                        {
+                          break;
+                        }
+
                       status = connection->GetTestUpdateClass()->Update();                                            
-                      XTRACE_PRINTCOLOR(status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED, __L("[Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
+                      XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[NetConn Update class Test Update Class Client->Server] Result: \"%s\""), status?__L("Ok"):__L("Error!"));
                     }
                   break;
+
+      case 'D'  : if(connectionsmanager)
+                    { 
+                      NETCONN_COREPROTOCOL_CONNECTION*  connection  = (NETCONN_COREPROTOCOL_CONNECTION*)connectionsmanager->Connections_Get((XDWORD)0);  
+                      bool                              status      = true;
+  
+                      if(!connection)
+                        {
+                          break;
+                        }
+
+                      status = connection->Disconnect();
+                                                      
+                      XTRACE_PRINTCOLOR((status?XTRACE_COLOR_BLUE:XTRACE_COLOR_RED), __L("[NetConn Command Disconnected] Result: \"%s\""), status?__L("Ok!"):__L("Error!"));
+                    }
+                  break;
+
 
 
     }

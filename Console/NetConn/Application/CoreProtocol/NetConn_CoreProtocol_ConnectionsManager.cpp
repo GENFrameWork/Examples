@@ -142,8 +142,6 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
   protocolCFG.SetIsCompressHeader(true);
   protocolCFG.SetIsCompressContent(true);
 
-  protocolCFG.SetIsEncapsulatedBase64(true);
-
   protocolCFG.SetTimeOutNoResponse(30);
   protocolCFG.SetTimeToEliminateConnectionDisconnect(1);
 
@@ -185,6 +183,10 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
 
   if(!APPFLOW_CFG.Connection_GetTransportType()->Compare(__L("SERIAL"), true))
     {
+      protocolCFG.SetIsEncapsulatedBase64(true);
+
+      protocolCFG.BusMode_Activate(true);
+
       DIOSTREAMUARTCONFIG*  diostreamUARTCFG = NULL;
       DIOSTREAM*            diostreamUART    = NULL;
   
@@ -314,7 +316,7 @@ DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCORE
   NETCONN_COREPROTOCOL_CONNECTION* netconn_connection = (NETCONN_COREPROTOCOL_CONNECTION*)connection;
   if(netconn_connection)
     {   
-      protocol->UpdateClass_Add(__L("agentstate")       , netconn_connection->GetAgentState(), true, 10);
+      protocol->UpdateClass_Add(__L("agentstate")       , netconn_connection->GetAgentState(), true, 180);
       protocol->UpdateClass_Add(__L("testupdateclass")  , netconn_connection->GetTestUpdateClass(), true, 0, DIOCOREPROTOCOL_UPDATECLASS_FLAG_FORCHANGE);
     }
 

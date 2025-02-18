@@ -21,19 +21,5 @@
         "CLIENT"
       ]
     }
-    ,
-    {
-      "type": "cppgdb",
-      "name": "Remote ARM",
-      "project": "CMakeLists.txt",
-      "projectTarget": "netconn",
-      "comment": "Learn how to configure WSL debugging. For more info, see http://aka.ms/vslinuxdebug",
-      "debuggerConfiguration": "gdb",
-      "args": [ "CLIENT" ],
-      "env": {},
-      "targetArchitecture": "arm",
-      "remoteMachineName": "192.168.1.22"
-    }
-
   ]
 }

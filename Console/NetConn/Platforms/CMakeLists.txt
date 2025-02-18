@@ -19,12 +19,13 @@ option(XTRACE_FEATURE                                           "XTrace"        
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
                     
 option(DIO_FEATURE                                              "Data Input/Output"                                       ON ) 
-option(DIO_STREAMUART_FEATURE                                   "Stream UART"                                             ON )    
-option(DIO_STREAMTCPIP_FEATURE                                  "Stream TCPIP"                                            ON )
 option(DIO_CHECKCONNECTIONS_FEATURE                             "Check Connections"                                       ON )
 option(DIO_NETWORKTIMEPROTOCOL_FEATURE                          "Network Time Protocol"                                   ON )
 option(DIO_DYNDNS_FEATURE                                       "DynDNS"                                                  ON )
 option(DIO_SCRAPERWEB_FEATURE                                   "Scraper Web"                                             ON )
+option(DIO_STREAM_FEATURE                                       "Stream"                                                  ON )    
+option(DIO_STREAMUART_FEATURE                                   "Stream UART"                                             ON )    
+option(DIO_STREAMTCPIP_FEATURE                                  "Stream TCPIP"                                            ON )
 option(DIO_COREPROTOCOL_FEATURE                                 "Data Input/Output Protocol"                              ON )
 
 option(HASH_SHA2_FEATURE                                        "Hash SHA2"                                               ON )
