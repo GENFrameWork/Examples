@@ -557,7 +557,7 @@ void SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
 {
   #ifdef SCRIPT_LIB_CFG_ACTIVE
   
-  SCRIPT_SET_LIB_CFG(script, APPFLOW_CFG);
+  SCRIPT_SET_LIB_CFG(script, (XFILECFG*)&APPFLOW_CFG);
 
   #endif
 }
