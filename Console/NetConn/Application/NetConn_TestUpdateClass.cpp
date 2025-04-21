@@ -198,8 +198,8 @@ bool NETCONN_TESTUPDATECLASS::Serialize()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_TESTUPDATECLASS::Deserialize()
 {
-  Primitive_Extract<XDWORD&>(number   , NETCONN_TESTUPDATECLASS_NUMBER_STR);
-  Primitive_Extract<XSTRING&>(string  , NETCONN_TESTUPDATECLASS_STRING_STR);
+  Primitive_Extract<XDWORD>(number   , NETCONN_TESTUPDATECLASS_NUMBER_STR);
+  Primitive_Extract<XSTRING>(string  , NETCONN_TESTUPDATECLASS_STRING_STR);
 
   return true;
 }

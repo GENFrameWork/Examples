@@ -197,8 +197,8 @@ bool NETCONN_AGENTSTATE::Serialize()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_AGENTSTATE::Deserialize()
 {
-  Primitive_Extract<XDWORD&>(total_memory , NETCONN_AGENTSTATE_TOTALMEMORY_STR);
-  Primitive_Extract<XDWORD&>(free_memory  , NETCONN_AGENTSTATE_FREEMEMORY_STR);
+  Primitive_Extract<XDWORD>(total_memory , NETCONN_AGENTSTATE_TOTALMEMORY_STR);
+  Primitive_Extract<XDWORD>(free_memory  , NETCONN_AGENTSTATE_FREEMEMORY_STR);
 
   return true;
 }
