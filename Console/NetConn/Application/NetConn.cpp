@@ -843,14 +843,14 @@ void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTI
     {
       case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_COMMANDRESPONSE : if(!response.CommandResponse(event))
                                                                               {
-                                                                                event->GetContenteResponseString()->Format(__L("[Error] Unkown command !!!"));
+                                                                                event->GetContentResponseString()->Format(__L("[Error] Unkown command !!!"));
                                                                               }
                                                                             break;  
 
       case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_UPDATECLASS     :
       case DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT_TYPE_ASKUPDATECLASS  : if(!response.UpdateClassResponse(event))
                                                                               {
-                                                                                event->GetContenteResponseString()->Format(__L("[Error] Unkown class !!!"));
+                                                                                event->GetContentResponseString()->Format(__L("[Error] Unkown class !!!"));
                                                                               }                                                                            
                                                                             break;
     }

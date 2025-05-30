@@ -160,7 +160,7 @@ bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse(DIOCOREPROTOCOL_CONNECTIONSM
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
-  event->GetContenteResponseString()->Format(__L("protocol version %d.%d"), NETCONN_COREPROTOCOL_VERSION, NETCONN_COREPROTOCOL_SUBVERSION);      
+  event->GetContentResponseString()->Format(__L("protocol version %d.%d"), NETCONN_COREPROTOCOL_VERSION, NETCONN_COREPROTOCOL_SUBVERSION);      
 
   return true;
 }
@@ -179,7 +179,7 @@ bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_GetVersion(DIOCOREPROTOCOL_C
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
-  event->GetContenteResponseString()->Format(__L("Other command"));      
+  event->GetContentResponseString()->Format(__L("Other command"));      
 
   return true;
 }
@@ -217,7 +217,7 @@ bool NETCONN_COREPROTOCOL_RESPONSE::UpdateClassResponse(DIOCOREPROTOCOL_CONNECTI
     {
       if(!message->GetHeader()->GetOperationParam()->Compare(__L("testupdateclass"), true))
         {
-          status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClassDeserialize(message, connection->GetTestUpdateClass());
+          status = DIOCOREPROTOCOL_CONNECTIONSMANAGER::UpdateClass_Deserialize(message, connection->GetTestUpdateClass());
         }
     }
 
