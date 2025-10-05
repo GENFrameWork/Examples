@@ -1,0 +1,25 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "netconn server",
+      "project": "CMakeLists.txt",
+      "projectTarget": "netconn.exe",
+      "name": "netconn server",
+      "args": [
+        "SERVER"
+      ]
+    }
+    ,
+    {
+      "type": "netconn client",
+      "project": "CMakeLists.txt",
+      "projectTarget": "netconn.exe",
+      "name": "netconn client",
+      "args": [
+        "CLIENT"
+      ]
+    }
+  ]
+}
