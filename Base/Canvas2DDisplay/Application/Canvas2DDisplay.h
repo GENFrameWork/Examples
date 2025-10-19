@@ -55,7 +55,7 @@
 
 
 
-#ifdef HW_PC
+#ifdef HW_INTEL
 
   #define SCREEN_GRP_RESET              DIOGPIO_PINSGROUP_A
   #define SCREEN_PIN_RESET              0

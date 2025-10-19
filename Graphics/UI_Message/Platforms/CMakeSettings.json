@@ -1,42 +1,42 @@
 ﻿{
   "configurations": [
     {
-      "name": "1 - Windows x32",
+      "name": "1 - Windows INTEL x32",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Windows\\x32",
-      "installRoot": "${projectDir}\\Windows\\x32",
-      "cmakeCommandArgs": "-DTARGET=PC",
+      "buildRoot": "${projectDir}\\Windows\\intel32",
+      "installRoot": "${projectDir}\\Windows\\intel32",
+      "cmakeCommandArgs": "-DTARGET=INTEL",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "msvc_x86_x64" ]
     },
     {
-      "name": "2 - Windows x64",
+      "name": "2 - Windows INTEL x64",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Windows\\x64",
-      "installRoot": "${projectDir}\\Windows\\x64",
-      "cmakeCommandArgs": "-DTARGET=PC",
+      "buildRoot": "${projectDir}\\Windows\\intel64",
+      "installRoot": "${projectDir}\\Windows\\intel64",
+      "cmakeCommandArgs": "-DTARGET=INTEL",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "msvc_x64_x64" ]
     },
     {
-      "name": "3 - Linux PC x64",
+      "name": "3 - Linux INTEL x64",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Linux\\x64",
-      "installRoot": "${projectDir}\\Linux\\x64",
+      "buildRoot": "${projectDir}\\Linux\\intel64",
+      "installRoot": "${projectDir}\\Linux\\intel64",
       "cmakeExecutable": "cmake",
-      "cmakeCommandArgs": "-DTARGET=PC",
+      "cmakeCommandArgs": "-DTARGET=INTEL",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "linux_x64" ],
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "4 - Linux ARM 64",
+      "name": "4 - Linux ARM x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm64",
@@ -62,7 +62,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "6 - Linux Raspberry Pi",
+      "name": "6 - Linux Raspberry Pi x32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\pi",
@@ -75,7 +75,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "7 - Linux Raspberry Pi 64",
+      "name": "7 - Linux Raspberry Pi x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\pi64",
@@ -88,17 +88,15 @@
       "wslPath": "${defaultWSLPath}",
       "intelliSenseMode": "linux-gcc-arm"
     },
-    {
-      "name": "8 - Android",
+    { "name": "8 - Espressif ESP32",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Android",
-      "installRoot": "${projectDir}\\Android",
-      "cmakeCommandArgs": "-DTARGET=ANDROID",
+      "buildRoot": "${projectDir}\\esp32",
+      "installRoot": "${projectDir}\\esp32",
+      "cmakeCommandArgs": "-DTARGET=ESP32",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "clang_cl_x86_arm64" ],
-      "intelliSenseMode": "android-clang-arm64"
+      "inheritEnvironments": [ "msvc_x86_x64" ]
     }
-  ]
+]
 }
