@@ -6,7 +6,7 @@
 * @brief      Application Base Example
 * @ingroup    EXAMPLES
 * 
-* @copyright  GEN Group. All rights reserved.
+* @copyright  EndoraSoft. All rights reserved.
 * 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -47,7 +47,7 @@
 #define APPLICATION_NAMEAPP                       __L("App Base Example")
 #define APPLICATION_NAMEFILE                      __L("AppBaseExample")
 
-#define APPLICATION_OWNER                         __L("GEN Group")
+#define APPLICATION_OWNER                         __L("EndoraSoft")
 
 #define APPLICATION_YEAROFCREATION                2022
 

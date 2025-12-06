@@ -6,7 +6,7 @@
 * @brief      Net Connection CFG class (DIOCoreProtol example)
 * @ingroup    EXAMPLES
 * 
-* @copyright  GEN Group. All rights reserved.
+* @copyright  EndoraSoft. All rights reserved.
 * 
 * @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -88,7 +88,7 @@ enum NETCONNTASKID
 #define APPLICATION_NAMEAPP                       __L("Net Conn")
 #define APPLICATION_NAMEFILE                      __L("netconn")
 
-#define APPLICATION_OWNER                         __L("GEN Group")
+#define APPLICATION_OWNER                         __L("EndoraSoft")
 
 #define APPLICATION_YEAROFCREATION                2024
 
