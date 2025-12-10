@@ -13,13 +13,14 @@ set(GEN_DIRECTORY "../../../../../GEN_FrameWork")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                            "Debug mode"                                                                                      ON )
-option(XTRACE_FEATURE                                           "XTrace"                                                                                          ON )
-option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                                                                 ON )
+option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
+option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
+option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
+option(XFEEDBACK_CONTROL_FEATURE                                "XFeedback Control"                                       ON )               
     
-option(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                       "Linux CodePage Editor Visual Studio CP1252"                                                      ON )   
+option(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                       "Linux CodePage Editor Visual Studio CP1252"              ON )   
                                 
-option(APPFLOW_FEATURE                                          "Application Flow modules"                                                                        ON )
+option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
 
 
 # --------------------------------------------------------------------

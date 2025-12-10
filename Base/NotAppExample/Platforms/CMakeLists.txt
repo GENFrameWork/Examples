@@ -13,9 +13,11 @@ set(GEN_DIRECTORY "../../../../")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                          "Activate Debug mode"                                     ON ) 
-option(XTRACE_FEATURE                                         "Activate XTrace"                                         ON )
-option(XMEMORY_CONTROL_FEATURE                                "Activate XMemory Control"                                ON )
+option(DEBUG_FEATURE                                           "Activate Debug mode"                                     ON ) 
+option(XTRACE_FEATURE                                          "Activate XTrace"                                         ON )
+option(XMEMORY_CONTROL_FEATURE                                 "Activate XMemory Control"                                ON )
+
+option(XSLEEP_FEATURE                                          "Sleep functions"                                         ON )
 
 
 # --------------------------------------------------------------------
