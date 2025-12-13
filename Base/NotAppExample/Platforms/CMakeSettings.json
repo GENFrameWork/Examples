@@ -36,19 +36,6 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "4 - Linux ARM x64",
-      "generator": "Ninja",
-      "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Linux\\arm64",
-      "installRoot": "${projectDir}\\Linux\\arm64",
-      "cmakeExecutable": "cmake",
-      "cmakeCommandArgs": "-DTARGET=ARM64",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_arm64" ],
-      "wslPath": "${defaultWSLPath}"
-    },
-    {
       "name": "5 - Linux ARM",
       "generator": "Ninja",
       "configurationType": "Debug",
@@ -62,11 +49,24 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
+      "name": "4 - Linux ARM x64",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\Linux\\arm64",
+      "installRoot": "${projectDir}\\Linux\\arm64",
+      "cmakeExecutable": "cmake",
+      "cmakeCommandArgs": "-DTARGET=ARM64",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "linux_arm64" ],
+      "wslPath": "${defaultWSLPath}"
+    },    
+    {
       "name": "6 - Linux Raspberry Pi x32",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Linux\\pi",
-      "installRoot": "${projectDir}\\Linux\\pi",
+      "buildRoot": "${projectDir}\\Linux\\rpi32",
+      "installRoot": "${projectDir}\\Linux\\rpi32",
       "cmakeExecutable": "cmake",
       "cmakeCommandArgs": "-DTARGET=RPI32",
       "buildCommandArgs": "",
@@ -78,8 +78,8 @@
       "name": "7 - Linux Raspberry Pi x64",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\Linux\\pi64",
-      "installRoot": "${projectDir}\\Linux\\pi64",
+      "buildRoot": "${projectDir}\\Linux\\rpi64",
+      "installRoot": "${projectDir}\\Linux\\rpi64",
       "cmakeExecutable": "cmake",
       "cmakeCommandArgs": "-DTARGET=RPI64",
       "buildCommandArgs": "",
