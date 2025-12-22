@@ -20,20 +20,18 @@
 
 #include "XString.h"
 #include "XLog.h"
-#ifdef LINUX
-#include "MainProcLINUX.h"
-#endif
+
+#include "MainProc.h"
 
 #pragma endregion
 
-
-void LIBRARY_Ini(void);
-void LIBRARY_End(void);
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 #pragma region GENERAL_VARIABLE
 
 #pragma endregion
+
+
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 #pragma region CLASS_MEMBERS
@@ -51,10 +49,7 @@ int main()
 {
   bool status;
 
-  #ifdef LINUX
-  // LIBRARY_Ini();
-  #endif
-
+  LIBRARY_Ini();
 
   status = GEN_XLOG.Ini(__L("helloword.log"), __L("helloword"), true);
   if(status)
@@ -69,12 +64,10 @@ int main()
       GEN_XLOG.End();
     }
 
-  #ifdef LINUX
-  // LIBRARY_End();
-  #endif
 
+  LIBRARY_End();
   
-  return 0;
+  return status;
 }
 
 #pragma endregion
