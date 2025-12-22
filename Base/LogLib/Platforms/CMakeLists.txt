@@ -20,6 +20,7 @@ option(XTRACE_FEATURE                                           "XTrace"        
 
 option(XPUBLISHER_FEATURE                                       "XPublisher"                                              ON )
 
+#option(APPMODE_LIBRARY_STATIC_FEATURE                           "Application Library Static  mode"                        ON )
 option(APPMODE_LIBRARY_DINAMIC_FEATURE                          "Application Library Dinamic mode"                        ON )
     
 option(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                       "Linux CodePage Editor Visual Studio CP1252"              ON )   

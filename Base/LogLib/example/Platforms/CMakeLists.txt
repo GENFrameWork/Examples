@@ -5,9 +5,23 @@
 cmake_minimum_required(VERSION 3.21.0)
 project(helloworld)
 
-set(GEN_DIRECTORY "../../../../../GEN/XUtils") 
+set(APP_DIRECTORY_APPLICATION         "../")
+set(GEN_DIRECTORY_COMMON              "../../../../../GEN/Common") 
+set(GEN_DIRECTORY_XUTILS              "../../../../../GEN/XUtils") 
+set(GEN_DIRECTORY_XUTILS_FORMATFILES  "../../../../../GEN/XUtils/FormatFiles") 
+set(GEN_DIRECTORY_APPFLOW             "../../../../../GEN/AppFlow") 
+set(GEN_DIRECTORY_MAINPROC            "../../../../../GEN/MainProc") 
+set(GEN_DIRECTORY_PLATFORMS_LINUX     "../../../../../GEN/Platforms/Linux") 
 
-include_directories(${GEN_DIRECTORY})
+list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
+list(APPEND GEN_INCLUDES_DIR_LIST ${GEN_DIRECTORY_COMMON})
+list(APPEND GEN_INCLUDES_DIR_LIST ${GEN_DIRECTORY_XUTILS})
+list(APPEND GEN_INCLUDES_DIR_LIST ${GEN_DIRECTORY_XUTILS_FORMATFILES})
+list(APPEND GEN_INCLUDES_DIR_LIST ${GEN_DIRECTORY_APPFLOW})
+list(APPEND GEN_INCLUDES_DIR_LIST ${GEN_DIRECTORY_MAINPROC})
+list(APPEND GEN_INCLUDES_DIR_LIST ${GEN_DIRECTORY_PLATFORMS_LINUX})
+
+include_directories(${GEN_INCLUDES_DIR_LIST})
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -16,16 +30,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
  set(CMAKE_BUILD_TYPE Debug            CACHE STRING "Choose the type of build."  FORCE)
  set(CMAKE_CONFIGURATION_TYPES Debug   CACHE STRING "Choose the type of build."  FORCE)
 
-add_executable(${CMAKE_PROJECT_NAME}
-               ../../../helloworld.cpp
-               ../../../helloworld.h
-              )             
+add_executable(${CMAKE_PROJECT_NAME}  ../../../helloworld.cpp)             
 
 set(LIB_ROOT "${CMAKE_CURRENT_LIST_DIR}/../..")
 
 
 if(WIN32)
   
+  add_definitions(-DWINDOWS)  
+
   set(LOG_LIB_DIR "${LIB_ROOT}/Platforms/Windows/intel32")
   set(LOG_DLL_DIR "${LIB_ROOT}/Platforms/Windows/intel32")
 
@@ -50,6 +63,8 @@ if(WIN32)
 
 else()
 
+  add_definitions(-DLINUX)  
+
   set(LOG_LIB_DIR "${LIB_ROOT}/Platforms/Linux/intel64")
 
   find_library(LOGLIB_SO
@@ -66,7 +81,7 @@ else()
 
   set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
                         BUILD_RPATH "${LOG_LIB_DIR}"
-                        sINSTALL_RPATH "${LOG_LIB_DIR}"
+                        INSTALL_RPATH "${LOG_LIB_DIR}"
                        )
 endif()              
               
