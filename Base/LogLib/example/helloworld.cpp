@@ -18,10 +18,9 @@
 
 #include <stdio.h>
 
-#include "XString.h"
-#include "XLog.h"
 
-#include "MainProc.h"
+#include "MainLibrary.h"
+#include "XLog.h"
 
 #pragma endregion
 
