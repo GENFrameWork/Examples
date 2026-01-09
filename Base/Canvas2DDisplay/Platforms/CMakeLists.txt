@@ -4,7 +4,7 @@
 # --------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.16.0)
-project(canvas2ddisplay)
+project(canvas2Ddisplay)
 
 
 set(GEN_DIRECTORY "../../../../") 
