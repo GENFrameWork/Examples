@@ -13,7 +13,7 @@ set(GEN_DIRECTORY "../../../../../GEN_FrameWork")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
+#option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 option(XFEEDBACK_CONTROL_FEATURE                                "XFeedback Control"                                       ON )               
