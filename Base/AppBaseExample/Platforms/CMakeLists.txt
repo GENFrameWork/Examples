@@ -7,13 +7,13 @@ cmake_minimum_required(VERSION 3.16.0)
 project(appbaseexample)
 
 
-set(GEN_DIRECTORY "../../../../../GEN_FrameWork") 
+set(GEN_DIRECTORY "../../../..") 
 
 
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-#option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
+option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 option(XFEEDBACK_CONTROL_FEATURE                                "XFeedback Control"                                       ON )               
@@ -26,7 +26,7 @@ option(APPFLOW_FEATURE                                          "Application Flo
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Main.txt") 
 
                      
 # --------------------------------------------------------------------
@@ -45,11 +45,11 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/AppBaseExampl
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_CreateProject.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_CreateProject.txt") 
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Libraries.txt") 
 

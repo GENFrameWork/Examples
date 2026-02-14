@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.16.0)
 project(loglib)
 
 
-set(GEN_DIRECTORY "../../../../../GEN_FrameWork") 
+set(GEN_DIRECTORY "../../../..") 
 
 
 # --------------------------------------------------------------------
@@ -31,7 +31,7 @@ option(XLOG_FEATURE                                             "LOG File"      
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Main.txt") 
 
                      
 # --------------------------------------------------------------------
@@ -50,11 +50,11 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_CreateProject.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_CreateProject.txt") 
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/Common/CMake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Libraries.txt") 
 

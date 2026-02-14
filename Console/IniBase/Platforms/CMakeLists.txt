@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------
-# NetConn : Example of console: Core protocol example
+# IniBase: Example of console: Init Base of Application
 # GEN FrameWork
 # --------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.16.0)
-project(netconn)
+project(inibase)
 
 
 set(GEN_DIRECTORY "../../../..") 
@@ -24,9 +24,7 @@ option(DIO_NETWORKTIMEPROTOCOL_FEATURE                          "Network Time Pr
 option(DIO_DYNDNS_FEATURE                                       "DynDNS"                                                  ON )
 option(DIO_SCRAPERWEB_FEATURE                                   "Scraper Web"                                             ON )
 option(DIO_STREAM_FEATURE                                       "Stream"                                                  ON )    
-option(DIO_STREAMUART_FEATURE                                   "Stream UART"                                             ON )    
 option(DIO_STREAMTCPIP_FEATURE                                  "Stream TCPIP"                                            ON )
-option(DIO_COREPROTOCOL_FEATURE                                 "Data Input/Output Protocol"                              ON )
 
 option(HASH_SHA2_FEATURE                                        "Hash SHA2"                                               ON )
 option(CIPHER_SYMMETRIC_AES_FEATURE                             "Cipher Symetric AES"                                     ON )
@@ -51,8 +49,8 @@ option(APPFLOW_CFG_DIOLOCATION_FEATURE                          "Application Flo
 # --------------------------------------------------------------------
 # Config Application Macro
 
-set(APP_CFG_NETCONN "-DAPPFLOW_CFG=NETCONN_CFG::GetInstance()")
-add_definitions(${APP_CFG_NETCONN})
+set(APP_CFG_INIBASE "-DAPPFLOW_CFG=INIBASE_CFG::GetInstance()")
+add_definitions(${APP_CFG_INIBASE})
 
 
 # --------------------------------------------------------------------
@@ -73,15 +71,8 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION_COREPROTOCOL})
 # --------------------------------------------------------------------
 # Source code of the Application
 
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_CFG.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_AgentState.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NetConn_TestUpdateClass.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_Response.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_RegisterData.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_Connection.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION_COREPROTOCOL}/NetConn_CoreProtocol_ConnectionsManager.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/IniBase.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/IniBase_CFG.cpp")
 
 
 # --------------------------------------------------------------------
