@@ -27,15 +27,12 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
-#pragma endregion
 
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "MiniWebServer_CFG.h"
 
@@ -45,28 +42,22 @@
 
 #include "MiniWebServer.h"
 
-#pragma endregion
 
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_CONTROL_INCLUDE
 
 #include "GEN_Control.h"
 
-#pragma endregion
 
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
-#pragma region GENERAL_VARIABLE
 
 MINIWEBSERVER_CFG* MINIWEBSERVER_CFG::instance = NULL;
 
-#pragma endregion
 
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -255,5 +246,4 @@ void MINIWEBSERVER_CFG::Clean()
 }
 
 
-#pragma endregion
 

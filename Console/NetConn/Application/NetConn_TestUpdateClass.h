@@ -29,26 +29,21 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XString.h"
 #include "XSerializable.h"
 
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define NETCONN_TESTUPDATECLASS_NUMBER_STR    __L("number") 
 #define NETCONN_TESTUPDATECLASS_STRING_STR    __L("string")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 
 class NETCONN_TESTUPDATECLASS : public XSERIALIZABLE
@@ -76,14 +71,11 @@ class NETCONN_TESTUPDATECLASS : public XSERIALIZABLE
 };
 
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

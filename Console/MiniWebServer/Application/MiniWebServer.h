@@ -29,7 +29,6 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -42,11 +41,9 @@
 
 #include "MiniWebServer_APIRest.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 enum MINIWEBSERVERXFSMEVENTS
 {
@@ -92,11 +89,9 @@ enum MINIWEBSERVERTASKID
 #define MINIWEBSERVER_TABLE_TEST_NAME             __L("TableTest")
 #define MINIWEBSERVER_TABLE_MAXFIELDS             16
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -145,14 +140,11 @@ class MINIWEBSERVER : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
     APPFLOWWEBSERVER*               appwebsocket;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

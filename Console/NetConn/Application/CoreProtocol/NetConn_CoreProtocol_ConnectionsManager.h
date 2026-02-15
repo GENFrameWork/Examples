@@ -29,23 +29,18 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #include "DIOCoreProtocol_CFG.h"
 #include "DIOCoreProtocol_ConnectionsManager.h"
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 
 class DIOCOREPROTOCOL_CFG;
@@ -73,14 +68,11 @@ class NETCONN_COREPROTOCOL_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTI
  };
 
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

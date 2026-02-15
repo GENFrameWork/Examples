@@ -27,15 +27,12 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
-#pragma endregion
 
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "UI_Options.h"
 
@@ -112,28 +109,22 @@
 #include "APPFlowExtended.h"
 
 #include "UI_Options_CFG.h"
-#pragma endregion
 
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_CONTROL_INCLUDE
 
 #include "GEN_Control.h"
 
-#pragma endregion
 
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
-#pragma region GENERAL_VARIABLE
 
  APPLICATIONCREATEINSTANCE(UI_OPTIONS, canvas2d)
 
-#pragma endregion
 
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -1258,5 +1249,4 @@ void UI_OPTIONS::Clean()
 }
 
 
-#pragma endregion
 

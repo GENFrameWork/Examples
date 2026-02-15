@@ -29,15 +29,12 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "APPFlowCFG.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define DATABASESCFG_SECTION_DATABASE                         __L("database")
 #define DATABASESCFG_DATABASE_URL                             __L("url")
@@ -47,11 +44,9 @@
 #define DATABASESCFG_DATABASE_PASSWORD                        __L("password")
 #define DATABASESCFG_DATABASE_TIMEOUTCONNECTION               __L("timeoutconnection")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class DATABASES_CFG : public APPFLOWCFG
 {
@@ -92,14 +87,11 @@ class DATABASES_CFG : public APPFLOWCFG
     int                             db_timeoutconnection;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

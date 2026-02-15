@@ -30,23 +30,18 @@
 
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "APPFlowCFG.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define NETCAPTURECFG_SECTIONGENERAL     __L("general")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 
 class NETCAPTURE_CFG : public APPFLOWCFG
@@ -73,14 +68,11 @@ class NETCAPTURE_CFG : public APPFLOWCFG
 };
 
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

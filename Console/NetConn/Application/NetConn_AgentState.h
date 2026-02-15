@@ -29,24 +29,19 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XSerializable.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define NETCONN_AGENTSTATE_TOTALMEMORY_STR    __L("total_memory") 
 #define NETCONN_AGENTSTATE_FREEMEMORY_STR     __L("free_memory")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class NETCONN_AGENTSTATE : public XSERIALIZABLE
 {
@@ -73,14 +68,11 @@ class NETCONN_AGENTSTATE : public XSERIALIZABLE
     XDWORD          free_memory;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

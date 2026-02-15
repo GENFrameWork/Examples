@@ -27,15 +27,12 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
-#pragma endregion
 
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "IniBase.h"
 
@@ -92,28 +89,22 @@
 
 #include "IniBase_CFG.h"
 
-#pragma endregion
 
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Control.h"
 
-#pragma endregion
 
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
-#pragma region GENERAL_VARIABLE
 
 APPLICATIONCREATEINSTANCE(INIBASE, inibase)
 
-#pragma endregion
 
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -523,5 +514,4 @@ void INIBASE::Clean()
 }
 
 
-#pragma endregion
 

@@ -27,15 +27,12 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_DEFINES_INCLUDE
 
 #include "GEN_Defines.h"
 
-#pragma endregion
 
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "ScriptsExample_CFG.h"
 
@@ -43,28 +40,22 @@
 
 #include "ScriptsExample.h"
 
-#pragma endregion
 
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
-#pragma region PRECOMPILATION_CONTROL_INCLUDE
 
 #include "GEN_Control.h"
 
-#pragma endregion
 
 
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
-#pragma region GENERAL_VARIABLE
 
 SCRIPTSEXAMPLE_CFG* SCRIPTSEXAMPLE_CFG::instance = NULL;
 
-#pragma endregion
 
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
-#pragma region CLASS_MEMBERS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
@@ -246,5 +237,4 @@ void SCRIPTSEXAMPLE_CFG::Clean()
 }
 
 
-#pragma endregion
 

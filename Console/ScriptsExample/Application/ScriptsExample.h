@@ -29,7 +29,6 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -43,11 +42,9 @@
 
 #include "APPFlowConsole.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 enum SCRIPTSEXAMPLEXFSMEVENTS
 {
@@ -89,11 +86,9 @@ enum SCRIPTSEXAMPLETASKID
 
 #define APPLICATION_YEAROFCREATION                2018
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -146,14 +141,11 @@ class SCRIPTSEXAMPLE : public APPFLOWCONSOLE, public XFSMACHINE
     XMUTEX*                         xmutexshowallstatus;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

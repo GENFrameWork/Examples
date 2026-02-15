@@ -29,24 +29,19 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "DIOCoreProtocol_RegisterData.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_GROUP       __L("group")
 #define NETCONN_COREPROTOCOL_REGISTERDATA_HEADER_VAR_SUBGROUP    __L("subgroup")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class NETCONN_COREPROTOCOL_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
 {
@@ -70,14 +65,11 @@ class NETCONN_COREPROTOCOL_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
     XSTRING                 subgroup;  
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

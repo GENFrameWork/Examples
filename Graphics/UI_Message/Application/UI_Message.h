@@ -29,7 +29,6 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -41,11 +40,9 @@
 
 #include "APPFlowGraphics.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 enum UI_MESSAGEXFSMEVENTS
 {
@@ -114,11 +111,9 @@ enum UI_MESSAGE_BUTTONS
 
 #define APPLICATION_GUI_MESSAGE_VIEWPORT_ID       __L("message_viewport")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -193,14 +188,11 @@ class UI_MESSAGE : public APPFLOWGRAPHICS, public XFSMACHINE
 };
 
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

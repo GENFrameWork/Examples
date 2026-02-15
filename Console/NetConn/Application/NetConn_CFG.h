@@ -29,15 +29,12 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "APPFlowCFG.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define NETCONN_CFG_SECTION_GENERAL                           __L("general")
 
@@ -49,11 +46,9 @@
 
 #define NETCONN_APPFLOW_CFG_DEFAULT_REMARK_COLUMN             98
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 
 class NETCONN_CFG : public APPFLOWCFG
@@ -89,14 +84,11 @@ class NETCONN_CFG : public APPFLOWCFG
     XSTRING                         connection_transportconfig;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

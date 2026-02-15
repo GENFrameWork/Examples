@@ -29,17 +29,14 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "DIOCoreProtocol.h"
 
 #include "CipherAES.h"
 
-#pragma endregion
  
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define NETCONN_COREPROTOCOL_AUTHENTICATION_INI       { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F }
 #define NETCONN_COREPROTOCOL_AUTHENTICATION_KEY       { 0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81, 0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4 }
@@ -58,11 +55,9 @@ enum NETCONN_COREPROTOCOL_COMMAND_TYPE
 #define NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_GETVERSION       __L("getversion")
 #define NETCONN_COREPROTOCOL_COMMAND_TYPE_STRING_OTHERCOMMAND     __L("othercommand")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class DIOCOREPROTOCOL_CFG; 
 class DIOSTREAM;
@@ -83,14 +78,11 @@ class NETCONN_COREPROTOCOL : public DIOCOREPROTOCOL
     CIPHERAES          cipherAES; 
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

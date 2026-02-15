@@ -29,15 +29,12 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XBuffer.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define APPLICATION_VERSION                       0
 #define APPLICATION_SUBVERSION                    1
@@ -50,11 +47,9 @@
 
 #define APPLICATION_YEAROFCREATION                2022
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class NOTAPPEXAMPLE
 {
@@ -67,13 +62,10 @@ class NOTAPPEXAMPLE
     void                Clean                 ();
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 

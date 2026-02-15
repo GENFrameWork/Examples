@@ -29,15 +29,12 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "APPFlowCFG.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define MINIWEBSERVER_CFG_SECTION_PROTOCOL                            __L("protocol")
 #define MINIWEBSERVER_CFG_PROTOCOL_ISACTIVE                           __L("isactive")
@@ -45,11 +42,9 @@
 #define MINIWEBSERVER_CFG_PROTOCOL_PORT                               __L("port")
 #define MINIWEBSERVER_CFG_PROTOCOL_TARGET                             __L("target")
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class MINIWEBSERVER_CFG : public APPFLOWCFG
 {
@@ -77,13 +72,10 @@ class MINIWEBSERVER_CFG : public APPFLOWCFG
 
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 

@@ -29,7 +29,6 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -43,11 +42,9 @@
 
 #include "NetConn_CoreProtocol_Response.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 
 enum NETCONNXFSMEVENTS
@@ -92,11 +89,9 @@ enum NETCONNTASKID
 #define APPLICATION_YEAROFCREATION                2024
 
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -161,14 +156,11 @@ class NETCONN : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
     NETCONN_TESTUPDATECLASS*                    testupdateclass;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 extern NETCONN* netconn;
 
-#pragma endregion
 
 

@@ -29,25 +29,20 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "DIOCoreProtocol_Connection.h"
 
 #include "NetConn_AgentState.h"
 #include "NetConn_TestUpdateClass.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class NETCONN_COREPROTOCOL_CONNECTION : public DIOCOREPROTOCOL_CONNECTION 
 {
@@ -69,14 +64,11 @@ class NETCONN_COREPROTOCOL_CONNECTION : public DIOCOREPROTOCOL_CONNECTION
     NETCONN_TESTUPDATECLASS*      testupdateclass;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

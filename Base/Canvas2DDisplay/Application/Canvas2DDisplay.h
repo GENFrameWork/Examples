@@ -29,17 +29,14 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XBuffer.h"
 #include "APPFlowBase.h"
 
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define APPLICATION_VERSION                       0
 #define APPLICATION_SUBVERSION                    1
@@ -101,11 +98,9 @@
 
 #endif
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class DIOSTREAM;
 class MAIN;
@@ -130,14 +125,11 @@ class CANVAS2DDISPLAY : public APPFLOWBASE
 };
 
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 

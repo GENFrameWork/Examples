@@ -29,7 +29,6 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "XDateTime.h"
 #include "XFSMachine.h"
@@ -41,11 +40,9 @@
 
 #include "APPFlowConsole.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 
 enum INIBASEXFSMEVENTS
@@ -90,11 +87,9 @@ enum INIBASETASKID
 #define APPLICATION_YEAROFCREATION                2024
 
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 class XTIME;
 class XTIMER;
@@ -145,14 +140,11 @@ class INIBASE : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
     XMUTEX*                   xmutexshowallstatus;        
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 extern INIBASE* inibase;
 
-#pragma endregion
 
 

@@ -29,25 +29,20 @@
 #pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
-#pragma region INCLUDES
 
 #include "APPFlowCFG.h"
 
-#pragma endregion
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
-#pragma region DEFINES_ENUMS
 
 #define INIBASE_CFG_SECTION_GENERAL                           __L("general")
 
 #define INIBASE_APPFLOW_CFG_DEFAULT_REMARK_COLUMN             98
 
-#pragma endregion
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
-#pragma region CLASS
 
 
 class INIBASE_CFG : public APPFLOWCFG
@@ -76,14 +71,11 @@ class INIBASE_CFG : public APPFLOWCFG
     static INIBASE_CFG*             instance;
 };
 
-#pragma endregion
 
 
 /*---- INLINE FUNCTIONS + PROTOTYPES ---------------------------------------------------------------------------------*/
-#pragma region FUNCTIONS_PROTOTYPES
 
 
-#pragma endregion
 
 
 
