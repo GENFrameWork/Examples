@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_COREPROTOCOL_H_
-#define _NETCONN_COREPROTOCOL_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -94,6 +93,5 @@ class NETCONN_COREPROTOCOL : public DIOCOREPROTOCOL
 #pragma endregion
 
 
-#endif
 
 

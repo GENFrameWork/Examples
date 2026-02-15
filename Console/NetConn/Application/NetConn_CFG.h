@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_CFG_H_
-#define _NETCONN_CFG_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -100,5 +99,4 @@ class NETCONN_CFG : public APPFLOWCFG
 #pragma endregion
 
 
-#endif
 

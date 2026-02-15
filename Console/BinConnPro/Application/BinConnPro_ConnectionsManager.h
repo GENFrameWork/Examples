@@ -26,8 +26,7 @@
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _BINCONNPRO_CONNECTIONSMANAGER_H_
-#define _BINCONNPRO_CONNECTIONSMANAGER_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
@@ -81,7 +80,6 @@ class BINCONNPRO_CONNECTIONSMANAGER : public DIOPROTOCOL_CONNECTIONSMANAGER
 
 /*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
 
-#endif
 
 
 

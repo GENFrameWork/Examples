@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _CANVAS2D_H_
-#define _CANVAS2D_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -199,4 +198,3 @@ class CANVAS2D : public APPFLOWGRAPHICS, public XFSMACHINE
 #pragma endregion
 
 
-#endif

@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _MINIWEBSERVER_CFG_H_
-#define _MINIWEBSERVER_CFG_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -88,4 +87,3 @@ class MINIWEBSERVER_CFG : public APPFLOWCFG
 #pragma endregion
 
 
-#endif

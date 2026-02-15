@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _APPBASEEXAMPLE_H_
-#define _APPBASEEXAMPLE_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -84,5 +83,4 @@ class APPBASEEXAMPLE: public APPFLOWBASE
 #pragma endregion
 
 
-#endif
 

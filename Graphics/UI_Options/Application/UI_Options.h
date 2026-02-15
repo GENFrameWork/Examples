@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _UI_OPTIONS_H_
-#define _UI_OPTIONS_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -199,5 +198,4 @@ class UI_OPTIONS : public APPFLOWGRAPHICS, public XFSMACHINE
 #pragma endregion
 
 
-#endif
 

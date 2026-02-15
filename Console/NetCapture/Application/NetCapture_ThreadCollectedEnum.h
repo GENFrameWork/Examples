@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCAPTURE_THREADCOLLECTEDENUM_H_
-#define _NETCAPTURE_THREADCOLLECTEDENUM_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -62,5 +61,4 @@ enum NETCAPTURE_XTHREADGROUPID
 #pragma endregion
 
 
-#endif
 

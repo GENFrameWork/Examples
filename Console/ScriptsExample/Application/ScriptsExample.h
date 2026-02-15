@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _SCRIPTSEXAMPLE_H_
-#define _SCRIPTSEXAMPLE_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -157,5 +156,4 @@ class SCRIPTSEXAMPLE : public APPFLOWCONSOLE, public XFSMACHINE
 #pragma endregion
 
 
-#endif
 

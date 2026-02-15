@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _INIBASE_CFG_H_
-#define _INIBASE_CFG_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -87,5 +86,4 @@ class INIBASE_CFG : public APPFLOWCFG
 #pragma endregion
 
 
-#endif
 

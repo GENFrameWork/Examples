@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _CANVAS2D_CFG_H_
-#define _CANVAS2D_CFG_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -82,4 +81,3 @@ class CANVAS2D_CFG : public APPFLOWCFG
 #pragma endregion
 
 
-#endif

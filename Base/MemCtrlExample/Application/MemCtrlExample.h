@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _MEMCTRLEXAMPLE_H_
-#define _MEMCTRLEXAMPLE_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -78,6 +77,5 @@ class MEMCTRLEXAMPLE
 #pragma endregion
 
 
-#endif
 
 

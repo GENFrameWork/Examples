@@ -26,8 +26,7 @@
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _BINCONNPRO_APPLICATIONDATA_H_
-#define _BINCONNPRO_APPLICATIONDATA_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
@@ -61,6 +60,5 @@ class BINCONNPRO_APPLICATIONDATA : public DIOPROTOCOL_APPLICATIONDATA
 
 /*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
 
-#endif
 
 

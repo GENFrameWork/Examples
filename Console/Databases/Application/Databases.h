@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _DATABASES_H_
-#define _DATABASES_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -158,5 +157,4 @@ class DATABASES : public APPFLOWCONSOLE, public XFSMACHINE
 #pragma endregion
 
 
-#endif
 

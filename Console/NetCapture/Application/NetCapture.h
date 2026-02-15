@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCAPTURE_H_
-#define _NETCAPTURE_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -133,5 +132,4 @@ class NETCAPTURE : public APPFLOWCONSOLE, public XFSMACHINE
 #pragma endregion
 
 
-#endif
 

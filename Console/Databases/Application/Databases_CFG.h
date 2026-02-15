@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _DATABASES_CFG_H_
-#define _DATABASES_CFG_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -103,5 +102,4 @@ class DATABASES_CFG : public APPFLOWCFG
 #pragma endregion
 
 
-#endif
 

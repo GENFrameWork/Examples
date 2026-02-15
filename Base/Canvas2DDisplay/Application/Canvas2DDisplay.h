@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _CANVAS2DDISPLAY_H_
-#define _CANVAS2DDISPLAY_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -141,5 +140,4 @@ class CANVAS2DDISPLAY : public APPFLOWBASE
 #pragma endregion
 
 
-#endif
 

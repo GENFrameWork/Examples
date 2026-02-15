@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_COREPROTOCOL_REGISTERDATA_H_
-#define _NETCONN_COREPROTOCOL_REGISTERDATA_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -81,5 +80,4 @@ class NETCONN_COREPROTOCOL_REGISTERDATA : public DIOCOREPROTOCOL_REGISTERDATA
 #pragma endregion
 
 
-#endif
 

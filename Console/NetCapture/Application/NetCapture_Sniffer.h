@@ -27,8 +27,7 @@
 * --------------------------------------------------------------------------------------------------------------------*/
 
 
-#ifndef _NETCAPTURE_SNIFFER_H_
-#define _NETCAPTURE_SNIFFER_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -119,6 +118,5 @@ class NETCAPTURE_SNIFFER
 #pragma endregion
 
 
-#endif
 
 

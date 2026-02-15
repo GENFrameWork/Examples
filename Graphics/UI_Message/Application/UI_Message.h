@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _UI_MESSAGE_H_
-#define _UI_MESSAGE_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -204,5 +203,4 @@ class UI_MESSAGE : public APPFLOWGRAPHICS, public XFSMACHINE
 #pragma endregion
 
 
-#endif
 

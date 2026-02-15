@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_AGENTSTATE_H_
-#define _NETCONN_AGENTSTATE_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -84,7 +83,6 @@ class NETCONN_AGENTSTATE : public XSERIALIZABLE
 #pragma endregion
 
 
-#endif
 
 
 

@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_TESTUPDATECLASS_H_
-#define _NETCONN_TESTUPDATECLASS_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -87,7 +86,6 @@ class NETCONN_TESTUPDATECLASS : public XSERIALIZABLE
 #pragma endregion
 
 
-#endif
 
 
 

@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _APP_GEN_DEFINES_H_
-#define _APP_GEN_DEFINES_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -65,5 +64,4 @@ bool    Proc_Main_End         (MAINPROC* main);
 #pragma endregion
 
 
-#endif
 

@@ -26,8 +26,7 @@
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 
-#ifndef _NETCONN_COREPROTOCOL_CONNECTIONSMANAGER_H_
-#define _NETCONN_COREPROTOCOL_CONNECTIONSMANAGER_H_
+#pragma once
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 #pragma region INCLUDES
@@ -84,5 +83,4 @@ class NETCONN_COREPROTOCOL_CONNECTIONSMANAGER :  public DIOCOREPROTOCOL_CONNECTI
 #pragma endregion
 
 
-#endif
 
