@@ -597,6 +597,8 @@ bool DATABASES::Database_DoTest()
                                                                   }
                                                               }
                                                               break;
+
+                                           default         : break;
                 }
 
               string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, __L("Creando tabla"));
@@ -642,6 +644,7 @@ bool DATABASES::Database_DoTest()
                       case DB_SQL_DATABASE_TYPE_MYSQL       :
                       case DB_SQL_DATABASE_TYPE_SQLITE      : querystring.Format(__L("INSERT INTO %s (id,name,value,date) VALUES (?,?,?,?);")    , DATABASES_TABLE_TEST_NAME);  break;
                       case DB_SQL_DATABASE_TYPE_POSTGRESQL  : querystring.Format(__L("INSERT INTO %s (id,name,value,date) VALUES ($1,$2,$3,$4);"), DATABASES_TABLE_TEST_NAME);  break;
+                                            default         : break;
                     }
 
                   if(!querystring.IsEmpty())

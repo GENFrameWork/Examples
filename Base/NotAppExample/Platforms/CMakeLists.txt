@@ -13,17 +13,19 @@ set(GEN_DIRECTORY "../../../..")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-#option(DEBUG_FEATURE                                           "Activate Debug mode"                                     ON ) 
-option(XTRACE_FEATURE                                          "Activate XTrace"                                         ON )
-option(XMEMORY_CONTROL_FEATURE                                 "Activate XMemory Control"                                ON )
+option(DEBUG_FEATURE                                            "Activate Debug mode"                                     ON ) 
+option(XTRACE_FEATURE                                           "Activate XTrace"                                         ON )
+option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
 
-option(XSLEEP_FEATURE                                          "Sleep functions"                                         ON )
+option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
+
+option(XSLEEP_FEATURE                                           "Sleep functions"                                         ON )
 
 
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Main.cmake") 
  
  
 # --------------------------------------------------------------------
@@ -42,11 +44,11 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/NotAppExample
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_CreateProject.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
 

@@ -16,9 +16,11 @@ set(GEN_DIRECTORY "../../../..")
 option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
-option(XFEEDBACK_CONTROL_FEATURE                                "XFeedback Control"                                       ON )               
+option(XFEEDBACK_CONTROL_FEATURE                                "XFeedback Control"                                       ON )     
+
+option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
     
-option(LINUX_VISUALSTUDIOCODEPAGE_FEATURE                       "Linux CodePage Editor Visual Studio CP1252"              ON )   
+option(LINUX_VISUALSTUDIO_CP1252_FEATURE                       "Linux CodePage Editor Visual Studio CP1252"              ON )   
                                 
 option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
 
@@ -26,7 +28,7 @@ option(APPFLOW_FEATURE                                          "Application Flo
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Main.cmake") 
 
                      
 # --------------------------------------------------------------------
@@ -45,11 +47,11 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/AppBaseExampl
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_CreateProject.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
 

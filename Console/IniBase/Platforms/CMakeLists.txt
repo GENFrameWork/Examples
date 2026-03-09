@@ -17,6 +17,8 @@ option(DEBUG_FEATURE                                            "Debug mode"    
 option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
+
+option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
                     
 option(DIO_FEATURE                                              "Data Input/Output"                                       ON ) 
 option(DIO_CHECKCONNECTIONS_FEATURE                             "Check Connections"                                       ON )
@@ -56,7 +58,7 @@ add_definitions(${APP_CFG_INIBASE})
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Main.cmake") 
                    
                    
 # --------------------------------------------------------------------
@@ -78,10 +80,10 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/IniBase_CFG.c
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_CreateProject.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 

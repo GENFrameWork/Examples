@@ -13,22 +13,24 @@ set(GEN_DIRECTORY "../../../..")
 # --------------------------------------------------------------------
 # Activate features/Defines
 
-option(DEBUG_FEATURE                                            "Debug mode"                                                                                        ON )
-option(XTRACE_FEATURE                                           "XTrace"                                                                                            ON )
-option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                                                                   ON )
+option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
+option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
+option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
+
+option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
                                                                                                 
-option(DIO_FEATURE                                              "Data Input/Output"                                                                                 ON ) 
-option(DIO_STREAM_FEATURE                                       "Data Input/Output Stream"                                                                          ON )
-option(DIO_STREAMUART_FEATURE                                   "Data Input/Output Stream UART"                                                                     ON )
-option(DIO_STREAMUSB_FEATURE                                    "Data Input/Output Stream USB"                                                                      ON )
+option(DIO_FEATURE                                              "Data Input/Output"                                       ON ) 
+option(DIO_STREAM_FEATURE                                       "Data Input/Output Stream"                                ON )
+option(DIO_STREAMUART_FEATURE                                   "Data Input/Output Stream UART"                           ON )
+option(DIO_STREAMUSB_FEATURE                                    "Data Input/Output Stream USB"                            ON )
                                                               
-option(APPFLOW_FEATURE                                          "Application flow modules"                                                                          ON )
+option(APPFLOW_FEATURE                                          "Application flow modules"                                ON )
 
 
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Main.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Main.cmake") 
 
                      
 # --------------------------------------------------------------------
@@ -47,11 +49,11 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/Canvas2DDispl
 # --------------------------------------------------------------------
 # Create proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_CreateProject.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
 
 
 # --------------------------------------------------------------------
 # Add Libraries
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CMakeLists_Libraries.txt") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
 
