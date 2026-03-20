@@ -1,7 +1,7 @@
-﻿{
+{
   "configurations": [
     {
-      "name": "1 - Windows INTEL x32",
+      "name": "A - Windows INTEL x32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Windows\\intel32",
@@ -9,10 +9,12 @@
       "cmakeCommandArgs": "-DTARGET=INTEL32",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x86_x64" ]
+      "inheritEnvironments": [
+        "msvc_x86_x64"
+      ]
     },
     {
-      "name": "2 - Windows INTEL x64",
+      "name": "B - Windows INTEL x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Windows\\intel64",
@@ -20,10 +22,12 @@
       "cmakeCommandArgs": "-DTARGET=INTEL64",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ]
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ]
     },
     {
-      "name": "3 - Linux INTEL x64",
+      "name": "C - Linux INTEL x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\intel64",
@@ -32,11 +36,13 @@
       "cmakeCommandArgs": "-DTARGET=INTEL64",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_x64" ],
+      "inheritEnvironments": [
+        "linux_x64"
+      ],
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "5 - Linux ARM",
+      "name": "D - Linux ARM",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm",
@@ -45,11 +51,13 @@
       "cmakeCommandArgs": "-DTARGET=ARM",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_arm" ],
+      "inheritEnvironments": [
+        "linux_arm"
+      ],
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "4 - Linux ARM x64",
+      "name": "E - Linux ARM x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm64",
@@ -58,11 +66,13 @@
       "cmakeCommandArgs": "-DTARGET=ARM64",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_arm64" ],
+      "inheritEnvironments": [
+        "linux_arm64"
+      ],
       "wslPath": "${defaultWSLPath}"
-    },    
+    },
     {
-      "name": "6 - Linux Raspberry Pi x32",
+      "name": "F - Linux Raspberry Pi x32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\rpi32",
@@ -71,11 +81,13 @@
       "cmakeCommandArgs": "-DTARGET=RPI32",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_arm" ],
+      "inheritEnvironments": [
+        "linux_arm"
+      ],
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "7 - Linux Raspberry Pi x64",
+      "name": "G - Linux Raspberry Pi x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\rpi64",
@@ -84,11 +96,14 @@
       "cmakeCommandArgs": "-DTARGET=RPI64",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "linux_arm64" ],
+      "inheritEnvironments": [
+        "linux_arm64"
+      ],
       "wslPath": "${defaultWSLPath}",
       "intelliSenseMode": "linux-gcc-arm"
     },
-    { "name": "8 - Espressif ESP32",
+    {
+      "name": "H - Espressif ESP32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\esp32",
@@ -96,7 +111,37 @@
       "cmakeCommandArgs": "-DTARGET=ESP32",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x86_x64" ]
-    }
-]
+      "inheritEnvironments": [
+        "msvc_x86_x64"
+      ]
+    },
+    {
+      "name": "I - Android ARMv7 (32Bits)",
+      "buildRoot": "${projectDir}\\Android\\armeabi-v7a",
+      "installRoot": "${projectDir}\\Android\\armeabi-v7a",
+      "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
+      "intelliSenseMode": "android-clang-arm",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "cmakeExecutable": "cmake",
+      "cmakeToolchain": "${projectDir}\\..\\..\\..\\..\\ThirdPartyLibraries\\android-ndk\\build\\cmake\\android.toolchain.cmake",
+      "buildCommandArgs": "canvas2D_apk",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": []
+    },
+    {
+      "name": "J - Android ARM64 (64Bits)",
+      "buildRoot": "${projectDir}\\Android\\arm64-v8a",
+      "installRoot": "${projectDir}\\Android\\arm64-v8a",
+      "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
+      "intelliSenseMode": "android-clang-arm64",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "cmakeExecutable": "cmake",
+      "cmakeToolchain": "${projectDir}\\..\\..\\..\\..\\ThirdPartyLibraries\\android-ndk\\build\\cmake\\android.toolchain.cmake",
+      "buildCommandArgs": "canvas2D_apk",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": []
+    }    
+  ]
 }

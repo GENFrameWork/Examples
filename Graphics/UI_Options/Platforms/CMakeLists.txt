@@ -9,11 +9,6 @@ project(ui_options)
 
 set(GEN_DIRECTORY "../../../..") 
 
-#set(ANDROID_NDK_ROOT "C:/Users/sirgraham/AppData/Local/Android/Sdk/ndk/21.0.6113669")
-#set(ANDROID_NDK_ROOT  "C:/Users/sirgraham/AppData/Local/Android/Sdk/ndk/21.3.6528147")
-set(ANDROID_NDK_ROOT "/mnt/GEN_FrameWork/ThirdPartyLibraries/android-ndk-r21b")
-#set(ANDROID_NDK_ROOT "/mnt/AndroidSDK")
-
 
 # --------------------------------------------------------------------
 # features/Defines
