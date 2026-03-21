@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application android:label="@GEN_ANDROID_APP_LABEL@"
+                 android:icon="@drawable/icon"
                  android:hasCode="false">
 
         <activity android:name="android.app.NativeActivity"
