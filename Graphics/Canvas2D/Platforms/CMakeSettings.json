@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "A - Windows INTEL x32",
+      "name": "01 - Windows INTEL x32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Windows\\intel32",
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "name": "B - Windows INTEL x64",
+      "name": "02 - Windows INTEL x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Windows\\intel64",
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "name": "C - Linux INTEL x64",
+      "name": "03 - Linux INTEL x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\intel64",
@@ -42,7 +42,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "D - Linux ARM",
+      "name": "04 - Linux ARM",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm",
@@ -57,7 +57,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "E - Linux ARM x64",
+      "name": "05 - Linux ARM x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\arm64",
@@ -72,7 +72,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "F - Linux Raspberry Pi x32",
+      "name": "06 - Linux Raspberry Pi x32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\rpi32",
@@ -87,7 +87,7 @@
       "wslPath": "${defaultWSLPath}"
     },
     {
-      "name": "G - Linux Raspberry Pi x64",
+      "name": "07 - Linux Raspberry Pi x64",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\Linux\\rpi64",
@@ -103,7 +103,7 @@
       "intelliSenseMode": "linux-gcc-arm"
     },
     {
-      "name": "H - Espressif ESP32",
+      "name": "08 - Espressif ESP32",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\esp32",
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "name": "I - Android ARMv7 (32Bits)",
+      "name": "09 - Android ARMv7 (32Bits)",
       "buildRoot": "${projectDir}\\Android\\armeabi-v7a",
       "installRoot": "${projectDir}\\Android\\armeabi-v7a",
       "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
@@ -130,7 +130,7 @@
       "inheritEnvironments": []
     },
     {
-      "name": "J - Android ARM64 (64Bits)",
+      "name": "10 - Android ARM64 (64Bits)",
       "buildRoot": "${projectDir}\\Android\\arm64-v8a",
       "installRoot": "${projectDir}\\Android\\arm64-v8a",
       "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",

@@ -8,6 +8,8 @@
               android:targetSdkVersion="@GEN_ANDROID_TARGET_SDK@" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
 
     <application android:label="@GEN_ANDROID_APP_LABEL@"
                  android:icon="@drawable/icon"
