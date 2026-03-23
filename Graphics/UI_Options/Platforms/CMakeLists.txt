@@ -53,6 +53,12 @@ set(APP_CFG_UI_OPTIONS "-DAPPFLOW_CFG=UI_OPTIONS_CFG::GetInstance()")
 add_definitions(${APP_CFG_UI_OPTIONS})
 
 
+
+# --------------------------------------------------------------------
+# Android package settings
+
+set(GEN_ANDROID_APP_LABEL                                  "UI_Options")
+
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
 
