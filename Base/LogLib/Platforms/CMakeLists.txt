@@ -50,13 +50,6 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
  
 
 # --------------------------------------------------------------------
-# Create proyect 
+# End Proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
-
-
-# --------------------------------------------------------------------
-# Add Libraries
-
-include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
-
+include("${GEN_DIRECTORY}/Common/cmake/GEN_End.cmake")

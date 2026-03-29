@@ -45,15 +45,8 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 
 list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/Canvas2DDisplay.cpp")
 
- 
-# --------------------------------------------------------------------
-# Create proyect 
-
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
-
 
 # --------------------------------------------------------------------
-# Add Libraries
+# End Proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
-
+include("${GEN_DIRECTORY}/Common/cmake/GEN_End.cmake")

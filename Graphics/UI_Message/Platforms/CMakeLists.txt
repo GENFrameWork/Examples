@@ -46,6 +46,7 @@ option(GRP_2D_FEATURE                                           "Graphics 2D"   
 option(INP_FEATURE                                              "Inputs"                                                  ON )
 
 
+
 # --------------------------------------------------------------------
 # Config Application Macro
 
@@ -74,12 +75,6 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/UI_Message_CF
 
 
 # --------------------------------------------------------------------
-# Create proyect 
+# End Proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake")
-
-
-# --------------------------------------------------------------------
-# Add Libraries
-
-include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_End.cmake")

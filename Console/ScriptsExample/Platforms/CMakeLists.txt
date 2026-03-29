@@ -19,7 +19,9 @@ option(XTRACE_NOINTERNET_FEATURE                                "No need for tra
 option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
 
 option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
-            
+
+option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )    
+
 option(DIO_FEATURE                                              "Input/Output"                                            ON )
 option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
 
@@ -33,8 +35,6 @@ option(APPFLOW_LOG_FEATURE                                      "Application Flo
 option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flow CFG General"                            ON )
 option(APPFLOW_CFG_LOG_FEATURE                                  "Application Flow CFG LOG"                                ON )
 option(APPFLOW_CFG_SCRIPTS_FEATURE                              "Application Flow Scripts List"                           ON )  
-
-option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
     
 option(SCRIPT_FEATURE                                           "Activate Scripts"                                        ON )
 option(SCRIPT_G_FEATURE                                         "Activate Script G Language"                              ON )
@@ -81,12 +81,6 @@ list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/ScriptsExampl
 
 
 # --------------------------------------------------------------------
-# Create proyect 
+# End Proyect 
 
-include("${GEN_DIRECTORY}/Common/cmake/GEN_CreateProject.cmake") 
-
-
-# --------------------------------------------------------------------
-# Add Libraries
-
-include("${GEN_DIRECTORY}/Common/cmake/GEN_Libraries.cmake") 
+include("${GEN_DIRECTORY}/Common/cmake/GEN_End.cmake")
