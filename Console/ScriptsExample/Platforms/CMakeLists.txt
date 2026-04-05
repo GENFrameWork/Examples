@@ -18,7 +18,10 @@ option(XTRACE_FEATURE                                           "Activate XTrace
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
 option(XMEMORY_CONTROL_FEATURE                                  "Activate XMemory Control"                                ON )
 
-option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
+option(COVERAGE_CREATEINFO_FEATURE                              "Coverage - Create Info"                                  ON ) 
+option(COVERAGE_GENERATESHOWINFO_FEATURE                        "Coverage - Generate Show Info"                           ON ) 
+
+#option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
 
 option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )    
 

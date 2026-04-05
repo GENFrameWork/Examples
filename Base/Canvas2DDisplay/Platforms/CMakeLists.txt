@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------
-# Canvas2DDisplay : Example of console (Canvas minimal app)
+# Canvas2dDisplay : Example of console (Canvas minimal app)
 # GEN FrameWork 
 # --------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.16.0)
-project(canvas2Ddisplay)
+project(canvas2ddisplay)
 
 
 set(GEN_DIRECTORY "../../../..") 

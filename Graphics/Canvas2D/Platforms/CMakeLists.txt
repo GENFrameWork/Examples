@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------
-# Canvas2D : Example of graphics Canvas 2D example  
+# Canvas2d : Example of graphics Canvas 2D example  
 # GEN FrameWork 
 # --------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.16.0)
-project(canvas2D)
+project(canvas2d)
 
 
 set(GEN_DIRECTORY "../../../..") 
