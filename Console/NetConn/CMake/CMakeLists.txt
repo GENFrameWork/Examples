@@ -66,7 +66,7 @@ include("${GEN_DIRECTORY}/Common/CMake/GEN_Main.cmake")
 # --------------------------------------------------------------------
 # Directorys of the Application
 
-set(APP_DIRECTORY_APPLICATION               "../Application")
+set(APP_DIRECTORY_APPLICATION               "../Sources")
 set(APP_DIRECTORY_APPLICATION_COREPROTOCOL  "${APP_DIRECTORY_APPLICATION}/CoreProtocol")
 
 list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
