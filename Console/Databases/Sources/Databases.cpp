@@ -183,7 +183,7 @@ bool DATABASES::InitFSMachine()
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_Ini()
-{
+{ 
   XSTRING string;
   XSTRING stringresult;
   XPATH   xpathsection;
@@ -266,6 +266,7 @@ bool DATABASES::AppProc_Ini()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_FirstUpdate()
 {
+
   //--------------------------------------------------------------------------------------
 
   xtimerupdateconsole = GEN_XFACTORY.CreateTimer();

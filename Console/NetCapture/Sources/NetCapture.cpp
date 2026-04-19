@@ -125,7 +125,8 @@ NETCAPTURE::~NETCAPTURE()
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::InitFSMachine()
-{
+{ 
+  
   if(!AddState( NETCAPTURE_XFSMSTATE_NONE            ,
                 NETCAPTURE_XFSMEVENT_INI             , NETCAPTURE_XFSMSTATE_INI           ,
                 NETCAPTURE_XFSMEVENT_END             , NETCAPTURE_XFSMSTATE_END           ,
