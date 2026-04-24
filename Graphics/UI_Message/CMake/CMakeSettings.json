@@ -60,7 +60,7 @@
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "linux_arm64" ],
       "wslPath": "${defaultWSLPath}"
-    },    
+    },
     {
       "name": "06 - Linux Raspberry Pi x32",
       "generator": "Ninja",
@@ -92,7 +92,7 @@
       "name": "08 - Android ARMv7 (32Bits)",
       "buildRoot": "${projectDir}\\Build\\Android\\armeabi-v7a",
       "installRoot": "${projectDir}\\Build\\Android\\armeabi-v7a",
-      "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
+      "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID32 -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
       "intelliSenseMode": "android-clang-arm",
       "generator": "Ninja",
       "configurationType": "Debug",
@@ -106,7 +106,7 @@
       "name": "09 - Android ARM64 (64Bits)",
       "buildRoot": "${projectDir}\\Build\\Android\\arm64-v8a",
       "installRoot": "${projectDir}\\Build\\Android\\arm64-v8a",
-      "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
+      "cmakeCommandArgs": "-Wno-dev -DTARGET=ANDROID64 -DCMAKE_SYSTEM_NAME=Android -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 -DANDROID_STL=c++_shared",
       "intelliSenseMode": "android-clang-arm64",
       "generator": "Ninja",
       "configurationType": "Debug",
@@ -115,6 +115,6 @@
       "buildCommandArgs": "ui_message",
       "ctestCommandArgs": "",
       "inheritEnvironments": []
-    }        
-]
+    }
+  ]
 }
