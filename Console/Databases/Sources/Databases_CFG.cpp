@@ -86,7 +86,7 @@ bool DATABASES_CFG::GetIsInstanced()
 * --------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new DATABASES_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW DATABASES_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

@@ -86,7 +86,7 @@ bool SCRIPTSEXAMPLE_CFG::GetIsInstanced()
 * --------------------------------------------------------------------------------------------------------------------*/
 SCRIPTSEXAMPLE_CFG& SCRIPTSEXAMPLE_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new SCRIPTSEXAMPLE_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW SCRIPTSEXAMPLE_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

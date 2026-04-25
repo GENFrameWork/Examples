@@ -3,7 +3,7 @@
 * @file       IiniBase_CFG.cpp
 * 
 * @class      INIBASE_CFG
-* @brief      Ini Base (Start to make new APP) (CFG class)
+* @brief      Ini Base (Start to make GEN_NEW APP) (CFG class)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -84,7 +84,7 @@ bool INIBASE_CFG::GetIsInstanced()
 *---------------------------------------------------------------------------------------------------------------------*/
 INIBASE_CFG& INIBASE_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new INIBASE_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW INIBASE_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

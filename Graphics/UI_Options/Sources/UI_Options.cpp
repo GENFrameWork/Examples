@@ -362,7 +362,7 @@ bool UI_OPTIONS::AppProc_FirstUpdate()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::AppProc_Update()
 {
-  if(GetEvent()==UI_OPTIONS_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==UI_OPTIONS_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {
@@ -1012,7 +1012,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
       for(int c=1; c<150; c++)  
         {
           XBUFFER*  dataimg = NULL;
-          dataimg = new XBUFFER();
+          dataimg = GEN_NEW XBUFFER();
           if(dataimg)
             {
               xpath_img = xpath;
@@ -1048,7 +1048,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
 
   GRPVIDEOFILEAVI* xfileAVI;
                                                       
-  xfileAVI = new GRPVIDEOFILEAVI();
+  xfileAVI = GEN_NEW GRPVIDEOFILEAVI();
   if(!xfileAVI) return false;                                         
                      
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
@@ -1080,7 +1080,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
   // -------------------------------------------------------------------------------
   // Read AVI 
                                                                                                                                                
-  xfileAVI = new GRPVIDEOFILEAVI();
+  xfileAVI = GEN_NEW GRPVIDEOFILEAVI();
   if(!xfileAVI) return false;
 
   if(xfileAVI->Open(xpath.Get()))

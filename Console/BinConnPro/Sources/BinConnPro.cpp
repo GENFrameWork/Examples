@@ -295,7 +295,7 @@ bool BINCONNPRO::AppProc_FirstUpdate()
 
       console->PrintMessage(string.Get(),1,true,false);
 
-      connectionsmanager = new BINCONNPRO_CONNECTIONSMANAGER();
+      connectionsmanager = GEN_NEW BINCONNPRO_CONNECTIONSMANAGER();
       if(!connectionsmanager) status = false;
 
       if(status)
@@ -359,7 +359,7 @@ bool BINCONNPRO::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::AppProc_Update()
 {
-  if(GetEvent()==BINCONNPRO_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==BINCONNPRO_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

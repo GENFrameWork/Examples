@@ -368,7 +368,7 @@ bool UI_MESSAGE::AppProc_FirstUpdate()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::AppProc_Update()
 {
-  if(GetEvent()==UI_MESSAGE_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==UI_MESSAGE_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

@@ -143,7 +143,7 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
       DIOSTREAMTCPIPCONFIG*  diostreamTCPIPCFG = NULL;
       DIOSTREAM*             diostreamTCPIP    = NULL;
   
-      diostreamTCPIPCFG = new DIOSTREAMTCPIPCONFIG();
+      diostreamTCPIPCFG = GEN_NEW DIOSTREAMTCPIPCONFIG();
       if(!diostreamTCPIPCFG)
         {
           return false;
@@ -181,7 +181,7 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
       DIOSTREAMUARTCONFIG*  diostreamUARTCFG = NULL;
       DIOSTREAM*            diostreamUART    = NULL;
   
-      diostreamUARTCFG = new DIOSTREAMUARTCONFIG();
+      diostreamUARTCFG = GEN_NEW DIOSTREAMUARTCONFIG();
       if(!diostreamUARTCFG)
         {
           return false;
@@ -253,12 +253,12 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End()
 * --------------------------------------------------------------------------------------------------------------------*/
 DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConnection()
 {
-  NETCONN_COREPROTOCOL_CONNECTION* connection = new NETCONN_COREPROTOCOL_CONNECTION();
+  NETCONN_COREPROTOCOL_CONNECTION* connection = GEN_NEW NETCONN_COREPROTOCOL_CONNECTION();
 
   if(NETCONN::IsServer())
     {
-      NETCONN_AGENTSTATE* agentstate            = new NETCONN_AGENTSTATE();
-      NETCONN_TESTUPDATECLASS* testupdateclass  = new NETCONN_TESTUPDATECLASS();
+      NETCONN_AGENTSTATE* agentstate            = GEN_NEW NETCONN_AGENTSTATE();
+      NETCONN_TESTUPDATECLASS* testupdateclass  = GEN_NEW NETCONN_TESTUPDATECLASS();
 
       if(agentstate) 
         {
@@ -294,7 +294,7 @@ DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConne
 * --------------------------------------------------------------------------------------------------------------------*/
 DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream)
 {
-  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)new NETCONN_COREPROTOCOL(&protocolCFG, diostream);
+  DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)GEN_NEW NETCONN_COREPROTOCOL(&protocolCFG, diostream);
   
   if(!protocol)
     {
@@ -339,7 +339,7 @@ void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnection
                                                                                   {
                                                                                     if(!connection->GetRegisterData())
                                                                                       {
-                                                                                        NETCONN_COREPROTOCOL_REGISTERDATA* registerdata = new NETCONN_COREPROTOCOL_REGISTERDATA();
+                                                                                        NETCONN_COREPROTOCOL_REGISTERDATA* registerdata = GEN_NEW NETCONN_COREPROTOCOL_REGISTERDATA();
                                                                                         if(registerdata)
                                                                                           {                                                                                           
                                                                                             connection->SetRegisterData(registerdata);

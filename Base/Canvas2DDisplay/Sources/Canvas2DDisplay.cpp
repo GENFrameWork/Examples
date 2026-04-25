@@ -200,7 +200,7 @@ bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
   //----------------------------------------------------------------------------
 
   /*
-  DIOI2COLEDSCREENSSD1306* screenOLEDSSD1306 = new DIOI2COLEDSCREENSSD1306();
+  DIOI2COLEDSCREENSSD1306* screenOLEDSSD1306 = GEN_NEW DIOI2COLEDSCREENSSD1306();
   if(!screenOLEDSSD1306) return false;
 
   if(screenOLEDSSD1306->Ini(1, 0x78, 10))
@@ -240,7 +240,7 @@ bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
     {
       if(diogpio->Ini())
         {
-          DIOSPILCDSCREENPCF8833* lcdscreen = new DIOSPILCDSCREENPCF8833();
+          DIOSPILCDSCREENPCF8833* lcdscreen = GEN_NEW DIOSPILCDSCREENPCF8833();
           if(lcdscreen)
             {
               lcdscreen->SetDIOGPIO(diogpio);
@@ -292,7 +292,7 @@ bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
                             {
                               XDEBUG_PRINTCOLOR(1, __L("Create Random..."));
 
-                              buffer = new XWORD[lcdscreen->GetNPixels()];
+                              buffer = GEN_NEW XWORD[lcdscreen->GetNPixels()];
                               if(buffer)
                                 {
                                   XDEBUG_PRINTCOLOR(1, __L("Create Buffer Random..."));
@@ -347,7 +347,7 @@ bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
     {
       if(diogpio->Ini())
         {
-          DIOSPIOLEDSCREENSSD1331*  oledscreenSSD1331 = new DIOSPIOLEDSCREENSSD1331();
+          DIOSPIOLEDSCREENSSD1331*  oledscreenSSD1331 = GEN_NEW DIOSPIOLEDSCREENSSD1331();
           if(oledscreenSSD1331)
             {
               oledscreenSSD1331->SetDIOGPIO(diogpio);

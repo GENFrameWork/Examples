@@ -84,7 +84,7 @@ bool NETCONN_CFG::GetIsInstanced()
 *---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_CFG& NETCONN_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new NETCONN_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW NETCONN_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

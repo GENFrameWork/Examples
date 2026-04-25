@@ -155,13 +155,13 @@ bool Proc_Main_Update(MAINPROC* main)
 {
 
   // -----------------------------------------------------------------------------------
-  //  new
+  //  GEN_NEW
 
-  char*  string1  = new char[256];   
+  char*  string1  = GEN_NEW char[256];   
   if(string1)
     {  
       memset(string1, 0, 256);
-      strcpy(string1, "Hello, World [new]");
+      strcpy(string1, "Hello, World [GEN_NEW]");
     }
 
   // -----------------------------------------------------------------------------------

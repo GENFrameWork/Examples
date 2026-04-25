@@ -74,7 +74,7 @@ bool UI_OPTIONS_CFG::GetIsInstanced()
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new UI_OPTIONS_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW UI_OPTIONS_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

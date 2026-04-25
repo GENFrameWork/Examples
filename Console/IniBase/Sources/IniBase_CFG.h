@@ -3,7 +3,7 @@
 * @file       IniBase_CFG.h
 * 
 * @class      INIBASE_CFG
-* @brief      Ini Base (Start to make new APP) (CFG class)
+* @brief      Ini Base (Start to make GEN_NEW APP) (CFG class)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.

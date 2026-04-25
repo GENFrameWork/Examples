@@ -243,7 +243,7 @@ bool NETCAPTURE::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------------
 
-  sniffer =  new NETCAPTURE_SNIFFER();
+  sniffer =  GEN_NEW NETCAPTURE_SNIFFER();
   if(!sniffer)
     {
       return false;
@@ -274,7 +274,7 @@ bool NETCAPTURE::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::AppProc_Update()
 {
-  if(GetEvent()==NETCAPTURE_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==NETCAPTURE_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

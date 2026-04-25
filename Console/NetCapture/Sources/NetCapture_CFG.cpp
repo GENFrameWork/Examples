@@ -86,7 +86,7 @@ bool NETCAPTURE_CFG::GetIsInstanced()
 * --------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_CFG& NETCAPTURE_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new NETCAPTURE_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW NETCAPTURE_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

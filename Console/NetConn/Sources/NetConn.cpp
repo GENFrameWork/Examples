@@ -305,13 +305,13 @@ bool NETCONN::AppProc_FirstUpdate()
 
   if(!modeserver)
     {
-      agentstate = new NETCONN_AGENTSTATE();
+      agentstate = GEN_NEW NETCONN_AGENTSTATE();
       if(agentstate)
         {
           agentstate->Update();          
         }
 
-      testupdateclass = new NETCONN_TESTUPDATECLASS();
+      testupdateclass = GEN_NEW NETCONN_TESTUPDATECLASS();
       if(testupdateclass)
         {
           testupdateclass->Update();
@@ -320,7 +320,7 @@ bool NETCONN::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------------------------
 
-  connectionsmanager = new NETCONN_COREPROTOCOL_CONNECTIONSMANAGER();
+  connectionsmanager = GEN_NEW NETCONN_COREPROTOCOL_CONNECTIONSMANAGER();
   if(connectionsmanager)
     {
       if(!connectionsmanager->Ini(modeserver))
@@ -355,7 +355,7 @@ bool NETCONN::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::AppProc_Update()
 {
-  if(GetEvent()==NETCONN_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==NETCONN_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

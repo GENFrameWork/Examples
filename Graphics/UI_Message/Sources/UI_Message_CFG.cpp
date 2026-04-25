@@ -74,7 +74,7 @@ bool UI_MESSAGE_CFG::GetIsInstanced()
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_MESSAGE_CFG& UI_MESSAGE_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new UI_MESSAGE_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW UI_MESSAGE_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

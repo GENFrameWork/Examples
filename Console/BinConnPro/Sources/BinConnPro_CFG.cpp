@@ -78,7 +78,7 @@ bool BINCONNPRO_CFG::GetIsInstanced()
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new BINCONNPRO_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW BINCONNPRO_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

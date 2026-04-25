@@ -3,7 +3,7 @@
 * @file       IniBase.h
 * 
 * @class      INIBASE
-* @brief      Ini Base (Start to make new APP)
+* @brief      Ini Base (Start to make GEN_NEW APP)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.

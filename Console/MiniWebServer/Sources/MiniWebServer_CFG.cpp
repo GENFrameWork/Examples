@@ -88,7 +88,7 @@ bool MINIWEBSERVER_CFG::GetIsInstanced()
 * --------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new MINIWEBSERVER_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW MINIWEBSERVER_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }

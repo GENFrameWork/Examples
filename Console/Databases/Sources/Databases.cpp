@@ -289,7 +289,7 @@ bool DATABASES::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_Update()
 {
-  if(GetEvent()==DATABASES_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==DATABASES_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

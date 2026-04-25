@@ -3,7 +3,7 @@
 * @file       IniBase.cpp
 * 
 * @class      INIBASE
-* @brief      Ini Base (Start to make new APP)
+* @brief      Ini Base (Start to make GEN_NEW APP)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -192,6 +192,7 @@ bool INIBASE::AppProc_Ini()
   XPATH   xpath;
   bool    status = false;
 
+ 
   //-------------------------------------------------------------------------------------------------
  
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
@@ -315,7 +316,7 @@ bool INIBASE::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::AppProc_Update()
 {
-  if(GetEvent()==INIBASE_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==INIBASE_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

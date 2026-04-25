@@ -111,12 +111,12 @@ bool BINCONNPRO_CONNECTIONSMANAGER::Ini(bool isserver, bool isenumlocalactive, i
 {
   this->applicationdata = applicationdata;
 
-  diostreamTCPIPcfg = new DIOSTREAMTCPIPCONFIG();
+  diostreamTCPIPcfg = GEN_NEW DIOSTREAMTCPIPCONFIG();
   if(!diostreamTCPIPcfg) return false;
 
   if(isenumlocalactive)
     {
-      diostreamudplocalenumservers = new DIOSTREAMUDPLOCALENUMSERVERS();
+      diostreamudplocalenumservers = GEN_NEW DIOSTREAMUDPLOCALENUMSERVERS();
       if(!diostreamudplocalenumservers)  return false;
 
       diostreamudplocalenumservers->SetID(BINCONNPRO_CONNECTIONSMANAGER_LOCALENUMID);
@@ -250,13 +250,13 @@ bool BINCONNPRO_CONNECTIONSMANAGER::End()
 *---------------------------------------------------------------------------------------------------------------------*/
 DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 {
-  CIPHERAES* cipher = new CIPHERAES();
+  CIPHERAES* cipher = GEN_NEW CIPHERAES();
   if(!cipher) return NULL;
 
   XBYTE inivector[] = BINCONNPRO_CONNECTIONSMANAGER_INIKEYENCRIPTION;
   XBYTE keydata[]   = BINCONNPRO_CONNECTIONSMANAGER_KEYENCRIPTION;
 
-  CIPHERKEYSYMMETRICAL* key = new CIPHERKEYSYMMETRICAL();
+  CIPHERKEYSYMMETRICAL* key = GEN_NEW CIPHERKEYSYMMETRICAL();
   if(!key) return NULL;
 
   cipher->SetChainingMode(CIPHERCHAININGMODE_CBC);
@@ -267,7 +267,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 
   cipher->SetKey(key);
 
-  DIOSTREAMCIPHER* diostreamcipher = new DIOSTREAMCIPHER(diostreamcfg, cipher);
+  DIOSTREAMCIPHER* diostreamcipher = GEN_NEW DIOSTREAMCIPHER(diostreamcfg, cipher);
   if(diostreamcipher)
     {
       DIOSTREAMTCPIP* diostreamTCPIP = (DIOSTREAMTCPIP*)diostreamcipher->GetDIOStreamBase();
@@ -275,7 +275,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
         {
           diostreamTCPIP->SetEnumServers(diostreamenumservers);
 
-          BINCONNPRO_PROTOCOL* protocol = new BINCONNPRO_PROTOCOL(diostreamcipher);
+          BINCONNPRO_PROTOCOL* protocol = GEN_NEW BINCONNPRO_PROTOCOL(diostreamcipher);
           if(protocol)
             {
               protocol->SetConnectionsManager(this);
@@ -291,7 +291,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 
               if(!applicationdata)
                 {
-                  BINCONNPRO_APPLICATIONDATA* protocolapplicationdatanew = new BINCONNPRO_APPLICATIONDATA();
+                  BINCONNPRO_APPLICATIONDATA* protocolapplicationdatanew = GEN_NEW BINCONNPRO_APPLICATIONDATA();
                   if(protocolapplicationdatanew)
                     {
                       protocol->SetApplicationData(protocolapplicationdatanew);
@@ -333,7 +333,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
     {
       diostreamTCPIP->SetEnumServers(diostreamenumservers);
 
-      BINCONNPRO_PROTOCOL* protocol = new BINCONNPRO_PROTOCOL(diostreamTCPIP);
+      BINCONNPRO_PROTOCOL* protocol = GEN_NEW BINCONNPRO_PROTOCOL(diostreamTCPIP);
       if(protocol)
         {
           protocol->SetMaskID(BINCONNPRO_CONNECTIONSMANAGER_PROTOCOLMASKID | (isserver?DIOPROTOCOL_CMDTYPE_ISSERVER:0));
@@ -344,7 +344,7 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 
           if(!applicationdata)
               {
-                BINCONNPRO_APPLICATIONDATA* protocolapplicationdatanew = new BINCONNPRO_APPLICATIONDATA();
+                BINCONNPRO_APPLICATIONDATA* protocolapplicationdatanew = GEN_NEW BINCONNPRO_APPLICATIONDATA();
                 if(protocolapplicationdatanew)
                   {
                     protocol->SetApplicationData(protocolapplicationdatanew);

@@ -387,7 +387,7 @@ bool NETCAPTURE_SNIFFER::Sniffer_Add(bool issend, XBYTE* framedata, XDWORD frame
 {
   NETCAPTURE_FRAME* frame = NULL;
   
-  frame = new NETCAPTURE_FRAME();
+  frame = GEN_NEW NETCAPTURE_FRAME();
   if(!frame)
     {
       return false;

@@ -287,7 +287,7 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
       string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando Web Server"));
       console->PrintMessage(string.Get(),1,true,false);
 
-      appwebserver = new APPFLOWWEBSERVER();
+      appwebserver = GEN_NEW APPFLOWWEBSERVER();
       if(appwebserver) status = true;
 
       if(status) status = appwebserver->Ini(&APPFLOW_CFG, true, false, false);
@@ -302,7 +302,7 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
           SubscribeEvent(DIOWEBSERVER_XEVENT_TYPE_CHECKAUTHENTICATE   , (XSUBJECT *)appwebserver);
           SubscribeEvent(DIOWEBSERVER_XEVENT_TYPE_REQUEST_ENDPOINT    , (XSUBJECT *)appwebserver);
 
-          apirest = new MINIWEBSERVER_APIREST(this);
+          apirest = GEN_NEW MINIWEBSERVER_APIREST(this);
           if(!apirest) return false;
         }
 
@@ -316,7 +316,7 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
   string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando WebSocket"));
   console->PrintMessage(string.Get(),1,true,false);
 
-  appwebsocket = new APPFLOWWEBSERVER();
+  appwebsocket = GEN_NEW APPFLOWWEBSERVER();
   if(appwebsocket) status = true;
 
   if(status) status = appwebsocket->Ini(17009, true, APPFLOW_CFG.WebServer_GetTimeoutToServerPage(), APPFLOW_CFG.WebServer_GetLocalAddress());
@@ -358,7 +358,7 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::AppProc_Update()
 {
-  if(GetEvent()==MINIWEBSERVER_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==MINIWEBSERVER_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {

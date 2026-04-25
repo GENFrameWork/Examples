@@ -86,7 +86,7 @@ bool CANVAS2D_CFG::GetIsInstanced()
 *---------------------------------------------------------------------------------------------------------------------*/
 CANVAS2D_CFG& CANVAS2D_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = new CANVAS2D_CFG(APPLICATION_NAMEFILE);
+  if(!instance) instance = GEN_NEW CANVAS2D_CFG(APPLICATION_NAMEFILE);
 
   return (*instance);
 }

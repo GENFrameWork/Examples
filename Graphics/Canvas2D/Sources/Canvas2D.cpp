@@ -401,7 +401,7 @@ bool CANVAS2D::AppProc_FirstUpdate()
 * --------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_Update()
 {
-  if(GetEvent()==CANVAS2D_XFSMEVENT_NONE) // Not new event
+  if(GetEvent()==CANVAS2D_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {
@@ -612,7 +612,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   GRPBITMAPFILE*  bitmapfile;
   bool            status;  
 
-  bitmapfile = new GRPBITMAPFILE();
+  bitmapfile = GEN_NEW GRPBITMAPFILE();
   if(!bitmapfile) return false;
 
   if(!backgroundbmp)
