@@ -30,6 +30,7 @@ syntax: glob
 # Files compilated
 /**/CMake/.vs
 /**/CMake/.vscode
+/**/CMake/.github
 /**/CMake/out
 /**/CMake/Build
 /output.txt
