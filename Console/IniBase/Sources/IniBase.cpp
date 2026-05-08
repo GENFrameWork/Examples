@@ -192,6 +192,9 @@ bool INIBASE::AppProc_Ini()
   XPATH   xpath;
   bool    status = false;
 
+
+  //XBYTE* memoryleak = GEN_NEW XBYTE[16];
+  
  
   //-------------------------------------------------------------------------------------------------
  

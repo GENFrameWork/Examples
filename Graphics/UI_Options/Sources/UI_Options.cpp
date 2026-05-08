@@ -1111,7 +1111,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
               delete bitmap;       
             } 
 
-          delete [] data;
+          GEN_DELETE_ARRAY data;
         }
                                                               
       xfileAVI->Close();

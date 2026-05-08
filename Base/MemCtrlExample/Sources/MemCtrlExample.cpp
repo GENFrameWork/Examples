@@ -171,7 +171,7 @@ bool Proc_Main_Update(MAINPROC* main)
   // -----------------------------------------------------------------------------------
   // malloc
 
-  char*  string2  = (char*)MALLOC(256);   
+  char*  string2  = (char*)GEN_MALLOC(256);   
   if(string2)
     {  
       memset(string2, 0, 256);
@@ -185,7 +185,7 @@ bool Proc_Main_Update(MAINPROC* main)
   // -----------------------------------------------------------------------------------
   // calloc
 
-  char*  string3  = (char*)CALLOC(256, sizeof(char));   
+  char*  string3  = (char*)GEN_CALLOC(256, sizeof(char));   
   if(string3)
     {
       memset(string3, 0, 256 * sizeof(char));
@@ -199,10 +199,10 @@ bool Proc_Main_Update(MAINPROC* main)
   // -----------------------------------------------------------------------------------
   // realloc
 
-  char*  string4  = (char*)MALLOC(128);   
+  char*  string4  = (char*)GEN_MALLOC(128);   
   if(string4)
     {  
-      string4  = (char*)REALLOC(string4, 256);    
+      string4  = (char*)GEN_REALLOC(string4, 256);    
       if(string4)
         {
           memset(string4, 0, 256);
@@ -218,9 +218,9 @@ bool Proc_Main_Update(MAINPROC* main)
 
   /*
   delete string1;
-  FREE(string2);
-  FREE(string3);
-  FREE(string4);
+  GEN_FREE(string2);
+  GEN_FREE(string3);
+  GEN_FREE(string4);
   */
 
   // -----------------------------------------------------------------------------------
