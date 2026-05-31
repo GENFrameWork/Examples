@@ -19,6 +19,8 @@ option(XTRACE_NOINTERNET_FEATURE                                "No need for tra
 option(XTHREADCOLLECTED_FEATURE                                 "Thread Collected"                                        ON )
 option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 
+option(GRP_OPENGL_FEATURE                                       "Graphics Open GL"                                        ON )
+
 option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
 
 option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
