@@ -694,7 +694,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
  
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
   xpath.Slash_Add();
-  xpath.Add(__L("example.zip"));
+  xpath.Add(__L("example/example.xml"));
     
   if(!GEN_USERINTERFACE.Load(xpath, screen, 0)) 
     {
@@ -729,7 +729,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
           option_cfg.sizefont     = 22;
           option_cfg.marginwidth  = 10;
           option_cfg.marginheight = 15;
-          option_cfg.width        = element_menu->GetBoundaryLine()->width-30;
+          option_cfg.width        = 250; // element_menu->GetBoundaryLine()->width-30;
           option_cfg.height       = option_height;
 
           UI_ELEMENT_OPTION* element_option = element_menu->Option_AddText(option_cfg);   
@@ -744,14 +744,22 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
                      
       GEN_USERINTERFACE.Layouts_Get(__L("example"))->GetSkin()->CalculeBoundaryLine_AllElements(element_menu, true); 
 
+
       UI_PROPERTY_SCROLLEABLE* property_scrolleable = dynamic_cast<UI_PROPERTY_SCROLLEABLE*>(element_menu);
       if(property_scrolleable) 
         {
-          //property_scrolleable->SetLimit(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, -((double)element_menu->GetComposeElements()->GetSize() * (double)(option_height-option_marginheight)) - option_marginheight);
+          property_scrolleable->Scroll_SetBarWidth(UI_PROPERTY_SCROLLEABLE_TYPE_ALL, 16.0f);
 
-          //double fullheight = (option_cfg.height + option_cfg.marginheight);  
-          double fullheight = (element_menu->GetComposeElements()->GetSize() * (option_height + option_cfg.marginheight))  - element_menu->GetBoundaryLine()->height + option_cfg.marginheight;
-          property_scrolleable->Scroll_SetLimit(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, -fullheight);
+          UI_COLOR thumbcolor;
+          UI_COLOR trackcolor;
+
+          thumbcolor.SetFromString(__L("white,75"));
+          trackcolor.SetFromString(__L("white,50"));
+    
+          property_scrolleable->Scroll_SetBarColors(UI_PROPERTY_SCROLLEABLE_TYPE_ALL, thumbcolor, trackcolor);          
+          property_scrolleable->Scroll_SetBarSeparation(UI_PROPERTY_SCROLLEABLE_TYPE_ALL, 5, 0);
+
+          
         }
           
       element_menu->GetVisibleRect()->CopyFrom((*element_menu->GetBoundaryLine()));
@@ -762,6 +770,18 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 
       //UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.GetElement(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
       //if(element_progressbar)  element_progressbar->ContinuousCycle_Set(true, 33, 10, 10); 
+
+
+     UI_ELEMENT_FORM* element_form = (UI_ELEMENT_FORM*)GEN_USERINTERFACE.Element_Get(__L("menu_horz"), UI_ELEMENT_TYPE_FORM);
+     if(element_form)
+       {
+         UI_PROPERTY_SCROLLEABLE* property_scrolleable = dynamic_cast<UI_PROPERTY_SCROLLEABLE*>(element_form);   // era element_menu
+         if(property_scrolleable)
+           {
+             property_scrolleable->Scroll_SetOverflow(UI_PROPERTY_SCROLLEABLE_TYPE_VERTICAL, UI_OVERFLOW_VISIBLE);
+           }
+       }
+
     }
 
   return true;
