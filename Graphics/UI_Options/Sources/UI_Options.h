@@ -40,6 +40,8 @@
 
 #include "APPFlowGraphics.h"
 
+#include "GRPVectorFileSVGRenderAGG.h"
+
 
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
@@ -129,6 +131,7 @@ class GRPBITMAPSECUENCE;
 class GRPXEVENT;
 class GRPBITMAP;
 class GRPBITMAPSEQUENCE;
+class GRPVECTORFILESVG;
 class INPBUTTON;
 class INPCURSOR;
 class UI_XEVENT;
@@ -178,8 +181,12 @@ class UI_OPTIONS : public APPFLOWGRAPHICS, public XFSMACHINE
     INPCURSOR*                      cursor;
 
     XSTRING                         makeaction;
-    
+
+    GRPVECTORFILESVG*               SVGfile; 
+    GRPVECTORFILESVGRENDERAGG       SVGrender;   
+
     GRPBITMAP*                      testbmp;
+
 };
 
 

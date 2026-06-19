@@ -15,9 +15,9 @@ set(GEN_DIRECTORY "../../../..")
 
 option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
-option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
+#option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
 option(XTHREADCOLLECTED_FEATURE                                 "Thread Collected"                                        ON )
-option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
+#option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 
 option(GRP_OPENGL_FEATURE                                       "Graphics Open GL"                                        ON )
 
@@ -43,6 +43,8 @@ option(GRP_BITMAP_FILE_JPG_FEATURE                              "Graphics Bitmap
 option(GRP_BITMAP_FILE_PNG_FEATURE                              "Graphics Bitmap File PNG"                                ON )
 option(GRP_BITMAP_FILE_TGA_FEATURE                              "Graphics Bitmap File TGA"                                ON )
 option(GRP_VIDEO_FILE_AVI_FEATURE                               "Graphics Video File AVI"                                 ON )
+option(GRP_VECTOR_FILE_DXF_FEATURE                              "Graphics Vector File DXF"                                ON )   
+option(GRP_VECTOR_FILE_SVG_FEATURE                              "Graphics Vector File SVG"                                ON )   
 option(GRP_2D_FEATURE                                           "Graphics 2D"                                             ON )
 
 option(INP_FEATURE                                              "Inputs"                                                  ON )

@@ -662,9 +662,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   //pathsvg.Add(__L("test_render.svg"));                 
   //pathsvg.Add(__L("tiger.svg"));
   //pathsvg.Add(__L("test_use.svg"));
-  //pathsvg.Add(__L("test_gradient.svg"));
-  pathsvg.Add(__L("test_text.svg"));
-
+  pathsvg.Add(__L("test_gradient.svg"));
 
 
   GRPVECTORFILE* vf = GRPVECTORFILE::CreateInstance(pathsvg);
@@ -897,23 +895,8 @@ bool UI_OPTIONS::DrawFrame()
     }
   */
 
-  // The circular main menu button overlaps the semi-transparent horizontal menu.
-  // Redrawing only the button leaves a stale saved rectangle over the alpha-blended
-  // menu when another modal layer, such as the virtual keyboard, is shown.
-  // Redraw both elements as the same visual group: first the underlay menu_horz,
-  // then the button, preserving the layout Z/order.
   UI_ELEMENT_BUTTON* element_button_mainmenu = (UI_ELEMENT_BUTTON*)GEN_USERINTERFACE.Element_Get(__L("menu-btn"), UI_ELEMENT_TYPE_BUTTON);
-  if(element_button_mainmenu)
-    {
-      UI_LAYOUT* layout = GEN_USERINTERFACE.Layouts_Get(__L("example"));
-      if(layout)
-        {
-          UI_ELEMENT* element_menu_horz = layout->Elements_Get(__L("menu_horz"));
-          if(element_menu_horz) GEN_USERINTERFACE.Elements_SetToRedraw(element_menu_horz, true);
-        }
-
-      GEN_USERINTERFACE.Elements_SetToRedraw(element_button_mainmenu, true);
-    }
+  if(element_button_mainmenu) GEN_USERINTERFACE.Elements_SetToRedraw(element_button_mainmenu);    
 
 
 /*
