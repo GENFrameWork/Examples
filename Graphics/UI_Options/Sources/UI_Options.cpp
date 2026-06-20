@@ -663,7 +663,10 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   //pathsvg.Add(__L("tiger.svg"));
   //pathsvg.Add(__L("test_use.svg"));
   //pathsvg.Add(__L("test_gradient.svg"));
-  pathsvg.Add(__L("test_text.svg"));
+  //pathsvg.Add(__L("test_text.svg"));
+  //pathsvg.Add(__L("test_block1.svg"));
+  //pathsvg.Add(__L("test_stroke.svg"));
+  pathsvg.Add(__L("thermometer.svg"));
 
 
 
