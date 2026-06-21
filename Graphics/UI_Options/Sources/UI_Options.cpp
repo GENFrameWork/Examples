@@ -843,11 +843,11 @@ bool UI_OPTIONS::DrawFrame()
   GRP2DCOLOR_RGBA8  colorblue(0, 0, 255);
   GRP2DCOLOR_RGBA8  colorgray(10, 10, 10, 150);
 
-  GRPSCREEN*    screen    = NULL;
-  GRPVIEWPORT*  viewport  = NULL;
-  GRP2DCANVAS*    canvas    = NULL;
-  int           width     = 0;
-  int           height    = 0;
+  GRPSCREEN*     screen    = NULL;
+  GRPVIEWPORT*   viewport  = NULL;
+  GRP2DCANVAS*   canvas    = NULL;
+  int            width     = 0;
+  int            height    = 0;
 
 
   screen = GetMainScreen();
@@ -868,33 +868,15 @@ bool UI_OPTIONS::DrawFrame()
       return false;
     }
  
+
+  //--------------------------------------------------------------------------------------
+
   width  = screen->GetWidth();
   height = screen->GetHeight();
 
   canvas->ReleaseDrawFramerate();
 
-  /*
-  static double x_pos = -150;
-  static double y_pos =  400;
-  static bool  direction = true;
-
-  if(direction)
-    {
-      if(x_pos < 400)  x_pos+=5;  else  direction = false;
-    }
-   else 
-    {
-      if(x_pos > -150)  x_pos-=5;  else  direction = true;
-    }
-
-  //y_pos += xrand->Between(1,4) - xrand->Between(1,4);
-
-  UI_ELEMENT_MENU* element_menu = (UI_ELEMENT_MENU*)GEN_USERINTERFACE.GetElement(__L("ListBoxMenuID"), UI_ELEMENT_TYPE_MENU);
-  if(element_menu)
-    {
-      GEN_USERINTERFACE.Skin_Selected()->SetElementPosition(element_menu, x_pos, y_pos);
-    }
-  */
+  //--------------------------------------------------------------------------------------
 
   UI_ELEMENT_BUTTON* element_button_mainmenu = (UI_ELEMENT_BUTTON*)GEN_USERINTERFACE.Element_Get(__L("menu-btn"), UI_ELEMENT_TYPE_BUTTON);
   if(element_button_mainmenu)
@@ -907,120 +889,26 @@ bool UI_OPTIONS::DrawFrame()
         }
 
       GEN_USERINTERFACE.Elements_SetToRedraw(element_button_mainmenu, true);
+    } 
+
+   //--------------------------------------------------------------------------------------
+// 
+   if(vectorfile)
+    {      
+      vectorfile_render.RenderCached(vectorfile, canvas, 650.0, 425.0, 320.0, 320.0);   
     }
+
+  //--------------------------------------------------------------------------------------
 
   GEN_USERINTERFACE.Elements_RebuildDrawAreas();
   
   GEN_USERINTERFACE.Update();
 
+  //--------------------------------------------------------------------------------------
+
   canvas->DrawFramerate(screen, 6, 20);
 
-  // --------------------------------------------------------------------
-  // center
-
-  /*
-  canvas->SetLineWidth(0.5f);
-  canvas->SetLineColor(&colorblue);
-  canvas->Circle((width/2), (height/2), 5);               
-  canvas->PutPixel((width/2), (height/2), &colorblack);               
-  */
-
-  /*
-  // --------------------------------------------------------------------
-  // TEST Path() + Beziers (bottom right corner)
-
-  {
-    double savedlinewidth = canvas->GetLineWidth();  
-
-    double margin   = 10.0;
-    double boxw     = 200.0;
-    double boxh     = 200.0;
-    double bx       = width  - boxw - margin;                                  // left
-    double by       = height - boxh - margin;                                  // top
-    double bx2      = bx + boxw;                                               // right
-    double by2      = by + boxh;                                               // bottom
-
-    GRP2DCOLOR_RGBA8  colorpanel  (245, 245, 245, 230);
-    GRP2DCOLOR_RGBA8  colorframe  (  0,   0,   0, 120);
-    GRP2DCOLOR_RGBA8  colorfill1  ( 60, 140, 220);                             // blue   (cubic bezier)
-    GRP2DCOLOR_RGBA8  colorstroke1( 20,  60, 110);
-    GRP2DCOLOR_RGBA8  colorfill2  (230, 120,  40);                             // orange (even odd hole)
-    GRP2DCOLOR_RGBA8  colorcurve  (200,  40,  60);                             // red    (open curve)
-
-    // Test panel background.
-    canvas->SetLineWidth(1.0f);
-    canvas->SetLineColor(&colorframe);
-    canvas->SetFillColor(&colorpanel);
-    canvas->Rectangle(bx, by, bx2, by2, true);
-
-    // 1) Cubic bezier closed shape (fill + stroke).
-    {
-      GRP2DPATH path;
-      double    ox = bx + 20;
-      double    oy = by + 55;
-
-      path.MoveTo (ox,                          oy);
-      path.CurveTo(ox + 25, oy - 50, ox + 75,   oy - 50, ox + 100, oy);        // top lobe
-      path.CurveTo(ox + 75, oy + 55, ox + 25,   oy + 55, ox,       oy);        // bottom lobe
-      path.Close();
-
-      canvas->SetLineWidth(2.0f);
-      canvas->SetFillColor(&colorfill1);
-      canvas->SetLineColor(&colorstroke1);
-      canvas->Path(path, true);
-    }
-
-    // 2) Even odd rule: outer square with an inner square as a hole.
-    {
-      GRP2DPATH path;
-      double    ox = bx + 25;
-      double    oy = by + 110;
-
-      path.MoveTo(ox,       oy);                                               // outer
-      path.LineTo(ox + 60,  oy);
-      path.LineTo(ox + 60,  oy + 60);
-      path.LineTo(ox,       oy + 60);
-      path.Close();
-
-      path.MoveTo(ox + 18,  oy + 18);                                          // inner (hole with even odd)
-      path.LineTo(ox + 42,  oy + 18);
-      path.LineTo(ox + 42,  oy + 42);
-      path.LineTo(ox + 18,  oy + 42);
-      path.Close();
-
-      path.SetFillRule(GRP2DPATHFILLRULE_EVENODD);
-
-      canvas->SetLineWidth(1.5f);
-      canvas->SetFillColor(&colorfill2);
-      canvas->SetLineColor(&colorframe);
-      canvas->Path(path, true);
-    }
-
-    // 3) Open path: quadratic bezier + elliptical arc (stroke only).
-    {
-      GRP2DPATH path;
-      double    ox = bx + 100;
-      double    oy = by + 150;
-
-      path.MoveTo(ox,                  oy);
-      path.QuadTo(ox + 30, oy - 60,    ox + 70, oy);                           // quadratic bezier
-      path.ArcTo (28, 28, 0, false, true, ox + 90, oy + 30);                   // elliptical arc
-
-      canvas->SetLineWidth(2.5f);
-      canvas->SetLineColor(&colorcurve);
-      canvas->Path(path, false);
-
-      canvas->SetLineWidth(savedlinewidth);
-    }
-  }
-
-  // --------------------------------------------------------------------
-  */
-
-  if(vectorfile)
-    {      
-      vectorfile_render.Render(vectorfile, canvas, 650.0, 425.0, 320.0, 320.0);   
-    }
+  //--------------------------------------------------------------------------------------
 
   return true;
 }
