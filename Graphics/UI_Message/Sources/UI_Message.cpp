@@ -84,7 +84,7 @@
 #include "DIOScraperWebGeolocationIP.h"
 #include "DIOScraperWebUserAgentID.h"
 
-#include "GRPCanvas.h"
+#include "GRP2DCanvas.h"
 #include "GRPScreen.h"
 #include "GRPViewPort.h"
 #include "GRPBitmapFile.h"
@@ -664,7 +664,7 @@ bool UI_MESSAGE::Ini_UserInterface(bool on)
 
   GRPSCREEN*    screen    = NULL;
   GRPVIEWPORT*  viewport  = NULL;
-  GRPCANVAS*    canvas    = NULL;
+  GRP2DCANVAS*    canvas    = NULL;
   XPATH         xpath;
   
   screen = GetMainScreen();
@@ -725,7 +725,7 @@ bool UI_MESSAGE::DrawFrame()
   if(!screen) return false; 
 
   GRPVIEWPORT*  viewport  = NULL;
-  GRPCANVAS*    canvas    = NULL;  
+  GRP2DCANVAS*    canvas    = NULL;  
   bool          status    = false;
 
   if(screen)

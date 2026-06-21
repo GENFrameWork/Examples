@@ -40,7 +40,7 @@
 
 #include "APPFlowGraphics.h"
 
-#include "GRPVectorFileSVGRenderAGG.h"
+#include "GRP2DVectorFileRenderAGG.h"
 
 
 
@@ -182,9 +182,9 @@ class UI_OPTIONS : public APPFLOWGRAPHICS, public XFSMACHINE
 
     XSTRING                         makeaction;
 
-    GRPVECTORFILESVG*               SVGfile; 
-    GRPVECTORFILESVGRENDERAGG       SVGrender;   
-
+    GRPVECTORFILE*                  vectorfile; 
+    GRP2DVECTORFILERENDERAGG        vectorfile_render;
+    
     GRPBITMAP*                      testbmp;
 
 };

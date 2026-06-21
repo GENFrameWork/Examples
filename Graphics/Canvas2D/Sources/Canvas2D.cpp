@@ -83,7 +83,7 @@
 #include "DIOScraperWebGeolocationIP.h"
 #include "DIOScraperWebUserAgentID.h"
 
-#include "GRPCanvas.h"
+#include "GRP2DCanvas.h"
 #include "GRPScreen.h"
 #include "GRPViewPort.h"
 #include "GRPBitmapFile.h"
@@ -324,7 +324,7 @@ bool CANVAS2D::AppProc_FirstUpdate()
   //--------------------------------------------------------------------------------
 
   GRPVIEWPORT*      viewport = NULL;
-  GRPCANVAS*        canvas   = NULL;
+  GRP2DCANVAS*        canvas   = NULL;
 
   viewport = GetMainScreen()->GetViewport(0);
   if(viewport) canvas =   viewport->GetCanvas();
@@ -694,7 +694,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
+* @fn         bool CANVAS2D::DrawStep(GRP2DCANVAS* canvas, int x, int y, bool type)
 * @brief      DrawStep
 * @ingroup    GRAPHIC
 * 
@@ -706,7 +706,7 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
+bool CANVAS2D::DrawStep(GRP2DCANVAS* canvas, int x, int y, bool type)
 {
   GRP2DCOLOR_RGBA8 color(80, 80, 80);
   
@@ -733,7 +733,7 @@ bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
+* @fn         bool CANVAS2D::DrawShadow(GRP2DCANVAS* canvas, int x, int y)
 * @brief      DrawShadow
 * @ingroup    GRAPHIC
 * 
@@ -744,7 +744,7 @@ bool CANVAS2D::DrawStep(GRPCANVAS* canvas, int x, int y, bool type)
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool CANVAS2D::DrawShadow(GRPCANVAS* canvas, int x, int y)
+bool CANVAS2D::DrawShadow(GRP2DCANVAS* canvas, int x, int y)
 {
   GRP2DCOLOR_RGBA8  colorshadow(10, 10, 10, 30);
 
@@ -778,7 +778,7 @@ bool CANVAS2D::DrawFrame()
   GRP2DCOLOR_RGBA8  colorgray(10, 10, 10, 150);
   
   GRPVIEWPORT*      viewport                = NULL;
-  GRPCANVAS*        canvas                  = NULL;
+  GRP2DCANVAS*        canvas                  = NULL;
   static int        scrollposx              = 680;
 
   int               width                   = GetMainScreen()->GetWidth();

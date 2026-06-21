@@ -83,7 +83,7 @@
 #include "DIOScraperWebGeolocationIP.h"
 #include "DIOScraperWebUserAgentID.h"
 
-#include "GRPCanvas.h"
+#include "GRP2DCanvas.h"
 #include "GRP2DPath.h"
 #include "GRPScreen.h"
 #include "GRPViewPort.h"
@@ -91,7 +91,6 @@
 #include "GRPBitmapFileJPG.h"
 #include "GRPVideoFileAVI.h"
 #include "GRPVectorFile.h"
-#include "GRPVectorFileSVG.h"
 #include "GRPXEvent.h"
 
 #include "INPManager.h"
@@ -426,10 +425,10 @@ bool UI_OPTIONS::AppProc_End()
 
   //--------------------------------------------------------------------------------------
   
-  if(SVGfile)
+  if(vectorfile)
     {
-      GEN_DELETE SVGfile;
-      SVGfile = NULL;
+      GEN_DELETE vectorfile;
+      vectorfile = NULL;
     }
 
   //--------------------------------------------------------------------------------------
@@ -655,33 +654,30 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   //--------------------------------------------------------------------------------------
 
   
-  XPATH pathsvg;
+  XPATH pathvf;
  
-  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS,  pathsvg);
-  pathsvg.Slash_Add();
-  //pathsvg.Add(__L("test_render.svg"));                 
-  //pathsvg.Add(__L("tiger.svg"));
-  //pathsvg.Add(__L("test_use.svg"));
-  //pathsvg.Add(__L("test_gradient.svg"));
-  //pathsvg.Add(__L("test_text.svg"));
-  //pathsvg.Add(__L("test_block1.svg"));
-  //pathsvg.Add(__L("test_stroke.svg"));
-  pathsvg.Add(__L("thermometer.svg"));
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS,  pathvf);
+  pathvf.Slash_Add();
 
+  //pathvf.Add(__L("test_render.svg"));                 
+  //pathvf.Add(__L("tiger.svg"));
+  //pathvf.Add(__L("test_use.svg"));
+  //pathvf.Add(__L("test_gradient.svg"));
+  //pathvf.Add(__L("test_text.svg"));
+  //pathvf.Add(__L("test_block1.svg"));
+  //pathvf.Add(__L("test_stroke.svg"));
+  //pathvf.Add(__L("thermometer.svg"));
+ 
+  //pathvf.Add(__L("cube.dxf"));  
+  //pathvf.Add(__L("bridge.dxf"));
+  //pathvf.Add(__L("compass.dxf"));
+  //pathvf.Add(__L("harley-davidson.dxf"));
+  pathvf.Add(__L("plate_120x80.dxf"));
 
-
-  GRPVECTORFILE* vf = GRPVECTORFILE::CreateInstance(pathsvg);
-  if(vf && (vf->GetType() == GRPVECTORFILETYPE_SVG))
+  vectorfile = GRPVECTORFILE::CreateInstance(pathvf);
+  if(vectorfile)
     {
-      vf->Load();
-      SVGfile = (GRPVECTORFILESVG*)vf;
-    }
-   else 
-    { 
-      if(vf)
-        {
-          GEN_DELETE vf;
-        }
+      vectorfile->Load();      
     }
     
   //--------------------------------------------------------------------------------------
@@ -716,7 +712,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 
   GRPSCREEN*    screen    = NULL;
   GRPVIEWPORT*  viewport  = NULL;
-  GRPCANVAS*    canvas    = NULL;
+  GRP2DCANVAS*    canvas    = NULL;
   XPATH         xpath;
   
   screen = GetMainScreen();
@@ -849,7 +845,7 @@ bool UI_OPTIONS::DrawFrame()
 
   GRPSCREEN*    screen    = NULL;
   GRPVIEWPORT*  viewport  = NULL;
-  GRPCANVAS*    canvas    = NULL;
+  GRP2DCANVAS*    canvas    = NULL;
   int           width     = 0;
   int           height    = 0;
 
@@ -866,7 +862,7 @@ bool UI_OPTIONS::DrawFrame()
       return false;
     }
 
-  canvas =   viewport->GetCanvas();
+  canvas =  viewport->GetCanvas();
   if(!canvas) 
     {
       return false;
@@ -900,11 +896,6 @@ bool UI_OPTIONS::DrawFrame()
     }
   */
 
-  // The circular main menu button overlaps the semi-transparent horizontal menu.
-  // Redrawing only the button leaves a stale saved rectangle over the alpha-blended
-  // menu when another modal layer, such as the virtual keyboard, is shown.
-  // Redraw both elements as the same visual group: first the underlay menu_horz,
-  // then the button, preserving the layout Z/order.
   UI_ELEMENT_BUTTON* element_button_mainmenu = (UI_ELEMENT_BUTTON*)GEN_USERINTERFACE.Element_Get(__L("menu-btn"), UI_ELEMENT_TYPE_BUTTON);
   if(element_button_mainmenu)
     {
@@ -918,17 +909,6 @@ bool UI_OPTIONS::DrawFrame()
       GEN_USERINTERFACE.Elements_SetToRedraw(element_button_mainmenu, true);
     }
 
-
-/*
-  GRP2DCOLOR_RGBA8  linecolor(0, 0, 0, 100);
-  GRP2DCOLOR_RGBA8  bkgcolor (255, 255,  255, 100);
-          
-  canvas->SetLineColor(&linecolor);
-  canvas->SetFillColor(&bkgcolor);
-
-  canvas->Rectangle(100, 100, 250, 150, true);
-  */
-  
   GEN_USERINTERFACE.Elements_RebuildDrawAreas();
   
   GEN_USERINTERFACE.Update();
@@ -1037,11 +1017,10 @@ bool UI_OPTIONS::DrawFrame()
   // --------------------------------------------------------------------
   */
 
-  if(SVGfile)
+  if(vectorfile)
     {      
-      SVGrender.Render(SVGfile, canvas, 650.0, 425.0, 320.0, 320.0);   
+      vectorfile_render.Render(vectorfile, canvas, 650.0, 425.0, 320.0, 320.0);   
     }
-
 
   return true;
 }
@@ -1269,7 +1248,7 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
             {
               GRPSCREEN*   screen   = NULL;
               GRPVIEWPORT* viewport = NULL;
-              GRPCANVAS*   canvas   = NULL;  
+              GRP2DCANVAS*   canvas   = NULL;  
 
               screen   = GetMainScreen();
               if(!screen) return false;
@@ -1418,4 +1397,6 @@ void UI_OPTIONS::Clean()
     }
   
   testbmp     = NULL;    
+
+  vectorfile  = NULL;  
 }

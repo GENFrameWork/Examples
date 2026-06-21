@@ -152,8 +152,8 @@ class CANVAS2D : public APPFLOWGRAPHICS, public XFSMACHINE
 
     bool                            Ini_Graphics                            (GRPSCREEN* screen);
 
-    bool                            DrawStep                                (GRPCANVAS* canvas, int x, int y, bool type);
-    bool                            DrawShadow                              (GRPCANVAS* canvas, int x, int y);
+    bool                            DrawStep                                (GRP2DCANVAS* canvas, int x, int y, bool type);
+    bool                            DrawShadow                              (GRP2DCANVAS* canvas, int x, int y);
     bool                            DrawFrame                               ();
 
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
