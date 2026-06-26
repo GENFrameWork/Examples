@@ -20,18 +20,31 @@
       <text>Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados,</text>
       <text>lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.</text>  
       <text>El resto della concluían sayo de velarte, calzas de velludo para las fiestas , con sus pantuflos de lo mesmo, y los días de  entresemana se honraba con su vellorí de lo más fino.</text>      
+    </element>    
+    
+  
+    <element name="ListBoxMenuID" type="menu"  xpos="100" ypos="250" width="150" height="225" roundrect="15" linecolor="colormenuline" color="colormenu">
+    </element>
+    
+    
+        
+    <element type="progressbar" name="progressbar0" xpos="50" ypos="300" width="300" height="22" direction="horizontal" roundcap="yes"  linecolor="60,60,60" bckgrdcolor="32,40,48" color="150,90,230"progressrect="0,0,0,0" level="15">
+     <element type="text" name="text0"  xpos="center" ypos="5" sizefont="18" color="yellow,100" >#[PROGRESSBAR_PERCENT]</element>
+    </element>
+  
+    <element type="gaugeradial" name="progressbar1" xpos="50" ypos="475" width="150" height="150" level="15" thickness="18" roundcap="yes" startangle="-90" sweepangle="360" bckgrdcolor="32,40,48" color="30,90,255" linecolor="25,224,255">
+      <element type="text" name="text1" xpos="center" ypos="center" sizefont="35" color="255,255,255">#[PROGRESSBAR_PERCENT]</element>
+    </element> 
+    
+    
+    <element  type="progressbar" name="progressbar2" xpos="220" ypos="375"  allocationtext="down" direction="horizontal"  progressrect="0,0,300,15" continuouscycle="33,10,10"  linecolor="black,60"  color="blue,30"  bckgrdcolor="white" level="15">       
+    </element>
+    
+    <element type="progressbar" name="progressbar3" xpos="220" ypos="450"  allocationtext="down" direction="horizontal"  progressrect="0,0,300,30" linecolor="black,60"  color="blue,30"  bckgrdcolor="white"  level="15">
+      <element type="text" name="text4"  xpos="center"  sizefont="18" color="black,100" >#[PROGRESSBAR_PERCENT]</element>
     </element>
     
    
-    <element name="progressbarID2" type="progressbar" xpos="100" ypos="350"  allocationtext="down" direction="horizontal"  progressrect="0,0,300,10" continuouscycle="33,10,10"  linecolor="black,60"  color="blue,30"  bckgrdcolor="white">
-    </element>
-
-    <element name="progressbarID" type="progressbar" xpos="100" ypos="410"  allocationtext="down" direction="horizontal"  progressrect="0,0,300,30" linecolor="black,60"  color="blue,30"  bckgrdcolor="white">
-      <element name="text01" type="text" xpos="center" sizefont="18" color="black,100" >#[PROGRESSBAR_PERCENT]</element>
-    </element>
-    
-    <element name="ListBoxMenuID" type="menu"  xpos="100" ypos="250" width="150" height="225" roundrect="15" linecolor="colormenuline" color="colormenu">
-    </element>
 
     <element name="form" type="form"  xpos="550" ypos="100" width="275" height="75" roundrect="15" linecolor="colormenuline" color="colormenu">
       <element name="ID Edit" type="edittext" maxsizetext="10" xpos="20" ypos="20" sizefont="22" roundrect="15" bckgrdcolor="159,131,87,100" color="yellow" >0000000</element>
@@ -92,7 +105,7 @@
         <image>menu_button.png</image>
       </element>
     </element>
-    
+  
    
   </layout>
   

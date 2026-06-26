@@ -104,6 +104,7 @@
 #include "UI_Element_ListBox.h"
 #include "UI_Element_Button.h"
 #include "UI_Element_ProgressBar.h"
+#include "UI_Element_GaugeRadial.h"
 #include "UI_SkinCanvas.h"
 
 #include "APPFlowLog.h"
@@ -549,7 +550,29 @@ bool UI_OPTIONS::UpdateInput()
               switch(c)
                 {
                   
-                  case UI_OPTIONS_BUTTON_F1       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                  case UI_OPTIONS_BUTTON_F1       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbar0"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                                                      if(element_progressbar) 
+                                                        { 
+                                                          float level =element_progressbar->GetLevel();
+                                                          level++;                                                          
+                                                          element_progressbar->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressbar); 
+                                                        }
+                                                    
+
+                                                      UI_ELEMENT_GAUGE_RADIAL* element_gaugeradial = (UI_ELEMENT_GAUGE_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("progressbar1"), UI_ELEMENT_TYPE_GAUGE_RADIAL);
+                                                      if(element_gaugeradial) 
+                                                        { 
+                                                          float level = element_gaugeradial->GetLevel();
+                                                          level++;                                                          
+                                                          element_gaugeradial->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_gaugeradial); 
+                                                        }
+
+
+                                                      element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbar3"), UI_ELEMENT_TYPE_PROGRESSBAR);
                                                       if(element_progressbar) 
                                                         { 
                                                           float level =element_progressbar->GetLevel();
@@ -561,7 +584,29 @@ bool UI_OPTIONS::UpdateInput()
                                                     }
                                                     break;
 
-                  case UI_OPTIONS_BUTTON_F2       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbarID"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                  case UI_OPTIONS_BUTTON_F2       : { UI_ELEMENT_PROGRESSBAR* element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbar0"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                                                      if(element_progressbar) 
+                                                        { 
+                                                          float level =element_progressbar->GetLevel();
+                                                          level--;                                                          
+                                                          element_progressbar->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressbar); 
+                                                        }
+                                                    
+
+                                                      UI_ELEMENT_GAUGE_RADIAL* element_gaugeradial = (UI_ELEMENT_GAUGE_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("progressbar1"), UI_ELEMENT_TYPE_GAUGE_RADIAL);
+                                                      if(element_gaugeradial) 
+                                                        { 
+                                                          float level = element_gaugeradial->GetLevel();
+                                                          level--;                                                          
+                                                          element_gaugeradial->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_gaugeradial); 
+                                                        }
+
+
+                                                      element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbar3"), UI_ELEMENT_TYPE_PROGRESSBAR);
                                                       if(element_progressbar) 
                                                         { 
                                                           float level =element_progressbar->GetLevel();
@@ -672,7 +717,8 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   //pathvf.Add(__L("bridge.dxf"));
   //pathvf.Add(__L("compass.dxf"));
   //pathvf.Add(__L("harley-davidson.dxf"));
-  pathvf.Add(__L("plate_120x80.dxf"));
+  //pathvf.Add(__L("plate_120x80.dxf"));
+  pathvf.Add(__L("plate_120x80_mtext_test.dxf"));
 
   vectorfile = GRPVECTORFILE::CreateInstance(pathvf);
   if(vectorfile)
@@ -744,6 +790,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 
   GEN_USERINTERFACE.SubscribeInputEvents(true);
   GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
+
 
   GEN_USERINTERFACE.CreaterVirtualKeyboard(GEN_USERINTERFACE.Layouts_Get(__L("example")), screen);   
 
@@ -820,6 +867,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
             }
         }
     }
+  
 
   return true;
 }
@@ -878,6 +926,7 @@ bool UI_OPTIONS::DrawFrame()
 
   //--------------------------------------------------------------------------------------
 
+  
   UI_ELEMENT_BUTTON* element_button_mainmenu = (UI_ELEMENT_BUTTON*)GEN_USERINTERFACE.Element_Get(__L("menu-btn"), UI_ELEMENT_TYPE_BUTTON);
   if(element_button_mainmenu)
     {
@@ -890,12 +939,15 @@ bool UI_OPTIONS::DrawFrame()
 
       GEN_USERINTERFACE.Elements_SetToRedraw(element_button_mainmenu, true);
     } 
+  
 
    //--------------------------------------------------------------------------------------
 // 
    if(vectorfile)
     {      
       vectorfile_render.RenderCached(vectorfile, canvas, 650.0, 425.0, 320.0, 320.0);   
+
+      //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
     }
 
   //--------------------------------------------------------------------------------------
