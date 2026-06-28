@@ -104,7 +104,8 @@
 #include "UI_Element_ListBox.h"
 #include "UI_Element_Button.h"
 #include "UI_Element_ProgressBar.h"
-#include "UI_Element_GaugeRadial.h"
+#include "UI_Element_ProgressRadial.h"
+#include "UI_Element_ProgressImage.h"
 #include "UI_SkinCanvas.h"
 
 #include "APPFlowLog.h"
@@ -561,14 +562,14 @@ bool UI_OPTIONS::UpdateInput()
                                                         }
                                                     
 
-                                                      UI_ELEMENT_GAUGE_RADIAL* element_gaugeradial = (UI_ELEMENT_GAUGE_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("progressbar1"), UI_ELEMENT_TYPE_GAUGE_RADIAL);
-                                                      if(element_gaugeradial) 
+                                                      UI_ELEMENT_PROGRESS_RADIAL* element_progressradial = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("progressbar1"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
+                                                      if(element_progressradial) 
                                                         { 
-                                                          float level = element_gaugeradial->GetLevel();
+                                                          float level = element_progressradial->GetLevel();
                                                           level++;                                                          
-                                                          element_gaugeradial->SetLevel(level);
+                                                          element_progressradial->SetLevel(level);
 
-                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_gaugeradial); 
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressradial); 
                                                         }
 
 
@@ -580,6 +581,28 @@ bool UI_OPTIONS::UpdateInput()
                                                           element_progressbar->SetLevel(level);
 
                                                           GEN_USERINTERFACE.Elements_SetToRedraw(element_progressbar); 
+                                                        }
+
+
+                                                      element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbar4"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                                                      if(element_progressbar) 
+                                                        { 
+                                                          float level =element_progressbar->GetLevel();
+                                                          level++;                                                          
+                                                          element_progressbar->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressbar); 
+                                                        }
+
+
+                                                      UI_ELEMENT_PROGRESS_IMAGE* element_progressimage = (UI_ELEMENT_PROGRESS_IMAGE*)GEN_USERINTERFACE.Element_Get(__L("temp_bar"), UI_ELEMENT_TYPE_PROGRESSIMAGE);
+                                                      if(element_progressimage) 
+                                                        { 
+                                                          float level = element_progressimage->GetLevel();
+                                                          level++;                                                          
+                                                          element_progressimage->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressimage); 
                                                         }
                                                     }
                                                     break;
@@ -595,14 +618,14 @@ bool UI_OPTIONS::UpdateInput()
                                                         }
                                                     
 
-                                                      UI_ELEMENT_GAUGE_RADIAL* element_gaugeradial = (UI_ELEMENT_GAUGE_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("progressbar1"), UI_ELEMENT_TYPE_GAUGE_RADIAL);
-                                                      if(element_gaugeradial) 
+                                                      UI_ELEMENT_PROGRESS_RADIAL* element_progressradial = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("progressbar1"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
+                                                      if(element_progressradial) 
                                                         { 
-                                                          float level = element_gaugeradial->GetLevel();
+                                                          float level = element_progressradial->GetLevel();
                                                           level--;                                                          
-                                                          element_gaugeradial->SetLevel(level);
+                                                          element_progressradial->SetLevel(level);
 
-                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_gaugeradial); 
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressradial); 
                                                         }
 
 
@@ -614,6 +637,27 @@ bool UI_OPTIONS::UpdateInput()
                                                           element_progressbar->SetLevel(level);
 
                                                           GEN_USERINTERFACE.Elements_SetToRedraw(element_progressbar); 
+                                                        }
+
+                                                      element_progressbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("progressbar4"), UI_ELEMENT_TYPE_PROGRESSBAR);
+                                                      if(element_progressbar) 
+                                                        { 
+                                                          float level =element_progressbar->GetLevel();
+                                                          level--;                                                          
+                                                          element_progressbar->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressbar); 
+                                                        }
+
+
+                                                      UI_ELEMENT_PROGRESS_IMAGE* element_progressimage = (UI_ELEMENT_PROGRESS_IMAGE*)GEN_USERINTERFACE.Element_Get(__L("temp_bar"), UI_ELEMENT_TYPE_PROGRESSIMAGE);
+                                                      if(element_progressimage) 
+                                                        { 
+                                                          float level = element_progressimage->GetLevel();
+                                                          level--;                                                          
+                                                          element_progressimage->SetLevel(level);
+
+                                                          GEN_USERINTERFACE.Elements_SetToRedraw(element_progressimage); 
                                                         }
                                                     }
                                                     break;
