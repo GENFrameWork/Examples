@@ -749,7 +749,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   pathvf.Slash_Add();
 
   //pathvf.Add(__L("test_render.svg"));                 
-  //pathvf.Add(__L("tiger.svg"));
+  pathvf.Add(__L("tiger.svg"));
   //pathvf.Add(__L("test_use.svg"));
   //pathvf.Add(__L("test_gradient.svg"));
   //pathvf.Add(__L("test_text.svg"));
@@ -762,14 +762,40 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   //pathvf.Add(__L("compass.dxf"));
   //pathvf.Add(__L("harley-davidson.dxf"));
   //pathvf.Add(__L("plate_120x80.dxf"));
-  pathvf.Add(__L("plate_120x80_mtext_test.dxf"));
+  //pathvf.Add(__L("plate_120x80_mtext_test.dxf"));
 
+  /*
   vectorfile = GRPVECTORFILE::CreateInstance(pathvf);
   if(vectorfile)
     {
       vectorfile->Load();      
     }
-    
+  */ 
+
+  vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
+  if(vectorfile)
+    {
+      XFILETXT* file = new XFILETXT();
+      if(file) 
+        {
+          if(file->Open(pathvf))
+            {
+              XSTRING content;
+
+              file->ReadAllFile();
+
+              file->GetAllInOneLine(content);
+
+              vectorfile->Load(content);
+
+              file->Close();            
+            }
+          }
+    }
+
+
+
+
   //--------------------------------------------------------------------------------------
 
                                           
