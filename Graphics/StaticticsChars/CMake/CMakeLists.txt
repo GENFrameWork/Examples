@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------
-# UI_Options : Example of graphics: User Interface example. 
+# StaticticsChars : Example of graphics: Statictics Chars 
 # GEN FrameWork
 # --------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.16.0)
-project(ui_options)
+project(staticticschars)
 
 
 set(GEN_DIRECTORY "../../../..") 
@@ -19,13 +19,11 @@ option(XTRACE_FEATURE                                           "XTrace"        
 option(XTHREADCOLLECTED_FEATURE                                 "Thread Collected"                                        ON )
 #option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 
-
 option(GRP_OPENGL_FEATURE                                       "Graphics Open GL"                                        ON )
 
 #option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
 
 option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
-
         
 option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
 option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  
@@ -49,23 +47,22 @@ option(GRP_2D_FEATURE                                           "Graphics 2D"   
 
 option(INP_FEATURE                                              "Inputs"                                                  ON )
 
-option(USERINTERFACE_FEATURE                                    "User Interace"                                           ON )
-#option(USERINTERFACE_DEBUG_FEATURE                              "Debug User Interace"                                     ON )
+
 
 
 
 # --------------------------------------------------------------------
 # Config Application Macro
 
-set(APP_CFG_UI_OPTIONS "-DAPPFLOW_CFG=UI_OPTIONS_CFG::GetInstance()")
-add_definitions(${APP_CFG_UI_OPTIONS})
+set(APP_CFG_STATICTICSCHARS "-DAPPFLOW_CFG=STATICTICSCHARS_CFG::GetInstance()")
+add_definitions(${APP_CFG_STATICTICSCHARS})
 
 
 
 # --------------------------------------------------------------------
 # Android package settings
 
-set(GEN_ANDROID_APP_LABEL                                  "UI_Options")
+set(GEN_ANDROID_APP_LABEL                                  "StaticticsChars")
 
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
@@ -83,8 +80,8 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 # --------------------------------------------------------------------
 # Source code of the Application
 
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/UI_Options.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/UI_Options_CFG.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/StaticticsChars.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/StaticticsChars_CFG.cpp")
 
 
 # --------------------------------------------------------------------

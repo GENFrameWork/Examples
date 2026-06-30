@@ -764,14 +764,16 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   //pathvf.Add(__L("plate_120x80.dxf"));
   //pathvf.Add(__L("plate_120x80_mtext_test.dxf"));
 
-  /*
+  //--------------------------------------------------------------------------------------
+
   vectorfile = GRPVECTORFILE::CreateInstance(pathvf);
   if(vectorfile)
     {
       vectorfile->Load();      
     }
-  */ 
-
+   
+  //-----------------------------------------------------------------------
+  /*
   vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
   if(vectorfile)
     {
@@ -792,10 +794,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
             }
           }
     }
-
-
-
-
+  */
   //--------------------------------------------------------------------------------------
 
                                           
