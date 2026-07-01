@@ -94,6 +94,8 @@
 
 #include "GRPStatisticsChartColumns.h"
 #include "GRPStatisticsChartBuilderSVG.h"
+#include "GRPVectorFileSVG.h"
+#include "GRPVectorFileSVGObj.h"
 #include "GRPXEvent.h"
 
 #include "APPFlowLog.h"
