@@ -93,6 +93,10 @@
 #include "GRPVectorFile.h"
 
 #include "GRPStatisticsChartColumns.h"
+#include "GRPStatisticsChartLines.h"
+#include "GRPStatisticsChartArea.h"
+#include "GRPStatisticsChartBars.h"
+#include "GRPStatisticsChartStackedColumns.h"
 #include "GRPStatisticsChartBuilderSVG.h"
 #include "GRPVectorFileSVG.h"
 #include "GRPVectorFileSVGObj.h"
@@ -566,16 +570,50 @@ bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
+  GRPVIEWPORT*    viewport = NULL;
+  GRP2DCANVAS*    canvas = NULL;
+  int             width = 0;
+  int             height = 0;
+
+  viewport = screen->GetViewport(0);
+  if(!viewport)
+    {
+      return false;
+    }
+
+  canvas = viewport->GetCanvas();
+  if(!canvas)
+    {
+      return false;
+    }
+  
+  XPATH pathfont;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_FONTS, pathfont);
+  pathfont.Slash_Add();             
+  pathfont.Add(__L("Nunito-SemiBold.ttf"));
+
+  
+  canvas->VectorFont_Load(pathfont);
+
+
   vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
   if(vectorfile)
     {
-      GRPSTATISTICSCHARTCOLUMNS chart;
+      GRPSTATISTICSCHARTSTACKEDCOLUMNS chart;
 
       GRPSTATISTICSCHARTCONFIG* config = chart.GetConfig();
       if(config)
         {
           config->SetTitle(__L("Sales by quarter"));
+
           config->SetShowValues(true);
+         
+          config->SetShowLegend(false);
+          config->SetLegendPosition(GRPSTATISTICSCHARTLEGENDPOSITION_LEFT);
+          config->SetLegendFontSize(12.0);
+          config->SetShowAxisLabels(true);
+          config->SetAxisFontSize(11.0);
         }
 
       GRPSTATISTICSCHARTDATA* data = chart.GetData();
