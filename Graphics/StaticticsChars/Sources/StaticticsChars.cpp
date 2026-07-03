@@ -97,7 +97,12 @@
 #include "GRPStatisticsChartArea.h"
 #include "GRPStatisticsChartBars.h"
 #include "GRPStatisticsChartStackedColumns.h"
+#include "GRPStatisticsChartPie.h"          
+#include "GRPStatisticsChartColumns3D.h"
+#include "GRPStatisticsChartLines3D.h"
+#include "GRPStatisticsChartArea3D.h"
 #include "GRPStatisticsChartBuilderSVG.h"
+
 #include "GRPVectorFileSVG.h"
 #include "GRPVectorFileSVGObj.h"
 #include "GRPXEvent.h"
@@ -600,7 +605,7 @@ bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
   vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
   if(vectorfile)
     {
-      GRPSTATISTICSCHARTSTACKEDCOLUMNS chart;
+      GRPSTATISTICSCHARTAREA3D chart;
 
       GRPSTATISTICSCHARTCONFIG* config = chart.GetConfig();
       if(config)
@@ -609,7 +614,7 @@ bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
 
           config->SetShowValues(true);
          
-          config->SetShowLegend(false);
+          config->SetShowLegend(true);
           config->SetLegendPosition(GRPSTATISTICSCHARTLEGENDPOSITION_LEFT);
           config->SetLegendFontSize(12.0);
           config->SetShowAxisLabels(true);
