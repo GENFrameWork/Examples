@@ -1,8 +1,8 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       StaticticsChars.cpp
+* @file       StaticticsCharts.cpp
 * 
-* @class      STATICTICSCHARS
+* @class      STATICTICSCHARTS
 * @brief      Graphics UI Options Example class
 * @ingroup    EXAMPLES
 * 
@@ -34,7 +34,7 @@
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
-#include "StaticticsChars.h"
+#include "StaticticsCharts.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -101,6 +101,9 @@
 #include "GRPStatisticsChartColumns3D.h"
 #include "GRPStatisticsChartLines3D.h"
 #include "GRPStatisticsChartArea3D.h"
+#include "GRPStatisticsChartBars3D.h"
+#include "GRPStatisticsChartStackedColumns3D.h"
+#include "GRPStatisticsChartPie3D.h"
 #include "GRPStatisticsChartBuilderSVG.h"
 
 #include "GRPVectorFileSVG.h"
@@ -113,7 +116,7 @@
 #include "INPManager.h"
 #include "INPDevice.h"
 
-#include "StaticticsChars_CFG.h"
+#include "StaticticsCharts_CFG.h"
 
 
 /*---- PRECOMPILATION INCLUDES ---------------------------------------------------------------------------------------*/
@@ -125,7 +128,7 @@
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
- APPLICATIONCREATEINSTANCE(STATICTICSCHARS, canvas2d)
+ APPLICATIONCREATEINSTANCE(STATICTICSCHARTS, staticticscharts2d)
 
 
 
@@ -134,7 +137,7 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::STATICTICSCHARS
+* @fn         STATICTICSCHARTS::STATICTICSCHARTS
 * @brief      Constructor
 * @ingroup
 *
@@ -142,7 +145,7 @@
 * @return
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-STATICTICSCHARS::STATICTICSCHARS() :  XFSMACHINE(0)
+STATICTICSCHARTS::STATICTICSCHARTS() :  XFSMACHINE(0)
 {
   Clean();
 }
@@ -150,7 +153,7 @@ STATICTICSCHARS::STATICTICSCHARS() :  XFSMACHINE(0)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::~STATICTICSCHARS
+* @fn         STATICTICSCHARTS::~STATICTICSCHARTS
 * @brief      Destructor
 * @ingroup
 *
@@ -158,7 +161,7 @@ STATICTICSCHARS::STATICTICSCHARS() :  XFSMACHINE(0)
 * @return
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-STATICTICSCHARS::~STATICTICSCHARS()
+STATICTICSCHARTS::~STATICTICSCHARTS()
 {
   Clean();
 }
@@ -166,7 +169,7 @@ STATICTICSCHARS::~STATICTICSCHARS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::InitFSMachine
+* @fn         STATICTICSCHARTS::InitFSMachine
 * @brief      Init FS Machine
 * @ingroup
 *
@@ -175,23 +178,23 @@ STATICTICSCHARS::~STATICTICSCHARS()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::InitFSMachine()
+bool STATICTICSCHARTS::InitFSMachine()
 {
-  if(!AddState( STATICTICSCHARS_XFSMSTATE_NONE           ,
-                STATICTICSCHARS_XFSMEVENT_INI            , STATICTICSCHARS_XFSMSTATE_INI          ,
-                STATICTICSCHARS_XFSMEVENT_END            , STATICTICSCHARS_XFSMSTATE_END          ,
+  if(!AddState( STATICTICSCHARTS_XFSMSTATE_NONE           ,
+                STATICTICSCHARTS_XFSMEVENT_INI            , STATICTICSCHARTS_XFSMSTATE_INI          ,
+                STATICTICSCHARTS_XFSMEVENT_END            , STATICTICSCHARTS_XFSMSTATE_END          ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( STATICTICSCHARS_XFSMSTATE_INI            ,
-                STATICTICSCHARS_XFSMEVENT_NONE           , STATICTICSCHARS_XFSMSTATE_NONE         ,
-                STATICTICSCHARS_XFSMEVENT_END            , STATICTICSCHARS_XFSMSTATE_END          ,
+  if(!AddState( STATICTICSCHARTS_XFSMSTATE_INI            ,
+                STATICTICSCHARTS_XFSMEVENT_NONE           , STATICTICSCHARTS_XFSMSTATE_NONE         ,
+                STATICTICSCHARTS_XFSMEVENT_END            , STATICTICSCHARTS_XFSMSTATE_END          ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
 
-  if(!AddState( STATICTICSCHARS_XFSMSTATE_END            ,
-                STATICTICSCHARS_XFSMEVENT_NONE           , STATICTICSCHARS_XFSMSTATE_NONE         ,
-                STATICTICSCHARS_XFSMEVENT_INI            , STATICTICSCHARS_XFSMSTATE_INI          ,
+  if(!AddState( STATICTICSCHARTS_XFSMSTATE_END            ,
+                STATICTICSCHARTS_XFSMEVENT_NONE           , STATICTICSCHARTS_XFSMSTATE_NONE         ,
+                STATICTICSCHARTS_XFSMEVENT_INI            , STATICTICSCHARTS_XFSMSTATE_INI          ,
                 XFSMACHINESTATE_EVENTDEFEND)) return false;
 
   return true;
@@ -200,7 +203,7 @@ bool STATICTICSCHARS::InitFSMachine()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::AppProc_Ini
+* @fn         STATICTICSCHARTS::AppProc_Ini
 * @brief      Ini Application
 * @ingroup
 *
@@ -209,7 +212,7 @@ bool STATICTICSCHARS::InitFSMachine()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::AppProc_Ini()
+bool STATICTICSCHARTS::AppProc_Ini()
 {
   XSTRING string;
   XSTRING stringresult;
@@ -257,6 +260,13 @@ bool STATICTICSCHARS::AppProc_Ini()
   if(!xtimer) return false;
 
   //--------------------------------------------------------------------------------------
+
+  xrand = GEN_XFACTORY.CreateRand();
+  if(!xrand) return false;
+
+  xrand->Ini();  
+
+  //--------------------------------------------------------------------------------------
   
   { XPATH xpath;
     
@@ -283,7 +293,7 @@ bool STATICTICSCHARS::AppProc_Ini()
 
   //--------------------------------------------------------------------------------------
 
-  SetEvent(STATICTICSCHARS_XFSMEVENT_INI);
+  SetEvent(STATICTICSCHARTS_XFSMEVENT_INI);
 
   return true;
 }
@@ -291,7 +301,7 @@ bool STATICTICSCHARS::AppProc_Ini()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::AppProc_FirstUpdate
+* @fn         STATICTICSCHARTS::AppProc_FirstUpdate
 * @brief      First Update
 * @ingroup
 *
@@ -300,7 +310,7 @@ bool STATICTICSCHARS::AppProc_Ini()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::AppProc_FirstUpdate()
+bool STATICTICSCHARTS::AppProc_FirstUpdate()
 {
   //--------------------------------------------------------------------------------------
 
@@ -309,33 +319,33 @@ bool STATICTICSCHARS::AppProc_FirstUpdate()
   inpdevice = GEN_INPMANAGER.GetDevice(INPDEVICE_TYPE_KEYBOARD);
   if(inpdevice)
     {
-      button[STATICTICSCHARS_BUTTON_UP]      = inpdevice->GetButton(INPBUTTON_ID_UP);
-      button[STATICTICSCHARS_BUTTON_DOWN]    = inpdevice->GetButton(INPBUTTON_ID_DOWN);
-      button[STATICTICSCHARS_BUTTON_LEFT]    = inpdevice->GetButton(INPBUTTON_ID_LEFT);
-      button[STATICTICSCHARS_BUTTON_RIGHT]   = inpdevice->GetButton(INPBUTTON_ID_RIGHT);
-      button[STATICTICSCHARS_BUTTON_SPACE]   = inpdevice->GetButton(INPBUTTON_ID_SPACE);
-      button[STATICTICSCHARS_BUTTON_ESC]     = inpdevice->GetButton(INPBUTTON_ID_ESCAPE);
-      button[STATICTICSCHARS_BUTTON_F1]      = inpdevice->GetButton(INPBUTTON_ID_F1);
-      button[STATICTICSCHARS_BUTTON_F2]      = inpdevice->GetButton(INPBUTTON_ID_F2);
-      button[STATICTICSCHARS_BUTTON_F5]      = inpdevice->GetButton(INPBUTTON_ID_F5);
-      button[STATICTICSCHARS_BUTTON_F9]      = inpdevice->GetButton(INPBUTTON_ID_F9);
-      button[STATICTICSCHARS_BUTTON_MINUS]   = inpdevice->GetButton(INPBUTTON_ID_WIIMOTE_MINUS);
-      button[STATICTICSCHARS_BUTTON_PLUS]    = inpdevice->GetButton(INPBUTTON_ID_WIIMOTE_PLUS);
+      button[STATICTICSCHARTS_BUTTON_UP]      = inpdevice->GetButton(INPBUTTON_ID_UP);
+      button[STATICTICSCHARTS_BUTTON_DOWN]    = inpdevice->GetButton(INPBUTTON_ID_DOWN);
+      button[STATICTICSCHARTS_BUTTON_LEFT]    = inpdevice->GetButton(INPBUTTON_ID_LEFT);
+      button[STATICTICSCHARTS_BUTTON_RIGHT]   = inpdevice->GetButton(INPBUTTON_ID_RIGHT);
+      button[STATICTICSCHARTS_BUTTON_SPACE]   = inpdevice->GetButton(INPBUTTON_ID_SPACE);
+      button[STATICTICSCHARTS_BUTTON_ESC]     = inpdevice->GetButton(INPBUTTON_ID_ESCAPE);
+      button[STATICTICSCHARTS_BUTTON_F1]      = inpdevice->GetButton(INPBUTTON_ID_F1);
+      button[STATICTICSCHARTS_BUTTON_F2]      = inpdevice->GetButton(INPBUTTON_ID_F2);
+      button[STATICTICSCHARTS_BUTTON_F5]      = inpdevice->GetButton(INPBUTTON_ID_F5);
+      button[STATICTICSCHARTS_BUTTON_F9]      = inpdevice->GetButton(INPBUTTON_ID_F9);
+      button[STATICTICSCHARTS_BUTTON_MINUS]   = inpdevice->GetButton(INPBUTTON_ID_WIIMOTE_MINUS);
+      button[STATICTICSCHARTS_BUTTON_PLUS]    = inpdevice->GetButton(INPBUTTON_ID_WIIMOTE_PLUS);
 
-      button[STATICTICSCHARS_BUTTON_MOUSE]   = inpdevice->GetButton(INPBUTTON_ID_MOUSE_RIGHT);
+      button[STATICTICSCHARTS_BUTTON_MOUSE]   = inpdevice->GetButton(INPBUTTON_ID_MOUSE_RIGHT);
     }
 
   inpdevice = GEN_INPMANAGER.GetDevice(INPDEVICE_TYPE_MOUSE);
   if(inpdevice)
     {
-      button[STATICTICSCHARS_BUTTON_MOUSE] = inpdevice->GetButton(INPBUTTON_ID_MOUSE_LEFT);
+      button[STATICTICSCHARTS_BUTTON_MOUSE] = inpdevice->GetButton(INPBUTTON_ID_MOUSE_LEFT);
       cursor = inpdevice->GetCursor(0);
     }
 
   inpdevice = GEN_INPMANAGER.GetDevice(INPDEVICE_TYPE_TOUCHSCREEN);
   if(inpdevice)
     {     
-      button[STATICTICSCHARS_BUTTON_TOUCHSCREEN] = inpdevice->GetButton(INPBUTTON_ID_TOUCHSCREEN);     
+      button[STATICTICSCHARTS_BUTTON_TOUCHSCREEN] = inpdevice->GetButton(INPBUTTON_ID_TOUCHSCREEN);     
       cursor = inpdevice->GetCursor(0);
     }
 
@@ -352,7 +362,7 @@ bool STATICTICSCHARS::AppProc_FirstUpdate()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::AppProc_Update
+* @fn         STATICTICSCHARTS::AppProc_Update
 * @brief      Update Application
 * @ingroup
 *
@@ -361,36 +371,36 @@ bool STATICTICSCHARS::AppProc_FirstUpdate()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::AppProc_Update()
+bool STATICTICSCHARTS::AppProc_Update()
 {
-  if(GetEvent()==STATICTICSCHARS_XFSMEVENT_NONE) // Not GEN_NEW event
+  if(GetEvent()==STATICTICSCHARTS_XFSMEVENT_NONE) // Not GEN_NEW event
     {
       switch(GetCurrentState())
         {
-          case STATICTICSCHARS_XFSMSTATE_NONE      :  break;
+          case STATICTICSCHARTS_XFSMSTATE_NONE      : break;
 
-          case STATICTICSCHARS_XFSMSTATE_INI       :  UpdateInput();
+          case STATICTICSCHARTS_XFSMSTATE_INI       : UpdateInput();
                                                       DrawFrame();
                                                       GetMainScreen()->UpdateViewports();
                                                       break;
 
-          case STATICTICSCHARS_XFSMSTATE_END       :  break;
+          case STATICTICSCHARTS_XFSMSTATE_END       : break;
 
         }
     }
    else //  New event
     {
-      if(GetEvent()<STATICTICSCHARS_LASTEVENT)
+      if(GetEvent()<STATICTICSCHARTS_LASTEVENT)
         {
           CheckTransition();
 
           switch(GetCurrentState())
             {
-              case STATICTICSCHARS_XFSMSTATE_NONE  :  break;
+              case STATICTICSCHARTS_XFSMSTATE_NONE  : break;
 
-              case STATICTICSCHARS_XFSMSTATE_INI   :  break;
+              case STATICTICSCHARTS_XFSMSTATE_INI   : break;
 
-              case STATICTICSCHARS_XFSMSTATE_END   :  break;
+              case STATICTICSCHARTS_XFSMSTATE_END   : break;
             }
         }
     }
@@ -401,7 +411,7 @@ bool STATICTICSCHARS::AppProc_Update()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::AppProc_End
+* @fn         STATICTICSCHARTS::AppProc_End
 * @brief      End Application
 * @ingroup
 *
@@ -410,22 +420,19 @@ bool STATICTICSCHARS::AppProc_Update()
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::AppProc_End()
+bool STATICTICSCHARTS::AppProc_End()
 {
   XSTRING string;
   XSTRING stringresult;
 
   //--------------------------------------------------------------------------------------
 
-  SetCurrentState(STATICTICSCHARS_XFSMSTATE_END);
+  SetCurrentState(STATICTICSCHARTS_XFSMSTATE_END);
 
   //--------------------------------------------------------------------------------------
   
-  if(vectorfile)
-    {
-      GEN_DELETE vectorfile;
-      vectorfile = NULL;
-    }
+  vectorfiles.DeleteContents();
+  vectorfiles.DeleteAll();
 
   //--------------------------------------------------------------------------------------
 
@@ -457,14 +464,14 @@ bool STATICTICSCHARS::AppProc_End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool STATICTICSCHARS::UpdateInput()
+* @fn         bool STATICTICSCHARTS::UpdateInput()
 * @brief      UpdateInput
 * @ingroup
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::UpdateInput()
+bool STATICTICSCHARTS::UpdateInput()
 {
    int  width  = GetMainScreen()->GetWidth();
    int  height = GetMainScreen()->GetHeight();
@@ -506,17 +513,17 @@ bool STATICTICSCHARS::UpdateInput()
                   
                 }
 
-              if(button[STATICTICSCHARS_BUTTON_MOUSE]->IsPressedWithRelease())
+              if(button[STATICTICSCHARTS_BUTTON_MOUSE]->IsPressedWithRelease())
                 {
-                  
+                  in3D = !in3D;
                   cursor->GetMotion()->Reset();       
                 }
     
-              if(button[STATICTICSCHARS_BUTTON_TOUCHSCREEN])
+              if(button[STATICTICSCHARTS_BUTTON_TOUCHSCREEN])
                 {             
-                  if(button[STATICTICSCHARS_BUTTON_TOUCHSCREEN]->IsPressed())
+                  if(button[STATICTICSCHARTS_BUTTON_TOUCHSCREEN]->IsPressed())
                     {  
-
+                      in3D = !in3D;
                       cursor->GetMotion()->Reset();
                     }
                 }
@@ -525,7 +532,7 @@ bool STATICTICSCHARS::UpdateInput()
     }
 
 
-  for(int c=0; c<STATICTICSCHARS_BUTTON_MOUSE; c++)
+  for(int c=0; c<STATICTICSCHARTS_BUTTON_MOUSE; c++)
     {
       if(button[c])
         {
@@ -533,16 +540,17 @@ bool STATICTICSCHARS::UpdateInput()
             {
               switch(c)
                 {
-                  case STATICTICSCHARS_BUTTON_F1     : break;
+                  case STATICTICSCHARTS_BUTTON_F1     : in3D = !in3D;
+                                                        break;
 
-                  case STATICTICSCHARS_BUTTON_F2     : break;
+                  case STATICTICSCHARTS_BUTTON_F2     : break;
                             
-                  case STATICTICSCHARS_BUTTON_F5     : break;
+                  case STATICTICSCHARTS_BUTTON_F5     : break;
 
               
 
-                  case STATICTICSCHARS_BUTTON_ESC    : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
-                                                       break;
+                  case STATICTICSCHARTS_BUTTON_ESC    : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
+                                                        break;
                 }
             }
         }
@@ -554,7 +562,7 @@ bool STATICTICSCHARS::UpdateInput()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
+* @fn         bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
 * @brief      Ini_Graphics
 * @ingroup    GRAPHIC
 * 
@@ -564,10 +572,10 @@ bool STATICTICSCHARS::UpdateInput()
 * @return     bool : true if is succesful. 
 * 
 * ---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
+bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
 {
-  screen->SetWidth(1024);
-  screen->SetHeight(768);
+  screen->SetWidth((420*3)+(20*4));
+  screen->SetHeight((420*2)+(20*3));
 
   screen->GetTitle()->Set(__L("Statictics Chars Canvas"));  
 
@@ -575,9 +583,9 @@ bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
-  GRPVIEWPORT*    viewport = NULL;
-  GRP2DCANVAS*    canvas = NULL;
-  int             width = 0;
+  GRPVIEWPORT*    viewport  = NULL;
+  GRP2DCANVAS*    canvas    = NULL;
+  int             width     = 0;
   int             height = 0;
 
   viewport = screen->GetViewport(0);
@@ -598,71 +606,114 @@ bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
   pathfont.Slash_Add();             
   pathfont.Add(__L("Nunito-SemiBold.ttf"));
 
+
+  XVECTOR<double> values;
+  int             indexvalue = 0;  
   
   canvas->VectorFont_Load(pathfont);
 
-
-  vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
-  if(vectorfile)
+  for(int c=0; c<12; c++)
     {
-      GRPSTATISTICSCHARTAREA3D chart;
-
-      GRPSTATISTICSCHARTCONFIG* config = chart.GetConfig();
-      if(config)
+      GRPVECTORFILE* vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
+      if(vectorfile)
         {
-          config->SetTitle(__L("Sales by quarter"));
+          GRPSTATISTICSCHART* chart = NULL;
 
-          config->SetShowValues(true);
+          switch(c)
+            {         
+              case  0: chart = new GRPSTATISTICSCHARTCOLUMNS();             break;
+              case  1: chart = new GRPSTATISTICSCHARTLINES();               break;
+              case  2: chart = new GRPSTATISTICSCHARTAREA();                break;
+              case  3: chart = new GRPSTATISTICSCHARTBARS();                break;
+              case  4: chart = new GRPSTATISTICSCHARTSTACKEDCOLUMNS();      break;
+              case  5: chart = new GRPSTATISTICSCHARTPIE();                 break;  
+
+              case  6: chart = new GRPSTATISTICSCHARTCOLUMNS3D();           break;
+              case  7: chart = new GRPSTATISTICSCHARTLINES3D();             break;
+              case  8: chart = new GRPSTATISTICSCHARTAREA3D();              break;
+              case  9: chart = new GRPSTATISTICSCHARTBARS3D();              break;
+              case 10: chart = new GRPSTATISTICSCHARTSTACKEDCOLUMNS3D();    break;
+              case 11: chart = new GRPSTATISTICSCHARTPIE3D();               break;  
+            }
+
+          if(chart)
+            { 
+              GRPSTATISTICSCHARTCONFIG* config = chart->GetConfig();
+              if(config)
+                {
+                  config->SetTitle(__L("Sales by quarter"));
+
+                  config->SetShowValues(true);
          
-          config->SetShowLegend(true);
-          config->SetLegendPosition(GRPSTATISTICSCHARTLEGENDPOSITION_LEFT);
-          config->SetLegendFontSize(12.0);
-          config->SetShowAxisLabels(true);
-          config->SetAxisFontSize(11.0);
-        }
+                  config->SetShowLegend(true);
+                  config->SetLegendPosition(GRPSTATISTICSCHARTLEGENDPOSITION_LEFT);
+                  config->SetLegendFontSize(12.0);
+                  config->SetShowAxisLabels(true);
+                  config->SetAxisFontSize(11.0);
+                }
 
-      GRPSTATISTICSCHARTDATA* data = chart.GetData();
-      if(data)
-        {
-          data->AddCategory(__L("Q1"));
-          data->AddCategory(__L("Q2"));
-          data->AddCategory(__L("Q3"));
-          data->AddCategory(__L("Q4"));
+              if(c<6)
+                { 
+                  for(int d=0; d<8; d++)   
+                    {
+                      values.Add((double)xrand->Between(10,80));     
+                    }
+                }
 
-          GRPSTATISTICSCHARTSERIE* serie2024 = data->AddSerie(__L("2024"));
-          if(serie2024)
-            {
-              serie2024->AddValue( 45.0);
-              serie2024->AddValue( 72.0);
-              serie2024->AddValue( 58.0);
-              serie2024->AddValue( 90.0);
+              if(c==6)
+                {
+                  indexvalue = 0;
+                }
+                           
+              GRPSTATISTICSCHARTDATA* data = chart->GetData();
+              if(data)
+                {
+                  data->AddCategory(__L("Q1"));
+                  data->AddCategory(__L("Q2"));
+                  data->AddCategory(__L("Q3"));
+                  data->AddCategory(__L("Q4"));
+                                
+                  GRPSTATISTICSCHARTSERIE* serie2024 = data->AddSerie(__L("2024"));
+                  if(serie2024)
+                    {
+                      for(int e=0; e<4; e++)  
+                        {
+                          serie2024->AddValue((double)values.Get(indexvalue));  indexvalue++;
+                        }                      
+                    }
+
+                  GRPSTATISTICSCHARTSERIE* serie2025 = data->AddSerie(__L("2025"));
+                  if(serie2025)
+                    {
+                      for(int e=0; e<4; e++)  
+                        {
+                          serie2025->AddValue((double)values.Get(indexvalue));  indexvalue++;
+                        }                                            
+                    }                                    
+                }
+
+              GRPSTATISTICSCHARTBUILDERSVG builder;
+
+              if(chart->Generate(builder, 420.0, 420.0) == GRPVECTORFILERESULT_OK)
+                {
+                  XSTRING content;
+
+                  if(builder.GetResult(content))
+                    {
+                      vectorfile->Load(content);
+                    }
+                }
+
+              vectorfiles.Add(vectorfile);    
+
+              delete chart;
             }
-
-          GRPSTATISTICSCHARTSERIE* serie2025 = data->AddSerie(__L("2025"));
-          if(serie2025)
-            {
-              serie2025->AddValue( 60.0);
-              serie2025->AddValue( 55.0);
-              serie2025->AddValue( 80.0);
-              serie2025->AddValue(110.0);
-            }
-        }
-
-      GRPSTATISTICSCHARTBUILDERSVG builder;
-
-      if(chart.Generate(builder, 420.0, 420.0) == GRPVECTORFILERESULT_OK)
-        {
-          XSTRING content;
-
-          if(builder.GetResult(content))
-            {
-              vectorfile->Load(content);
-            }
-        }
+        }      
     }
 
   //--------------------------------------------------------------------------------------
 
+  values.DeleteAll();
                                           
   return true;
 }
@@ -671,14 +722,14 @@ bool STATICTICSCHARS::Ini_Graphics(GRPSCREEN* screen)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool STATICTICSCHARS::DrawFrame()
+* @fn         bool STATICTICSCHARTS::DrawFrame()
 * @brief      DrawFrame
 * @ingroup
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS::DrawFrame()
+bool STATICTICSCHARTS::DrawFrame()
 {
   GRP2DCOLOR_RGBA8  colorblack(0, 0, 0);
   GRP2DCOLOR_RGBA8  colorwhite(255, 255, 255);
@@ -712,19 +763,32 @@ bool STATICTICSCHARS::DrawFrame()
       return false;
     }
  
-  //--------------------------------------------------------------------------------------
-
+  
   width  = screen->GetWidth();
   height = screen->GetHeight();
 
-  canvas->ReleaseDrawFramerate();
 
+  canvas->Clear(&colorblack);
+
+  int index = 0;
   
-   if(vectorfile)
-    {      
-      vectorfile_render.RenderCached(vectorfile, canvas, 50.0, 50.0, 420.0, 420.0);   
+  if(in3D)
+    {
+      index = vectorfiles.GetSize()/2;      
+    }
+   
+  //--------------------------------------------------------------------------------------
 
-      //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
+  for(int c=0; c<vectorfiles.GetSize()/2; c++)
+    {
+      GRPVECTORFILE* vectorfile = vectorfiles.Get(c + index);
+      if(vectorfile)
+        {
+          float x = 20.0 + (c%3) * (420.0 + 20.0);
+          float y = 20.0 + (c/3) * (420.0 + 20.0);
+
+          vectorfile_render.RenderCached(vectorfile, canvas, x, y, 420.0, 420.0);    
+        }
     }
 
   //--------------------------------------------------------------------------------------
@@ -739,7 +803,7 @@ bool STATICTICSCHARS::DrawFrame()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void STATICTICSCHARS::Graphics_HandleEvent(GRPXEVENT* event)
+* @fn         void STATICTICSCHARTS::Graphics_HandleEvent(GRPXEVENT* event)
 * @brief      Graphics_HandleEvent
 * @ingroup
 *
@@ -748,7 +812,7 @@ bool STATICTICSCHARS::DrawFrame()
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void STATICTICSCHARS::HandleEvent_Graphics(GRPXEVENT* event)
+void STATICTICSCHARTS::HandleEvent_Graphics(GRPXEVENT* event)
 {
   switch(event->GetEventType())
     {
@@ -764,7 +828,7 @@ void STATICTICSCHARS::HandleEvent_Graphics(GRPXEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS::HandleEvent
+* @fn         STATICTICSCHARTS::HandleEvent
 * @brief      Handle Events
 * @ingroup
 *
@@ -773,7 +837,7 @@ void STATICTICSCHARS::HandleEvent_Graphics(GRPXEVENT* event)
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void STATICTICSCHARS::HandleEvent(XEVENT* xevent)
+void STATICTICSCHARTS::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
 
@@ -791,7 +855,7 @@ void STATICTICSCHARS::HandleEvent(XEVENT* xevent)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void STATICTICSCHARS::Clean()
+* @fn         void STATICTICSCHARTS::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
@@ -799,15 +863,15 @@ void STATICTICSCHARS::HandleEvent(XEVENT* xevent)
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void STATICTICSCHARS::Clean()
+void STATICTICSCHARTS::Clean()
 {
   xtimer       = NULL;
   xrand        = NULL;
 
-  for(int c=0; c<STATICTICSCHARS_BUTTON_MAX; c++)
+  in3D         = false; 
+
+  for(int c=0; c<STATICTICSCHARTS_BUTTON_MAX; c++)
     {
       button[c] = NULL;
     }  
-
-  vectorfile  = NULL;  
 }

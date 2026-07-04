@@ -1,8 +1,8 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       StaticticsChars.h
+* @file       StaticticsCharts.h
 * 
-* @class      STATICTICSCHARS
+* @class      STATICTICSCHARTS
 * @brief      Graphics UI Options Example class
 * @ingroup    EXAMPLES
 * 
@@ -34,6 +34,7 @@
 #include "XFSMachine.h"
 #include "XString.h"
 #include "XScheduler.h"
+#include "XVector.h"
 
 #include "DIOStream.h"
 #include "DIOURL.h"
@@ -46,64 +47,64 @@
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
-enum STATICTICSCHARSXFSMEVENTS
+enum STATICTICSCHARTSXFSMEVENTS
 {
-  STATICTICSCHARS_XFSMEVENT_NONE                 = 0 ,
-  STATICTICSCHARS_XFSMEVENT_INI                      ,
-  STATICTICSCHARS_XFSMEVENT_END                      ,
+  STATICTICSCHARTS_XFSMEVENT_NONE                 = 0 ,
+  STATICTICSCHARTS_XFSMEVENT_INI                      ,
+  STATICTICSCHARTS_XFSMEVENT_END                      ,
 
-  STATICTICSCHARS_LASTEVENT
+  STATICTICSCHARTS_LASTEVENT
 };
 
 
-enum STATICTICSCHARSXFSMSTATES
+enum STATICTICSCHARTSXFSMSTATES
 {
-  STATICTICSCHARS_XFSMSTATE_NONE                 = 0 ,
-  STATICTICSCHARS_XFSMSTATE_INI                      ,
-  STATICTICSCHARS_XFSMSTATE_END                      ,
+  STATICTICSCHARTS_XFSMSTATE_NONE                 = 0 ,
+  STATICTICSCHARTS_XFSMSTATE_INI                      ,
+  STATICTICSCHARTS_XFSMSTATE_END                      ,
 
-  STATICTICSCHARS_LASTSTATE
+  STATICTICSCHARTS_LASTSTATE
 };
 
 
-enum STATICTICSCHARSTASKID
+enum STATICTICSCHARTSTASKID
 {
-  STATICTICSCHARSTASKID_UNKNOWN                  = 0 ,
-  STATICTICSCHARSTASKID_CHECKMEMORYSTATUS            ,
+  STATICTICSCHARTSTASKID_UNKNOWN                  = 0 ,
+  STATICTICSCHARTSTASKID_CHECKMEMORYSTATUS            ,
 };
 
 
-enum STATICTICSCHARS_BUTTONS
+enum STATICTICSCHARTS_BUTTONS
 {
-  STATICTICSCHARS_BUTTON_UP                      = 0 ,
-  STATICTICSCHARS_BUTTON_DOWN                        ,
-  STATICTICSCHARS_BUTTON_LEFT                        ,
-  STATICTICSCHARS_BUTTON_RIGHT                       ,
-  STATICTICSCHARS_BUTTON_SPACE                       ,
-  STATICTICSCHARS_BUTTON_ESC                         ,
-  STATICTICSCHARS_BUTTON_F1                          ,
-  STATICTICSCHARS_BUTTON_F2                          ,
-  STATICTICSCHARS_BUTTON_F5                          ,
-  STATICTICSCHARS_BUTTON_F9                          ,
-  STATICTICSCHARS_BUTTON_PLUS                        ,
-  STATICTICSCHARS_BUTTON_MINUS                       ,
+  STATICTICSCHARTS_BUTTON_UP                      = 0 ,
+  STATICTICSCHARTS_BUTTON_DOWN                        ,
+  STATICTICSCHARTS_BUTTON_LEFT                        ,
+  STATICTICSCHARTS_BUTTON_RIGHT                       ,
+  STATICTICSCHARTS_BUTTON_SPACE                       ,
+  STATICTICSCHARTS_BUTTON_ESC                         ,
+  STATICTICSCHARTS_BUTTON_F1                          ,
+  STATICTICSCHARTS_BUTTON_F2                          ,
+  STATICTICSCHARTS_BUTTON_F5                          ,
+  STATICTICSCHARTS_BUTTON_F9                          ,
+  STATICTICSCHARTS_BUTTON_PLUS                        ,
+  STATICTICSCHARTS_BUTTON_MINUS                       ,
 
-  STATICTICSCHARS_BUTTON_MOUSE                       ,
+  STATICTICSCHARTS_BUTTON_MOUSE                       ,
 
-  STATICTICSCHARS_BUTTON_TOUCHSCREEN                 ,
+  STATICTICSCHARTS_BUTTON_TOUCHSCREEN                 ,
 
-  STATICTICSCHARS_BUTTON_MAX
+  STATICTICSCHARTS_BUTTON_MAX
 };
 
 
-#define XTHREADGROUPID_STATICTICSCHARS_DRAWFRAME       XTHREADGROUPID_APPOWNER + 100
+#define XTHREADGROUPID_STATICTICSCHARTS_DRAWFRAME       XTHREADGROUPID_APPOWNER + 100
 
 #define APPLICATION_VERSION                       0
 #define APPLICATION_SUBVERSION                    1
 #define APPLICATION_SUBVERSIONERR                 1
 
-#define APPLICATION_NAMEAPP                       __L("StaticticsChars")
-#define APPLICATION_NAMEFILE                      __L("staticticschars")
+#define APPLICATION_NAMEAPP                       __L("StaticticsCharts")
+#define APPLICATION_NAMEFILE                      __L("staticticscharts")
 
 #define APPLICATION_OWNER                         __L("EndoraSoft")
 
@@ -137,14 +138,14 @@ class INPCURSOR;
 class UI_XEVENT;
 class UI_ELEMENT;
 class UI_ELEMENT_TEXT;
-class STATICTICSCHARS_CFG;
+class STATICTICSCHARTS_CFG;
 
 
-class STATICTICSCHARS : public APPFLOWGRAPHICS, public XFSMACHINE
+class STATICTICSCHARTS : public APPFLOWGRAPHICS, public XFSMACHINE
 {
   public:
-                                    STATICTICSCHARS                              ();
-    virtual                        ~STATICTICSCHARS                              ();
+                                    STATICTICSCHARTS                              ();
+    virtual                        ~STATICTICSCHARTS                              ();
 
     bool                            InitFSMachine                           ();
 
@@ -171,10 +172,12 @@ class STATICTICSCHARS : public APPFLOWGRAPHICS, public XFSMACHINE
 
     XRAND*                          xrand;
 
-    INPBUTTON*                      button[STATICTICSCHARS_BUTTON_MAX];
+    INPBUTTON*                      button[STATICTICSCHARTS_BUTTON_MAX];
     INPCURSOR*                      cursor;
 
-    GRPVECTORFILE*                  vectorfile; 
+    bool                            in3D;               
+
+    XVECTOR<GRPVECTORFILE*>         vectorfiles; 
     GRP2DVECTORFILERENDERAGG        vectorfile_render;
 
 };

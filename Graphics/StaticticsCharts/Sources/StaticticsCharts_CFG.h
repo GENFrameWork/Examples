@@ -1,8 +1,8 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       StaticticsChars_CFG.h
+* @file       StaticticsCharts_CFG.h
 *
-* @class      STATICTICSCHARS_CFG
+* @class      STATICTICSCHARTS_CFG
 * @brief      GEN UI Options Config Example class
 * @ingroup    EXAMPLES
 *
@@ -34,16 +34,16 @@
 
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
-#define STATICTICSCHARSCFG_SECTIONGENERAL    __L("general")
+#define STATICTICSCHARTSCFG_SECTIONGENERAL    __L("general")
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
-class STATICTICSCHARS_CFG : public APPFLOWCFG
+class STATICTICSCHARTS_CFG : public APPFLOWCFG
 {
   public:
 
     static bool                     GetIsInstanced                          ();
-    static STATICTICSCHARS_CFG&          GetInstance                             (bool ini = true);
+    static STATICTICSCHARTS_CFG&          GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
     bool                            DoVariableMapping                       (); 
@@ -51,15 +51,15 @@ class STATICTICSCHARS_CFG : public APPFLOWCFG
 
   private:
 
-                                    STATICTICSCHARS_CFG                          (XCHAR* namefile);
-                                    STATICTICSCHARS_CFG                          (STATICTICSCHARS_CFG const&);       // Don't implement
-    virtual                        ~STATICTICSCHARS_CFG                          ();
+                                    STATICTICSCHARTS_CFG                          (XCHAR* namefile);
+                                    STATICTICSCHARTS_CFG                          (STATICTICSCHARTS_CFG const&);       // Don't implement
+    virtual                        ~STATICTICSCHARTS_CFG                          ();
 
-    void                            operator =                              (STATICTICSCHARS_CFG const&);       // Don't implement
+    void                            operator =                              (STATICTICSCHARTS_CFG const&);       // Don't implement
 
     void                            Clean                                   ();
 
-    static STATICTICSCHARS_CFG*          instance;
+    static STATICTICSCHARTS_CFG*          instance;
 };
 
 

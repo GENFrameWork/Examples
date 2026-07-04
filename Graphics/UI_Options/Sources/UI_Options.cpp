@@ -254,6 +254,14 @@ bool UI_OPTIONS::AppProc_Ini()
   xtimer = GEN_XFACTORY.CreateTimer();
   if(!xtimer) return false;
 
+
+  //--------------------------------------------------------------------------------------
+
+  xrand = GEN_XFACTORY.CreateRand();
+  if(!xrand) return false;
+
+  xrand->Ini();  
+
   //--------------------------------------------------------------------------------------
   
   { XPATH xpath;
@@ -991,7 +999,17 @@ bool UI_OPTIONS::DrawFrame()
   width  = screen->GetWidth();
   height = screen->GetHeight();
 
-  canvas->ReleaseDrawFramerate();
+  canvas->ReleaseDrawFramerate(); 
+
+  static double zoom   = 0; //(double)xrand->Between(1, 75);
+  static bool   invert = false;
+
+  if(!invert) zoom += 1.0; else zoom -= 1.0;
+  
+  if(zoom >= 90)  invert = !invert;
+  if(zoom < 0)    invert = !invert;
+
+  canvas->RebuildAllAreas();
 
   //--------------------------------------------------------------------------------------
 
@@ -1011,10 +1029,15 @@ bool UI_OPTIONS::DrawFrame()
   
 
    //--------------------------------------------------------------------------------------
-// 
+
+   
+  
+   canvas->CreateRebuildArea(625.0, 400.0, 320.0 + zoom, 320.0 + zoom);
+
+
    if(vectorfile)
     {      
-      vectorfile_render.RenderCached(vectorfile, canvas, 650.0, 425.0, 320.0, 320.0);   
+      vectorfile_render.Render(vectorfile, canvas, 625.0, 400.0, 250.0 + zoom, 250.0 + zoom);   
 
       //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
     }

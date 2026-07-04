@@ -1,8 +1,8 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @file       StaticticsChars_CFG.cpp
+* @file       StaticticsCharts_CFG.cpp
 *
-* @class      STATICTICSCHARS_CFG
+* @class      STATICTICSCHARTS_CFG
 * @brief      GEN UI Options Config Example class
 * @ingroup    EXAMPLES
 *
@@ -34,29 +34,29 @@
 
 #include "XLog.h"
 
-#include "StaticticsChars.h"
+#include "StaticticsCharts.h"
 
-#include "StaticticsChars_CFG.h"
+#include "StaticticsCharts_CFG.h"
 
 #include "XMemory_Control.h"
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
-STATICTICSCHARS_CFG* STATICTICSCHARS_CFG::instance = NULL;
+STATICTICSCHARTS_CFG* STATICTICSCHARTS_CFG::instance = NULL;
 
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool STATICTICSCHARS_CFG::GetIsInstanced()
+* @fn         bool STATICTICSCHARTS_CFG::GetIsInstanced()
 * @brief      GetIsInstanced
 * @ingroup
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS_CFG::GetIsInstanced()
+bool STATICTICSCHARTS_CFG::GetIsInstanced()
 {
   return instance!=NULL;
 }
@@ -65,16 +65,16 @@ bool STATICTICSCHARS_CFG::GetIsInstanced()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS_CFG& STATICTICSCHARS_CFG::GetInstance(bool ini)
+* @fn         STATICTICSCHARTS_CFG& STATICTICSCHARTS_CFG::GetInstance(bool ini)
 * @brief      GetInstance
 * @ingroup
 *
-* @return     STATICTICSCHARS_CFG& :
+* @return     STATICTICSCHARTS_CFG& :
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-STATICTICSCHARS_CFG& STATICTICSCHARS_CFG::GetInstance(bool ini)
+STATICTICSCHARTS_CFG& STATICTICSCHARTS_CFG::GetInstance(bool ini)
 {
-  if(!instance) instance = GEN_NEW STATICTICSCHARS_CFG(ini?APPLICATION_NAMEFILE:NULL);
+  if(!instance) instance = GEN_NEW STATICTICSCHARTS_CFG(ini?APPLICATION_NAMEFILE:NULL);
 
   return (*instance);
 }
@@ -82,14 +82,14 @@ STATICTICSCHARS_CFG& STATICTICSCHARS_CFG::GetInstance(bool ini)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool STATICTICSCHARS_CFG::DelInstance()
+* @fn         bool STATICTICSCHARTS_CFG::DelInstance()
 * @brief      DelInstance
 * @ingroup
 *
 * @return     bool : true if is succesful.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS_CFG::DelInstance()
+bool STATICTICSCHARTS_CFG::DelInstance()
 {
   if(instance)
     {
@@ -107,14 +107,14 @@ bool STATICTICSCHARS_CFG::DelInstance()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool STATICTICSCHARS_CFG::DoVariableMapping()
+* @fn         bool STATICTICSCHARTS_CFG::DoVariableMapping()
 * @brief      DoVariableMapping
 * @ingroup    APPLICATION
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS_CFG::DoVariableMapping()
+bool STATICTICSCHARTS_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
     {
@@ -127,14 +127,14 @@ bool STATICTICSCHARS_CFG::DoVariableMapping()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool STATICTICSCHARS_CFG::DoDefault()
+* @fn         bool STATICTICSCHARTS_CFG::DoDefault()
 * @brief      DoDefault
 * @ingroup    APPLICATION
 * 
 * @return     bool : true if is succesful. 
 * 
 * --------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARS_CFG::DoDefault()
+bool STATICTICSCHARTS_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
     {
@@ -174,7 +174,7 @@ bool STATICTICSCHARS_CFG::DoDefault()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS_CFG::STATICTICSCHARS_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
+* @fn         STATICTICSCHARTS_CFG::STATICTICSCHARTS_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
 * @brief      Constructor
 * @ingroup
 *
@@ -183,20 +183,20 @@ bool STATICTICSCHARS_CFG::DoDefault()
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-STATICTICSCHARS_CFG::STATICTICSCHARS_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
+STATICTICSCHARTS_CFG::STATICTICSCHARTS_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
 
   if(namefile)
     {
-      Ini<STATICTICSCHARS_CFG>();
+      Ini<STATICTICSCHARTS_CFG>();
     }
 }
 
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARS_CFG::~STATICTICSCHARS_CFG()
+* @fn         STATICTICSCHARTS_CFG::~STATICTICSCHARTS_CFG()
 * @brief      Destructor
 * @note       VIRTUAL
 * @ingroup
@@ -204,7 +204,7 @@ STATICTICSCHARS_CFG::STATICTICSCHARS_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 * @return     Does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-STATICTICSCHARS_CFG::~STATICTICSCHARS_CFG()
+STATICTICSCHARTS_CFG::~STATICTICSCHARTS_CFG()
 {
   Clean();
 }
@@ -213,7 +213,7 @@ STATICTICSCHARS_CFG::~STATICTICSCHARS_CFG()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void STATICTICSCHARS_CFG::Clean()
+* @fn         void STATICTICSCHARTS_CFG::Clean()
 * @brief      Clean the attributes of the class: Default initialice
 * @note       INTERNAL
 * @ingroup
@@ -221,7 +221,7 @@ STATICTICSCHARS_CFG::~STATICTICSCHARS_CFG()
 * @return     void : does not return anything.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-void STATICTICSCHARS_CFG::Clean()
+void STATICTICSCHARTS_CFG::Clean()
 {
 
 }

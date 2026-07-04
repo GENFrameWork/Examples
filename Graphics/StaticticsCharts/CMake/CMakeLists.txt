@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------
-# StaticticsChars : Example of graphics: Statictics Chars 
+# StaticticsCharts : Example of graphics: Statictics Charts 
 # GEN FrameWork
 # --------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.16.0)
-project(staticticschars)
+project(staticticscharts)
 
 
 set(GEN_DIRECTORY "../../../..") 
@@ -54,15 +54,15 @@ option(INP_FEATURE                                              "Inputs"        
 # --------------------------------------------------------------------
 # Config Application Macro
 
-set(APP_CFG_STATICTICSCHARS "-DAPPFLOW_CFG=STATICTICSCHARS_CFG::GetInstance()")
-add_definitions(${APP_CFG_STATICTICSCHARS})
+set(APP_CFG_STATICTICSCHARTS "-DAPPFLOW_CFG=STATICTICSCHARTS_CFG::GetInstance()")
+add_definitions(${APP_CFG_STATICTICSCHARTS})
 
 
 
 # --------------------------------------------------------------------
 # Android package settings
 
-set(GEN_ANDROID_APP_LABEL                                  "StaticticsChars")
+set(GEN_ANDROID_APP_LABEL                                  "StaticticsCharts")
 
 # --------------------------------------------------------------------
 # Main CMakeList of GEN
@@ -80,8 +80,8 @@ list(APPEND GEN_INCLUDES_DIR_LIST ${APP_DIRECTORY_APPLICATION})
 # --------------------------------------------------------------------
 # Source code of the Application
 
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/StaticticsChars.cpp")
-list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/StaticticsChars_CFG.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/StaticticsCharts.cpp")
+list(APPEND GEN_SOURCES_MODULES_LIST "${APP_DIRECTORY_APPLICATION}/StaticticsCharts_CFG.cpp")
 
 
 # --------------------------------------------------------------------
