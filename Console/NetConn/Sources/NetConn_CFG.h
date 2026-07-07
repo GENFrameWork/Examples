@@ -3,7 +3,7 @@
 * @file       NetConn_CFG.h
 * 
 * @class      NETCONN_CFG
-* @brief      Net Connection CFG class (DIOCoreProtol example)
+* @brief      Net Connection CFG class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.

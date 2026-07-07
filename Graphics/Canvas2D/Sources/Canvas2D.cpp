@@ -123,14 +123,14 @@ APPLICATIONCREATEINSTANCE(CANVAS2D, canvas2d)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         CANVAS2D::CANVAS2D() : XFSMACHINE(0)
-* @brief      Constructor
-* @ingroup    GRAPHIC
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         CANVAS2D::CANVAS2D()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 CANVAS2D::CANVAS2D() :  XFSMACHINE(0)
 {
   Clean();
@@ -138,15 +138,15 @@ CANVAS2D::CANVAS2D() :  XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         CANVAS2D::~CANVAS2D()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    GRAPHIC
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 CANVAS2D::~CANVAS2D()
 {
   Clean();
@@ -154,14 +154,14 @@ CANVAS2D::~CANVAS2D()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::InitFSMachine()
 {
   if(!AddState( CANVAS2D_XFSMSTATE_NONE           ,
@@ -186,14 +186,14 @@ bool CANVAS2D::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_Ini()
 {
   XSTRING   string;
@@ -281,14 +281,14 @@ bool CANVAS2D::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_FirstUpdate()
 {
   //--------------------------------------------------------------------------------------
@@ -323,8 +323,8 @@ bool CANVAS2D::AppProc_FirstUpdate()
 
   //--------------------------------------------------------------------------------
 
-  GRPVIEWPORT*      viewport = NULL;
-  GRP2DCANVAS*        canvas   = NULL;
+  GRPVIEWPORT*  viewport = NULL;
+  GRP2DCANVAS*  canvas   = NULL;
 
   viewport = GetMainScreen()->GetViewport(0);
   if(viewport) canvas =   viewport->GetCanvas();
@@ -391,14 +391,14 @@ bool CANVAS2D::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_Update()
 {
   if(GetEvent()==CANVAS2D_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -442,14 +442,14 @@ bool CANVAS2D::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::AppProc_End()
 {
   XSTRING string;
@@ -519,14 +519,14 @@ bool CANVAS2D::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::UpdateInput()
-* @brief      UpdateInput
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Updates the application input state.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::UpdateInput()
 {
   if(cursor)
@@ -596,16 +596,16 @@ bool CANVAS2D::UpdateInput()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
-* @brief      Ini_Graphics
-* @ingroup    GRAPHIC
-* 
-* @param[in]  screen : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the graphics subsystem.
+* @ingroup    EXAMPLES
+*
+* @param[in]  screen : Screen where the graphics or user interface resources are created.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 {  
   XPATH           xpath;
@@ -693,19 +693,19 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::DrawStep(GRP2DCANVAS* canvas, int x, int y, bool type)
-* @brief      DrawStep
-* @ingroup    GRAPHIC
-* 
-* @param[in]  canvas : 
-* @param[in]  x : 
-* @param[in]  y : 
-* @param[in]  type : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Draws a step on the canvas.
+* @ingroup    EXAMPLES
+*
+* @param[in]  canvas : Canvas used to draw the graphical element.
+* @param[in]  x : Horizontal coordinate.
+* @param[in]  y : Vertical coordinate.
+* @param[in]  type : Type value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::DrawStep(GRP2DCANVAS* canvas, int x, int y, bool type)
 {
   GRP2DCOLOR_RGBA8 color(80, 80, 80);
@@ -732,18 +732,18 @@ bool CANVAS2D::DrawStep(GRP2DCANVAS* canvas, int x, int y, bool type)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::DrawShadow(GRP2DCANVAS* canvas, int x, int y)
-* @brief      DrawShadow
-* @ingroup    GRAPHIC
-* 
-* @param[in]  canvas : 
-* @param[in]  x : 
-* @param[in]  y : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Draws a shadow on the canvas.
+* @ingroup    EXAMPLES
+*
+* @param[in]  canvas : Canvas used to draw the graphical element.
+* @param[in]  x : Horizontal coordinate.
+* @param[in]  y : Vertical coordinate.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::DrawShadow(GRP2DCANVAS* canvas, int x, int y)
 {
   GRP2DCOLOR_RGBA8  colorshadow(10, 10, 10, 30);
@@ -758,14 +758,14 @@ bool CANVAS2D::DrawShadow(GRP2DCANVAS* canvas, int x, int y)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2D::DrawFrame()
-* @brief      DrawFrame
-* @ingroup    GRAPHIC
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Draws the current frame.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2D::DrawFrame()
 {
   if(!GetMainScreen())
@@ -920,17 +920,17 @@ bool CANVAS2D::DrawFrame()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles graphics events.
 * @note       INTERNAL
-* @ingroup    GRAPHIC
-* 
-* @param[in]  event : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 {
   switch(event->GetEventType())
@@ -946,17 +946,17 @@ void CANVAS2D::HandleEvent_Graphics(GRPXEVENT* event)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handle event sound.
 * @note       INTERNAL
-* @ingroup    GRAPHIC
-* 
-* @param[in]  event : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
 {  
   #if SND_ACTIVE
@@ -984,17 +984,17 @@ void CANVAS2D::HandleEvent_Sound(SNDFACTORY_XEVENT* event)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void CANVAS2D::HandleEvent(XEVENT* xevent)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles an event.
 * @note       INTERNAL
-* @ingroup    GRAPHIC
-* 
-* @param[in]  xevent : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  xevent : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -1019,15 +1019,15 @@ void CANVAS2D::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void CANVAS2D::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    GRAPHIC
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2D::Clean()
 {
   rand                        = NULL;

@@ -3,7 +3,7 @@
 * @file       StaticticsCharts_CFG.h
 *
 * @class      STATICTICSCHARTS_CFG
-* @brief      GEN UI Options Config Example class
+* @brief      GEN Statistics Charts Config Example class
 * @ingroup    EXAMPLES
 *
 * @copyright  EndoraSoft. All rights reserved.

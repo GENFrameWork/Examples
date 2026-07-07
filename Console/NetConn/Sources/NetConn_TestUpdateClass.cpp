@@ -3,7 +3,7 @@
 * @file       NetConn_TestUpdateClass.cpp
 * 
 * @class      NETCONN_TESTUPDATECLASS
-* @brief      Net Conn Test UpdateClass  class
+* @brief      Net Conn Test Update Class
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -56,12 +56,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_TESTUPDATECLASS::NETCONN_TESTUPDATECLASS()
-* @brief      Constructor
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_TESTUPDATECLASS::NETCONN_TESTUPDATECLASS()
 {
   Clean();
@@ -69,13 +71,15 @@ NETCONN_TESTUPDATECLASS::NETCONN_TESTUPDATECLASS()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_TESTUPDATECLASS::~NETCONN_TESTUPDATECLASS()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_TESTUPDATECLASS::~NETCONN_TESTUPDATECLASS()
 {
   Clean();
@@ -83,14 +87,14 @@ NETCONN_TESTUPDATECLASS::~NETCONN_TESTUPDATECLASS()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XDWORD NETCONN_TESTUPDATECLASS::GetNumber()
-* @brief      GetNumber
+* @brief      Gets the number.
 * @ingroup    EXAMPLES
-* 
-* @return     XDWORD : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XDWORD : Requested value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD NETCONN_TESTUPDATECLASS::GetNumber()
 {
   return number;
@@ -98,14 +102,16 @@ XDWORD NETCONN_TESTUPDATECLASS::GetNumber()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_TESTUPDATECLASS::SetNumber(XDWORD number)
-* @brief      SetNumber
+* @brief      Sets the number.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  number : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  number : Number value to set.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_TESTUPDATECLASS::SetNumber(XDWORD number)
 {
   this->number = number;
@@ -113,14 +119,14 @@ void NETCONN_TESTUPDATECLASS::SetNumber(XDWORD number)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* NETCONN_TESTUPDATECLASS::GetString()
-* @brief      GetString
+* @brief      Gets the string.
 * @ingroup    EXAMPLES
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* NETCONN_TESTUPDATECLASS::GetString()
 {
   return &string;
@@ -128,14 +134,14 @@ XSTRING* NETCONN_TESTUPDATECLASS::GetString()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_TESTUPDATECLASS::Update()
-* @brief      Update
+* @brief      Updates the object data.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_TESTUPDATECLASS::Update()
 {
   XRAND* rand = GEN_XFACTORY.CreateRand();
@@ -161,14 +167,14 @@ bool NETCONN_TESTUPDATECLASS::Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_TESTUPDATECLASS::Serialize()
-* @brief      Serialize
+* @brief      Serializes the object data.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_TESTUPDATECLASS::Serialize()
 {
   Primitive_Add<XDWORD>(number    , NETCONN_TESTUPDATECLASS_NUMBER_STR);  
@@ -179,14 +185,14 @@ bool NETCONN_TESTUPDATECLASS::Serialize()
     
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_TESTUPDATECLASS::Deserialize()
-* @brief      Deserialize
+* @brief      Deserializes the object data.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_TESTUPDATECLASS::Deserialize()
 {
   Primitive_Extract<XDWORD>(number   , NETCONN_TESTUPDATECLASS_NUMBER_STR);
@@ -197,13 +203,15 @@ bool NETCONN_TESTUPDATECLASS::Deserialize()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_TESTUPDATECLASS::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_TESTUPDATECLASS::Clean()
 {
   number = 0;  

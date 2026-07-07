@@ -108,14 +108,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         BINCONNPRO::BINCONNPRO() : XFSMACHINE(0)
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         BINCONNPRO::BINCONNPRO()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO::BINCONNPRO() :  XFSMACHINE(0)
 {
   Clean();
@@ -124,15 +124,15 @@ BINCONNPRO::BINCONNPRO() :  XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         BINCONNPRO::~BINCONNPRO()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO::~BINCONNPRO()
 {
   Clean();
@@ -140,14 +140,14 @@ BINCONNPRO::~BINCONNPRO()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::InitFSMachine()
 {
   if(!AddState( BINCONNPRO_XFSMSTATE_NONE           ,
@@ -172,14 +172,14 @@ bool BINCONNPRO::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::AppProc_Ini()
 {
   XSTRING string;
@@ -264,14 +264,14 @@ bool BINCONNPRO::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::AppProc_FirstUpdate()
 {
   XSTRING string;
@@ -349,14 +349,14 @@ bool BINCONNPRO::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::AppProc_Update()
 {
   if(GetEvent()==BINCONNPRO_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -411,14 +411,14 @@ bool BINCONNPRO::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::AppProc_End()
 {
   XSTRING string;
@@ -487,12 +487,12 @@ bool BINCONNPRO::AppProc_End()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
-* @ingroup    APPLICATION
+* @brief      Processes valid key sequences.
+* @ingroup    EXAMPLES
 *
-* @param[in]  key :
+* @param[in]  key : Key code to process.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::KeyValidSecuences(int key)
@@ -518,10 +518,10 @@ bool BINCONNPRO::KeyValidSecuences(int key)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO::Show_ConnectionsStatus()
-* @brief      Show_ConnectionsStatus
-* @ingroup    APPLICATION
+* @brief      Shows connection status information.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::Show_ConnectionsStatus()
@@ -546,10 +546,10 @@ bool BINCONNPRO::Show_ConnectionsStatus()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO::Show_DeviceConnectedStatus()
-* @brief      ShowDeviceConnectedStatus
-* @ingroup    APPLICATION
+* @brief      Shows connected device status information.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::Show_DeviceConnectedStatus()
@@ -659,10 +659,10 @@ bool BINCONNPRO::Show_DeviceConnectedStatus()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO::Show_AllStatus()
-* @brief      Show_AllStatus
-* @ingroup    APPLICATION
+* @brief      Shows all status information.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::Show_AllStatus()
@@ -684,13 +684,13 @@ bool BINCONNPRO::Show_AllStatus()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO::InitializeProtocolConnectionServer(BINCONNPRO_PROTOCOL* protocol, BINCONNPRO_APPLICATIONDATA* applicationdata)
-* @brief      InitializeProtocolConnectionServer
-* @ingroup    APPLICATION
+* @brief      Initializes a server protocol connection.
+* @ingroup    EXAMPLES
 *
-* @param[in]  protocol :
-* @param[in]  applicationdata :
+* @param[in]  protocol : Protocol instance used by the operation.
+* @param[in]  applicationdata : Application data associated with the protocol connection.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::InitializeProtocolConnectionServer(BINCONNPRO_PROTOCOL* protocol, BINCONNPRO_APPLICATIONDATA* applicationdata)
@@ -772,13 +772,13 @@ bool BINCONNPRO::InitializeProtocolConnectionServer(BINCONNPRO_PROTOCOL* protoco
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO::InitializeProtocolConnectionClient(BINCONNPRO_PROTOCOL* protocol, BINCONNPRO_APPLICATIONDATA* applicationdata)
-* @brief      InitializeProtocolConnectionClient
-* @ingroup    APPLICATION
+* @brief      Initializes a client protocol connection.
+* @ingroup    EXAMPLES
 *
-* @param[in]  protocol :
-* @param[in]  applicationdata :
+* @param[in]  protocol : Protocol instance used by the operation.
+* @param[in]  applicationdata : Application data associated with the protocol connection.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO::InitializeProtocolConnectionClient(BINCONNPRO_PROTOCOL* protocol, BINCONNPRO_APPLICATIONDATA* applicationdata)
@@ -836,13 +836,13 @@ bool BINCONNPRO::InitializeProtocolConnectionClient(BINCONNPRO_PROTOCOL* protoco
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles server protocol connection events.
 * @note       INTERNAL
-* @ingroup    APPLICATION
+* @ingroup    EXAMPLES
 *
-* @param[in]  event :
+* @param[in]  event : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
@@ -897,13 +897,13 @@ void BINCONNPRO::HandleEvent_ServerProtocolConnections(DIOPROTOCOL_CONNECTIONSMA
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles client protocol connection events.
 * @note       INTERNAL
-* @ingroup    APPLICATION
+* @ingroup    EXAMPLES
 *
-* @param[in]  event :
+* @param[in]  event : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
@@ -944,13 +944,13 @@ void BINCONNPRO::HandleEvent_ClientProtocolConnections(DIOPROTOCOL_CONNECTIONSMA
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO::HandleEvent
-* @brief      Handle Events
-* @ingroup
+* @fn         void BINCONNPRO::HandleEvent(XEVENT* xevent)
+* @brief      Handles an event.
+* @ingroup    EXAMPLES
 *
-* @param[]    xevent : event send to control
+* @param[in]  xevent : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO::HandleEvent(XEVENT* xevent)
@@ -978,11 +978,11 @@ void BINCONNPRO::HandleEvent(XEVENT* xevent)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO::Clean()

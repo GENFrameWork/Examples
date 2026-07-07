@@ -60,12 +60,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL_RESPONSE::NETCONN_COREPROTOCOL_RESPONSE()
-* @brief      Constructor
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_RESPONSE::NETCONN_COREPROTOCOL_RESPONSE()
 {
   Clean();
@@ -73,13 +75,15 @@ NETCONN_COREPROTOCOL_RESPONSE::NETCONN_COREPROTOCOL_RESPONSE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL_RESPONSE::~NETCONN_COREPROTOCOL_RESPONSE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_RESPONSE::~NETCONN_COREPROTOCOL_RESPONSE()
 {
   Clean();
@@ -87,16 +91,16 @@ NETCONN_COREPROTOCOL_RESPONSE::~NETCONN_COREPROTOCOL_RESPONSE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      CommandResponse
+* @brief      Command response.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   bool status = false;
@@ -139,16 +143,16 @@ bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse(DIOCOREPROTOCOL_CONNECTIONSM
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      CommandResponse_GetVersion
+* @brief      Command response get version.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_GetVersion(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   event->GetContentResponseString()->Format(__L("protocol version %d.%d"), NETCONN_COREPROTOCOL_VERSION, NETCONN_COREPROTOCOL_SUBVERSION);      
@@ -158,16 +162,16 @@ bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_GetVersion(DIOCOREPROTOCOL_C
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      CommandResponse_OtherCommand
+* @brief      Command response other command.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_OtherCommand(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   event->GetContentResponseString()->Format(__L("Other command"));      
@@ -177,16 +181,16 @@ bool NETCONN_COREPROTOCOL_RESPONSE::CommandResponse_OtherCommand(DIOCOREPROTOCOL
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_RESPONSE::UpdateClassResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      UpdateClassResponse
+* @brief      Update class response.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_RESPONSE::UpdateClassResponse(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   bool status = false;
@@ -217,13 +221,15 @@ bool NETCONN_COREPROTOCOL_RESPONSE::UpdateClassResponse(DIOCOREPROTOCOL_CONNECTI
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL_RESPONSE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_RESPONSE::Clean()
 {
 

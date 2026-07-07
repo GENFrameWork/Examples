@@ -1,6 +1,6 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       SCRIPTSEXAMPLE_CFG.h
+* @file       ScriptsExample_CFG.h
 * 
 * @class      Scripts Example Config class 
 * @brief      Scripts Example Config 

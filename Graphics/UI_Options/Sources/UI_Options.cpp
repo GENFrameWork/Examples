@@ -132,12 +132,11 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::UI_OPTIONS
-* @brief      Constructor
-* @ingroup
+* @fn         UI_OPTIONS::UI_OPTIONS()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param
-* @return
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_OPTIONS::UI_OPTIONS() :  XFSMACHINE(0)
@@ -148,12 +147,11 @@ UI_OPTIONS::UI_OPTIONS() :  XFSMACHINE(0)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::~UI_OPTIONS
-* @brief      Destructor
-* @ingroup
+* @fn         UI_OPTIONS::~UI_OPTIONS()
+* @brief      Destructor.
+* @ingroup    EXAMPLES
 *
-* @param
-* @return
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_OPTIONS::~UI_OPTIONS()
@@ -164,13 +162,11 @@ UI_OPTIONS::~UI_OPTIONS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::InitFSMachine
-* @brief      Init FS Machine
-* @ingroup
+* @fn         bool UI_OPTIONS::InitFSMachine()
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::InitFSMachine()
@@ -198,13 +194,11 @@ bool UI_OPTIONS::InitFSMachine()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::AppProc_Ini
-* @brief      Ini Application
-* @ingroup
+* @fn         bool UI_OPTIONS::AppProc_Ini()
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::AppProc_Ini()
@@ -297,13 +291,11 @@ bool UI_OPTIONS::AppProc_Ini()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::AppProc_FirstUpdate
-* @brief      First Update
-* @ingroup
+* @fn         bool UI_OPTIONS::AppProc_FirstUpdate()
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::AppProc_FirstUpdate()
@@ -362,13 +354,11 @@ bool UI_OPTIONS::AppProc_FirstUpdate()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::AppProc_Update
-* @brief      Update Application
-* @ingroup
+* @fn         bool UI_OPTIONS::AppProc_Update()
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::AppProc_Update()
@@ -411,13 +401,11 @@ bool UI_OPTIONS::AppProc_Update()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::AppProc_End
-* @brief      End Application
-* @ingroup
+* @fn         bool UI_OPTIONS::AppProc_End()
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::AppProc_End()
@@ -480,10 +468,10 @@ bool UI_OPTIONS::AppProc_End()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_OPTIONS::UpdateInput()
-* @brief      UpdateInput
-* @ingroup
+* @brief      Updates the application input state.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::UpdateInput()
@@ -726,17 +714,16 @@ bool UI_OPTIONS::UpdateInput()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
-* @brief      Ini_Graphics
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  screen : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the graphics subsystem.
+* @ingroup    EXAMPLES
+*
+* @param[in]  screen : Screen where the graphics or user interface resources are created.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 {
   screen->SetWidth(1024);
@@ -811,17 +798,16 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS::Ini_UserInterface(bool on)
-* @brief      Ini_UserInterface
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  on : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes or ends the user interface.
+* @ingroup    EXAMPLES
+*
+* @param[in]  on : true to enable the operation; false to disable it.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::Ini_UserInterface(bool on)
 {  
   if(!on)
@@ -953,10 +939,10 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_OPTIONS::DrawFrame()
-* @brief      DrawFrame
-* @ingroup
+* @brief      Draws the current frame.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::DrawFrame()
@@ -1006,10 +992,12 @@ bool UI_OPTIONS::DrawFrame()
 
   if(!invert) zoom += 1.0; else zoom -= 1.0;
   
-  if(zoom >= 90)  invert = !invert;
+  if(zoom >= 75)  invert = !invert;
   if(zoom < 0)    invert = !invert;
 
   canvas->RebuildAllAreas();
+  canvas->CreateRebuildArea(615.0+50, 390.0, 330.0 + zoom, 330.0 + zoom);
+
 
   //--------------------------------------------------------------------------------------
 
@@ -1030,14 +1018,10 @@ bool UI_OPTIONS::DrawFrame()
 
    //--------------------------------------------------------------------------------------
 
-   
-  
-   canvas->CreateRebuildArea(625.0, 400.0, 320.0 + zoom, 320.0 + zoom);
-
 
    if(vectorfile)
     {      
-      vectorfile_render.Render(vectorfile, canvas, 625.0, 400.0, 250.0 + zoom, 250.0 + zoom);   
+      vectorfile_render.Render(vectorfile, canvas, 625.0+50, 400.0, 250.0 + zoom, 250.0 + zoom);   
 
       //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
     }
@@ -1059,17 +1043,16 @@ bool UI_OPTIONS::DrawFrame()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
-* @brief      UserInterface_ElementSelected
-* @ingroup    
-* 
-* 
-* @param[in]  element : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Processes the selected user interface element.
+* @ingroup    EXAMPLES
+*
+* @param[in]  element : User interface element to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 {
   if(!element) return false;
@@ -1122,19 +1105,18 @@ bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresolved)
-* @brief      UserInterface_ChangeLiteralText
-* @ingroup    
-* 
-* 
-* @param[in]  element_text : 
-* @param[in]  maskvalue : 
-* @param[in]  maskresolved : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Resolves a user interface literal text.
+* @ingroup    EXAMPLES
+*
+* @param[in]  element_text : Text element that contains the literal to resolve.
+* @param[in]  maskvalue : Mask value to resolve.
+* @param[in]  maskresolved : Resolved mask output value.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresolved)
 {
   if(!element_text)   return false;
@@ -1166,15 +1148,14 @@ bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, 
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS::UnitTest_AVIVideoWrite()
-* @brief      UnitTest_AVIVideoWrite
-* @ingroup    GRAPHIC
-* 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Runs the AVI video write unit test.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::UnitTest_AVIVideoWrite()
 {  
   // -------------------------------------------------------------------------------
@@ -1308,18 +1289,17 @@ bool UI_OPTIONS::UnitTest_AVIVideoWrite()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles user interface events.
 * @note       INTERNAL
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  event : 
-* 
-* @return     void : does not return anything. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
 {
   switch(event->GetEventType())
@@ -1351,13 +1331,13 @@ void UI_OPTIONS::HandleEvent_UserInterface(UI_XEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void UI_OPTIONS::Graphics_HandleEvent(GRPXEVENT* event)
-* @brief      Graphics_HandleEvent
-* @ingroup
+* @fn         void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
+* @brief      Handles graphics events.
+* @ingroup    EXAMPLES
 *
-* @param[in]  event :
+* @param[in]  event : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
@@ -1376,13 +1356,13 @@ void UI_OPTIONS::HandleEvent_Graphics(GRPXEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS::HandleEvent
-* @brief      Handle Events
-* @ingroup
+* @fn         void UI_OPTIONS::HandleEvent(XEVENT* xevent)
+* @brief      Handles an event.
+* @ingroup    EXAMPLES
 *
-* @param[]    xevent : event send to control
+* @param[in]  xevent : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_OPTIONS::HandleEvent(XEVENT* xevent)
@@ -1411,11 +1391,11 @@ void UI_OPTIONS::HandleEvent(XEVENT* xevent)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void UI_OPTIONS::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_OPTIONS::Clean()

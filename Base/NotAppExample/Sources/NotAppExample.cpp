@@ -3,7 +3,7 @@
 * @file       NotAppExample.cpp
 * 
 * @class      NOTAPPEXAMPLE
-* @brief      Not Application Example (aplication simple without "application" class)
+* @brief      Not Application Example (simple application without the GEN application class)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -63,14 +63,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NOTAPPEXAMPLE::NOTAPPEXAMPLE()
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NOTAPPEXAMPLE::NOTAPPEXAMPLE()
 {
   Clean();
@@ -78,15 +78,15 @@ NOTAPPEXAMPLE::NOTAPPEXAMPLE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
 
 {
@@ -97,11 +97,11 @@ NOTAPPEXAMPLE::~NOTAPPEXAMPLE()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void NOTAPPEXAMPLE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    TEST
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void NOTAPPEXAMPLE::Clean()
@@ -112,12 +112,12 @@ void NOTAPPEXAMPLE::Clean()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool Proc_Main_Ini(MAINPROC* main)
-* @brief      roc_Main_Ini
-* @ingroup    APPLICATION
+* @brief      Initializes the main process.
+* @ingroup    EXAMPLES
 *
-* @param[in]  main :
+* @param[in]  main : Main process instance used by the callback.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_Ini(MAINPROC* main)
@@ -142,12 +142,12 @@ bool Proc_Main_Ini(MAINPROC* main)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool Proc_Main_Update(MAINPROC* main)
-* @brief      roc_Main_Update
-* @ingroup    APPLICATION
+* @brief      Updates the main process.
+* @ingroup    EXAMPLES
 *
-* @param[in]  main :
+* @param[in]  main : Main process instance used by the callback.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_Update(MAINPROC* main)
@@ -161,12 +161,12 @@ bool Proc_Main_Update(MAINPROC* main)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool Proc_Main_End(MAINPROC* main)
-* @brief      roc_Main_End
-* @ingroup    APPLICATION
+* @brief      Ends the main process.
+* @ingroup    EXAMPLES
 *
-* @param[in]  main :
+* @param[in]  main : Main process instance used by the callback.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_End(MAINPROC* main)

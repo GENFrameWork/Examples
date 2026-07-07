@@ -108,14 +108,14 @@ APPLICATIONCREATEINSTANCE(INIBASE, inibase)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         INIBASE::INIBASE() : XFSMACHINE(0)
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         INIBASE::INIBASE()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 INIBASE::INIBASE() : XFSMACHINE(0)
 {
   Clean();
@@ -123,15 +123,15 @@ INIBASE::INIBASE() : XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         INIBASE::~INIBASE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 INIBASE::~INIBASE()
 {
   Clean();
@@ -139,14 +139,14 @@ INIBASE::~INIBASE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::InitFSMachine()
 {
   if(!AddState( INIBASE_XFSMSTATE_NONE            ,
@@ -176,14 +176,14 @@ bool INIBASE::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::AppProc_Ini()
 {  
   XSTRING string;
@@ -274,14 +274,14 @@ bool INIBASE::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::AppProc_FirstUpdate()
 {
   XSTRING string;
@@ -309,14 +309,14 @@ bool INIBASE::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::AppProc_Update()
 {
   if(GetEvent()==INIBASE_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -375,14 +375,14 @@ bool INIBASE::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::AppProc_End()
 {
   XSTRING string;
@@ -424,12 +424,12 @@ bool INIBASE::AppProc_End()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool INIBASE::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
-* @ingroup    APPLICATION
+* @brief      Processes valid key sequences.
+* @ingroup    EXAMPLES
 *
-* @param[in]  key :
+* @param[in]  key : Key code to process.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::KeyValidSecuences(int key)
@@ -458,10 +458,10 @@ bool INIBASE::KeyValidSecuences(int key)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool INIBASE::Show_AllStatus()
-* @brief      Show_AllStatus
-* @ingroup    APPLICATION
+* @brief      Shows all status information.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE::Show_AllStatus()
@@ -479,13 +479,13 @@ bool INIBASE::Show_AllStatus()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         INIBASE::HandleEvent
-* @brief      Handle Events
-* @ingroup
+* @fn         void INIBASE::HandleEvent(XEVENT* xevent)
+* @brief      Handles an event.
+* @ingroup    EXAMPLES
 *
-* @param[]    xevent : event send to control
+* @param[in]  xevent : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void INIBASE::HandleEvent(XEVENT* xevent)
@@ -504,11 +504,11 @@ void INIBASE::HandleEvent(XEVENT* xevent)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void INIBASE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void INIBASE::Clean()

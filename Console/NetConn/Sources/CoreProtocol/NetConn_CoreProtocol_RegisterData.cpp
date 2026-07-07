@@ -57,12 +57,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL_REGISTERDATA::NETCONN_COREPROTOCOL_REGISTERDATA()
-* @brief      Constructor
-* @ingroup    DATAIO
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_REGISTERDATA::NETCONN_COREPROTOCOL_REGISTERDATA()
 {
   Clean();
@@ -70,13 +72,15 @@ NETCONN_COREPROTOCOL_REGISTERDATA::NETCONN_COREPROTOCOL_REGISTERDATA()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL_REGISTERDATA::~NETCONN_COREPROTOCOL_REGISTERDATA()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    DATAIO
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_REGISTERDATA::~NETCONN_COREPROTOCOL_REGISTERDATA()
 {
   Clean();
@@ -84,16 +88,16 @@ NETCONN_COREPROTOCOL_REGISTERDATA::~NETCONN_COREPROTOCOL_REGISTERDATA()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_REGISTERDATA::InitializeData(bool isserver)
-* @brief      InitializeData
+* @brief      Initialize data.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  isserver : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  isserver : true when the connection manager works as server; false when it works as client.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_REGISTERDATA::InitializeData(bool isserver)
 {
   bool status = DIOCOREPROTOCOL_REGISTERDATA::InitializeData(isserver);
@@ -109,14 +113,14 @@ bool NETCONN_COREPROTOCOL_REGISTERDATA::InitializeData(bool isserver)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetGroup()
-* @brief      GetGroup
+* @brief      Gets the group.
 * @ingroup    EXAMPLES
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetGroup()
 {
   return &group;
@@ -124,14 +128,14 @@ XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetGroup()
     
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetSubGroup()
-* @brief      GetSubGroup
+* @brief      Gets the sub group.
 * @ingroup    EXAMPLES
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetSubGroup()
 {
   return &subgroup;
@@ -139,14 +143,14 @@ XSTRING* NETCONN_COREPROTOCOL_REGISTERDATA::GetSubGroup()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_REGISTERDATA::Serialize()
-* @brief      Serialize
-* @ingroup    DATAIO
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Serializes the object data.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_REGISTERDATA::Serialize()
 { 
   bool status = DIOCOREPROTOCOL_REGISTERDATA::Serialize();
@@ -159,14 +163,14 @@ bool NETCONN_COREPROTOCOL_REGISTERDATA::Serialize()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL_REGISTERDATA::Deserialize()
-* @brief      Deserialize
-* @ingroup    DATAIO
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Deserializes the object data.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_REGISTERDATA::Deserialize()
 {   
   bool status = DIOCOREPROTOCOL_REGISTERDATA::Deserialize();
@@ -179,13 +183,15 @@ bool NETCONN_COREPROTOCOL_REGISTERDATA::Deserialize()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL_REGISTERDATA::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    DATAIO
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_REGISTERDATA::Clean()
 {
 }

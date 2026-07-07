@@ -59,13 +59,11 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::BINCONNPRO_CONNECTIONSMANAGER
-* @brief      Constructor
-* @ingroup    PLATFORM_COMMON
+* @fn         BINCONNPRO_CONNECTIONSMANAGER::BINCONNPRO_CONNECTIONSMANAGER()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_CONNECTIONSMANAGER::BINCONNPRO_CONNECTIONSMANAGER() : DIOPROTOCOL_CONNECTIONSMANAGER()
@@ -78,11 +76,11 @@ BINCONNPRO_CONNECTIONSMANAGER::BINCONNPRO_CONNECTIONSMANAGER() : DIOPROTOCOL_CON
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::~BINCONNPRO_CONNECTIONSMANAGER
-* @brief      Destructor
-* @ingroup    PLATFORM_COMMON
+* @fn         BINCONNPRO_CONNECTIONSMANAGER::~BINCONNPRO_CONNECTIONSMANAGER()
+* @brief      Destructor.
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_CONNECTIONSMANAGER::~BINCONNPRO_CONNECTIONSMANAGER()
@@ -95,16 +93,16 @@ BINCONNPRO_CONNECTIONSMANAGER::~BINCONNPRO_CONNECTIONSMANAGER()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::Ini
-* @brief      Initialize connection manager
-* @ingroup    PLATFORM_COMMON
+* @fn         bool BINCONNPRO_CONNECTIONSMANAGER::Ini(bool isserver, bool isenumlocalactive, int port, BINCONNPRO_APPLICATIONDATA* applicationdata)
+* @brief      Ini.
+* @ingroup    EXAMPLES
 *
-* @param[in]    isserver : is Server or client mode
-* @param[in]    isenumlocalactive : Is active the enum (local)
-* @param[in]    port : port connection.
-* @param[in]    applicationdata : application data global
+* @param[in]  isserver : true when the connection manager works as server; false when it works as client.
+* @param[in]  isenumlocalactive : true to enable local enumeration; false to disable it.
+* @param[in]  port : TCP or UDP port used by the operation.
+* @param[in]  applicationdata : Application data associated with the protocol connection.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CONNECTIONSMANAGER::Ini(bool isserver, bool isenumlocalactive, int port, BINCONNPRO_APPLICATIONDATA* applicationdata)
@@ -135,11 +133,11 @@ bool BINCONNPRO_CONNECTIONSMANAGER::Ini(bool isserver, bool isenumlocalactive, i
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetNConnected
-* @brief      Get number of connections connected
-* @ingroup    PLATFORM_COMMON
+* @fn         int BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetNConnected()
+* @brief      Gets the number of connected protocol connections.
+* @ingroup    EXAMPLES
 *
-* @return     int :
+* @return     int : Requested value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 int BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetNConnected()
@@ -170,13 +168,13 @@ int BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetNConnected()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetByDIOStream
-* @brief      Get connections by DIOstream
-* @ingroup    PLATFORM_COMMON
+* @fn         DIOPROTOCOL_CONNECTION* BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetByDIOStream(DIOSTREAM* diostream)
+* @brief      Gets a protocol connection by stream.
+* @ingroup    EXAMPLES
 *
-* @param[in]  diostream : diostream to search associated connection.
+* @param[in]  diostream : Stream used by the protocol.
 *
-* @return     DIOPROTOCOL_CONNECTION* :
+* @return     DIOPROTOCOL_CONNECTION* : Pointer to the requested object; NULL if it is not available.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 DIOPROTOCOL_CONNECTION* BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetByDIOStream(DIOSTREAM* diostream)
@@ -207,11 +205,11 @@ DIOPROTOCOL_CONNECTION* BINCONNPRO_CONNECTIONSMANAGER::ProtocolConnections_GetBy
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::End
-* @brief      End Connection manager
-* @ingroup    PLATFORM_COMMON
+* @fn         bool BINCONNPRO_CONNECTIONSMANAGER::End()
+* @brief      End.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CONNECTIONSMANAGER::End()
@@ -241,11 +239,11 @@ bool BINCONNPRO_CONNECTIONSMANAGER::End()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol
-* @brief      Create protocol instance.
-* @ingroup    PLATFORM_COMMON
+* @fn         DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
+* @brief      Creates a protocol instance.
+* @ingroup    EXAMPLES
 *
-* @return     DIOPROTOCOL* : DIO Protocol created
+* @return     DIOPROTOCOL* : Pointer to the requested object; NULL if it is not available.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
@@ -319,11 +317,11 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol
-* @brief      Create protocol instance.
-* @ingroup    PLATFORM_COMMON
+* @fn         DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
+* @brief      Creates a protocol instance.
+* @ingroup    EXAMPLES
 *
-* @return     DIOPROTOCOL* : DIO Protocol created
+* @return     DIOPROTOCOL* : Pointer to the requested object; NULL if it is not available.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
@@ -377,13 +375,13 @@ DIOPROTOCOL* BINCONNPRO_CONNECTIONSMANAGER::CreateProtocol()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol
-* @brief      Delete Protocol instance
-* @ingroup    PLATFORM_COMMON
+* @fn         bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
+* @brief      Deletes a protocol instance.
+* @ingroup    EXAMPLES
 *
-* @param[in]  dioprotocol : DIO Protocol to delete.
+* @param[in]  dioprotocol : Dioprotocol value used by the operation.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
@@ -419,13 +417,13 @@ bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol
-* @brief      Delete Protocol instance
-* @ingroup    PLATFORM_COMMON
+* @fn         bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
+* @brief      Deletes a protocol instance.
+* @ingroup    EXAMPLES
 *
-* @param[in]  dioprotocol : DIO Protocol to delete.
+* @param[in]  dioprotocol : Dioprotocol value used by the operation.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
@@ -458,11 +456,11 @@ bool BINCONNPRO_CONNECTIONSMANAGER::DeleteProtocol(DIOPROTOCOL* dioprotocol)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_CONNECTIONSMANAGER::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_CONNECTIONSMANAGER::Clean()

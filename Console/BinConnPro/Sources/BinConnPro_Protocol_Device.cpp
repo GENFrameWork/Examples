@@ -45,10 +45,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_PROTOCOL_DEVICE::BINCONNPRO_PROTOCOL_DEVICE()
-* @brief      Constructor
-* @ingroup
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_PROTOCOL_DEVICE::BINCONNPRO_PROTOCOL_DEVICE()
@@ -63,11 +63,11 @@ BINCONNPRO_PROTOCOL_DEVICE::BINCONNPRO_PROTOCOL_DEVICE()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_PROTOCOL_DEVICE::~BINCONNPRO_PROTOCOL_DEVICE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_PROTOCOL_DEVICE::~BINCONNPRO_PROTOCOL_DEVICE()
@@ -80,10 +80,10 @@ BINCONNPRO_PROTOCOL_DEVICE::~BINCONNPRO_PROTOCOL_DEVICE()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_PROTOCOL_DEVICETYPE BINCONNPRO_PROTOCOL_DEVICE::GetType()
-* @brief      GetType
-* @ingroup
+* @brief      Gets the type.
+* @ingroup    EXAMPLES
 *
-* @return     BINCONNPRO_PROTOCOL_DEVICETYPE :
+* @return     BINCONNPRO_PROTOCOL_DEVICETYPE : Requested value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_PROTOCOL_DEVICETYPE BINCONNPRO_PROTOCOL_DEVICE::GetType()
@@ -96,12 +96,12 @@ BINCONNPRO_PROTOCOL_DEVICETYPE BINCONNPRO_PROTOCOL_DEVICE::GetType()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_PROTOCOL_DEVICE::SetType(BINCONNPRO_PROTOCOL_DEVICETYPE type)
-* @brief      SetType
-* @ingroup
+* @brief      Sets the type.
+* @ingroup    EXAMPLES
 *
-* @param[in]  type :
+* @param[in]  type : Type value used by the operation.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_PROTOCOL_DEVICE::SetType(BINCONNPRO_PROTOCOL_DEVICETYPE type)
@@ -114,10 +114,10 @@ void BINCONNPRO_PROTOCOL_DEVICE::SetType(BINCONNPRO_PROTOCOL_DEVICETYPE type)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         XDWORD BINCONNPRO_PROTOCOL_DEVICE::GetID()
-* @brief      GetID
-* @ingroup
+* @brief      Gets the id.
+* @ingroup    EXAMPLES
 *
-* @return     XDWORD :
+* @return     XDWORD : Requested value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 XDWORD BINCONNPRO_PROTOCOL_DEVICE::GetID()
@@ -130,12 +130,12 @@ XDWORD BINCONNPRO_PROTOCOL_DEVICE::GetID()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_PROTOCOL_DEVICE::SetID(XDWORD ID)
-* @brief      SetID
-* @ingroup
+* @brief      Sets the id.
+* @ingroup    EXAMPLES
 *
-* @param[in]  ID :
+* @param[in]  ID : Id value used by the operation.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_PROTOCOL_DEVICE::SetID(XDWORD ID)
@@ -147,13 +147,13 @@ void BINCONNPRO_PROTOCOL_DEVICE::SetID(XDWORD ID)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typename)
-* @brief      GetDeviceTypeName
-* @ingroup
+* @fn         bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typestring)
+* @brief      Gets the device type in string.
+* @ingroup    EXAMPLES
 *
-* @param[in]  typename :
+* @param[in]  typestring : Typestring value used by the operation.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typestring)
@@ -174,11 +174,11 @@ bool BINCONNPRO_PROTOCOL_DEVICE::GetDeviceTypeInString(XSTRING& typestring)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_PROTOCOL_DEVICE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_PROTOCOL_DEVICE::Clean()

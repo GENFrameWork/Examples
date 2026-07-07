@@ -46,14 +46,16 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(diostream)
-* @brief      Constructor
+*
+* @fn         BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream)
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  DIOSTREAM* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  diostream : Stream used by the protocol.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(diostream)
 {
   AddCommand(BINCONNPRO_PROTOCOL_CMDTYPE_GETDEVICETYPEANDID       , __L("")           , __L("DD")                 , RCV_GetDeviceTypeAndID        , __L("GetDeviceTypeAndID")         );
@@ -65,11 +67,11 @@ BINCONNPRO_PROTOCOL::BINCONNPRO_PROTOCOL(DIOSTREAM* diostream) : DIOPROTOCOL(dio
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_PROTOCOL::~BINCONNPRO_PROTOCOL()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_PROTOCOL::~BINCONNPRO_PROTOCOL()
@@ -81,13 +83,13 @@ BINCONNPRO_PROTOCOL::~BINCONNPRO_PROTOCOL()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_PROTOCOL::CMD_GetDeviceTypeAndID(XDWORD& devicetype, XDWORD& deviceID)
-* @brief      CMD_GetPOSDeviceTypeAndID
-* @ingroup
+* @brief      Sends the get device type and id command.
+* @ingroup    EXAMPLES
 *
-* @param[in]  devicetype :
-* @param[in]  deviceID :
+* @param[out]  devicetype : Output device type value.
+* @param[out]  deviceID : Output device identifier value.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_PROTOCOL::CMD_GetDeviceTypeAndID(XDWORD& devicetype, XDWORD& deviceID)
@@ -114,16 +116,16 @@ bool BINCONNPRO_PROTOCOL::CMD_GetDeviceTypeAndID(XDWORD& devicetype, XDWORD& dev
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         int BINCONNPRO_PROTOCOL::RCV_GetDeviceTypeAndID(DIOPROTOCOL* protocol, DIOPROTOCOL_COMMAND* cmd, XBUFFER& xbuffer, XDWORD rID, XDWORD& param)
-* @brief      RCV_GetPOSDeviceTypeAndID
-* @ingroup
+* @brief      Receives the get device type and id command response.
+* @ingroup    EXAMPLES
 *
-* @param[in]  protocol :
-* @param[in]  cmd :
-* @param[in]  xbuffer :
-* @param[in]  rID :
-* @param[in]  param :
+* @param[in]  protocol : Protocol instance used by the operation.
+* @param[in]  cmd : Protocol command associated with the operation.
+* @param[in,out]  xbuffer : Buffer that contains the command data.
+* @param[in]  rID : Request identifier associated with the command.
+* @param[out]  param : Auxiliary protocol parameter.
 *
-* @return     int :
+* @return     int : Requested value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 int BINCONNPRO_PROTOCOL::RCV_GetDeviceTypeAndID(DIOPROTOCOL* protocol, DIOPROTOCOL_COMMAND* cmd, XBUFFER& xbuffer, XDWORD rID, XDWORD& param)
@@ -147,12 +149,12 @@ int BINCONNPRO_PROTOCOL::RCV_GetDeviceTypeAndID(DIOPROTOCOL* protocol, DIOPROTOC
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_PROTOCOL::CMD_GetCenterName(XSTRING& centername)
-* @brief      CMD_GetCenterName
-* @ingroup
+* @brief      Sends the get center name command.
+* @ingroup    EXAMPLES
 *
-* @param[in]  centername :
+* @param[out]  centername : Output center name value.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_PROTOCOL::CMD_GetCenterName(XSTRING& centername)
@@ -179,16 +181,16 @@ bool BINCONNPRO_PROTOCOL::CMD_GetCenterName(XSTRING& centername)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         int BINCONNPRO_PROTOCOL::RCV_GetCenterName(DIOPROTOCOL* protocol, DIOPROTOCOL_COMMAND* cmd, XBUFFER& xbuffer, XDWORD rID, XDWORD& param)
-* @brief      RCV_GetCenterName
-* @ingroup
+* @brief      Receives the get center name command response.
+* @ingroup    EXAMPLES
 *
-* @param[in]  protocol :
-* @param[in]  cmd :
-* @param[in]  xbuffer :
-* @param[in]  rID :
-* @param[in]  param :
+* @param[in]  protocol : Protocol instance used by the operation.
+* @param[in]  cmd : Protocol command associated with the operation.
+* @param[in,out]  xbuffer : Buffer that contains the command data.
+* @param[in]  rID : Request identifier associated with the command.
+* @param[out]  param : Auxiliary protocol parameter.
 *
-* @return     int :
+* @return     int : Requested value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 int BINCONNPRO_PROTOCOL::RCV_GetCenterName(DIOPROTOCOL* protocol, DIOPROTOCOL_COMMAND* cmd, XBUFFER& xbuffer, XDWORD rID, XDWORD& param)
@@ -208,16 +210,16 @@ int BINCONNPRO_PROTOCOL::RCV_GetCenterName(DIOPROTOCOL* protocol, DIOPROTOCOL_CO
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_PROTOCOL::CMD_GetLocation(XSTRING& street, XSTRING& city, XSTRING& state, XSTRING& country, XDWORD& postalcode)
-* @brief      CMD_GetLocation
-* @ingroup
+* @brief      Sends the get location command.
+* @ingroup    EXAMPLES
 *
-* @param[in]  street :
-* @param[in]  city :
-* @param[in]  state :
-* @param[in]  country :
-* @param[in]  postalcode :
+* @param[out]  street : Output street value.
+* @param[out]  city : Output city value.
+* @param[out]  state : Output state value.
+* @param[out]  country : Output country value.
+* @param[out]  postalcode : Output postal code value.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_PROTOCOL::CMD_GetLocation(XSTRING& street, XSTRING& city, XSTRING& state, XSTRING& country, XDWORD& postalcode)
@@ -242,25 +244,21 @@ bool BINCONNPRO_PROTOCOL::CMD_GetLocation(XSTRING& street, XSTRING& city, XSTRIN
 
 
 
-/*-------------------------------------------------------------------
-//  MACHINEPROTOCOL::RCV_GetLocation
-*/
-/**
-//
-//
-//
-//  ""
-//  @version      24/09/2015 11:08:33
-//
-//  @return       int :
-//
-//  @param        protocol :
-//  @param        cmd :
-//  @param        xbuffer :
-//  @param        rID :
-//  @param        param :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         int BINCONNPRO_PROTOCOL::RCV_GetLocation(DIOPROTOCOL* protocol, DIOPROTOCOL_COMMAND* cmd, XBUFFER& xbuffer, XDWORD rID, XDWORD& param)
+* @brief      Receives the get location command response.
+* @ingroup    EXAMPLES
+*
+* @param[in]  protocol : Protocol instance used by the operation.
+* @param[in]  cmd : Protocol command associated with the operation.
+* @param[in,out]  xbuffer : Buffer that contains the command data.
+* @param[in]  rID : Request identifier associated with the command.
+* @param[out]  param : Auxiliary protocol parameter.
+*
+* @return     int : Requested value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 int BINCONNPRO_PROTOCOL::RCV_GetLocation(DIOPROTOCOL* protocol, DIOPROTOCOL_COMMAND* cmd, XBUFFER& xbuffer, XDWORD rID, XDWORD& param)
 {
   if(!protocol) return 0;
@@ -281,11 +279,11 @@ int BINCONNPRO_PROTOCOL::RCV_GetLocation(DIOPROTOCOL* protocol, DIOPROTOCOL_COMM
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_PROTOCOL::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_PROTOCOL::Clean()

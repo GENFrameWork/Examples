@@ -46,10 +46,10 @@
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_APPLICATIONDATA::BINCONNPRO_APPLICATIONDATA()
-* @brief      Constructor
-* @ingroup
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_APPLICATIONDATA::BINCONNPRO_APPLICATIONDATA()
@@ -62,11 +62,11 @@ BINCONNPRO_APPLICATIONDATA::BINCONNPRO_APPLICATIONDATA()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_APPLICATIONDATA::~BINCONNPRO_APPLICATIONDATA()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_APPLICATIONDATA::~BINCONNPRO_APPLICATIONDATA()
@@ -79,11 +79,11 @@ BINCONNPRO_APPLICATIONDATA::~BINCONNPRO_APPLICATIONDATA()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_APPLICATIONDATA::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_APPLICATIONDATA::Clean()

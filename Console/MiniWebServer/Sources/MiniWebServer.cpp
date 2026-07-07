@@ -116,14 +116,14 @@ APPLICATIONCREATEINSTANCE(MINIWEBSERVER, miniwebserver)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-
-@fn         MINIWEBSERVER::MINIWEBSERVER()
-@brief      Constructor
-@ingroup    APPLICATION
-
-@return     Does not return anything. 
-
---------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         MINIWEBSERVER::MINIWEBSERVER()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER::MINIWEBSERVER() :  XFSMACHINE(0)
 {
   Clean();
@@ -131,15 +131,15 @@ MINIWEBSERVER::MINIWEBSERVER() :  XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         MINIWEBSERVER::~MINIWEBSERVER()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER::~MINIWEBSERVER()
 {
   Clean();
@@ -147,14 +147,14 @@ MINIWEBSERVER::~MINIWEBSERVER()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::InitFSMachine()
 {
   if(!AddState( MINIWEBSERVER_XFSMSTATE_NONE            ,
@@ -179,14 +179,14 @@ bool MINIWEBSERVER::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::AppProc_Ini()
 {
   XSTRING string;
@@ -259,14 +259,14 @@ bool MINIWEBSERVER::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::AppProc_FirstUpdate()
 {
   XSTRING string;
@@ -348,14 +348,14 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::AppProc_Update()
 {
   if(GetEvent()==MINIWEBSERVER_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -409,14 +409,14 @@ bool MINIWEBSERVER::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::AppProc_End()
 {
   XSTRING string;
@@ -505,16 +505,16 @@ bool MINIWEBSERVER::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
-* @ingroup    APPLICATION
-* 
-* @param[in]  key : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Processes valid key sequences.
+* @ingroup    EXAMPLES
+*
+* @param[in]  key : Key code to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
@@ -536,14 +536,14 @@ bool MINIWEBSERVER::KeyValidSecuences(int key)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::Show_WebServerConfig()
-* @brief      Show_WebServerConfig
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Shows web server configuration.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::Show_WebServerConfig()
 {
   XSTRING string;
@@ -584,14 +584,14 @@ bool MINIWEBSERVER::Show_WebServerConfig()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::Show_WebSocketConfig()
-* @brief      Show_WebSocketConfig
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Shows web socket configuration.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::Show_WebSocketConfig()
 {
   if(!appwebsocket)                   return false;
@@ -644,14 +644,14 @@ bool MINIWEBSERVER::Show_WebSocketConfig()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER::Show_AllStatus()
-* @brief      Show_AllStatus
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Shows all status information.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::Show_AllStatus()
 {
   console->Clear();
@@ -672,13 +672,13 @@ bool MINIWEBSERVER::Show_AllStatus()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void MINIWEBSERVER::HandleEvent_WebServer(DIOWEBSERVER_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handle event web server.
 * @note       INTERNAL
-* @ingroup    APPLICATION
+* @ingroup    EXAMPLES
 *
-* @param[in]  event :
+* @param[in]  event : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void MINIWEBSERVER::HandleEvent_WebServer(DIOWEBSERVER_XEVENT* event)
@@ -712,17 +712,17 @@ void MINIWEBSERVER::HandleEvent_WebServer(DIOWEBSERVER_XEVENT* event)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void MINIWEBSERVER::HandleEvent(XEVENT* xevent)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles an event.
 * @note       INTERNAL
-* @ingroup    APPLICATION
-* 
-* @param[in]  xevent : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  xevent : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void MINIWEBSERVER::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -740,15 +740,15 @@ void MINIWEBSERVER::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void MINIWEBSERVER::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    APPLICATION
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void MINIWEBSERVER::Clean()
 {
   xtimerupdateconsole       = NULL;

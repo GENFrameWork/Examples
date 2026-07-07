@@ -1,6 +1,6 @@
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @file       IiniBase_CFG.cpp
+* @file       IniBase_CFG.cpp
 * 
 * @class      INIBASE_CFG
 * @brief      Ini Base (Start to make GEN_NEW APP) (CFG class)
@@ -61,10 +61,10 @@ INIBASE_CFG* INIBASE_CFG::instance = NULL;
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool INIBASE_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the condition is met; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE_CFG::GetIsInstanced()
@@ -76,10 +76,12 @@ bool INIBASE_CFG::GetIsInstanced()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         INIBASE_CFG& INIBASE_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     INIBASE_CFG& :
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     INIBASE_CFG& : Reference to the requested object.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 INIBASE_CFG& INIBASE_CFG::GetInstance(bool ini)
@@ -93,10 +95,10 @@ INIBASE_CFG& INIBASE_CFG::GetInstance(bool ini)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool INIBASE_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE_CFG::DelInstance()
@@ -114,14 +116,14 @@ bool INIBASE_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -139,14 +141,14 @@ bool INIBASE_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool INIBASE_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool INIBASE_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -165,14 +167,16 @@ bool INIBASE_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         INIBASE_CFG::INIBASE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
-* @brief      Constructor
+*
+* @fn         INIBASE_CFG::INIBASE_CFG(XCHAR* namefile)
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  namefile : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  namefile : Configuration file name.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 INIBASE_CFG::INIBASE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
@@ -187,11 +191,11 @@ INIBASE_CFG::INIBASE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         INIBASE_CFG::~INIBASE_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 INIBASE_CFG::~INIBASE_CFG()
@@ -203,11 +207,11 @@ INIBASE_CFG::~INIBASE_CFG()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void INIBASE_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void INIBASE_CFG::Clean()

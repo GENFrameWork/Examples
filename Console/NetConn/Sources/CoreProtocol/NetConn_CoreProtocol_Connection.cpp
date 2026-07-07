@@ -3,7 +3,7 @@
 * @file       NetConn_CoreProtocol_Connection.cpp
 * 
 * @class      NETCONN_COREPROTOCOL_CONNECTION
-* @brief      Net Connection Core Protocol Connection class (DIOCoreProtol example)
+* @brief      Net Connection Core Protocol Connection class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -53,12 +53,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL_CONNECTION::NETCONN_COREPROTOCOL_CONNECTION()
-* @brief      Constructor
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_CONNECTION::NETCONN_COREPROTOCOL_CONNECTION()
 {
   Clean();
@@ -66,13 +68,15 @@ NETCONN_COREPROTOCOL_CONNECTION::NETCONN_COREPROTOCOL_CONNECTION()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
 {
   if(IsServer())
@@ -86,14 +90,14 @@ NETCONN_COREPROTOCOL_CONNECTION::~NETCONN_COREPROTOCOL_CONNECTION()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
-* @brief      GetAgentState
+* @brief      Gets the agent state object.
 * @ingroup    EXAMPLES
-* 
-* @return     NETCONN_AGENTSTATE* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     NETCONN_AGENTSTATE* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
 {
   return agentstate;
@@ -101,14 +105,16 @@ NETCONN_AGENTSTATE* NETCONN_COREPROTOCOL_CONNECTION::GetAgentState()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL_CONNECTION::SetAgentState(NETCONN_AGENTSTATE* agentstate)
-* @brief      SetAgentState
+* @brief      Sets the agent state.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  agentstate : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  agentstate : Agentstate value used by the operation.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_CONNECTION::SetAgentState(NETCONN_AGENTSTATE* agentstate)
 {
   this->agentstate = agentstate;
@@ -116,14 +122,14 @@ void NETCONN_COREPROTOCOL_CONNECTION::SetAgentState(NETCONN_AGENTSTATE* agentsta
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
-* @brief      GetTestUpdateClass
+* @brief      Gets the test update object.
 * @ingroup    EXAMPLES
-* 
-* @return     NETCONN_TESTUPDATECLASS* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     NETCONN_TESTUPDATECLASS* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
 {
   return testupdateclass;
@@ -131,14 +137,16 @@ NETCONN_TESTUPDATECLASS* NETCONN_COREPROTOCOL_CONNECTION::GetTestUpdateClass()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL_CONNECTION::SetTestUpdateClass(NETCONN_TESTUPDATECLASS* testupdateclass)
-* @brief      SetTestUpdateClass
+* @brief      Sets the test update class.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  testupdateclass : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  testupdateclass : Testupdateclass value used by the operation.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_CONNECTION::SetTestUpdateClass(NETCONN_TESTUPDATECLASS* testupdateclass)
 {
   this->testupdateclass = testupdateclass;
@@ -146,13 +154,15 @@ void NETCONN_COREPROTOCOL_CONNECTION::SetTestUpdateClass(NETCONN_TESTUPDATECLASS
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL_CONNECTION::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_CONNECTION::Clean()
 {
   agentstate      = NULL;

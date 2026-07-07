@@ -55,12 +55,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_AGENTSTATE::NETCONN_AGENTSTATE()
-* @brief      Constructor
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_AGENTSTATE::NETCONN_AGENTSTATE()
 {
   Clean();
@@ -68,13 +70,15 @@ NETCONN_AGENTSTATE::NETCONN_AGENTSTATE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_AGENTSTATE::~NETCONN_AGENTSTATE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_AGENTSTATE::~NETCONN_AGENTSTATE()
 {
   Clean();
@@ -82,14 +86,14 @@ NETCONN_AGENTSTATE::~NETCONN_AGENTSTATE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XDWORD NETCONN_AGENTSTATE::GetTotalMemory()
-* @brief      GetTotalMemory
+* @brief      Gets the total memory.
 * @ingroup    EXAMPLES
-* 
-* @return     XDWORD : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XDWORD : Requested value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD NETCONN_AGENTSTATE::GetTotalMemory()
 {
   return total_memory;
@@ -97,14 +101,16 @@ XDWORD NETCONN_AGENTSTATE::GetTotalMemory()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_AGENTSTATE::SetTotalMemory(XDWORD total_memory)
-* @brief      SetTotalMemory
+* @brief      Sets the total memory.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  total_memory : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  total_memory : Total memory value to set.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_AGENTSTATE::SetTotalMemory(XDWORD total_memory)
 {
   this->total_memory = total_memory;
@@ -112,14 +118,14 @@ void NETCONN_AGENTSTATE::SetTotalMemory(XDWORD total_memory)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XDWORD NETCONN_AGENTSTATE::GetFreeMmemory()
-* @brief      GetFreeMmemory
+* @brief      Gets the free mmemory.
 * @ingroup    EXAMPLES
-* 
-* @return     XDWORD : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XDWORD : Requested value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD NETCONN_AGENTSTATE::GetFreeMmemory()
 {
   return free_memory;
@@ -127,14 +133,16 @@ XDWORD NETCONN_AGENTSTATE::GetFreeMmemory()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_AGENTSTATE::SetFreeMemory(XDWORD free_memory)
-* @brief      SetFreeMemory
+* @brief      Sets the free memory.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  free_memory : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  free_memory : Free memory value to set.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_AGENTSTATE::SetFreeMemory(XDWORD free_memory)
 {
   this->free_memory = free_memory;
@@ -142,14 +150,14 @@ void NETCONN_AGENTSTATE::SetFreeMemory(XDWORD free_memory)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_AGENTSTATE::Update()
-* @brief      Update
+* @brief      Updates the object data.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_AGENTSTATE::Update()
 {
   GEN_XSYSTEM.GetMemoryInfo(total_memory, free_memory);
@@ -160,14 +168,14 @@ bool NETCONN_AGENTSTATE::Update()
 
   
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_AGENTSTATE::Serialize()
-* @brief      Serialize
+* @brief      Serializes the object data.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_AGENTSTATE::Serialize()
 {
   Primitive_Add<XDWORD>(total_memory  , NETCONN_AGENTSTATE_TOTALMEMORY_STR);  
@@ -178,14 +186,14 @@ bool NETCONN_AGENTSTATE::Serialize()
     
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_AGENTSTATE::Deserialize()
-* @brief      Deserialize
+* @brief      Deserializes the object data.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_AGENTSTATE::Deserialize()
 {
   Primitive_Extract<XDWORD>(total_memory , NETCONN_AGENTSTATE_TOTALMEMORY_STR);
@@ -196,13 +204,15 @@ bool NETCONN_AGENTSTATE::Deserialize()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_AGENTSTATE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_AGENTSTATE::Clean()
 {
   total_memory  = 0;

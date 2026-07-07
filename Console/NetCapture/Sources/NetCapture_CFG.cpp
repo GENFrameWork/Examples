@@ -59,14 +59,14 @@ NETCAPTURE_CFG* NETCAPTURE_CFG::instance = NULL;
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the condition is met; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_CFG::GetIsInstanced()
 {
   return instance!=NULL;
@@ -74,16 +74,16 @@ bool NETCAPTURE_CFG::GetIsInstanced()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_CFG& NETCAPTURE_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup    
-* 
-* @param[in]  ini : 
-* 
-* @return     NETCAPTURE_CFG& : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
+*
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     NETCAPTURE_CFG& : Reference to the requested object.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_CFG& NETCAPTURE_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = GEN_NEW NETCAPTURE_CFG(ini?APPLICATION_NAMEFILE:NULL);
@@ -93,14 +93,14 @@ NETCAPTURE_CFG& NETCAPTURE_CFG::GetInstance(bool ini)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_CFG::DelInstance()
 {
   if(instance)
@@ -116,14 +116,14 @@ bool NETCAPTURE_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -136,14 +136,14 @@ bool NETCAPTURE_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -187,16 +187,16 @@ bool NETCAPTURE_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
-* @brief      Constructor
-* @ingroup    
-* 
-* @param[in]  XCHAR* : 
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile)
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @param[in]  namefile : Configuration file name.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 
 {
@@ -210,15 +210,15 @@ NETCAPTURE_CFG::NETCAPTURE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_CFG::~NETCAPTURE_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_CFG::~NETCAPTURE_CFG()
 {
   Clean();
@@ -226,15 +226,15 @@ NETCAPTURE_CFG::~NETCAPTURE_CFG()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE_CFG::Clean()
 {
 

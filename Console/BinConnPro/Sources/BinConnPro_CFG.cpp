@@ -54,10 +54,10 @@ BINCONNPRO_CFG* BINCONNPRO_CFG::instance = NULL;
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the condition is met; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::GetIsInstanced()
@@ -70,10 +70,12 @@ bool BINCONNPRO_CFG::GetIsInstanced()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     BINCONNPRO_CFG& :
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     BINCONNPRO_CFG& : Reference to the requested object.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance(bool ini)
@@ -87,10 +89,10 @@ BINCONNPRO_CFG& BINCONNPRO_CFG::GetInstance(bool ini)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::DelInstance()
@@ -108,14 +110,14 @@ bool BINCONNPRO_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -136,14 +138,14 @@ bool BINCONNPRO_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool BINCONNPRO_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -172,10 +174,10 @@ bool BINCONNPRO_CFG::DoDefault()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_CFG::Protocol_IsActive()
-* @brief      Protocol_IsActive
-* @ingroup    APPLICATION
+* @brief      Gets whether active.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the condition is met; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::Protocol_IsActive()
@@ -188,10 +190,10 @@ bool BINCONNPRO_CFG::Protocol_IsActive()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool BINCONNPRO_CFG::Protocol_IsLocalEnumActive()
-* @brief      Protocol_IsLocalEnumActive
-* @ingroup    APPLICATION
+* @brief      Gets whether local enum active.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the condition is met; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool BINCONNPRO_CFG::Protocol_IsLocalEnumActive()
@@ -204,10 +206,10 @@ bool BINCONNPRO_CFG::Protocol_IsLocalEnumActive()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         int BINCONNPRO_CFG::Protocol_GetPort()
-* @brief      Protocol_GetPort
-* @ingroup    APPLICATION
+* @brief      Gets the protocol port.
+* @ingroup    EXAMPLES
 *
-* @return     int :
+* @return     int : Requested value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 int BINCONNPRO_CFG::Protocol_GetPort()
@@ -220,10 +222,10 @@ int BINCONNPRO_CFG::Protocol_GetPort()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
-* @brief      Protocol_GetTarget
-* @ingroup    APPLICATION
+* @brief      Gets the protocol target.
+* @ingroup    EXAMPLES
 *
-* @return     XSTRING* :
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
@@ -237,13 +239,13 @@ XSTRING* BINCONNPRO_CFG::Protocol_GetTarget()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
-* @brief      Constructor
-* @ingroup
+* @fn         BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile)
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param[in]  XCHAR* : name of file of config
+* @param[in]  namefile : Configuration file name.
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
@@ -261,11 +263,11 @@ BINCONNPRO_CFG::BINCONNPRO_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         BINCONNPRO_CFG::~BINCONNPRO_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 BINCONNPRO_CFG::~BINCONNPRO_CFG()
@@ -278,11 +280,11 @@ BINCONNPRO_CFG::~BINCONNPRO_CFG()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void BINCONNPRO_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void BINCONNPRO_CFG::Clean()

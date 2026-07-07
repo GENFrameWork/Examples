@@ -65,14 +65,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         MEMCTRLEXAMPLE::MEMCTRLEXAMPLE()
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MEMCTRLEXAMPLE::MEMCTRLEXAMPLE()
 {
   Clean();
@@ -80,15 +80,15 @@ MEMCTRLEXAMPLE::MEMCTRLEXAMPLE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         MEMCTRLEXAMPLE::~MEMCTRLEXAMPLE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MEMCTRLEXAMPLE::~MEMCTRLEXAMPLE()
 {
   Clean();
@@ -98,11 +98,11 @@ MEMCTRLEXAMPLE::~MEMCTRLEXAMPLE()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void MEMCTRLEXAMPLE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    TEST
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void MEMCTRLEXAMPLE::Clean()
@@ -113,12 +113,12 @@ void MEMCTRLEXAMPLE::Clean()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool Proc_Main_Ini(MAINPROC* main)
-* @brief      roc_Main_Ini
-* @ingroup    APPLICATION
+* @brief      Initializes the main process.
+* @ingroup    EXAMPLES
 *
-* @param[in]  main :
+* @param[in]  main : Main process instance used by the callback.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_Ini(MAINPROC* main)
@@ -143,12 +143,12 @@ bool Proc_Main_Ini(MAINPROC* main)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool Proc_Main_Update(MAINPROC* main)
-* @brief      roc_Main_Update
-* @ingroup    APPLICATION
+* @brief      Updates the main process.
+* @ingroup    EXAMPLES
 *
-* @param[in]  main :
+* @param[in]  main : Main process instance used by the callback.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_Update(MAINPROC* main)
@@ -234,12 +234,12 @@ bool Proc_Main_Update(MAINPROC* main)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool Proc_Main_End(MAINPROC* main)
-* @brief      roc_Main_End
-* @ingroup    APPLICATION
+* @brief      Ends the main process.
+* @ingroup    EXAMPLES
 *
-* @param[in]  main :
+* @param[in]  main : Main process instance used by the callback.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool Proc_Main_End(MAINPROC* main)

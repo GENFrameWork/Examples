@@ -3,7 +3,7 @@
 * @file       NetConn_CoreProtocol.h
 * 
 * @class      NETCONN_COREPROTOCOL
-* @brief      Net Connection Core Protocol class (DIOCoreProtol example)
+* @brief      Net Connection Core Protocol class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.

@@ -76,14 +76,14 @@ APPLICATIONCREATEINSTANCE(CANVAS2DDISPLAY, uart_usb)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         CANVAS2DDISPLAY::CANVAS2DDISPLAY()
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 CANVAS2DDISPLAY::CANVAS2DDISPLAY()
 {
   Clean();
@@ -91,15 +91,15 @@ CANVAS2DDISPLAY::CANVAS2DDISPLAY()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         CANVAS2DDISPLAY::~CANVAS2DDISPLAY()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 CANVAS2DDISPLAY::~CANVAS2DDISPLAY()
 {
   Clean();
@@ -107,14 +107,14 @@ CANVAS2DDISPLAY::~CANVAS2DDISPLAY()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2DDISPLAY::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_Ini()
 {
   XSTRING string;
@@ -138,14 +138,14 @@ bool CANVAS2DDISPLAY::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
 {
   //Test_DIOStreamI2C();
@@ -156,14 +156,14 @@ bool CANVAS2DDISPLAY::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2DDISPLAY::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_Update()
 {
   return true;
@@ -171,14 +171,14 @@ bool CANVAS2DDISPLAY::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2DDISPLAY::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::AppProc_End()
 {
 
@@ -187,14 +187,14 @@ bool CANVAS2DDISPLAY::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
-* @brief      Test_DIOStreamI2C
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Runs the I2C stream test.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
 {
   //----------------------------------------------------------------------------
@@ -220,14 +220,14 @@ bool CANVAS2DDISPLAY::Test_DIOStreamI2C()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
-* @brief      Test_DIOStreamSPI
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Runs the SPI stream test.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
 {
   bool status = false;
@@ -393,11 +393,11 @@ bool CANVAS2DDISPLAY::Test_DIOStreamSPI()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void CANVAS2DDISPLAY::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    TEST
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void CANVAS2DDISPLAY::Clean()

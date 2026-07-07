@@ -3,7 +3,7 @@
 * @file       NetConn_TestUpdateClass.h
 * 
 * @class      NETCONN_TESTUPDATECLASS
-* @brief      Net Conn Test UpdateClass  class
+* @brief      Net Conn Test Update Class
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.

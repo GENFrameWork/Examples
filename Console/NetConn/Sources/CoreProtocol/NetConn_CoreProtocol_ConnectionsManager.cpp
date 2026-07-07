@@ -3,7 +3,7 @@
 * @file       NetConn_CoreProtocol_ConnectionsManager.cpp
 * 
 * @class      NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
-* @brief      Net Connection Core Protocol Connections Manager class (DIOCoreProtol example)
+* @brief      Net Connection Core Protocol Connections Manager class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -76,13 +76,11 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
-* @brief      Constructor
-* @ingroup    PLATFORM_COMMON
+* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::NETCONN_COREPROTOCOL_CONNECTIONSMANAGER()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::NETCONN_COREPROTOCOL_CONNECTIONSMANAGER() 
@@ -93,11 +91,11 @@ NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_CONNECTIONS::~NETCONN_CONNECTIONS
-* @brief      Destructor
-* @ingroup    PLATFORM_COMMON
+* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::~NETCONN_COREPROTOCOL_CONNECTIONSMANAGER()
+* @brief      Destructor.
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::~NETCONN_COREPROTOCOL_CONNECTIONSMANAGER()
@@ -108,16 +106,13 @@ NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::~NETCONN_COREPROTOCOL_CONNECTIONSMANAGE
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini
-* @brief      Initialize connection manager
-* @ingroup    PLATFORM_COMMON
+* @fn         bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
+* @brief      Ini.
+* @ingroup    EXAMPLES
 *
-* @param[in]    isserver : is Server or client mode
-* @param[in]    isenumlocalactive : Is active the enum (local)
-* @param[in]    port : port connection.
-* @param[in]    applicationdata : application data global
+* @param[in]  isserver : true when the connection manager works as server; false when it works as client.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
@@ -223,11 +218,11 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Ini(bool isserver)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End
-* @brief      End Connection manager
-* @ingroup    PLATFORM_COMMON
+* @fn         bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End()
+* @brief      End.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End()
@@ -243,14 +238,14 @@ bool NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConnection()
-* @brief      CreateConnection
+* @brief      Create connection.
 * @ingroup    EXAMPLES
-* 
-* @return     DIOCOREPROTOCOL_CONNECTION* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     DIOCOREPROTOCOL_CONNECTION* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConnection()
 {
   NETCONN_COREPROTOCOL_CONNECTION* connection = GEN_NEW NETCONN_COREPROTOCOL_CONNECTION();
@@ -281,17 +276,17 @@ DIOCOREPROTOCOL_CONNECTION* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateConne
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream)
-* @brief      CreateProtocol
+* @brief      Creates a protocol instance.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  connection : 
-* @param[in]  diostream : 
-* 
-* @return     DIOCOREPROTOCOL* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  connection : Connection value used by the operation.
+* @param[in]  diostream : Stream used by the protocol.
+*
+* @return     DIOCOREPROTOCOL* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCOREPROTOCOL_CONNECTION* connection, DIOSTREAM* diostream)
 {
   DIOCOREPROTOCOL* protocol = (DIOCOREPROTOCOL*)GEN_NEW NETCONN_COREPROTOCOL(&protocolCFG, diostream);
@@ -316,15 +311,17 @@ DIOCOREPROTOCOL* NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::CreateProtocol(DIOCORE
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handle event core protocol connections manager.
 * @note       INTERNAL  (Only Information)
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnectionsManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   if(!event) 
@@ -399,12 +396,12 @@ void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::HandleEvent_CoreProtocolConnection
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void NETCONN_CONNECTIONS::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @fn         void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Clean()
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL_CONNECTIONSMANAGER::Clean()

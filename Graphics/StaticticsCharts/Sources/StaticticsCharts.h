@@ -3,7 +3,7 @@
 * @file       StaticticsCharts.h
 * 
 * @class      STATICTICSCHARTS
-* @brief      Graphics UI Options Example class
+* @brief      Graphics Statistics Charts Example class
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -158,6 +158,7 @@ class STATICTICSCHARTS : public APPFLOWGRAPHICS, public XFSMACHINE
     
     bool                            UpdateInput                             ();
 
+    bool                            Ini_StaticticCharts                     ();   
     bool                            Ini_Graphics                            (GRPSCREEN* screen);
 
 
@@ -174,9 +175,10 @@ class STATICTICSCHARTS : public APPFLOWGRAPHICS, public XFSMACHINE
 
     INPBUTTON*                      button[STATICTICSCHARTS_BUTTON_MAX];
     INPCURSOR*                      cursor;
+    
+    XDWORD                          indexchart;
 
-    bool                            in3D;               
-
+    GRPBITMAP*                      backgroundbmp;
     XVECTOR<GRPVECTORFILE*>         vectorfiles; 
     GRP2DVECTORFILERENDERAGG        vectorfile_render;
 

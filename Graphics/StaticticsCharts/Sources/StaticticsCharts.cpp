@@ -3,7 +3,7 @@
 * @file       StaticticsCharts.cpp
 * 
 * @class      STATICTICSCHARTS
-* @brief      Graphics UI Options Example class
+* @brief      Graphics Statistics Charts Example class
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -137,12 +137,11 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::STATICTICSCHARTS
-* @brief      Constructor
-* @ingroup
+* @fn         STATICTICSCHARTS::STATICTICSCHARTS()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param
-* @return
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 STATICTICSCHARTS::STATICTICSCHARTS() :  XFSMACHINE(0)
@@ -153,12 +152,11 @@ STATICTICSCHARTS::STATICTICSCHARTS() :  XFSMACHINE(0)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::~STATICTICSCHARTS
-* @brief      Destructor
-* @ingroup
+* @fn         STATICTICSCHARTS::~STATICTICSCHARTS()
+* @brief      Destructor.
+* @ingroup    EXAMPLES
 *
-* @param
-* @return
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 STATICTICSCHARTS::~STATICTICSCHARTS()
@@ -169,13 +167,11 @@ STATICTICSCHARTS::~STATICTICSCHARTS()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::InitFSMachine
-* @brief      Init FS Machine
-* @ingroup
+* @fn         bool STATICTICSCHARTS::InitFSMachine()
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::InitFSMachine()
@@ -203,13 +199,11 @@ bool STATICTICSCHARTS::InitFSMachine()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::AppProc_Ini
-* @brief      Ini Application
-* @ingroup
+* @fn         bool STATICTICSCHARTS::AppProc_Ini()
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::AppProc_Ini()
@@ -301,13 +295,11 @@ bool STATICTICSCHARTS::AppProc_Ini()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::AppProc_FirstUpdate
-* @brief      First Update
-* @ingroup
+* @fn         bool STATICTICSCHARTS::AppProc_FirstUpdate()
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::AppProc_FirstUpdate()
@@ -350,9 +342,20 @@ bool STATICTICSCHARTS::AppProc_FirstUpdate()
     }
 
   //--------------------------------------------------------------------------------------
-  
-  xrand  = GEN_XFACTORY.CreateRand();
-  if(!xrand)  return false;
+
+  GRPVIEWPORT*  viewport = NULL;
+  GRP2DCANVAS*  canvas   = NULL;
+
+  viewport = GetMainScreen()->GetViewport(0);
+  if(viewport) canvas =   viewport->GetCanvas();
+
+  if(canvas)
+    {
+      if(backgroundbmp) 
+        {
+          canvas->PutBitmapNoAlpha(0, 0, backgroundbmp);
+        }
+    }
 
   //--------------------------------------------------------------------------------------
 
@@ -362,13 +365,11 @@ bool STATICTICSCHARTS::AppProc_FirstUpdate()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::AppProc_Update
-* @brief      Update Application
-* @ingroup
+* @fn         bool STATICTICSCHARTS::AppProc_Update()
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::AppProc_Update()
@@ -411,13 +412,11 @@ bool STATICTICSCHARTS::AppProc_Update()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::AppProc_End
-* @brief      End Application
-* @ingroup
+* @fn         bool STATICTICSCHARTS::AppProc_End()
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::AppProc_End()
@@ -452,6 +451,14 @@ bool STATICTICSCHARTS::AppProc_End()
 
   //--------------------------------------------------------------------------------------
 
+  if(backgroundbmp)
+    {
+      delete backgroundbmp;
+      backgroundbmp = NULL;
+    }
+
+  //--------------------------------------------------------------------------------------
+
   APPFLOW_EXTENDED.APPEnd();
   APPFLOW_EXTENDED.DelInstance();  
   APPFLOW_CFG.DelInstance();
@@ -465,10 +472,10 @@ bool STATICTICSCHARTS::AppProc_End()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool STATICTICSCHARTS::UpdateInput()
-* @brief      UpdateInput
-* @ingroup
+* @brief      Updates the application input state.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::UpdateInput()
@@ -480,10 +487,8 @@ bool STATICTICSCHARTS::UpdateInput()
     {  
       if(cursor->GetMotion()->IsReadyToTest(50))
         {
-          cursor->GetMotion()->InvertYAxis(height);
-
-       
-
+          cursor->GetMotion()->InvertYAxis(height);                 
+          
           cursor->GetMotion()->Reset();
         }
        else    
@@ -515,7 +520,9 @@ bool STATICTICSCHARTS::UpdateInput()
 
               if(button[STATICTICSCHARTS_BUTTON_MOUSE]->IsPressedWithRelease())
                 {
-                  in3D = !in3D;
+                  indexchart+=6;
+                  if (indexchart > 23) indexchart = 0;
+
                   cursor->GetMotion()->Reset();       
                 }
     
@@ -523,7 +530,9 @@ bool STATICTICSCHARTS::UpdateInput()
                 {             
                   if(button[STATICTICSCHARTS_BUTTON_TOUCHSCREEN]->IsPressed())
                     {  
-                      in3D = !in3D;
+                      indexchart+=6;
+                      if (indexchart > 23) indexchart = 0;
+
                       cursor->GetMotion()->Reset();
                     }
                 }
@@ -540,7 +549,9 @@ bool STATICTICSCHARTS::UpdateInput()
             {
               switch(c)
                 {
-                  case STATICTICSCHARTS_BUTTON_F1     : in3D = !in3D;
+                  case STATICTICSCHARTS_BUTTON_F1     : indexchart+=6;
+                                                        if(indexchart > 23) indexchart = 0;
+
                                                         break;
 
                   case STATICTICSCHARTS_BUTTON_F2     : break;
@@ -562,57 +573,30 @@ bool STATICTICSCHARTS::UpdateInput()
 
 /**-------------------------------------------------------------------------------------------------------------------
 * 
-* @fn         bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
-* @brief      Ini_Graphics
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  screen : 
+* @fn         bool STATICTICSCHARTS::Ini_StaticticCharts()
+* @brief      ini  statictic charts
+* @ingroup    
 * 
 * @return     bool : true if is succesful. 
 * 
-* ---------------------------------------------------------------------------------------------------------------------*/
-bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
+* --------------------------------------------------------------------------------------------------------------------*/
+bool STATICTICSCHARTS::Ini_StaticticCharts()
 {
-  screen->SetWidth((420*3)+(20*4));
-  screen->SetHeight((420*2)+(20*3));
-
-  screen->GetTitle()->Set(__L("Statictics Chars Canvas"));  
-
-  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
-
-  //--------------------------------------------------------------------------------------
-
-  GRPVIEWPORT*    viewport  = NULL;
-  GRP2DCANVAS*    canvas    = NULL;
-  int             width     = 0;
-  int             height = 0;
-
-  viewport = screen->GetViewport(0);
-  if(!viewport)
-    {
-      return false;
-    }
-
-  canvas = viewport->GetCanvas();
-  if(!canvas)
-    {
-      return false;
-    }
-  
-  XPATH pathfont;
-
-  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_FONTS, pathfont);
-  pathfont.Slash_Add();             
-  pathfont.Add(__L("Nunito-SemiBold.ttf"));
-
-
   XVECTOR<double> values;
   int             indexvalue = 0;  
-  
-  canvas->VectorFont_Load(pathfont);
 
-  for(int c=0; c<12; c++)
+  
+  vectorfiles.DeleteContents();
+  vectorfiles.DeleteAll();
+
+
+  for(int d=0; d<48; d++)   
+    {
+      values.Add((double)xrand->Between(10,80));     
+    }
+
+  
+  for(int c=0; c<24; c++)
     {
       GRPVECTORFILE* vectorfile = GRPVECTORFILE::CreateInstance(GRPVECTORFILETYPE_SVG);
       if(vectorfile)
@@ -634,6 +618,20 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
               case  9: chart = new GRPSTATISTICSCHARTBARS3D();              break;
               case 10: chart = new GRPSTATISTICSCHARTSTACKEDCOLUMNS3D();    break;
               case 11: chart = new GRPSTATISTICSCHARTPIE3D();               break;  
+
+              case 12: chart = new GRPSTATISTICSCHARTCOLUMNS();             break;
+              case 13: chart = new GRPSTATISTICSCHARTLINES();               break;
+              case 14: chart = new GRPSTATISTICSCHARTAREA();                break;
+              case 15: chart = new GRPSTATISTICSCHARTBARS();                break;
+              case 16: chart = new GRPSTATISTICSCHARTSTACKEDCOLUMNS();      break;
+              case 17: chart = new GRPSTATISTICSCHARTPIE();                 break;  
+
+              case 18: chart = new GRPSTATISTICSCHARTCOLUMNS3D();           break;
+              case 19: chart = new GRPSTATISTICSCHARTLINES3D();             break;
+              case 20: chart = new GRPSTATISTICSCHARTAREA3D();              break;
+              case 21: chart = new GRPSTATISTICSCHARTBARS3D();              break;
+              case 22: chart = new GRPSTATISTICSCHARTSTACKEDCOLUMNS3D();    break;
+              case 23: chart = new GRPSTATISTICSCHARTPIE3D();               break;  
             }
 
           if(chart)
@@ -650,17 +648,14 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
                   config->SetLegendFontSize(12.0);
                   config->SetShowAxisLabels(true);
                   config->SetAxisFontSize(11.0);
-                }
-
-              if(c<6)
-                { 
-                  for(int d=0; d<8; d++)   
+                  if(c>11)
                     {
-                      values.Add((double)xrand->Between(10,80));     
+                      GRPSTATISTICSCHARTCOLOR color(255, 255, 255, 175);
+                      config->SetBackgroundColor(color);
                     }
                 }
 
-              if(c==6)
+              if(!(c%6))
                 {
                   indexvalue = 0;
                 }
@@ -678,7 +673,8 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
                     {
                       for(int e=0; e<4; e++)  
                         {
-                          serie2024->AddValue((double)values.Get(indexvalue));  indexvalue++;
+                          serie2024->AddValue((double)values.Get(indexvalue));  
+                          indexvalue++;
                         }                      
                     }
 
@@ -687,7 +683,8 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
                     {
                       for(int e=0; e<4; e++)  
                         {
-                          serie2025->AddValue((double)values.Get(indexvalue));  indexvalue++;
+                          serie2025->AddValue((double)values.Get(indexvalue));  
+                          indexvalue++;
                         }                                            
                     }                                    
                 }
@@ -714,7 +711,76 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
   //--------------------------------------------------------------------------------------
 
   values.DeleteAll();
-                                          
+
+  return true;
+
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
+* @brief      Initializes the graphics subsystem.
+* @ingroup    EXAMPLES
+*
+* @param[in]  screen : Screen where the graphics or user interface resources are created.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
+{
+
+  //--------------------------------------------------------------------------------------
+
+  screen->SetWidth((420*3)+(20*4));
+  screen->SetHeight((420*2)+(20*3));
+
+  screen->GetTitle()->Set(__L("Statictics Chars Canvas"));  
+
+  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
+
+  //--------------------------------------------------------------------------------------
+
+  GRPVIEWPORT*    viewport  = NULL;
+  GRP2DCANVAS*    canvas    = NULL;
+  int             width     = 0;
+  int             height = 0;
+
+  viewport = screen->GetViewport(0);
+  if(!viewport)
+    {
+      return false;
+    }
+
+  canvas = viewport->GetCanvas();
+  if(!canvas)
+    {
+      return false;
+    }
+
+  XPATH xpath;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("background.jpg"));
+
+  GRPBITMAPFILE   bitmapfile;
+  
+  backgroundbmp = bitmapfile.Load(xpath, GetMainScreen()->GetMode());
+  if(!backgroundbmp) return false;
+
+  
+  XPATH pathfont;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_FONTS, pathfont);
+  pathfont.Slash_Add();             
+  pathfont.Add(__L("Nunito-SemiBold.ttf"));
+
+  canvas->VectorFont_Load(pathfont);
+
+  Ini_StaticticCharts();
+
   return true;
 }
 
@@ -723,10 +789,10 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool STATICTICSCHARTS::DrawFrame()
-* @brief      DrawFrame
-* @ingroup
+* @brief      Draws the current frame.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool STATICTICSCHARTS::DrawFrame()
@@ -738,11 +804,11 @@ bool STATICTICSCHARTS::DrawFrame()
   GRP2DCOLOR_RGBA8  colorblue(0, 0, 255);
   GRP2DCOLOR_RGBA8  colorgray(10, 10, 10, 150);
 
-  GRPSCREEN*     screen    = NULL;
-  GRPVIEWPORT*   viewport  = NULL;
-  GRP2DCANVAS*   canvas    = NULL;
-  int            width     = 0;
-  int            height    = 0;
+  GRPSCREEN*        screen    = NULL;
+  GRPVIEWPORT*      viewport  = NULL;
+  GRP2DCANVAS*      canvas    = NULL;
+  int               width     = 0;
+  int               height    = 0;
 
 
   screen = GetMainScreen();
@@ -762,26 +828,32 @@ bool STATICTICSCHARTS::DrawFrame()
     {
       return false;
     }
- 
-  
+
   width  = screen->GetWidth();
   height = screen->GetHeight();
 
-
-  canvas->Clear(&colorblack);
-
-  int index = 0;
-  
-  if(in3D)
-    {
-      index = vectorfiles.GetSize()/2;      
-    }
-   
   //--------------------------------------------------------------------------------------
 
-  for(int c=0; c<vectorfiles.GetSize()/2; c++)
+  if(canvas)
     {
-      GRPVECTORFILE* vectorfile = vectorfiles.Get(c + index);
+      if(indexchart>11)
+        {
+          if(backgroundbmp) 
+            {
+              canvas->PutBitmapNoAlpha(0, 0, backgroundbmp);
+            }                    
+        }
+       else
+        {
+          canvas->Clear(&colorwhite);  
+        }
+    }
+
+  //--------------------------------------------------------------------------------------
+
+  for(int c=0; c<6; c++)
+    {
+      GRPVECTORFILE* vectorfile = vectorfiles.Get(c+indexchart);
       if(vectorfile)
         {
           float x = 20.0 + (c%3) * (420.0 + 20.0);
@@ -797,19 +869,15 @@ bool STATICTICSCHARTS::DrawFrame()
 }
 
 
-
-
-
-
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void STATICTICSCHARTS::Graphics_HandleEvent(GRPXEVENT* event)
-* @brief      Graphics_HandleEvent
-* @ingroup
+* @fn         void STATICTICSCHARTS::HandleEvent_Graphics(GRPXEVENT* event)
+* @brief      Handles graphics events.
+* @ingroup    EXAMPLES
 *
-* @param[in]  event :
+* @param[in]  event : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void STATICTICSCHARTS::HandleEvent_Graphics(GRPXEVENT* event)
@@ -828,13 +896,13 @@ void STATICTICSCHARTS::HandleEvent_Graphics(GRPXEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         STATICTICSCHARTS::HandleEvent
-* @brief      Handle Events
-* @ingroup
+* @fn         void STATICTICSCHARTS::HandleEvent(XEVENT* xevent)
+* @brief      Handles an event.
+* @ingroup    EXAMPLES
 *
-* @param[]    xevent : event send to control
+* @param[in]  xevent : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void STATICTICSCHARTS::HandleEvent(XEVENT* xevent)
@@ -856,19 +924,21 @@ void STATICTICSCHARTS::HandleEvent(XEVENT* xevent)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void STATICTICSCHARTS::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void STATICTICSCHARTS::Clean()
 {
-  xtimer       = NULL;
-  xrand        = NULL;
+  xtimer          = NULL;
+  xrand           = NULL;
 
-  in3D         = false; 
+  indexchart      = 0;
+ 
+  backgroundbmp   = NULL;
 
   for(int c=0; c<STATICTICSCHARTS_BUTTON_MAX; c++)
     {

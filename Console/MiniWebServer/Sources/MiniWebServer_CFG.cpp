@@ -61,14 +61,14 @@ MINIWEBSERVER_CFG* MINIWEBSERVER_CFG::instance = NULL;
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the condition is met; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER_CFG::GetIsInstanced()
 {
   return instance!=NULL;
@@ -76,16 +76,16 @@ bool MINIWEBSERVER_CFG::GetIsInstanced()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup    APPLICATION
-* 
-* @param[in]  ini : 
-* 
-* @return     MINIWEBSERVER_CFG& : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
+*
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     MINIWEBSERVER_CFG& : Reference to the requested object.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = GEN_NEW MINIWEBSERVER_CFG(ini?APPLICATION_NAMEFILE:NULL);
@@ -95,14 +95,14 @@ MINIWEBSERVER_CFG& MINIWEBSERVER_CFG::GetInstance(bool ini)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER_CFG::DelInstance()
 {
   if(instance)
@@ -118,14 +118,14 @@ bool MINIWEBSERVER_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -138,14 +138,14 @@ bool MINIWEBSERVER_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -193,16 +193,16 @@ bool MINIWEBSERVER_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-
-@fn         MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile)
-@brief      Constructor
-@ingroup    APPLICATION
-
-@param[in]  XCHAR* : 
-
-@return     Does not return anything. 
-
---------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile)
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @param[in]  namefile : Configuration file name.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
@@ -215,15 +215,15 @@ MINIWEBSERVER_CFG::MINIWEBSERVER_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         MINIWEBSERVER_CFG::~MINIWEBSERVER_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER_CFG::~MINIWEBSERVER_CFG()
 {
   Clean();
@@ -231,15 +231,15 @@ MINIWEBSERVER_CFG::~MINIWEBSERVER_CFG()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void MINIWEBSERVER_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    APPLICATION
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void MINIWEBSERVER_CFG::Clean()
 {
 

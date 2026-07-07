@@ -50,10 +50,10 @@ UI_OPTIONS_CFG* UI_OPTIONS_CFG::instance = NULL;
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_OPTIONS_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the condition is met; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS_CFG::GetIsInstanced()
@@ -66,10 +66,12 @@ bool UI_OPTIONS_CFG::GetIsInstanced()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     UI_OPTIONS_CFG& :
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     UI_OPTIONS_CFG& : Reference to the requested object.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance(bool ini)
@@ -83,10 +85,10 @@ UI_OPTIONS_CFG& UI_OPTIONS_CFG::GetInstance(bool ini)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_OPTIONS_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS_CFG::DelInstance()
@@ -106,14 +108,14 @@ bool UI_OPTIONS_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -126,14 +128,14 @@ bool UI_OPTIONS_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_OPTIONS_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -174,13 +176,13 @@ bool UI_OPTIONS_CFG::DoDefault()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_OPTIONS_CFG::UI_OPTIONS_CFG(XCHAR* namefile) : APPLICATIONCFG(namefile)
-* @brief      Constructor
-* @ingroup
+* @fn         UI_OPTIONS_CFG::UI_OPTIONS_CFG(XCHAR* namefile)
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param[in]  XCHAR* : name of file of config
+* @param[in]  namefile : Configuration file name.
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_OPTIONS_CFG::UI_OPTIONS_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
@@ -197,11 +199,11 @@ UI_OPTIONS_CFG::UI_OPTIONS_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         UI_OPTIONS_CFG::~UI_OPTIONS_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_OPTIONS_CFG::~UI_OPTIONS_CFG()
@@ -214,11 +216,11 @@ UI_OPTIONS_CFG::~UI_OPTIONS_CFG()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void UI_OPTIONS_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_OPTIONS_CFG::Clean()

@@ -3,7 +3,7 @@
 * @file       NetConn_CoreProtocol.cpp
 * 
 * @class      NETCONN_COREPROTOCOL
-* @brief      Net Connection Core Protocol class (DIOCoreProtol example)
+* @brief      Net Connection Core Protocol class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -60,14 +60,17 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN_COREPROTOCOL::NETCONN_COREPROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG)
-* @brief      Constructor
+*
+* @fn         NETCONN_COREPROTOCOL::NETCONN_COREPROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream)
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  DIOCOREPROTOCOL_CFG* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  protocolCFG : Protocol config value used by the operation.
+* @param[in]  diostream : Stream used by the protocol.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL::NETCONN_COREPROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIOSTREAM* diostream) : DIOCOREPROTOCOL(protocolCFG, diostream)
 {
   Clean();
@@ -75,13 +78,15 @@ NETCONN_COREPROTOCOL::NETCONN_COREPROTOCOL(DIOCOREPROTOCOL_CFG* protocolCFG, DIO
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_COREPROTOCOL::~NETCONN_COREPROTOCOL()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_COREPROTOCOL::~NETCONN_COREPROTOCOL()
 {
   Clean();
@@ -89,16 +94,16 @@ NETCONN_COREPROTOCOL::~NETCONN_COREPROTOCOL()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
-* @brief      GenerateAuthenticationChallenge
+* @brief      Generate authentication challenge.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  autentication_challange : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  autentication_challange : Autentication challange value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autentication_challange)
 {
   XRAND* rand = GEN_XFACTORY.CreateRand();
@@ -121,17 +126,17 @@ bool NETCONN_COREPROTOCOL::GenerateAuthenticationChallenge(XBUFFER& autenticatio
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_COREPROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
-* @brief      GenerateAuthenticationResponse
+* @brief      Generate authentication response.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  autentication_challange : 
-* @param[in]  autentication_response : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  autentication_challange : Autentication challange value used by the operation.
+* @param[in]  autentication_response : Autentication response value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_COREPROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication_challange, XBUFFER& autentication_response)
 {
   XBYTE                 ini_data[] = NETCONN_COREPROTOCOL_AUTHENTICATION_INI;
@@ -166,13 +171,15 @@ bool NETCONN_COREPROTOCOL::GenerateAuthenticationResponse(XBUFFER& autentication
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCONN_COREPROTOCOL::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_COREPROTOCOL::Clean()
 {
 

@@ -58,11 +58,13 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         MINIWEBSERVER_APIREST::MINIWEBSERVER_APIREST()
-* @brief      Constructor
-* @ingroup    APPLICATION
+* @fn         MINIWEBSERVER_APIREST::MINIWEBSERVER_APIREST(MINIWEBSERVER* miniwebserver)
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @param[in]  miniwebserver : Miniwebserver value used by the operation.
+*
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER_APIREST::MINIWEBSERVER_APIREST(MINIWEBSERVER* miniwebserver)
@@ -76,11 +78,11 @@ MINIWEBSERVER_APIREST::MINIWEBSERVER_APIREST(MINIWEBSERVER* miniwebserver)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         MINIWEBSERVER_APIREST::~MINIWEBSERVER_APIREST()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 MINIWEBSERVER_APIREST::~MINIWEBSERVER_APIREST()
@@ -90,16 +92,16 @@ MINIWEBSERVER_APIREST::~MINIWEBSERVER_APIREST()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_XEVENT* event)
-* @brief      ResolveEndPoint
+* @brief      Resolves an API REST endpoint.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_XEVENT* event)
 {
   if(!miniwebserver) return false;
@@ -111,11 +113,11 @@ bool MINIWEBSERVER_APIREST::ResolveEndPoint(DIOWEBSERVER_XEVENT* event)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void MINIWEBSERVER_APIREST::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    APPLICATION
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void MINIWEBSERVER_APIREST::Clean()

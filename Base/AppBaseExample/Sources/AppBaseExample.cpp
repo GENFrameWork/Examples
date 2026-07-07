@@ -63,10 +63,10 @@ APPLICATIONCREATEINSTANCE(APPBASEEXAMPLE, appbaseexample)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         APPBASEEXAMPLE::APPBASEEXAMPLE()
-* @brief      Constructor
-* @ingroup    DATAIO
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 APPBASEEXAMPLE::APPBASEEXAMPLE()
@@ -78,11 +78,11 @@ APPBASEEXAMPLE::APPBASEEXAMPLE()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         APPBASEEXAMPLE::~APPBASEEXAMPLE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    DATAIO
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 APPBASEEXAMPLE::~APPBASEEXAMPLE()
@@ -94,10 +94,10 @@ APPBASEEXAMPLE::~APPBASEEXAMPLE()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool APPBASEEXAMPLE::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    DATAIO
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool APPBASEEXAMPLE::AppProc_Ini()
@@ -107,15 +107,14 @@ bool APPBASEEXAMPLE::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool APPBASEEXAMPLE::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    
-* 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool APPBASEEXAMPLE::AppProc_FirstUpdate()
 {
   //-------------------------------------------------------------------------------------------------
@@ -141,10 +140,10 @@ bool APPBASEEXAMPLE::AppProc_FirstUpdate()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool APPBASEEXAMPLE::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    DATAIO
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool APPBASEEXAMPLE::AppProc_Update()
@@ -154,15 +153,14 @@ bool APPBASEEXAMPLE::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool APPBASEEXAMPLE::AppProc_LastUpdate()
-* @brief      AppProc_LastUpdate
-* @ingroup    DATAIO
-* 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the last application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool APPBASEEXAMPLE::AppProc_LastUpdate()
 {
   return false;
@@ -172,10 +170,10 @@ bool APPBASEEXAMPLE::AppProc_LastUpdate()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool APPBASEEXAMPLE::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    DATAIO
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool APPBASEEXAMPLE::AppProc_End()
@@ -187,11 +185,11 @@ bool APPBASEEXAMPLE::AppProc_End()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void APPBASEEXAMPLE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    TEST
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void APPBASEEXAMPLE::Clean()

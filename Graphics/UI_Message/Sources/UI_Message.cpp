@@ -129,12 +129,11 @@
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::UI_MESSAGE
-* @brief      Constructor
-* @ingroup
+* @fn         UI_MESSAGE::UI_MESSAGE()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
 *
-* @param
-* @return
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_MESSAGE::UI_MESSAGE() :  XFSMACHINE(0)
@@ -145,12 +144,11 @@ UI_MESSAGE::UI_MESSAGE() :  XFSMACHINE(0)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::~UI_MESSAGE
-* @brief      Destructor
-* @ingroup
+* @fn         UI_MESSAGE::~UI_MESSAGE()
+* @brief      Destructor.
+* @ingroup    EXAMPLES
 *
-* @param
-* @return
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 UI_MESSAGE::~UI_MESSAGE()
@@ -161,13 +159,11 @@ UI_MESSAGE::~UI_MESSAGE()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::InitFSMachine
-* @brief      Init FS Machine
-* @ingroup
+* @fn         bool UI_MESSAGE::InitFSMachine()
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::InitFSMachine()
@@ -195,13 +191,11 @@ bool UI_MESSAGE::InitFSMachine()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::AppProc_Ini
-* @brief      Ini Application
-* @ingroup
+* @fn         bool UI_MESSAGE::AppProc_Ini()
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::AppProc_Ini()
@@ -286,13 +280,11 @@ bool UI_MESSAGE::AppProc_Ini()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::AppProc_FirstUpdate
-* @brief      First Update
-* @ingroup
+* @fn         bool UI_MESSAGE::AppProc_FirstUpdate()
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::AppProc_FirstUpdate()
@@ -357,13 +349,11 @@ bool UI_MESSAGE::AppProc_FirstUpdate()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::AppProc_Update
-* @brief      Update Application
-* @ingroup
+* @fn         bool UI_MESSAGE::AppProc_Update()
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::AppProc_Update()
@@ -413,13 +403,11 @@ bool UI_MESSAGE::AppProc_Update()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::AppProc_End
-* @brief      End Application
-* @ingroup
+* @fn         bool UI_MESSAGE::AppProc_End()
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
 *
-* @param
-*
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::AppProc_End()
@@ -474,10 +462,10 @@ bool UI_MESSAGE::AppProc_End()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_MESSAGE::UpdateInput()
-* @brief      UpdateInput
-* @ingroup
+* @brief      Updates the application input state.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::UpdateInput()
@@ -567,17 +555,16 @@ bool UI_MESSAGE::UpdateInput()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
-* @brief      Ini_Graphics
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  screen : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the graphics subsystem.
+* @ingroup    EXAMPLES
+*
+* @param[in]  screen : Screen where the graphics or user interface resources are created.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
 {
   if(!screen)
@@ -615,16 +602,16 @@ bool UI_MESSAGE::Ini_Graphics(GRPSCREEN* screen)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_MESSAGE::Ini_Canvas(GRPSCREEN* screen)
-* @brief      Ini_Canvas
+* @brief      Initializes the canvas resources.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  screen : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  screen : Screen where the graphics or user interface resources are created.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::Ini_Canvas(GRPSCREEN* screen)
 {
   if(!screen)
@@ -639,17 +626,16 @@ bool UI_MESSAGE::Ini_Canvas(GRPSCREEN* screen)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_MESSAGE::Ini_UserInterface(bool on)
-* @brief      Ini_UserInterface
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  on : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes or ends the user interface.
+* @ingroup    EXAMPLES
+*
+* @param[in]  on : true to enable the operation; false to disable it.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::Ini_UserInterface(bool on)
 {  
   if(!on)
@@ -713,10 +699,10 @@ bool UI_MESSAGE::Ini_UserInterface(bool on)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool UI_MESSAGE::DrawFrame()
-* @brief      DrawFrame
-* @ingroup
+* @brief      Draws the current frame.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::DrawFrame()
@@ -758,17 +744,16 @@ bool UI_MESSAGE::DrawFrame()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_MESSAGE::UserInterface_ElementSelected(UI_ELEMENT* element)
-* @brief      UserInterface_ElementSelected
-* @ingroup    
-* 
-* 
-* @param[in]  element : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Processes the selected user interface element.
+* @ingroup    EXAMPLES
+*
+* @param[in]  element : User interface element to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::UserInterface_ElementSelected(UI_ELEMENT* element)
 {
   if(!element) return false;
@@ -780,19 +765,18 @@ bool UI_MESSAGE::UserInterface_ElementSelected(UI_ELEMENT* element)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool UI_MESSAGE::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresolved)
-* @brief      UserInterface_ChangeLiteralText
-* @ingroup    
-* 
-* 
-* @param[in]  element_text : 
-* @param[in]  maskvalue : 
-* @param[in]  maskresolved : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @brief      Resolves a user interface literal text.
+* @ingroup    EXAMPLES
+*
+* @param[in]  element_text : Text element that contains the literal to resolve.
+* @param[in]  maskvalue : Mask value to resolve.
+* @param[in]  maskresolved : Resolved mask output value.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool UI_MESSAGE::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresolved)
 {
   if(!element_text)   return false;
@@ -814,18 +798,17 @@ bool UI_MESSAGE::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, 
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void UI_MESSAGE::HandleEvent_UserInterface(UI_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles user interface events.
 * @note       INTERNAL
-* @ingroup    GRAPHIC
-* 
-* 
-* @param[in]  event : 
-* 
-* @return     void : does not return anything. 
-* 
-* ---------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void UI_MESSAGE::HandleEvent_UserInterface(UI_XEVENT* event)
 {
   switch(event->GetEventType())
@@ -862,13 +845,13 @@ void UI_MESSAGE::HandleEvent_UserInterface(UI_XEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         void UI_MESSAGE::Graphics_HandleEvent(GRPXEVENT* event)
-* @brief      Graphics_HandleEvent
-* @ingroup
+* @fn         void UI_MESSAGE::HandleEvent_Graphics(GRPXEVENT* event)
+* @brief      Handles graphics events.
+* @ingroup    EXAMPLES
 *
-* @param[in]  event :
+* @param[in]  event : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_MESSAGE::HandleEvent_Graphics(GRPXEVENT* event)
@@ -894,13 +877,13 @@ void UI_MESSAGE::HandleEvent_Graphics(GRPXEVENT* event)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         UI_MESSAGE::HandleEvent
-* @brief      Handle Events
-* @ingroup
+* @fn         void UI_MESSAGE::HandleEvent(XEVENT* xevent)
+* @brief      Handles an event.
+* @ingroup    EXAMPLES
 *
-* @param[]    xevent : event send to control
+* @param[in]  xevent : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_MESSAGE::HandleEvent(XEVENT* xevent)
@@ -929,11 +912,11 @@ void UI_MESSAGE::HandleEvent(XEVENT* xevent)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void UI_MESSAGE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void UI_MESSAGE::Clean()

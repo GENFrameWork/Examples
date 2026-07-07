@@ -3,7 +3,7 @@
 * @file       NotAppExample.h
 * 
 * @class      NOTAPPEXAMPLE
-* @brief      Not Application Example (aplication simple without "application" class of GEN)
+* @brief      Not Application Example (simple application without the GEN application class)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.

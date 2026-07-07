@@ -3,7 +3,7 @@
 * @file       NetConn_CFG.cpp
 * 
 * @class      NETCONN_CFG
-* @brief      Net Connection CFG class (DIOCoreProtol example)
+* @brief      Net Connection CFG class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
@@ -61,10 +61,10 @@ NETCONN_CFG* NETCONN_CFG::instance = NULL;
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool NETCONN_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the condition is met; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::GetIsInstanced()
@@ -76,10 +76,12 @@ bool NETCONN_CFG::GetIsInstanced()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         NETCONN_CFG& NETCONN_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     NETCONN_CFG& :
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     NETCONN_CFG& : Reference to the requested object.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_CFG& NETCONN_CFG::GetInstance(bool ini)
@@ -93,10 +95,10 @@ NETCONN_CFG& NETCONN_CFG::GetInstance(bool ini)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool NETCONN_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::DelInstance()
@@ -114,14 +116,14 @@ bool NETCONN_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -141,14 +143,14 @@ bool NETCONN_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -173,14 +175,14 @@ bool NETCONN_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN_CFG::Connection_IsServer()
-* @brief      connection  is server
+* @brief      Connection is server.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN_CFG::Connection_IsServer()
 {
   return connection_isserver;
@@ -188,14 +190,14 @@ bool NETCONN_CFG::Connection_IsServer()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* NETCONN_CFG::Connection_GetTransportType()
-* @brief      connection  get transport type
+* @brief      Connection get transport type.
 * @ingroup    EXAMPLES
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* NETCONN_CFG::Connection_GetTransportType()
 {
   return &connection_transporttype;
@@ -203,14 +205,14 @@ XSTRING* NETCONN_CFG::Connection_GetTransportType()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* NETCONN_CFG::Connection_GetTransportConfig()
-* @brief      connection  get transport config
+* @brief      Connection get transport config.
 * @ingroup    EXAMPLES
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* NETCONN_CFG::Connection_GetTransportConfig()
 {
   return &connection_transportconfig;
@@ -218,14 +220,16 @@ XSTRING* NETCONN_CFG::Connection_GetTransportConfig()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
-* @brief      Constructor
+*
+* @fn         NETCONN_CFG::NETCONN_CFG(XCHAR* namefile)
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  namefile : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  namefile : Configuration file name.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
@@ -240,11 +244,11 @@ NETCONN_CFG::NETCONN_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         NETCONN_CFG::~NETCONN_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     Does not return anything.
+* @return     Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_CFG::~NETCONN_CFG()
@@ -256,11 +260,11 @@ NETCONN_CFG::~NETCONN_CFG()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void NETCONN_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN_CFG::Clean()

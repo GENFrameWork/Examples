@@ -119,14 +119,14 @@ APPLICATIONCREATEINSTANCE(NETCONN, netconn)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         NETCONN::NETCONN() : XFSMACHINE(0)
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         NETCONN::NETCONN()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN::NETCONN() : XFSMACHINE(0)
 {
   Clean();
@@ -134,15 +134,15 @@ NETCONN::NETCONN() : XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN::~NETCONN()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN::~NETCONN()
 {
   Clean();
@@ -150,14 +150,14 @@ NETCONN::~NETCONN()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::InitFSMachine()
 {
   if(!AddState( NETCONN_XFSMSTATE_NONE            ,
@@ -187,14 +187,14 @@ bool NETCONN::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::AppProc_Ini()
 {  
   XSTRING string;
@@ -282,14 +282,14 @@ bool NETCONN::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::AppProc_FirstUpdate()
 {
   XSTRING string;
@@ -345,14 +345,14 @@ bool NETCONN::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::AppProc_Update()
 {
   if(GetEvent()==NETCONN_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -411,14 +411,14 @@ bool NETCONN::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::AppProc_End()
 {
   XSTRING string;
@@ -488,14 +488,14 @@ bool NETCONN::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::IsServer()
-* @brief      IsServer
+* @brief      Checks if the application is running as server.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the condition is met; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::IsServer()
 {
   return netconn->modeserver;
@@ -505,12 +505,12 @@ bool NETCONN::IsServer()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool NETCONN::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
-* @ingroup    APPLICATION
+* @brief      Processes valid key sequences.
+* @ingroup    EXAMPLES
 *
-* @param[in]  key :
+* @param[in]  key : Key code to process.
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::KeyValidSecuences(int key)
@@ -632,14 +632,14 @@ bool NETCONN::KeyValidSecuences(int key)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_AGENTSTATE* NETCONN::GetAgentState()
-* @brief      GetAgentState
+* @brief      Gets the agent state object.
 * @ingroup    EXAMPLES
-* 
-* @return     NETCONN_AGENTSTATE* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     NETCONN_AGENTSTATE* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_AGENTSTATE* NETCONN::GetAgentState()
 {
   return agentstate;
@@ -647,14 +647,14 @@ NETCONN_AGENTSTATE* NETCONN::GetAgentState()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCONN_TESTUPDATECLASS* NETCONN::GetTestUpdateClass()
-* @brief      GetTestUpdateClass
+* @brief      Gets the test update object.
 * @ingroup    EXAMPLES
-* 
-* @return     NETCONN_TESTUPDATECLASS* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     NETCONN_TESTUPDATECLASS* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCONN_TESTUPDATECLASS* NETCONN::GetTestUpdateClass()
 {
   return testupdateclass;
@@ -662,14 +662,14 @@ NETCONN_TESTUPDATECLASS* NETCONN::GetTestUpdateClass()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::Show_TestUpdateClass()
-* @brief      Show_TestUpdateClass
+* @brief      Shows test update class information.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::Show_TestUpdateClass()
 { 
   XSTRING string;
@@ -700,14 +700,14 @@ bool NETCONN::Show_TestUpdateClass()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCONN::Show_ConnectionsStatus()
-* @brief      Show_ConnectionsStatus
+* @brief      Shows connection status information.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::Show_ConnectionsStatus()
 { 
   XSTRING string;
@@ -797,10 +797,10 @@ bool NETCONN::Show_ConnectionsStatus()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool NETCONN::Show_AllStatus()
-* @brief      Show_AllStatus
-* @ingroup    APPLICATION
+* @brief      Shows all status information.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool NETCONN::Show_AllStatus()
@@ -819,15 +819,17 @@ bool NETCONN::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         void NETCONN::HandleEvent_ConnectionManager(NETCONN_CONNECTIONSMANAGER_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+*
+* @fn         void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
+* @brief      Handle event core protocol connection manager.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTIONSMANAGER_XEVENT* event)
 {
   switch(event->GetEventType())
@@ -850,13 +852,13 @@ void NETCONN::HandleEvent_CoreProtocolConnectionManager(DIOCOREPROTOCOL_CONNECTI
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         NETCONN::HandleEvent
-* @brief      Handle Events
-* @ingroup
+* @fn         void NETCONN::HandleEvent(XEVENT* xevent)
+* @brief      Handles an event.
+* @ingroup    EXAMPLES
 *
-* @param[]    xevent : event send to control
+* @param[in]  xevent : Event information to process.
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN::HandleEvent(XEVENT* xevent)
@@ -878,11 +880,11 @@ void NETCONN::HandleEvent(XEVENT* xevent)
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         void NETCONN::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup
+* @ingroup    EXAMPLES
 *
-* @return     void : does not return anything.
+* @return     void : Does not return a value.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 void NETCONN::Clean()

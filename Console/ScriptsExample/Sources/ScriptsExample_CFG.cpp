@@ -59,14 +59,14 @@ SCRIPTSEXAMPLE_CFG* SCRIPTSEXAMPLE_CFG::instance = NULL;
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
+* @brief      Checks if the singleton instance is created.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the condition is met; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE_CFG::GetIsInstanced()
 {
   return instance!=NULL;
@@ -74,16 +74,16 @@ bool SCRIPTSEXAMPLE_CFG::GetIsInstanced()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         SCRIPTSEXAMPLE_CFG& SCRIPTSEXAMPLE_CFG::GetInstance(bool ini)
-* @brief      GetInstance
+* @brief      Gets the singleton instance.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  ini : 
-* 
-* @return     SCRIPTSEXAMPLE_CFG& : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     SCRIPTSEXAMPLE_CFG& : Reference to the requested object.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 SCRIPTSEXAMPLE_CFG& SCRIPTSEXAMPLE_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = GEN_NEW SCRIPTSEXAMPLE_CFG(ini?APPLICATION_NAMEFILE:NULL);
@@ -93,14 +93,14 @@ SCRIPTSEXAMPLE_CFG& SCRIPTSEXAMPLE_CFG::GetInstance(bool ini)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE_CFG::DelInstance()
-* @brief      DelInstance
+* @brief      Deletes the singleton instance.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE_CFG::DelInstance()
 {
   if(instance)
@@ -116,14 +116,14 @@ bool SCRIPTSEXAMPLE_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
+* @brief      Maps configuration variables.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -136,14 +136,14 @@ bool SCRIPTSEXAMPLE_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE_CFG::DoDefault()
-* @brief      DoDefault
+* @brief      Loads default configuration values.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -183,16 +183,16 @@ bool SCRIPTSEXAMPLE_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         SCRIPTSEXAMPLE_CFG::SCRIPTSEXAMPLE_CFG(XCHAR* namefile)
-* @brief      Constructor
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  XCHAR* : 
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  namefile : Configuration file name.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 SCRIPTSEXAMPLE_CFG::SCRIPTSEXAMPLE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
@@ -205,15 +205,15 @@ SCRIPTSEXAMPLE_CFG::SCRIPTSEXAMPLE_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         SCRIPTSEXAMPLE_CFG::~SCRIPTSEXAMPLE_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 SCRIPTSEXAMPLE_CFG::~SCRIPTSEXAMPLE_CFG()
 
 {
@@ -222,15 +222,15 @@ SCRIPTSEXAMPLE_CFG::~SCRIPTSEXAMPLE_CFG()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void SCRIPTSEXAMPLE_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTSEXAMPLE_CFG::Clean()
 {
 

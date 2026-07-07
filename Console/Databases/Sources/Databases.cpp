@@ -111,14 +111,14 @@ APPLICATIONCREATEINSTANCE(DATABASES, databases)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-
-@fn         DATABASES::DATABASES()
-@brief      Constructor
-@ingroup    APPLICATION
-
-@return     Does not return anything. 
-
---------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         DATABASES::DATABASES()
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DATABASES::DATABASES() :  XFSMACHINE(0)
 {
   Clean();
@@ -126,15 +126,15 @@ DATABASES::DATABASES() :  XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         DATABASES::~DATABASES()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DATABASES::~DATABASES()
 {
   Clean();
@@ -142,14 +142,14 @@ DATABASES::~DATABASES()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::InitFSMachine()
 {
   if(!AddState( DATABASES_XFSMSTATE_NONE            ,
@@ -174,14 +174,14 @@ bool DATABASES::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_Ini()
 { 
   XSTRING string;
@@ -256,14 +256,14 @@ bool DATABASES::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_FirstUpdate()
 {
 
@@ -279,14 +279,14 @@ bool DATABASES::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_Update()
 {
   if(GetEvent()==DATABASES_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -340,14 +340,14 @@ bool DATABASES::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::AppProc_End()
 {
   XSTRING string;
@@ -390,16 +390,16 @@ bool DATABASES::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
-* @ingroup    APPLICATION
-* 
-* @param[in]  key : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Processes valid key sequences.
+* @ingroup    EXAMPLES
+*
+* @param[in]  key : Key code to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
@@ -426,16 +426,16 @@ bool DATABASES::KeyValidSecuences(int key)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
-* @brief      DataBase_ChangeType
-* @ingroup    APPLICATION
-* 
-* @param[in]  type : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Changes the database type.
+* @ingroup    EXAMPLES
+*
+* @param[in]  type : Type value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
 {
   if(database)
@@ -453,14 +453,14 @@ bool DATABASES::DataBase_ChangeType(DB_SQL_DATABASE_TYPE type)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::Database_DoTest()
-* @brief      Database_DoTest
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Runs the database test.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Database_DoTest()
 {
   XCHAR*              fields[DATABASES_TABLE_MAXFIELDS];
@@ -801,14 +801,14 @@ bool DATABASES::Database_DoTest()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::Show_AppStatus()
-* @brief      Show_AppStatus
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Shows application status information.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Show_AppStatus()
 {
   XSTRING string;
@@ -851,10 +851,10 @@ bool DATABASES::Show_AppStatus()
 /**-------------------------------------------------------------------------------------------------------------------
 *
 * @fn         bool DATABASES::Show_DatabasesStatus()
-* @brief      Show_DatabasesStatus
-* @ingroup    APPLICATION
+* @brief      Shows database status information.
+* @ingroup    EXAMPLES
 *
-* @return     bool : true if is succesful.
+* @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Show_DatabasesStatus()
@@ -874,14 +874,14 @@ bool DATABASES::Show_DatabasesStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES::Show_AllStatus()
-* @brief      Show_AllStatus
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Shows all status information.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES::Show_AllStatus()
 {
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
@@ -900,17 +900,17 @@ bool DATABASES::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void DATABASES::HandleEvent(XEVENT* xevent)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles an event.
 * @note       INTERNAL
-* @ingroup    APPLICATION
-* 
-* @param[in]  xevent : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  xevent : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void DATABASES::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -930,15 +930,15 @@ void DATABASES::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void DATABASES::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    APPLICATION
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void DATABASES::Clean()
 {
   xtimerupdateconsole         = NULL;

@@ -64,14 +64,14 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_FRAME::NETCAPTURE_FRAME()
-* @brief      Constructor
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_FRAME::NETCAPTURE_FRAME()
 {
   Clean();
@@ -79,15 +79,15 @@ NETCAPTURE_FRAME::NETCAPTURE_FRAME()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_FRAME::~NETCAPTURE_FRAME()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_FRAME::~NETCAPTURE_FRAME()
 {
   Clean();
@@ -95,14 +95,14 @@ NETCAPTURE_FRAME::~NETCAPTURE_FRAME()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_FRAME::IsSend()
-* @brief      IsSend
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Checks if send.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the condition is met; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_FRAME::IsSend()
 {
   return issend;
@@ -110,16 +110,16 @@ bool NETCAPTURE_FRAME::IsSend()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE_FRAME::SetIsSend(bool issend)
-* @brief      SetIsSend
-* @ingroup    
-* 
-* @param[in]  issend : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sets the is send.
+* @ingroup    EXAMPLES
+*
+* @param[in]  issend : Issend value used by the operation.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE_FRAME::SetIsSend(bool issend)
 {
   this->issend = issend;
@@ -127,14 +127,14 @@ void NETCAPTURE_FRAME::SetIsSend(bool issend)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XBUFFER* NETCAPTURE_FRAME::GetPayLoadBuffer()
-* @brief      GetPayLoadBuffer
-* @ingroup    
-* 
-* @return     XBUFFER* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the pay load buffer.
+* @ingroup    EXAMPLES
+*
+* @return     XBUFFER* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBUFFER* NETCAPTURE_FRAME::GetPayLoadBuffer()
 {
   return &payloadbuffer;
@@ -142,15 +142,15 @@ XBUFFER* NETCAPTURE_FRAME::GetPayLoadBuffer()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE_FRAME::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE_FRAME::Clean()
 {
 
@@ -162,14 +162,14 @@ void NETCAPTURE_FRAME::Clean()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_SNIFFER::NETCAPTURE_SNIFFER()
-* @brief      Constructor
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_SNIFFER::NETCAPTURE_SNIFFER()
 {
   Clean();
@@ -177,15 +177,15 @@ NETCAPTURE_SNIFFER::NETCAPTURE_SNIFFER()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_SNIFFER::~NETCAPTURE_SNIFFER()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_SNIFFER::~NETCAPTURE_SNIFFER()
 {
   Capture_End();
@@ -195,14 +195,14 @@ NETCAPTURE_SNIFFER::~NETCAPTURE_SNIFFER()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Capture_Ini()
-* @brief      Capture_Ini
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Capture ini.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Capture_Ini()
 {
   DIOPCAPNETINTERFACE* netinterface			 = NULL; 
@@ -273,14 +273,14 @@ bool NETCAPTURE_SNIFFER::Capture_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Capture_Manager()
-* @brief      Capture_Manager
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Capture manager.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Capture_Manager()
 {
   XDWORD nsize = Sniffer_Get()->GetSize();
@@ -309,14 +309,14 @@ bool NETCAPTURE_SNIFFER::Capture_Manager()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Capture_End()
-* @brief      Capture_End
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Capture end.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Capture_End()
 {
   if(threadsniffer)
@@ -356,14 +356,14 @@ bool NETCAPTURE_SNIFFER::Capture_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         DIOPCAP* NETCAPTURE_SNIFFER::GetDIOPCap()
-* @brief      GetDIOPCap
-* @ingroup    
-* 
-* @return     DIOPCAP* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the diopcap.
+* @ingroup    EXAMPLES
+*
+* @return     DIOPCAP* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DIOPCAP* NETCAPTURE_SNIFFER::GetDIOPCap()
 {
   return diopcap;
@@ -371,18 +371,18 @@ DIOPCAP* NETCAPTURE_SNIFFER::GetDIOPCap()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Sniffer_Add(bool issend, XBYTE* framedata, XDWORD framesize )
-* @brief      Sniffer_Add
-* @ingroup    
-* 
-* @param[in]  issend : 
-* @param[in]  framedata : 
-* @param[in]  framesize : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sniffer add.
+* @ingroup    EXAMPLES
+*
+* @param[in]  issend : Issend value used by the operation.
+* @param[in]  framedata : Framedata value used by the operation.
+* @param[in]  framesize : Framesize value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Sniffer_Add(bool issend, XBYTE* framedata, XDWORD framesize ) 
 {
   NETCAPTURE_FRAME* frame = NULL;
@@ -415,16 +415,16 @@ bool NETCAPTURE_SNIFFER::Sniffer_Add(bool issend, XBYTE* framedata, XDWORD frame
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE_FRAME* NETCAPTURE_SNIFFER::Sniffer_Get(int index)
-* @brief      Sniffer_Get
-* @ingroup    
-* 
-* @param[in]  index : 
-* 
-* @return     NETCAPTURE_FRAME* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sniffer get.
+* @ingroup    EXAMPLES
+*
+* @param[in]  index : Index value used by the operation.
+*
+* @return     NETCAPTURE_FRAME* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE_FRAME* NETCAPTURE_SNIFFER::Sniffer_Get(int index)
 {
  NETCAPTURE_FRAME* frame = NULL;
@@ -447,16 +447,16 @@ NETCAPTURE_FRAME* NETCAPTURE_SNIFFER::Sniffer_Get(int index)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Sniffer_Del(int index)
-* @brief      Sniffer_Del
-* @ingroup    
-* 
-* @param[in]  index : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sniffer del.
+* @ingroup    EXAMPLES
+*
+* @param[in]  index : Index value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Sniffer_Del(int index)
 {
   bool status = false;
@@ -484,14 +484,14 @@ bool NETCAPTURE_SNIFFER::Sniffer_Del(int index)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Sniffer_DelAll()
-* @brief      Sniffer_DelAll
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sniffer del all.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Sniffer_DelAll()
 {
   if(framesmutex)
@@ -514,14 +514,14 @@ bool NETCAPTURE_SNIFFER::Sniffer_DelAll()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XVECTOR<NETCAPTURE_FRAME*>* NETCAPTURE_SNIFFER::Sniffer_Get()
-* @brief      Sniffer_Get
-* @ingroup    
-* 
-* @return     XVECTOR<NETCAPTURE_FRAME*>* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sniffer get.
+* @ingroup    EXAMPLES
+*
+* @return     XVECTOR<NETCAPTURE_FRAME*>* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XVECTOR<NETCAPTURE_FRAME*>* NETCAPTURE_SNIFFER::Sniffer_Get() 
 {
   return &frames;
@@ -529,16 +529,16 @@ XVECTOR<NETCAPTURE_FRAME*>* NETCAPTURE_SNIFFER::Sniffer_Get()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE_SNIFFER::Sniffer_Interpreter(NETCAPTURE_FRAME* frame)
-* @brief      Sniffer_Interpreter
-* @ingroup    
-* 
-* @param[in]  frame : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Sniffer interpreter.
+* @ingroup    EXAMPLES
+*
+* @param[in]  frame : Frame value used by the operation.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE_SNIFFER::Sniffer_Interpreter(NETCAPTURE_FRAME* frame)
 {
   if(!frame)
@@ -561,15 +561,15 @@ bool NETCAPTURE_SNIFFER::Sniffer_Interpreter(NETCAPTURE_FRAME* frame)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE_SNIFFER::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE_SNIFFER::Clean()
 {
   diopcap           = NULL;
@@ -580,16 +580,16 @@ void NETCAPTURE_SNIFFER::Clean()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE_SNIFFER::ThreadRunFunctionSniffer(void* param)
-* @brief      ThreadRunFunctionSniffer
-* @ingroup    
-* 
-* @param[in]  param : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Thread run function sniffer.
+* @ingroup    EXAMPLES
+*
+* @param[in]  param : Auxiliary protocol parameter.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE_SNIFFER::ThreadRunFunctionSniffer(void* param)
 {
   NETCAPTURE_SNIFFER* sniffer = (NETCAPTURE_SNIFFER*)param;
@@ -641,16 +641,16 @@ void NETCAPTURE_SNIFFER::ThreadRunFunctionSniffer(void* param)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE_SNIFFER::ThreadRunFunctionManager(void* param)
-* @brief      ThreadRunFunctionManager
-* @ingroup    
-* 
-* @param[in]  param : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Thread run function manager.
+* @ingroup    EXAMPLES
+*
+* @param[in]  param : Auxiliary protocol parameter.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE_SNIFFER::ThreadRunFunctionManager(void* param)
 {
   NETCAPTURE_SNIFFER* sniffer = (NETCAPTURE_SNIFFER*)param;

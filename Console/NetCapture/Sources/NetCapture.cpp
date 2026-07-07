@@ -85,14 +85,14 @@ APPLICATIONCREATEINSTANCE(NETCAPTURE, netcapture)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE::NETCAPTURE()
-* @brief      Constructor
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE::NETCAPTURE() : XFSMACHINE(0)
 {
   Clean();
@@ -100,15 +100,15 @@ NETCAPTURE::NETCAPTURE() : XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         NETCAPTURE::~NETCAPTURE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 NETCAPTURE::~NETCAPTURE()
 {
   Clean();
@@ -116,14 +116,14 @@ NETCAPTURE::~NETCAPTURE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::InitFSMachine()
-* @brief      InitFSMachine
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the finite state machine.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::InitFSMachine()
 { 
   
@@ -151,14 +151,14 @@ bool NETCAPTURE::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::AppProc_Ini()
-* @brief      AppProc_Ini
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Initializes the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::AppProc_Ini()
 {
   XSTRING string;
@@ -226,14 +226,14 @@ bool NETCAPTURE::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the first application update.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::AppProc_FirstUpdate()
 {
   //--------------------------------------------------------------------------------------
@@ -264,14 +264,14 @@ bool NETCAPTURE::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::AppProc_Update()
-* @brief      AppProc_Update
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Executes the application update cycle.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::AppProc_Update()
 {
   if(GetEvent()==NETCAPTURE_XFSMEVENT_NONE) // Not GEN_NEW event
@@ -333,14 +333,14 @@ bool NETCAPTURE::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::AppProc_LastUpdate()
-* @brief      AppProc_LastUpdate
+* @brief      Executes the last application update cycle.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::AppProc_LastUpdate()
 {
   if(sniffer)
@@ -356,14 +356,14 @@ bool NETCAPTURE::AppProc_LastUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::AppProc_End()
-* @brief      AppProc_End
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Ends the application process.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::AppProc_End()
 {
   XSTRING string;
@@ -402,16 +402,16 @@ bool NETCAPTURE::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
+* @brief      Processes valid key sequences.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  key : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  key : Key code to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
@@ -438,14 +438,14 @@ bool NETCAPTURE::KeyValidSecuences(int key)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool NETCAPTURE::Show_AllStatus()
-* @brief      Show_AllStatus
-* @ingroup    
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Shows all status information.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool NETCAPTURE::Show_AllStatus()
 {  
   if(xmutexshowallstatus) xmutexshowallstatus->Lock();
@@ -459,17 +459,17 @@ bool NETCAPTURE::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE::HandleEvent(XEVENT* xevent)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles an event.
 * @note       INTERNAL
-* @ingroup    
-* 
-* @param[in]  xevent : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @param[in]  xevent : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -489,15 +489,15 @@ void NETCAPTURE::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void NETCAPTURE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void NETCAPTURE::Clean()
 {
   xtimerupdateconsole         = NULL;

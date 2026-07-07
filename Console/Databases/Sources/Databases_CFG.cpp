@@ -59,14 +59,14 @@ DATABASES_CFG* DATABASES_CFG::instance = NULL;
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES_CFG::GetIsInstanced()
-* @brief      GetIsInstanced
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Checks if the singleton instance is created.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the condition is met; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::GetIsInstanced()
 {
   return instance!=NULL;
@@ -74,16 +74,16 @@ bool DATABASES_CFG::GetIsInstanced()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
-* @brief      GetInstance
-* @ingroup    APPLICATION
-* 
-* @param[in]  ini : 
-* 
-* @return     DATABASES_CFG& : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the singleton instance.
+* @ingroup    EXAMPLES
+*
+* @param[in]  ini : true to initialize configuration from file; false to use the current values.
+*
+* @return     DATABASES_CFG& : Reference to the requested object.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 {
   if(!instance) instance = GEN_NEW DATABASES_CFG(ini?APPLICATION_NAMEFILE:NULL);
@@ -93,14 +93,14 @@ DATABASES_CFG& DATABASES_CFG::GetInstance(bool ini)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES_CFG::DelInstance()
-* @brief      DelInstance
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Deletes the singleton instance.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::DelInstance()
 {
   if(instance)
@@ -116,14 +116,14 @@ bool DATABASES_CFG::DelInstance()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES_CFG::DoVariableMapping()
-* @brief      DoVariableMapping
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Maps configuration variables.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::DoVariableMapping()
 {
   if(!APPFLOWCFG::DoVariableMapping())
@@ -146,14 +146,14 @@ bool DATABASES_CFG::DoVariableMapping()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool DATABASES_CFG::DoDefault()
-* @brief      DoDefault
-* @ingroup    APPLICATION
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Loads default configuration values.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool DATABASES_CFG::DoDefault()
 {
   if(!APPFLOWCFG::DoDefault()) 
@@ -202,14 +202,14 @@ bool DATABASES_CFG::DoDefault()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* DATABASES_CFG::Database_GetURL()
-* @brief      Database_GetURL
-* @ingroup    APPLICATION
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the database url.
+* @ingroup    EXAMPLES
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_GetURL()
 {
   return &db_URL;
@@ -217,14 +217,14 @@ XSTRING* DATABASES_CFG::Database_GetURL()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XDWORD DATABASES_CFG::Database_GetPort()
-* @brief      Database_GetPort
-* @ingroup    APPLICATION
-* 
-* @return     XDWORD : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the database port.
+* @ingroup    EXAMPLES
+*
+* @return     XDWORD : Requested value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD DATABASES_CFG::Database_GetPort()
 {
   return db_port;
@@ -232,14 +232,14 @@ XDWORD DATABASES_CFG::Database_GetPort()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* DATABASES_CFG::Database_DatabaseName()
-* @brief      Database_DatabaseName
-* @ingroup    APPLICATION
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Database database name.
+* @ingroup    EXAMPLES
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_DatabaseName()
 {
   return &db_databasename;
@@ -247,14 +247,14 @@ XSTRING* DATABASES_CFG::Database_DatabaseName()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* DATABASES_CFG::Database_GetUser()
-* @brief      Database_GetUser
-* @ingroup    APPLICATION
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the database user.
+* @ingroup    EXAMPLES
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_GetUser()
 {
   return &db_user;
@@ -262,14 +262,14 @@ XSTRING* DATABASES_CFG::Database_GetUser()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         XSTRING* DATABASES_CFG::Database_GetPassword()
-* @brief      Database_GetPassword
-* @ingroup    APPLICATION
-* 
-* @return     XSTRING* : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the database password.
+* @ingroup    EXAMPLES
+*
+* @return     XSTRING* : Pointer to the requested object; NULL if it is not available.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSTRING* DATABASES_CFG::Database_GetPassword()
 {
   return &db_password;
@@ -277,14 +277,14 @@ XSTRING* DATABASES_CFG::Database_GetPassword()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         int DATABASES_CFG::Database_GetTimeoutConnection()
-* @brief      Database_GetTimeoutConnection
-* @ingroup    APPLICATION
-* 
-* @return     int : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @brief      Gets the database timeout connection.
+* @ingroup    EXAMPLES
+*
+* @return     int : Requested value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 int DATABASES_CFG::Database_GetTimeoutConnection()
 {
   return db_timeoutconnection;
@@ -292,16 +292,16 @@ int DATABASES_CFG::Database_GetTimeoutConnection()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
-* @brief      Constructor
-* @ingroup    APPLICATION
-* 
-* @param[in]  XCHAR* : 
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         DATABASES_CFG::DATABASES_CFG(XCHAR* namefile)
+* @brief      Constructor.
+* @ingroup    EXAMPLES
+*
+* @param[in]  namefile : Configuration file name.
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 {
   Clean();
@@ -314,15 +314,15 @@ DATABASES_CFG::DATABASES_CFG(XCHAR* namefile) : APPFLOWCFG(namefile)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         DATABASES_CFG::~DATABASES_CFG()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
-* @ingroup    APPLICATION
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 DATABASES_CFG::~DATABASES_CFG()
 {
   Clean();
@@ -330,15 +330,15 @@ DATABASES_CFG::~DATABASES_CFG()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void DATABASES_CFG::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
-* @ingroup    APPLICATION
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+* @ingroup    EXAMPLES
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void DATABASES_CFG::Clean()
 {
 

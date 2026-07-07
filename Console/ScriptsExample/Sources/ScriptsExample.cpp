@@ -120,14 +120,14 @@ APPLICATIONCREATEINSTANCE(SCRIPTSEXAMPLE, scriptsexample)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         ATS::ATS()
-* @brief      Constructor
+*
+* @fn         SCRIPTSEXAMPLE::SCRIPTSEXAMPLE()
+* @brief      Constructor.
 * @ingroup    EXAMPLES
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 SCRIPTSEXAMPLE::SCRIPTSEXAMPLE() : XFSMACHINE(0)
 {
   Clean();
@@ -135,15 +135,15 @@ SCRIPTSEXAMPLE::SCRIPTSEXAMPLE() : XFSMACHINE(0)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         SCRIPTSEXAMPLE::~SCRIPTSEXAMPLE()
-* @brief      Destructor
+* @brief      Destructor.
 * @note       VIRTUAL
 * @ingroup    EXAMPLES
-* 
-* @return     Does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 SCRIPTSEXAMPLE::~SCRIPTSEXAMPLE()
 {
   Clean();
@@ -151,14 +151,14 @@ SCRIPTSEXAMPLE::~SCRIPTSEXAMPLE()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::InitFSMachine()
-* @brief      InitFSMachine
+* @brief      Initializes the finite state machine.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::InitFSMachine()
 {
   if(!AddState( SCRIPTSEXAMPLE_XFSMSTATE_NONE            ,
@@ -187,14 +187,14 @@ bool SCRIPTSEXAMPLE::InitFSMachine()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::AppProc_Ini()
-* @brief      AppProc_Ini
+* @brief      Initializes the application process.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::AppProc_Ini()
 {
   XSTRING string;
@@ -266,14 +266,14 @@ bool SCRIPTSEXAMPLE::AppProc_Ini()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
-* @brief      AppProc_FirstUpdate
+* @brief      Executes the first application update.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
 {
 
@@ -301,14 +301,14 @@ bool SCRIPTSEXAMPLE::AppProc_FirstUpdate()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::AppProc_Update()
-* @brief      AppProc_Update
+* @brief      Executes the application update cycle.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::AppProc_Update()
 {
   if(GetEvent()==SCRIPTSEXAMPLE_XFSMEVENT_NONE) 
@@ -367,14 +367,14 @@ bool SCRIPTSEXAMPLE::AppProc_Update()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::AppProc_End()
-* @brief      AppProc_End
+* @brief      Ends the application process.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::AppProc_End()
 {
   XSTRING string;
@@ -419,16 +419,16 @@ bool SCRIPTSEXAMPLE::AppProc_End()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
-* @brief      KeyValidSecuences
+* @brief      Processes valid key sequences.
 * @ingroup    EXAMPLES
-* 
-* @param[in]  key : 
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  key : Key code to process.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
 {
   XCHAR character = (XCHAR)key;
@@ -464,14 +464,14 @@ bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::Show_AppStatus()
-* @brief      Show_AppStatus
+* @brief      Shows application status information.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::Show_AppStatus()
 {
   XSTRING string;
@@ -511,14 +511,14 @@ bool SCRIPTSEXAMPLE::Show_AppStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         bool SCRIPTSEXAMPLE::Show_AllStatus()
-* @brief      Show_AllStatus
+* @brief      Shows all status information.
 * @ingroup    EXAMPLES
-* 
-* @return     bool : true if is succesful. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool SCRIPTSEXAMPLE::Show_AllStatus()
 {
   console->Clear();
@@ -534,16 +534,16 @@ bool SCRIPTSEXAMPLE::Show_AllStatus()
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
-* @fn         SCRFUNCADJUSTLIBRARYS SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
-* @brief      AdjustLibraries
-* @ingroup    APPLICATION
-* 
-* @param[in]  script : 
-* 
-* @return     SCRFUNCADJUSTLIBRARYS : 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @fn         void SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
+* @brief      Adjusts the script libraries.
+* @ingroup    EXAMPLES
+*
+* @param[in]  script : Script instance used to adjust the libraries.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
 {
   #ifdef SCRIPT_LIB_CFG_ACTIVE
@@ -555,17 +555,17 @@ void SCRIPTSEXAMPLE::AdjustLibraries(SCRIPT* script)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void SCRIPTSEXAMPLE::HandleEvent_Script(SCRIPT_XEVENT* event)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handle event script.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* @param[in]  event : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  event : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTSEXAMPLE::HandleEvent_Script(SCRIPT_XEVENT* event)
 {
   switch(event->GetEventType())
@@ -582,17 +582,17 @@ void SCRIPTSEXAMPLE::HandleEvent_Script(SCRIPT_XEVENT* event)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void SCRIPTSEXAMPLE::HandleEvent(XEVENT* xevent)
-* @brief      Handle Event for the observer manager of this class
+* @brief      Handles an event.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* @param[in]  xevent : 
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @param[in]  xevent : Event information to process.
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTSEXAMPLE::HandleEvent(XEVENT* xevent)
 {
   if(!xevent) return;
@@ -609,15 +609,15 @@ void SCRIPTSEXAMPLE::HandleEvent(XEVENT* xevent)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
-* 
+*
 * @fn         void SCRIPTSEXAMPLE::Clean()
-* @brief      Clean the attributes of the class: Default initialice
+* @brief      Cleans the object internal state.
 * @note       INTERNAL
 * @ingroup    EXAMPLES
-* 
-* @return     void : does not return anything. 
-* 
-* --------------------------------------------------------------------------------------------------------------------*/
+*
+* @return     void : Does not return a value.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void SCRIPTSEXAMPLE::Clean()
 {
   xtimerupdateconsole         = NULL;

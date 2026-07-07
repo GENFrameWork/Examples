@@ -3,7 +3,7 @@
 * @file       NetConn_CoreProtocol_ConnectionsManager.h
 * 
 * @class      NETCONN_COREPROTOCOL_CONNECTIONSMANAGER
-* @brief      Net Connection Core Protocol Connections Manager class (DIOCoreProtol example)
+* @brief      Net Connection Core Protocol Connections Manager class (DIOCoreProtocol example)
 * @ingroup    EXAMPLES
 * 
 * @copyright  EndoraSoft. All rights reserved.
