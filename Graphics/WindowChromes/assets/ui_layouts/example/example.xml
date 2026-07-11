@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layouts>
+  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="background.jpg" > </skin>
+
+  <color name="colortext">yellow</color>
+  <color name="colormenuline">red</color>
+  <color name="colormenu">black,50</color>
+
+
+  <!-- The window's custom chrome/caption now lives in its own file (see assets/ui_layouts/chrome/chrome.xml),
+       loaded directly by GRPSCREEN (GRPSCREENCFGCHROMES::SetCustomLayoutFile/SetCustomLayoutName), not from
+       here. This layout stays for whatever this app's own content/UI needs (currently nothing yet). -->
+
+  <layout name="example">
+  
+    <element type="image" name="img_icon_minimize" xpos="center" ypos="center" width="350" height="350">tiger.svg</element>
+
+
+  </layout>
+
+
+</layouts>
+

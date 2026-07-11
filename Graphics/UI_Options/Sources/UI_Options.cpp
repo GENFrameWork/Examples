@@ -85,6 +85,7 @@
 
 #include "GRP2DCanvas.h"
 #include "GRP2DPath.h"
+#include "GRPScreenCFGChromes.h"
 #include "GRPScreen.h"
 #include "GRPViewPort.h"
 #include "GRPBitmapFile.h"
@@ -729,6 +730,24 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   screen->SetWidth(1024);
   screen->SetHeight(768);
 
+
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  cfgchromes.SetUseNativeChromes(true);  
+  cfgchromes.SetCaptionActive(true);
+  cfgchromes.SetIconActive(false);
+  cfgchromes.SetTitleActive(true);
+  cfgchromes.SetTitlePosition(GRPSCREENCFGCHROMES_TITLEPOSITION_CENTER);
+  cfgchromes.SetResizeActive(false);
+  cfgchromes.SetMinimizeActive(false);
+  cfgchromes.SetMaximizeActive(false);
+  cfgchromes.SetCloseActive(true);  
+
+  screen->SetCFGChromes(cfgchromes);
+
+  //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
+  //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
+  
   screen->GetTitle()->Set(__L("User Interface Canvas"));  
   screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
@@ -744,13 +763,14 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   pathvf.Slash_Add();
 
   //pathvf.Add(__L("test_render.svg"));                 
-  pathvf.Add(__L("tiger.svg"));
+  //pathvf.Add(__L("tiger.svg"));
   //pathvf.Add(__L("test_use.svg"));
   //pathvf.Add(__L("test_gradient.svg"));
   //pathvf.Add(__L("test_text.svg"));
   //pathvf.Add(__L("test_block1.svg"));
   //pathvf.Add(__L("test_stroke.svg"));
   //pathvf.Add(__L("thermometer.svg"));
+  //pathvf.Add(__L("icon_close_activated.svg"));
  
   //pathvf.Add(__L("cube.dxf"));  
   //pathvf.Add(__L("bridge.dxf"));
@@ -761,11 +781,13 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
+  /*
   vectorfile = GRPVECTORFILE::CreateInstance(pathvf);
   if(vectorfile)
     {
       vectorfile->Load();      
     }
+  */
    
   //-----------------------------------------------------------------------
   /*
@@ -985,18 +1007,9 @@ bool UI_OPTIONS::DrawFrame()
   width  = screen->GetWidth();
   height = screen->GetHeight();
 
-  canvas->ReleaseDrawFramerate(); 
-
-  static double zoom   = 0; //(double)xrand->Between(1, 75);
-  static bool   invert = false;
-
-  if(!invert) zoom += 1.0; else zoom -= 1.0;
-  
-  if(zoom >= 75)  invert = !invert;
-  if(zoom < 0)    invert = !invert;
-
+  canvas->ReleaseDrawFramerate();   
   canvas->RebuildAllAreas();
-  canvas->CreateRebuildArea(615.0+50, 390.0, 330.0 + zoom, 330.0 + zoom);
+
 
 
   //--------------------------------------------------------------------------------------
@@ -1016,8 +1029,18 @@ bool UI_OPTIONS::DrawFrame()
     } 
   
 
-   //--------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------
 
+  /*
+  static double zoom   = 0; //(double)xrand->Between(1, 75);
+  static bool   invert = false;
+
+  if(!invert) zoom += 1.0; else zoom -= 1.0;
+  
+  if(zoom >= 75)  invert = !invert;
+  if(zoom < 0)    invert = !invert;  
+
+  canvas->CreateRebuildArea(615.0+50, 390.0, 330.0 + zoom, 330.0 + zoom);
 
    if(vectorfile)
     {      
@@ -1025,6 +1048,7 @@ bool UI_OPTIONS::DrawFrame()
 
       //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
     }
+  */
 
   //--------------------------------------------------------------------------------------
 

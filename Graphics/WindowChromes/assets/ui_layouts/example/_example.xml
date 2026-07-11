@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layouts>
+  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="background.jpg" > </skin>
+
+  <color name="colortext">yellow</color>   
+  <color name="colormenuline">red</color>   
+  <color name="colormenu">black,50</color>
+
+ 
+  <layout name="example"> 
+          
+    <element type="image" name="img_app_icon"         role="icon"       xpos="10"  ypos="64" width="32" height="32">icon_app.svg</element> 
+    <element type="text"  name="txt_chrome_title"     role="title"      xpos="58"  ypos="52" sizefont="18" color="#000000FF">Ventana de prueba</element>    
+    <element type="image" name="btn_chrome_minimize"  role="minimize"   xpos="860" ypos="64" width="32"  height="32">icon_minimized_activated.svg</element>
+    <element type="image" name="btn_chrome_maximize"  role="maximize"   xpos="900" ypos="64" width="32"  height="32">icon_maximized_activated.svg</element>
+    <element type="image" name="btn_chrome_close"     role="close"      xpos="950" ypos="64" width="32"  height="32">icon_close_activated.svg</element>
+    
+  </layout>
+  
+ 
+</layouts> 
+
+

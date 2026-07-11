@@ -113,8 +113,11 @@
         <image>menu_button.png</image>
       </element>
     </element>
-  
-   
+
+    <element type="image" name="img_icon_minimize" xpos="640" ypos="750" width="350" height="350">icon_app.svg</element>
+
+
+
   </layout>
   
  
