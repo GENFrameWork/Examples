@@ -94,6 +94,7 @@
 #include "GRPVectorFile.h"
 #include "GRPXEvent.h"
 
+
 #include "INPManager.h"
 
 #include "UI_XEvent.h"
@@ -731,17 +732,18 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   screen->SetHeight(768);
 
 
+  //--------------------------------------------------------------------------------------
+
   GRPSCREENCFGCHROMES cfgchromes;
 
-  cfgchromes.SetUseNativeChromes(true);  
-  cfgchromes.SetCaptionActive(true);
-  cfgchromes.SetIconActive(false);
-  cfgchromes.SetTitleActive(true);
-  cfgchromes.SetTitlePosition(GRPSCREENCFGCHROMES_TITLEPOSITION_CENTER);
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(true);
+  cfgchromes.SetNativeMinimizeActive(false);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);    
+
   cfgchromes.SetResizeActive(false);
-  cfgchromes.SetMinimizeActive(false);
-  cfgchromes.SetMaximizeActive(false);
-  cfgchromes.SetCloseActive(true);  
 
   screen->SetCFGChromes(cfgchromes);
 
