@@ -9,7 +9,8 @@
 
   <layout name="chrome">
 
-    <element name="caption" type="form" role="caption" xpos="0" ypos="46" width="1024" height="46"  color="colormenu"> 
+    <element name="caption" type="form" role="caption" xpos="0" ypos="46" width="1024" height="46"  color="black,25"> 
+     
      
       <element type="button" name="btn_chrome_icon" role="icon" xpos="left" ypos="center" margin="12,0,0,0" >
         <element type="animation">
@@ -18,9 +19,8 @@
       </element>
 
 
-      <element type="text"  name="txt_chrome_title" role="title" xpos="left"  ypos="center" sizefont="20"  margin="65,0,0,0" color="#FFFFFFFF">Ventana de prueba</element>
-      
-      
+      <element type="text"  name="txt_chrome_title" role="title" xpos="left"  ypos="center" sizefont="20"  margin="65,0,0,0" color="#FFFFFFFF">Title</element>
+            
       
       <element name="btn_chrome_minimize" role="minimize" type="multioption" xpos="right" margin="0,78,0,0" ypos="center">
 
@@ -96,7 +96,7 @@
 
         <element type="button" name="btn_chrome_close" role="close" selectablestatus="selected" >
           <element type="animation">
-            <image width="32" height="32">icon_close_activated.svg</image>
+            <image width="24" height="24">icon_close_activated.svg</image>
           </element>
         </element>
 
@@ -107,6 +107,7 @@
         </element>
 
       </element>
+      
     </element>    
 
   </layout>

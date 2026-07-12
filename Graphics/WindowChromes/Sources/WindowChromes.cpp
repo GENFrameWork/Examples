@@ -482,12 +482,7 @@ bool WINDOWCHROMES::UpdateInput()
 
   if(cursor)    
     {  
-      // Swipe/gesture motion recognition: a separate, optional signal. It must NOT gate the normal cursor
-      // tracking below -- it used to (this whole block used to be its "else" branch), which meant that after
-      // holding a button down long enough for the gesture recorder's own buffer to fill up (a few seconds),
-      // CURSOR_MOVE/CURSOR_BUTTON stopped being sent at all until the buffer was reset by a release+press. That
-      // silently froze anything relying on a sustained held-button state, like the window-drag mechanism over
-      // a role="caption" element (see UI_MANAGER::Chromes_UpdateDrag()).
+    
       if(cursor->GetMotion()->IsReadyToTest(50))
         {
           cursor->GetMotion()->InvertYAxis(height);
@@ -599,30 +594,10 @@ bool WINDOWCHROMES::UpdateInput()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool WINDOWCHROMES::Ini_Graphics(GRPSCREEN* screen)
 {
+  //--------------------------------------------------------------------------------------
+
   screen->SetWidth(1024);
   screen->SetHeight(768);
-
-
-  GRPSCREENCFGCHROMES cfgchromes;
-
-  cfgchromes.SetUseNativeChromes(false);  
-  cfgchromes.SetCaptionActive(false);
-  cfgchromes.SetIconActive(false);
-  cfgchromes.SetTitleActive(true);
-  cfgchromes.SetResizeActive(false);
-  cfgchromes.SetMinimizeActive(false);
-  cfgchromes.SetMaximizeActive(false);
-  cfgchromes.SetCloseActive(true);  
-
-  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
-  // The custom Chromes layout lives in its own .xml, separate from this app's own UI layout (assets/ui_layouts/
-  // example/example.xml). GRPSCREEN loads it by itself (see GRPSCREEN::CreateViewport()/LoadCFGChromesLayout())
-  // as soon as the screen has its first viewport+canvas -- there is no Load() call for it here.
-  cfgchromes.SetCustomLayoutFile(__L("chrome/chrome.xml"));
-  cfgchromes.SetCustomLayoutName(__L("chrome"));
-  #endif
-
-  screen->SetCFGChromes(cfgchromes);
 
   //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
   //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
@@ -630,12 +605,44 @@ bool WINDOWCHROMES::Ini_Graphics(GRPSCREEN* screen)
   screen->GetTitle()->Set(__L("Window Chromes"));  
   screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
-  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
+  //--------------------------------------------------------------------------------------
 
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(true);  
+  cfgchromes.SetNativeMinimizeActive(false);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  cfgchromes.SetResizeActive(false);
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+  /*
+  XPATH xpath;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("defaultwindowschromes/defaultwindowschromes.xml"));
+  //xpath.Add(__L("defaultwindowschromes.zip"));
+
+
+  cfgchromes.SetCustomLayoutFile(xpath.Get());
+  cfgchromes.SetCustomLayoutName(__L("chrome"));
+*/
+
+  cfgchromes.SetCustomAutoHide(1);
+
+  #endif
+
+  screen->SetCFGChromes(cfgchromes);
 
   //--------------------------------------------------------------------------------------
 
+  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
 
+  //--------------------------------------------------------------------------------------
                                           
   return true;
 }
