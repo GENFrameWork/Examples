@@ -37,6 +37,7 @@ option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flo
 option(APPFLOW_CFG_LOG_FEATURE                                  "Application Flow CFG LOG"                                ON )
 
 option(GRP_FEATURE                                              "Graphics"                                                ON )
+option(GRP_SCREEN_CUSTOMCHROMES_FEATURE                         "Graphics Screen Custom Chromes"                          ON )
 option(GRP_BITMAP_FILE_BMP_FEATURE                              "Graphics Bitmap File BMP"                                ON )
 option(GRP_BITMAP_FILE_JPG_FEATURE                              "Graphics Bitmap File JPG"                                ON )
 option(GRP_BITMAP_FILE_PNG_FEATURE                              "Graphics Bitmap File PNG"                                ON )

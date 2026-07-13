@@ -343,11 +343,6 @@ bool WINDOWCHROMES::AppProc_FirstUpdate()
   if(!Ini_UserInterface(true)) return false;
 
   //--------------------------------------------------------------------------------------
-  
-  xrand  = GEN_XFACTORY.CreateRand();
-  if(!xrand)  return false;
-
-  //--------------------------------------------------------------------------------------
 
   return true;
 }
@@ -594,10 +589,41 @@ bool WINDOWCHROMES::UpdateInput()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool WINDOWCHROMES::Ini_Graphics(GRPSCREEN* screen)
 {
-  //--------------------------------------------------------------------------------------
-
   screen->SetWidth(1024);
   screen->SetHeight(768);
+
+
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(true);
+  cfgchromes.SetResizeActive(false);
+  cfgchromes.SetNativeMinimizeActive(false);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+
+  /*
+  XPATH xpath;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("chrome/chrome.xml"));
+  //xpath.Add(__L("chrome.zip"));
+
+
+  cfgchromes.SetCustomLayoutFile(xpath.Get());
+  cfgchromes.SetCustomLayoutName(__L("chrome"));
+  */
+
+  cfgchromes.SetCustomAutoHide(1);
+
+  #endif
+
+
+  screen->SetCFGChromes(cfgchromes);
 
   //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
   //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
@@ -605,45 +631,24 @@ bool WINDOWCHROMES::Ini_Graphics(GRPSCREEN* screen)
   screen->GetTitle()->Set(__L("Window Chromes"));  
   screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
-  //--------------------------------------------------------------------------------------
-
-  GRPSCREENCFGCHROMES cfgchromes;
-
-  cfgchromes.SetNativeCaptionActive(true);
-  cfgchromes.SetNativeIconActive(false);
-  cfgchromes.SetNativeTitleActive(true);  
-  cfgchromes.SetNativeMinimizeActive(false);
-  cfgchromes.SetNativeMaximizeActive(false);
-  cfgchromes.SetNativeCloseActive(true);  
-
-  cfgchromes.SetResizeActive(false);
-
-  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
-  /*
-  XPATH xpath;
-
-  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
-  xpath.Slash_Add();
-  xpath.Add(__L("defaultwindowschromes/defaultwindowschromes.xml"));
-  //xpath.Add(__L("defaultwindowschromes.zip"));
-
-
-  cfgchromes.SetCustomLayoutFile(xpath.Get());
-  cfgchromes.SetCustomLayoutName(__L("chrome"));
-*/
-
-  cfgchromes.SetCustomAutoHide(1);
-
-  #endif
-
-  screen->SetCFGChromes(cfgchromes);
-
-  //--------------------------------------------------------------------------------------
-
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
 
   //--------------------------------------------------------------------------------------
+
+  XPATH pathvf;
+ 
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS,  pathvf);
+  pathvf.Slash_Add();
+  pathvf.Add(__L("tiger.svg"));
+  
+  vectorfile = GRPVECTORFILE::CreateInstance(pathvf);
+  if(vectorfile)
+    {
+      vectorfile->Load();      
+    }
                                           
+  //--------------------------------------------------------------------------------------
+
   return true;
 }
 
@@ -672,7 +677,7 @@ bool WINDOWCHROMES::Ini_UserInterface(bool on)
 
   GRPSCREEN*    screen    = NULL;
   GRPVIEWPORT*  viewport  = NULL;
-  GRP2DCANVAS*    canvas    = NULL;
+  GRP2DCANVAS*  canvas    = NULL;
   XPATH         xpath;
   
   screen = GetMainScreen();
@@ -705,14 +710,13 @@ bool WINDOWCHROMES::Ini_UserInterface(bool on)
   GEN_USERINTERFACE.SubscribeInputEvents(true);
   GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
 
-
-  GEN_USERINTERFACE.CreaterVirtualKeyboard(GEN_USERINTERFACE.Layouts_Get(__L("example")), screen);   
-
   GEN_USERINTERFACE.Layout_PutBackground();
 
   GEN_USERINTERFACE.Elements_SetToRedraw();
-        
 
+
+  canvas->CreateRebuildArea(325.0+50, 200.0, 250.0 + 75, 250.0 + 75);   
+        
   return true;
 }
 
@@ -767,22 +771,42 @@ bool WINDOWCHROMES::DrawFrame()
   height = screen->GetHeight();
 
   canvas->ReleaseDrawFramerate();   
+
   canvas->RebuildAllAreas();
 
   //--------------------------------------------------------------------------------------
 
   
-  //--------------------------------------------------------------------------------------
+  static double zoom   = 0; //(double)xrand->Between(1, 75);
+  static bool   invert = false;
 
-  GEN_USERINTERFACE.Elements_RebuildDrawAreas();
+  if(!invert) zoom += 1.0; else zoom -= 1.0;
   
-  GEN_USERINTERFACE.Update();
+  if(zoom >= 75)  invert = !invert;
+  if(zoom < 0)    invert = !invert;  
 
+  
+
+   if(vectorfile)
+    {        
+      vectorfile_render.Render(vectorfile, canvas, 325.0+50, 200.0, 250.0 + zoom, 250.0 + zoom);   
+
+      //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
+    }
+  
   //--------------------------------------------------------------------------------------
 
   canvas->DrawFramerate(screen, 6, 750);
 
   //--------------------------------------------------------------------------------------
+
+  GEN_USERINTERFACE.Elements_RebuildDrawAreas();
+  
+  GEN_USERINTERFACE.Update(); 
+
+  //--------------------------------------------------------------------------------------
+
+  
 
   return true;
 }
@@ -807,10 +831,7 @@ bool WINDOWCHROMES::UserInterface_ElementSelected(UI_ELEMENT* element)
   // completely independent of how the layout happens to name its elements.
   switch(element->GetChromeRole())
     {
-      case UI_ELEMENT_CHROMEROLE_ICON     : // TODO: no action defined yet for a click on the application icon
-                                            // (native chromes typically pop the system menu here). Wire it up
-                                            // once we decide what it should do in this app.
-                                            break;
+      case UI_ELEMENT_CHROMEROLE_ICON     : break;
 
       case UI_ELEMENT_CHROMEROLE_MINIMIZE : if(GetMainScreen()) GetMainScreen()->Minimize(true);
                                             break;
@@ -883,9 +904,7 @@ void WINDOWCHROMES::HandleEvent_UserInterface(UI_XEVENT* event)
                                                     } 
                                                     break;
 
-      case UI_XEVENT_TYPE_OUTPUT_CHANGECONTENTS   : { int a=0;
-                                                      a++;
-
+      case UI_XEVENT_TYPE_OUTPUT_CHANGECONTENTS   : { 
                                                     }
                                                     break;
       

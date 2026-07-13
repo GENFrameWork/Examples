@@ -728,24 +728,11 @@ bool UI_OPTIONS::UpdateInput()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 {
-  screen->SetWidth(1024);
-  screen->SetHeight(768);
-
 
   //--------------------------------------------------------------------------------------
 
-  GRPSCREENCFGCHROMES cfgchromes;
-
-  cfgchromes.SetNativeCaptionActive(true);
-  cfgchromes.SetNativeIconActive(false);
-  cfgchromes.SetNativeTitleActive(true);
-  cfgchromes.SetNativeMinimizeActive(false);
-  cfgchromes.SetNativeMaximizeActive(false);
-  cfgchromes.SetNativeCloseActive(true);    
-
-  cfgchromes.SetResizeActive(false);
-
-  screen->SetCFGChromes(cfgchromes);
+  screen->SetWidth(1024);
+  screen->SetHeight(768);
 
   //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
   //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
@@ -753,8 +740,30 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
   screen->GetTitle()->Set(__L("User Interface Canvas"));  
   screen->SetDesktopScreenSelected(GRPSCREENTYPE_DESKTOP_MAIN);
 
-  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
+  //--------------------------------------------------------------------------------------
 
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(true);  
+  cfgchromes.SetNativeMinimizeActive(false);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  cfgchromes.SetResizeActive(false);
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+  
+  cfgchromes.SetCustomAutoHide(1);
+
+  #endif
+
+  screen->SetCFGChromes(cfgchromes);
+
+  //--------------------------------------------------------------------------------------
+
+  GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
 
   //--------------------------------------------------------------------------------------
 
@@ -845,7 +854,7 @@ bool UI_OPTIONS::Ini_UserInterface(bool on)
 
   GRPSCREEN*    screen    = NULL;
   GRPVIEWPORT*  viewport  = NULL;
-  GRP2DCANVAS*    canvas    = NULL;
+  GRP2DCANVAS*  canvas    = NULL;
   XPATH         xpath;
   
   screen = GetMainScreen();
@@ -1009,10 +1018,9 @@ bool UI_OPTIONS::DrawFrame()
   width  = screen->GetWidth();
   height = screen->GetHeight();
 
-  canvas->ReleaseDrawFramerate();   
+  canvas->ReleaseDrawFramerate();  
+ 
   canvas->RebuildAllAreas();
-
-
 
   //--------------------------------------------------------------------------------------
 
@@ -1033,34 +1041,13 @@ bool UI_OPTIONS::DrawFrame()
 
   //--------------------------------------------------------------------------------------
 
-  /*
-  static double zoom   = 0; //(double)xrand->Between(1, 75);
-  static bool   invert = false;
-
-  if(!invert) zoom += 1.0; else zoom -= 1.0;
-  
-  if(zoom >= 75)  invert = !invert;
-  if(zoom < 0)    invert = !invert;  
-
-  canvas->CreateRebuildArea(615.0+50, 390.0, 330.0 + zoom, 330.0 + zoom);
-
-   if(vectorfile)
-    {      
-      vectorfile_render.Render(vectorfile, canvas, 625.0+50, 400.0, 250.0 + zoom, 250.0 + zoom);   
-
-      //vectorfile_render.RenderCached(vectorfile, canvas, 30.0, 30.0, canvas->GetWidth()-130, canvas->GetHeight()-30);   
-    }
-  */
+  canvas->DrawFramerate(screen, 6, 750);
 
   //--------------------------------------------------------------------------------------
 
   GEN_USERINTERFACE.Elements_RebuildDrawAreas();
   
-  GEN_USERINTERFACE.Update();
-
-  //--------------------------------------------------------------------------------------
-
-  canvas->DrawFramerate(screen, 6, 20);
+  GEN_USERINTERFACE.Update(); 
 
   //--------------------------------------------------------------------------------------
 
@@ -1082,6 +1069,26 @@ bool UI_OPTIONS::DrawFrame()
 bool UI_OPTIONS::UserInterface_ElementSelected(UI_ELEMENT* element)
 {
   if(!element) return false;
+
+
+  switch(element->GetChromeRole())
+    {
+      case UI_ELEMENT_CHROMEROLE_ICON     : break;
+
+      case UI_ELEMENT_CHROMEROLE_MINIMIZE : if(GetMainScreen()) GetMainScreen()->Minimize(true);
+                                            break;
+
+      case UI_ELEMENT_CHROMEROLE_MAXIMIZE : if(GetMainScreen()) GetMainScreen()->Maximize(true);
+                                            break;
+
+      case UI_ELEMENT_CHROMEROLE_CLOSE    : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
+                                            break;
+
+      default                             : break;
+    }
+
+
+
 
   XSTRING elementname;
 

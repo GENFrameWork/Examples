@@ -12,9 +12,7 @@
        here. This layout stays for whatever this app's own content/UI needs (currently nothing yet). -->
 
   <layout name="example">
-  
-    <element type="image" name="img_icon_minimize" xpos="center" ypos="center" width="350" height="350">tiger.svg</element>
-
+ 
 
   </layout>
 
