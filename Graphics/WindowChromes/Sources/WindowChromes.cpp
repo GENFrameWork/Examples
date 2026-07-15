@@ -593,37 +593,7 @@ bool WINDOWCHROMES::Ini_Graphics(GRPSCREEN* screen)
   screen->SetHeight(768);
 
 
-  GRPSCREENCFGCHROMES cfgchromes;
-
-  cfgchromes.SetNativeCaptionActive(true);
-  cfgchromes.SetNativeIconActive(false);
-  cfgchromes.SetNativeTitleActive(true);
-  cfgchromes.SetResizeActive(false);
-  cfgchromes.SetNativeMinimizeActive(false);
-  cfgchromes.SetNativeMaximizeActive(false);
-  cfgchromes.SetNativeCloseActive(true);  
-
-  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
-
-  /*
-  XPATH xpath;
-
-  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
-  xpath.Slash_Add();
-  xpath.Add(__L("chrome/chrome.xml"));
-  //xpath.Add(__L("chrome.zip"));
-
-
-  cfgchromes.SetCustomLayoutFile(xpath.Get());
-  cfgchromes.SetCustomLayoutName(__L("chrome"));
-  */
-
-  cfgchromes.SetCustomAutoHide(1);
-
-  #endif
-
-
-  screen->SetCFGChromes(cfgchromes);
+  UserInterface_CFGChromes(screen);
 
   //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
   //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
@@ -827,8 +797,6 @@ bool WINDOWCHROMES::UserInterface_ElementSelected(UI_ELEMENT* element)
 {
   if(!element) return false;
 
-  // Chrome buttons are located by role (see role="" in the layout), never by name: this keeps the click handling
-  // completely independent of how the layout happens to name its elements.
   switch(element->GetChromeRole())
     {
       case UI_ELEMENT_CHROMEROLE_ICON     : break;
@@ -869,6 +837,58 @@ bool WINDOWCHROMES::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_tex
   if(!maskresolved)   return false;
 
  
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool WINDOWCHROMES::UserInterface_CFGChromes(GRPSCREEN* screen)
+* @brief      user interface  CFGchromes
+* @ingroup    
+* 
+* @param[in]  screen : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool WINDOWCHROMES::UserInterface_CFGChromes(GRPSCREEN* screen)
+{
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+
+  /*
+  XPATH xpath;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("chrome/chrome.xml"));
+  //xpath.Add(__L("chrome.zip"));
+
+
+  cfgchromes.SetCustomLayoutFile(xpath.Get());
+  cfgchromes.SetCustomLayoutName(__L("chrome"));
+  */
+
+  cfgchromes.SetCustomAutoHide(1);
+
+  #else
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(false);
+ 
+  cfgchromes.SetNativeMinimizeActive(true);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  #endif
+
+  cfgchromes.SetResizeActive(false);
+
+  screen->SetCFGChromes(cfgchromes);
+
   return true;
 }
 

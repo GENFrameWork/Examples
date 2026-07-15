@@ -165,7 +165,7 @@ class WINDOWCHROMES : public APPFLOWGRAPHICS, public XFSMACHINE
     bool                            UserInterface_ElementSelected           (UI_ELEMENT* element);
     bool                            UserInterface_ChangeLiteralText         (UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresult);
 
-    bool                            UnitTest_AVIVideoWrite                  ();
+    bool                            UserInterface_CFGChromes                (GRPSCREEN* screen);
 
     void                            HandleEvent_UserInterface               (UI_XEVENT* event);
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
