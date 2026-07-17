@@ -24,8 +24,8 @@ option(GRP_OPENGL_FEATURE                                       "Graphics Open G
 
 option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compiler"                                      ON )
 
-option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
-
+#option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
+option(LINUX_WAYLAND_FEATURE                                    "Linux WAYLAND"                                           ON )
         
 option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
 option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  

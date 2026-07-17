@@ -742,24 +742,7 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
-  GRPSCREENCFGCHROMES cfgchromes;
-
-  cfgchromes.SetNativeCaptionActive(true);
-  cfgchromes.SetNativeIconActive(false);
-  cfgchromes.SetNativeTitleActive(true);  
-  cfgchromes.SetNativeMinimizeActive(false);
-  cfgchromes.SetNativeMaximizeActive(false);
-  cfgchromes.SetNativeCloseActive(true);  
-
-  cfgchromes.SetResizeActive(false);
-
-  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
-  
-  cfgchromes.SetCustomAutoHide(1);
-
-  #endif
-
-  screen->SetCFGChromes(cfgchromes);
+  UserInterface_CFGChromes(screen); 
 
   //--------------------------------------------------------------------------------------
 
@@ -1176,6 +1159,57 @@ bool UI_OPTIONS::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, 
       counter++;
     }
  
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool UI_OPTIONS::UserInterface_CFGChromes(GRPSCREEN* screen)
+* @brief      user interface  CFGchromes
+* @ingroup    
+* 
+* @param[in]  screen : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool UI_OPTIONS::UserInterface_CFGChromes(GRPSCREEN* screen)
+{
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+
+  /*
+  XPATH xpath;
+
+  GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
+  xpath.Slash_Add();
+  xpath.Add(__L("chrome/chrome.xml"));
+  //xpath.Add(__L("chrome.zip"));
+
+
+  cfgchromes.SetCustomLayoutFile(xpath.Get());
+  cfgchromes.SetCustomLayoutName(__L("chrome"));
+  */
+
+  cfgchromes.SetCustomAutoHide(1);
+
+  #else
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(true);
+  cfgchromes.SetNativeTitleActive(true); 
+  cfgchromes.SetNativeMinimizeActive(true);
+  cfgchromes.SetNativeMaximizeActive(true);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  #endif
+
+  cfgchromes.SetResizeActive(false);
+
+  screen->SetCFGChromes(cfgchromes);
+
   return true;
 }
 

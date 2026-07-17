@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layouts>
-  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="timesi.ttf" backgroundimg="background.jpg" > </skin>
+  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="seamless_pattern2.jpg" backgroundseamlesspattern="yes" > </skin>
 
   <color name="colortext">yellow</color>   
   <color name="colormenuline">red</color>   
@@ -114,7 +114,7 @@
       </element>
     </element>
 
-    <element type="image" name="img_icon_minimize" xpos="640" ypos="750" width="350" height="350">icon_app.svg</element>
+    <element type="image" name="img_icon_minimize" xpos="660" ypos="750" width="350" height="350">Japanese Wave Seamless Pattern.svg</element>
 
 
 

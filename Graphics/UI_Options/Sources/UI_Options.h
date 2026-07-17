@@ -164,6 +164,7 @@ class UI_OPTIONS : public APPFLOWGRAPHICS, public XFSMACHINE
 
     bool                            UserInterface_ElementSelected           (UI_ELEMENT* element);
     bool                            UserInterface_ChangeLiteralText         (UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresult);
+    bool                            UserInterface_CFGChromes                (GRPSCREEN* screen);    
 
     bool                            UnitTest_AVIVideoWrite                  ();
 

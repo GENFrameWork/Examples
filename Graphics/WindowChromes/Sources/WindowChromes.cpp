@@ -286,6 +286,8 @@ bool WINDOWCHROMES::AppProc_Ini()
 
   SetEvent(WINDOWCHROMES_XFSMEVENT_INI);
 
+  //--------------------------------------------------------------------------------------
+
   return true;
 }
 

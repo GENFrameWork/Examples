@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layouts>
-  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="background.jpg" > </skin>
+  <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="seamless_pattern2.jpg" backgroundseamlesspattern="yes"> </skin>
 
   <color name="colortext">yellow</color>
   <color name="colormenuline">red</color>
