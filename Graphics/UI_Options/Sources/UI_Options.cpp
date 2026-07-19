@@ -1193,7 +1193,7 @@ bool UI_OPTIONS::UserInterface_CFGChromes(GRPSCREEN* screen)
   cfgchromes.SetCustomLayoutName(__L("chrome"));
   */
 
-  cfgchromes.SetCustomAutoHide(1);
+  cfgchromes.SetCustomAutoHide(500);
 
   #else
 
@@ -1206,7 +1206,7 @@ bool UI_OPTIONS::UserInterface_CFGChromes(GRPSCREEN* screen)
 
   #endif
 
-  cfgchromes.SetResizeActive(false);
+  cfgchromes.SetResizeActive(true);
 
   screen->SetCFGChromes(cfgchromes);
 
