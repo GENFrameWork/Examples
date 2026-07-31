@@ -14,7 +14,7 @@ set(GEN_DIRECTORY "../../../..")
 # Activate features/Defines
 
 option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
-option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
+#option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
 
@@ -23,6 +23,7 @@ option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compi
 option(XSERIALIZABLE_JSON_FEATURE                               "Serializable JSON"                                       ON ) 
                     
 option(DIO_FEATURE                                              "Input/Output"                                            ON )
+#option(DIOPING_NATIVE_FEATURE                                  "Ping Native"                                              ON )  
 option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
 option(DIO_CHECKCONNECTIONS_FEATURE                             "Check Connections"                                       ON )
 option(DIO_NETWORKTIMEPROTOCOL_FEATURE                          "Network Time Protocol"                                   ON )
@@ -36,6 +37,7 @@ option(APPFLOW_LOG_FEATURE                                      "Application Flo
 option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  
 option(APPFLOW_EXTENDED_APPLICATIONHEADER_FEATURE               "Application Flow Extended Aplication Header"             ON )  
 option(APPFLOW_EXTENDED_APPLICATIONSTATUS_FEATURE               "Application Flow Extended Aplication Status"             ON )  
+option(APPFLOW_EXTENDED_INTERNETSTATUS_FEATURE                  "Application Flow Extended Internet Status"               ON )  
 option(APPFLOW_WEBSERVER_FEATURE                                "Application Flow Web Server"                             ON )
               
 option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flow CFG General"                            ON )
