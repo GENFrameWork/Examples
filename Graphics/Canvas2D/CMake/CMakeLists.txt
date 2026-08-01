@@ -21,6 +21,8 @@ option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compi
 option(GRP_OPENGL_FEATURE                                       "Graphics Open GL"                                        ON )
 
 option(LINUX_X11_FEATURE                                        "Linux X11"                                               ON )
+#option(LINUX_WAYLAND_FEATURE                                    "Linux WAYLAND"                                           ON )
+
         
 option(APPFLOW_FEATURE                                          "Application Flow modules"                                ON )
 option(APPFLOW_EXTENDED_FEATURE                                 "Application Flow Extended"                               ON )  
@@ -31,6 +33,7 @@ option(APPFLOW_CFG_GENERAL_FEATURE                              "Application Flo
 option(APPFLOW_CFG_LOG_FEATURE                                  "Application Flow CFG LOG"                                ON )
 
 option(GRP_FEATURE                                              "Graphics"                                                ON )
+#option(GRP_SCREEN_CUSTOMCHROMES_FEATURE                         "Graphics Screen Custom Chromes"                          ON )
 option(GRP_BITMAP_FILE_BMP_FEATURE                              "Graphics Bitmap File BMP"                                ON )
 option(GRP_BITMAP_FILE_JPG_FEATURE                              "Graphics Bitmap File JPG"                                ON )
 option(GRP_BITMAP_FILE_PNG_FEATURE                              "Graphics Bitmap File PNG"                                ON )

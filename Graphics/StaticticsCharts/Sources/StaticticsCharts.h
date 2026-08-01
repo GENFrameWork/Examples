@@ -160,10 +160,14 @@ class STATICTICSCHARTS : public APPFLOWGRAPHICS, public XFSMACHINE
 
     bool                            Ini_StaticticCharts                     ();   
     bool                            Ini_Graphics                            (GRPSCREEN* screen);
+    bool                            Ini_UserInterface                       (bool on);  
 
 
     bool                            DrawFrame                               ();
 
+    bool                            UserInterface_CFGChromes                (GRPSCREEN* screen);
+
+    void                            HandleEvent_UserInterface               (UI_XEVENT* event);
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
     void                            HandleEvent                             (XEVENT* xevent);
     

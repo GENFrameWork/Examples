@@ -156,6 +156,8 @@ class CANVAS2D : public APPFLOWGRAPHICS, public XFSMACHINE
     bool                            DrawShadow                              (GRP2DCANVAS* canvas, int x, int y);
     bool                            DrawFrame                               ();
 
+    bool                            UserInterface_CFGChromes                (GRPSCREEN* screen);  
+
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
     void                            HandleEvent_Sound                       (SNDFACTORY_XEVENT* event);
     void                            HandleEvent                             (XEVENT* xevent);

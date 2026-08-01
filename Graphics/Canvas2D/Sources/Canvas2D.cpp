@@ -612,6 +612,13 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
   GRPBITMAPFILE*  bitmapfile;
   bool            status;  
 
+
+  //--------------------------------------------------------------------------------------
+
+  UserInterface_CFGChromes(screen); 
+
+  //--------------------------------------------------------------------------------------
+
   bitmapfile = GEN_NEW GRPBITMAPFILE();
   if(!bitmapfile) return false;
 
@@ -625,7 +632,8 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
       if(!backgroundbmp) return false;
     }
   
-  
+  //--------------------------------------------------------------------------------------  
+    
   if(!charactersecuence[0])
     {
       GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, xpath);
@@ -651,6 +659,8 @@ bool CANVAS2D::Ini_Graphics(GRPSCREEN* screen)
     }
 
   delete bitmapfile;
+
+  //--------------------------------------------------------------------------------------
 
   XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("Main Screen: Width %d, height %d"),  screen->GetWidth(), screen->GetHeight());
 
@@ -917,6 +927,45 @@ bool CANVAS2D::DrawFrame()
 
   return true;
 }
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool CANVAS2D::UserInterface_CFGChromes(GRPSCREEN* screen)
+* @brief      user interface  CFGchromes
+* @ingroup    
+* 
+* @param[in]  screen : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool CANVAS2D::UserInterface_CFGChromes(GRPSCREEN* screen)
+{
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+
+  //cfgchromes.SetCustomAutoHide(500);
+
+  #else
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(true); 
+  cfgchromes.SetNativeMinimizeActive(true);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  #endif
+
+  cfgchromes.SetResizeActive(false);
+
+  screen->SetCFGChromes(cfgchromes);
+
+  return true;
+}
+
 
 
 /**-------------------------------------------------------------------------------------------------------------------

@@ -116,6 +116,9 @@
 #include "INPManager.h"
 #include "INPDevice.h"
 
+#include "UI_XEvent.h"
+#include "UI_Manager.h"
+
 #include "StaticticsCharts_CFG.h"
 
 
@@ -340,6 +343,10 @@ bool STATICTICSCHARTS::AppProc_FirstUpdate()
       button[STATICTICSCHARTS_BUTTON_TOUCHSCREEN] = inpdevice->GetButton(INPBUTTON_ID_TOUCHSCREEN);     
       cursor = inpdevice->GetCursor(0);
     }
+
+  //--------------------------------------------------------------------------------------
+
+  if(!Ini_UserInterface(true)) return false;
 
   //--------------------------------------------------------------------------------------
 
@@ -785,6 +792,69 @@ bool STATICTICSCHARTS::Ini_Graphics(GRPSCREEN* screen)
 }
 
 
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool STATICTICSCHARTS::Ini_UserInterface(bool on)
+* @brief      ini  user interface
+* @ingroup    
+* 
+* @param[in]  on : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool STATICTICSCHARTS::Ini_UserInterface(bool on)
+{  
+  if(!on)
+    { 
+      GEN_USERINTERFACE.SubscribeOutputEvents(false, this, &GEN_USERINTERFACE.GetInstance());
+      GEN_USERINTERFACE.SubscribeInputEvents(false);
+      GEN_USERINTERFACE.DelInstance();
+   
+      return true;
+    }
+
+  //--------------------------------------------------------------------------------------
+
+  GRPSCREEN*    screen    = NULL;
+  GRPVIEWPORT*  viewport  = NULL;
+  GRP2DCANVAS*  canvas    = NULL;
+  XPATH         xpath;
+  
+  screen = GetMainScreen();
+  if(!screen)   
+    {
+      return false;
+    } 
+
+  viewport = screen->GetViewport(0);
+  if(!viewport) 
+    {
+      return false;
+    }
+
+  canvas = viewport->GetCanvas();
+  if(!canvas)   
+    {
+      return false;
+    }
+ 
+  
+  //--------------------------------------------------------------------------------------
+  
+  UserInterface_CFGChromes(screen); 
+
+  //--------------------------------------------------------------------------------------
+
+  GEN_USERINTERFACE.SubscribeInputEvents(true);
+  GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
+
+  GEN_USERINTERFACE.Elements_SetToRedraw();
+        
+  return true;
+}
+
+
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
@@ -865,7 +935,75 @@ bool STATICTICSCHARTS::DrawFrame()
 
   //--------------------------------------------------------------------------------------
 
+  GEN_USERINTERFACE.Elements_RebuildDrawAreas();
+  
+  GEN_USERINTERFACE.Update(); 
+
+  //--------------------------------------------------------------------------------------
+
+
   return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         bool STATICTICSCHARTS::UserInterface_CFGChromes(GRPSCREEN* screen)
+* @brief      user interface  CFGchromes
+* @ingroup    
+* 
+* @param[in]  screen : 
+* 
+* @return     bool : true if is succesful. 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+bool STATICTICSCHARTS::UserInterface_CFGChromes(GRPSCREEN* screen)
+{
+  GRPSCREENCFGCHROMES cfgchromes;
+
+  #ifdef GRP_SCREEN_CUSTOMCHROMES_ACTIVE
+
+  //cfgchromes.SetCustomAutoHide(500);
+
+  #else
+
+  cfgchromes.SetNativeCaptionActive(true);
+  cfgchromes.SetNativeIconActive(false);
+  cfgchromes.SetNativeTitleActive(true); 
+  cfgchromes.SetNativeMinimizeActive(true);
+  cfgchromes.SetNativeMaximizeActive(false);
+  cfgchromes.SetNativeCloseActive(true);  
+
+  #endif
+
+  cfgchromes.SetResizeActive(false);
+
+  screen->SetCFGChromes(cfgchromes);
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+* 
+* @fn         void STATICTICSCHARTS::HandleEvent_UserInterface(UI_XEVENT* event)
+* @brief      Handle Event for the observer manager of this class
+* @ingroup    
+* @note       INTERNAL
+* 
+* @param[in]  event : 
+* 
+* --------------------------------------------------------------------------------------------------------------------*/
+void STATICTICSCHARTS::HandleEvent_UserInterface(UI_XEVENT* event)
+{
+  switch(event->GetEventType())
+    {
+      case  UI_XEVENT_TYPE_OUTPUT_SELECTED        : break;
+
+      case UI_XEVENT_TYPE_OUTPUT_TEXTTOCHANGE     : break;
+
+      case UI_XEVENT_TYPE_OUTPUT_CHANGECONTENTS   : break;      
+    }
 }
 
 
@@ -915,6 +1053,13 @@ void STATICTICSCHARTS::HandleEvent(XEVENT* xevent)
                                           if(!event) return;
 
                                           HandleEvent_Graphics(event);
+                                        }
+                                        break;
+
+      case XEVENT_TYPE_USERINTERFACE  : { UI_XEVENT* event = (UI_XEVENT*)xevent;
+                                          if(!event) return;
+
+                                          HandleEvent_UserInterface(event);
                                         }
                                         break;
     }
