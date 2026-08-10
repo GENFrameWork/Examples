@@ -23,7 +23,7 @@ option(USE_CLANG_COMPILER_FEATURE                               "Use Clang Compi
 option(XSERIALIZABLE_JSON_FEATURE                               "Serializable JSON"                                       ON ) 
                     
 option(DIO_FEATURE                                              "Input/Output"                                            ON )
-#option(DIOPING_NATIVE_FEATURE                                  "Ping Native"                                              ON )  
+#option(DIO_PING_NATIVE_FEATURE                                  "Ping Native"                                              ON )  
 option(DIO_PUBLICINTERNETIP_FEATURE                             "Public Internet IP"                                      ON )
 option(DIO_CHECKCONNECTIONS_FEATURE                             "Check Connections"                                       ON )
 option(DIO_NETWORKTIMEPROTOCOL_FEATURE                          "Network Time Protocol"                                   ON )
