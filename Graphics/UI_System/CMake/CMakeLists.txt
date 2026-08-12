@@ -43,6 +43,7 @@ option(GRP_BITMAP_FILE_BMP_FEATURE                              "Graphics Bitmap
 option(GRP_BITMAP_FILE_JPG_FEATURE                              "Graphics Bitmap File JPG"                                ON )
 option(GRP_BITMAP_FILE_PNG_FEATURE                              "Graphics Bitmap File PNG"                                ON )
 option(GRP_BITMAP_FILE_TGA_FEATURE                              "Graphics Bitmap File TGA"                                ON )
+option(GRP_VECTOR_FILE_SVG_FEATURE                              "Graphics Vector File SVG"                                ON )   
 option(GRP_STATISTICSCHARS_FEATURE                              "Graphics Statistics Chars"                               ON )  
 option(GRP_2D_FEATURE                                           "Graphics 2D"                                             ON )
 

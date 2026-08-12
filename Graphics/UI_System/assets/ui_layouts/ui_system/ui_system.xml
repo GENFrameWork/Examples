@@ -46,48 +46,48 @@
 
     <!-- ================================================================ SIDEBAR ================================================================ -->
 
-    <element name="nav-resumen-btn" type="button" xpos="15" ypos="150" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-resumen-icon" type="animation" xpos="14" ypos="center"><image>icons/small_home.png</image></element>
+    <element name="nav-resumen-btn" type="button" xpos="15" ypos="150" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-resumen-icon" type="animation" xpos="14" ypos="center" ><image width="64" height="64">icons/home.svg</image></element>
       <element name="nav-resumen-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextmain">Resumen</element>
     </element>
 
-    <element name="nav-cpu-btn" type="button" xpos="15" ypos="204" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-cpu-icon" type="animation" xpos="14" ypos="center"><image>icons/small_cpu.png</image></element>
+    <element name="nav-cpu-btn" type="button" xpos="15" ypos="204" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-cpu-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/cpu.svg</image></element>
       <element name="nav-cpu-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">CPU</element>
     </element>
 
-    <element name="nav-memoria-btn" type="button" xpos="15" ypos="258" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-memoria-icon" type="animation" xpos="14" ypos="center"><image>icons/small_ram.png</image></element>
+    <element name="nav-memoria-btn" type="button" xpos="15" ypos="258" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-memoria-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/memory.svg</image></element>
       <element name="nav-memoria-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">Memoria</element>
     </element>
 
-    <element name="nav-red-btn" type="button" xpos="15" ypos="312" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-red-icon" type="animation" xpos="14" ypos="center"><image>icons/small_wifi.png</image></element>
+    <element name="nav-red-btn" type="button" xpos="15" ypos="312" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-red-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/net.svg</image></element>
       <element name="nav-red-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">Red</element>
     </element>
 
-    <element name="nav-disco-btn" type="button" xpos="15" ypos="366" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-disco-icon" type="animation" xpos="14" ypos="center"><image>icons/small_disk.png</image></element>
+    <element name="nav-disco-btn" type="button" xpos="15" ypos="366" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-disco-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/harddisk.svg</image></element>
       <element name="nav-disco-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">Disco</element>
     </element>
 
-    <element name="nav-procesos-btn" type="button" xpos="15" ypos="420" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-procesos-icon" type="animation" xpos="14" ypos="center"><image>icons/small_processes.png</image></element>
+    <element name="nav-procesos-btn" type="button" xpos="15" ypos="420" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-procesos-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/process.svg</image></element>
       <element name="nav-procesos-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">Procesos</element>
     </element>
 
-    <element name="nav-alertas-btn" type="button" xpos="15" ypos="474" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-alertas-icon" type="animation" xpos="14" ypos="center"><image>icons/small_bell.png</image></element>
+    <element name="nav-alertas-btn" type="button" xpos="15" ypos="474" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-alertas-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/alert.svg</image></element>
       <element name="nav-alertas-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">Alertas</element>
     </element>
 
-    <element name="nav-configuracion-btn" type="button" xpos="15" ypos="528" width="180" height="46" allocationtext="right" sizefont="16">
-      <element name="nav-configuracion-icon" type="animation" xpos="14" ypos="center"><image>icons/small_gear.png</image></element>
+    <element name="nav-configuracion-btn" type="button" xpos="15" ypos="528" width="180" height="64" allocationtext="right" sizefont="16">
+      <element name="nav-configuracion-icon" type="animation" xpos="14" ypos="center"><image width="64" height="64">icons/configuration.svg</image></element>
       <element name="nav-configuracion-text" type="text"      xpos="46" ypos="center" sizefont="16" color="colortextsoft">Configuración</element>
     </element>
 
     <element name="sidebar_footer_brand" type="button" xpos="24" ypos="826" allocationtext="right" sizefont="15">
-      <element name="sidebar_footer_brand_icon" type="animation"><image>icons/monitor_20.png</image></element>
+      <element name="sidebar_footer_brand_icon" type="animation"><image width="64" height="64">icons/system.svg</image ></element>
       <element name="sidebar_footer_brand_text" type="text" xpos="center" ypos="center" sizefont="15" color="colortextsoft">Sistema</element>
     </element>
     <element name="sidebar_footer_version" type="text" xpos="54" ypos="845" sizefont="14" color="colortextsoft">v#[APP_VERSION]</element>
