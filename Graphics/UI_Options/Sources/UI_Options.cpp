@@ -110,6 +110,10 @@
 #include "UI_Element_ProgressImage.h"
 #include "UI_SkinCanvas.h"
 
+#include "UI_CSSParser.h"
+#include "UI_StyleSheet.h"
+
+
 #include "APPFlowLog.h"
 #include "APPFlowExtended.h"
 
@@ -731,8 +735,8 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
-  screen->SetWidth(1024);
-  screen->SetHeight(768);
+  screen->SetWidth(1200);
+  screen->SetHeight(800);
 
   //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
   //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
@@ -1024,7 +1028,7 @@ bool UI_OPTIONS::DrawFrame()
 
   //--------------------------------------------------------------------------------------
 
-  canvas->DrawFramerate(screen, 6, 750);
+  canvas->DrawFramerate(screen, 4, 790);
 
   //--------------------------------------------------------------------------------------
 

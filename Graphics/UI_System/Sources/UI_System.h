@@ -104,6 +104,7 @@ enum UI_SYSTEM_BUTTONS
 
 
 #define XTHREADGROUPID_UI_SYSTEM_DRAWFRAME        XTHREADGROUPID_APPOWNER + 100
+#define XTHREADGROUPID_UI_SYSTEM_HARDWAREINFO     static_cast<XTHREADGROUPID>(XTHREADGROUPID_APPOWNER + 101)
 
 #define APPLICATION_VERSION                       2
 #define APPLICATION_SUBVERSION                    1
@@ -125,6 +126,7 @@ enum UI_SYSTEM_BUTTONS
 class XTIME;
 class XTIMER;
 class XTHREAD;
+class XMUTEX;
 class XDIR;
 class XSCHEDULER;
 class XSCHEDULER_XEVENT;
@@ -166,14 +168,43 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
 
     bool                            DrawFrame                               ();
 
-    bool                            UpdateHardwareInfo                      (bool forced);
+    //--------------------------------------------------------------------------------------
+    // Hardware info now runs on its own background XTHREAD (see AppProc_Ini()/AppProc_End()),
+    // decoupled from the render loop:
+    //   - HardwareInfo_Compute() runs ONLY on that background thread. It does the actual
+    //     (potentially slow / network-blocking, e.g. HardwareInfo_UpdateConnection()) reads,
+    //     entirely unlocked, into local variables, then takes hardwareinfomutex just long
+    //     enough to publish them into the members below and set hardwareinfo_haspending.
+    //   - HardwareInfo_UpdateCPU/Memory/DateTime/Uptime/Connection/Footer() are the individual
+    //     per-topic readers HardwareInfo_Compute() calls. They no longer touch UI_ELEMENT /
+    //     GEN_USERINTERFACE at all (that used to happen inline in some of them) -- they only
+    //     write their result into the output reference parameters they are given, which
+    //     HardwareInfo_Compute() owns as its own local (background-thread-only) variables.
+    //   - HardwareInfo_Apply() runs ONLY on the main thread, called from AppProc_Update()
+    //     exactly where the old inline UpdateHardwareInfo(false) call used to be. It takes
+    //     hardwareinfomutex just long enough to copy out whatever the background thread last
+    //     published (a no-op, cheap check if nothing changed since the last frame), then -
+    //     unlocked - pushes those values into the UI_ELEMENTs and asks for a redraw. This is
+    //     the ONLY place that still touches UI_ELEMENT/GEN_USERINTERFACE for hardware info, and
+    //     it never runs on the background thread.
+    //   - HardwareInfo_RequestForced() is the non-blocking replacement for the old
+    //     UpdateHardwareInfo(true) call sites (first frame, F5): it just raises a flag under
+    //     the mutex for the background thread to notice on its next tick, instead of running
+    //     the (possibly slow) reads synchronously on the caller's thread.
+    //--------------------------------------------------------------------------------------
 
-    bool                            HardwareInfo_UpdateCPU                  ();
-    bool                            HardwareInfo_UpdateMemory               ();
-    bool                            HardwareInfo_UpdateDateTime             ();
-    bool                            HardwareInfo_UpdateUptime               ();
-    bool                            HardwareInfo_UpdateConnection           ();
-    bool                            HardwareInfo_UpdateFooter               ();
+    static void                     ThreadFunction_UpdateHardwareInfo       (void* param);
+
+    bool                            HardwareInfo_Compute                    (bool forced);
+    bool                            HardwareInfo_Apply                      ();
+    bool                            HardwareInfo_RequestForced              ();
+
+    bool                            HardwareInfo_UpdateCPU                  (XSTRING& outtemperature, float& outtemperaturelevel, float& outusagelevel);
+    bool                            HardwareInfo_UpdateMemory               (XSTRING& outusedtotal, float& outusagelevel);
+    bool                            HardwareInfo_UpdateDateTime             (XSTRING& outdate, XSTRING& outtime);
+    bool                            HardwareInfo_UpdateUptime               (XSTRING& outmonths, XSTRING& outhours, XSTRING& outyears, XSTRING& outseconds);
+    bool                            HardwareInfo_UpdateConnection           (bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip);
+    bool                            HardwareInfo_UpdateFooter               (XSTRING& outequipo, XSTRING& outso, XSTRING& outuptime);
 
     bool                            UserInterface_ElementSelected           (UI_ELEMENT* element);
     bool                            UserInterface_ChangeLiteralText         (UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresult);
@@ -198,6 +229,38 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
 
     XQWORD                          lastupdatehardwareinfo_second;
 
+    //--------------------------------------------------------------------------------------
+    // Background hardware-info thread. hardwareinfomutex guards every field below that is
+    // shared between it and the main thread (the level/bool fields here, plus the *_str
+    // members further down -- those are also read from UserInterface_ChangeLiteralText(),
+    // which now locks around that read). hardwareinfothread itself, hardwareinfoexiting and
+    // the XSTRING/level locals HardwareInfo_Compute() uses while actually reading CPU/memory/
+    // network/etc. are NOT in this shared set: they are only ever touched from the one thread
+    // that owns them (main thread for the former, background thread for the latter), by
+    // construction, so they need no locking.
+    //--------------------------------------------------------------------------------------
+
+    XTHREAD*                        hardwareinfothread;
+    XMUTEX*                         hardwareinfomutex;
+
+    bool                            hardwareinfoexiting;                     // set right before End(), so a call already in flight when shutdown starts does not start another cycle
+    bool                            hardwareinfo_forcenext;                  // guarded by hardwareinfomutex: set by HardwareInfo_RequestForced(), consumed by HardwareInfo_Compute()
+    bool                            hardwareinfo_haspending;                 // guarded by hardwareinfomutex: set by HardwareInfo_Compute(), consumed by HardwareInfo_Apply()
+
+    float                           cpu_temperaturelevel;                    // guarded by hardwareinfomutex
+    float                           cpu_usagelevel;                          // guarded by hardwareinfomutex
+    float                           ram_usagelevel;                          // guarded by hardwareinfomutex
+    bool                            isconnected;                             // guarded by hardwareinfomutex
+
+    // Set once Ini_Graphics() has already loaded the dashboard, before the native window is shown --
+    // see the note in Ini_Graphics(). Lets AppProc_FirstUpdate() skip a redundant second load on the
+    // normal path while still retrying (and still aborting startup on failure, exactly as before)
+    // if that early attempt did not run or did not succeed.
+    bool                            dashboardloaded;
+
+    // Published hardware-info text, guarded by hardwareinfomutex: written by
+    // HardwareInfo_Compute() (background thread), read by UserInterface_ChangeLiteralText()
+    // (main thread, when GEN_USERINTERFACE resolves a #[MASK] literal during redraw).
     XSTRING                         cpu_temperature_str;
     XSTRING                         ram_used_total_str;
     XSTRING                         system_date_str;

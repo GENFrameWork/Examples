@@ -99,7 +99,7 @@
 
 /*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
- APPLICATIONCREATEINSTANCE(UI_SYSTEM, canvas2d)
+ APPLICATIONCREATEINSTANCE(UI_SYSTEM, ui_system)
 
 
 
@@ -237,6 +237,34 @@ bool UI_SYSTEM::AppProc_Ini()
   lastupdatehardwareinfo_second  = 0;
 
   //--------------------------------------------------------------------------------------
+  // Background hardware-info thread: HardwareInfo_Compute() (see its own note in UI_System.h)
+  // is what used to run straight inside AppProc_Update(), in the middle of the render loop --
+  // most notably HardwareInfo_UpdateConnection(), which can block on a real network check. It
+  // now runs here instead, on its own XTHREAD, so a slow/stalled network check can never delay
+  // a rendered frame: AppProc_Update() only ever calls the cheap, non-blocking HardwareInfo_Apply().
+  //
+  // Created/started only AFTER every field it (or HardwareInfo_Compute()) touches is already in
+  // its final initial state above -- lastupdatehardwareinfo_second in particular, since
+  // hardwareinfothread->Ini() below can have the background thread calling HardwareInfo_Compute()
+  // before this function returns, and that field is read/written under hardwareinfomutex from
+  // then on, never again from this (main) thread directly.
+  //
+  // waityield is set short (200ms) so a HardwareInfo_RequestForced() call (F5) or shutdown is
+  // noticed quickly -- HardwareInfo_Compute() still self-throttles to once every
+  // UI_SYSTEM_HARDWAREINFO_UPDATEPERIOD_SECONDS internally, exactly as before, so this does not
+  // make the actual hardware reads any more frequent than they already were.
+  //--------------------------------------------------------------------------------------
+
+  hardwareinfomutex = GEN_XFACTORY.Create_Mutex();
+  if(!hardwareinfomutex) return false;
+
+  hardwareinfothread = GEN_XFACTORY.CreateThread(XTHREADGROUPID_UI_SYSTEM_HARDWAREINFO, __L("UI_SYSTEM::HardwareInfo"), ThreadFunction_UpdateHardwareInfo, this);
+  if(!hardwareinfothread) return false;
+
+  hardwareinfothread->SetWaitYield(200);
+  hardwareinfothread->Ini();
+
+  //--------------------------------------------------------------------------------------
   
   { XPATH xpath;
     
@@ -308,16 +336,30 @@ bool UI_SYSTEM::AppProc_FirstUpdate()
     }
 
   //--------------------------------------------------------------------------------------
-
-  if(!Ini_UserInterface(true)) return false;
-
-  //--------------------------------------------------------------------------------------
-  // First hardware info population, so the dashboard shows real values on the very first
-  // rendered frame instead of waiting for the first UI_SYSTEM_HARDWAREINFO_UPDATEPERIOD_SECONDS
-  // tick.
+  // The normal path: Ini_Graphics() already loaded the dashboard, before the window was ever shown
+  // (see the note there). This is now just the fallback/retry for a platform where that early attempt
+  // did not run or did not succeed -- same failure handling as the original single call site, an app
+  // that cannot load its own UI aborts here instead of continuing into a silently blank window.
   //--------------------------------------------------------------------------------------
 
-  UpdateHardwareInfo(true);
+  if(!dashboardloaded)
+    {
+      if(!Ini_UserInterface(true)) return false;
+    }
+
+  //--------------------------------------------------------------------------------------
+  // First hardware info population. This used to be a synchronous, forced UpdateHardwareInfo(true)
+  // call right here -- deliberately kept out of Ini_Graphics() and left this late specifically
+  // because HardwareInfo_UpdateConnection() can block on a real network check (see the note that
+  // used to be here, and still applies -- it just moved, see Ini_Graphics()). Now that hardware
+  // info runs on its own background thread (started in AppProc_Ini(), already running by the time
+  // this executes), that concern is gone: this just raises a flag for it to pick up on its very
+  // next tick instead of running the read itself. The dashboard's first rendered frame still shows
+  // its authored placeholder values for one or two frames until that first background pass
+  // publishes -- same as before, just no longer at the cost of a synchronous block here.
+  //--------------------------------------------------------------------------------------
+
+  HardwareInfo_RequestForced();
 
   //--------------------------------------------------------------------------------------
 
@@ -343,10 +385,10 @@ bool UI_SYSTEM::AppProc_Update()
           case UI_SYSTEM_XFSMSTATE_NONE      : break;
 
           case UI_SYSTEM_XFSMSTATE_INI       : UpdateInput();
-                                                UpdateHardwareInfo(false);
-                                                DrawFrame();
-                                                GetMainScreen()->UpdateViewports();
-                                                break;
+                                               HardwareInfo_Apply();
+                                               DrawFrame();
+                                               GetMainScreen()->UpdateViewports();
+                                               break;
 
           case UI_SYSTEM_XFSMSTATE_END       : break;
 
@@ -385,11 +427,37 @@ bool UI_SYSTEM::AppProc_Update()
 bool UI_SYSTEM::AppProc_End()
 {
   //--------------------------------------------------------------------------------------
+  // Stop the background hardware-info thread FIRST, before anything below it reads (xtimer,
+  // diocheckinternetconnection) gets deleted, and before Ini_UserInterface(false) tears down
+  // GEN_USERINTERFACE. hardwareinfoexiting is a fast-path guard so a thread tick that fires
+  // between this flag being set and End() actually stopping it returns immediately instead of
+  // starting one more (unlockable) compute pass; End() itself blocks (via WaitToEnd()) until any
+  // pass already in flight has finished, so by the time this block returns the background thread
+  // is guaranteed to no longer be touching xtimer/diocheckinternetconnection/hardwareinfomutex.
+  //--------------------------------------------------------------------------------------
+
+  hardwareinfoexiting = true;
+
+  if(hardwareinfothread)
+    {
+      hardwareinfothread->End();
+      GEN_XFACTORY.DeleteThread(XTHREADGROUPID_UI_SYSTEM_HARDWAREINFO, hardwareinfothread);
+
+      hardwareinfothread = NULL;
+    }
+
+  if(hardwareinfomutex)
+    {
+      GEN_XFACTORY.Delete_Mutex(hardwareinfomutex);
+      hardwareinfomutex = NULL;
+    }
+
+  //--------------------------------------------------------------------------------------
 
   SetCurrentState(UI_SYSTEM_XFSMSTATE_END);
 
   //--------------------------------------------------------------------------------------
-  
+
   Ini_UserInterface(false);
 
   //--------------------------------------------------------------------------------------
@@ -502,7 +570,7 @@ bool UI_SYSTEM::UpdateInput()
                 {
                   case UI_SYSTEM_BUTTON_F5    : Ini_UserInterface(false);
                                                 Ini_UserInterface(true);
-                                                UpdateHardwareInfo(true);
+                                                HardwareInfo_RequestForced();
                                                 break;
 
                   case UI_SYSTEM_BUTTON_ESC   : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
@@ -540,14 +608,46 @@ bool UI_SYSTEM::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
-  UserInterface_CFGChromes(screen); 
+  UserInterface_CFGChromes(screen);
 
   //--------------------------------------------------------------------------------------
 
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
 
   //--------------------------------------------------------------------------------------
-                                          
+  // Load the dashboard as early as possible: SCREEN_CREATING (which is what is being handled right
+  // now, all the way up the call chain to HandleEvent_Graphics()) fires BEFORE CreateMainScreenProcess()
+  // goes on to call mainscreen->Create(show) -- the call that actually maps the native window and makes
+  // it visible. Ini_UserInterface() used to run from AppProc_FirstUpdate() instead, which is the first
+  // tick of the app's main loop -- by construction AFTER the window was already on screen. Whatever the
+  // OS painted in between (an empty/zeroed canvas -- see the GRP2DCANVAS::Buffer_Create() fix -- or,
+  // before that fix, whatever was left in the freshly allocated buffer) was visible to the user for the
+  // whole time dashboard.xml and its ~30 SVG icons were being parsed and decoded. Doing that same work
+  // HERE instead removes essentially all of it from the window the user could watch it happen in: the
+  // viewport/canvas this needs already exist (CreateViewport() just above), and nothing else this touches
+  // depends on the native window itself.
+  //
+  // Hardware info population deliberately stays OUT of this early call, and is still requested from
+  // AppProc_FirstUpdate() instead (now via HardwareInfo_RequestForced(), no longer a synchronous call --
+  // see AppProc_Ini()/AppProc_FirstUpdate()). HardwareInfo_UpdateConnection() can block on a real network
+  // check; that used to matter here because the call was synchronous and this runs before the window
+  // exists at all. It runs on its own background thread now, so it would technically be safe to request
+  // it this early too -- left at AppProc_FirstUpdate() anyway, since nothing here depends on hardware info
+  // being ready any sooner and moving it would not change when the first real values actually appear on
+  // screen (that is gated by the background thread's own first pass, not by when it is asked to start).
+  // The dashboard's first frame simply shows its authored placeholder values for a frame or two, same as
+  // it always could between any two periodic refreshes.
+  //
+  // dashboardloaded records whether this attempt succeeded, so AppProc_FirstUpdate() below does not load
+  // it a second time on the normal path, but still retries -- and still aborts startup on failure exactly
+  // like the original single call site did -- if this one did not run or did not succeed (a platform whose
+  // canvas creation is genuinely deferred past this point would hit that fallback, not a silent blank UI).
+  //--------------------------------------------------------------------------------------
+
+  dashboardloaded = Ini_UserInterface(true);
+
+  //--------------------------------------------------------------------------------------
+
   return true;
 }
 
@@ -599,7 +699,7 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
  
   GEN_XPATHSMANAGER.GetPathOfSection(XPATHSMANAGERSECTIONTYPE_UI_LAYOUTS, xpath);
   xpath.Slash_Add();
-  xpath.Add(__L("ui_system/ui_system.xml"));
+  xpath.Add(__L("ui_system/dashboard.xml"));
     
   if(!GEN_USERINTERFACE.Load(xpath, screen, 0)) 
     {
@@ -676,8 +776,32 @@ bool UI_SYSTEM::DrawFrame()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::UpdateHardwareInfo(bool forced)
-* @brief      Polls the GEN hardware/system information sources and refreshes the dashboard.
+* @fn         void UI_SYSTEM::ThreadFunction_UpdateHardwareInfo(void* param)
+* @brief      Background thread entry point: called repeatedly (every hardwareinfothread waityield
+*             tick) by GEN's XTHREAD, for as long as the thread is running.
+* @note       STATIC. Runs on the background thread, never on the main thread.
+* @ingroup    EXAMPLES
+*
+* @param[in]  param : the UI_SYSTEM instance (passed as the thread's data pointer at creation).
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void UI_SYSTEM::ThreadFunction_UpdateHardwareInfo(void* param)
+{
+  UI_SYSTEM* uisystem = (UI_SYSTEM*)param;
+  if(!uisystem)                      return;
+  if(uisystem->hardwareinfoexiting)  return;
+
+  uisystem->HardwareInfo_Compute(false);
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
+* @brief      Reads every hardware/system information source and publishes the results for
+*             HardwareInfo_Apply() to pick up. This is the direct replacement for what the old
+*             UpdateHardwareInfo(bool) did, minus touching GEN_USERINTERFACE/UI_ELEMENT directly.
+* @note       Runs ONLY on the background thread (called from ThreadFunction_UpdateHardwareInfo()).
 * @ingroup    EXAMPLES
 *
 * @param[in]  forced : true to ignore the update period and refresh immediately.
@@ -685,27 +809,172 @@ bool UI_SYSTEM::DrawFrame()
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::UpdateHardwareInfo(bool forced)
+bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
 {
-  if(!xtimer) return false;
+  if(!xtimer)             return false;
+  if(!hardwareinfomutex)  return false;
 
   XQWORD actualsecond = xtimer->GetMeasureSeconds();
+  bool   duetorun;
 
-  if((!forced) && ((actualsecond - lastupdatehardwareinfo_second) < UI_SYSTEM_HARDWAREINFO_UPDATEPERIOD_SECONDS))
-    {
-      return true;
-    }
+  hardwareinfomutex->Lock();
 
-  lastupdatehardwareinfo_second = actualsecond;
+    if(hardwareinfo_forcenext)
+      {
+        forced                  = true;
+        hardwareinfo_forcenext  = false;
+      }
+
+    duetorun = forced || ((actualsecond - lastupdatehardwareinfo_second) >= UI_SYSTEM_HARDWAREINFO_UPDATEPERIOD_SECONDS);
+
+  hardwareinfomutex->UnLock();
+
+  if(!duetorun) return true;
 
   //--------------------------------------------------------------------------------------
+  // Everything below runs UNLOCKED, into local (this call's own stack, background-thread-only)
+  // variables: this is exactly the work that used to run straight inside AppProc_Update() and
+  // could stall rendering -- most notably HardwareInfo_UpdateConnection(), which can block on a
+  // real network check. It is now free to take as long as it needs without the render loop (or
+  // HardwareInfo_Apply(), which only ever takes the mutex for the short "publish" block further
+  // down) ever waiting on it.
+  //--------------------------------------------------------------------------------------
 
-  HardwareInfo_UpdateCPU();
-  HardwareInfo_UpdateMemory();
-  HardwareInfo_UpdateDateTime();
-  HardwareInfo_UpdateUptime();
-  HardwareInfo_UpdateConnection();
-  HardwareInfo_UpdateFooter();
+  XSTRING temperaturestr, usedtotalstr, datestr, timestr;
+  XSTRING monthsstr, hoursstr, yearsstr, secondsstr;
+  XSTRING statusstr, qualitystr, markstr, ipstr;
+  XSTRING equipostr, sostr, uptimestr;
+
+  float temperaturelevel = 0.0f;
+  float cpuusagelevelnow = 0.0f;
+  float ramusagelevelnow = 0.0f;
+  bool  isconnectednow   = false;
+
+  HardwareInfo_UpdateCPU(temperaturestr, temperaturelevel, cpuusagelevelnow);
+  HardwareInfo_UpdateMemory(usedtotalstr, ramusagelevelnow);
+  HardwareInfo_UpdateDateTime(datestr, timestr);
+  HardwareInfo_UpdateUptime(monthsstr, hoursstr, yearsstr, secondsstr);
+  HardwareInfo_UpdateConnection(isconnectednow, statusstr, qualitystr, markstr, ipstr);
+  HardwareInfo_UpdateFooter(equipostr, sostr, uptimestr);
+
+  //--------------------------------------------------------------------------------------
+  // Publish: the only point where this thread touches the fields the main thread reads
+  // (directly in HardwareInfo_Apply(), or via UserInterface_ChangeLiteralText() when
+  // GEN_USERINTERFACE resolves a #[MASK] literal during its own redraw). Held just long enough
+  // to copy already-computed values -- never around any of the work above.
+  //--------------------------------------------------------------------------------------
+
+  hardwareinfomutex->Lock();
+
+    cpu_temperature_str.Set(temperaturestr.Get());
+    ram_used_total_str.Set(usedtotalstr.Get());
+    system_date_str.Set(datestr.Get());
+    system_time_str.Set(timestr.Get());
+    uptime_months_str.Set(monthsstr.Get());
+    uptime_hours_str.Set(hoursstr.Get());
+    uptime_years_str.Set(yearsstr.Get());
+    uptime_seconds_str.Set(secondsstr.Get());
+    connection_status_str.Set(statusstr.Get());
+    connection_quality_str.Set(qualitystr.Get());
+    connection_mark_str.Set(markstr.Get());
+    local_ip_str.Set(ipstr.Get());
+    footer_equipo_str.Set(equipostr.Get());
+    footer_so_str.Set(sostr.Get());
+    footer_uptime_str.Set(uptimestr.Get());
+
+    cpu_temperaturelevel = temperaturelevel;
+    cpu_usagelevel       = cpuusagelevelnow;
+    ram_usagelevel       = ramusagelevelnow;
+    isconnected          = isconnectednow;
+
+    lastupdatehardwareinfo_second = actualsecond;
+    hardwareinfo_haspending       = true;
+
+  hardwareinfomutex->UnLock();
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::HardwareInfo_Apply()
+* @brief      Pushes whatever HardwareInfo_Compute() last published into the actual UI_ELEMENTs
+*             and asks for a redraw. Cheap no-op when nothing changed since the last frame.
+* @note       Runs ONLY on the main thread (called from AppProc_Update(), where the old inline
+*             UpdateHardwareInfo(false) call used to be). This is the only place in the whole
+*             class that still touches UI_ELEMENT/GEN_USERINTERFACE for hardware info.
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::HardwareInfo_Apply()
+{
+  if(!hardwareinfomutex) return false;
+
+  bool  haspending;
+  float temperaturelevel = 0.0f;
+  float cpuusagelevelnow = 0.0f;
+  float ramusagelevelnow = 0.0f;
+  bool  isconnectednow   = false;
+
+  hardwareinfomutex->Lock();
+
+    haspending = hardwareinfo_haspending;
+
+    if(haspending)
+      {
+        hardwareinfo_haspending = false;
+
+        temperaturelevel = cpu_temperaturelevel;
+        cpuusagelevelnow = cpu_usagelevel;
+        ramusagelevelnow = ram_usagelevel;
+        isconnectednow   = isconnected;
+      }
+
+  hardwareinfomutex->UnLock();
+
+  if(!haspending) return true;                            // nothing new since the last frame
+
+  //--------------------------------------------------------------------------------------
+  // From here on this is exactly what UpdateHardwareInfo(false)'s HardwareInfo_UpdateCPU() /
+  // _UpdateMemory() / _UpdateConnection() used to do inline, just fed from the values the
+  // background thread already computed instead of computing them here. No mutex needed below:
+  // this function only ever runs on the main thread.
+  //--------------------------------------------------------------------------------------
+
+  UI_ELEMENT_PROGRESS_IMAGE* element_temp = (UI_ELEMENT_PROGRESS_IMAGE*)GEN_USERINTERFACE.Element_Get(__L("cpu_temp_bar"), UI_ELEMENT_TYPE_PROGRESSIMAGE);
+  if(element_temp) element_temp->SetLevel(temperaturelevel);
+
+  UI_ELEMENT_PROGRESS_RADIAL* element_cpu = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("cpu_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
+  if(element_cpu) element_cpu->SetLevel(cpuusagelevelnow);
+
+  UI_ELEMENT_PROGRESS_RADIAL* element_radial = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("ram_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
+  if(element_radial) element_radial->SetLevel(ramusagelevelnow);
+
+  UI_ELEMENT_PROGRESSBAR* element_bar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("ram_linear_bar"), UI_ELEMENT_TYPE_PROGRESSBAR);
+  if(element_bar) element_bar->SetLevel(ramusagelevelnow);
+
+  //--------------------------------------------------------------------------------------
+  // Status glyph. Two images sit stacked at the same spot in the layout (a green disc with a
+  // tick, and a red disc with a cross); only one of them is ever visible. This replaces the
+  // previous "recolour a round form" approach, which stopped being visible once Draw_Form
+  // started preferring background-color over color for its fill.
+  //--------------------------------------------------------------------------------------
+
+  UI_ELEMENT* element_iconok = GEN_USERINTERFACE.Element_Get(__L("connection_icon_ok"), UI_ELEMENT_TYPE_IMAGE);
+  if(element_iconok) element_iconok->SetVisible(isconnectednow);
+
+  UI_ELEMENT* element_iconko = GEN_USERINTERFACE.Element_Get(__L("connection_icon_ko"), UI_ELEMENT_TYPE_IMAGE);
+  if(element_iconko) element_iconko->SetVisible(!isconnectednow);
+
+  //--------------------------------------------------------------------------------------
+  // The status line follows the same semantics: green when up, red when down.
+  //--------------------------------------------------------------------------------------
+
+  UI_ELEMENT_TEXT* element_status = (UI_ELEMENT_TEXT*)GEN_USERINTERFACE.Element_Get(__L("connection_status_text"), UI_ELEMENT_TYPE_TEXT);
+  if(element_status) element_status->GetColor()->SetFromString(isconnectednow ? __L("63,185,80") : __L("248,81,73"));
 
   //--------------------------------------------------------------------------------------
   // A single global redraw is enough: it re-resolves every #[MASK] literal text in the
@@ -721,14 +990,44 @@ bool UI_SYSTEM::UpdateHardwareInfo(bool forced)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateCPU()
-* @brief      Reads CPU temperature and CPU usage from GEN_XSYSTEM and updates the related UI elements.
+* @fn         bool UI_SYSTEM::HardwareInfo_RequestForced()
+* @brief      Non-blocking replacement for the old UpdateHardwareInfo(true) call sites (first
+*             frame, F5): raises a flag for the background thread to notice on its next tick
+*             (within hardwareinfothread's waityield) instead of running the reads synchronously
+*             on the caller's thread.
 * @ingroup    EXAMPLES
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateCPU()
+bool UI_SYSTEM::HardwareInfo_RequestForced()
+{
+  if(!hardwareinfomutex) return false;
+
+  hardwareinfomutex->Lock();
+    hardwareinfo_forcenext = true;
+  hardwareinfomutex->UnLock();
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateCPU(XSTRING& outtemperature, float& outtemperaturelevel, float& outusagelevel)
+* @brief      Reads CPU temperature and CPU usage from GEN_XSYSTEM.
+* @note       Called from HardwareInfo_Compute(), on the background thread. Writes only into its
+*             own output parameters -- no member/UI_ELEMENT access here anymore.
+* @ingroup    EXAMPLES
+*
+* @param[out] outtemperature : formatted "NN\u00B0C" (or "--" if unavailable).
+* @param[out] outtemperaturelevel : temperature level for cpu_temp_bar, clamped to [0,100].
+* @param[out] outusagelevel : CPU usage percent for cpu_usage_radial, 0 if unavailable.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::HardwareInfo_UpdateCPU(XSTRING& outtemperature, float& outtemperaturelevel, float& outusagelevel)
 {
   //--------------------------------------------------------------------------------------
   // CPU Temperature. On several platforms GEN_XSYSTEM.GetCPUTemperature() is still a pending
@@ -737,22 +1036,20 @@ bool UI_SYSTEM::HardwareInfo_UpdateCPU()
   //--------------------------------------------------------------------------------------
 
   float cputemperature = GEN_XSYSTEM.GetCPUTemperature();
-  float cputemperaturelevel = 0.0f;
+
+  outtemperaturelevel = 0.0f;
 
   if(cputemperature > 0.0f)
     {
-      cpu_temperature_str.Format(__L("%d\u00B0C"), (int)(cputemperature + 0.5f));
+      outtemperature.Format(__L("%d\u00B0C"), (int)(cputemperature + 0.5f));
 
-      cputemperaturelevel = cputemperature;
-      if(cputemperaturelevel > 100.0f) cputemperaturelevel = 100.0f;
+      outtemperaturelevel = cputemperature;
+      if(outtemperaturelevel > 100.0f) outtemperaturelevel = 100.0f;
     }
    else
     {
-      cpu_temperature_str.Set(__L("--"));            // TODO: wire a real CPU sensor (e.g. /sys/class/thermal) here
+      outtemperature.Set(__L("--"));                 // TODO: wire a real CPU sensor (e.g. /sys/class/thermal) here
     }
-
-  UI_ELEMENT_PROGRESS_IMAGE* element_temp = (UI_ELEMENT_PROGRESS_IMAGE*)GEN_USERINTERFACE.Element_Get(__L("cpu_temp_bar"), UI_ELEMENT_TYPE_PROGRESSIMAGE);
-  if(element_temp) element_temp->SetLevel(cputemperaturelevel);
 
   //--------------------------------------------------------------------------------------
   // CPU Usage (total, real value read from the OS: /proc/stat on Linux, WMI on Windows, ...)
@@ -760,8 +1057,7 @@ bool UI_SYSTEM::HardwareInfo_UpdateCPU()
 
   int cpuusage = GEN_XSYSTEM.GetCPUUsageTotal();
 
-  UI_ELEMENT_PROGRESS_RADIAL* element_cpu = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("cpu_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
-  if(element_cpu) element_cpu->SetLevel((cpuusage != XSYSTEM_CPUUSAGE_ERROR) ? (float)cpuusage : 0.0f);
+  outusagelevel = (cpuusage != XSYSTEM_CPUUSAGE_ERROR) ? (float)cpuusage : 0.0f;
 
   return true;
 }
@@ -769,18 +1065,24 @@ bool UI_SYSTEM::HardwareInfo_UpdateCPU()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateMemory()
-* @brief      Reads RAM usage from GEN_XSYSTEM and updates the related UI elements.
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, float& outusagelevel)
+* @brief      Reads RAM usage from GEN_XSYSTEM.
+* @note       Called from HardwareInfo_Compute(), on the background thread. Writes only into its
+*             own output parameters -- no member/UI_ELEMENT access here anymore.
 * @ingroup    EXAMPLES
+*
+* @param[out] outusedtotal : formatted "X.X GB / Y.Y GB" (or "-- GB / -- GB" if unavailable).
+* @param[out] outusagelevel : RAM used percent, for ram_usage_radial and ram_linear_bar.
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateMemory()
+bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, float& outusagelevel)
 {
-  XDWORD total        = 0;
-  XDWORD free         = 0;
-  float  usedpercent  = 0.0f;
+  XDWORD total = 0;
+  XDWORD free  = 0;
+
+  outusagelevel = 0.0f;
 
   if(GEN_XSYSTEM.GetMemoryInfo(total, free) && total)
     {
@@ -789,20 +1091,14 @@ bool UI_SYSTEM::HardwareInfo_UpdateMemory()
       double totalGB = (double)total / (1024.0 * 1024.0 * 1024.0);
       double usedGB  = (double)used  / (1024.0 * 1024.0 * 1024.0);
 
-      ram_used_total_str.Format(__L("%.1f GB / %.1f GB"), usedGB, totalGB);
+      outusedtotal.Format(__L("%.1f GB / %.1f GB"), usedGB, totalGB);
 
-      usedpercent = (float)(((double)used / (double)total) * 100.0);
+      outusagelevel = (float)(((double)used / (double)total) * 100.0);
     }
    else
     {
-      ram_used_total_str.Set(__L("-- GB / -- GB"));
+      outusedtotal.Set(__L("-- GB / -- GB"));
     }
-
-  UI_ELEMENT_PROGRESS_RADIAL* element_radial = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("ram_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
-  if(element_radial) element_radial->SetLevel(usedpercent);
-
-  UI_ELEMENT_PROGRESSBAR* element_bar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("ram_linear_bar"), UI_ELEMENT_TYPE_PROGRESSBAR);
-  if(element_bar) element_bar->SetLevel(usedpercent);
 
   return true;
 }
@@ -810,22 +1106,26 @@ bool UI_SYSTEM::HardwareInfo_UpdateMemory()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateDateTime()
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateDateTime(XSTRING& outdate, XSTRING& outtime)
 * @brief      Reads the actual system date and time.
+* @note       Called from HardwareInfo_Compute(), on the background thread.
 * @ingroup    EXAMPLES
+*
+* @param[out] outdate : formatted "DD/MM/YYYY".
+* @param[out] outtime : formatted "HH:MM:SS".
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateDateTime()
+bool UI_SYSTEM::HardwareInfo_UpdateDateTime(XSTRING& outdate, XSTRING& outtime)
 {
   XDATETIME* xdatetime = GEN_XFACTORY.CreateDateTime();
   if(!xdatetime) return false;
 
   xdatetime->Read();
 
-  system_date_str.Format(__L("%02d/%02d/%04d"), xdatetime->GetDay(),  xdatetime->GetMonth(),   xdatetime->GetYear());
-  system_time_str.Format(__L("%02d:%02d:%02d"), xdatetime->GetHours(), xdatetime->GetMinutes(), xdatetime->GetSeconds());
+  outdate.Format(__L("%02d/%02d/%04d"), xdatetime->GetDay(),  xdatetime->GetMonth(),   xdatetime->GetYear());
+  outtime.Format(__L("%02d:%02d:%02d"), xdatetime->GetHours(), xdatetime->GetMinutes(), xdatetime->GetSeconds());
 
   GEN_XFACTORY.DeleteDateTime(xdatetime);
 
@@ -835,14 +1135,20 @@ bool UI_SYSTEM::HardwareInfo_UpdateDateTime()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateUptime()
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateUptime(XSTRING& outmonths, XSTRING& outhours, XSTRING& outyears, XSTRING& outseconds)
 * @brief      Builds the "Tiempo de funcionamiento del sistema" figures out of the elapsed apptimer.
+* @note       Called from HardwareInfo_Compute(), on the background thread.
 * @ingroup    EXAMPLES
+*
+* @param[out] outmonths  : elapsed months, as text.
+* @param[out] outhours   : elapsed hours, as text.
+* @param[out] outyears   : elapsed years, as text.
+* @param[out] outseconds : elapsed seconds, as text.
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateUptime()
+bool UI_SYSTEM::HardwareInfo_UpdateUptime(XSTRING& outmonths, XSTRING& outhours, XSTRING& outyears, XSTRING& outseconds)
 {
   if(!xtimer) return false;
 
@@ -852,10 +1158,10 @@ bool UI_SYSTEM::HardwareInfo_UpdateUptime()
   XDWORD months  = XDATETIME_SECONDSMONTHS(allseconds);
   XDWORD hours   = (XDWORD)(allseconds / XDATETIME_SECONDSINHOUR);
 
-  uptime_years_str.Format  (__L("%d"), years);
-  uptime_months_str.Format (__L("%d"), months);
-  uptime_hours_str.Format  (__L("%d"), hours);
-  uptime_seconds_str.Format(__L("%d"), (XDWORD)allseconds);
+  outyears.Format  (__L("%d"), years);
+  outmonths.Format (__L("%d"), months);
+  outhours.Format  (__L("%d"), hours);
+  outseconds.Format(__L("%d"), (XDWORD)allseconds);
 
   return true;
 }
@@ -863,39 +1169,43 @@ bool UI_SYSTEM::HardwareInfo_UpdateUptime()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateConnection()
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip)
 * @brief      Checks the internet connection status, its latency and the local IP address.
+* @note       Called from HardwareInfo_Compute(), on the background thread. This is the one most
+*             worth having moved off the main thread: diocheckinternetconnection->Check() can
+*             block on a real network check. No UI_ELEMENT touched here anymore -- outisconnected
+*             is what HardwareInfo_Apply() uses to drive the status glyph/colour on the main thread.
 * @ingroup    EXAMPLES
+*
+* @param[out] outisconnected : true if the connection check succeeded.
+* @param[out] outstatus : "Conectado" / "Desconectado".
+* @param[out] outquality : "Conexi\u00F3n estable" / "Sin conexi\u00F3n".
+* @param[out] outmark : "OK" / "--".
+* @param[out] outip : formatted "IP: x.x.x.x" (or "IP: --" if unavailable).
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateConnection()
+bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip)
 {
-  bool isconnected = false;
+  outisconnected = false;
 
   if(diocheckinternetconnection)
     {
-      isconnected = diocheckinternetconnection->Check();
+      outisconnected = diocheckinternetconnection->Check();
     }
 
-  if(isconnected)
+  if(outisconnected)
     {
-      connection_status_str.Set(__L("Conectado"));
-      connection_quality_str.Set(__L("Conexi\u00F3n estable"));
-      connection_mark_str.Set(__L("OK"));
+      outstatus.Set(__L("Conectado"));
+      outquality.Set(__L("Conexi\u00F3n estable"));
+      outmark.Set(__L("OK"));
     }
    else
     {
-      connection_status_str.Set(__L("Desconectado"));
-      connection_quality_str.Set(__L("Sin conexi\u00F3n"));
-      connection_mark_str.Set(__L("--"));
-    }
-
-  UI_ELEMENT_FORM* element_badge = (UI_ELEMENT_FORM*)GEN_USERINTERFACE.Element_Get(__L("connection_status_badge"), UI_ELEMENT_TYPE_FORM);
-  if(element_badge)
-    {
-      element_badge->GetColor()->SetFromString(isconnected ? __L("60,200,110,255") : __L("225,70,70,255"));
+      outstatus.Set(__L("Desconectado"));
+      outquality.Set(__L("Sin conexi\u00F3n"));
+      outmark.Set(__L("--"));
     }
 
   //--------------------------------------------------------------------------------------
@@ -912,18 +1222,18 @@ bool UI_SYSTEM::HardwareInfo_UpdateConnection()
 
           device->GetIP()->GetXString(ipstring);
 
-          local_ip_str.Format(__L("IP: %s"), ipstring.Get());
+          outip.Format(__L("IP: %s"), ipstring.Get());
         }
        else
         {
-          local_ip_str.Set(__L("IP: --"));
+          outip.Set(__L("IP: --"));
         }
 
       GEN_DIOFACTORY.DeleteStreamEnumDevices(enumdevices);
     }
    else
     {
-      local_ip_str.Set(__L("IP: --"));
+      outip.Set(__L("IP: --"));
     }
 
   return true;
@@ -932,14 +1242,19 @@ bool UI_SYSTEM::HardwareInfo_UpdateConnection()
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateFooter()
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateFooter(XSTRING& outequipo, XSTRING& outso, XSTRING& outuptime)
 * @brief      Builds the status bar literals (equipment name, operative system and uptime summary).
+* @note       Called from HardwareInfo_Compute(), on the background thread.
 * @ingroup    EXAMPLES
+*
+* @param[out] outequipo : "Equipo: <domain>" (or "Equipo: --" if unavailable).
+* @param[out] outso : "SO: <id>" (or "SO: --" if unavailable).
+* @param[out] outuptime : "Uptime del sistema: <measure>".
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateFooter()
+bool UI_SYSTEM::HardwareInfo_UpdateFooter(XSTRING& outequipo, XSTRING& outso, XSTRING& outuptime)
 {
   //--------------------------------------------------------------------------------------
   // Equipment name: GEN does not expose the machine hostname on every platform (it is
@@ -952,11 +1267,11 @@ bool UI_SYSTEM::HardwareInfo_UpdateFooter()
 
   if(GEN_XSYSTEM.GetUserAndDomain(user, domain) && (!domain.IsEmpty()))
     {
-      footer_equipo_str.Format(__L("Equipo: %s"), domain.Get());
+      outequipo.Format(__L("Equipo: %s"), domain.Get());
     }
    else
     {
-      footer_equipo_str.Set(__L("Equipo: --"));           // TODO: add a real hostname source for this platform
+      outequipo.Set(__L("Equipo: --"));                    // TODO: add a real hostname source for this platform
     }
 
   //--------------------------------------------------------------------------------------
@@ -965,11 +1280,11 @@ bool UI_SYSTEM::HardwareInfo_UpdateFooter()
 
   if(GEN_XSYSTEM.GetOperativeSystemID(operativesystemID) && (!operativesystemID.IsEmpty()))
     {
-      footer_so_str.Format(__L("SO: %s"), operativesystemID.Get());
+      outso.Format(__L("SO: %s"), operativesystemID.Get());
     }
    else
     {
-      footer_so_str.Set(__L("SO: --"));
+      outso.Set(__L("SO: --"));
     }
 
   //--------------------------------------------------------------------------------------
@@ -981,8 +1296,8 @@ bool UI_SYSTEM::HardwareInfo_UpdateFooter()
       xtimer->GetMeasureString(measure, true);
 
       if(!measure.IsEmpty())
-            footer_uptime_str.Format(__L("Uptime del sistema: %s"), measure.Get());
-       else footer_uptime_str.Set(__L("Uptime del sistema: 0 segundos"));
+            outuptime.Format(__L("Uptime del sistema: %s"), measure.Get());
+       else outuptime.Set(__L("Uptime del sistema: 0 segundos"));
     }
 
   return true;
@@ -1080,6 +1395,15 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
                                                              __L("nav-alertas-text")      ,
                                                              __L("nav-configuracion-text") };
 
+  static XCHAR* navbarnames[UI_SYSTEM_SECTIONID_MAX]     = { __L("nav-resumen-bar")       ,
+                                                             __L("nav-cpu-bar")           ,
+                                                             __L("nav-memoria-bar")       ,
+                                                             __L("nav-red-bar")           ,
+                                                             __L("nav-disco-bar")         ,
+                                                             __L("nav-procesos-bar")      ,
+                                                             __L("nav-alertas-bar")       ,
+                                                             __L("nav-configuracion-bar")  };
+
   for(int c=0; c<UI_SYSTEM_SECTIONID_MAX; c++)
     {
       bool isactive = (c == (int)sectionID);
@@ -1087,8 +1411,21 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
       UI_ELEMENT_FORM* element_hl = (UI_ELEMENT_FORM*)GEN_USERINTERFACE.Element_Get(navhlnames[c], UI_ELEMENT_TYPE_FORM);
       if(element_hl) element_hl->SetVisible(isactive);
 
+      //----------------------------------------------------------------------------------------
+      // Left accent bar of the current row. Same show/hide treatment as the band behind it.
+      //----------------------------------------------------------------------------------------
+
+      UI_ELEMENT_FORM* element_bar = (UI_ELEMENT_FORM*)GEN_USERINTERFACE.Element_Get(navbarnames[c], UI_ELEMENT_TYPE_FORM);
+      if(element_bar) element_bar->SetVisible(isactive);
+
+      //----------------------------------------------------------------------------------------
+      // Label tone. These two values mirror --accent-blue and --text-muted in dashboard.css; an
+      // SVG cannot be recoloured at runtime, so the icon keeps its neutral tint and the accent is
+      // carried by the text plus the band and bar above.
+      //----------------------------------------------------------------------------------------
+
       UI_ELEMENT_TEXT* element_txt = (UI_ELEMENT_TEXT*)GEN_USERINTERFACE.Element_Get(navtextnames[c], UI_ELEMENT_TYPE_TEXT);
-      if(element_txt) element_txt->GetColor()->SetFromString(isactive ? __L("228,232,238,255") : __L("146,156,171,255"));
+      if(element_txt) element_txt->GetColor()->SetFromString(isactive ? __L("88,166,255") : __L("139,148,158"));
     }
 
   currentsectionID = sectionID;
@@ -1123,6 +1460,15 @@ bool UI_SYSTEM::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, X
       maskresolved->Format(__L("%d.%d.%d"), APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
     }
 
+  //--------------------------------------------------------------------------------------
+  // Every field read below is also written by HardwareInfo_Compute(), on the background
+  // thread (see the note in UI_System.h) -- this runs on the main thread (called from inside
+  // GEN_USERINTERFACE.Update(), during DrawFrame()'s redraw), so it needs the same mutex to
+  // avoid reading a string the background thread is mid-Set()/Format() on.
+  //--------------------------------------------------------------------------------------
+
+  if(hardwareinfomutex) hardwareinfomutex->Lock();
+
   if(!maskvalue->Compare(__L("CPU_TEMPERATURE")   , true))  maskresolved->Set(cpu_temperature_str.Get());
   if(!maskvalue->Compare(__L("RAM_USED_TOTAL")    , true))  maskresolved->Set(ram_used_total_str.Get());
   if(!maskvalue->Compare(__L("SYSTEM_DATE")       , true))  maskresolved->Set(system_date_str.Get());
@@ -1138,6 +1484,8 @@ bool UI_SYSTEM::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, X
   if(!maskvalue->Compare(__L("FOOTER_EQUIPO")     , true))  maskresolved->Set(footer_equipo_str.Get());
   if(!maskvalue->Compare(__L("FOOTER_SO")         , true))  maskresolved->Set(footer_so_str.Get());
   if(!maskvalue->Compare(__L("FOOTER_UPTIME")     , true))  maskresolved->Set(footer_uptime_str.Get());
+
+  if(hardwareinfomutex) hardwareinfomutex->UnLock();
 
   return true;
 }
@@ -1298,6 +1646,20 @@ void UI_SYSTEM::Clean()
 
   currentsectionID               = UI_SYSTEM_SECTIONID_RESUMEN;
   lastupdatehardwareinfo_second  = 0;
+
+  dashboardloaded                = false;
+
+  hardwareinfothread              = NULL;
+  hardwareinfomutex               = NULL;
+
+  hardwareinfoexiting             = false;
+  hardwareinfo_forcenext          = false;
+  hardwareinfo_haspending         = false;
+
+  cpu_temperaturelevel            = 0.0f;
+  cpu_usagelevel                  = 0.0f;
+  ram_usagelevel                  = 0.0f;
+  isconnected                     = false;
 
   cpu_temperature_str.Empty();
   ram_used_total_str.Empty();

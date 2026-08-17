@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layouts>
   <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="seamless_pattern2.jpg" backgroundseamlesspattern="yes" > </skin>
-
+  <stylesheet>example.css</stylesheet>
+  
   <color name="colortext">yellow</color>   
   <color name="colormenuline">red</color>   
   <color name="colormenu">black,50</color>
@@ -12,9 +13,9 @@
 
   <layout name="example"> 
     
-    <element name="text01" type="text" xpos="Center" ypos="740" sizefont="22" color="black" >Change tests in sentence: #[TEST_TEXT2]</element>    s
+    <element name="text01" type="text" xpos="Center" ypos="840" sizefont="22" color="black" >Change tests in sentence: #[TEST_TEXT2]</element>    s
 
-    <element name="textbox01" type="textbox"  xpos="550" ypos="475" width="400" height="350" textalignment="center" wordclipping="yes" linespacing="5" sizefont="18" color="red,50">
+    <element name="textbox01" type="textbox"  xpos="650" ypos="475" width="400" height="350" textalignment="center" wordclipping="yes" linespacing="5" sizefont="18" color="red,50">
       <animation name="gigolord_walk1">gigolord_walk0/LF-WxWalk_02#[02].png</animation>
       <text>#[TRANSLATE_100]</text>
       <text>Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados,</text>
@@ -54,11 +55,11 @@
     </element>
    
 
-    <element name="form" type="form"  xpos="550" ypos="100" width="275" height="75" roundrect="15" linecolor="colormenuline" color="colormenu">
+    <element name="form" type="form"  class="card-outlined" xpos="700" ypos="100" width="275" height="75" roundrect="15" linecolor="colormenuline" color="colormenu">
       <element name="ID Edit" type="edittext" maxsizetext="10" xpos="20" ypos="20" sizefont="22" roundrect="15" bckgrdcolor="159,131,87,100" color="yellow" >0000000</element>
     </element>    
     
-    <element name="menu_horz" type="form"  xpos="60" ypos="690"  visiblerect = "0,0,550,70" roundrect="15" linecolor="white,100" color="60,60,60, 70">
+    <element name="menu_horz" type="form" class="card-shadow-lift" xpos="60" ypos="690"  visiblerect = "0,0,550,70" roundrect="15" linecolor="white,100" color="60,60,60, 70">
 
       <element name="chromeall-btn" type="multioption" xpos="80" ypos="20">
 
@@ -114,7 +115,7 @@
       </element>
     </element>
 
-    <element type="image" name="img_icon_minimize" xpos="660" ypos="750" width="350" height="350">tiger.svg</element>
+    <element type="image" name="img_icon_minimize" xpos="760" ypos="790" width="350" height="350">tiger.svg</element>
 
 
 

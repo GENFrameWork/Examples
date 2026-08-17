@@ -1,0 +1,299 @@
+/* -------------------------------------------------------------------
+   Demo stylesheet for UI_Options/assets/ui_layouts/example/example.xml
+   Drop next to the .xml and add <stylesheet>example.css</stylesheet>
+   inside the <layouts> node to see it applied.
+
+   Supported selector subset (steps 1-2):
+     tipo                       (button, text, progressbar, ...)
+     #id                        (equivalent to name="…")
+     .clase                     (one or more classes from class="…")
+     :pseudo                    (only ":root" is honoured; others are parsed
+                                 but currently unmatchable, awaiting state)
+     tipo#id.clase              (combinations)
+     *                          (universal)
+
+   Cascade: id = 100, class = 10, pseudo = 10, type = 1.
+   Ties are broken by source order: later rule wins.
+
+   Values use the SAME format as XML attributes today:
+     colors as "name", "R,G,B", "R,G,B,A" or "#RRGGBBAA"
+     numbers plain ("15"), tuples ("0,0,175,30")
+   Custom properties (variables) declared under :root can be referenced
+   anywhere with var(--name) or var(--name, fallback).
+   ------------------------------------------------------------------- */
+
+
+/* --- Theme variables (step 2) -------------------------------------- */
+
+:root {
+  /* Dashboard accent palette */
+  --accent-blue:    20,80,240;
+  --accent-red:     220,50,50;
+  --accent-green:   40,180,90;
+  --accent-purple:  140,80,225;
+
+  /* Companion tints used as gradient stops */
+  --tint-blue:      160,195,255;
+  --tint-red:       255,150,150;
+  --tint-green:     160,255,190;
+  --tint-purple:    210,185,245;
+
+  /* Surface / structure */
+  --card-bg:        32,40,48;
+  --card-line:      black,60;
+  --muted-text:     120,120,120,100;
+
+  /* Aliases: one variable can reference another */
+  --primary:        var(--accent-blue);
+  --primary-tint:   var(--tint-blue);
+}
+
+
+/* --- Type-level baseline (specificity = 1) ------------------------- */
+
+progressbar {
+  linecolor:      var(--card-line);
+  color:          var(--primary-tint);
+  gradientcolor:  var(--primary);
+  gradientmode:   track;
+  bckgrdcolor:    white;
+  roundcap:       no;
+}
+
+progressradial {
+  color:          var(--primary-tint);
+  gradientcolor:  var(--primary);
+  gradientmode:   track;
+  bckgrdcolor:    var(--card-bg);
+  thickness:      18;
+  roundcap:       no;
+}
+
+text {
+  color:          black,100;
+  sizefont:       18;
+}
+
+
+/* --- Class-level modifiers (specificity = 10) ---------------------- */
+
+.accent-blue    { color: var(--accent-blue);   gradientcolor: var(--tint-blue);   }
+.accent-red     { color: var(--accent-red);    gradientcolor: var(--tint-red);    }
+.accent-green   { color: var(--accent-green);  gradientcolor: var(--tint-green);  }
+.accent-purple  { color: var(--accent-purple); gradientcolor: var(--tint-purple); }
+
+.muted          { color: var(--muted-text); }
+
+
+/* --- Id-level override (specificity = 100) ------------------------- */
+
+#progressbar4   { roundrect: 8;   linecolor: red,80; }
+
+
+/* --- Compound selector (type + class, specificity = 11) ------------ */
+
+progressbar.big { thickness: 30; }
+
+
+/* --- Fallback showcase (var not defined) --------------------------- */
+/* If --nonexistent is never declared, this expands to "yellow". */
+
+.warned         { color: var(--nonexistent, yellow); }
+
+
+/* --- Pseudo-classes with live state re-resolution (step 3) --------- */
+/* Mapped to UI_ELEMENT state flags:
+     :preselect   -> ispreselect  (typically mouse-over / cursor-parked)
+     :selected    -> isselected   (clicked / picked)
+     :active      -> isactive     (enabled)
+     :disabled    -> !isactive
+   Every time one of these flips, UI_ELEMENT re-runs the cascade and
+   updates the three baseline visual keys (color, bckgrdcolor, roundrect).
+   Per-type keys (linecolor, gradientcolor, thickness) are frozen at
+   load time and will land in a later step.
+   To try this out, add class="hoverable" to a button in example.xml
+   and interact with it: colour should update instantly on hover/click. */
+
+button.hoverable            { color: white,100;               bckgrdcolor: 40,40,48;   roundrect: 10; }
+button.hoverable:preselect  { color: var(--accent-blue);      bckgrdcolor: 60,60,72;   roundrect: 12; }
+button.hoverable:selected   { color: var(--accent-red);       bckgrdcolor: 80,20,20;   roundrect: 14; }
+button.hoverable:disabled   { color: var(--muted-text);       bckgrdcolor: 32,32,32;   roundrect: 10; }
+
+
+/* --- Box model: padding + border-width (step 4) -------------------- */
+/* Applies to any element whose skin honours it. In this step Draw_Form
+   reads border-width (0 = no stroke, >0 = px, unset = historical 1px).
+   CalculePosition applies the parent's padding to every child, so the
+   inner content is inset accordingly. Padding shorthand follows the
+   CSS convention: 1/2/3/4 values map to all / v-h / t-hh-b / t-r-b-l.
+   Longhands padding-left/right/top/bottom override the shorthand.
+
+   To try this out, add class="card" to a <element type="form" ...>
+   in example.xml and observe: inner children shift, and the outline
+   becomes thicker (or disappears with border-width: 0). */
+
+form.card {
+  bckgrdcolor:    var(--card-bg);
+  linecolor:      var(--card-line);   /* existing UI_ELEMENT_FORM key */
+  border-width:   2;
+  padding:        16;                 /* shorthand: 16 all sides */
+  roundrect:      15;
+}
+
+form.card-tight {
+  padding:        8 20;               /* 8 top-bottom, 20 left-right */
+  border-width:   0;                  /* fill only, no stroke */
+}
+
+form.card-asymmetric {
+  padding:        10 20 30 40;        /* T R B L, CSS order */
+}
+
+
+/* --- Border color + per-corner radius (step 5) --------------------- */
+/* border-color at base level overrides the per-type linecolor. Missing
+   key -> fall back to linecolor so pre-step-5 layouts render unchanged.
+
+   border-radius accepts the CSS shorthand of 1..4 values:
+     1 value : all four corners
+     2 values: TL-BR, TR-BL (opposite diagonals)
+     3 values: TL, TR-BL, BR
+     4 values: TL, TR, BR, BL (clockwise from top-left)
+   Longhands: border-top-left-radius / border-top-right-radius /
+              border-bottom-right-radius / border-bottom-left-radius.
+   Un-authored corners fall back to the element's roundrect value.    */
+
+form.card-outlined {
+  background-color: var(--card-bg);         /* CSS-natural (step 6). "bckgrdcolor" is the equivalent GEN key. */
+  border-color:     var(--accent-blue);     /* wins over linecolor */
+  border-width:     3;
+  border-radius:    20;                     /* uniform */
+  padding:          14;
+}
+
+form.card-bubble {
+  background-color: var(--card-bg);
+  border-color:     var(--accent-purple);
+  border-width:     2;
+  border-radius:    4 24;                   /* TL/BR small, TR/BL big */
+  padding:          12;
+}
+
+form.card-tab {
+  background-color: var(--card-bg);
+  border-color:     var(--accent-green);
+  border-width:     2;
+  border-top-left-radius:      20;
+  border-top-right-radius:     20;
+  border-bottom-right-radius:   0;
+  border-bottom-left-radius:    0;          /* tab-style card, rounded on top only */
+  padding:          12;
+}
+
+
+/* --- CSS-natural semantics for Form (step 6) ----------------------- */
+/* Prior to step 6, Form used "color" for its background fill. Now
+   it uses "background-color" (or the equivalent GEN key "bckgrdcolor")
+   as the CSS-standard convention. "color" is intended as the text
+   colour that children may inherit via "color: inherit".
+   For retro-compat, Form still falls back to "color" as fill when
+   "background-color" is not set; the log emits a one-time WARNING per
+   Form to help migrate its XML.
+   Example of the migration idiom:                                   */
+
+form.card-textual {
+  background-color: var(--card-bg);
+  color:            white,100;              /* text colour for children */
+  border-color:     var(--card-line);
+  border-width:     1;
+  border-radius:    12;
+  padding:          16;
+}
+
+/* And in every text child that should follow the card's text colour, tag it
+   with a class and opt in via "color: inherit". Descendant combinators
+   ("form.card-textual text") will land when the selector grammar grows. */
+.inherit-text {
+  color: inherit;                            /* walks up to nearest authored ancestor colour */
+}
+
+
+/* --- Box shadow (steps 7-8) ---------------------------------------- */
+/* Accepted grammar (CSS subset):
+     box-shadow: <offset-x> <offset-y> <color>
+     box-shadow: <offset-x> <offset-y> <blur> <color>
+   Positive offset-y drops the shadow DOWN (screen y-down).
+   Blur = 0  -> hard-edged silhouette (step 7).
+   Blur > 0  -> soft shadow rendered via 3-pass box blur (step 8),
+                Gaussian-equivalent for the small radii typical in UI.
+   The skin auto-expands the rebuild-area to include the shadow footprint
+   (including the blur fade), so save/restore cycles do not leave ghost
+   pixels around the shape.
+
+   *** ALPHA CONVENTION -- READ THIS ***
+   GEN colour strings do NOT follow the web rgba() convention. The fourth
+   component of "R,G,B,A" is a PERCENTAGE in the range 0..100, and any
+   value above 100 is clamped to fully opaque (see UI_COLOR::SetFromString
+   -> GetAlphaForPercent). So:
+       0,0,0,40    ->  black at  40% opacity   (a soft shadow)
+       0,0,0,100   ->  black at 100% opacity   (solid black)
+       0,0,0,180   ->  clamped to 100%         (also solid black!)
+   For finer-grained control the hex form takes a true 0..255 byte:
+       #00000066   ->  black at alpha 102/255 (= 40%)
+   Shadows normally want 20%..50%; anything above ~60% reads as a solid
+   block rather than as a shadow.                                      */
+
+form.card-shadow {
+  background-color: var(--card-bg);
+  border-color:     var(--card-line);
+  border-width:     1;
+  border-radius:    12;
+  padding:          14;
+  box-shadow:       4 4 0,0,0,35;            /* hard drop shadow, black @ 35% */
+}
+
+form.card-shadow-strong {
+  background-color: var(--card-bg);
+  border-color:     var(--card-line);
+  border-width:     1;
+  border-radius:    16;
+  padding:          16;
+  box-shadow:       6 8 0,0,0,50;            /* deeper, more opaque, still hard */
+}
+
+form.card-shadow-up {
+  background-color: var(--card-bg);
+  border-width:     0;
+  border-radius:    10;
+  padding:          10;
+  box-shadow:       0 -3 0,0,0,40;           /* shadow above the card (negative Y) */
+}
+
+
+/* --- Soft (blurred) shadows --------------------------------------- */
+
+form.card-shadow-soft {
+  background-color: var(--card-bg);
+  border-color:     var(--card-line);
+  border-width:     1;
+  border-radius:    14;
+  padding:          14;
+  box-shadow:       4 6 8 0,0,0,35;          /* offset 4/6, blur 8 px, black @ 35% */
+}
+
+form.card-shadow-lift {
+  background-color: var(--card-bg);
+  border-width:     0;
+  border-radius:    18;
+  padding:          16;
+  box-shadow:       0 12 24 0,0,0,30;        /* "floating card": wide blur, light tint */
+}
+
+form.card-shadow-glow {
+  background-color: var(--card-bg);
+  border-color:     var(--accent-blue);
+  border-width:     1;
+  border-radius:    12;
+  padding:          12;
+  box-shadow:       0 0 16 20,80,240,45;     /* symmetric soft glow, blue @ 45% */
+}

@@ -1,0 +1,179 @@
+/* ===================================================================================================
+   UI_System - "Monitor del Sistema" presentation layer
+   Companion stylesheet for dashboard.xml
+
+   SCOPE
+   -----
+   Only the BASE properties of UI_ELEMENT reach a stylesheet, because UI_MANAGER::GetLayoutElement_Base
+   is the only builder that reads the cascaded UI_STYLE bag. Type-specific attributes (sizefont, level,
+   thickness, gradientcolor, gradientmode, linecolor, roundcap, startangle, sweepangle, allocationtext,
+   progressrect, imageempty/imagefull, offsetstart/offsetend) are read straight from the XML node by the
+   per-type builders and are ignored here. They live in dashboard.xml.
+
+       reachable : color, background-color / bckgrdcolor, roundrect, visible, scroll, margin,
+                   padding(+longhands), border-width, border-color, border-radius(+longhands),
+                   box-shadow, direction, role, blink, extra, xpos, ypos, width, height
+       painted   : padding / border-* / box-shadow are consumed by Draw_Form only. On other widget
+                   types they parse cleanly and are simply not drawn yet.
+
+   ALPHA CONVENTION
+   ----------------
+   In "R,G,B,A" the fourth component is a PERCENTAGE 0..100 (over 100 clamps to opaque). "R,G,B" with
+   no fourth component is opaque. "#RRGGBBAA" takes a true 0..255 byte.
+   =================================================================================================== */
+
+
+/* --- Theme ---------------------------------------------------------------------------------------- */
+
+:root {
+  /* Surfaces */
+  --page-bg:        13,17,23;
+  --card-bg:        22,27,34;
+  --card-line:      48,54,61;
+  --inner-bg:       13,17,23;
+  --inner-line:     40,46,54;
+  --sidebar-bg:     16,20,28;
+  --sidebar-line:   33,38,45;
+  --footer-bg:      16,20,28;
+
+  /* Selection */
+  --nav-band:       33,58,105,45;      /* subtle blue wash behind the current section */
+  --nav-accent:     56,139,253;        /* 4 px bar on the left edge */
+
+  /* Text */
+  --text-strong:    230,237,243;
+  --text-normal:    201,209,217;
+  --text-muted:     139,148,158;
+
+  /* Accents - one per card, mirrored by the icon colours baked into the SVGs */
+  --accent-blue:    88,166,255;
+  --accent-purple:  191,148,255;
+  --accent-red:     248,81,73;
+  --accent-green:   63,185,80;
+
+  /* Depth. Black at a low percentage reads as a shadow; over ~60% it reads as a solid block. */
+  --shadow-card:    0,0,0,35;
+}
+
+
+/* --- Chrome surfaces ------------------------------------------------------------------------------ */
+
+form.sidebar {
+  background-color: var(--sidebar-bg);
+  border-color:     var(--sidebar-line);
+  border-width:     1;
+  border-radius:    0;
+  padding:          0;
+}
+
+form.footer {
+  background-color: var(--footer-bg);
+  border-color:     var(--sidebar-line);
+  border-width:     1;
+  border-radius:    0;
+  padding:          0;
+}
+
+
+/* --- Cards ----------------------------------------------------------------------------------------
+   type="form" is the only widget whose Draw_X consumes the box model today, which is why the six
+   panels and the inset boxes carry radius, border and shadow while everything else is plain text.
+   -------------------------------------------------------------------------------------------------- */
+
+form.card {
+  background-color: var(--card-bg);
+  border-color:     var(--card-line);
+  border-width:     1;
+  border-radius:    16;
+  padding:          18;
+  box-shadow:       0 4 12 var(--shadow-card);
+}
+
+form.inner-box {
+  background-color: var(--inner-bg);
+  border-color:     var(--inner-line);
+  border-width:     1;
+  border-radius:    12;
+  padding:          12;
+}
+
+form.tile {
+  background-color: var(--inner-bg);
+  border-color:     var(--inner-line);
+  border-width:     1;
+  border-radius:    10;
+  padding:          8;
+}
+
+
+/* --- Sidebar selection ----------------------------------------------------------------------------
+   The band and the accent bar are plain forms whose visibility the application toggles in
+   UserInterface_SelectSection(). Their colours are pure presentation, so they belong here.
+   -------------------------------------------------------------------------------------------------- */
+
+form.nav-band {
+  background-color: var(--nav-band);
+  border-width:     0;
+  border-radius:    0;
+}
+
+form.nav-accent {
+  background-color: var(--nav-accent);
+  border-width:     0;
+  border-radius:    0;
+}
+
+/* Transparent hit target laid over each row. No sub-elements and an explicit width/height, so
+   CalculateBoundaryLine_Option leaves the box alone and the whole 210x48 row stays clickable.
+   "visiblelimit" is deliberately NOT set in the XML: that attribute is what enables the skin's
+   built-in red/white preselect outline, which would fight with the band underneath. The hover
+   feedback below is the stylesheet's own, re-resolved live on every state change. */
+button.nav-hit {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  border-radius:    0;
+}
+
+button.nav-hit:preselect {
+  background-color: 255,255,255,6;      /* barely-there wash under the cursor */
+}
+
+.nav-label   { color: var(--text-muted);   }   /* the app repaints the current one in accent blue */
+.brand       { color: var(--text-normal);  }
+.brand-dim   { color: var(--text-muted);   }
+
+
+/* --- Typography -----------------------------------------------------------------------------------
+   Colour only. Every sizefont lives in the XML: the Text builder reads that attribute from the node
+   and never consults the stylesheet.
+   -------------------------------------------------------------------------------------------------- */
+
+.card-title    { color: var(--text-strong);  }
+
+.value-temp    { color: var(--accent-red);    }
+.value-ram     { color: var(--accent-purple); }
+.value-date    { color: var(--text-strong);   }
+.value-time    { color: var(--accent-blue);   }
+.value-ok      { color: var(--accent-green);  }
+
+.ring-value    { color: var(--text-strong);   }
+
+.tile-label    { color: var(--text-muted);    }
+.tile-value    { color: var(--accent-green);  }
+
+.label         { color: var(--text-muted);    }
+.label-dim     { color: var(--text-muted);    }
+.label-accent  { color: var(--accent-blue);   }
+
+.foot          { color: var(--text-muted);    }
+
+
+/* --- Progress widgets -----------------------------------------------------------------------------
+   "color" is a base property so the ring / bar base tone IS settable here; its companion
+   "gradientcolor" (plus thickness, level, roundcap, startangle, sweepangle) is XML-only.
+   The dark "background-color" is what draws the unfilled part of the track.
+   -------------------------------------------------------------------------------------------------- */
+
+.ring-cpu   { color: var(--accent-blue);    background-color: 33,38,45; }
+.ring-ram   { color: var(--accent-purple);  background-color: 33,38,45; }
+.bar-ram    { color: var(--accent-purple);  background-color: 33,38,45; }

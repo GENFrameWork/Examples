@@ -1,0 +1,66 @@
+/* -------------------------------------------------------------------
+   Demo stylesheet for UI_Options/assets/ui_layouts/example/example.xml
+   Drop next to the .xml and add <stylesheet>example.css</stylesheet>
+   inside the <layouts> node to see it applied.
+
+   Supported selector subset (step 1):
+     tipo                       (button, text, progressbar, ...)
+     #id                        (equivalent to name="…")
+     .clase                     (one or more classes from class="…")
+     tipo#id.clase              (combinations)
+     *                          (universal)
+
+   Cascade: id = 100, class = 10, type = 1.
+   Ties are broken by source order: later rule wins.
+
+   Values use the SAME format as XML attributes today:
+     colors as "name", "R,G,B", "R,G,B,A" or "#RRGGBBAA"
+     numbers plain ("15"), tuples ("0,0,175,30")
+   ------------------------------------------------------------------- */
+
+
+/* --- Type-level baseline (specificity = 1) ------------------------- */
+
+progressbar {
+  linecolor:      black,60;
+  color:          160,195,255;
+  gradientcolor:  20,80,240;
+  gradientmode:   track;
+  bckgrdcolor:    white;
+  roundcap:       yes;
+}
+
+progressradial {
+  color:          160,195,255;
+  gradientcolor:  20,80,240;
+  gradientmode:   track;
+  bckgrdcolor:    32,40,48;
+  thickness:      18;
+  roundcap:       yes;
+}
+
+text {
+  color:          black,100;
+  sizefont:       18;
+}
+
+
+/* --- Class-level modifiers (specificity = 10) ---------------------- */
+
+.accent-blue   { color: 20,80,240;   gradientcolor: 160,195,255; }
+.accent-red    { color: 220,50,50;   gradientcolor: 255,150,150; }
+.accent-green  { color: 40,180,90;   gradientcolor: 160,255,190; }
+
+.muted         { color: 120,120,120,100; }
+
+
+/* --- Id-level override (specificity = 100) ------------------------- */
+
+#progressbar4  { roundrect: 8;   linecolor: black,80; }
+
+
+/* --- Compound selector (type + class, specificity = 11) ------------ */
+
+progressbar.big {
+  thickness:    30;
+}
