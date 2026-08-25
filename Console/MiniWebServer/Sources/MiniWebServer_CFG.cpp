@@ -185,6 +185,10 @@ bool MINIWEBSERVER_CFG::DoDefault()
   webserver_isauthenticatedaccess                   = false;
   webserver_password                                = __L("");
   webserver_path_resources                          = __L("");
+  #ifdef DIO_STREAMTLS_ACTIVE
+  webserver_path_privatekey                         = __L("");
+  webserver_path_certificate                        = __L("");
+  #endif
 
   //------------------------------------------------------------------------------
 

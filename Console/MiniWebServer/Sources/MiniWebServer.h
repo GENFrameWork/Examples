@@ -134,7 +134,7 @@ class MINIWEBSERVER : public APPFLOWCONSOLE, public XOBSERVER, public XFSMACHINE
 
     XTIMER*                         xtimerupdateconsole;
     XMUTEX*                         xmutexshowallstatus;
-    
+
     APPFLOWWEBSERVER*               appwebserver;
     MINIWEBSERVER_APIREST*          apirest;
     APPFLOWWEBSERVER*               appwebsocket;

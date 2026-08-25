@@ -42,6 +42,12 @@
 #define MINIWEBSERVER_CFG_PROTOCOL_PORT                               __L("port")
 #define MINIWEBSERVER_CFG_PROTOCOL_TARGET                             __L("target")
 
+// NOTE: the HTTPS (TLS 1.3) listener configuration (isactive/port/pathprivatekey/pathcertificate) that used to
+// live here in its own "[webserverhttps]" section has been merged into APPFLOWCFG's "[webserver]" section
+// (see APPFLOW_CFG_WEBSERVER_ISTLS / APPFLOW_CFG_WEBSERVER_PATH_PRIVATEKEY / APPFLOW_CFG_WEBSERVER_PATH_CERTIFICATE
+// in APPFlowCFG.h, guarded by DIO_STREAMTLS_ACTIVE), since it is shared functionality and no longer specific to
+// this example. Use APPFLOW_CFG.WebServer_IsTLS() / WebServer_PathPrivateKey() / WebServer_PathCertificate().
+
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
@@ -55,7 +61,7 @@ class MINIWEBSERVER_CFG : public APPFLOWCFG
     static MINIWEBSERVER_CFG&       GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
-    bool                            DoVariableMapping                       (); 
+    bool                            DoVariableMapping                       ();
     bool                            DoDefault                               ();
 
   private:
