@@ -215,7 +215,8 @@ bool MINIWEBSERVER::AppProc_Ini()
 
   GEN_XPATHSMANAGER.AdjustRootPathDefault(APPFLOW_DEFAULT_DIRECTORY_ROOT);
 
-  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_WEB,  APPFLOW_DEFAULT_DIRECTORY_WEB);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_WEB           ,  APPFLOW_DEFAULT_DIRECTORY_WEB);
+  GEN_XPATHSMANAGER.AddPathSection(XPATHSMANAGERSECTIONTYPE_CERTIFICATES  ,  APPFLOW_DEFAULT_DIRECTORY_CERTIFICATES);
 
   GEN_XPATHSMANAGER.CreateAllPathSectionOnDisk();
 
@@ -349,8 +350,10 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
   //--------------------------------------------------------------------------------------------------
   // NOTE: the second, independent HTTPS (TLS 1.3) listener that used to be started here in parallel with
   // appwebserver has been retired. TLS is now native to appwebserver above: APPFLOWWEBSERVER::Ini(APPFLOWCFG*, ...)
-  // wraps the single listener in TLS by itself whenever APPFLOW_CFG.WebServer_IsTLS() is true (the default),
-  // loading the private key / certificate from WebServer_PathPrivateKey() / WebServer_PathCertificate() -- see
+  // wraps the single listener in TLS by itself whenever APPFLOW_CFG.WebServer_IsTLS() is true -- which is the
+  // case by default, since it just means path_privatekey and path_certificate are both configured (there is no
+  // separate "istls" setting: leave either of those two empty in the .ini to run plain HTTP instead), loading
+  // the private key / certificate from WebServer_PathPrivateKey() / WebServer_PathCertificate() -- see
   // APPFlowWebServer.cpp. There is no separate credential-loading step left to do here.
 
   //--------------------------------------------------------------------------------------------------
