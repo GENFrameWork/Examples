@@ -61,10 +61,10 @@ class BINCONNPRO_CFG : public APPFLOWCFG
 
   private:
                                     BINCONNPRO_CFG                          (XCHAR* namefile);
-                                    BINCONNPRO_CFG                          (BINCONNPRO_CFG const&);        // Don't implement
+                                    BINCONNPRO_CFG                          (BINCONNPRO_CFG const&);        
     virtual                        ~BINCONNPRO_CFG                          ();
 
-    void                            operator =                              (BINCONNPRO_CFG const&);        // Don't implement
+    void                            operator =                              (BINCONNPRO_CFG const&);        
 
 
     void                            Clean                                   ();

@@ -52,10 +52,10 @@ class WINDOWCHROMES_CFG : public APPFLOWCFG
   private:
 
                                     WINDOWCHROMES_CFG                          (XCHAR* namefile);
-                                    WINDOWCHROMES_CFG                          (WINDOWCHROMES_CFG const&);       // Don't implement
+                                    WINDOWCHROMES_CFG                          (WINDOWCHROMES_CFG const&);       
     virtual                        ~WINDOWCHROMES_CFG                          ();
 
-    void                            operator =                              (WINDOWCHROMES_CFG const&);       // Don't implement
+    void                            operator =                              (WINDOWCHROMES_CFG const&);       
 
     void                            Clean                                   ();
 

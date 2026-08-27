@@ -168,30 +168,30 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
 
     bool                            DrawFrame                               ();
 
-    //--------------------------------------------------------------------------------------
-    // Hardware info now runs on its own background XTHREAD (see AppProc_Ini()/AppProc_End()),
-    // decoupled from the render loop:
-    //   - HardwareInfo_Compute() runs ONLY on that background thread. It does the actual
-    //     (potentially slow / network-blocking, e.g. HardwareInfo_UpdateConnection()) reads,
-    //     entirely unlocked, into local variables, then takes hardwareinfomutex just long
-    //     enough to publish them into the members below and set hardwareinfo_haspending.
-    //   - HardwareInfo_UpdateCPU/Memory/DateTime/Uptime/Connection/Footer() are the individual
-    //     per-topic readers HardwareInfo_Compute() calls. They no longer touch UI_ELEMENT /
-    //     GEN_USERINTERFACE at all (that used to happen inline in some of them) -- they only
-    //     write their result into the output reference parameters they are given, which
-    //     HardwareInfo_Compute() owns as its own local (background-thread-only) variables.
-    //   - HardwareInfo_Apply() runs ONLY on the main thread, called from AppProc_Update()
-    //     exactly where the old inline UpdateHardwareInfo(false) call used to be. It takes
-    //     hardwareinfomutex just long enough to copy out whatever the background thread last
-    //     published (a no-op, cheap check if nothing changed since the last frame), then -
-    //     unlocked - pushes those values into the UI_ELEMENTs and asks for a redraw. This is
-    //     the ONLY place that still touches UI_ELEMENT/GEN_USERINTERFACE for hardware info, and
-    //     it never runs on the background thread.
-    //   - HardwareInfo_RequestForced() is the non-blocking replacement for the old
-    //     UpdateHardwareInfo(true) call sites (first frame, F5): it just raises a flag under
-    //     the mutex for the background thread to notice on its next tick, instead of running
-    //     the (possibly slow) reads synchronously on the caller's thread.
-    //--------------------------------------------------------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     static void                     ThreadFunction_UpdateHardwareInfo       (void* param);
 
@@ -229,38 +229,38 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
 
     XQWORD                          lastupdatehardwareinfo_second;
 
-    //--------------------------------------------------------------------------------------
-    // Background hardware-info thread. hardwareinfomutex guards every field below that is
-    // shared between it and the main thread (the level/bool fields here, plus the *_str
-    // members further down -- those are also read from UserInterface_ChangeLiteralText(),
-    // which now locks around that read). hardwareinfothread itself, hardwareinfoexiting and
-    // the XSTRING/level locals HardwareInfo_Compute() uses while actually reading CPU/memory/
-    // network/etc. are NOT in this shared set: they are only ever touched from the one thread
-    // that owns them (main thread for the former, background thread for the latter), by
-    // construction, so they need no locking.
-    //--------------------------------------------------------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     XTHREAD*                        hardwareinfothread;
     XMUTEX*                         hardwareinfomutex;
 
-    bool                            hardwareinfoexiting;                     // set right before End(), so a call already in flight when shutdown starts does not start another cycle
-    bool                            hardwareinfo_forcenext;                  // guarded by hardwareinfomutex: set by HardwareInfo_RequestForced(), consumed by HardwareInfo_Compute()
-    bool                            hardwareinfo_haspending;                 // guarded by hardwareinfomutex: set by HardwareInfo_Compute(), consumed by HardwareInfo_Apply()
+    bool                            hardwareinfoexiting;                     
+    bool                            hardwareinfo_forcenext;                  
+    bool                            hardwareinfo_haspending;                 
 
-    float                           cpu_temperaturelevel;                    // guarded by hardwareinfomutex
-    float                           cpu_usagelevel;                          // guarded by hardwareinfomutex
-    float                           ram_usagelevel;                          // guarded by hardwareinfomutex
-    bool                            isconnected;                             // guarded by hardwareinfomutex
+    float                           cpu_temperaturelevel;                    
+    float                           cpu_usagelevel;                          
+    float                           ram_usagelevel;                          
+    bool                            isconnected;                             
 
-    // Set once Ini_Graphics() has already loaded the dashboard, before the native window is shown --
-    // see the note in Ini_Graphics(). Lets AppProc_FirstUpdate() skip a redundant second load on the
-    // normal path while still retrying (and still aborting startup on failure, exactly as before)
-    // if that early attempt did not run or did not succeed.
+    
+    
+    
+    
     bool                            dashboardloaded;
 
-    // Published hardware-info text, guarded by hardwareinfomutex: written by
-    // HardwareInfo_Compute() (background thread), read by UserInterface_ChangeLiteralText()
-    // (main thread, when GEN_USERINTERFACE resolves a #[MASK] literal during redraw).
+    
+    
+    
     XSTRING                         cpu_temperature_str;
     XSTRING                         ram_used_total_str;
     XSTRING                         system_date_str;

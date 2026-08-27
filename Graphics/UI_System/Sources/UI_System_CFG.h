@@ -50,12 +50,11 @@ class UI_SYSTEM_CFG : public APPFLOWCFG
     bool                            DoDefault                               ();  
 
   private:
-
                                     UI_SYSTEM_CFG                           (XCHAR* namefile);
-                                    UI_SYSTEM_CFG                           (UI_SYSTEM_CFG const&);        // Don't implement
+                                    UI_SYSTEM_CFG                           (UI_SYSTEM_CFG const&);        
     virtual                        ~UI_SYSTEM_CFG                           ();
 
-    void                            operator =                              (UI_SYSTEM_CFG const&);       // Don't implement
+    void                            operator =                              (UI_SYSTEM_CFG const&);       
 
     void                            Clean                                   ();
 

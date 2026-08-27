@@ -32,9 +32,11 @@
 
 #include "APPFlowCFG.h"
 
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 #define STATICTICSCHARTSCFG_SECTIONGENERAL    __L("general")
+
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
@@ -43,7 +45,7 @@ class STATICTICSCHARTS_CFG : public APPFLOWCFG
   public:
 
     static bool                     GetIsInstanced                          ();
-    static STATICTICSCHARTS_CFG&          GetInstance                             (bool ini = true);
+    static STATICTICSCHARTS_CFG&    GetInstance                             (bool ini = true);
     static bool                     DelInstance                             ();
 
     bool                            DoVariableMapping                       (); 
@@ -51,15 +53,15 @@ class STATICTICSCHARTS_CFG : public APPFLOWCFG
 
   private:
 
-                                    STATICTICSCHARTS_CFG                          (XCHAR* namefile);
-                                    STATICTICSCHARTS_CFG                          (STATICTICSCHARTS_CFG const&);       // Don't implement
-    virtual                        ~STATICTICSCHARTS_CFG                          ();
+                                    STATICTICSCHARTS_CFG                    (XCHAR* namefile);
+                                    STATICTICSCHARTS_CFG                    (STATICTICSCHARTS_CFG const&);       
+    virtual                        ~STATICTICSCHARTS_CFG                    ();
 
-    void                            operator =                              (STATICTICSCHARTS_CFG const&);       // Don't implement
+    void                            operator =                              (STATICTICSCHARTS_CFG const&);       
 
     void                            Clean                                   ();
 
-    static STATICTICSCHARTS_CFG*          instance;
+    static STATICTICSCHARTS_CFG*    instance;
 };
 
 

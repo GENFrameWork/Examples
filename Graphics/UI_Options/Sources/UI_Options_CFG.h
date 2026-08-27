@@ -32,9 +32,11 @@
 
 #include "APPFlowCFG.h"
 
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 #define UI_OPTIONSCFG_SECTIONGENERAL    __L("general")
+
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
@@ -50,12 +52,11 @@ class UI_OPTIONS_CFG : public APPFLOWCFG
     bool                            DoDefault                               ();  
 
   private:
-
                                     UI_OPTIONS_CFG                          (XCHAR* namefile);
-                                    UI_OPTIONS_CFG                          (UI_OPTIONS_CFG const&);       // Don't implement
+                                    UI_OPTIONS_CFG                          (UI_OPTIONS_CFG const&);       
     virtual                        ~UI_OPTIONS_CFG                          ();
 
-    void                            operator =                              (UI_OPTIONS_CFG const&);       // Don't implement
+    void                            operator =                              (UI_OPTIONS_CFG const&);       
 
     void                            Clean                                   ();
 

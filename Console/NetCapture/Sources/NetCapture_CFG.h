@@ -40,7 +40,6 @@
 #define NETCAPTURECFG_SECTIONGENERAL     __L("general")
 
 
-
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
 
@@ -57,10 +56,10 @@ class NETCAPTURE_CFG : public APPFLOWCFG
 
   private:
                                     NETCAPTURE_CFG                          (XCHAR* namefile);
-                                    NETCAPTURE_CFG                          (NETCAPTURE_CFG const&);        // Don't implement
+                                    NETCAPTURE_CFG                          (NETCAPTURE_CFG const&);        
     virtual                        ~NETCAPTURE_CFG                          ();
 
-    void                            operator =                              (NETCAPTURE_CFG const&);        // Don't implement
+    void                            operator =                              (NETCAPTURE_CFG const&);        
 
     void                            Clean                                   ();
 

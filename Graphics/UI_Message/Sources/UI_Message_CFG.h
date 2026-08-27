@@ -32,9 +32,11 @@
 
 #include "APPFlowCFG.h"
 
+
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 #define UI_MESSAGECFG_SECTIONGENERAL    __L("general")
+
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
@@ -52,10 +54,10 @@ class UI_MESSAGE_CFG : public APPFLOWCFG
   private:
 
                                     UI_MESSAGE_CFG                          (XCHAR* namefile);
-                                    UI_MESSAGE_CFG                          (UI_MESSAGE_CFG const&);       // Don't implement
+                                    UI_MESSAGE_CFG                          (UI_MESSAGE_CFG const&);       
     virtual                        ~UI_MESSAGE_CFG                          ();
 
-    void                            operator =                              (UI_MESSAGE_CFG const&);       // Don't implement
+    void                            operator =                              (UI_MESSAGE_CFG const&);       
 
     void                            Clean                                   ();
 

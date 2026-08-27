@@ -49,7 +49,6 @@ class INIBASE_CFG : public APPFLOWCFG
 {
   public:
 
-
     static bool                     GetIsInstanced                    ();
     static INIBASE_CFG&             GetInstance                       (bool ini = true);
     static bool                     DelInstance                       ();
@@ -60,10 +59,10 @@ class INIBASE_CFG : public APPFLOWCFG
    
   private:
                                     INIBASE_CFG                       (XCHAR* namefile);
-                                    INIBASE_CFG                       (INIBASE_CFG const&);        // Don't implement
+                                    INIBASE_CFG                       (INIBASE_CFG const&);        
     virtual                        ~INIBASE_CFG                       ();
 
-    void                            operator =                        (INIBASE_CFG const&);        // Don't implement
+    void                            operator =                        (INIBASE_CFG const&);        
 
 
     void                            Clean                             ();

@@ -53,10 +53,10 @@ class SCRIPTSEXAMPLE_CFG : public APPFLOWCFG
 
   private:
                                     SCRIPTSEXAMPLE_CFG                      (XCHAR* namefile);
-                                    SCRIPTSEXAMPLE_CFG                      (SCRIPTSEXAMPLE_CFG const&);        // Don't implement
+                                    SCRIPTSEXAMPLE_CFG                      (SCRIPTSEXAMPLE_CFG const&);        
     virtual                        ~SCRIPTSEXAMPLE_CFG                      ();
 
-    void                            operator =                              (SCRIPTSEXAMPLE_CFG const&);        // Don't implement
+    void                            operator =                              (SCRIPTSEXAMPLE_CFG const&);        
 
     void                            Clean                                   ();
 

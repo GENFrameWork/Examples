@@ -69,10 +69,10 @@ class DATABASES_CFG : public APPFLOWCFG
 
   private:
                                     DATABASES_CFG                           (XCHAR* namefile);
-                                    DATABASES_CFG                           (DATABASES_CFG const&);        // Don't implement
+                                    DATABASES_CFG                           (DATABASES_CFG const&);        
     virtual                        ~DATABASES_CFG                           ();
 
-    void                            operator =                              (DATABASES_CFG const&);        // Don't implement
+    void                            operator =                              (DATABASES_CFG const&);        
 
 
     void                            Clean                                   ();

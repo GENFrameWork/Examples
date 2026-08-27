@@ -47,7 +47,6 @@
 #define NETCONN_APPFLOW_CFG_DEFAULT_REMARK_COLUMN             98
 
 
-
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
 
@@ -69,10 +68,10 @@ class NETCONN_CFG : public APPFLOWCFG
    
   private:
                                     NETCONN_CFG                       (XCHAR* namefile);
-                                    NETCONN_CFG                       (NETCONN_CFG const&);        // Don't implement
+                                    NETCONN_CFG                       (NETCONN_CFG const&);        
     virtual                        ~NETCONN_CFG                       ();
 
-    void                            operator =                        (NETCONN_CFG const&);        // Don't implement
+    void                            operator =                        (NETCONN_CFG const&);        
 
 
     void                            Clean                             ();

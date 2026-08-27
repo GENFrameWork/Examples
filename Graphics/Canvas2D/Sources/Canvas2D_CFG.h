@@ -56,10 +56,10 @@ class CANVAS2D_CFG : public APPFLOWCFG
   private:
 
                                     CANVAS2D_CFG                            (XCHAR* namefile);
-                                    CANVAS2D_CFG                            (CANVAS2D_CFG const&);       // Don't implement
+                                    CANVAS2D_CFG                            (CANVAS2D_CFG const&);       
     virtual                        ~CANVAS2D_CFG                            ();
 
-    void                            operator =                              (CANVAS2D_CFG const&);       // Don't implement
+    void                            operator =                              (CANVAS2D_CFG const&);       
 
     void                            Clean                                   ();
 
