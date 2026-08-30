@@ -270,7 +270,8 @@ bool MINIWEBSERVER::AppProc_Ini()
 *---------------------------------------------------------------------------------------------------------------------*/
 bool MINIWEBSERVER::AppProc_FirstUpdate()
 {
-  XSTRING string;
+  XSTRING string;   
+  XSTRING string2;
   XSTRING stringresult;
   bool    status = false;
 
@@ -285,11 +286,14 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
 
   if(APPFLOW_CFG.WebServer_GetPort())
     {
+      string2.Format(__L("Inicializando Web Server "));
+      
       #ifdef DIO_STREAMTLS_ACTIVE
-      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando Web Server%s"), APPFLOW_CFG.WebServer_IsTLS()?__L(" (TLS)"):__L(""));
-      #else
-      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando Web Server"));
+      string2.AddFormat(__L(" %s"), (APPFLOW_CFG.WebServer_IsTLS()?__L(" (TLS)"):__L("")));     
       #endif
+      
+      string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, string2.Get());
+      
       console->PrintMessage(string.Get(),1,true,false);
 
       appwebserver = GEN_NEW APPFLOWWEBSERVER();
@@ -318,18 +322,19 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
 
   status = false;
 
+  string2.Format(__L("Inicializando Web Socket "));
+      
   #ifdef DIO_STREAMTLS_ACTIVE
-  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando WebSocket%s"), APPFLOW_CFG.WebServer_IsTLS()?__L(" (WSS)"):__L(""));
-  #else
-  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK,__L("Inicializando WebSocket"));
+  string2.AddFormat(__L(" %s"), (APPFLOW_CFG.WebServer_IsTLS()?__L(" (WSS)"):__L("")));     
   #endif
+
+  string.Format(APPFLOWCONSOLE_DEFAULT_MESSAGEMASK, string2.Get());
+
   console->PrintMessage(string.Get(),1,true,false);
 
   appwebsocket = GEN_NEW APPFLOWWEBSERVER();
   if(appwebsocket) status = true;
 
-  // Shares APPFLOW_CFG.WebServer_IsTLS() (and its credentials) with the main webserver above: same TLS/plain
-  // decision for the whole app, just on this listener's own port instead of WebServer_GetPort().
   if(status) status = appwebsocket->Ini(&APPFLOW_CFG, 17009, APPFLOW_CFG.WebServer_GetTimeoutToServerPage(), APPFLOW_CFG.WebServer_GetLocalAddress());
 
   stringresult = (status)?__L("Ok."):__L("ERROR!");
@@ -346,17 +351,6 @@ bool MINIWEBSERVER::AppProc_FirstUpdate()
     }
 
   APPFLOW_LOG_ENTRY((status)?XLOGLEVEL_INFO:XLOGLEVEL_ERROR, APPFLOW_CFG_LOG_SECTIONID_INITIATION, false, __L("%s: %s") , string.Get(), stringresult.Get());
-
-  //--------------------------------------------------------------------------------------------------
-  // NOTE: the second, independent HTTPS (TLS 1.3) listener that used to be started here in parallel with
-  // appwebserver has been retired. TLS is now native to appwebserver above: APPFLOWWEBSERVER::Ini(APPFLOWCFG*, ...)
-  // wraps the single listener in TLS by itself whenever APPFLOW_CFG.WebServer_IsTLS() is true -- which is the
-  // case by default, since it just means path_privatekey and path_certificate are both configured (there is no
-  // separate "istls" setting: leave either of those two empty in the .ini to run plain HTTP instead), loading
-  // the private key / certificate from WebServer_PathPrivateKey() / WebServer_PathCertificate() -- see
-  // APPFlowWebServer.cpp. There is no separate credential-loading step left to do here.
-
-  //--------------------------------------------------------------------------------------------------
 
   console->PrintMessage(__L(" "),0,false,true);
   console->WaitKey(__L("  Pulsa una tecla para continuar... (%d)"), 1, false, 5);

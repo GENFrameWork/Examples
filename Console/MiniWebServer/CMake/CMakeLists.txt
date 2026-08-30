@@ -14,7 +14,7 @@ set(GEN_DIRECTORY "../../../..")
 # Activate features/Defines
 
 option(DEBUG_FEATURE                                            "Debug mode"                                              ON )
-#option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
+option(XMEMORY_CONTROL_FEATURE                                  "XMemory Control"                                         ON )
 option(XTRACE_FEATURE                                           "XTrace"                                                  ON )
 option(XTRACE_NOINTERNET_FEATURE                                "No need for trace dependencies with Internet"            ON )
 
