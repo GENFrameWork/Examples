@@ -1071,7 +1071,7 @@ bool UI_SYSTEM::HardwareInfo_UpdateCPU(XSTRING& outtemperature, float& outtemper
 *             own output parameters -- no member/UI_ELEMENT access here anymore.
 * @ingroup    EXAMPLES
 *
-* @param[out] outusedtotal : formatted "X.X GB / Y.Y GB" (or "-- GB / -- GB" if unavailable).
+* @param[out] outusedtotal : formatted RAM used / total, selecting KB, MB, GB or TB from total memory.
 * @param[out] outusagelevel : RAM used percent, for ram_usage_radial and ram_linear_bar.
 *
 * @return     bool : true if the operation is successful; otherwise false.
@@ -1086,18 +1086,35 @@ bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, float& outusage
 
   if(GEN_XSYSTEM.GetMemoryInfo(total, free) && total)
     {
-      XDWORD used = total - free;
+      XDWORD       used          = total - free;
+      double       memorydivisor = 1.0;
+      const XCHAR* memoryunit    = __L("KB");
 
-      double totalGB = (double)total / (1024.0 * 1024.0 * 1024.0);
-      double usedGB  = (double)used  / (1024.0 * 1024.0 * 1024.0);
+      if(total >= (1024U * 1024U * 1024U))
+        {
+          memorydivisor = 1024.0 * 1024.0 * 1024.0;
+          memoryunit    = __L("TB");
+        }
+      else if(total >= (1024U * 1024U))
+        {
+          memorydivisor = 1024.0 * 1024.0;
+          memoryunit    = __L("GB");
+        }
+      else if(total >= 1024U)
+        {
+          memorydivisor = 1024.0;
+          memoryunit    = __L("MB");
+        }
 
-      outusedtotal.Format(__L("%.1f GB / %.1f GB"), usedGB, totalGB);
+      outusedtotal.Format(__L("%.1f %s / %.1f %s"),
+                          (double)used  / memorydivisor, memoryunit,
+                          (double)total / memorydivisor, memoryunit);
 
       outusagelevel = (float)(((double)used / (double)total) * 100.0);
     }
    else
     {
-      outusedtotal.Set(__L("-- GB / -- GB"));
+      outusedtotal.Set(__L("-- / --"));
     }
 
   return true;

@@ -173,18 +173,18 @@
       <element name="ram_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="36">#[PROGRESSBAR_PERCENT]</element>
     </element>
 
-    <element name="ram_used_total" type="text" class="value-ram" xpos="1236" ypos="250" sizefont="21">#[RAM_USED_TOTAL]</element>
-    <element name="ram_caption"    type="text" class="label"     xpos="1236" ypos="278" sizefont="14">En uso / Total</element>
+    <element name="ram_used_total" type="text" class="value-ram" xpos="1214" ypos="250" sizefont="19">#[RAM_USED_TOTAL]</element>
+    <element name="ram_caption"    type="text" class="label"     xpos="1254" ypos="278" sizefont="14">En uso / Total</element>
 
     <element name="ram_linear_bar" type="progressbar" class="bar-ram"
-             xpos="1236" ypos="348" allocationtext="none" direction="horizontal"
+             xpos="1220" ypos="348" allocationtext="none" direction="horizontal"
              roundcap="yes" progressrect="0,0,158,14" level="0" linecolor="0,0,0,0"
              gradientcolor="163,113,247" gradientmode="track">
     </element>
 
-    <element name="ram_scale_0"   type="text" class="label-dim" xpos="1236" ypos="374" sizefont="12">0%</element>
-    <element name="ram_scale_50"  type="text" class="label-dim" xpos="1298" ypos="374" sizefont="12">50%</element>
-    <element name="ram_scale_100" type="text" class="label-dim" xpos="1358" ypos="374" sizefont="12">100%</element>
+    <element name="ram_scale_0"   type="text" class="label-dim" xpos="1220" ypos="374" sizefont="12">0%</element>
+    <element name="ram_scale_50"  type="text" class="label-dim" xpos="1286" ypos="374" sizefont="12">50%</element>
+    <element name="ram_scale_100" type="text" class="label-dim" xpos="1347" ypos="374" sizefont="12">100%</element>
 
 
     <!-- ==========================================================================================
