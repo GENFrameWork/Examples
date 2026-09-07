@@ -78,11 +78,25 @@
     <element name="card_connection" type="form" class="card" xpos="1034" ypos="828" width="376" height="346"></element>
 
     <!-- Inset panels -->
-    <element name="datetime_box"       type="form" class="inner-box" xpos="266" ypos="736" width="320" height="140"></element>
-    <element name="uptime_box_months"  type="form" class="tile"      xpos="656" ypos="762" width="80"  height="136"></element>
-    <element name="uptime_box_hours"   type="form" class="tile"      xpos="742" ypos="762" width="80"  height="136"></element>
-    <element name="uptime_box_years"   type="form" class="tile"      xpos="828" ypos="762" width="80"  height="136"></element>
-    <element name="uptime_box_seconds" type="form" class="tile"      xpos="914" ypos="762" width="80"  height="136"></element>
+    <!-- Height trimmed 140->124 (top edge, 596, kept fixed against the header row above it): the mockup's
+         box hugs its own content tightly, while this box left visible dead space below "system_time"
+         before the caption row: confirmed by direct comparison against a real build screenshot. -->
+    <element name="datetime_box"       type="form" class="inner-box" xpos="266" ypos="720" width="320" height="124"></element>
+
+    <!-- Mockup shows ONE continuous panel with thin vertical dividers between the four columns, not four
+         separate bordered tiles (the previous "uptime_box_months/hours/years/seconds", each its own
+         "tile" form, is what a real Windows build actually looked like: four visibly separate boxes
+         with gaps between them). Replaced by a single inner-box panel spanning the same overall width
+         (656..994, unchanged) plus 3 "hr-line" dividers (same class already used for the horizontal rule
+         in the date/time card, just drawn 1px WIDE instead of 1px tall) at the old tile boundaries.
+         Top edge raised from 626 to 596 (matching datetime_box's own top, right above it in card 4) to
+         close the oversized 84px header-to-panel gap a real build screenshot showed against the mockup;
+         divider height stretched 100->112 so the rule spans nearly the full panel height instead of
+         floating with generous top/bottom margins, again per direct comparison against the mockup. -->
+    <element name="uptime_box"         type="form" class="inner-box" xpos="656" ypos="716" width="338" height="120"></element>
+    <element name="uptime_divider_1"   type="form" class="hr-line"   xpos="739" ypos="712" width="1" height="112"></element>
+    <element name="uptime_divider_2"   type="form" class="hr-line"   xpos="825" ypos="712" width="1" height="112"></element>
+    <element name="uptime_divider_3"   type="form" class="hr-line"   xpos="911" ypos="712" width="1" height="112"></element>
 
 
     <!-- ==========================================================================================
@@ -120,7 +134,10 @@
 
     <element name="brand_icon"    type="image" xpos="26" ypos="831" width="52" height="52">icons/brand_system.svg</element>
     <element name="brand_text"    type="text"  class="brand"     xpos="88" ypos="808" sizefont="15">Sistema</element>
-    <element name="brand_version" type="text"  class="brand-dim" xpos="88" ypos="830" sizefont="13">v#[APP_VERSION]</element>
+    <!-- "style=" is Step 6's inline override (see dashboard.css SCOPE comment): wins over ".brand-dim" without a
+         one-off class, exactly like HTML. Demonstrated here by nudging the version tag to the same accent blue
+         used elsewhere in the sidebar, instead of the class's default muted grey. -->
+    <element name="brand_version" type="text"  class="brand-dim" style="color: 88,166,255;" xpos="88" ypos="830" sizefont="13">v#[APP_VERSION]</element>
 
 
     <!-- ==========================================================================================
@@ -130,16 +147,70 @@
     <element name="temp_hdr_icon" type="image" xpos="262" ypos="130" width="48" height="48">icons/card_thermo.svg</element>
     <element name="temp_hdr_text" type="text"  class="card-title" xpos="320" ypos="114" sizefont="19">Temperatura CPU</element>
 
-    <element name="cpu_temp_bar" type="progressimage" xpos="286" ypos="416" width="72" height="220"
+    <!-- thermo_empty.png/thermo_full.png are the "glass tube" artwork supplied by the designer, with the
+         0/20/40/60/80/100 numeric scale and the "°C" unit baked directly into the bitmap (unlike the earlier
+         flat icons, which needed separate temp_scale_* text elements to show a scale at all, now removed).
+         Draw_ProgressImage draws these at their native pixel size (PutBitmapAlpha), so the on-screen size comes
+         from the PNG's own dimensions (180x270, scaled up from the mockup comparison) rather than from
+         width/height here; those two attributes are kept in sync with the asset purely for layout/hit-region
+         bookkeeping. There is still no CSS color/tint hook for this widget type, so the tube's color stays
+         whatever the bitmap contains.
+         offsetstart/offsetend were measured directly against the 180x270 asset, not guessed proportionally:
+         the tube's own red fill (in thermo_full.png) starts at pixel row 25, right where the rounded top cap
+         reaches its full width, and the bulb's fixed red disc (identical in both images, so it does not need
+         "revealing" at all) begins at row 193; hence offsetend=25 (top margin) and offsetstart=270-193=77
+         (bottom margin).
+
+         Column layout (xpos=262/466 below): the card's own left inner margin is 24 (card left=238, and
+         temp_hdr_icon already sits at x=262 above), so the tube's left edge was moved to xpos=262 to reuse
+         that exact same margin and to line up under the header icon. The right-hand group (cpu_temp_value,
+         temp_cap_icon, temp_cap_text) is placed at xpos=466, i.e. the same 24-unit gap again measured from the
+         tube's own right edge (262+180+24=466), so the left margin of the tube and the gap between the tube
+         and the right-hand group are equal, as requested. All three right-hand elements share that same
+         xpos=466 so they line up vertically with each other; 466+142=608 stays inside the card's right edge
+         (614) even for the widest live value, "100°C" at sizefont 50 (measured against Nunito-SemiBold.ttf).
+
+         Vertical position (ypos below) was re-measured against Abraham's clean reference crop of the target
+         card: mapping that reference's own card rectangle onto this card's coordinates (both are ~376x390),
+         the tube's bottom edge sits at ~87% of the card's height and the value/icon/caption group sits noticeably
+         higher/tighter than our previous ypos values, so all four were raised: cpu_temp_bar ypos 416->405 (kept
+         clear of temp_hdr_icon, whose bottom edge is at y=130, by 5 units), cpu_temp_value 276->263, temp_cap_icon
+         377->364, temp_cap_text 402->389; a uniform ~13-unit rise that preserves the spacing already measured
+         between them (it matched the reference closely) while moving the whole block up to match. The reference's
+         tube is proportionally narrower than this 180-wide asset (drawn at native pixel size, so width/height
+         above cannot itself compensate); xpos=262/466 already matches the reference's horizontal fractions
+         closely (measured within ~1%), so only the vertical position needed correcting here. -->
+    <element name="cpu_temp_bar" type="progressimage" xpos="262" ypos="405" width="180" height="270"
              direction="vertical" allocationtext="none"
-             offsetstart="46" offsetend="20" level="0"
+             offsetstart="77" offsetend="25" level="0"
              imageempty="thermo_empty.png" imagefull="thermo_full.png">
     </element>
 
-    <element name="cpu_temp_value" type="text" class="value-temp" xpos="404" ypos="276" sizefont="50">#[CPU_TEMPERATURE]</element>
+    <element name="cpu_temp_value" type="text" class="value-temp" xpos="466" ypos="263" sizefont="50">#[CPU_TEMPERATURE]</element>
 
-    <element name="temp_cap_icon" type="image" xpos="447" ypos="377" width="60" height="60">icons/cap_thermo.svg</element>
-    <element name="temp_cap_text" type="text"  class="label"      xpos="400" ypos="402" sizefont="14">Temperatura actual</element>
+    <!-- Mockup's degree unit is a visibly smaller glyph than the number, baseline-aligned with it (same
+         "big number + small unit" pattern also used for the ring "%" and the RAM "GB"; this is the
+         first of those to get it, being the simplest case: a single, left-aligned value, no centering to
+         re-derive. #[CPU_TEMPERATURE] itself no longer carries "°C" (see HardwareInfo_UpdateCPU's updated
+         doc comment in UI_System.cpp): it is now digits-only, so this static text supplies the unit.
+         xpos=532 is a FIXED offset tuned for the common 2-digit case (466 + 60px, "62" at sizefont 50,
+         Nunito-SemiBold, + a 6px gap): GEN positions left-aligned text at a fixed xpos regardless of the
+         mask's rendered width, so there is no built-in way to make this element "flow" after a sibling of
+         varying width without new plumbing (an app-level text-width query GEN doesn't expose today). A
+         1-digit reading ("5°C") will show a slightly wider gap than a 3-digit one ("100°C") a slightly
+         tighter one; flagged to Abraham as a known, deliberate trade-off rather than silently accepted. -->
+    <element name="cpu_temp_unit" type="text" class="value-temp" xpos="532" ypos="263" sizefont="28">°C</element>
+
+    <!-- Mockup swaps the small caption icon for a red CPU chip instead of a second (redundant) thermometer
+         glyph: cap_cpu.svg is card_cpu.svg's same chip artwork recoloured to the theme's accent-red
+         (248,81,73), matching cpu_temp_value's colour and cap_thermo.svg's old red tone exactly. -->
+    <element name="temp_cap_icon" type="image" xpos="466" ypos="364" width="60" height="60">icons/cap_cpu.svg</element>
+    <!-- xpos=470, not 466: measured against Abraham's own build screenshot that cpu_temp_value/temp_cap_icon's
+         glyphs render ~4px right of their declared xpos=466 (Nunito-SemiBold's left-side bearing at sizefont=50,
+         and cap_cpu.svg's own inner margin, both push their visible edge in a bit), while this 14pt label has
+         almost none; matching the RENDERED edge (not just the declared xpos) is what makes the three look
+         aligned on screen. -->
+    <element name="temp_cap_text" type="text"  class="label"      xpos="470" ypos="389" sizefont="14">Temperatura actual</element>
 
 
     <!-- ==========================================================================================
@@ -149,14 +220,27 @@
     <element name="cpu_hdr_icon" type="image" xpos="660" ypos="130" width="48" height="48">icons/card_cpu.svg</element>
     <element name="cpu_hdr_text" type="text"  class="card-title" xpos="718" ypos="114" sizefont="19">Uso actual de CPU</element>
 
+    <!-- Measured against Abraham's mockup (comparing the CPU-usage card's own rectangle to the ring's): the
+         ring there fills roughly 69% of the card's width, well past this ring's previous 200/376=53%. Grown to
+         260 (69%), re-centred (694 = 636 + (376-260)/2, same centre x=824 the caption below was already tuned
+         for) and thickness/value font scaled by the same ~1.3 factor so the stroke and the "37%" text keep
+         their prior visual proportion to the ring's new size. -->
     <element name="cpu_usage_radial" type="progressradial" class="ring-cpu"
-             xpos="724" ypos="382" width="200" height="200"
-             level="0" thickness="22" roundcap="yes" startangle="-90" sweepangle="360"
+             xpos="694" ypos="412" width="260" height="260"
+             level="0" thickness="28" roundcap="yes" startangle="-90" sweepangle="360"
              gradientcolor="56,139,253" gradientmode="track">
-      <element name="cpu_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="46">#[PROGRESSBAR_PERCENT]</element>
+      <!-- maxsizetext="4" reserves the box width of the widest possible value ("100%", 4 chars) instead of the
+           CURRENT value's width. Without it, CalculateBoundaryLine_Text() auto-sizes this text element's own
+           box to the exact pixel width of "42%"/"7%"/"100%" as the level changes; since that box is what gets
+           re-centered inside the ring on every update, a narrower-to-wider (or wider-to-narrower) value change
+           visibly resizes and re-shifts the box for a frame, reading as a jump/flash. Fixing the box at the
+           4-char reservation makes the width constant across every level, so only the CSS text-align:center
+           offset (see .ring-value in dashboard.css) has to redo its (now real) job of centering the actual
+           string inside that fixed box, with no size change and so no visible jump. -->
+      <element name="cpu_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="58" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
     </element>
 
-    <element name="cpu_usage_caption" type="text" class="label-accent" xpos="786" ypos="430" sizefont="15">Uso actual</element>
+    <element name="cpu_usage_caption" type="text" class="label-accent" xpos="786" ypos="438" sizefont="15">Uso actual</element>
 
 
     <!-- ==========================================================================================
@@ -166,25 +250,38 @@
     <element name="ram_hdr_icon" type="image" xpos="1058" ypos="130" width="48" height="48">icons/card_ram.svg</element>
     <element name="ram_hdr_text" type="text"  class="card-title" xpos="1116" ypos="114" sizefont="17">Consumo de memoria RAM</element>
 
+    <!-- Grown more modestly than cpu_usage_radial (164->178, +8.5%, vs. the CPU ring's +30%): unlike that card,
+         this ring shares its row with the used/total text and the bar, and the worst-case value string, "31.8
+         GB / 31.8 GB" (measured against Nunito-SemiBold at sizefont=19: 157 units wide), leaves no room for a
+         bigger ring without either overflowing the card's right edge (1410) or shrinking that text. Left edge
+         (xpos) kept at the same 22-unit margin from the card's own left edge (1056-1034=22); growing to the
+         right pushed every element beside it (ram_used_total, ram_caption, ram_linear_bar, ram_scale_*) right
+         by the ring's growth plus extra breathing room, since ram_used_total previously started only 6 units
+         past the ring's own right edge (1214 vs 1220), tight enough that the clipped-looking leading digit
+         Abraham saw in his last screenshot is likely exactly that margin, independently of the ring resize. -->
     <element name="ram_usage_radial" type="progressradial" class="ring-ram"
-             xpos="1056" ypos="352" width="164" height="164"
-             level="0" thickness="20" roundcap="yes" startangle="-90" sweepangle="360"
+             xpos="1056" ypos="366" width="178" height="178"
+             level="0" thickness="22" roundcap="yes" startangle="-90" sweepangle="360"
              gradientcolor="163,113,247" gradientmode="track">
-      <element name="ram_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="36">#[PROGRESSBAR_PERCENT]</element>
+      <!-- Same fixed-width reservation as cpu_usage_value; see the comment there. -->
+      <element name="ram_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="39" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
     </element>
 
-    <element name="ram_used_total" type="text" class="value-ram" xpos="1214" ypos="250" sizefont="19">#[RAM_USED_TOTAL]</element>
-    <element name="ram_caption"    type="text" class="label"     xpos="1254" ypos="278" sizefont="14">En uso / Total</element>
+    <element name="ram_used_total" type="text" class="value-ram" xpos="1250" ypos="250" sizefont="19">#[RAM_USED_TOTAL]</element>
+    <element name="ram_caption"    type="text" class="label"     xpos="1290" ypos="278" sizefont="14">En uso / Total</element>
 
+    <!-- progressrect width trimmed from 158 to 140: the bar's left edge moved right along with the rest of this
+         column (1220->1256), and the card's right edge (1410) no longer leaves room for the old width without
+         overflowing, so it was narrowed to keep a clear margin (1256+140=1396, 14 units clear of 1410). -->
     <element name="ram_linear_bar" type="progressbar" class="bar-ram"
-             xpos="1220" ypos="348" allocationtext="none" direction="horizontal"
-             roundcap="yes" progressrect="0,0,158,14" level="0" linecolor="0,0,0,0"
+             xpos="1256" ypos="348" allocationtext="none" direction="horizontal"
+             roundcap="yes" progressrect="0,0,140,14" level="0" linecolor="0,0,0,0"
              gradientcolor="163,113,247" gradientmode="track">
     </element>
 
-    <element name="ram_scale_0"   type="text" class="label-dim" xpos="1220" ypos="374" sizefont="12">0%</element>
-    <element name="ram_scale_50"  type="text" class="label-dim" xpos="1286" ypos="374" sizefont="12">50%</element>
-    <element name="ram_scale_100" type="text" class="label-dim" xpos="1347" ypos="374" sizefont="12">100%</element>
+    <element name="ram_scale_0"   type="text" class="label-dim" xpos="1256" ypos="374" sizefont="12">0%</element>
+    <element name="ram_scale_50"  type="text" class="label-dim" xpos="1313" ypos="374" sizefont="12">50%</element>
+    <element name="ram_scale_100" type="text" class="label-dim" xpos="1363" ypos="374" sizefont="12">100%</element>
 
 
     <!-- ==========================================================================================
@@ -194,11 +291,31 @@
     <element name="dt_hdr_icon" type="image" xpos="262" ypos="542" width="48" height="48">icons/card_calendar.svg</element>
     <element name="dt_hdr_text" type="text"  class="card-title" xpos="320" ypos="526" sizefont="19">Fecha y hora del sistema</element>
 
-    <element name="system_date" type="text" class="value-date" xpos="292" ypos="652" sizefont="30">#[SYSTEM_DATE]</element>
-    <element name="system_time" type="text" class="value-time" xpos="306" ypos="714" sizefont="34">#[SYSTEM_TIME]</element>
+    <!-- ypos nudged 652->648: follows datetime_box's tightened top edge (596, was 596 already; the box's
+         own height shrank around it, see the "Inset panels" section above), keeping the same small gap
+         under the box's inner padding. -->
+    <element name="system_date" type="text" class="value-date" xpos="292" ypos="648" sizefont="30">#[SYSTEM_DATE]</element>
 
-    <element name="dt_cap_icon" type="image" xpos="284" ypos="789" width="36" height="36">icons/cap_clock.svg</element>
-    <element name="dt_cap_text" type="text"  class="label-dim" xpos="326" ypos="778" sizefont="13">Hora local del sistema</element>
+    <!-- Thin divider between the date and the time, matching the mockup's "Fecha y hora del sistema" box
+         (missing in the previous rounds of this card). Spans the inner-box width minus its own 12px
+         padding (box x=266..586 -> line x=278..574), sits roughly midway between the date and time lines.
+         ypos raised 668->655 together with the rest of this card's content, following the box's shorter
+         height. -->
+    <element name="dt_divider"  type="form" class="hr-line"  xpos="278" ypos="655" width="296" height="1"></element>
+
+    <!-- xpos aligned to system_date's 292 (was 306): both lines share the box's left content column, as
+         in the mockup; previously the time sat 14px further right than the date. ypos raised 714->703
+         to close up against the divider now that the box around it is shorter. -->
+    <element name="system_time" type="text" class="value-time" xpos="292" ypos="703" sizefont="34">#[SYSTEM_TIME]</element>
+
+    <!-- xpos aligned to the same 292 column as system_date/system_time (was 284): in the mockup the
+         "Hora local del sistema" icon shares the date/time's left edge instead of sitting on its own.
+         ypos raised 789->773, matching datetime_box's 16px-shorter bottom edge so the gap between the
+         box and this caption row stays the same as before. -->
+    <element name="dt_cap_icon" type="image" xpos="292" ypos="773" width="36" height="36">icons/cap_clock.svg</element>
+    <!-- xpos shifted +8 with dt_cap_icon (was 326) to keep the same icon-to-text gap. -->
+    <!-- ypos raised 778->762 alongside dt_cap_icon, same -16 shift. -->
+    <element name="dt_cap_text" type="text"  class="label-dim" xpos="334" ypos="762" sizefont="13">Hora local del sistema</element>
 
 
     <!-- ==========================================================================================
@@ -208,17 +325,21 @@
     <element name="up_hdr_icon" type="image" xpos="660" ypos="542" width="48" height="48">icons/card_clock.svg</element>
     <element name="up_hdr_text" type="text"  class="card-title" xpos="718" ypos="526" sizefont="16">Tiempo de funcionamiento del sistema</element>
 
-    <element name="uptime_months_label"  type="text" class="tile-label" xpos="672" ypos="688" sizefont="13">Meses</element>
-    <element name="uptime_months_value"  type="text" class="tile-value" xpos="688" ypos="744" sizefont="26">#[UPTIME_MONTHS]</element>
+    <!-- label/value ypos raised again (666->640, 718->687/676) together with uptime_box's own top edge
+         (626->596): a real build screenshot still showed a visibly larger header-to-panel gap on this
+         card than on the date/time card next to it, even after the previous round's fix; both cards'
+         panels now start at the same y=596. -->
+    <element name="uptime_months_label"  type="text" class="tile-label" xpos="672" ypos="640" sizefont="13">Meses</element>
+    <element name="uptime_months_value"  type="text" class="tile-value" xpos="688" ypos="687" sizefont="26">#[UPTIME_MONTHS]</element>
 
-    <element name="uptime_hours_label"   type="text" class="tile-label" xpos="760" ypos="688" sizefont="13">Horas</element>
-    <element name="uptime_hours_value"   type="text" class="tile-value" xpos="758" ypos="744" sizefont="26">#[UPTIME_HOURS]</element>
+    <element name="uptime_hours_label"   type="text" class="tile-label" xpos="760" ypos="640" sizefont="13">Horas</element>
+    <element name="uptime_hours_value"   type="text" class="tile-value" xpos="758" ypos="687" sizefont="26">#[UPTIME_HOURS]</element>
 
-    <element name="uptime_years_label"   type="text" class="tile-label" xpos="848" ypos="688" sizefont="13">Anios</element>
-    <element name="uptime_years_value"   type="text" class="tile-value" xpos="860" ypos="744" sizefont="26">#[UPTIME_YEARS]</element>
+    <element name="uptime_years_label"   type="text" class="tile-label" xpos="848" ypos="640" sizefont="13">Anios</element>
+    <element name="uptime_years_value"   type="text" class="tile-value" xpos="860" ypos="687" sizefont="26">#[UPTIME_YEARS]</element>
 
-    <element name="uptime_seconds_label" type="text" class="tile-label" xpos="922" ypos="688" sizefont="13">Segundos</element>
-    <element name="uptime_seconds_value" type="text" class="tile-value" xpos="924" ypos="744" sizefont="17">#[UPTIME_SECONDS]</element>
+    <element name="uptime_seconds_label" type="text" class="tile-label" xpos="922" ypos="640" sizefont="13">Segundos</element>
+    <element name="uptime_seconds_value" type="text" class="tile-value" xpos="924" ypos="676" sizefont="26">#[UPTIME_SECONDS]</element>
 
 
     <!-- ==========================================================================================
@@ -236,12 +357,24 @@
     <element name="connection_quality"     type="text" class="label"     xpos="1062" ypos="726" sizefont="15">#[CONNECTION_QUALITY]</element>
     <element name="connection_ip"          type="text" class="label"     xpos="1062" ypos="756" sizefont="15">#[LOCAL_IP]</element>
 
-    <element name="connection_net_icon" type="image" xpos="1232" ypos="802" width="140" height="140">icons/internet-net.svg</element>
+    <!-- ypos raised 802->689: in the mockup this diagram sits centred against the "Conectado" badge row
+         (connection_icon_ok, y=574..664), not down at the "Conexion estable"/IP row: a real build
+         screenshot showed it sitting noticeably lower than the mockup. Its fill colour is also fixed in
+         icons/internet-net.svg itself this round (was a mismatched neon lime, #99FF00; now #3FB950,
+         the same green as badge_ok.svg / the "accent-green" CSS variable). -->
+    <element name="connection_net_icon" type="image" xpos="1280" ypos="760" width="100" height="100">icons/internet-net.svg</element>
 
 
     <!-- ==========================================================================================
          FOOTER
          ========================================================================================== -->
+
+    <!-- Vertical separators between the footer's three segments (Equipo / SO / Uptime), matching the
+         mockup: previously there was nothing but blank space between them. Same "hr-line" class already
+         used for the horizontal rules elsewhere, drawn 1px wide instead of 1px tall; centred in the
+         footer's own 44px height (y=856..900) with a few px of margin top and bottom. -->
+    <element name="footer_divider_1" type="form" class="hr-line" xpos="300" ypos="890" width="1" height="24"></element>
+    <element name="footer_divider_2" type="form" class="hr-line" xpos="780" ypos="890" width="1" height="24"></element>
 
     <element name="footer_equipo_icon" type="image" xpos="24"   ypos="896" width="36" height="36">icons/foot_computer.svg</element>
     <element name="footer_equipo_text" type="text"  class="foot" xpos="68"  ypos="885" sizefont="14">#[FOOTER_EQUIPO]</element>

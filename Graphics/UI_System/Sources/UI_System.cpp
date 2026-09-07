@@ -1020,7 +1020,9 @@ bool UI_SYSTEM::HardwareInfo_RequestForced()
 *             own output parameters -- no member/UI_ELEMENT access here anymore.
 * @ingroup    EXAMPLES
 *
-* @param[out] outtemperature : formatted "NN\u00B0C" (or "--" if unavailable).
+* @param[out] outtemperature : formatted "NN", digits only (or "--" if unavailable). The "\u00B0C" unit is a
+*             separate, smaller-sizefont static <text> element (cpu_temp_unit) in dashboard.xml -- see the
+*             comment there -- so it no longer travels inside this string.
 * @param[out] outtemperaturelevel : temperature level for cpu_temp_bar, clamped to [0,100].
 * @param[out] outusagelevel : CPU usage percent for cpu_usage_radial, 0 if unavailable.
 *
@@ -1030,8 +1032,11 @@ bool UI_SYSTEM::HardwareInfo_RequestForced()
 bool UI_SYSTEM::HardwareInfo_UpdateCPU(XSTRING& outtemperature, float& outtemperaturelevel, float& outusagelevel)
 {
   //--------------------------------------------------------------------------------------
-  // CPU Temperature. On several platforms GEN_XSYSTEM.GetCPUTemperature() is still a pending
-  // stub (returns 0.0f), so if no real reading is available the value is left as a "--"
+  // CPU Temperature: a real sensor reading on Windows (WMI), Linux (thermal sysfs), and Android
+  // (same sysfs interface -- XANDROIDSYSTEM inherits XLINUXSYSTEM's implementation). Some boards/
+  // OEM builds still expose no readable thermal zone at all, and microcontroller platforms
+  // (ESP32/STM32) have no CPU temperature sensor to read in the first place; GEN_XSYSTEM.
+  // GetCPUTemperature() returns 0.0f in every one of those cases, so the value is left as a "--"
   // placeholder instead of showing a fake number.
   //--------------------------------------------------------------------------------------
 
@@ -1041,14 +1046,14 @@ bool UI_SYSTEM::HardwareInfo_UpdateCPU(XSTRING& outtemperature, float& outtemper
 
   if(cputemperature > 0.0f)
     {
-      outtemperature.Format(__L("%d\u00B0C"), (int)(cputemperature + 0.5f));
+      outtemperature.Format(__L("%d"), (int)(cputemperature + 0.5f));
 
       outtemperaturelevel = cputemperature;
       if(outtemperaturelevel > 100.0f) outtemperaturelevel = 100.0f;
     }
    else
     {
-      outtemperature.Set(__L("--"));                 // TODO: wire a real CPU sensor (e.g. /sys/class/thermal) here
+      outtemperature.Set(__L("--"));
     }
 
   //--------------------------------------------------------------------------------------
