@@ -17,6 +17,9 @@ function max(num1, num2)
 
 function main()
 {
+
+  Console_Printf("------------------------------------------------------------------------\n");  
+
   Console_Printf("JavaScript version %s\n", "0.1.0");
  
   var number1 = 3;
@@ -34,5 +37,7 @@ function main()
 
   Console_Printf("\nIntroduce una tecla:"); 
   Console_Printf("[%c]\n", Console_GetChar());  
+
+  Console_Printf("\n"); 
 }
 

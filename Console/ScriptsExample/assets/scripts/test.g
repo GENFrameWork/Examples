@@ -25,6 +25,8 @@ int main()
 	number1 = 3;
 	number2 = 8;
   
+  Console_Printf("------------------------------------------------------------------------\n");  
+
   Console_Printf("G version %s\n", VERSION);
   
   Console_Printf("De %d y %d el mayor es %d \n", number1, number2, max(number1, number2));
@@ -39,6 +41,11 @@ int main()
   
   Console_Printf("\nIntroduce una tecla:"); 
   Console_Printf("[%c]\n", Console_GetChar());  
+
+  Console_Printf("\n");  
+
+  return 10;
+
 }
 
 

@@ -16,12 +16,14 @@ end
 
 
 function main()
-
-  Console_Printf("Lua version %s\n", _VERSION);
-
+  
   number1 = 3;
   number2 = 8;
 
+  Console_Printf("------------------------------------------------------------------------\n");  
+
+  Console_Printf("Lua version %s\n", _VERSION);
+   
   Console_Printf("De %d y %d el mayor es %d \n", number1, number2, max(number1, number2));
 
   Console_Printf("Numeros aleatorio de 1 a 100: \n");
@@ -35,7 +37,9 @@ function main()
   Console_Printf("\nIntroduce una tecla:");
   Console_Printf("[%c]\n", Console_GetChar());
 
-  return 25
+  Console_Printf("\n"); 
+
+  return 10;
   
 end 
 
