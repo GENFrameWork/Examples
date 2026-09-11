@@ -12,9 +12,67 @@
 
        reachable : color, background-color / bckgrdcolor, roundrect, visible, scroll, margin,
                    padding(+longhands), border-width, border-color, border-radius(+longhands),
-                   box-shadow, direction, role, blink, extra, xpos, ypos, width, height
-       painted   : padding / border-* / box-shadow are consumed by Draw_Form only. On other widget
-                   types they parse cleanly and are simply not drawn yet.
+                   box-shadow, direction, role, blink, transition, extra, xpos, ypos, width, height,
+                   text-align / textalignment, display (flex only), flex-direction, justify-content,
+                   gap / row-gap / column-gap, flex-wrap, align-content, align-items, flex-grow,
+                   flex-shrink, flex-basis, align-self
+       flexbox   : Phase 4 ("migración del ejemplo") -- "display: flex" makes an element a real flex
+                   container, laid out by the NEW engine (UI_LAYOUTENGINE, wired into UI_MANAGER::
+                   CreateLayouts() -- see its own SCOPE ADDENDUM) instead of the legacy absolute xpos/
+                   ypos math. ".footer" below is the first user of it. Grid (grid-template-columns/rows,
+                   grid-column/row) is NOT wired yet -- a later sub-step of this same increment.
+                   "margin" is still shorthand-only (no "margin-top" etc. longhand -- see UI_MANAGER::
+                   GetLayoutElement_Base()'s own comment on it), so a flex child's exact gap/cross-axis
+                   offset is authored through the 4-value legacy form, LEFT,RIGHT,UP,DOWN order (NOT
+                   padding/border-radius's TOP,RIGHT,BOTTOM,LEFT order -- the two shorthands keep their
+                   own, different, historical argument orders).
+       painted   : border-* / box-shadow are consumed by Draw_Form only (its fill/stroke/shadow geometry
+                   comes straight from the element's own VisibleRect -- see UI_SKINCANVAS::Draw_Form()).
+                   "padding" is NOT one of them, despite reading like it should be: it never reaches
+                   Draw_Form at all (confirmed by reading the function in full, Phase 4 card-header sub-
+                   step). Its only real effect anywhere in the engine is as a LAYOUT inset for CHILDREN --
+                   UI_SKINCANVAS::CalculePosition()'s "father padding delta" step for legacy-positioned
+                   nested elements, and UI_LAYOUTENGINE::BuildTree()/PackFlexLine() for flex ones -- so on
+                   an element with no children (every ".card"/".inner-box"/".tile" panel before this sub-
+                   step) it is a pure no-op, silently inert rather than drawn as an inset border. On other
+                   widget types border-* / box-shadow parse cleanly and are simply not drawn yet. text-align
+                   is consumed by Draw_Text only (UI_ELEMENT_TEXT); on other widget types it parses cleanly and is
+                   simply not read. "sizefont" (and "font-family": GEN's canvas loads a single vector
+                   font per skin, so there is no per-element font switch to reach) stay XML-only.
+       units     : xpos/ypos/width/height accept a trailing "%" (Step 4, relative units), resolved
+                   against the father element's own already-resolved box. Only meaningful on an
+                   element that actually HAS a father (an XML child of another <element>, not a
+                   direct child of <layout>) -- ".footer"'s children (Phase 4) are the first real
+                   nesting in this file, but they are flex items positioned by the new engine, not by
+                   xpos/ypos/"%", so "%" itself is still undemonstrated here; it stays documented for
+                   the day something needs it.
+       inline    : a "style=" XML attribute (Step 6) is a per-element override that wins over both the
+                   plain XML attributes and any rule in THIS file (class, id, or :root) -- the same
+                   precedence HTML's own inline style has. It takes the same bare "prop: value; ..."
+                   grammar a rule body uses (see UI_CSSPARSER::ParseInlineDeclarations()), so anything
+                   reachable through a class here is reachable inline too. var(...) is NOT expanded
+                   inside "style=" (it is parsed standalone, outside this stylesheet's variable table),
+                   so an inline override needs a literal value. dashboard.xml's "brand_version" element
+                   uses it to demonstrate the override winning over ".brand-dim".
+       transition : "transition: <milliseconds>" (Step 7) tweens color/background-color between their old and
+                   new value whenever a pseudo-class state change (":hover"/":preselect", ":selected",
+                   ":active"/":disabled") re-resolves them, instead of jumping instantly. Deliberately minimal,
+                   like the rest of this parser's grammar: one duration, no property list, no easing keyword --
+                   see UI_ELEMENT::ReapplyStyleVisual()/UpdateTransition(). 0 (unset) is the original instant
+                   jump, unchanged for every rule that does not opt in. Applied to ".nav-hit" below, so the
+                   hover wash now fades in/out instead of snapping.
+
+   PITFALL, LEARNED THE HARD WAY (Phase 4, card-header sub-step): this whole header is one single C-style
+   comment block, and prose that happens to contain an asterisk immediately followed by a slash ends that
+   block right there -- silently. Everything after (including the "at-import" line a few lines below) got fed
+   to the RULE parser instead, which choked its way through real content as malformed "rules" until re-syncing
+   much later in the file -- with the net effect that EVERY var(--x) reference resolved to nothing (theme.css's
+   ":root" never got absorbed) and every card/footer/sidebar panel, and every ".card-title" caption, painted
+   fully transparent. No error surfaced anywhere visible (XTRACE_PRINTCOLOR's warnings are compiled in but
+   were not visible in this build). The culprit was the phrase "border-", asterisk, slash, "box-shadow" a few
+   paragraphs up, fixed by spacing it out like its other use two lines above that. Moral: never let an asterisk
+   and a slash land adjacent in prose inside a CSS comment -- this note is itself written to avoid the same
+   trap, describing the two characters in words rather than typing them next to each other.
 
    ALPHA CONVENTION
    ----------------
@@ -23,37 +81,15 @@
    =================================================================================================== */
 
 
-/* --- Theme ---------------------------------------------------------------------------------------- */
+/* --- Theme ----------------------------------------------------------------------------------------
+   Step 5 ("una sola hoja por layout"): the ":root" palette used to live here directly; it now lives in
+   theme.css and is pulled in with "@import" so a future second screen can reuse the exact same
+   variables with one line instead of copy-pasting this block. Nothing downstream changes: the
+   imported ":root" declarations land in the same UI_STYLESHEET::Variables() table this file's own
+   var(...) references already read from -- see UI_CSSPARSER::ResolveAndParseImport().
+   -------------------------------------------------------------------------------------------------- */
 
-:root {
-  /* Surfaces */
-  --page-bg:        13,17,23;
-  --card-bg:        22,27,34;
-  --card-line:      48,54,61;
-  --inner-bg:       13,17,23;
-  --inner-line:     40,46,54;
-  --sidebar-bg:     16,20,28;
-  --sidebar-line:   33,38,45;
-  --footer-bg:      16,20,28;
-
-  /* Selection */
-  --nav-band:       33,58,105,45;      /* subtle blue wash behind the current section */
-  --nav-accent:     56,139,253;        /* 4 px bar on the left edge */
-
-  /* Text */
-  --text-strong:    230,237,243;
-  --text-normal:    201,209,217;
-  --text-muted:     139,148,158;
-
-  /* Accents - one per card, mirrored by the icon colours baked into the SVGs */
-  --accent-blue:    88,166,255;
-  --accent-purple:  191,148,255;
-  --accent-red:     248,81,73;
-  --accent-green:   63,185,80;
-
-  /* Depth. Black at a low percentage reads as a shadow; over ~60% it reads as a solid block. */
-  --shadow-card:    0,0,0,35;
-}
+@import "theme.css";
 
 
 /* --- Chrome surfaces ------------------------------------------------------------------------------ */
@@ -66,12 +102,57 @@ form.sidebar {
   padding:          0;
 }
 
+/* Phase 4 ("migración del ejemplo", second sub-step, revised after two live-app regressions -- see
+   dashboard.xml's own comment on "footer_bg" for the full story): the footer's icon/text/divider content is
+   real XML children of this element instead of root-level siblings hand-positioned in absolute canvas
+   coordinates -- "display: flex" (the only recognized value; see UI_MANAGER::GetLayoutElement_Base()'s
+   Flexbox SCOPE ADDENDUM) makes this the FIRST real flex container in the example. flex-direction/justify-
+   content stay at their engine defaults (row / flex-start). "align-items: center" (NOT left at its flex-start
+   default any more) vertically centers every child -- image, form, or text -- in the footer's 44px using the
+   engine's own PackFlexLine() cross-axis centering, independent of each child's real (auto-measured, for
+   text) height; this replaced an earlier version where each child instead carried its OWN per-item vertical
+   margin (icons/dividers) or "align-self: flex-end" (the three captions) to reproduce the original mockup's
+   pixel positions by hand -- correct in isolation, but the two groups ended up on visibly different cross-axis
+   baselines once actually on screen. Each child's own "margin" (still shorthand-only -- see UI_MANAGER::
+   GetLayoutElement_Base()'s "margin" comment -- 4-value legacy form, LEFT,RIGHT,UP,DOWN order) now supplies
+   ONLY the horizontal gap to its predecessor along the row (main axis); see dashboard.xml for those numbers. */
 form.footer {
   background-color: var(--footer-bg);
   border-color:     var(--sidebar-line);
   border-width:     1;
   border-radius:    0;
   padding:          0;
+  display:          flex;
+  align-items:      center;
+}
+
+
+/* Phase 4 ("migración del ejemplo", third sub-step): the sidebar's 8 nav rows (icon + label each), real XML
+   children of "sidebar_nav" now instead of 16 root-level siblings hand-positioned in absolute canvas
+   coordinates -- see dashboard.xml's own comment on "sidebar_nav" for why that container is a SEPARATE
+   element from "sidebar_bg" (the dark panel background) rather than nesting straight into it, and for the
+   "nav-<section>-hl"/"nav-<section>-bar"/"nav-<section>-btn" overlays that stay exactly as they were (flat
+   root-level siblings, untouched by this sub-step -- see the approved SCOPE for this round).
+     ".sidebar-nav" (the wrapper) : "display: flex; flex-direction: column;" stacks the 8 rows top-to-bottom;
+       "row-gap: 8" is the constant 8px gap between consecutive rows (the SAME gap the original mockup's
+       118/174/230/... ypos ladder reproduces one 56 = 48 (row height) + 8 (gap) step at a time -- see
+       dashboard.xml for the derivation). Paints nothing of its own (transparent background, no border): it
+       exists purely to host the flex layout, exactly like the footer's own "footer_spacer" trick.
+     ".nav-row" (each of the 8 rows) : "display: flex; align-items: center;" is the SAME row-direction,
+       cross-axis-centering pattern "form.footer" above already uses, for the exact same reason -- an icon and
+       a text label with different real heights, centered as a unit rather than each hand-pinned to its own
+       vertical margin. */
+form.sidebar-nav {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  display:          flex;
+  flex-direction:   column;
+  row-gap:          8;
+}
+
+form.nav-row {
+  display:     flex;
+  align-items: center;
 }
 
 
@@ -80,13 +161,86 @@ form.footer {
    panels and the inset boxes carry radius, border and shadow while everything else is plain text.
    -------------------------------------------------------------------------------------------------- */
 
+/* Phase 4 ("migración del ejemplo", fourth sub-step): each card's header (icon + title) is now a real XML
+   child ("card-header" below) instead of two root-level siblings ("<name>_hdr_icon"/"<name>_hdr_text")
+   hand-positioned in absolute canvas coordinates -- see dashboard.xml's own comment on "card_cpu_temp" for
+   the derivation. Approved SCOPE for this round is header-only: each card's BODY content (the thermometer/
+   ring/bar widgets, values, captions) stays exactly as it was, flat root-level siblings, untouched.
+
+   "padding: 18" USED TO sit here, but was always a no-op: no card ever had a nested child before this sub-
+   step, and padding only has an effect on CHILDREN (see the SCOPE comment's "painted" paragraph above) --
+   so it never actually inset anything, for layout OR painting. The moment "card-header" becomes a real
+   child, that stops being true (UI_LAYOUTENGINE::BuildTree() and UI_SKINCANVAS::CalculePosition() both
+   apply a father's padding as a positioning delta on it), and it would conflict outright: the header
+   icon's original absolute position is only 12px below the card's own top edge, less than the 18px an
+   active padding would force as a floor. Rather than reconcile two competing insets, padding here is
+   dropped to 0 (it was invisible either way) and "card-header" carries the ORIGINAL 24/12 offset itself,
+   as its own margin -- the exact same division of responsibility already used for "footer"/"sidebar-nav"
+   (father: 0 padding; child: margin does the positioning). ".card-header" paints nothing of its own
+   (transparent background, no border), same "exists purely to host layout" trick as "footer_spacer"/
+   "sidebar-nav".
+
+   CORRECTION (same sub-step, caught against Abraham's real Windows build): "display: flex;
+   flex-direction: column;" below is NOT optional, unlike what the first version of this rule shipped
+   with. Leaving "card" a plain (non-flex) father and relying on "card-header"'s margin alone put the
+   header at the BOTTOM of every card instead of the top. Root cause: a plain nested child with no father
+   that is itself a flex container is positioned by the OLD engine, UI_SKINCANVAS::CalculePosition() --
+   and that function's Y math is bottom-anchored (a child with no explicit "ypos" defaults to sitting
+   flush against its father's BOTTOM edge; margin-UP then offsets a little further from THAT, not from the
+   top). The CSS-native flex engine (UI_LAYOUTENGINE, see this file's own SCOPE ADDENDUM further up) is
+   top-anchored and treats margin-UP as "distance from the top" instead -- exactly what "sidebar-nav"/
+   "nav-row" already rely on. Making "card" itself a real (if functionally trivial, one-item) flex
+   container routes "card-header" through THAT engine instead, so its margin means what it always meant to
+   mean here. Nothing else about "card" changes: it still has exactly one child (BODY content stays flat
+   root-level siblings, per the approved SCOPE), so this is invisible everywhere except where it fixes the
+   bug. */
 form.card {
   background-color: var(--card-bg);
   border-color:     var(--card-line);
   border-width:     1;
   border-radius:    16;
-  padding:          18;
+  padding:          0;
+  display:          flex;
+  flex-direction:   column;
   box-shadow:       0 4 12 var(--shadow-card);
+}
+
+form.card-header {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  display:          flex;
+  align-items:      center;
+}
+
+/* Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies", first half -- Temp CPU / Uso CPU / RAM /
+   Fecha-Hora, the four whose content maps cleanly onto the flex engine already wired end-to-end. Uptime and
+   Connection are deliberately deferred to a follow-up sub-step: Uptime's 4-column tile row is Grid's textbook
+   case (already implemented at the UI_LAYOUTBOX/UI_LAYOUTENGINE level -- tracks, fr, minmax, spans -- but never
+   wired into the real XML/CSS pipeline: no parsing in UI_MANAGER::GetLayoutElement_Base(), no storage on
+   UI_ELEMENT, RunLayout() itself never calls ApplyGridLayout()), and Connection's toggled badge_ok/badge_ko
+   pair would need BuildTree()/ArrangeFlexChildren()/ArrangeGridChildren() to skip invisible children, which
+   none of them do today (a hidden child still consumes a flex/grid slot). Forcing either through flex now
+   would just be the same "hand-positioned, dressed up as CSS" trick this whole migration exists to retire --
+   real engine work for both, tracked as explicit future work, not folded in here under time pressure.
+
+   Two reusable, purely structural wrappers (transparent, borderless -- exist only to host a flex arrangement,
+   same "exists purely to host layout" trick as "footer_spacer"/"sidebar-nav"/"card-header"): ".flex-row" and
+   ".flex-col" are the row/column equivalents of each other, kept as ONE pair of classes reused across every
+   card body below (value+unit rows, icon+caption rows, the RAM scale row) rather than one throwaway class per
+   instance, since none of them differ in anything but layout PROPERTIES -- which travel per-instance through
+   each element's own "style=" (margin, align-items, justify-content, gap, width/height), exactly like
+   "card-header" already does for its own margin. */
+form.flex-row {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  display:          flex;
+}
+
+form.flex-col {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  display:          flex;
+  flex-direction:   column;
 }
 
 form.inner-box {
@@ -95,6 +249,15 @@ form.inner-box {
   border-width:     1;
   border-radius:    12;
   padding:          12;
+}
+
+/* Thin 1px rule inside an inner-box (e.g. the date/time card), a plain "form" with no border of its
+   own -- just a flat background-color bar the height of the line. */
+form.hr-line {
+  background-color: var(--inner-line);
+  border-width:     0;
+  border-radius:    0;
+  padding:          0;
 }
 
 form.tile {
@@ -127,14 +290,19 @@ form.nav-accent {
    CalculateBoundaryLine_Option leaves the box alone and the whole 210x48 row stays clickable.
    "visiblelimit" is deliberately NOT set in the XML: that attribute is what enables the skin's
    built-in red/white preselect outline, which would fight with the band underneath. The hover
-   feedback below is the stylesheet's own, re-resolved live on every state change. */
+   feedback below is the stylesheet's own, re-resolved live on every state change. ":hover" is
+   GEN's real mouse-over pseudo-class (an exact synonym of ":preselect" -- both fire from the same
+   live state, see UI_ELEMENT::GetActivePseudos()); written with the CSS-natural name here on
+   purpose, now that it is wired, but ":preselect" keeps working identically wherever it is used.
+   "transition" (Step 7) fades that wash in/out over 150ms instead of snapping on/off with the cursor. */
 button.nav-hit {
   background-color: 0,0,0,0;
   border-width:     0;
   border-radius:    0;
+  transition:       150;
 }
 
-button.nav-hit:preselect {
+button.nav-hit:hover {
   background-color: 255,255,255,6;      /* barely-there wash under the cursor */
 }
 
@@ -156,7 +324,12 @@ button.nav-hit:preselect {
 .value-time    { color: var(--accent-blue);   }
 .value-ok      { color: var(--accent-green);  }
 
-.ring-value    { color: var(--text-strong);   }
+/* xpos="center"/ypos="center" in dashboard.xml already places these zero-width <text> elements' box at the
+   ring's midpoint; without "text-align" that only pins the FIRST glyph to the midpoint (the string then grows
+   rightward, so "8%" and "37%" sit at visibly different offsets inside the same ring). "center" (Step 10, see
+   UI_ELEMENT::GetTextAlign()) fixes the string itself around that point, matching the mockup regardless of how
+   many digits the live percentage has. */
+.ring-value    { color: var(--text-strong); text-align: center; }
 
 .tile-label    { color: var(--text-muted);    }
 .tile-value    { color: var(--accent-green);  }

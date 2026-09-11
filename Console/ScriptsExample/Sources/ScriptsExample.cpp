@@ -446,6 +446,8 @@ bool SCRIPTSEXAMPLE::KeyValidSecuences(int key)
 
       case 'R'  : { if(xtimerscriptrun) xtimerscriptrun->Reset();
 
+                    console->Printf(__L("\r\n"));
+
                     SCRIPT::LoadScriptAndRun(APPFLOW_CFG.Scripts_GetAll(), SCRIPTSEXAMPLE::AdjustLibraries);
 
                     XQWORD timereleapsed      =  xtimerscriptrun->GetMeasureMilliSeconds();
