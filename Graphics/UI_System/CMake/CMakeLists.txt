@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.16.0)
 project(ui_system)
 
 
-set(GEN_DIRECTORY "../../../..") 
+set(GEN_DIRECTORY "../../../..")
 
 
 # --------------------------------------------------------------------

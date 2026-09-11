@@ -1,0 +1,38 @@
+/* ===================================================================================================
+   UI_System - shared theme (":root" variables)
+
+   Pulled out of dashboard.css via "@import" (Step 5, "una sola hoja por layout"): a future second
+   screen's stylesheet can now pull in this exact palette with a single "@import "theme.css";" line
+   instead of copy-pasting the ":root" block. See UI_CSSPARSER::ResolveAndParseImport() for how the
+   import is resolved (relative to the IMPORTING file's own directory) and merged.
+   =================================================================================================== */
+
+:root {
+  /* Surfaces */
+  --page-bg:        13,17,23;
+  --card-bg:        22,27,34;
+  --card-line:      48,54,61;
+  --inner-bg:       13,17,23;
+  --inner-line:     40,46,54;
+  --sidebar-bg:     16,20,28;
+  --sidebar-line:   33,38,45;
+  --footer-bg:      16,20,28;
+
+  /* Selection */
+  --nav-band:       33,58,105,45;      /* subtle blue wash behind the current section */
+  --nav-accent:     56,139,253;        /* 4 px bar on the left edge */
+
+  /* Text */
+  --text-strong:    230,237,243;
+  --text-normal:    201,209,217;
+  --text-muted:     139,148,158;
+
+  /* Accents - one per card, mirrored by the icon colours baked into the SVGs */
+  --accent-blue:    88,166,255;
+  --accent-purple:  191,148,255;
+  --accent-red:     248,81,73;
+  --accent-green:   63,185,80;
+
+  /* Depth. Black at a low percentage reads as a shadow; over ~60% it reads as a solid block. */
+  --shadow-card:    0,0,0,35;
+}
