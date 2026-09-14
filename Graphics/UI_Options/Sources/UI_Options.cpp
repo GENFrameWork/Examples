@@ -735,8 +735,8 @@ bool UI_OPTIONS::Ini_Graphics(GRPSCREEN* screen)
 
   //--------------------------------------------------------------------------------------
 
-  screen->SetWidth(1200);
-  screen->SetHeight(800);
+  screen->SetWidth(1024);
+  screen->SetHeight(768);
 
   //screen->Styles_Set(GRPSCREENSTYLE_TRANSPARENT);
   //screen->Styles_Set(GRPSCREENSTYLE_FULLSCREEN);
