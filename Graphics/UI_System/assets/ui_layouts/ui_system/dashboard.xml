@@ -50,58 +50,58 @@
     <element name="sidebar_bg" type="form" class="sidebar" xpos="0" ypos="856" width="210" height="810"></element>
 
     <!-- Phase 4 ("migración del ejemplo", second sub-step): the FIRST real nested flex container in this file
-         -- see dashboard.css's ".footer" rule (display: flex) and its own SCOPE comment. The eight children
+         ; see dashboard.css's ".footer" rule (display: flex) and its own SCOPE comment. The eight children
          below are real XML children now (were root-level siblings, hand-positioned in absolute canvas
          coordinates); they are listed in actual LEFT-TO-RIGHT VISUAL order (flex packs in document/compose
-         order along the main axis -- this engine has no reordering property), which is NOT the order the old
+         order along the main axis ; this engine has no reordering property), which is NOT the order the old
          flat version of this file listed them in (dividers first, then each icon/text pair). No xpos/ypos on
          any child: position now comes entirely from the flex engine (row direction, flex-start justify-
-         content/align-items -- all just the engine's own defaults, left unset here) plus each child's own
-         "margin" -- see each one's inline "style=" below for exactly how the four numbers reproduce this
+         content/align-items ; all just the engine's own defaults, left unset here) plus each child's own
+         "margin" ; see each one's inline "style=" below for exactly how the four numbers reproduce this
          element's ORIGINAL absolute position pixel-for-pixel:
            - horizontal (main axis): margin-LEFT is the gap from the PRECEDING child's right edge (or, for the
-             first child, from the container's own left edge) -- derived as
+             first child, from the container's own left edge) ; derived as
              (this child's old absolute xpos) - (preceding child's old absolute xpos + its width).
            - vertical (cross axis): NONE of the eight children set a vertical margin or "align-self" any more
              (an earlier version of this comment walked through per-item margin-UP/margin-DOWN arithmetic
-             here -- superseded by this simpler, more robust approach after two rounds of live-app regressions:
-             (1) shipping margin-UP on the assumption a text element's box has height 0 -- wrong, see
+             here ; superseded by this simpler, more robust approach after two rounds of live-app regressions:
+             (1) shipping margin-UP on the assumption a text element's box has height 0 ; wrong, see
              UI_SKINCANVAS::CalculateBoundaryLine_Text(), it auto-sizes to the real font-metric height, which
              clipped the captions off-screen; (2) the align-self:flex-end + margin-DOWN fix that followed was
              correct in isolation but put the three captions on a different cross-axis baseline than their own
-             icons (still margin-UP-centered), which -- once the captions were finally visible -- visually read
+             icons (still margin-UP-centered), which ; once the captions were finally visible ; visually read
              as "not vertically centered" and, combined with a too-tight 8px gap, "glued together". Both are
              fixed at once by centering the WHOLE row instead of each item individually: dashboard.css's
              ".footer" rule now carries "align-items: center;" (the engine's own PackFlexLine() cross-axis
-             centering, height-independent by construction -- see UI_LAYOUTENGINE.cpp), so every child --
-             image, form, or text, whatever its real auto-measured height turns out to be -- lands vertically
+             centering, height-independent by construction ; see UI_LAYOUTENGINE.cpp), so every child ;
+             image, form, or text, whatever its real auto-measured height turns out to be ; lands vertically
              centered in the footer's 44px automatically, with NO per-item vertical arithmetic to keep in sync.
            - horizontal (main axis): unchanged from the earlier derivation EXCEPT the icon-to-caption gap, which
-             is now 12 (was 8, still each caption's own margin-LEFT) -- purely a visual tweak: the tighter 8
+             is now 12 (was 8, still each caption's own margin-LEFT) ; purely a visual tweak: the tighter 8
              read as the icon and its caption "touching" once both sat on the same (now centered) baseline.
              Every OTHER margin-LEFT (divider-after-caption, next icon-after-divider: 232/219/216) is still the
              gap from the PRECEDING child's right edge, derived from the ORIGINAL absolute mockup exactly as
-             before -- see the earlier revision of this comment for the full derivation. Note those numbers
+             before ; see the earlier revision of this comment for the full derivation. Note those numbers
              only reproduce the mockup's pixel positions as long as each caption's real auto-measured string
              width roughly matches what the mockup assumed; because a caption's width is its own real,
-             font-measured string width (not a fixed placeholder) -- e.g. "SO: <the live OS string>" -- the
+             font-measured string width (not a fixed placeholder) ; e.g. "SO: <the live OS string>" ; the
              exact position of everything after the FIRST caption is inherently dynamic now, unlike the single
              fixed-size mockup this file replaced, which could not do that at all.
 
-         SCOPE ADDENDUM (footer icon/caption gap regression, round 3 -- root cause confirmed against a real
+         SCOPE ADDENDUM (footer icon/caption gap regression, round 3 ; root cause confirmed against a real
          windowed build, not just this suite's unit tests): every child below now also carries "flex-shrink: 0"
          in its inline style. Without it, each child fell back to the engine's CSS default (flex-shrink: 1), and
-         UI_MANAGER::ChangeTextElementValue()'s live-reflow fix (round 1 -- re-running RunLayout() on every
+         UI_MANAGER::ChangeTextElementValue()'s live-reflow fix (round 1 ; re-running RunLayout() on every
          "#[FOOTER_*]" text refresh so siblings stay correctly spaced, per THIS SAME comment's own history above)
          re-engaged that shrink on every single refresh. Live "SO: <full OS string>" and "Uptime: ..." captions
          genuinely run wider than this row's fixed 232/219/216 gap margins were sized for (see the paragraph
-         above), so the row is a few percent over budget the moment those two captions are both long -- and each
+         above), so the row is a few percent over budget the moment those two captions are both long ; and each
          RunLayout() call was shrinking every child a little further using the PREVIOUS call's already-shrunk
          width as its new "natural" size (fixed engine-side in UI_LAYOUTENGINE::BuildTree()/UI_SKIN::
-         CalculateBoundaryLine() -- see their own SCOPE ADDENDUM comments), geometrically converging the 36px
+         CalculateBoundaryLine() ; see their own SCOPE ADDENDUM comments), geometrically converging the 36px
          icons down to a third of their size after a couple of minutes on screen and, with it, their caption's
-         margin-left-computed gap. "flex-shrink: 0" restores this row's actual intent -- every icon, divider and
-         caption stays EXACTLY its declared/measured size, full stop -- so on the (accepted, pre-existing, see
+         margin-left-computed gap. "flex-shrink: 0" restores this row's actual intent ; every icon, divider and
+         caption stays EXACTLY its declared/measured size, full stop ; so on the (accepted, pre-existing, see
          above) days the live captions run long, the row simply overflows a little past x=1440 instead of
          quietly shrinking every icon and gap to disguise it. -->
     <element name="footer_bg" type="form" class="footer" xpos="0" ypos="900" width="1440" height="44">
@@ -113,20 +113,20 @@
       <element name="footer_divider_2"   type="form"  class="hr-line" style="margin: 216,0,0,0; flex-shrink: 0;" width="1" height="24"></element>
       <!-- Invisible spacer, NOT part of the mockup: "flex-grow: 1" makes it consume ALL of the row's remaining
            free space (the classic Flexbox "margin: auto" substitute for an engine, like this one, with no
-           auto-margin of its own -- see UI_LAYOUTENGINE.cpp's flex-grow resolution pass, already exercised by
+           auto-margin of its own ; see UI_LAYOUTENGINE.cpp's flex-grow resolution pass, already exercised by
            this same test suite). It pushes the "Uptime" group flush toward the footer's right edge regardless
-           of how wide the live "SO: ..." caption before it happens to render -- the alternative (a hardcoded
+           of how wide the live "SO: ..." caption before it happens to render ; the alternative (a hardcoded
            margin-left on "footer_uptime_icon") could only ever be correct for one specific OS string length.
            width/height start at 0 (flex-grow only ever grows the MAIN axis, never the cross one) and it carries
            no class, plus an explicit fully-transparent background and zero border, so it paints nothing even
            after growing wide: it exists purely to consume space, never to be seen. -->
       <element name="footer_spacer"      type="form"  style="flex-grow: 1; background-color: 0,0,0,0; border-width: 0;" width="0" height="0"></element>
       <element name="footer_uptime_icon" type="image" style="margin: 219,0,0,0; flex-shrink: 0;"  width="36" height="36">icons/foot_clock.svg</element>
-      <!-- margin-RIGHT=24 mirrors "footer_equipo_icon"'s own margin-LEFT=24 -- with "footer_spacer" just above
+      <!-- margin-RIGHT=24 mirrors "footer_equipo_icon"'s own margin-LEFT=24 ; with "footer_spacer" just above
            consuming all the free space ahead of this group, this is what actually keeps that 24px inset on
            the right: the spacer's own grown width is exactly (available free space - this margin-right), so
            the row's total content, spacer included, fills the container exactly, ending flush at 1440 minus
-           this margin -- see PackFlexLine()'s own freespace accounting in UI_LAYOUTENGINE.cpp. -->
+           this margin ; see PackFlexLine()'s own freespace accounting in UI_LAYOUTENGINE.cpp. -->
       <element name="footer_uptime_text" type="text"  class="foot" style="margin: 16,24,0,0; flex-shrink: 0;" sizefont="14">#[FOOTER_UPTIME]</element>
     </element>
 
@@ -152,25 +152,25 @@
     <!-- Cards
          Phase 4 ("migración del ejemplo", fourth sub-step): each card's header (icon + title) is now a real
          XML child ("card-header") instead of two root-level siblings ("<name>_hdr_icon"/"<name>_hdr_text")
-         hand-positioned in absolute canvas coordinates -- see dashboard.css's "form.card"/"form.card-header"
+         hand-positioned in absolute canvas coordinates ; see dashboard.css's "form.card"/"form.card-header"
          rules for the flex/padding properties this relies on. Approved SCOPE for this round is header-only:
-         each card's BODY content (progress widgets, values, captions -- everything below the "CARD N" banner
+         each card's BODY content (progress widgets, values, captions ; everything below the "CARD N" banner
          comments further down this file) stays exactly as it was, flat root-level siblings, untouched.
 
          Z-ORDER: unlike the sidebar's icon/label (which shared their screen region with a later-declared
-         "nav-<section>-hl"/"-bar" overlay, forcing a separate wrapper -- see "sidebar_nav"'s own comment),
+         "nav-<section>-hl"/"-bar" overlay, forcing a separate wrapper ; see "sidebar_nav"'s own comment),
          no card header shares its screen region with any element declared between "card_cpu_temp" (here)
          and where the old "<name>_hdr_icon"/"<name>_hdr_text" used to sit (datetime_box/uptime_box/dividers,
-         the sidebar, the brand block -- all elsewhere on screen). So nesting straight into "card_<name>"
+         the sidebar, the brand block ; all elsewhere on screen). So nesting straight into "card_<name>"
          itself, no wrapper trick needed, reproduces the original paint order with no visible difference.
 
          DERIVATION (traced back to the ORIGINAL absolute positions this replaces, identical relative geometry
-         confirmed across all 6 cards): each header icon sat at a card-relative offset of (24, 12) -- e.g. card
+         confirmed across all 6 cards): each header icon sat at a card-relative offset of (24, 12) ; e.g. card
          1: card xpos=238, "temp_hdr_icon" xpos=262 (238+24); reproduced below as "card-header"'s own margin,
          "margin: 24,0,12,0;" (LEFT=24, UP=12), the same division of responsibility already used for "footer"/
-         "sidebar-nav" (father padding 0, child margin does the positioning -- see "form.card"'s own comment).
+         "sidebar-nav" (father padding 0, child margin does the positioning ; see "form.card"'s own comment).
          Within the row, the title text's old xpos was always exactly 82 from the card's left edge, i.e. a 10px
-         gap from the icon's right edge (82 - (24+48) = 10) -- reproduced as the title's own "margin: 10,0,0,0;"
+         gap from the icon's right edge (82 - (24+48) = 10) ; reproduced as the title's own "margin: 10,0,0,0;"
          (LEFT=10, first flex item being the icon with no leading margin of its own). Vertically, "align-items:
          center" on "card-header" (row height = the icon's own 48, "form.card-header" in dashboard.css) replaces
          each title's individually hand-picked ypos, using the SAME real-height-independent centering already
@@ -181,7 +181,7 @@
         <element name="temp_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="19">Temperatura CPU</element>
       </element>
       <!-- "temp_hdr_icon"/"temp_hdr_text" (icon at card-relative 24,12; title 82 from the card's left edge,
-           a 10px gap from the icon) moved into "card_cpu_temp" itself as a nested "card-header" -- see this
+           a 10px gap from the icon) moved into "card_cpu_temp" itself as a nested "card-header" ; see this
            file's own comment on the "Cards" section above and dashboard.css's "form.card-header". The
            xpos=262/466 reasoning in the comment just below still holds unchanged: "temp_hdr_icon" still sits
            at that same absolute x, now arrived at via the card's xpos (238) + the header's margin (24)
@@ -238,7 +238,7 @@
            load-bearing precision as "card-header"'s derivation. -->
       <!-- "card-body"/"right-col"/"value-row" all carry an explicit width AND height: CalculateBoundaryLine_Form()
            always returns false (a plain "form" never auto-sizes to its children, unlike text/image/progress*
-           widgets, which measure themselves from font metrics/asset dimensions/explicit attributes) -- an
+           widgets, which measure themselves from font metrics/asset dimensions/explicit attributes) ; an
            un-sized flex wrapper reads as a 0x0 box to UI_LAYOUTENGINE, and a 0-sized MAIN axis makes
            ResolveFlexItemSizes() compute a large NEGATIVE freespace against that wrapper's own real children,
            wrongly shrinking them (every item defaults to flex-shrink:1). Each size below is a generous, safely
@@ -265,10 +265,10 @@
                  sibling of "cpu_temp_value" now (not a fixed-xpos root sibling) is what actually FIXES the
                  trade-off the old flat structure's comment used to flag here: "GEN positions left-aligned text
                  at a fixed xpos regardless of the mask's rendered width, so there is no built-in way to make
-                 this element flow after a sibling of varying width" -- true for two independent root elements,
+                 this element flow after a sibling of varying width" ; true for two independent root elements,
                  no longer true for two flex items in the same row, since UI_MANAGER::ChangeTextElementValue()
                  already re-runs RunLayout() on the flex father whenever a changed text child's father
-                 IsFlexContainer() (see UI_LayoutEngine.h's own "migración del ejemplo" SCOPE ADDENDUM) -- so the
+                 IsFlexContainer() (see UI_LayoutEngine.h's own "migración del ejemplo" SCOPE ADDENDUM) ; so the
                  unit now genuinely re-flows after the live value on every update, 1-digit or 3-digit alike,
                  instead of sitting at a fixed offset tuned for the common 2-digit case. -->
             <element name="cpu_temp_unit" type="text" class="value-temp" style="margin: 6,0,0,0;" sizefont="28">°C</element>
@@ -278,7 +278,7 @@
                glyph: cap_cpu.svg is card_cpu.svg's same chip artwork recoloured to the theme's accent-red
                (248,81,73), matching cpu_temp_value's colour and cap_thermo.svg's old red tone exactly. -->
           <element name="temp_cap_icon" type="image" style="margin: 0,0,100,0;" width="60" height="60">icons/cap_cpu.svg</element>
-          <!-- margin-LEFT=4, not 0: kept from the old flat layout's own note -- measured against Abraham's build
+          <!-- margin-LEFT=4, not 0: kept from the old flat layout's own note ; measured against Abraham's build
                screenshot that cpu_temp_value/temp_cap_icon's glyphs render ~4px right of their declared xpos
                (Nunito-SemiBold's left-side bearing at sizefont=50, and cap_cpu.svg's own inner margin, both push
                their visible edge in a bit), while this 14pt label has almost none; matching the RENDERED edge is
@@ -297,11 +297,11 @@
            real XML child, "card-body" (flex column, the ring then its caption stacked below). Ring's own
            "xpos=center"/"ypos=center" child ("cpu_usage_value") is the SEPARATE, legacy, per-widget centering
            mechanism (UI_ELEMENT_TYPE_ALIGN_CENTER, resolved by CalculePosition() independently of this card-level
-           Flexbox) -- untouched, unaffected by "cpu_usage_radial" becoming a flex ITEM one level up.
+           Flexbox) ; untouched, unaffected by "cpu_usage_radial" becoming a flex ITEM one level up.
            margin: LEFT=58 (694-636, the ring's original left offset from the card's own left edge, re-centred
            per the comment kept below), UP=22 (152-130: the ring's original top edge minus the header row's
            bottom edge, 12+48). "cpu_usage_caption"'s own margin (measured against the original xpos/ypos, same
-           "estimate, not exact -- text height is a runtime measurement" caveat as "card_cpu_temp"'s own comment)
+           "estimate, not exact ; text height is a runtime measurement" caveat as "card_cpu_temp"'s own comment)
            places it just under the ring, offset right of the ring's own left edge to stay centred under it. -->
       <!-- Explicit width/height for the same reason "card_cpu_temp"'s own "card-body" comment explains: a plain
            "form" flex wrapper never auto-sizes to its children (CalculateBoundaryLine_Form() always returns
@@ -332,7 +332,7 @@
         <!-- margin-top corrected from a stale 92 (an editing leftover from an earlier draft of this card,
              predating the ring's growth to 260) to 7: matches this element's own "card-body" height
              derivation just above ("290 = 260 (ring) + 7 (gap) + ~19 (caption's real height)"), confirmed
-             against a real windowed build screenshot -- 92 visibly overlapped the caption text under the
+             against a real windowed build screenshot ; 92 visibly overlapped the caption text under the
              ring's own bottom edge instead of sitting below it. -->
         <element name="cpu_usage_caption" type="text" class="label-accent" style="margin: 7,0,7,0;" sizefont="15">Uso actual</element>
       </element>
@@ -348,7 +348,7 @@
            ram_scale_0/50/100]. "card-body"'s own margin (22,0,58,0) reproduces the ring's original left/top edge
            (LEFT=22, matching the ring's original 1056-1034 offset from the card's own left edge; UP=58, the
            ring's original top edge 188 minus the header row's bottom edge 130). "right-col"'s own margin-top
-           (38) reproduces the vertical gap between the ring's top and the used/total text's original top -- this
+           (38) reproduces the vertical gap between the ring's top and the used/total text's original top ; this
            column starts noticeably lower than the ring, matching the mockup. Every OTHER vertical gap inside
            "right-col" (ram_caption/ram_linear_bar/scale-row's own margin-top below), like "card_cpu_temp"'s own
            caveat, is a reasonable STARTING estimate rather than an exact derivation: a "text" element's real
@@ -361,7 +361,7 @@
            1256/1313/1363 xpos ladder did by hand. -->
       <!-- Explicit width/height, same reason as "card_cpu_temp"'s own "card-body" comment: an un-sized "form"
            flex wrapper reads as 0x0 to UI_LAYOUTENGINE and wrongly shrinks its real children.
-           354 = 178 (ring) + 16 (gap) + 160 (right column -- see its own comment below for that number's
+           354 = 178 (ring) + 16 (gap) + 160 (right column ; see its own comment below for that number's
            derivation); 186 is generous headroom for "right-col"'s real content, which (including its own
            38px margin-top) runs taller than the ring alone. -->
       <element name="card-body" type="form" class="flex-row" style="margin: 22,0,58,0;" width="354" height="186">
@@ -378,10 +378,10 @@
         </element>
 
         <!-- 160 = the real available width from this column's left edge (1250, the original "ram_used_total"
-             xpos) to the card's own right edge (1410) -- the same 160 the original design's own worst-case
+             xpos) to the card's own right edge (1410) ; the same 160 the original design's own worst-case
              string, "31.8 GB / 31.8 GB" at 157px, already had to fit inside (see the comment kept below). 148 =
              ~24 (used_total) + 10 (gap) + ~18 (caption) + 56 (gap) + 14 (bar) + 11 (gap) + ~15 (scale row),
-             generously rounded up -- same "form never auto-sizes" reasoning as "card-body"'s own comment above. -->
+             generously rounded up ; same "form never auto-sizes" reasoning as "card-body"'s own comment above. -->
         <element name="right-col" type="form" class="flex-col" style="margin: 0,0,38,0;" width="160" height="148">
           <element name="ram_used_total" type="text" class="value-ram" sizefont="19">#[RAM_USED_TOTAL]</element>
           <element name="ram_caption"    type="text" class="label"     style="margin: 0,0,10,0;" sizefont="14">En uso / Total</element>
@@ -417,7 +417,7 @@
            (28,0,54,0) reproduces its original absolute geometry: LEFT=28 (266-238, its original left offset
            from the card's own left edge), UP=54 (114-60: its original top edge minus the header row's bottom
            edge, 12+48). "display: flex; flex-direction: column;" makes it, itself, a real flex container for
-           the date/divider/time/caption-row it now hosts -- its existing "padding: 12" (form.inner-box in
+           the date/divider/time/caption-row it now hosts ; its existing "padding: 12" (form.inner-box in
            dashboard.css) already insets every child from its own border the same way "form.card"'s padding
            would have, if it had ever had a real child before this sub-step (see that rule's own comment).
            Every child's own margin-top below is a reasonable STARTING estimate, same caveat as
@@ -434,7 +434,7 @@
         <element name="system_time" type="text" class="value-time" style="margin: 0,0,5,0;" sizefont="34">#[SYSTEM_TIME]</element>
 
         <!-- 296 matches "datetime_box"'s own content width (320 minus its 12px padding on both sides); 36
-           matches the icon's own height -- same "form never auto-sizes" reasoning as "card_cpu_temp"'s own
+           matches the icon's own height ; same "form never auto-sizes" reasoning as "card_cpu_temp"'s own
            "card-body" comment. -->
         <element name="cap-row" type="form" class="flex-row" style="margin: 0,0,20,0; align-items: center;" width="296" height="36">
           <element name="dt_cap_icon" type="image" width="36" height="36">icons/cap_clock.svg</element>
@@ -456,9 +456,9 @@
     </element>
 
     <!-- Inset panels -->
-    <!-- "datetime_box" (Card 4) is nested into "card_datetime" itself as a real flex child -- see that
+    <!-- "datetime_box" (Card 4) is nested into "card_datetime" itself as a real flex child ; see that
          element's own comment for the full derivation. Only "uptime_box" (Card 5, deferred to the Grid
-         follow-up round -- see dashboard.css's own SCOPE comment) still lives here as a flat, absolutely
+         follow-up round ; see dashboard.css's own SCOPE comment) still lives here as a flat, absolutely
          positioned root-level sibling. -->
 
     <!-- Mockup shows ONE continuous panel with thin vertical dividers between the four columns, not four
@@ -484,19 +484,19 @@
     <!-- Phase 4 ("migración del ejemplo", third sub-step): the sidebar's icon+label pairs are real nested
          Flexbox containers now instead of 16 root-level siblings hand-positioned in absolute canvas
          coordinates (8 "nav-<section>-icon" + 8 "nav-<section>-text", each with its own xpos/ypos derived
-         by hand from the mockup) -- see dashboard.css's "form.sidebar-nav"/"form.nav-row" rules for the
+         by hand from the mockup) ; see dashboard.css's "form.sidebar-nav"/"form.nav-row" rules for the
          flex properties this relies on.
 
          WHY A SEPARATE "sidebar_nav" ELEMENT INSTEAD OF NESTING STRAIGHT INTO "sidebar_bg": the footer had
          only ONE surface underneath its content ("footer_bg" itself); the sidebar has THREE, stacked in a
-         specific paint order that the app's UserInterface_SelectSection() (see UI_System.cpp) depends on --
+         specific paint order that the app's UserInterface_SelectSection() (see UI_System.cpp) depends on ;
          sidebar_bg's dark panel background, then "nav-<section>-hl"/"nav-<section>-bar" (the selection
          band + accent bar it shows/hides with SetVisible()), then the icon/label on top of THOSE. A form's
          nested children always paint immediately after that SAME form's own background/border (see
-         UI_SKINCANVAS::Draw_Form()'s child recursion) -- so nesting icon+label straight into "sidebar_bg"
+         UI_SKINCANVAS::Draw_Form()'s child recursion) ; so nesting icon+label straight into "sidebar_bg"
          would draw them BEFORE "nav-<section>-hl"/"-bar" even run (those are separate, later ROOT-level
          siblings), putting the selection band on TOP of the icon and label instead of under them. A second,
-         otherwise-invisible flex container ("sidebar_nav" -- background-color/border-width zeroed out, the
+         otherwise-invisible flex container ("sidebar_nav" ; background-color/border-width zeroed out, the
          same "paints nothing, exists purely to host layout" trick "footer_spacer" already uses) declared
          AFTER "nav-<section>-hl"/"-bar" below, at the exact file position the old flat icon/text elements
          used to occupy, reproduces the original paint order exactly while still giving the flex engine a
@@ -507,15 +507,15 @@
              46) so percentages/margins below read against the same frame the mockup was authored in.
            - vertical (main axis, "flex-direction: column"): the first row's old absolute top (70, from
              "nav-resumen-hl"'s ypos=118 minus its own height=48) is 24px below "sidebar_nav"'s own top (46)
-             -- reproduced as "margin: 0,0,24,0;" (margin-UP, the column main axis's leading edge -- see
+             ; reproduced as "margin: 0,0,24,0;" (margin-UP, the column main axis's leading edge ; see
              UI_LAYOUTENGINE.cpp's PackFlexLine()) on ONLY the first row. Every following row is exactly 56px
-             below the previous one (174-118=56, 230-174=56, ...) = 48 (row height) + 8 (gap) -- reproduced
+             below the previous one (174-118=56, 230-174=56, ...) = 48 (row height) + 8 (gap) ; reproduced
              once, at the container level, as "row-gap: 8" on "sidebar_nav" (see "form.sidebar-nav"), instead
              of repeating "margin: 0,0,8,0;" on 7 separate rows.
-           - horizontal (cross axis, "align-items: center" on each row -- see "form.nav-row"): replaces each
+           - horizontal (cross axis, "align-items: center" on each row ; see "form.nav-row"): replaces each
              icon/text's own hand-picked vertical offset (icon top=72 = row top 70 + (48-44)/2, i.e. already
              centered by eye against the row's 48px; text was pinned by its OLD assumed height, off by a few
-             px against the font's real metric -- same class of mismatch the footer's own captions had, see
+             px against the font's real metric ; same class of mismatch the footer's own captions had, see
              "footer_bg"'s comment above) with the SAME robust, real-height-independent centering already
              proven there.
            - horizontal (main axis WITHIN each row, unchanged from the mockup): icon's "margin: 26,...;" is
@@ -575,16 +575,16 @@
     <element name="brand_version" type="text"  class="brand-dim" style="color: 88,166,255;" xpos="88" ypos="830" sizefont="13">v#[APP_VERSION]</element>
 
 
-    <!-- CARD 1 (Temperatura CPU) body: nested into "card_cpu_temp" itself as its "card-body" -- see that
+    <!-- CARD 1 (Temperatura CPU) body: nested into "card_cpu_temp" itself as its "card-body" ; see that
          element's own comment for the full derivation. -->
 
-    <!-- CARD 2 (Uso actual de CPU) body: nested into "card_cpu_usage" itself as its "card-body" -- see that
+    <!-- CARD 2 (Uso actual de CPU) body: nested into "card_cpu_usage" itself as its "card-body" ; see that
          element's own comment for the full derivation. -->
 
-    <!-- CARD 3 (Consumo de memoria RAM) body: nested into "card_ram" itself as its "card-body" -- see that
+    <!-- CARD 3 (Consumo de memoria RAM) body: nested into "card_ram" itself as its "card-body" ; see that
          element's own comment for the full derivation. -->
 
-    <!-- CARD 4 (Fecha y hora del sistema) body: nested into "card_datetime" itself as its "datetime_box" --
+    <!-- CARD 4 (Fecha y hora del sistema) body: nested into "card_datetime" itself as its "datetime_box" ;
          see that element's own comment for the full derivation. -->
 
 
@@ -592,7 +592,7 @@
          CARD 5 : Tiempo de funcionamiento del sistema
          ========================================================================================== -->
 
-    <!-- "up_hdr_icon"/"up_hdr_text" moved into "card_uptime" as a nested "card-header" -- see the "Cards"
+    <!-- "up_hdr_icon"/"up_hdr_text" moved into "card_uptime" as a nested "card-header" ; see the "Cards"
          section comment above ("temp_hdr_icon" carries the full derivation). -->
 
     <!-- label/value ypos raised again (666->640, 718->687/676) together with uptime_box's own top edge
@@ -616,7 +616,7 @@
          CARD 6 : Estado de la conexion a internet
          ========================================================================================== -->
 
-    <!-- "conn_hdr_icon"/"conn_hdr_text" moved into "card_connection" as a nested "card-header" -- see the
+    <!-- "conn_hdr_icon"/"conn_hdr_text" moved into "card_connection" as a nested "card-header" ; see the
          "Cards" section comment above ("temp_hdr_icon" carries the full derivation). -->
 
     <!-- Two stacked glyphs: the application shows one and hides the other. -->
@@ -635,7 +635,7 @@
     <element name="connection_net_icon" type="image" xpos="1280" ypos="760" width="100" height="100">icons/internet-net.svg</element>
 
 
-    <!-- FOOTER: see "footer_bg" up in the SURFACES section above (Phase 4, second sub-step) -- its content is
+    <!-- FOOTER: see "footer_bg" up in the SURFACES section above (Phase 4, second sub-step) ; its content is
          now real XML children of that element, laid out by the new Flexbox engine instead of listed here as
          root-level, absolutely-positioned siblings. -->
 

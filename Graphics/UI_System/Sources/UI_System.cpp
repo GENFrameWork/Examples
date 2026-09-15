@@ -57,6 +57,7 @@
 #include "XTranslation_GEN.h"
 #include "XThread.h"
 #include "XTrace.h"
+#include "XDiagLog.h"                        // TEMPORARY diagnostic-only, see XDiagLog.h -- remove with it
 
 #include "DIOFactory.h"
 #include "DIOStreamDeviceIP.h"
@@ -757,16 +758,88 @@ bool UI_SYSTEM::DrawFrame()
     }
  
   //--------------------------------------------------------------------------------------
+  // TEMPORARY DIAGNOSTIC INSTRUMENTATION (2026-09) -- see XDiagLog.h. Root-causing a multi-second full-dashboard
+  // blank-freeze reported on real hardware/VMs (Windows and Linux) that a sandboxed reconstruction did not fully
+  // explain. Times each of the 3 frame phases against XDiagLog's shared wall clock (a real platform XTIMER, NOT
+  // clock()/CPU time -- a genuine block/wait must show up here, unlike CPU time, which would hide it). Logs a
+  // [SLOWFRAME] line only when this single frame took over 20ms (past a 16.6ms/60fps budget) and a [HEARTBEAT]
+  // line once a second regardless, so a stall INSIDE DrawFrame (heartbeats keep coming, frames are just slow) can
+  // be told apart from the whole main loop not being called at all (heartbeats themselves stop appearing).
+  //--------------------------------------------------------------------------------------
 
-  canvas->ReleaseDrawFramerate();  
- 
+  static XQWORD diag_framecounter    = 0;
+  static XQWORD diag_hb_windowstart  = XDIAGLOG_NOWUS();
+  static XQWORD diag_hb_frames       = 0;
+  static XQWORD diag_hb_maxus        = 0;
+
+  // TEMPORARY diagnostics -- counters defined in UI_Skin.cpp, incremented on every UI_SKIN::Draw() call this
+  // frame (recursive: covers every top-level element AND every descendant visited via Draw_Form()/Draw_Menu()
+  // etc). Tells us the ACTUAL size of the tree walked per frame and how much of it was visible/dirty, since the
+  // existing "update=" timing alone cannot distinguish "few elements, each expensive" from "many elements,
+  // walked normally" -- both would show the same total. Extern-declared here rather than in a header since
+  // this is throwaway.
+  extern XDWORD diagskin_visits;
+  extern XDWORD diagskin_visible;
+  extern XDWORD diagskin_dirty;
+  extern XQWORD diagskin_shadowus;         // UI_SkinCanvas.cpp -- accumulated us inside soft-shadow build+composite
+  extern XDWORD diagskin_shadowcalls;      // UI_SkinCanvas.cpp -- how many soft-shadow draws happened this frame
+  extern XDWORD diagskin_shadowcachehits;  // UI_SkinCanvas.cpp -- of those, how many reused the cached bitmap (Draw_Form path only)
+  extern XDWORD diagskin_shadowcachemiss;  // UI_SkinCanvas.cpp -- of those, how many had to rebuild it
+
+  diagskin_visits          = 0;
+  diagskin_visible         = 0;
+  diagskin_dirty           = 0;
+  diagskin_shadowus         = 0;
+  diagskin_shadowcalls      = 0;
+  diagskin_shadowcachehits  = 0;
+  diagskin_shadowcachemiss  = 0;
+
+  XQWORD diag_t0 = XDIAGLOG_NOWUS();
+
+  //--------------------------------------------------------------------------------------
+
+  canvas->ReleaseDrawFramerate();
+
   canvas->RebuildAllAreas();
+
+  XQWORD diag_t1 = XDIAGLOG_NOWUS();
 
   //--------------------------------------------------------------------------------------
 
   GEN_USERINTERFACE.Elements_RebuildDrawAreas();
-  
-  GEN_USERINTERFACE.Update(); 
+
+  XQWORD diag_t2 = XDIAGLOG_NOWUS();
+
+  GEN_USERINTERFACE.Update();
+
+  XQWORD diag_t3 = XDIAGLOG_NOWUS();
+
+  //--------------------------------------------------------------------------------------
+  // Diagnostic bookkeeping -- see note above.
+  //--------------------------------------------------------------------------------------
+
+  diag_framecounter++;
+  diag_hb_frames++;
+  if((diag_t3 - diag_t0) > diag_hb_maxus) diag_hb_maxus = diag_t3 - diag_t0;
+
+  if((diag_t3 - diag_t0) > 20000)
+    {
+      XDIAGLOG_WRITE("SLOWFRAME", "n=%llu total=%lluus canvasrebuild=%lluus elementsrebuild=%lluus update=%lluus skinvisits=%u skinvisible=%u skindirty=%u shadowcalls=%u shadowus=%llu shadowhits=%u shadowmiss=%u",
+                      (unsigned long long)diag_framecounter,
+                      (unsigned long long)(diag_t3-diag_t0), (unsigned long long)(diag_t1-diag_t0),
+                      (unsigned long long)(diag_t2-diag_t1), (unsigned long long)(diag_t3-diag_t2),
+                      (unsigned int)diagskin_visits, (unsigned int)diagskin_visible, (unsigned int)diagskin_dirty,
+                      (unsigned int)diagskin_shadowcalls, (unsigned long long)diagskin_shadowus,
+                      (unsigned int)diagskin_shadowcachehits, (unsigned int)diagskin_shadowcachemiss);
+    }
+
+  if((XDIAGLOG_NOWUS() - diag_hb_windowstart) > 1000000ULL)
+    {
+      XDIAGLOG_WRITE("HEARTBEAT", "frames_in_window=%llu maxframe=%lluus", (unsigned long long)diag_hb_frames, (unsigned long long)diag_hb_maxus);
+      diag_hb_frames      = 0;
+      diag_hb_maxus       = 0;
+      diag_hb_windowstart = XDIAGLOG_NOWUS();
+    }
 
   //--------------------------------------------------------------------------------------
 
@@ -850,12 +923,32 @@ bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
   float ramusagelevelnow = 0.0f;
   bool  isconnectednow   = false;
 
+  // TEMPORARY diagnostic-only (see XDiagLog.h): times each source and the mutex re-acquire below, to check
+  // empirically whether HardwareInfo_UpdateConnection() (the one documented as able to block on a real network
+  // check) or mutex contention with the render thread is actually overlapping with the multi-second blank-freeze
+  // under investigation, rather than trusting the "this can never stall rendering" design intent unverified.
+  XQWORD diagh_t0 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateCPU(temperaturestr, temperaturelevel, cpuusagelevelnow);
+  XQWORD diagh_t1 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateMemory(usedtotalstr, ramusagelevelnow);
+  XQWORD diagh_t2 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateDateTime(datestr, timestr);
+  XQWORD diagh_t3 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateUptime(monthsstr, hoursstr, yearsstr, secondsstr);
+  XQWORD diagh_t4 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateConnection(isconnectednow, statusstr, qualitystr, markstr, ipstr);
+  XQWORD diagh_t5 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateFooter(equipostr, sostr, uptimestr);
+  XQWORD diagh_t6 = XDIAGLOG_NOWUS();
+
+  if((diagh_t6 - diagh_t0) > 5000)   // this whole unlocked block took over 5ms
+    {
+      XDIAGLOG_WRITE("HWINFO", "cpu=%lluus mem=%lluus datetime=%lluus uptime=%lluus connection=%lluus footer=%lluus total=%lluus",
+                      (unsigned long long)(diagh_t1-diagh_t0), (unsigned long long)(diagh_t2-diagh_t1),
+                      (unsigned long long)(diagh_t3-diagh_t2), (unsigned long long)(diagh_t4-diagh_t3),
+                      (unsigned long long)(diagh_t5-diagh_t4), (unsigned long long)(diagh_t6-diagh_t5),
+                      (unsigned long long)(diagh_t6-diagh_t0));
+    }
 
   //--------------------------------------------------------------------------------------
   // Publish: the only point where this thread touches the fields the main thread reads
@@ -864,7 +957,14 @@ bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
   // to copy already-computed values -- never around any of the work above.
   //--------------------------------------------------------------------------------------
 
-  hardwareinfomutex->Lock();
+  { XQWORD diagh_lockwaitstart = XDIAGLOG_NOWUS();
+    hardwareinfomutex->Lock();
+    XQWORD diagh_lockwaitelapsed = XDIAGLOG_NOWUS() - diagh_lockwaitstart;
+    if(diagh_lockwaitelapsed > 5000)   // acquiring the "publish" lock itself took over 5ms -- contention
+      {
+        XDIAGLOG_WRITE("HWINFO", "publish-lock WAIT elapsed=%lluus (contended by the render thread?)", (unsigned long long)diagh_lockwaitelapsed);
+      }
+  }
 
     cpu_temperature_str.Set(temperaturestr.Get());
     ram_used_total_str.Set(usedtotalstr.Get());
@@ -919,7 +1019,19 @@ bool UI_SYSTEM::HardwareInfo_Apply()
   float ramusagelevelnow = 0.0f;
   bool  isconnectednow   = false;
 
+  // TEMPORARY diagnostic-only (see XDiagLog.h): this runs on the MAIN (render) thread -- if acquiring this lock
+  // ever takes a long time, that is direct proof of the background hardware-info thread stalling the render
+  // loop, regardless of what the design intent says.
+  XQWORD diaga_lockwaitstart = XDIAGLOG_NOWUS();
+
   hardwareinfomutex->Lock();
+
+    { XQWORD diaga_lockwaitelapsed = XDIAGLOG_NOWUS() - diaga_lockwaitstart;
+      if(diaga_lockwaitelapsed > 5000)
+        {
+          XDIAGLOG_WRITE("HWINFO", "MAIN THREAD apply-lock WAIT elapsed=%lluus (render thread stalled by background thread)", (unsigned long long)diaga_lockwaitelapsed);
+        }
+    }
 
     haspending = hardwareinfo_haspending;
 
@@ -977,12 +1089,35 @@ bool UI_SYSTEM::HardwareInfo_Apply()
   if(element_status) element_status->GetColor()->SetFromString(isconnectednow ? __L("63,185,80") : __L("248,81,73"));
 
   //--------------------------------------------------------------------------------------
-  // A single global redraw is enough: it re-resolves every #[MASK] literal text in the
-  // layout (via UserInterface_ChangeLiteralText / the automatic PROGRESSBAR_PERCENT mask)
-  // and repaints the progress elements with the levels set above.
+  // Mark only the text leaves whose masks can have changed. The skin's rebuild-area transaction expands
+  // this set to every overlapping surface/element before restoring pixels, so the example does not need to
+  // know which card happens to be behind each value. Keeping that dependency in the renderer is essential:
+  // a future CSS layout can move or restack these elements without changing application code.
   //--------------------------------------------------------------------------------------
 
-  GEN_USERINTERFACE.Elements_SetToRedraw();
+  static XCHAR* maskedtextelements[] =
+    {
+      __L("footer_equipo_text")      ,
+      __L("footer_so_text")          ,
+      __L("footer_uptime_text")      ,
+      __L("cpu_temp_value")          ,
+      __L("ram_used_total")          ,
+      __L("system_date")             ,
+      __L("system_time")             ,
+      __L("uptime_months_value")     ,
+      __L("uptime_hours_value")      ,
+      __L("uptime_years_value")      ,
+      __L("uptime_seconds_value")    ,
+      __L("connection_status_text")  ,
+      __L("connection_quality")      ,
+      __L("connection_ip")           ,
+    };
+
+  for(int c=0; c<(int)(sizeof(maskedtextelements)/sizeof(maskedtextelements[0])); c++)
+    {
+      UI_ELEMENT* element_masked = GEN_USERINTERFACE.Element_Get(maskedtextelements[c], UI_ELEMENT_TYPE_TEXT);
+      if(element_masked) GEN_USERINTERFACE.Elements_SetToRedraw(element_masked, false);
+    }
 
   return true;
 }
@@ -1426,6 +1561,24 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
                                                              __L("nav-alertas-bar")       ,
                                                              __L("nav-configuracion-bar")  };
 
+  // P1.1 fix: this used to end with an unconditional GEN_USERINTERFACE.Elements_SetToRedraw() (no element = the
+  // WHOLE tree, every layout, every element -- ~135 nodes in dashboard.xml for a two-row highlight change).
+  // That single call was, by itself, enough to reproduce the "empty card" blank-flash bug documented in
+  // Informe_tecnico_GEN_UI_CSS_video.md: with every element marked dirty at once, UI_SKINCANVAS_REBUILDAREAS
+  // ends up restoring/recreating a huge number of overlapping saved-under rebuild areas in the same pass
+  // (six shadowed cards among them), which is exactly the situation MarkOverlappingAreasDirty()'s neighbour
+  // propagation has to fix up (see UI_SkinCanvas.cpp) -- fixing that propagation closes the correctness bug,
+  // but this call was still needlessly manufacturing the worst-case load that triggered it constantly.
+  //
+  // Only two kinds of visual change actually happen here: (1) a highlight band/accent bar becomes visible or
+  // hidden, and (2) a label's colour flips between accent and muted. UI_ELEMENT::SetVisible() ALREADY marks
+  // itself (recursively) dirty internally, but only when the value actually changes -- so element_hl/element_bar
+  // below are already invalidated correctly and minimally by the two SetVisible() calls per section change (old
+  // row hiding, new row showing). The label colour is different: it is a raw UI_COLOR::SetFromString() on the
+  // object GetColor() returns, which does not itself touch any dirty flag, so it needs an explicit, but now
+  // narrowly-targeted, invalidation.
+  UI_SYSTEM_SECTIONID previoussectionID = currentsectionID;
+
   for(int c=0; c<UI_SYSTEM_SECTIONID_MAX; c++)
     {
       bool isactive = (c == (int)sectionID);
@@ -1443,16 +1596,23 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
       //----------------------------------------------------------------------------------------
       // Label tone. These two values mirror --accent-blue and --text-muted in dashboard.css; an
       // SVG cannot be recoloured at runtime, so the icon keeps its neutral tint and the accent is
-      // carried by the text plus the band and bar above.
+      // carried by the text plus the band and bar above. Only the row LOSING and the row GAINING
+      // the active state actually change colour -- the other six are being set to the exact value
+      // they already have, so there is nothing to invalidate for them.
       //----------------------------------------------------------------------------------------
 
-      UI_ELEMENT_TEXT* element_txt = (UI_ELEMENT_TEXT*)GEN_USERINTERFACE.Element_Get(navtextnames[c], UI_ELEMENT_TYPE_TEXT);
-      if(element_txt) element_txt->GetColor()->SetFromString(isactive ? __L("88,166,255") : __L("139,148,158"));
+      if((c == (int)previoussectionID) || (c == (int)sectionID))
+        {
+          UI_ELEMENT_TEXT* element_txt = (UI_ELEMENT_TEXT*)GEN_USERINTERFACE.Element_Get(navtextnames[c], UI_ELEMENT_TYPE_TEXT);
+          if(element_txt)
+            {
+              element_txt->GetColor()->SetFromString(isactive ? __L("88,166,255") : __L("139,148,158"));
+              GEN_USERINTERFACE.Elements_SetToRedraw(element_txt, true);
+            }
+        }
     }
 
   currentsectionID = sectionID;
-
-  GEN_USERINTERFACE.Elements_SetToRedraw();
 
   return true;
 }
@@ -1699,5 +1859,3 @@ void UI_SYSTEM::Clean()
   footer_so_str.Empty();
   footer_uptime_str.Empty();
 }
-
-

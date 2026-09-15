@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ===================================================================================================
-  UI_System - "Monitor del Sistema" dashboard -- FLAT SKIN A/B TEST FIXTURE (CSS gap analysis, point 1:
+  UI_System - "Monitor del Sistema" dashboard ; FLAT SKIN A/B TEST FIXTURE (CSS gap analysis, point 1:
   skin box-model parity). Byte-identical to dashboard.xml except for <skin name="flat" ...>; reuses the
   exact same dashboard.css untouched. Swap this in place of dashboard.xml (UI_System.cpp always loads
   "ui_system/dashboard.xml") to verify UI_SKINCANVAS_FLAT::Draw_Form now renders the same border-radius/
