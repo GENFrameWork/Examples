@@ -8,7 +8,7 @@
    =================================================================================================== */
 
 :root {
-  /* Surfaces */
+  /* Surfaces -- tuned toward the Monitor del Sistema prototype (deep slate page, slightly lifted cards) */
   --page-bg:        13,17,23;
   --card-bg:        22,27,34;
   --card-line:      48,54,61;
@@ -34,5 +34,5 @@
   --accent-green:   63,185,80;
 
   /* Depth. Black at a low percentage reads as a shadow; over ~60% it reads as a solid block. */
-  --shadow-card:    0,0,0,35;
+  --shadow-card:    0,0,0,40;
 }

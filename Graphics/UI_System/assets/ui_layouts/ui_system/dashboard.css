@@ -21,11 +21,10 @@
                    CreateLayouts() -- see its own SCOPE ADDENDUM) instead of the legacy absolute xpos/
                    ypos math. ".footer" below is the first user of it. Grid (grid-template-columns/rows,
                    grid-column/row) is NOT wired yet -- a later sub-step of this same increment.
-                   "margin" is still shorthand-only (no "margin-top" etc. longhand -- see UI_MANAGER::
-                   GetLayoutElement_Base()'s own comment on it), so a flex child's exact gap/cross-axis
-                   offset is authored through the 4-value legacy form, LEFT,RIGHT,UP,DOWN order (NOT
-                   padding/border-radius's TOP,RIGHT,BOTTOM,LEFT order -- the two shorthands keep their
-                   own, different, historical argument orders).
+                   "margin" accepts the CSS 4-value TOP,RIGHT,BOTTOM,LEFT form when a stylesheet is present,
+                   plus longhands margin-top/right/bottom/left (override the shorthand, same as padding-*).
+                   Layouts WITHOUT a stylesheet keep the historical LEFT,RIGHT,UP,DOWN 4-value order and
+                   ignore margin-* longhands so UI_Options stays pixel-identical.
        painted   : border-* / box-shadow are consumed by Draw_Form only (its fill/stroke/shadow geometry
                    comes straight from the element's own VisibleRect -- see UI_SKINCANVAS::Draw_Form()).
                    "padding" is NOT one of them, despite reading like it should be: it never reaches
@@ -113,8 +112,8 @@ form.sidebar {
    text) height; this replaced an earlier version where each child instead carried its OWN per-item vertical
    margin (icons/dividers) or "align-self: flex-end" (the three captions) to reproduce the original mockup's
    pixel positions by hand -- correct in isolation, but the two groups ended up on visibly different cross-axis
-   baselines once actually on screen. Each child's own "margin" (still shorthand-only -- see UI_MANAGER::
-   GetLayoutElement_Base()'s "margin" comment -- 4-value legacy form, LEFT,RIGHT,UP,DOWN order) now supplies
+   baselines once actually on screen.   Each child's own "margin" (shorthand TOP,RIGHT,BOTTOM,LEFT or margin-left / margin-top longhands --
+   see UI_MANAGER::GetLayoutElement_Base() / UI_PROPERTYREGISTRY::ResolveMarginEdges) now supplies
    ONLY the horizontal gap to its predecessor along the row (main axis); see dashboard.xml for those numbers. */
 form.footer {
   background-color: var(--footer-bg);
@@ -198,11 +197,11 @@ form.card {
   background-color: var(--card-bg);
   border-color:     var(--card-line);
   border-width:     1;
-  border-radius:    16;
+  border-radius:    14;
   padding:          0;
   display:          flex;
   flex-direction:   column;
-  box-shadow:       0 4 12 var(--shadow-card);
+  box-shadow:       0 6 16 var(--shadow-card);
 }
 
 form.card-header {
@@ -213,15 +212,9 @@ form.card-header {
 }
 
 /* Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies", first half -- Temp CPU / Uso CPU / RAM /
-   Fecha-Hora, the four whose content maps cleanly onto the flex engine already wired end-to-end. Uptime and
-   Connection are deliberately deferred to a follow-up sub-step: Uptime's 4-column tile row is Grid's textbook
-   case (already implemented at the UI_LAYOUTBOX/UI_LAYOUTENGINE level -- tracks, fr, minmax, spans -- but never
-   wired into the real XML/CSS pipeline: no parsing in UI_MANAGER::GetLayoutElement_Base(), no storage on
-   UI_ELEMENT, RunLayout() itself never calls ApplyGridLayout()), and Connection's toggled badge_ok/badge_ko
-   pair would need BuildTree()/ArrangeFlexChildren()/ArrangeGridChildren() to skip invisible children, which
-   none of them do today (a hidden child still consumes a flex/grid slot). Forcing either through flex now
-   would just be the same "hand-positioned, dressed up as CSS" trick this whole migration exists to retire --
-   real engine work for both, tracked as explicit future work, not folded in here under time pressure.
+   Fecha-Hora). Uptime uses CSS Grid (form.uptime-grid). Connection body content stays absolute siblings for
+   now: toggled badge_ok/badge_ko visibility is fine for paint; nesting both into flex is deferred until a
+   live pass confirms ArrangeFlex skips invisible children end-to-end (BuildTree already does).
 
    Two reusable, purely structural wrappers (transparent, borderless -- exist only to host a flex arrangement,
    same "exists purely to host layout" trick as "footer_spacer"/"sidebar-nav"/"card-header"): ".flex-row" and
@@ -270,8 +263,8 @@ form.tile {
 
 
 /* --- Sidebar selection ----------------------------------------------------------------------------
-   The band and the accent bar are plain forms whose visibility the application toggles in
-   UserInterface_SelectSection(). Their colours are pure presentation, so they belong here.
+   Phase 2: selected look is CSS :selected on button.nav-hit. form.nav-band / form.nav-accent remain in
+   the XML one release but are forced hidden by UserInterface_SelectSection(); colours kept for reference.
    -------------------------------------------------------------------------------------------------- */
 
 form.nav-band {
@@ -306,16 +299,22 @@ button.nav-hit:hover {
   background-color: 255,255,255,6;      /* barely-there wash under the cursor */
 }
 
-.nav-label   { color: var(--text-muted);   }   /* the app repaints the current one in accent blue */
+button.nav-hit:selected {
+  background-color: var(--nav-band);
+}
+
+button.nav-hit:selected:hover {
+  background-color: var(--nav-band);
+}
+
+.nav-label   { color: var(--text-muted);   }
+form.nav-row:selected .nav-label { color: var(--accent-blue); }
+
 .brand       { color: var(--text-normal);  }
 .brand-dim   { color: var(--text-muted);   }
 
 
-/* --- Typography -----------------------------------------------------------------------------------
-   Colour only. Every sizefont lives in the XML: the Text builder reads that attribute from the node
-   and never consults the stylesheet.
-   -------------------------------------------------------------------------------------------------- */
-
+/* Colour and sizefont. sizefont may also come from CSS (Phase 1 typed Reapply on Text). */
 .card-title    { color: var(--text-strong);  }
 
 .value-temp    { color: var(--accent-red);    }
@@ -342,11 +341,35 @@ button.nav-hit:hover {
 
 
 /* --- Progress widgets -----------------------------------------------------------------------------
-   "color" is a base property so the ring / bar base tone IS settable here; its companion
-   "gradientcolor" (plus thickness, level, roundcap, startangle, sweepangle) is XML-only.
-   The dark "background-color" is what draws the unfilled part of the track.
+   Base "color"/"background-color" plus typed keys (gradientcolor, thickness, ...) are reachable from CSS
+   when a stylesheet is present (builders + ProgressRadial::ReapplyStyleVisual). Without a stylesheet,
+   XML attributes alone remain the historical path.
+   Optional box-shadow on progressradial paints an annular soft halo around the ring (not a filled AABB
+   disc -- that washed the hollow centre and froze a hard colour block behind the "%" caption).
    -------------------------------------------------------------------------------------------------- */
 
-.ring-cpu   { color: var(--accent-blue);    background-color: 33,38,45; }
-.ring-ram   { color: var(--accent-purple);  background-color: 33,38,45; }
+.ring-cpu   { color: var(--accent-blue);    background-color: 33,38,45; box-shadow: 0 0 18 56,139,253,22; }
+.ring-ram   { color: var(--accent-purple);  background-color: 33,38,45; box-shadow: 0 0 18 191,148,255,22; }
 .bar-ram    { color: var(--accent-purple);  background-color: 33,38,45; }
+
+/* Uptime tiles: 4 equal columns under the card (CSS Grid). Each column is a nested flex column so
+   label/value texts are arranged AFTER the grid places the column (RunLayout's single flow pass).
+   Background matches --inner-bg so the tile block reads as an inset panel like the mockup. */
+form.uptime-grid {
+  display:               grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap:            0;
+  background-color:      var(--inner-bg);
+  border-color:          var(--inner-line);
+  border-width:          1;
+  border-radius:         12;
+}
+
+form.uptime-col {
+  display:          flex;
+  flex-direction:   column;
+  align-items:      center;
+  justify-content:  center;
+  background-color: 0,0,0,0;
+  border-width:     0;
+}

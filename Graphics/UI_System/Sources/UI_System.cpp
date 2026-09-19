@@ -1529,87 +1529,36 @@ bool UI_SYSTEM::UserInterface_ElementSelected(UI_ELEMENT* element)
 *---------------------------------------------------------------------------------------------------------------------*/
 bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
 {
-  // NOTE: the active/inactive highlight is a separate flat "nav-xxx-hl" rounded rectangle
-  // (declared before the sidebar buttons in the layout, so it is painted behind them) that is
-  // simply shown/hidden, instead of recoloring the button itself: nesting plain content inside
-  // a "form" turned out to not be positioned correctly by this GEN build, so every element with
-  // visual meaning of its own is kept as a flat, top-level, absolutely positioned element.
-  static XCHAR* navhlnames[UI_SYSTEM_SECTIONID_MAX]     = { __L("nav-resumen-hl")        ,
-                                                             __L("nav-cpu-hl")            ,
-                                                             __L("nav-memoria-hl")        ,
-                                                             __L("nav-red-hl")            ,
-                                                             __L("nav-disco-hl")          ,
-                                                             __L("nav-procesos-hl")       ,
-                                                             __L("nav-alertas-hl")        ,
-                                                             __L("nav-configuracion-hl")   };
+  // Official selection path: SetSelected on the hit-target button (CSS :selected wash) and on the nav-row
+  // so descendant rules like `form.nav-row:selected .nav-label` restyle the label without C++ color hacks.
+  // Legacy nav-*-hl / nav-*-bar overlays are removed from the layout; stylesheet is the source of truth.
+  static XCHAR* navbtnnames[UI_SYSTEM_SECTIONID_MAX]    = { __L("nav-resumen-btn")       ,
+                                                             __L("nav-cpu-btn")           ,
+                                                             __L("nav-memoria-btn")       ,
+                                                             __L("nav-red-btn")           ,
+                                                             __L("nav-disco-btn")         ,
+                                                             __L("nav-procesos-btn")      ,
+                                                             __L("nav-alertas-btn")       ,
+                                                             __L("nav-configuracion-btn")  };
 
-  static XCHAR* navtextnames[UI_SYSTEM_SECTIONID_MAX]   = { __L("nav-resumen-text")      ,
-                                                             __L("nav-cpu-text")          ,
-                                                             __L("nav-memoria-text")      ,
-                                                             __L("nav-red-text")          ,
-                                                             __L("nav-disco-text")        ,
-                                                             __L("nav-procesos-text")     ,
-                                                             __L("nav-alertas-text")      ,
-                                                             __L("nav-configuracion-text") };
-
-  static XCHAR* navbarnames[UI_SYSTEM_SECTIONID_MAX]     = { __L("nav-resumen-bar")       ,
-                                                             __L("nav-cpu-bar")           ,
-                                                             __L("nav-memoria-bar")       ,
-                                                             __L("nav-red-bar")           ,
-                                                             __L("nav-disco-bar")         ,
-                                                             __L("nav-procesos-bar")      ,
-                                                             __L("nav-alertas-bar")       ,
-                                                             __L("nav-configuracion-bar")  };
-
-  // P1.1 fix: this used to end with an unconditional GEN_USERINTERFACE.Elements_SetToRedraw() (no element = the
-  // WHOLE tree, every layout, every element -- ~135 nodes in dashboard.xml for a two-row highlight change).
-  // That single call was, by itself, enough to reproduce the "empty card" blank-flash bug documented in
-  // Informe_tecnico_GEN_UI_CSS_video.md: with every element marked dirty at once, UI_SKINCANVAS_REBUILDAREAS
-  // ends up restoring/recreating a huge number of overlapping saved-under rebuild areas in the same pass
-  // (six shadowed cards among them), which is exactly the situation MarkOverlappingAreasDirty()'s neighbour
-  // propagation has to fix up (see UI_SkinCanvas.cpp) -- fixing that propagation closes the correctness bug,
-  // but this call was still needlessly manufacturing the worst-case load that triggered it constantly.
-  //
-  // Only two kinds of visual change actually happen here: (1) a highlight band/accent bar becomes visible or
-  // hidden, and (2) a label's colour flips between accent and muted. UI_ELEMENT::SetVisible() ALREADY marks
-  // itself (recursively) dirty internally, but only when the value actually changes -- so element_hl/element_bar
-  // below are already invalidated correctly and minimally by the two SetVisible() calls per section change (old
-  // row hiding, new row showing). The label colour is different: it is a raw UI_COLOR::SetFromString() on the
-  // object GetColor() returns, which does not itself touch any dirty flag, so it needs an explicit, but now
-  // narrowly-targeted, invalidation.
-  UI_SYSTEM_SECTIONID previoussectionID = currentsectionID;
+  static XCHAR* navrownames[UI_SYSTEM_SECTIONID_MAX]    = { __L("nav-resumen-row")       ,
+                                                             __L("nav-cpu-row")           ,
+                                                             __L("nav-memoria-row")       ,
+                                                             __L("nav-red-row")           ,
+                                                             __L("nav-disco-row")         ,
+                                                             __L("nav-procesos-row")      ,
+                                                             __L("nav-alertas-row")       ,
+                                                             __L("nav-configuracion-row")  };
 
   for(int c=0; c<UI_SYSTEM_SECTIONID_MAX; c++)
     {
       bool isactive = (c == (int)sectionID);
 
-      UI_ELEMENT_FORM* element_hl = (UI_ELEMENT_FORM*)GEN_USERINTERFACE.Element_Get(navhlnames[c], UI_ELEMENT_TYPE_FORM);
-      if(element_hl) element_hl->SetVisible(isactive);
+      UI_ELEMENT* element_btn = GEN_USERINTERFACE.Element_Get(navbtnnames[c], UI_ELEMENT_TYPE_BUTTON);
+      if(element_btn) element_btn->SetSelected(isactive);
 
-      //----------------------------------------------------------------------------------------
-      // Left accent bar of the current row. Same show/hide treatment as the band behind it.
-      //----------------------------------------------------------------------------------------
-
-      UI_ELEMENT_FORM* element_bar = (UI_ELEMENT_FORM*)GEN_USERINTERFACE.Element_Get(navbarnames[c], UI_ELEMENT_TYPE_FORM);
-      if(element_bar) element_bar->SetVisible(isactive);
-
-      //----------------------------------------------------------------------------------------
-      // Label tone. These two values mirror --accent-blue and --text-muted in dashboard.css; an
-      // SVG cannot be recoloured at runtime, so the icon keeps its neutral tint and the accent is
-      // carried by the text plus the band and bar above. Only the row LOSING and the row GAINING
-      // the active state actually change colour -- the other six are being set to the exact value
-      // they already have, so there is nothing to invalidate for them.
-      //----------------------------------------------------------------------------------------
-
-      if((c == (int)previoussectionID) || (c == (int)sectionID))
-        {
-          UI_ELEMENT_TEXT* element_txt = (UI_ELEMENT_TEXT*)GEN_USERINTERFACE.Element_Get(navtextnames[c], UI_ELEMENT_TYPE_TEXT);
-          if(element_txt)
-            {
-              element_txt->GetColor()->SetFromString(isactive ? __L("88,166,255") : __L("139,148,158"));
-              GEN_USERINTERFACE.Elements_SetToRedraw(element_txt, true);
-            }
-        }
+      UI_ELEMENT* element_row = GEN_USERINTERFACE.Element_Get(navrownames[c], UI_ELEMENT_TYPE_FORM);
+      if(element_row) element_row->SetSelected(isactive);
     }
 
   currentsectionID = sectionID;

@@ -19,11 +19,18 @@
     ram_usage_radial        progressradial  SetLevel()
     ram_linear_bar          progressbar     SetLevel()
     connection_icon_ok/ko   image           SetVisible()   (green tick / red cross)
-    nav-<section>-btn       button          click target
-    nav-<section>-hl        form            selection band      SetVisible()
-    nav-<section>-bar       form            selection accent    SetVisible()
-    nav-<section>-text      text            selection colour    GetColor()
+    nav-<section>-btn       button          click target + SetSelected()
+    nav-<section>-row       form            SetSelected() so CSS `form.nav-row:selected .nav-label` works
     #[MASK] literals        resolved in UI_SYSTEM::UserInterface_ChangeLiteralText()
+
+  Selection chrome is stylesheet-only (:selected on button + row). Legacy nav-*-hl / nav-*-bar overlays
+  were removed; do not reintroduce SetVisible band hacks in the app.
+
+  MARGIN AUTHORING (stylesheet present)
+  =====================================
+    4-value margin is CSS TRBL: TOP, RIGHT, BOTTOM, LEFT.
+    Longhands margin-top / margin-right / margin-bottom / margin-left override the shorthand.
+    (Layouts WITHOUT a stylesheet keep LEFT,RIGHT,UP,DOWN and ignore margin-* -- UI_Options.)
 
   WHAT LIVES WHERE
   ================
@@ -105,12 +112,12 @@
          above) days the live captions run long, the row simply overflows a little past x=1440 instead of
          quietly shrinking every icon and gap to disguise it. -->
     <element name="footer_bg" type="form" class="footer" xpos="0" ypos="900" width="1440" height="44">
-      <element name="footer_equipo_icon" type="image" style="margin: 24,0,0,0; flex-shrink: 0;"   width="36" height="36">icons/foot_computer.svg</element>
-      <element name="footer_equipo_text" type="text"  class="foot" style="margin: 16,0,0,0; flex-shrink: 0;" sizefont="14">#[FOOTER_EQUIPO]</element>
-      <element name="footer_divider_1"   type="form"  class="hr-line" style="margin: 232,0,0,0; flex-shrink: 0;" width="1" height="24"></element>
-      <element name="footer_so_icon"     type="image" style="margin: 219,0,0,0; flex-shrink: 0;"  width="36" height="36">icons/foot_gear.svg</element>
-      <element name="footer_so_text"     type="text"  class="foot" style="margin: 16,0,0,0; flex-shrink: 0;" sizefont="14">#[FOOTER_SO]</element>
-      <element name="footer_divider_2"   type="form"  class="hr-line" style="margin: 216,0,0,0; flex-shrink: 0;" width="1" height="24"></element>
+      <element name="footer_equipo_icon" type="image" style="margin: 0,0,0,24; flex-shrink: 0;"   width="36" height="36">icons/foot_computer.svg</element>
+      <element name="footer_equipo_text" type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_EQUIPO]</element>
+      <element name="footer_divider_1"   type="form"  class="hr-line" style="margin: 0,0,0,232; flex-shrink: 0;" width="1" height="24"></element>
+      <element name="footer_so_icon"     type="image" style="margin: 0,0,0,219; flex-shrink: 0;"  width="36" height="36">icons/foot_gear.svg</element>
+      <element name="footer_so_text"     type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_SO]</element>
+      <element name="footer_divider_2"   type="form"  class="hr-line" style="margin: 0,0,0,216; flex-shrink: 0;" width="1" height="24"></element>
       <!-- Invisible spacer, NOT part of the mockup: "flex-grow: 1" makes it consume ALL of the row's remaining
            free space (the classic Flexbox "margin: auto" substitute for an engine, like this one, with no
            auto-margin of its own ; see UI_LAYOUTENGINE.cpp's flex-grow resolution pass, already exercised by
@@ -121,33 +128,14 @@
            no class, plus an explicit fully-transparent background and zero border, so it paints nothing even
            after growing wide: it exists purely to consume space, never to be seen. -->
       <element name="footer_spacer"      type="form"  style="flex-grow: 1; background-color: 0,0,0,0; border-width: 0;" width="0" height="0"></element>
-      <element name="footer_uptime_icon" type="image" style="margin: 219,0,0,0; flex-shrink: 0;"  width="36" height="36">icons/foot_clock.svg</element>
+      <element name="footer_uptime_icon" type="image" style="margin: 0,0,0,219; flex-shrink: 0;"  width="36" height="36">icons/foot_clock.svg</element>
       <!-- margin-RIGHT=24 mirrors "footer_equipo_icon"'s own margin-LEFT=24 ; with "footer_spacer" just above
            consuming all the free space ahead of this group, this is what actually keeps that 24px inset on
            the right: the spacer's own grown width is exactly (available free space - this margin-right), so
            the row's total content, spacer included, fills the container exactly, ending flush at 1440 minus
            this margin ; see PackFlexLine()'s own freespace accounting in UI_LAYOUTENGINE.cpp. -->
-      <element name="footer_uptime_text" type="text"  class="foot" style="margin: 16,24,0,0; flex-shrink: 0;" sizefont="14">#[FOOTER_UPTIME]</element>
+      <element name="footer_uptime_text" type="text"  class="foot" style="margin: 0,24,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_UPTIME]</element>
     </element>
-
-    <!-- Selection band + left accent bar. Visibility is driven from UserInterface_SelectSection(). -->
-    <element name="nav-resumen-hl"       type="form" class="nav-band" xpos="0" ypos="118" width="210" height="48" visible="yes"></element>
-    <element name="nav-cpu-hl"           type="form" class="nav-band" xpos="0" ypos="174" width="210" height="48" visible="no"></element>
-    <element name="nav-memoria-hl"       type="form" class="nav-band" xpos="0" ypos="230" width="210" height="48" visible="no"></element>
-    <element name="nav-red-hl"           type="form" class="nav-band" xpos="0" ypos="286" width="210" height="48" visible="no"></element>
-    <element name="nav-disco-hl"         type="form" class="nav-band" xpos="0" ypos="342" width="210" height="48" visible="no"></element>
-    <element name="nav-procesos-hl"      type="form" class="nav-band" xpos="0" ypos="398" width="210" height="48" visible="no"></element>
-    <element name="nav-alertas-hl"       type="form" class="nav-band" xpos="0" ypos="454" width="210" height="48" visible="no"></element>
-    <element name="nav-configuracion-hl" type="form" class="nav-band" xpos="0" ypos="510" width="210" height="48" visible="no"></element>
-
-    <element name="nav-resumen-bar"       type="form" class="nav-accent" xpos="0" ypos="118" width="4" height="48" visible="yes"></element>
-    <element name="nav-cpu-bar"           type="form" class="nav-accent" xpos="0" ypos="174" width="4" height="48" visible="no"></element>
-    <element name="nav-memoria-bar"       type="form" class="nav-accent" xpos="0" ypos="230" width="4" height="48" visible="no"></element>
-    <element name="nav-red-bar"           type="form" class="nav-accent" xpos="0" ypos="286" width="4" height="48" visible="no"></element>
-    <element name="nav-disco-bar"         type="form" class="nav-accent" xpos="0" ypos="342" width="4" height="48" visible="no"></element>
-    <element name="nav-procesos-bar"      type="form" class="nav-accent" xpos="0" ypos="398" width="4" height="48" visible="no"></element>
-    <element name="nav-alertas-bar"       type="form" class="nav-accent" xpos="0" ypos="454" width="4" height="48" visible="no"></element>
-    <element name="nav-configuracion-bar" type="form" class="nav-accent" xpos="0" ypos="510" width="4" height="48" visible="no"></element>
 
     <!-- Cards
          Phase 4 ("migración del ejemplo", fourth sub-step): each card's header (icon + title) is now a real
@@ -167,18 +155,19 @@
          DERIVATION (traced back to the ORIGINAL absolute positions this replaces, identical relative geometry
          confirmed across all 6 cards): each header icon sat at a card-relative offset of (24, 12) ; e.g. card
          1: card xpos=238, "temp_hdr_icon" xpos=262 (238+24); reproduced below as "card-header"'s own margin,
-         "margin: 24,0,12,0;" (LEFT=24, UP=12), the same division of responsibility already used for "footer"/
+         "margin: 12,0,0,24;" (TOP=12, LEFT=24 -- CSS TRBL), the same division of responsibility already used for "footer"/
          "sidebar-nav" (father padding 0, child margin does the positioning ; see "form.card"'s own comment).
          Within the row, the title text's old xpos was always exactly 82 from the card's left edge, i.e. a 10px
-         gap from the icon's right edge (82 - (24+48) = 10) ; reproduced as the title's own "margin: 10,0,0,0;"
+         gap from the icon's right edge (82 - (24+48) = 10) ; reproduced as the title's own "margin: 0,0,0,10;"
          (LEFT=10, first flex item being the icon with no leading margin of its own). Vertically, "align-items:
          center" on "card-header" (row height = the icon's own 48, "form.card-header" in dashboard.css) replaces
          each title's individually hand-picked ypos, using the SAME real-height-independent centering already
          proven for "footer"/"nav-row" rather than re-deriving one more hand-pinned offset per card. -->
     <element name="card_cpu_temp"   type="form" class="card" xpos="238"  ypos="460" width="376" height="390">
-      <element name="card-header" type="form" class="card-header" style="margin: 24,0,12,0;" width="328" height="48">
+      <!-- Longhands demo (Phase C): same inset as margin: 12,0,0,24 -- easier to read than TRBL shorthand. -->
+      <element name="card-header" type="form" class="card-header" style="margin-top: 12; margin-left: 24;" width="328" height="48">
         <element name="temp_hdr_icon" type="image" width="48" height="48">icons/card_thermo.svg</element>
-        <element name="temp_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="19">Temperatura CPU</element>
+        <element name="temp_hdr_text" type="text" class="card-title" style="margin-left: 10;" sizefont="19">Temperatura CPU</element>
       </element>
       <!-- "temp_hdr_icon"/"temp_hdr_text" (icon at card-relative 24,12; title 82 from the card's left edge,
            a 10px gap from the icon) moved into "card_cpu_temp" itself as a nested "card-header" ; see this
@@ -247,7 +236,7 @@
            bound); 270 matches the thermometer's own height, the tallest of "card-body"'s two children; 247 =
            62 (value-row, sized to the largest live value's real sizefont=50 glyph height) + 100 (gap to the
            caption icon) + 60 (icon) + 7 (gap) + ~18 (caption text's real height). -->
-      <element name="card-body" type="form" class="flex-row" style="margin: 24,0,5,0; column-gap: 24;" width="346" height="270">
+      <element name="card-body" type="form" class="flex-row" style="margin: 5,0,0,24; column-gap: 24;" width="346" height="270">
         <element name="cpu_temp_bar" type="progressimage" width="180" height="270"
                  direction="vertical" allocationtext="none"
                  offsetstart="77" offsetend="25" level="0"
@@ -271,27 +260,27 @@
                  IsFlexContainer() (see UI_LayoutEngine.h's own "migración del ejemplo" SCOPE ADDENDUM) ; so the
                  unit now genuinely re-flows after the live value on every update, 1-digit or 3-digit alike,
                  instead of sitting at a fixed offset tuned for the common 2-digit case. -->
-            <element name="cpu_temp_unit" type="text" class="value-temp" style="margin: 6,0,0,0;" sizefont="28">°C</element>
+            <element name="cpu_temp_unit" type="text" class="value-temp" style="margin: 0,0,0,6;" sizefont="28">°C</element>
           </element>
 
           <!-- Mockup swaps the small caption icon for a red CPU chip instead of a second (redundant) thermometer
                glyph: cap_cpu.svg is card_cpu.svg's same chip artwork recoloured to the theme's accent-red
                (248,81,73), matching cpu_temp_value's colour and cap_thermo.svg's old red tone exactly. -->
-          <element name="temp_cap_icon" type="image" style="margin: 0,0,100,0;" width="60" height="60">icons/cap_cpu.svg</element>
+          <element name="temp_cap_icon" type="image" style="margin: 100,0,0,0;" width="60" height="60">icons/cap_cpu.svg</element>
           <!-- margin-LEFT=4, not 0: kept from the old flat layout's own note ; measured against Abraham's build
                screenshot that cpu_temp_value/temp_cap_icon's glyphs render ~4px right of their declared xpos
                (Nunito-SemiBold's left-side bearing at sizefont=50, and cap_cpu.svg's own inner margin, both push
                their visible edge in a bit), while this 14pt label has almost none; matching the RENDERED edge is
                what makes the three look aligned on screen, same reasoning, now expressed as a margin instead of
                an absolute xpos delta. -->
-          <element name="temp_cap_text" type="text"  class="label" style="margin: 4,0,7,0;" sizefont="14">Temperatura actual</element>
+          <element name="temp_cap_text" type="text"  class="label" style="margin: 7,0,0,4;" sizefont="14">Temperatura actual</element>
         </element>
       </element>
     </element>
     <element name="card_cpu_usage"  type="form" class="card" xpos="636"  ypos="460" width="376" height="390">
-      <element name="card-header" type="form" class="card-header" style="margin: 24,0,12,0;" width="328" height="48">
+      <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="cpu_hdr_icon" type="image" width="48" height="48">icons/card_cpu.svg</element>
-        <element name="cpu_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="19">Uso actual de CPU</element>
+        <element name="cpu_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="19">Uso actual de CPU</element>
       </element>
       <!-- Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies"): nested into "card_cpu_usage" as a
            real XML child, "card-body" (flex column, the ring then its caption stacked below). Ring's own
@@ -308,7 +297,7 @@
            false), so an un-sized one reads as 0x0 to UI_LAYOUTENGINE and wrongly shrinks its real children.
            260 matches the ring's own width (the taller/wider of the two children); 290 = 260 (ring) + 7 (gap) +
            ~19 (caption's real height, sizefont=15), rounded up generously. -->
-      <element name="card-body" type="form" class="flex-col" style="margin: 58,0,22,0;" width="260" height="290">
+      <element name="card-body" type="form" class="flex-col" style="margin: 22,0,0,58; align-items: center;" width="260" height="290">
         <!-- Measured against Abraham's mockup (comparing the CPU-usage card's own rectangle to the ring's): the
              ring there fills roughly 69% of the card's width, well past this ring's previous 200/376=53%. Grown to
              260 (69%), re-centred (694 = 636 + (376-260)/2, same centre x=824 the caption below was already tuned
@@ -334,13 +323,13 @@
              derivation just above ("290 = 260 (ring) + 7 (gap) + ~19 (caption's real height)"), confirmed
              against a real windowed build screenshot ; 92 visibly overlapped the caption text under the
              ring's own bottom edge instead of sitting below it. -->
-        <element name="cpu_usage_caption" type="text" class="label-accent" style="margin: 7,0,7,0;" sizefont="15">Uso actual</element>
+        <element name="cpu_usage_caption" type="text" class="label-accent" style="margin: 7,0,0,0;" sizefont="15">Uso actual</element>
       </element>
     </element>
     <element name="card_ram"        type="form" class="card" xpos="1034" ypos="460" width="376" height="390">
-      <element name="card-header" type="form" class="card-header" style="margin: 24,0,12,0;" width="328" height="48">
+      <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="ram_hdr_icon" type="image" width="48" height="48">icons/card_ram.svg</element>
-        <element name="ram_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="17">Consumo de memoria RAM</element>
+        <element name="ram_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Consumo de memoria RAM</element>
       </element>
       <!-- Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies"): nested into "card_ram" as a real XML
            child. Structure: "card-body" (flex row) = [ram_usage_radial] + [right-col (flex column) =
@@ -364,7 +353,7 @@
            354 = 178 (ring) + 16 (gap) + 160 (right column ; see its own comment below for that number's
            derivation); 186 is generous headroom for "right-col"'s real content, which (including its own
            38px margin-top) runs taller than the ring alone. -->
-      <element name="card-body" type="form" class="flex-row" style="margin: 22,0,58,0;" width="354" height="186">
+      <element name="card-body" type="form" class="flex-row" style="margin: 58,0,0,22;" width="354" height="186">
         <!-- Grown more modestly than cpu_usage_radial (164->178, +8.5%, vs. the CPU ring's +30%): unlike that card,
              this ring shares its row with the used/total text and the bar, and the worst-case value string, "31.8
              GB / 31.8 GB" (measured against Nunito-SemiBold at sizefont=19: 157 units wide), leaves no room for a
@@ -382,9 +371,9 @@
              string, "31.8 GB / 31.8 GB" at 157px, already had to fit inside (see the comment kept below). 148 =
              ~24 (used_total) + 10 (gap) + ~18 (caption) + 56 (gap) + 14 (bar) + 11 (gap) + ~15 (scale row),
              generously rounded up ; same "form never auto-sizes" reasoning as "card-body"'s own comment above. -->
-        <element name="right-col" type="form" class="flex-col" style="margin: 0,0,38,0;" width="160" height="148">
+        <element name="right-col" type="form" class="flex-col" style="margin: 38,0,0,0;" width="160" height="148">
           <element name="ram_used_total" type="text" class="value-ram" sizefont="19">#[RAM_USED_TOTAL]</element>
-          <element name="ram_caption"    type="text" class="label"     style="margin: 0,0,10,0;" sizefont="14">En uso / Total</element>
+          <element name="ram_caption"    type="text" class="label"     style="margin: 10,0,0,0;" sizefont="14">En uso / Total</element>
 
           <!-- progressrect width trimmed from 158 to 140: the bar's left edge moved right along with the rest of
                this column (1220->1256), and the card's right edge (1410) no longer leaves room for the old width
@@ -392,12 +381,12 @@
                1410). Explicit width/height added (140/14, matching progressrect) now that this is a real flex
                item: CalculateBoundaryLine_ProgressBar() also never auto-sizes (same "return false" as Form). -->
           <element name="ram_linear_bar" type="progressbar" class="bar-ram" width="140" height="14"
-                   style="margin: 6,0,56,0;" allocationtext="none" direction="horizontal"
+                   style="margin: 56,0,0,6;" allocationtext="none" direction="horizontal"
                    roundcap="yes" progressrect="0,0,140,14" level="0" linecolor="0,0,0,0"
                    gradientcolor="163,113,247" gradientmode="track">
           </element>
 
-          <element name="scale-row" type="form" class="flex-row" style="margin: 6,0,11,0; justify-content: space-between;" width="140" height="15">
+          <element name="scale-row" type="form" class="flex-row" style="margin: 11,0,0,6; justify-content: space-between;" width="140" height="15">
             <element name="ram_scale_0"   type="text" class="label-dim" sizefont="12">0%</element>
             <element name="ram_scale_50"  type="text" class="label-dim" sizefont="12">50%</element>
             <element name="ram_scale_100" type="text" class="label-dim" sizefont="12">100%</element>
@@ -406,9 +395,9 @@
       </element>
     </element>
     <element name="card_datetime"   type="form" class="card" xpos="238"  ypos="828" width="376" height="346">
-      <element name="card-header" type="form" class="card-header" style="margin: 24,0,12,0;" width="328" height="48">
+      <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="dt_hdr_icon" type="image" width="48" height="48">icons/card_calendar.svg</element>
-        <element name="dt_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="19">Fecha y hora del sistema</element>
+        <element name="dt_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="19">Fecha y hora del sistema</element>
       </element>
 
       <!-- Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies"): "datetime_box" and its content
@@ -423,58 +412,62 @@
            Every child's own margin-top below is a reasonable STARTING estimate, same caveat as
            "card_cpu_temp"'s own comment: a "text" element's real rendered height is a runtime, font-metrics-
            dependent measurement this XML cannot see statically, tuned against Abraham's real Windows build. -->
-      <element name="datetime_box" type="form" class="inner-box" style="margin: 28,0,54,0; display: flex; flex-direction: column;" width="320" height="124">
+      <element name="datetime_box" type="form" class="inner-box" style="margin: 54,0,0,28; display: flex; flex-direction: column;" width="320" height="124">
         <element name="system_date" type="text" class="value-date" sizefont="30">#[SYSTEM_DATE]</element>
 
         <!-- Thin divider between the date and the time, matching the mockup's "Fecha y hora del sistema" box.
              Width kept at 296 (the inner-box's own content width once its 12px padding is subtracted on both
              sides: 320-24=296), unchanged from the original flat layout. -->
-        <element name="dt_divider"  type="form" class="hr-line" style="margin: 0,0,6,0;" width="296" height="1"></element>
+        <element name="dt_divider"  type="form" class="hr-line" style="margin: 6,0,0,0;" width="296" height="1"></element>
 
-        <element name="system_time" type="text" class="value-time" style="margin: 0,0,5,0;" sizefont="34">#[SYSTEM_TIME]</element>
+        <element name="system_time" type="text" class="value-time" style="margin: 5,0,0,0;" sizefont="34">#[SYSTEM_TIME]</element>
 
         <!-- 296 matches "datetime_box"'s own content width (320 minus its 12px padding on both sides); 36
            matches the icon's own height ; same "form never auto-sizes" reasoning as "card_cpu_temp"'s own
            "card-body" comment. -->
-        <element name="cap-row" type="form" class="flex-row" style="margin: 0,0,20,0; align-items: center;" width="296" height="36">
+        <element name="cap-row" type="form" class="flex-row" style="margin: 20,0,0,0; align-items: center;" width="296" height="36">
           <element name="dt_cap_icon" type="image" width="36" height="36">icons/cap_clock.svg</element>
-          <element name="dt_cap_text" type="text"  class="label-dim" style="margin: 6,0,0,0;" sizefont="13">Hora local del sistema</element>
+          <element name="dt_cap_text" type="text"  class="label-dim" style="margin: 0,0,0,6;" sizefont="13">Hora local del sistema</element>
         </element>
       </element>
     </element>
     <element name="card_uptime"     type="form" class="card" xpos="636"  ypos="828" width="376" height="346">
-      <element name="card-header" type="form" class="card-header" style="margin: 24,0,12,0;" width="328" height="48">
+      <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="up_hdr_icon" type="image" width="48" height="48">icons/card_clock.svg</element>
-        <element name="up_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="16">Tiempo de funcionamiento del sistema</element>
+        <element name="up_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="16">Tiempo de funcionamiento del sistema</element>
+      </element>
+      <!-- Proof of CSS Grid capability: four equal columns nested under the card (no absolute xpos/ypos). -->
+      <!-- Uptime column margins were already CSS TRBL (top/bottom for stacked label+value); do not
+           re-interpret them as the old LEFT,RIGHT,UP,DOWN form used elsewhere before the TRBL migration. -->
+      <element name="uptime_grid" type="form" class="uptime-grid" style="margin: 24,0,0,24;" width="328" height="220">
+        <element name="uptime_col_months" type="form" class="uptime-col" width="82" height="220">
+          <element name="uptime_months_label" type="text" class="tile-label" style="margin: 28,0,12,0;" sizefont="13">Meses</element>
+          <element name="uptime_months_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="28">#[UPTIME_MONTHS]</element>
+        </element>
+        <element name="uptime_col_hours" type="form" class="uptime-col" width="82" height="220">
+          <element name="uptime_hours_label" type="text" class="tile-label" style="margin: 28,0,12,0;" sizefont="13">Horas</element>
+          <element name="uptime_hours_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="28">#[UPTIME_HOURS]</element>
+        </element>
+        <element name="uptime_col_years" type="form" class="uptime-col" width="82" height="220">
+          <element name="uptime_years_label" type="text" class="tile-label" style="margin: 28,0,12,0;" sizefont="13">Años</element>
+          <element name="uptime_years_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="28">#[UPTIME_YEARS]</element>
+        </element>
+        <element name="uptime_col_seconds" type="form" class="uptime-col" width="82" height="220">
+          <element name="uptime_seconds_label" type="text" class="tile-label" style="margin: 28,0,12,0;" sizefont="13">Segundos</element>
+          <element name="uptime_seconds_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="28">#[UPTIME_SECONDS]</element>
+        </element>
       </element>
     </element>
     <element name="card_connection" type="form" class="card" xpos="1034" ypos="828" width="376" height="346">
-      <element name="card-header" type="form" class="card-header" style="margin: 24,0,12,0;" width="328" height="48">
+      <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="conn_hdr_icon" type="image" width="48" height="48">icons/card_net.svg</element>
-        <element name="conn_hdr_text" type="text" class="card-title" style="margin: 10,0,0,0;" sizefont="17">Estado de la conexion a internet</element>
+        <element name="conn_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Estado de la conexion a internet</element>
       </element>
     </element>
 
     <!-- Inset panels -->
-    <!-- "datetime_box" (Card 4) is nested into "card_datetime" itself as a real flex child ; see that
-         element's own comment for the full derivation. Only "uptime_box" (Card 5, deferred to the Grid
-         follow-up round ; see dashboard.css's own SCOPE comment) still lives here as a flat, absolutely
-         positioned root-level sibling. -->
-
-    <!-- Mockup shows ONE continuous panel with thin vertical dividers between the four columns, not four
-         separate bordered tiles (the previous "uptime_box_months/hours/years/seconds", each its own
-         "tile" form, is what a real Windows build actually looked like: four visibly separate boxes
-         with gaps between them). Replaced by a single inner-box panel spanning the same overall width
-         (656..994, unchanged) plus 3 "hr-line" dividers (same class already used for the horizontal rule
-         in the date/time card, just drawn 1px WIDE instead of 1px tall) at the old tile boundaries.
-         Top edge raised from 626 to 596 (matching datetime_box's own top, right above it in card 4) to
-         close the oversized 84px header-to-panel gap a real build screenshot showed against the mockup;
-         divider height stretched 100->112 so the rule spans nearly the full panel height instead of
-         floating with generous top/bottom margins, again per direct comparison against the mockup. -->
-    <element name="uptime_box"         type="form" class="inner-box" xpos="656" ypos="716" width="338" height="120"></element>
-    <element name="uptime_divider_1"   type="form" class="hr-line"   xpos="739" ypos="712" width="1" height="112"></element>
-    <element name="uptime_divider_2"   type="form" class="hr-line"   xpos="825" ypos="712" width="1" height="112"></element>
-    <element name="uptime_divider_3"   type="form" class="hr-line"   xpos="911" ypos="712" width="1" height="112"></element>
+    <!-- "datetime_box" (Card 4) is nested into "card_datetime". Uptime tiles live under "card_uptime" as a
+         CSS Grid ("uptime_grid") -- see dashboard.css form.uptime-grid. -->
 
 
     <!-- ==========================================================================================
@@ -487,72 +480,50 @@
          by hand from the mockup) ; see dashboard.css's "form.sidebar-nav"/"form.nav-row" rules for the
          flex properties this relies on.
 
-         WHY A SEPARATE "sidebar_nav" ELEMENT INSTEAD OF NESTING STRAIGHT INTO "sidebar_bg": the footer had
-         only ONE surface underneath its content ("footer_bg" itself); the sidebar has THREE, stacked in a
-         specific paint order that the app's UserInterface_SelectSection() (see UI_System.cpp) depends on ;
-         sidebar_bg's dark panel background, then "nav-<section>-hl"/"nav-<section>-bar" (the selection
-         band + accent bar it shows/hides with SetVisible()), then the icon/label on top of THOSE. A form's
-         nested children always paint immediately after that SAME form's own background/border (see
-         UI_SKINCANVAS::Draw_Form()'s child recursion) ; so nesting icon+label straight into "sidebar_bg"
-         would draw them BEFORE "nav-<section>-hl"/"-bar" even run (those are separate, later ROOT-level
-         siblings), putting the selection band on TOP of the icon and label instead of under them. A second,
-         otherwise-invisible flex container ("sidebar_nav" ; background-color/border-width zeroed out, the
-         same "paints nothing, exists purely to host layout" trick "footer_spacer" already uses) declared
-         AFTER "nav-<section>-hl"/"-bar" below, at the exact file position the old flat icon/text elements
-         used to occupy, reproduces the original paint order exactly while still giving the flex engine a
-         real container to lay these 16 elements out in.
+         WHY A SEPARATE "sidebar_nav" ELEMENT INSTEAD OF NESTING STRAIGHT INTO "sidebar_bg": keeps icon+label
+         paint order under the transparent hit-target buttons (nav-*-btn, declared after this block). Selection
+         chrome is CSS :selected on button + row (no hl/bar overlays).
 
          DERIVATION (each number traced back to the ORIGINAL absolute mockup positions this replaces):
            - "sidebar_nav" shares "sidebar_bg"'s own box (xpos=0 ypos=856 width=210 height=810 -> top edge
              46) so percentages/margins below read against the same frame the mockup was authored in.
-           - vertical (main axis, "flex-direction: column"): the first row's old absolute top (70, from
-             "nav-resumen-hl"'s ypos=118 minus its own height=48) is 24px below "sidebar_nav"'s own top (46)
-             ; reproduced as "margin: 0,0,24,0;" (margin-UP, the column main axis's leading edge ; see
-             UI_LAYOUTENGINE.cpp's PackFlexLine()) on ONLY the first row. Every following row is exactly 56px
-             below the previous one (174-118=56, 230-174=56, ...) = 48 (row height) + 8 (gap) ; reproduced
-             once, at the container level, as "row-gap: 8" on "sidebar_nav" (see "form.sidebar-nav"), instead
-             of repeating "margin: 0,0,8,0;" on 7 separate rows.
-           - horizontal (cross axis, "align-items: center" on each row ; see "form.nav-row"): replaces each
-             icon/text's own hand-picked vertical offset (icon top=72 = row top 70 + (48-44)/2, i.e. already
-             centered by eye against the row's 48px; text was pinned by its OLD assumed height, off by a few
-             px against the font's real metric ; same class of mismatch the footer's own captions had, see
-             "footer_bg"'s comment above) with the SAME robust, real-height-independent centering already
-             proven there.
-           - horizontal (main axis WITHIN each row, unchanged from the mockup): icon's "margin: 26,...;" is
-             its old absolute xpos (26, measured from the row's/sidebar's own left edge); the label's
-             "margin: 14,...;" is the gap from the icon's right edge (84 - (26+44) = 14). -->
+           - vertical (main axis, "flex-direction: column"): the first row's old absolute top (70) is 24px
+             below "sidebar_nav"'s own top (46); reproduced as "margin: 24,0,0,0;" on the first row. Every
+             following row is 48 (row height) + 8 (gap) = 56px below the previous; "row-gap: 8" on sidebar_nav.
+           - horizontal (cross axis, "align-items: center" on each row ; see "form.nav-row").
+           - horizontal (main axis WITHIN each row): icon margin-LEFT 26; label gap 14 from icon. -->
     <element name="sidebar_nav" type="form" class="sidebar-nav" xpos="0" ypos="856" width="210" height="810">
-      <element name="nav-resumen-row" type="form" class="nav-row" style="margin: 0,0,24,0;" width="210" height="48">
-        <element name="nav-resumen-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_home.svg</element>
-        <element name="nav-resumen-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Resumen</element>
+      <element name="nav-resumen-row" type="form" class="nav-row" style="margin: 24,0,0,0;" width="210" height="48">
+        <element name="nav-resumen-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_home.svg</element>
+        <element name="nav-resumen-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Resumen</element>
       </element>
       <element name="nav-cpu-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-cpu-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_cpu.svg</element>
-        <element name="nav-cpu-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">CPU</element>
+        <element name="nav-cpu-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_cpu.svg</element>
+        <element name="nav-cpu-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">CPU</element>
       </element>
       <element name="nav-memoria-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-memoria-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_memory.svg</element>
-        <element name="nav-memoria-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Memoria</element>
+        <element name="nav-memoria-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_memory.svg</element>
+        <element name="nav-memoria-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Memoria</element>
       </element>
       <element name="nav-red-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-red-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_net.svg</element>
-        <element name="nav-red-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Red</element>
+        <element name="nav-red-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_net.svg</element>
+        <element name="nav-red-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Red</element>
       </element>
       <element name="nav-disco-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-disco-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_disk.svg</element>
-        <element name="nav-disco-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Disco</element>
+        <element name="nav-disco-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_disk.svg</element>
+        <element name="nav-disco-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Disco</element>
       </element>
       <element name="nav-procesos-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-procesos-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_process.svg</element>
-        <element name="nav-procesos-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Procesos</element>
+        <element name="nav-procesos-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_process.svg</element>
+        <element name="nav-procesos-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Procesos</element>
       </element>
       <element name="nav-alertas-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-alertas-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_alert.svg</element>
-        <element name="nav-alertas-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Alertas</element>
+        <element name="nav-alertas-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_alert.svg</element>
+        <element name="nav-alertas-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Alertas</element>
       </element>
       <element name="nav-configuracion-row" type="form" class="nav-row" width="210" height="48">
-        <element name="nav-configuracion-icon" type="image" style="margin: 26,0,0,0;" width="44" height="44">icons/nav_config.svg</element>
-        <element name="nav-configuracion-text" type="text" class="nav-label" style="margin: 14,0,0,0;" sizefont="16">Configuracion</element>
+        <element name="nav-configuracion-icon" type="image" style="margin: 0,0,0,26;" width="44" height="44">icons/nav_config.svg</element>
+        <element name="nav-configuracion-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Configuracion</element>
       </element>
     </element>
 
@@ -587,29 +558,7 @@
     <!-- CARD 4 (Fecha y hora del sistema) body: nested into "card_datetime" itself as its "datetime_box" ;
          see that element's own comment for the full derivation. -->
 
-
-    <!-- ==========================================================================================
-         CARD 5 : Tiempo de funcionamiento del sistema
-         ========================================================================================== -->
-
-    <!-- "up_hdr_icon"/"up_hdr_text" moved into "card_uptime" as a nested "card-header" ; see the "Cards"
-         section comment above ("temp_hdr_icon" carries the full derivation). -->
-
-    <!-- label/value ypos raised again (666->640, 718->687/676) together with uptime_box's own top edge
-         (626->596): a real build screenshot still showed a visibly larger header-to-panel gap on this
-         card than on the date/time card next to it, even after the previous round's fix; both cards'
-         panels now start at the same y=596. -->
-    <element name="uptime_months_label"  type="text" class="tile-label" xpos="672" ypos="640" sizefont="13">Meses</element>
-    <element name="uptime_months_value"  type="text" class="tile-value" xpos="688" ypos="687" sizefont="26">#[UPTIME_MONTHS]</element>
-
-    <element name="uptime_hours_label"   type="text" class="tile-label" xpos="760" ypos="640" sizefont="13">Horas</element>
-    <element name="uptime_hours_value"   type="text" class="tile-value" xpos="758" ypos="687" sizefont="26">#[UPTIME_HOURS]</element>
-
-    <element name="uptime_years_label"   type="text" class="tile-label" xpos="848" ypos="640" sizefont="13">Anios</element>
-    <element name="uptime_years_value"   type="text" class="tile-value" xpos="860" ypos="687" sizefont="26">#[UPTIME_YEARS]</element>
-
-    <element name="uptime_seconds_label" type="text" class="tile-label" xpos="922" ypos="640" sizefont="13">Segundos</element>
-    <element name="uptime_seconds_value" type="text" class="tile-value" xpos="924" ypos="676" sizefont="26">#[UPTIME_SECONDS]</element>
+    <!-- CARD 5 uptime tiles: nested into "card_uptime" as CSS Grid "uptime_grid" (no absolute siblings). -->
 
 
     <!-- ==========================================================================================
