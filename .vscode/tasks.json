@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "genExample",
+      "type": "pickString",
+      "description": "Ejemplo GEN a configurar con CMake Tools",
+      "options": [
+        "Base/AppBaseExample",
+        "Base/Canvas2DDisplay",
+        "Base/LogLib",
+        "Base/MemCtrlExample",
+        "Base/NotAppExample",
+        "Console/BinConnPro",
+        "Console/Databases",
+        "Console/IniBase",
+        "Console/MiniWebServer",
+        "Console/NetCapture",
+        "Console/NetConn",
+        "Console/ScriptsExample",
+        "Graphics/Canvas2D",
+        "Graphics/StaticticsCharts",
+        "Graphics/UI_Message",
+        "Graphics/UI_Options",
+        "Graphics/UI_System",
+        "Graphics/WindowChromes"
+      ],
+      "default": "Console/MiniWebServer"
+    }
+  ],
+  "tasks": [
+    {
+      "label": "GEN: Seleccionar ejemplo",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/select-example.ps1",
+        "${input:genExample}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true,
+        "focus": true
+      }
+    }
+  ]
+}

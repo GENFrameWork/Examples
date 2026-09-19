@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SANDBOX layout (not loaded by UI_Options at runtime).
+  Production path: example/example.xml (XML-only, no stylesheet).
+  This file pairs with example.css to experiment with XML+CSS without touching the baseline.
+-->
 <layouts>
   <skin name="" drawmode="canvas" rasterfont="verdana18" vectorfont="Nunito-SemiBold.ttf" backgroundimg="seamless_pattern2.jpg" backgroundseamlesspattern="yes" > </skin>
   <stylesheet>example.css</stylesheet>
