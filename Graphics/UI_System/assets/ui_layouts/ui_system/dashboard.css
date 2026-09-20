@@ -99,6 +99,10 @@ form.sidebar {
   border-width:     1;
   border-radius:    0;
   padding:          0;
+  /* Host sidebar_nav as a real child so FormBackdrop restore force-dirties the nav subtree (Oleada
+     regression: root-sibling nav was wiped by sidebar_bg restore and stayed blank until a click). */
+  display:          flex;
+  flex-direction:   column;
 }
 
 /* Phase 4 ("migración del ejemplo", second sub-step, revised after two live-app regressions -- see
@@ -120,7 +124,8 @@ form.footer {
   border-color:     var(--sidebar-line);
   border-width:     1;
   border-radius:    0;
-  padding:          0;
+  /* Sidebar is 210 wide; keep Equipo|SO|Uptime in the content column, not under the brand. */
+  padding:          0 0 0 210;
   display:          flex;
   align-items:      center;
 }
@@ -201,7 +206,7 @@ form.card {
   padding:          0;
   display:          flex;
   flex-direction:   column;
-  box-shadow:       0 6 16 var(--shadow-card);
+  /* no box-shadow: soft blur left black AABB corner tips on every card (confirmed in 2026-09-20 video) */
 }
 
 form.card-header {
@@ -212,9 +217,8 @@ form.card-header {
 }
 
 /* Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies", first half -- Temp CPU / Uso CPU / RAM /
-   Fecha-Hora). Uptime uses CSS Grid (form.uptime-grid). Connection body content stays absolute siblings for
-   now: toggled badge_ok/badge_ko visibility is fine for paint; nesting both into flex is deferred until a
-   live pass confirms ArrangeFlex skips invisible children end-to-end (BuildTree already does).
+   Fecha-Hora). Uptime uses CSS Grid (form.uptime-grid). Connection body is nested under card_connection
+   (badge slot + status row + quality/IP), same flex pattern as the other cards.
 
    Two reusable, purely structural wrappers (transparent, borderless -- exist only to host a flex arrangement,
    same "exists purely to host layout" trick as "footer_spacer"/"sidebar-nav"/"card-header"): ".flex-row" and
@@ -263,8 +267,8 @@ form.tile {
 
 
 /* --- Sidebar selection ----------------------------------------------------------------------------
-   Phase 2: selected look is CSS :selected on button.nav-hit. form.nav-band / form.nav-accent remain in
-   the XML one release but are forced hidden by UserInterface_SelectSection(); colours kept for reference.
+   Selected look is CSS :selected on button.nav-hit (wash) plus form.nav-row:selected .nav-accent-mark
+   (4px left bar). No SetVisible overlays.
    -------------------------------------------------------------------------------------------------- */
 
 form.nav-band {
@@ -277,6 +281,18 @@ form.nav-accent {
   background-color: var(--nav-accent);
   border-width:     0;
   border-radius:    0;
+}
+
+/* 4px accent bar: first flex child of each nav-row; transparent until the row is :selected. */
+form.nav-accent-mark {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  border-radius:    0;
+  flex-shrink:      0;
+}
+
+form.nav-row:selected .nav-accent-mark {
+  background-color: var(--nav-accent);
 }
 
 /* Transparent hit target laid over each row. No sub-elements and an explicit width/height, so
@@ -319,8 +335,8 @@ form.nav-row:selected .nav-label { color: var(--accent-blue); }
 
 .value-temp    { color: var(--accent-red);    }
 .value-ram     { color: var(--accent-purple); }
-.value-date    { color: var(--text-strong);   }
-.value-time    { color: var(--accent-blue);   }
+.value-date    { color: var(--text-strong); text-align: center; }
+.value-time    { color: var(--accent-blue); text-align: center; }
 .value-ok      { color: var(--accent-green);  }
 
 /* xpos="center"/ypos="center" in dashboard.xml already places these zero-width <text> elements' box at the

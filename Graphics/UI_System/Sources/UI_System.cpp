@@ -1437,7 +1437,13 @@ bool UI_SYSTEM::HardwareInfo_UpdateFooter(XSTRING& outequipo, XSTRING& outso, XS
 
   if(GEN_XSYSTEM.GetOperativeSystemID(operativesystemID) && (!operativesystemID.IsEmpty()))
     {
-      outso.Format(__L("SO: %s"), operativesystemID.Get());
+      // Shorten live Windows strings ("Microsoft Windows 11 Pro Build 26200") so the footer can show
+      // Equipo | SO | Uptime without the huge fixed gaps the mockup used for short Linux IDs.
+      XSTRING soid = operativesystemID;
+      if(soid.Find(__L("Microsoft "), true) == 0) soid.DeleteCharacters(0, 10);
+      int buildat = soid.Find(__L(" Build"), true);
+      if(buildat >= 0) soid.DeleteCharactersToEnd((XDWORD)buildat);
+      outso.Format(__L("SO: %s"), soid.Get());
     }
    else
     {
@@ -1558,7 +1564,14 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
       if(element_btn) element_btn->SetSelected(isactive);
 
       UI_ELEMENT* element_row = GEN_USERINTERFACE.Element_Get(navrownames[c], UI_ELEMENT_TYPE_FORM);
-      if(element_row) element_row->SetSelected(isactive);
+      if(element_row)
+        {
+          element_row->SetSelected(isactive);
+          // Redraw the row (accent + label) only -- not the overlay nav-*-btn. Forcing the buttons to
+          // redraw at Ini/SelectSection made them OptionBackdrop-capture before/without nav ink and then
+          // keep restoring a blank strip (video: sidebar empty until click).
+          GEN_USERINTERFACE.Elements_SetToRedraw(element_row, true);
+        }
     }
 
   currentsectionID = sectionID;
