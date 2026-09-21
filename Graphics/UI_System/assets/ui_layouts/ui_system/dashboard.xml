@@ -18,6 +18,9 @@
     cpu_usage_radial        progressradial  SetLevel()
     ram_usage_radial        progressradial  SetLevel()
     ram_linear_bar          progressbar     SetLevel()
+    disk_usage_radial       progressradial  SetLevel()
+    disk_linear_bar         progressbar     SetLevel()
+    disk_prev_btn/next_btn  button          cycle volumes (HardwareInfo_CycleDisk)
     connection_icon_ok/ko   image           SetVisible()   (green tick / red cross)
     nav-<section>-btn       button          click target + SetSelected()
     nav-<section>-row       form            SetSelected() so CSS `form.nav-row:selected .nav-label` works
@@ -160,7 +163,6 @@
     <element name="footer_bg" type="form" class="footer" xpos="0" ypos="900" width="1440" height="44">
       <element name="footer_equipo_icon" type="image" style="margin: 0,0,0,24; flex-shrink: 0;"   width="36" height="36">icons/foot_computer.svg</element>
       <element name="footer_equipo_text" type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_EQUIPO]</element>
-      <element name="footer_divider_1"   type="form"  class="hr-line" style="margin: 0,0,0,28; flex-shrink: 0;" width="1" height="24"></element>
       <element name="footer_so_icon"     type="image" style="margin: 0,0,0,28; flex-shrink: 0;"  width="36" height="36">icons/foot_gear.svg</element>
       <element name="footer_so_text"     type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_SO]</element>
       <element name="footer_divider_2"   type="form"  class="hr-line" style="margin: 0,0,0,28; flex-shrink: 0;" width="1" height="24"></element>
@@ -269,44 +271,23 @@
            bound); 270 matches the thermometer's own height, the tallest of "card-body"'s two children; 247 =
            62 (value-row, sized to the largest live value's real sizefont=50 glyph height) + 100 (gap to the
            caption icon) + 60 (icon) + 7 (gap) + ~18 (caption text's real height). -->
-      <element name="card-body" type="form" class="flex-row" style="margin: 5,0,0,24; column-gap: 24;" width="346" height="270">
+      <!-- right-col centrado interno; el aire L/R de la tarjeta lo define form.temp-card-body
+           (margin 24 + width 328). No encojer right-col por debajo de 142. -->
+      <element name="card-body" type="form" class="flex-row temp-card-body" width="328" height="270">
         <element name="cpu_temp_bar" type="progressimage" width="180" height="270"
                  direction="vertical" allocationtext="none"
                  offsetstart="77" offsetend="25" level="0"
                  imageempty="thermo_empty.png" imagefull="thermo_full.png">
         </element>
 
-        <element name="right-col" type="form" class="flex-col" width="142" height="200">
-          <!-- "align-items: flex-end" bottom-aligns the two texts, reproducing the original design where both
-               shared the exact same ypos (263): the big value and its small unit sit on the same visual
-               baseline, "big number + small unit" pattern also used for the ring "%" and the RAM "GB". -->
-          <element name="value-row" type="form" class="flex-row" style="align-items: flex-end;" width="142" height="62">
+        <element name="right-col" type="form" class="flex-col temp-right-col" style="justify-content: center; align-items: center;" width="142" height="220">
+          <element name="value-row" type="form" class="flex-row" style="align-items: flex-end; justify-content: center;" width="142" height="62">
             <element name="cpu_temp_value" type="text" class="value-temp" sizefont="50">#[CPU_TEMPERATURE]</element>
-            <!-- #[CPU_TEMPERATURE] no longer carries "°C" (see HardwareInfo_UpdateCPU's updated doc comment in
-                 UI_System.cpp): it is digits-only, so this static text supplies the unit. Being a real flex
-                 sibling of "cpu_temp_value" now (not a fixed-xpos root sibling) is what actually FIXES the
-                 trade-off the old flat structure's comment used to flag here: "GEN positions left-aligned text
-                 at a fixed xpos regardless of the mask's rendered width, so there is no built-in way to make
-                 this element flow after a sibling of varying width" ; true for two independent root elements,
-                 no longer true for two flex items in the same row, since UI_MANAGER::ChangeTextElementValue()
-                 already re-runs RunLayout() on the flex father whenever a changed text child's father
-                 IsFlexContainer() (see UI_LayoutEngine.h's own "migración del ejemplo" SCOPE ADDENDUM) ; so the
-                 unit now genuinely re-flows after the live value on every update, 1-digit or 3-digit alike,
-                 instead of sitting at a fixed offset tuned for the common 2-digit case. -->
             <element name="cpu_temp_unit" type="text" class="value-temp" style="margin: 0,0,0,6;" sizefont="28">°C</element>
           </element>
 
-          <!-- Mockup swaps the small caption icon for a red CPU chip instead of a second (redundant) thermometer
-               glyph: cap_cpu.svg is card_cpu.svg's same chip artwork recoloured to the theme's accent-red
-               (248,81,73), matching cpu_temp_value's colour and cap_thermo.svg's old red tone exactly. -->
-          <element name="temp_cap_icon" type="image" style="margin: 36,0,0,0;" width="60" height="60">icons/cap_cpu.svg</element>
-          <!-- margin-LEFT=4, not 0: kept from the old flat layout's own note ; measured against Abraham's build
-               screenshot that cpu_temp_value/temp_cap_icon's glyphs render ~4px right of their declared xpos
-               (Nunito-SemiBold's left-side bearing at sizefont=50, and cap_cpu.svg's own inner margin, both push
-               their visible edge in a bit), while this 14pt label has almost none; matching the RENDERED edge is
-               what makes the three look aligned on screen, same reasoning, now expressed as a margin instead of
-               an absolute xpos delta. -->
-          <element name="temp_cap_text" type="text"  class="label" style="margin: 7,0,0,4;" sizefont="14">Temperatura actual</element>
+          <element name="temp_cap_icon" type="image" style="margin: 20,0,0,0;" width="52" height="52">icons/cap_cpu.svg</element>
+          <element name="temp_cap_text" type="text" class="label" style="margin: 8,0,0,0; text-align: center;" sizefont="14">Temperatura actual</element>
         </element>
       </element>
     </element>
@@ -330,33 +311,20 @@
            false), so an un-sized one reads as 0x0 to UI_LAYOUTENGINE and wrongly shrinks its real children.
            260 matches the ring's own width (the taller/wider of the two children); 290 = 260 (ring) + 7 (gap) +
            ~19 (caption's real height, sizefont=15), rounded up generously. -->
-      <element name="card-body" type="form" class="flex-col" style="margin: 22,0,0,58; align-items: center;" width="260" height="290">
-        <!-- Measured against Abraham's mockup (comparing the CPU-usage card's own rectangle to the ring's): the
-             ring there fills roughly 69% of the card's width, well past this ring's previous 200/376=53%. Grown to
-             260 (69%), re-centred (694 = 636 + (376-260)/2, same centre x=824 the caption below was already tuned
-             for) and thickness/value font scaled by the same ~1.3 factor so the stroke and the "37%" text keep
-             their prior visual proportion to the ring's new size. -->
+      <!-- CPU usage: ring without glow, smaller than the old 260 fill, proportions vs proto
+           (centered ring + larger % + caption with clearer gap under the ring). -->
+      <!-- Ring+% arriba (cerca del header); "Uso actual" anclado abajo del body (proto). -->
+      <element name="card-body" type="form" class="flex-col cpu-usage-body" width="232" height="310">
         <element name="cpu_usage_radial" type="progressradial" class="ring-cpu"
-                 width="260" height="260"
-                 level="0" thickness="28" roundcap="yes" startangle="-90" sweepangle="360"
+                 width="220" height="220"
+                 level="0" thickness="18" roundcap="yes" startangle="-90" sweepangle="360"
                  gradientcolor="56,139,253" gradientmode="track">
-          <!-- maxsizetext="4" reserves the box width of the widest possible value ("100%", 4 chars) instead of the
-               CURRENT value's width. Without it, CalculateBoundaryLine_Text() auto-sizes this text element's own
-               box to the exact pixel width of "42%"/"7%"/"100%" as the level changes; since that box is what gets
-               re-centered inside the ring on every update, a narrower-to-wider (or wider-to-narrower) value change
-               visibly resizes and re-shifts the box for a frame, reading as a jump/flash. Fixing the box at the
-               4-char reservation makes the width constant across every level, so only the CSS text-align:center
-               offset (see .ring-value in dashboard.css) has to redo its (now real) job of centering the actual
-               string inside that fixed box, with no size change and so no visible jump. -->
-          <element name="cpu_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="58" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
+          <element name="cpu_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="54" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
         </element>
 
-        <!-- margin-top corrected from a stale 92 (an editing leftover from an earlier draft of this card,
-             predating the ring's growth to 260) to 7: matches this element's own "card-body" height
-             derivation just above ("290 = 260 (ring) + 7 (gap) + ~19 (caption's real height)"), confirmed
-             against a real windowed build screenshot ; 92 visibly overlapped the caption text under the
-             ring's own bottom edge instead of sitting below it. -->
-        <element name="cpu_usage_caption" type="text" class="label-accent" style="margin: 10,0,0,0;" sizefont="15">Uso actual</element>
+        <element name="cpu-usage-caption-slot" type="form" class="flex-row cpu-usage-caption" style="align-items: center; justify-content: center;" width="232" height="24">
+          <element name="cpu_usage_caption" type="text" class="label-accent" sizefont="16">Uso actual</element>
+        </element>
       </element>
     </element>
     <element name="card_ram"        type="form" class="card" xpos="1034" ypos="460" width="376" height="390">
@@ -386,34 +354,32 @@
            354 = 178 (ring) + 16 (gap) + 160 (right column ; see its own comment below for that number's
            derivation); 186 is generous headroom for "right-col"'s real content, which (including its own
            38px margin-top) runs taller than the ring alone. -->
-      <element name="card-body" type="form" class="flex-row" style="margin: 40,0,0,16; column-gap: 12;" width="360" height="200">
-        <!-- Grown more modestly than cpu_usage_radial (164->178, +8.5%, vs. the CPU ring's +30%): unlike that card,
-             this ring shares its row with the used/total text and the bar, and the worst-case value string, "31.8
-             GB / 31.8 GB" (measured against Nunito-SemiBold at sizefont=19: 157 units wide), leaves no room for a
-             bigger ring without either overflowing the card's right edge (1410) or shrinking that text. -->
+      <!-- RAM: anillo sin glow, mas pequeño para dejar margen con la columna de textos/barra. -->
+      <element name="card-body" type="form" class="flex-row" style="margin: 36,0,0,24; column-gap: 22; align-items: center;" width="328" height="200">
         <element name="ram_usage_radial" type="progressradial" class="ring-ram"
-                 width="178" height="178"
-                 level="0" thickness="22" roundcap="yes" startangle="-90" sweepangle="360"
+                 width="140" height="140"
+                 level="0" thickness="16" roundcap="yes" startangle="-90" sweepangle="360"
                  gradientcolor="163,113,247" gradientmode="track">
-          <!-- Same fixed-width reservation as cpu_usage_value; see the comment there. -->
-          <element name="ram_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="39" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
+          <element name="ram_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="32" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
         </element>
 
-        <!-- Wider right column + bar so the mockup's horizontal split reads closer on screen. -->
-        <element name="right-col" type="form" class="flex-col" style="margin: 28,0,0,0;" width="170" height="160">
-          <element name="ram_used_total" type="text" class="value-ram" sizefont="19">#[RAM_USED_TOTAL]</element>
-          <element name="ram_caption"    type="text" class="label"     style="margin: 10,0,0,0;" sizefont="14">En uso / Total</element>
+        <element name="right-col" type="form" class="flex-col" style="justify-content: center;" width="166" height="160">
+          <element name="ram-used-row" type="form" class="flex-row" style="align-items: flex-end;" width="166" height="28">
+            <element name="ram_used"  type="text" class="value-ram" sizefont="22">#[RAM_USED]</element>
+            <element name="ram_total" type="text" class="label-dim" style="margin: 0,0,0,4;" sizefont="16">#[RAM_TOTAL]</element>
+          </element>
+          <element name="ram_caption"    type="text" class="label"     style="margin: 8,0,0,0;" sizefont="13">En uso / Total</element>
 
-          <element name="ram_linear_bar" type="progressbar" class="bar-ram" width="160" height="16"
-                   style="margin: 40,0,0,0;" allocationtext="none" direction="horizontal"
-                   roundcap="yes" progressrect="0,0,160,16" level="0" linecolor="0,0,0,0"
+          <element name="ram_linear_bar" type="progressbar" class="bar-ram" width="160" height="14"
+                   style="margin: 28,0,0,0;" allocationtext="none" direction="horizontal"
+                   roundcap="yes" progressrect="0,0,160,14" level="0" linecolor="0,0,0,0"
                    gradientcolor="163,113,247" gradientmode="track">
           </element>
 
-          <element name="scale-row" type="form" class="flex-row" style="margin: 10,0,0,0; justify-content: space-between;" width="160" height="15">
-            <element name="ram_scale_0"   type="text" class="label-dim" sizefont="12">0%</element>
-            <element name="ram_scale_50"  type="text" class="label-dim" sizefont="12">50%</element>
-            <element name="ram_scale_100" type="text" class="label-dim" sizefont="12">100%</element>
+          <element name="scale-row" type="form" class="flex-row" style="margin: 8,0,0,0; justify-content: space-between;" width="160" height="15">
+            <element name="ram_scale_0"   type="text" class="label-dim" sizefont="11">0%</element>
+            <element name="ram_scale_50"  type="text" class="label-dim" sizefont="11">50%</element>
+            <element name="ram_scale_100" type="text" class="label-dim" sizefont="11">100%</element>
           </element>
         </element>
       </element>
@@ -451,56 +417,74 @@
         </element>
       </element>
     </element>
-    <element name="card_uptime"     type="form" class="card" xpos="636"  ypos="828" width="376" height="346">
+    <element name="card_disk"       type="form" class="card" xpos="636"  ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
-        <element name="up_hdr_icon" type="image" width="48" height="48">icons/card_clock.svg</element>
-        <element name="up_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="15">Tiempo de funcionamiento del sistema</element>
+        <element name="disk_hdr_icon" type="image" width="48" height="48">icons/card_disk.svg</element>
+        <element name="disk_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Almacenamiento del sistema</element>
       </element>
-      <!-- Proof of CSS Grid capability: four equal columns nested under the card (no absolute xpos/ypos). -->
-      <element name="uptime_grid" type="form" class="uptime-grid" style="margin: 16,0,0,20;" width="336" height="250">
-        <element name="uptime_col_months" type="form" class="uptime-col" width="84" height="250">
-          <element name="uptime_months_label" type="text" class="tile-label" style="margin: 36,0,12,0;" sizefont="13">Meses</element>
-          <element name="uptime_months_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="30">#[UPTIME_MONTHS]</element>
+
+      <!-- Primary volume display (RAM-like). Kept high so the bottom band hosts cycle buttons. -->
+      <element name="card-body" type="form" class="flex-row" style="margin: 4,0,0,24; column-gap: 22; align-items: center;" width="328" height="180">
+        <element name="disk_usage_radial" type="progressradial" class="ring-disk"
+                 width="140" height="140"
+                 level="0" thickness="16" roundcap="yes" startangle="-90" sweepangle="360"
+                 gradientcolor="210,153,34" gradientmode="track">
+          <element name="disk_usage_value" type="text" class="ring-value" xpos="center" ypos="center" sizefont="32" maxsizetext="4">#[PROGRESSBAR_PERCENT]</element>
         </element>
-        <element name="uptime_col_hours" type="form" class="uptime-col" width="84" height="250">
-          <element name="uptime_hours_label" type="text" class="tile-label" style="margin: 36,0,12,0;" sizefont="13">Horas</element>
-          <element name="uptime_hours_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="30">#[UPTIME_HOURS]</element>
+
+        <element name="right-col" type="form" class="flex-col" style="justify-content: center;" width="166" height="160">
+          <element name="disk-used-row" type="form" class="flex-row" style="align-items: flex-end;" width="166" height="28">
+            <element name="disk_used"  type="text" class="value-disk" sizefont="20">#[DISK_USED]</element>
+            <element name="disk_total" type="text" class="label-dim" style="margin: 0,0,0,4;" sizefont="14">#[DISK_TOTAL]</element>
+          </element>
+          <element name="disk_caption" type="text" class="label" style="margin: 8,0,0,0;" sizefont="13">#[DISK_CAPTION]</element>
+
+          <element name="disk_linear_bar" type="progressbar" class="bar-disk" width="160" height="14"
+                   style="margin: 28,0,0,0;" allocationtext="none" direction="horizontal"
+                   roundcap="yes" progressrect="0,0,160,14" level="0" linecolor="0,0,0,0"
+                   gradientcolor="210,153,34" gradientmode="track">
+          </element>
+
+          <element name="scale-row" type="form" class="flex-row" style="margin: 8,0,0,0; justify-content: space-between;" width="160" height="15">
+            <element name="disk_scale_0"   type="text" class="label-dim" sizefont="11">0%</element>
+            <element name="disk_scale_50"  type="text" class="label-dim" sizefont="11">50%</element>
+            <element name="disk_scale_100" type="text" class="label-dim" sizefont="11">100%</element>
+          </element>
         </element>
-        <element name="uptime_col_years" type="form" class="uptime-col" width="84" height="250">
-          <element name="uptime_years_label" type="text" class="tile-label" style="margin: 36,0,12,0;" sizefont="13">Años</element>
-          <element name="uptime_years_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="30">#[UPTIME_YEARS]</element>
-        </element>
-        <element name="uptime_col_seconds" type="form" class="uptime-col" width="84" height="250">
-          <element name="uptime_seconds_label" type="text" class="tile-label" style="margin: 36,0,12,0;" sizefont="13">Segundos</element>
-          <element name="uptime_seconds_value" type="text" class="tile-value" style="margin: 8,0,0,0;" sizefont="30">#[UPTIME_SECONDS]</element>
-        </element>
+      </element>
+
+      <!-- Decorative cycle strip (icons + index). Hit targets are root-level siblings below. -->
+      <element name="disk_nav" type="form" class="flex-row disk-nav" style="margin: 36,0,0,24; align-items: center; justify-content: space-between;" width="328" height="48">
+        <element name="disk_prev_icon" type="image" width="44" height="44">icons/disk_prev.svg</element>
+        <element name="disk_index" type="text" class="disk-nav-index" sizefont="14">#[DISK_INDEX]</element>
+        <element name="disk_next_icon" type="image" width="44" height="44">icons/disk_next.svg</element>
       </element>
     </element>
     <element name="card_connection" type="form" class="card" xpos="1034" ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
-        <element name="conn_hdr_icon" type="image" width="48" height="48">icons/card_net.svg</element>
-        <element name="conn_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="15">Estado de la conexion a internet</element>
+        <element name="conn_hdr_icon" type="image" width="48" height="48">icons/card_wifi.svg</element>
+        <element name="conn_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="16">Estado de la conexion a internet</element>
       </element>
-      <!-- Nested body (Oleada 1): badge slot stacks ok/ko without flex reflow; status row + quality/IP below. -->
-      <element name="card-body" type="form" class="flex-col" style="margin: 20,0,0,24;" width="328" height="250">
-        <element name="conn-status-row" type="form" class="flex-row" style="align-items: center;" width="328" height="100">
-          <element name="conn-badge-slot" type="form" style="background-color: 0,0,0,0; border-width: 0; flex-shrink: 0;" width="90" height="90">
-            <element name="connection_icon_ok" type="image" xpos="0" ypos="0" width="90" height="90" visible="yes">icons/badge_ok.svg</element>
-            <element name="connection_icon_ko" type="image" xpos="0" ypos="0" width="90" height="90" visible="no">icons/badge_ko.svg</element>
+      <!-- Distribucion del prototipo: fila [badge|Conectado] arriba; debajo quality/IP/IP publica
+           alineados al borde izquierdo del badge; icono de red a la derecha. Compacto (sin scroll). -->
+      <element name="conn_body" type="form" class="flex-row" style="margin: 20,0,0,24; align-items: center;" width="328" height="200">
+        <!-- Left column wide enough for badge + "Desconectado" at 22pt (was 220: text clipped on offline). -->
+        <element name="conn-left" type="form" class="flex-col" style="flex-shrink: 0;" width="248" height="190">
+          <element name="conn-status-row" type="form" class="flex-row" style="align-items: center;" width="248" height="72">
+            <element name="conn-badge-slot" type="form" class="flex-row" style="flex-shrink: 0; background-color: 0,0,0,0; border-width: 0;" width="64" height="64">
+              <element name="connection_icon_ok" type="image" width="64" height="64" visible="yes">icons/badge_ok.svg</element>
+              <element name="connection_icon_ko" type="image" width="64" height="64" visible="no">icons/badge_ko.svg</element>
+            </element>
+            <element name="connection_status_text" type="text" class="value-ok" style="margin: 0,0,0,10; flex-shrink: 0;" sizefont="22">#[CONNECTION_STATUS]</element>
           </element>
-          <element name="connection_status_text" type="text" class="value-ok" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="26">#[CONNECTION_STATUS]</element>
-          <element name="conn_row_spacer" type="form" style="flex-grow: 1; background-color: 0,0,0,0; border-width: 0;" width="0" height="0"></element>
-          <element name="connection_net_icon" type="image" style="flex-shrink: 0;" width="100" height="100">icons/internet-net.svg</element>
+          <element name="connection_quality"   type="text" class="label" style="margin: 14,0,0,0;" sizefont="17">#[CONNECTION_QUALITY]</element>
+          <element name="connection_ip"        type="text" class="label" style="margin: 10,0,0,0;" sizefont="16">#[LOCAL_IP]</element>
+          <element name="connection_public_ip" type="text" class="label" style="margin: 10,0,0,0;" sizefont="16">#[PUBLIC_IP]</element>
         </element>
-        <element name="connection_quality" type="text" class="label" style="margin: 16,0,0,0;" sizefont="15">#[CONNECTION_QUALITY]</element>
-        <element name="connection_ip"      type="text" class="label" style="margin: 8,0,0,0;" sizefont="15">#[LOCAL_IP]</element>
+        <element name="conn_row_spacer" type="form" style="flex-grow: 1; background-color: 0,0,0,0; border-width: 0;" width="0" height="0"></element>
+        <element name="connection_net_icon" type="image" style="flex-shrink: 0;" width="72" height="72">icons/internet-net.svg</element>
       </element>
     </element>
-
-    <!-- Inset panels -->
-    <!-- "datetime_box" (Card 4) is nested into "card_datetime". Uptime tiles live under "card_uptime" as a
-         CSS Grid ("uptime_grid") -- see dashboard.css form.uptime-grid. -->
-
 
     <!-- ==========================================================================================
          SIDEBAR hit targets + brand (nav rows live nested under sidebar_bg above)
@@ -517,6 +501,11 @@
     <element name="nav-procesos-btn"      type="button" class="nav-hit" xpos="0" ypos="398" width="210" height="48" roundrect="0"></element>
     <element name="nav-alertas-btn"       type="button" class="nav-hit" xpos="0" ypos="454" width="210" height="48" roundrect="0"></element>
     <element name="nav-configuracion-btn" type="button" class="nav-hit" xpos="0" ypos="510" width="210" height="48" roundrect="0"></element>
+
+    <!-- Disk card cycle hit targets — pixel-aligned to cyan SVG icons (capture: 662,766–701,805 /
+         946,766–985,805). Root ypos = bottom edge (hit test uses y - height). -->
+    <element name="disk_prev_btn" type="button" class="disk-nav-hit" xpos="662" ypos="806" width="40" height="40" roundrect="20"></element>
+    <element name="disk_next_btn" type="button" class="disk-nav-hit" xpos="946" ypos="806" width="40" height="40" roundrect="20"></element>
 
     <element name="brand_icon"    type="image" xpos="26" ypos="831" width="52" height="52">icons/brand_system.svg</element>
     <element name="brand_text"    type="text"  class="brand"     xpos="88" ypos="808" sizefont="15">Sistema</element>

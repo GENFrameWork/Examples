@@ -7,13 +7,23 @@
     <uses-sdk android:minSdkVersion="@GEN_ANDROID_MIN_SDK@"
               android:targetSdkVersion="@GEN_ANDROID_TARGET_SDK@" />
 
+    <!-- UI_System hardware/network info at startup and on the background poll:
+         - INTERNET: DIOCHECKINTERNETCONNECTION + GEN_DIOPUBLICINTERNETIP (HTTP)
+         - ACCESS_NETWORK_STATE: connection up/down
+         - ACCESS_WIFI_STATE: local iface enum (wlan*) / Wi-Fi link state
+         - CHANGE_WIFI_MULTICAST_STATE: GEN XTrace / DIO UDP multicast
+         - NEARBY_WIFI_DEVICES: Wi-Fi device APIs on API 33+ (neverForLocation: not used for location) -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"
+                     android:usesPermissionFlags="neverForLocation" />
 
     <application android:label="@GEN_ANDROID_APP_LABEL@"
                  android:icon="@drawable/icon"
-                 android:hasCode="false">
+                 android:hasCode="false"
+                 android:extractNativeLibs="true">
 
         <activity android:name="android.app.NativeActivity"
                   android:label="@GEN_ANDROID_APP_LABEL@"

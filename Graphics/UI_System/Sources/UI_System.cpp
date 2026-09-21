@@ -65,6 +65,7 @@
 
 #include "DIOCheckTCPIPConnections.h"
 #include "DIOCheckInternetConnection.h"
+#include "DIOPublicInternetIP.h"
 
 #include "GRP2DCanvas.h"
 #include "GRPScreenCFGChromes.h"
@@ -227,10 +228,14 @@ bool UI_SYSTEM::AppProc_Ini()
   //       "GetSystemUpTime()" in XSYSTEM), so "xtimer" is used as the running clock for the
   //       "Tiempo de funcionamiento del sistema" card: it measures the time elapsed since this
   //       monitor application started. Swap it for a real OS uptime source (e.g. reading
-  //       /proc/uptime on Linux) here and in HardwareInfo_UpdateUptime() when one is available.
+  //       /proc/uptime on Linux) for the footer FOOTER_UPTIME path when one is available.
   //--------------------------------------------------------------------------------------
 
-  diocheckinternetconnection = GEN_NEW DIOCHECKINTERNETCONNECTION(5);
+  // On Android a blocking Wait inside this ctor (up to N seconds of DNS probes) runs on the
+  // NativeActivity start path before the window is ready. Real devices are stricter than
+  // BlueStacks about when network/DNS is usable; HardwareInfo already re-checks on its
+  // background thread, so skip the sync wait (second ctor arg = false).
+  diocheckinternetconnection = GEN_NEW DIOCHECKINTERNETCONNECTION(5, false);
 
   //--------------------------------------------------------------------------------------
 
@@ -274,12 +279,17 @@ bool UI_SYSTEM::AppProc_Ini()
     xpath.Add(APPLICATION_NAMEFILE);
     xpath.Add(XTRANSLATION_NAMEFILEEXT);    
 
+    // Missing/unextracted .lng must not abort the whole NativeActivity: on Android assets land
+    // under getFilesDir()/assets only after OverturnAssets, and a failed Ini() here used to
+    // cascade into CreateMainScreenProcess never running → OnStep STATUS_KO → silent finish.
     if(!GEN_XTRANSLATION.Ini(xpath))
       {
-        return false;
+        XTRACE_PRINTCOLOR(XTRACE_COLOR_RED, __L("[UI_System] Translation file not loaded: %s"), xpath.Get());
       }
-
-    GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
+     else
+      {
+        GEN_XTRANSLATION.SetActual(XLANGUAGE_ISO_639_3_CODE_SPA);
+      }
   }
 
   //--------------------------------------------------------------------------------------------------
@@ -345,7 +355,18 @@ bool UI_SYSTEM::AppProc_FirstUpdate()
 
   if(!dashboardloaded)
     {
-      if(!Ini_UserInterface(true)) return false;
+      // Same soft-fail idea as translation: aborting FirstUpdate finishes the Android activity
+      // with no dialog. Retry once; if assets are still missing keep running with placeholders
+      // so logcat can show the real Load() failure instead of a silent exit.
+      if(!Ini_UserInterface(true))
+        {
+          XTRACE_PRINTCOLOR(XTRACE_COLOR_RED, __L("[UI_System] Dashboard load failed in FirstUpdate"));
+          dashboardloaded = false;
+        }
+       else
+        {
+          dashboardloaded = true;
+        }
     }
 
   //--------------------------------------------------------------------------------------
@@ -913,15 +934,24 @@ bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
   // down) ever waiting on it.
   //--------------------------------------------------------------------------------------
 
-  XSTRING temperaturestr, usedtotalstr, datestr, timestr;
-  XSTRING monthsstr, hoursstr, yearsstr, secondsstr;
-  XSTRING statusstr, qualitystr, markstr, ipstr;
+  XSTRING temperaturestr, usedtotalstr, usedstr, totalstr, datestr, timestr;
+  XSTRING diskname[UI_SYSTEM_DISK_SLOT_MAX];
+  XSTRING diskused[UI_SYSTEM_DISK_SLOT_MAX];
+  XSTRING disktotal[UI_SYSTEM_DISK_SLOT_MAX];
+  float   disklevel[UI_SYSTEM_DISK_SLOT_MAX];
+  int     diskcount = 0;
+  XSTRING statusstr, qualitystr, markstr, ipstr, publicipstr;
   XSTRING equipostr, sostr, uptimestr;
 
   float temperaturelevel = 0.0f;
   float cpuusagelevelnow = 0.0f;
   float ramusagelevelnow = 0.0f;
   bool  isconnectednow   = false;
+
+  for(int s=0; s<UI_SYSTEM_DISK_SLOT_MAX; s++)
+    {
+      disklevel[s] = 0.0f;
+    }
 
   // TEMPORARY diagnostic-only (see XDiagLog.h): times each source and the mutex re-acquire below, to check
   // empirically whether HardwareInfo_UpdateConnection() (the one documented as able to block on a real network
@@ -930,20 +960,20 @@ bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
   XQWORD diagh_t0 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateCPU(temperaturestr, temperaturelevel, cpuusagelevelnow);
   XQWORD diagh_t1 = XDIAGLOG_NOWUS();
-  HardwareInfo_UpdateMemory(usedtotalstr, ramusagelevelnow);
+  HardwareInfo_UpdateMemory(usedtotalstr, usedstr, totalstr, ramusagelevelnow);
   XQWORD diagh_t2 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateDateTime(datestr, timestr);
   XQWORD diagh_t3 = XDIAGLOG_NOWUS();
-  HardwareInfo_UpdateUptime(monthsstr, hoursstr, yearsstr, secondsstr);
+  HardwareInfo_UpdateVolumes(diskname, diskused, disktotal, disklevel, diskcount);
   XQWORD diagh_t4 = XDIAGLOG_NOWUS();
-  HardwareInfo_UpdateConnection(isconnectednow, statusstr, qualitystr, markstr, ipstr);
+  HardwareInfo_UpdateConnection(isconnectednow, statusstr, qualitystr, markstr, ipstr, publicipstr);
   XQWORD diagh_t5 = XDIAGLOG_NOWUS();
   HardwareInfo_UpdateFooter(equipostr, sostr, uptimestr);
   XQWORD diagh_t6 = XDIAGLOG_NOWUS();
 
   if((diagh_t6 - diagh_t0) > 5000)   // this whole unlocked block took over 5ms
     {
-      XDIAGLOG_WRITE("HWINFO", "cpu=%lluus mem=%lluus datetime=%lluus uptime=%lluus connection=%lluus footer=%lluus total=%lluus",
+      XDIAGLOG_WRITE("HWINFO", "cpu=%lluus mem=%lluus datetime=%lluus volumes=%lluus connection=%lluus footer=%lluus total=%lluus",
                       (unsigned long long)(diagh_t1-diagh_t0), (unsigned long long)(diagh_t2-diagh_t1),
                       (unsigned long long)(diagh_t3-diagh_t2), (unsigned long long)(diagh_t4-diagh_t3),
                       (unsigned long long)(diagh_t5-diagh_t4), (unsigned long long)(diagh_t6-diagh_t5),
@@ -968,16 +998,26 @@ bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
 
     cpu_temperature_str.Set(temperaturestr.Get());
     ram_used_total_str.Set(usedtotalstr.Get());
+    ram_used_str.Set(usedstr.Get());
+    ram_total_str.Set(totalstr.Get());
+    for(int s=0; s<UI_SYSTEM_DISK_SLOT_MAX; s++)
+      {
+        disk_slot_name[s].Set(diskname[s].Get());
+        disk_slot_used[s].Set(diskused[s].Get());
+        disk_slot_total[s].Set(disktotal[s].Get());
+        disk_slot_level[s] = disklevel[s];
+      }
+    disk_slot_count = diskcount;
+    if(disk_slot_count <= 0)                          disk_slot_index = 0;
+     else if(disk_slot_index >= disk_slot_count)      disk_slot_index = 0;
+    HardwareInfo_PublishDiskSlot();
     system_date_str.Set(datestr.Get());
     system_time_str.Set(timestr.Get());
-    uptime_months_str.Set(monthsstr.Get());
-    uptime_hours_str.Set(hoursstr.Get());
-    uptime_years_str.Set(yearsstr.Get());
-    uptime_seconds_str.Set(secondsstr.Get());
     connection_status_str.Set(statusstr.Get());
     connection_quality_str.Set(qualitystr.Get());
     connection_mark_str.Set(markstr.Get());
     local_ip_str.Set(ipstr.Get());
+    public_ip_str.Set(publicipstr.Get());
     footer_equipo_str.Set(equipostr.Get());
     footer_so_str.Set(sostr.Get());
     footer_uptime_str.Set(uptimestr.Get());
@@ -1017,6 +1057,7 @@ bool UI_SYSTEM::HardwareInfo_Apply()
   float temperaturelevel = 0.0f;
   float cpuusagelevelnow = 0.0f;
   float ramusagelevelnow = 0.0f;
+  float diskusagelevelnow = 0.0f;
   bool  isconnectednow   = false;
 
   // TEMPORARY diagnostic-only (see XDiagLog.h): this runs on the MAIN (render) thread -- if acquiring this lock
@@ -1042,6 +1083,7 @@ bool UI_SYSTEM::HardwareInfo_Apply()
         temperaturelevel = cpu_temperaturelevel;
         cpuusagelevelnow = cpu_usagelevel;
         ramusagelevelnow = ram_usagelevel;
+        diskusagelevelnow = disk_usagelevel;
         isconnectednow   = isconnected;
       }
 
@@ -1068,18 +1110,37 @@ bool UI_SYSTEM::HardwareInfo_Apply()
   UI_ELEMENT_PROGRESSBAR* element_bar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("ram_linear_bar"), UI_ELEMENT_TYPE_PROGRESSBAR);
   if(element_bar) element_bar->SetLevel(ramusagelevelnow);
 
+  UI_ELEMENT_PROGRESS_RADIAL* element_diskradial = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("disk_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
+  if(element_diskradial) element_diskradial->SetLevel(diskusagelevelnow);
+
+  UI_ELEMENT_PROGRESSBAR* element_diskbar = (UI_ELEMENT_PROGRESSBAR*)GEN_USERINTERFACE.Element_Get(__L("disk_linear_bar"), UI_ELEMENT_TYPE_PROGRESSBAR);
+  if(element_diskbar) element_diskbar->SetLevel(diskusagelevelnow);
+
   //--------------------------------------------------------------------------------------
   // Status glyph. Two images sit stacked at the same spot in the layout (a green disc with a
   // tick, and a red disc with a cross); only one of them is ever visible. This replaces the
   // previous "recolour a round form" approach, which stopped being visible once Draw_Form
   // started preferring background-color over color for its fill.
+  // Must dirty both images (and the badge slot) on every apply: SetVisible alone does not
+  // rebuild the area, so switching to offline left an empty slot / missing badge_ko (BlueStacks).
   //--------------------------------------------------------------------------------------
 
   UI_ELEMENT* element_iconok = GEN_USERINTERFACE.Element_Get(__L("connection_icon_ok"), UI_ELEMENT_TYPE_IMAGE);
-  if(element_iconok) element_iconok->SetVisible(isconnectednow);
+  if(element_iconok)
+    {
+      element_iconok->SetVisible(isconnectednow);
+      GEN_USERINTERFACE.Elements_SetToRedraw(element_iconok, false);
+    }
 
   UI_ELEMENT* element_iconko = GEN_USERINTERFACE.Element_Get(__L("connection_icon_ko"), UI_ELEMENT_TYPE_IMAGE);
-  if(element_iconko) element_iconko->SetVisible(!isconnectednow);
+  if(element_iconko)
+    {
+      element_iconko->SetVisible(!isconnectednow);
+      GEN_USERINTERFACE.Elements_SetToRedraw(element_iconko, false);
+    }
+
+  UI_ELEMENT* element_badgeslot = GEN_USERINTERFACE.Element_Get(__L("conn-badge-slot"), UI_ELEMENT_TYPE_FORM);
+  if(element_badgeslot) GEN_USERINTERFACE.Elements_SetToRedraw(element_badgeslot, false);
 
   //--------------------------------------------------------------------------------------
   // The status line follows the same semantics: green when up, red when down.
@@ -1101,16 +1162,18 @@ bool UI_SYSTEM::HardwareInfo_Apply()
       __L("footer_so_text")          ,
       __L("footer_uptime_text")      ,
       __L("cpu_temp_value")          ,
-      __L("ram_used_total")          ,
+      __L("ram_used")                ,
+      __L("ram_total")               ,
+      __L("disk_used")               ,
+      __L("disk_total")              ,
+      __L("disk_caption")            ,
+      __L("disk_index")              ,
       __L("system_date")             ,
       __L("system_time")             ,
-      __L("uptime_months_value")     ,
-      __L("uptime_hours_value")      ,
-      __L("uptime_years_value")      ,
-      __L("uptime_seconds_value")    ,
       __L("connection_status_text")  ,
       __L("connection_quality")      ,
       __L("connection_ip")           ,
+      __L("connection_public_ip")    ,
     };
 
   for(int c=0; c<(int)(sizeof(maskedtextelements)/sizeof(maskedtextelements[0])); c++)
@@ -1205,19 +1268,21 @@ bool UI_SYSTEM::HardwareInfo_UpdateCPU(XSTRING& outtemperature, float& outtemper
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, float& outusagelevel)
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, XSTRING& outused, XSTRING& outtotal, float& outusagelevel)
 * @brief      Reads RAM usage from GEN_XSYSTEM.
 * @note       Called from HardwareInfo_Compute(), on the background thread. Writes only into its
 *             own output parameters -- no member/UI_ELEMENT access here anymore.
 * @ingroup    EXAMPLES
 *
-* @param[out] outusedtotal : formatted RAM used / total, selecting KB, MB, GB or TB from total memory.
+* @param[out] outusedtotal : formatted "used / total" (legacy single line).
+* @param[out] outused : used amount alone ("5.4 GB") for the hierarchical RAM card line.
+* @param[out] outtotal : "/ total" suffix ("/ 8.0 GB") muted next to outused in the mockup.
 * @param[out] outusagelevel : RAM used percent, for ram_usage_radial and ram_linear_bar.
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, float& outusagelevel)
+bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, XSTRING& outused, XSTRING& outtotal, float& outusagelevel)
 {
   XDWORD total = 0;
   XDWORD free  = 0;
@@ -1246,14 +1311,16 @@ bool UI_SYSTEM::HardwareInfo_UpdateMemory(XSTRING& outusedtotal, float& outusage
           memoryunit    = __L("MB");
         }
 
-      outusedtotal.Format(__L("%.1f %s / %.1f %s"),
-                          (double)used  / memorydivisor, memoryunit,
-                          (double)total / memorydivisor, memoryunit);
+      outused.Format(__L("%.1f %s"), (double)used / memorydivisor, memoryunit);
+      outtotal.Format(__L("/ %.1f %s"), (double)total / memorydivisor, memoryunit);
+      outusedtotal.Format(__L("%s %s"), outused.Get(), outtotal.Get());
 
       outusagelevel = (float)(((double)used / (double)total) * 100.0);
     }
    else
     {
+      outused.Set(__L("--"));
+      outtotal.Set(__L("/ --"));
       outusedtotal.Set(__L("-- / --"));
     }
 
@@ -1292,33 +1359,150 @@ bool UI_SYSTEM::HardwareInfo_UpdateDateTime(XSTRING& outdate, XSTRING& outtime)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateUptime(XSTRING& outmonths, XSTRING& outhours, XSTRING& outyears, XSTRING& outseconds)
-* @brief      Builds the "Tiempo de funcionamiento del sistema" figures out of the elapsed apptimer.
-* @note       Called from HardwareInfo_Compute(), on the background thread.
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateVolumes(XSTRING* outname, XSTRING* outused, XSTRING* outtotal, float* outusagelevel, int& outcount)
+* @brief      Enumerates mounted volumes (up to UI_SYSTEM_DISK_SLOT_MAX) for the disk card carousel.
+* @note       Prefer fixed (system root first), then removable, then other volumes with capacity.
 * @ingroup    EXAMPLES
 *
-* @param[out] outmonths  : elapsed months, as text.
-* @param[out] outhours   : elapsed hours, as text.
-* @param[out] outyears   : elapsed years, as text.
-* @param[out] outseconds : elapsed seconds, as text.
+* @param[out] outname : per-slot captions.
+* @param[out] outused : per-slot used text.
+* @param[out] outtotal : per-slot "/ total" text.
+* @param[out] outusagelevel : per-slot used percent.
+* @param[out] outcount : number of filled slots.
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateUptime(XSTRING& outmonths, XSTRING& outhours, XSTRING& outyears, XSTRING& outseconds)
+bool UI_SYSTEM::HardwareInfo_UpdateVolumes(XSTRING* outname, XSTRING* outused, XSTRING* outtotal, float* outusagelevel, int& outcount)
 {
-  if(!xtimer) return false;
+  outcount = 0;
 
-  XQWORD allseconds = xtimer->GetMeasureSeconds();
+  if(!outname || !outused || !outtotal || !outusagelevel) return false;
 
-  XDWORD years   = XDATETIME_SECONDSYEARS(allseconds);
-  XDWORD months  = XDATETIME_SECONDSMONTHS(allseconds);
-  XDWORD hours   = (XDWORD)(allseconds / XDATETIME_SECONDSINHOUR);
+  for(int s=0; s<UI_SYSTEM_DISK_SLOT_MAX; s++)
+    {
+      outname[s].Set(__L("--"));
+      outused[s].Set(__L("--"));
+      outtotal[s].Set(__L("/ --"));
+      outusagelevel[s] = 0.0f;
+    }
 
-  outyears.Format  (__L("%d"), years);
-  outmonths.Format (__L("%d"), months);
-  outhours.Format  (__L("%d"), hours);
-  outseconds.Format(__L("%d"), (XDWORD)allseconds);
+  XVECTOR<XSYSTEM_VOLUMEINFO*> volumes;
+
+  if(!GEN_XSYSTEM.GetVolumesInfo(volumes) || !volumes.GetSize())
+    {
+      volumes.DeleteContents();
+      return true;
+    }
+
+  XVECTOR<XSYSTEM_VOLUMEINFO*> ordered;
+
+  for(int pass=0; pass<4; pass++)
+    {
+      for(XDWORD c=0; c<volumes.GetSize(); c++)
+        {
+          XSYSTEM_VOLUMEINFO* volume = volumes.Get(c);
+          if(!volume) continue;
+          if(!volume->GetTotalBytes()) continue;
+          if(ordered.GetSize() >= (XDWORD)UI_SYSTEM_DISK_SLOT_MAX) break;
+
+          XSYSTEM_VOLUME_TYPE type = volume->GetType();
+          bool accept = false;
+
+          switch(pass)
+            {
+              case 0 : if(type == XSYSTEM_VOLUME_TYPE_FIXED)
+                         {
+                           XSTRING* name = volume->GetName();
+                           if(name && name->Get())
+                             {
+                               if(!name->Compare(__L("/"), true)) accept = true;
+                                else if(name->GetSize() >= 2)
+                                 {
+                                   XCHAR drive = name->Get()[0];
+                                   XCHAR colon = name->Get()[1];
+                                   if((drive == __C('C') || drive == __C('c')) && colon == __C(':')) accept = true;
+                                 }
+                             }
+                         }
+                       break;
+
+              case 1 : if(type == XSYSTEM_VOLUME_TYPE_FIXED) accept = true;
+                       break;
+
+              case 2 : if(type == XSYSTEM_VOLUME_TYPE_REMOVABLE) accept = true;
+                       break;
+
+              default: accept = true;
+                       break;
+            }
+
+          if(!accept) continue;
+
+          bool already = false;
+          for(XDWORD o=0; o<ordered.GetSize(); o++)
+            {
+              if(ordered.Get(o) == volume) { already = true; break; }
+            }
+          if(already) continue;
+
+          ordered.Add(volume);
+        }
+    }
+
+  for(XDWORD c=0; c<ordered.GetSize() && c<(XDWORD)UI_SYSTEM_DISK_SLOT_MAX; c++)
+    {
+      XSYSTEM_VOLUMEINFO* volume = ordered.Get(c);
+      if(!volume) continue;
+
+      XQWORD totalbytes = volume->GetTotalBytes();
+      XQWORD usedbytes  = volume->GetUsedBytes();
+
+      double       divisor = 1.0;
+      const XCHAR* unit    = __L("B");
+
+      if(totalbytes >= (1024ULL * 1024ULL * 1024ULL * 1024ULL))
+        {
+          divisor = 1024.0 * 1024.0 * 1024.0 * 1024.0;
+          unit    = __L("TB");
+        }
+      else if(totalbytes >= (1024ULL * 1024ULL * 1024ULL))
+        {
+          divisor = 1024.0 * 1024.0 * 1024.0;
+          unit    = __L("GB");
+        }
+      else if(totalbytes >= (1024ULL * 1024ULL))
+        {
+          divisor = 1024.0 * 1024.0;
+          unit    = __L("MB");
+        }
+      else if(totalbytes >= 1024ULL)
+        {
+          divisor = 1024.0;
+          unit    = __L("KB");
+        }
+
+      outused[c].Format(__L("%.1f %s"), (double)usedbytes / divisor, unit);
+      outtotal[c].Format(__L("/ %.1f %s"), (double)totalbytes / divisor, unit);
+      outusagelevel[c] = volume->GetUsedPercent();
+
+      XSTRING* name  = volume->GetName();
+      XSTRING* label = volume->GetLabel();
+
+      if(name && name->GetSize())
+        {
+          if(label && label->GetSize()) outname[c].Format(__L("%s  %s"), name->Get(), label->Get());
+           else                         outname[c].Set(name->Get());
+        }
+       else
+        {
+          outname[c].Set(__L("Volumen"));
+        }
+
+      outcount++;
+    }
+
+  volumes.DeleteContents();
 
   return true;
 }
@@ -1326,12 +1510,86 @@ bool UI_SYSTEM::HardwareInfo_UpdateUptime(XSTRING& outmonths, XSTRING& outhours,
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip)
-* @brief      Checks the internet connection status, its latency and the local IP address.
+* @fn         bool UI_SYSTEM::HardwareInfo_PublishDiskSlot()
+* @brief      Copies the currently selected disk slot into the display strings / level.
+* @note       Caller must already hold hardwareinfomutex (Compute publish or CycleDisk).
+* @ingroup    EXAMPLES
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::HardwareInfo_PublishDiskSlot()
+{
+  if(disk_slot_count <= 0)
+    {
+      disk_slot_index = 0;
+      disk_used_str.Set(__L("--"));
+      disk_total_str.Set(__L("/ --"));
+      disk_caption_str.Set(__L("Sin volumen"));
+      disk_index_str.Set(__L("0 / 0"));
+      disk_usagelevel = 0.0f;
+      return true;
+    }
+
+  if(disk_slot_index < 0 || disk_slot_index >= disk_slot_count) disk_slot_index = 0;
+
+  disk_used_str.Set(disk_slot_used[disk_slot_index].Get());
+  disk_total_str.Set(disk_slot_total[disk_slot_index].Get());
+  disk_caption_str.Set(disk_slot_name[disk_slot_index].Get());
+  disk_usagelevel = disk_slot_level[disk_slot_index];
+  disk_index_str.Format(__L("%d / %d"), disk_slot_index + 1, disk_slot_count);
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::HardwareInfo_CycleDisk(int delta)
+* @brief      Rotates the disk card to the previous (-1) or next (+1) volume slot.
+* @ingroup    EXAMPLES
+*
+* @param[in]  delta : -1 = left/prev, +1 = right/next.
+*
+* @return     bool : true if the selection changed (or was republished); otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::HardwareInfo_CycleDisk(int delta)
+{
+  if(!hardwareinfomutex) return false;
+  if(!delta) return false;
+
+  hardwareinfomutex->Lock();
+
+    if(disk_slot_count <= 0)
+      {
+        hardwareinfomutex->UnLock();
+        return false;
+      }
+
+    int next = disk_slot_index + delta;
+    while(next < 0)                  next += disk_slot_count;
+    while(next >= disk_slot_count)   next -= disk_slot_count;
+
+    disk_slot_index = next;
+    HardwareInfo_PublishDiskSlot();
+    hardwareinfo_haspending = true;
+
+  hardwareinfomutex->UnLock();
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip, XSTRING& outpublicip)
+* @brief      Checks the internet connection status, its latency, the local IP and the public WAN IP.
 * @note       Called from HardwareInfo_Compute(), on the background thread. This is the one most
 *             worth having moved off the main thread: diocheckinternetconnection->Check() can
-*             block on a real network check. No UI_ELEMENT touched here anymore -- outisconnected
-*             is what HardwareInfo_Apply() uses to drive the status glyph/colour on the main thread.
+*             block on a real network check, and GEN_DIOPUBLICINTERNETIP.Get() can block on HTTP.
+*             No UI_ELEMENT touched here anymore -- outisconnected is what HardwareInfo_Apply()
+*             uses to drive the status glyph/colour on the main thread.
 * @ingroup    EXAMPLES
 *
 * @param[out] outisconnected : true if the connection check succeeded.
@@ -1339,11 +1597,12 @@ bool UI_SYSTEM::HardwareInfo_UpdateUptime(XSTRING& outmonths, XSTRING& outhours,
 * @param[out] outquality : "Conexi\u00F3n estable" / "Sin conexi\u00F3n".
 * @param[out] outmark : "OK" / "--".
 * @param[out] outip : formatted "IP: x.x.x.x" (or "IP: --" if unavailable).
+* @param[out] outpublicip : formatted "IP P\u00FAblica: x.x.x.x" (or "--" if unavailable).
 *
 * @return     bool : true if the operation is successful; otherwise false.
 *
 *---------------------------------------------------------------------------------------------------------------------*/
-bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip)
+bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip, XSTRING& outpublicip)
 {
   outisconnected = false;
 
@@ -1351,6 +1610,15 @@ bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& out
     {
       outisconnected = diocheckinternetconnection->Check();
     }
+
+  // Set to 1 to force the offline card (badge_ko + "Desconectado") on a machine that has WAN,
+  // e.g. to match BlueStacks layout. Leave 0 for real DIOCHECKINTERNETCONNECTION results.
+  #ifndef UI_SYSTEM_SIMULATE_OFFLINE
+  #define UI_SYSTEM_SIMULATE_OFFLINE 0
+  #endif
+  #if UI_SYSTEM_SIMULATE_OFFLINE
+  outisconnected = false;
+  #endif
 
   if(outisconnected)
     {
@@ -1392,6 +1660,43 @@ bool UI_SYSTEM::HardwareInfo_UpdateConnection(bool& outisconnected, XSTRING& out
     {
       outip.Set(__L("IP: --"));
     }
+
+  //--------------------------------------------------------------------------------------
+  // Public WAN IP via GEN_DIOPUBLICINTERNETIP (ipecho.net). Cached while connected so the
+  // background poll does not re-hit HTTP on every HardwareInfo tick.
+  //--------------------------------------------------------------------------------------
+
+  outpublicip.Set(__L("IP P\u00FAblica: --"));
+
+  #ifdef DIO_PUBLICINTERNETIP_ACTIVE
+  {
+    static XSTRING cachedpublicip;
+    static bool    havecachedpublicip = false;
+
+    if(!outisconnected)
+      {
+        havecachedpublicip = false;
+        cachedpublicip.Empty();
+      }
+     else
+      {
+        if(!havecachedpublicip)
+          {
+            XSTRING fetched;
+            if(GEN_DIOPUBLICINTERNETIP.Get(fetched) && (!fetched.IsEmpty()))
+              {
+                cachedpublicip.Set(fetched.Get());
+                havecachedpublicip = true;
+              }
+          }
+
+        if(havecachedpublicip)
+          {
+            outpublicip.Format(__L("IP P\u00FAblica: %s"), cachedpublicip.Get());
+          }
+      }
+  }
+  #endif
 
   return true;
 }
@@ -1515,6 +1820,19 @@ bool UI_SYSTEM::UserInterface_ElementSelected(UI_ELEMENT* element)
   if(!elementname.Compare(__L("nav-alertas-btn")       , true)) UserInterface_SelectSection(UI_SYSTEM_SECTIONID_ALERTAS);
   if(!elementname.Compare(__L("nav-configuracion-btn") , true)) UserInterface_SelectSection(UI_SYSTEM_SECTIONID_CONFIGURACION);
 
+  // Disk carousel buttons (empty hit targets over icons — same idea as nav-*-btn).
+  if((!elementname.Compare(__L("disk_prev_btn"), true)))
+    {
+      HardwareInfo_CycleDisk(-1);
+      HardwareInfo_Apply();
+    }
+
+  if((!elementname.Compare(__L("disk_next_btn"), true)))
+    {
+      HardwareInfo_CycleDisk(+1);
+      HardwareInfo_Apply();
+    }
+
   return true;
 }
 
@@ -1615,16 +1933,19 @@ bool UI_SYSTEM::UserInterface_ChangeLiteralText(UI_ELEMENT_TEXT* element_text, X
 
   if(!maskvalue->Compare(__L("CPU_TEMPERATURE")   , true))  maskresolved->Set(cpu_temperature_str.Get());
   if(!maskvalue->Compare(__L("RAM_USED_TOTAL")    , true))  maskresolved->Set(ram_used_total_str.Get());
+  if(!maskvalue->Compare(__L("RAM_USED")          , true))  maskresolved->Set(ram_used_str.Get());
+  if(!maskvalue->Compare(__L("RAM_TOTAL")         , true))  maskresolved->Set(ram_total_str.Get());
+  if(!maskvalue->Compare(__L("DISK_USED")         , true))  maskresolved->Set(disk_used_str.Get());
+  if(!maskvalue->Compare(__L("DISK_TOTAL")        , true))  maskresolved->Set(disk_total_str.Get());
+  if(!maskvalue->Compare(__L("DISK_CAPTION")      , true))  maskresolved->Set(disk_caption_str.Get());
+  if(!maskvalue->Compare(__L("DISK_INDEX")        , true))  maskresolved->Set(disk_index_str.Get());
   if(!maskvalue->Compare(__L("SYSTEM_DATE")       , true))  maskresolved->Set(system_date_str.Get());
   if(!maskvalue->Compare(__L("SYSTEM_TIME")       , true))  maskresolved->Set(system_time_str.Get());
-  if(!maskvalue->Compare(__L("UPTIME_MONTHS")     , true))  maskresolved->Set(uptime_months_str.Get());
-  if(!maskvalue->Compare(__L("UPTIME_HOURS")      , true))  maskresolved->Set(uptime_hours_str.Get());
-  if(!maskvalue->Compare(__L("UPTIME_YEARS")      , true))  maskresolved->Set(uptime_years_str.Get());
-  if(!maskvalue->Compare(__L("UPTIME_SECONDS")    , true))  maskresolved->Set(uptime_seconds_str.Get());
   if(!maskvalue->Compare(__L("CONNECTION_STATUS") , true))  maskresolved->Set(connection_status_str.Get());
   if(!maskvalue->Compare(__L("CONNECTION_QUALITY"), true))  maskresolved->Set(connection_quality_str.Get());
   if(!maskvalue->Compare(__L("CONNECTION_MARK")   , true))  maskresolved->Set(connection_mark_str.Get());
   if(!maskvalue->Compare(__L("LOCAL_IP")          , true))  maskresolved->Set(local_ip_str.Get());
+  if(!maskvalue->Compare(__L("PUBLIC_IP")         , true))  maskresolved->Set(public_ip_str.Get());
   if(!maskvalue->Compare(__L("FOOTER_EQUIPO")     , true))  maskresolved->Set(footer_equipo_str.Get());
   if(!maskvalue->Compare(__L("FOOTER_SO")         , true))  maskresolved->Set(footer_so_str.Get());
   if(!maskvalue->Compare(__L("FOOTER_UPTIME")     , true))  maskresolved->Set(footer_uptime_str.Get());
@@ -1803,20 +2124,34 @@ void UI_SYSTEM::Clean()
   cpu_temperaturelevel            = 0.0f;
   cpu_usagelevel                  = 0.0f;
   ram_usagelevel                  = 0.0f;
+  disk_usagelevel                 = 0.0f;
+  disk_slot_count                 = 0;
+  disk_slot_index                 = 0;
   isconnected                     = false;
+
+  for(int s=0; s<UI_SYSTEM_DISK_SLOT_MAX; s++)
+    {
+      disk_slot_level[s] = 0.0f;
+      disk_slot_name[s].Empty();
+      disk_slot_used[s].Empty();
+      disk_slot_total[s].Empty();
+    }
 
   cpu_temperature_str.Empty();
   ram_used_total_str.Empty();
+  ram_used_str.Empty();
+  ram_total_str.Empty();
+  disk_used_str.Empty();
+  disk_total_str.Empty();
+  disk_caption_str.Empty();
+  disk_index_str.Empty();
   system_date_str.Empty();
   system_time_str.Empty();
-  uptime_months_str.Empty();
-  uptime_hours_str.Empty();
-  uptime_years_str.Empty();
-  uptime_seconds_str.Empty();
   connection_status_str.Empty();
   connection_quality_str.Empty();
   connection_mark_str.Empty();
   local_ip_str.Empty();
+  public_ip_str.Empty();
   footer_equipo_str.Empty();
   footer_so_str.Empty();
   footer_uptime_str.Empty();

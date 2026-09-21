@@ -119,6 +119,7 @@ enum UI_SYSTEM_BUTTONS
 
 
 #define UI_SYSTEM_HARDWAREINFO_UPDATEPERIOD_SECONDS         1
+#define UI_SYSTEM_DISK_SLOT_MAX                           16
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
@@ -200,10 +201,12 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
     bool                            HardwareInfo_RequestForced              ();
 
     bool                            HardwareInfo_UpdateCPU                  (XSTRING& outtemperature, float& outtemperaturelevel, float& outusagelevel);
-    bool                            HardwareInfo_UpdateMemory               (XSTRING& outusedtotal, float& outusagelevel);
+    bool                            HardwareInfo_UpdateMemory               (XSTRING& outusedtotal, XSTRING& outused, XSTRING& outtotal, float& outusagelevel);
+    bool                            HardwareInfo_UpdateVolumes              (XSTRING* outname, XSTRING* outused, XSTRING* outtotal, float* outusagelevel, int& outcount);
+    bool                            HardwareInfo_PublishDiskSlot            ();
+    bool                            HardwareInfo_CycleDisk                  (int delta);
     bool                            HardwareInfo_UpdateDateTime             (XSTRING& outdate, XSTRING& outtime);
-    bool                            HardwareInfo_UpdateUptime               (XSTRING& outmonths, XSTRING& outhours, XSTRING& outyears, XSTRING& outseconds);
-    bool                            HardwareInfo_UpdateConnection           (bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip);
+    bool                            HardwareInfo_UpdateConnection           (bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip, XSTRING& outpublicip);
     bool                            HardwareInfo_UpdateFooter               (XSTRING& outequipo, XSTRING& outso, XSTRING& outuptime);
 
     bool                            UserInterface_ElementSelected           (UI_ELEMENT* element);
@@ -249,7 +252,11 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
 
     float                           cpu_temperaturelevel;                    
     float                           cpu_usagelevel;                          
-    float                           ram_usagelevel;                          
+    float                           ram_usagelevel;
+    float                           disk_usagelevel;
+    float                           disk_slot_level[UI_SYSTEM_DISK_SLOT_MAX];
+    int                             disk_slot_count;
+    int                             disk_slot_index;
     bool                            isconnected;                             
 
     
@@ -263,16 +270,22 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
     
     XSTRING                         cpu_temperature_str;
     XSTRING                         ram_used_total_str;
+    XSTRING                         ram_used_str;
+    XSTRING                         ram_total_str;
+    XSTRING                         disk_slot_name[UI_SYSTEM_DISK_SLOT_MAX];
+    XSTRING                         disk_slot_used[UI_SYSTEM_DISK_SLOT_MAX];
+    XSTRING                         disk_slot_total[UI_SYSTEM_DISK_SLOT_MAX];
+    XSTRING                         disk_used_str;
+    XSTRING                         disk_total_str;
+    XSTRING                         disk_caption_str;
+    XSTRING                         disk_index_str;
     XSTRING                         system_date_str;
     XSTRING                         system_time_str;
-    XSTRING                         uptime_months_str;
-    XSTRING                         uptime_hours_str;
-    XSTRING                         uptime_years_str;
-    XSTRING                         uptime_seconds_str;
     XSTRING                         connection_status_str;
     XSTRING                         connection_quality_str;
     XSTRING                         connection_mark_str;
     XSTRING                         local_ip_str;
+    XSTRING                         public_ip_str;
     XSTRING                         footer_equipo_str;
     XSTRING                         footer_so_str;
     XSTRING                         footer_uptime_str;

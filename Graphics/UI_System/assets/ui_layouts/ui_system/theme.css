@@ -32,6 +32,7 @@
   --accent-purple:  191,148,255;
   --accent-red:     248,81,73;
   --accent-green:   63,185,80;
+  --accent-amber:   210,153,34;
 
   /* Depth. Black at a low percentage reads as a shadow; over ~60% it reads as a solid block. */
   --shadow-card:    0,0,0,40;

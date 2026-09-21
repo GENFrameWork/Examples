@@ -240,12 +240,33 @@ form.flex-col {
   flex-direction:   column;
 }
 
+/* Temperatura CPU — body de la tarjeta.
+   margin-left / margin-right iguales = las dos franjas amarillas (aire hasta el
+   borde de la tarjeta). El width del card-body en el XML debe ser
+   376 - margin-left - margin-right (aqui 328). column-gap bajo para que quepan
+   termometro(180) + gap + right-col(142) sin scroll. La columna right-col sigue
+   a 142 para no cortar "Temperatura actual". */
+form.temp-card-body {
+  margin-top:    5;
+  margin-left:   24;
+  margin-right:  24;
+  column-gap:    6;
+  align-items:   center;
+}
+
+/* Columna valor/chip/caption: solo centrado interno; el aire derecho lo pone
+   temp-card-body.margin-right, no un margin aqui (evita scroll). */
+form.temp-right-col {
+  margin-right: 0;
+}
+
 form.inner-box {
   background-color: var(--inner-bg);
   border-color:     var(--inner-line);
   border-width:     1;
+  /* PunchRoundRectCornerTips restores card backdrop into AABB tips after RoundRect. */
   border-radius:    12;
-  padding:          12;
+  padding:          0;
 }
 
 /* Thin 1px rule inside an inner-box (e.g. the date/time card), a plain "form" with no border of its
@@ -335,6 +356,7 @@ form.nav-row:selected .nav-label { color: var(--accent-blue); }
 
 .value-temp    { color: var(--accent-red);    }
 .value-ram     { color: var(--accent-purple); }
+.value-disk    { color: var(--accent-amber);  }
 .value-date    { color: var(--text-strong); text-align: center; }
 .value-time    { color: var(--accent-blue); text-align: center; }
 .value-ok      { color: var(--accent-green);  }
@@ -346,8 +368,8 @@ form.nav-row:selected .nav-label { color: var(--accent-blue); }
    many digits the live percentage has. */
 .ring-value    { color: var(--text-strong); text-align: center; }
 
-.tile-label    { color: var(--text-muted);    }
-.tile-value    { color: var(--accent-green);  }
+.tile-label    { color: var(--text-muted); text-align: center; }
+.tile-value    { color: var(--accent-green); text-align: center; }
 
 .label         { color: var(--text-muted);    }
 .label-dim     { color: var(--text-muted);    }
@@ -364,28 +386,51 @@ form.nav-row:selected .nav-label { color: var(--accent-blue); }
    disc -- that washed the hollow centre and froze a hard colour block behind the "%" caption).
    -------------------------------------------------------------------------------------------------- */
 
-.ring-cpu   { color: var(--accent-blue);    background-color: 33,38,45; box-shadow: 0 0 18 56,139,253,22; }
-.ring-ram   { color: var(--accent-purple);  background-color: 33,38,45; box-shadow: 0 0 18 191,148,255,22; }
-.bar-ram    { color: var(--accent-purple);  background-color: 33,38,45; }
-
-/* Uptime tiles: 4 equal columns under the card (CSS Grid). Each column is a nested flex column so
-   label/value texts are arranged AFTER the grid places the column (RunLayout's single flow pass).
-   Background matches --inner-bg so the tile block reads as an inset panel like the mockup. */
-form.uptime-grid {
-  display:               grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap:            0;
-  background-color:      var(--inner-bg);
-  border-color:          var(--inner-line);
-  border-width:          1;
-  border-radius:         12;
+/* Uso actual de CPU — contenedor. Hijos desde arriba; cada uno con su margin-top. */
+form.cpu-usage-body {
+  margin-top:          0;
+  margin-left:         72;
+  align-items:         center;
+  justify-content:     flex-start;
 }
 
-form.uptime-col {
-  display:          flex;
-  flex-direction:   column;
-  align-items:      center;
-  justify-content:  center;
+/* Anillo CPU: color/track + POSICION VERTICAL respecto a la tarjeta.
+   margin-top = bajo el header. Negativos suben el circulo. */
+.ring-cpu {
+  color:             var(--accent-blue);
+  background-color:  33,38,45;
+  margin-top:        -55;
+}
+
+/* Slot del texto "Uso actual" (form, no el text): POSICION VERTICAL.
+   margin-top funciona igual que en .ring-cpu (el margin-bottom anterior no
+   movia el texto con space-between). Negativos suben; positivos bajan. */
+form.cpu-usage-caption {
+  margin-top: 50;
+}
+
+.ring-ram   { color: var(--accent-purple);  background-color: 33,38,45; }
+.bar-ram    { color: var(--accent-purple);  background-color: 33,38,45; }
+.ring-disk  { color: var(--accent-amber);   background-color: 33,38,45; }
+.bar-disk   { color: var(--accent-amber);   background-color: 33,38,45; }
+
+form.disk-nav {
   background-color: 0,0,0,0;
   border-width:     0;
+}
+
+button.disk-nav-hit {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  border-radius:    24;
+  transition:       120;
+}
+
+button.disk-nav-hit:hover {
+  background-color: 255,255,255,20;
+}
+
+.disk-nav-index {
+  color:      var(--text-muted);
+  text-align: center;
 }
