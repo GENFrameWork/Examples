@@ -119,7 +119,11 @@ enum UI_SYSTEM_BUTTONS
 
 
 #define UI_SYSTEM_HARDWAREINFO_UPDATEPERIOD_SECONDS         1
+#define UI_SYSTEM_CHART_REBUILD_PERIOD_SECONDS            2
 #define UI_SYSTEM_DISK_SLOT_MAX                           16
+
+#define UI_SYSTEM_CPUHISTORY_MAX                          30
+#define UI_SYSTEM_RAMHISTORY_MAX                          30
 
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
@@ -209,6 +213,10 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
     bool                            HardwareInfo_UpdateConnection           (bool& outisconnected, XSTRING& outstatus, XSTRING& outquality, XSTRING& outmark, XSTRING& outip, XSTRING& outpublicip);
     bool                            HardwareInfo_UpdateFooter               (XSTRING& outequipo, XSTRING& outso, XSTRING& outuptime);
 
+    bool                            CpuHistoryChart_PushSample              (float cpuusagepercent);
+    bool                            HistoryChart_Apply                      (bool forced = false);
+    bool                            DashboardSlot_ApplySection              (UI_SYSTEM_SECTIONID sectionID);
+
     bool                            UserInterface_ElementSelected           (UI_ELEMENT* element);
     bool                            UserInterface_ChangeLiteralText         (UI_ELEMENT_TEXT* element_text, XSTRING* maskvalue, XSTRING* maskresult);
     bool                            UserInterface_CFGChromes                (GRPSCREEN* screen);    
@@ -289,6 +297,17 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
     XSTRING                         footer_equipo_str;
     XSTRING                         footer_so_str;
     XSTRING                         footer_uptime_str;
+
+    float                           cpuhistory_samples[UI_SYSTEM_CPUHISTORY_MAX];
+    int                             cpuhistory_count;
+    int                             cpuhistory_write;
+
+    float                           ramhistory_samples[UI_SYSTEM_RAMHISTORY_MAX];
+    int                             ramhistory_count;
+    int                             ramhistory_write;
+
+    XQWORD                          lastchartrebuild_second;
+    bool                            chart_force_rebuild;
 
 };
 

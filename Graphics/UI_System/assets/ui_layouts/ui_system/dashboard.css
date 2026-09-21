@@ -394,19 +394,35 @@ form.cpu-usage-body {
   justify-content:     flex-start;
 }
 
-/* Anillo CPU: color/track + POSICION VERTICAL respecto a la tarjeta.
-   margin-top = bajo el header. Negativos suben el circulo. */
+/* Anillo CPU: color/track + POSICION VERTICAL respecto a la tarjeta. */
 .ring-cpu {
   color:             var(--accent-blue);
   background-color:  33,38,45;
   margin-top:        -55;
 }
 
-/* Slot del texto "Uso actual" (form, no el text): POSICION VERTICAL.
-   margin-top funciona igual que en .ring-cpu (el margin-bottom anterior no
-   movia el texto con space-between). Negativos suben; positivos bajan. */
 form.cpu-usage-caption {
   margin-top: 50;
+}
+
+/* Historico (StatisticsChart): mismo panel opaco que Fase 1 (contraste SVG+raster). */
+form.cpu-history-body {
+  margin-top:          8;
+  margin-left:         24;
+  align-items:         center;
+  justify-content:     flex-start;
+}
+
+statisticschart.cpu-history-chart,
+element.cpu-history-chart {
+  background-color:  var(--card-bg);
+  color:             var(--accent-blue);
+  border-width:      0;
+}
+
+text.history-empty {
+  color:             var(--text-muted);
+  text-align:        center;
 }
 
 .ring-ram   { color: var(--accent-purple);  background-color: 33,38,45; }

@@ -14,9 +14,11 @@
 
   CONTRACT WITH UI_System.cpp  (do not rename these without updating the source)
   =============================================================================
-    cpu_temp_bar            progressimage   SetLevel()
-    cpu_usage_radial        progressradial  SetLevel()
-    ram_usage_radial        progressradial  SetLevel()
+    cpu_temp_bar            progressimage      SetLevel()
+    cpu_usage_radial        progressradial     SetLevel()
+    cpu_history_chart       statisticschart    HistoryChart_Apply()  CPU / Memoria / Disco
+    card_datetime           form               default in same slot (always unless chart)
+    ram_usage_radial        progressradial     SetLevel()
     ram_linear_bar          progressbar     SetLevel()
     disk_usage_radial       progressradial  SetLevel()
     disk_linear_bar         progressbar     SetLevel()
@@ -296,24 +298,7 @@
         <element name="cpu_hdr_icon" type="image" width="48" height="48">icons/card_cpu.svg</element>
         <element name="cpu_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="19">Uso actual de CPU</element>
       </element>
-      <!-- Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies"): nested into "card_cpu_usage" as a
-           real XML child, "card-body" (flex column, the ring then its caption stacked below). Ring's own
-           "xpos=center"/"ypos=center" child ("cpu_usage_value") is the SEPARATE, legacy, per-widget centering
-           mechanism (UI_ELEMENT_TYPE_ALIGN_CENTER, resolved by CalculePosition() independently of this card-level
-           Flexbox) ; untouched, unaffected by "cpu_usage_radial" becoming a flex ITEM one level up.
-           margin: LEFT=58 (694-636, the ring's original left offset from the card's own left edge, re-centred
-           per the comment kept below), UP=22 (152-130: the ring's original top edge minus the header row's
-           bottom edge, 12+48). "cpu_usage_caption"'s own margin (measured against the original xpos/ypos, same
-           "estimate, not exact ; text height is a runtime measurement" caveat as "card_cpu_temp"'s own comment)
-           places it just under the ring, offset right of the ring's own left edge to stay centred under it. -->
-      <!-- Explicit width/height for the same reason "card_cpu_temp"'s own "card-body" comment explains: a plain
-           "form" flex wrapper never auto-sizes to its children (CalculateBoundaryLine_Form() always returns
-           false), so an un-sized one reads as 0x0 to UI_LAYOUTENGINE and wrongly shrinks its real children.
-           260 matches the ring's own width (the taller/wider of the two children); 290 = 260 (ring) + 7 (gap) +
-           ~19 (caption's real height, sizefont=15), rounded up generously. -->
-      <!-- CPU usage: ring without glow, smaller than the old 260 fill, proportions vs proto
-           (centered ring + larger % + caption with clearer gap under the ring). -->
-      <!-- Ring+% arriba (cerca del header); "Uso actual" anclado abajo del body (proto). -->
+      <!-- Restored Phase-pre-0 radial card (kept for production CPU usage). Chart moved to card_cpu_history. -->
       <element name="card-body" type="form" class="flex-col cpu-usage-body" width="232" height="310">
         <element name="cpu_usage_radial" type="progressradial" class="ring-cpu"
                  width="220" height="220"
@@ -384,37 +369,32 @@
         </element>
       </element>
     </element>
+    <!-- Bottom-left slot: Fecha/hora is ALWAYS present. History stacks on top for CPU / Memoria / Disco. -->
     <element name="card_datetime"   type="form" class="card" xpos="238"  ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="dt_hdr_icon" type="image" width="48" height="48">icons/card_calendar.svg</element>
         <element name="dt_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Fecha y hora del sistema</element>
       </element>
-
-      <!-- Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies"): "datetime_box" and its content
-           (date, divider, time, caption icon+text) are now real XML children of "card_datetime" instead of 5
-           root-level siblings hand-positioned in absolute canvas coordinates. "datetime_box"'s own margin
-           (28,0,54,0) reproduces its original absolute geometry: LEFT=28 (266-238, its original left offset
-           from the card's own left edge), UP=54 (114-60: its original top edge minus the header row's bottom
-           edge, 12+48). "display: flex; flex-direction: column;" makes it, itself, a real flex container for
-           the date/divider/time/caption-row it now hosts ; its existing "padding: 12" (form.inner-box in
-           dashboard.css) already insets every child from its own border the same way "form.card"'s padding
-           would have, if it had ever had a real child before this sub-step (see that rule's own comment).
-           Every child's own margin-top below is a reasonable STARTING estimate, same caveat as
-           "card_cpu_temp"'s own comment: a "text" element's real rendered height is a runtime, font-metrics-
-           dependent measurement this XML cannot see statically, tuned against Abraham's real Windows build. -->
-      <!-- datetime_box: column flex with align-items/justify-content center so date, time and caption
-           sit in the middle of the sub-card (prototype), not left-stacked under flex-start defaults. -->
       <element name="datetime_box" type="form" class="inner-box" style="margin: 36,0,0,24; display: flex; flex-direction: column; align-items: center; justify-content: center;" width="328" height="200">
         <element name="system_date" type="text" class="value-date" style="text-align: center;" sizefont="32">#[SYSTEM_DATE]</element>
-
         <element name="dt_divider"  type="form" class="hr-line" style="margin: 10,0,0,0;" width="200" height="1"></element>
-
         <element name="system_time" type="text" class="value-time" style="margin: 8,0,0,0; text-align: center;" sizefont="36">#[SYSTEM_TIME]</element>
-
         <element name="cap-row" type="form" class="flex-row" style="margin: 28,0,0,0; align-items: center; justify-content: center;" width="304" height="36">
           <element name="dt_cap_icon" type="image" width="36" height="36">icons/cap_clock.svg</element>
           <element name="dt_cap_text" type="text"  class="label-dim" style="margin: 0,0,0,6;" sizefont="13">Hora local del sistema</element>
         </element>
+      </element>
+    </element>
+    <element name="card_cpu_history" type="form" class="card" xpos="238"  ypos="828" width="376" height="346">
+      <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
+        <element name="cpuhist_hdr_icon" type="image" width="48" height="48">icons/card_cpu.svg</element>
+        <element name="cpuhist_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Historico de CPU</element>
+      </element>
+      <element name="card-body" type="form" class="flex-col cpu-history-body" width="328" height="270">
+        <element name="cpu_history_chart" type="statisticschart" class="cpu-history-chart"
+                 chart="lines" title="CPU %" width="328" height="270"></element>
+        <element name="history_empty_text" type="text" class="label-dim history-empty"
+                 xpos="center" ypos="center" sizefont="15" visible="0">--</element>
       </element>
     </element>
     <element name="card_disk"       type="form" class="card" xpos="636"  ypos="828" width="376" height="346">

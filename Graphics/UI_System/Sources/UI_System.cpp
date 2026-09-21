@@ -72,7 +72,6 @@
 #include "GRPScreen.h"
 #include "GRPViewPort.h"
 #include "GRPXEvent.h"
-
 #include "INPManager.h"
 
 #include "UI_XEvent.h"
@@ -84,6 +83,7 @@
 #include "UI_Element_ProgressBar.h"
 #include "UI_Element_ProgressRadial.h"
 #include "UI_Element_ProgressImage.h"
+#include "UI_Element_StatisticsChart.h"
 #include "UI_SkinCanvas.h"
 
 #include "APPFlowLog.h"
@@ -1027,6 +1027,17 @@ bool UI_SYSTEM::HardwareInfo_Compute(bool forced)
     ram_usagelevel       = ramusagelevelnow;
     isconnected          = isconnectednow;
 
+    // Phase 2 StatisticsChart: keep rings of recent CPU / RAM % for the history card.
+    // Mutex is already held for the publish block; do not call CpuHistoryChart_PushSample() here
+    // (that helper locks again).
+    cpuhistory_samples[cpuhistory_write] = cpuusagelevelnow;
+    cpuhistory_write = (cpuhistory_write + 1) % UI_SYSTEM_CPUHISTORY_MAX;
+    if(cpuhistory_count < UI_SYSTEM_CPUHISTORY_MAX) cpuhistory_count++;
+
+    ramhistory_samples[ramhistory_write] = ramusagelevelnow;
+    ramhistory_write = (ramhistory_write + 1) % UI_SYSTEM_RAMHISTORY_MAX;
+    if(ramhistory_count < UI_SYSTEM_RAMHISTORY_MAX) ramhistory_count++;
+
     lastupdatehardwareinfo_second = actualsecond;
     hardwareinfo_haspending       = true;
 
@@ -1103,6 +1114,9 @@ bool UI_SYSTEM::HardwareInfo_Apply()
 
   UI_ELEMENT_PROGRESS_RADIAL* element_cpu = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("cpu_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
   if(element_cpu) element_cpu->SetLevel(cpuusagelevelnow);
+
+  // Phase 2: push samples into the GEN statisticschart widget (throttled; main thread only).
+  HistoryChart_Apply(false);
 
   UI_ELEMENT_PROGRESS_RADIAL* element_radial = (UI_ELEMENT_PROGRESS_RADIAL*)GEN_USERINTERFACE.Element_Get(__L("ram_usage_radial"), UI_ELEMENT_TYPE_PROGRESSRADIAL);
   if(element_radial) element_radial->SetLevel(ramusagelevelnow);
@@ -1183,6 +1197,272 @@ bool UI_SYSTEM::HardwareInfo_Apply()
     }
 
   return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::CpuHistoryChart_PushSample(float cpuusagepercent)
+* @brief      Appends one CPU usage sample to the history ring (thread-safe).
+* @ingroup    EXAMPLES
+*
+* @param[in]  cpuusagepercent : CPU usage percent 0..100.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::CpuHistoryChart_PushSample(float cpuusagepercent)
+{
+  if(!hardwareinfomutex) return false;
+
+  hardwareinfomutex->Lock();
+
+    cpuhistory_samples[cpuhistory_write] = cpuusagepercent;
+    cpuhistory_write = (cpuhistory_write + 1) % UI_SYSTEM_CPUHISTORY_MAX;
+    if(cpuhistory_count < UI_SYSTEM_CPUHISTORY_MAX) cpuhistory_count++;
+
+  hardwareinfomutex->UnLock();
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::DashboardSlot_ApplySection(UI_SYSTEM_SECTIONID sectionID)
+* @brief      Swaps the bottom-left slot: Fecha/hora by default; StatisticsChart on CPU / Memoria / Disco.
+* @note       MAIN THREAD ONLY.
+* @ingroup    EXAMPLES
+*
+* @param[in]  sectionID : Active sidebar section.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::DashboardSlot_ApplySection(UI_SYSTEM_SECTIONID sectionID)
+{
+  // Fecha/hora stays visible forever in this slot. CPU / Memoria / Disco overlay the chart on top.
+  bool showhistory = ((sectionID == UI_SYSTEM_SECTIONID_CPU)     ||
+                      (sectionID == UI_SYSTEM_SECTIONID_MEMORIA) ||
+                      (sectionID == UI_SYSTEM_SECTIONID_DISCO));
+
+  UI_ELEMENT* element_datetime = GEN_USERINTERFACE.Element_Get(__L("card_datetime")   , UI_ELEMENT_TYPE_FORM);
+  UI_ELEMENT* element_history  = GEN_USERINTERFACE.Element_Get(__L("card_cpu_history"), UI_ELEMENT_TYPE_FORM);
+
+  if(!element_datetime || !element_history) return false;
+
+  // Base layer: never hide Fecha/hora (avoids empty AABB when chart overlay fails or is torn down).
+  if(!element_datetime->IsVisible())
+    {
+      element_datetime->SetVisible(true);
+    }
+  element_datetime->SetTransitionStateShow(UI_ELEMENT_TRANSITION_STATE_SHOW_NONE);
+
+  if(showhistory)
+    {
+      element_history->SetVisible(true);
+      element_history->SetTransitionStateShow(UI_ELEMENT_TRANSITION_STATE_SHOW_NONE);
+      element_history->SetMustReDraw(true);
+      GEN_USERINTERFACE.Elements_SetToRedraw(element_history, true);
+    }
+   else
+    {
+      // Hide chart without RestoreOnHide (that would stomp the date card). Repaint Fecha/hora instead.
+      if(element_history->IsVisible())
+        {
+          element_history->SetVisible(false);
+        }
+      element_history->SetMustReDraw(false);
+      element_history->SetTransitionStateShow(UI_ELEMENT_TRANSITION_STATE_SHOW_NONE);
+
+      element_datetime->SetMustReDraw(true);
+      GEN_USERINTERFACE.Elements_SetToRedraw(element_datetime, true);
+
+      UI_ELEMENT* element_date = GEN_USERINTERFACE.Element_Get(__L("system_date"), UI_ELEMENT_TYPE_TEXT);
+      UI_ELEMENT* element_time = GEN_USERINTERFACE.Element_Get(__L("system_time"), UI_ELEMENT_TYPE_TEXT);
+      if(element_date) GEN_USERINTERFACE.Elements_SetToRedraw(element_date, false);
+      if(element_time) GEN_USERINTERFACE.Elements_SetToRedraw(element_time, false);
+    }
+
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::HistoryChart_Apply(bool forced)
+* @brief      Phase 2: feeds the GEN statisticschart from CPU/RAM rings or disk slots according to
+*             the active sidebar section. Throttled to UI_SYSTEM_CHART_REBUILD_PERIOD_SECONDS unless forced
+*             (section change). Empty state shows "--" until enough samples exist.
+* @note       MAIN THREAD ONLY (touches GEN_USERINTERFACE). Fecha/hora is the default slot card;
+*             chart for CPU / Memoria / Disco (never leave the slot empty).
+* @ingroup    EXAMPLES
+*
+* @param[in]  forced : True to bypass the rebuild throttle.
+*
+* @return     bool : true if the operation is successful; otherwise false.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::HistoryChart_Apply(bool forced)
+{
+  #ifndef GRP_STATISTICSCHARS_ACTIVE
+  DashboardSlot_ApplySection(currentsectionID);
+  return false;
+  #else
+
+  if(!hardwareinfomutex) return false;
+
+  DashboardSlot_ApplySection(currentsectionID);
+
+  UI_SYSTEM_SECTIONID section = currentsectionID;
+  bool showhistory = ((section == UI_SYSTEM_SECTIONID_CPU)     ||
+                      (section == UI_SYSTEM_SECTIONID_MEMORIA) ||
+                      (section == UI_SYSTEM_SECTIONID_DISCO));
+  if(!showhistory) return true;
+
+  XQWORD actualsecond = 0;
+  if(xtimer) actualsecond = xtimer->GetMeasureSeconds();
+
+  hardwareinfomutex->Lock();
+    bool force = forced || chart_force_rebuild;
+    if((!force) && ((actualsecond - lastchartrebuild_second) < UI_SYSTEM_CHART_REBUILD_PERIOD_SECONDS))
+      {
+        hardwareinfomutex->UnLock();
+        return true;
+      }
+    chart_force_rebuild = false;
+  hardwareinfomutex->UnLock();
+
+  UI_ELEMENT_STATISTICSCHART* element_chart = (UI_ELEMENT_STATISTICSCHART*)GEN_USERINTERFACE.Element_Get(__L("cpu_history_chart"), UI_ELEMENT_TYPE_STATISTICSCHART);
+  if(!element_chart) return false;
+
+  UI_ELEMENT_TEXT* element_hdr = (UI_ELEMENT_TEXT*)GEN_USERINTERFACE.Element_Get(__L("cpuhist_hdr_text"), UI_ELEMENT_TYPE_TEXT);
+  UI_ELEMENT*      element_empty = GEN_USERINTERFACE.Element_Get(__L("history_empty_text"), UI_ELEMENT_TYPE_TEXT);
+
+  float samples[UI_SYSTEM_CPUHISTORY_MAX];
+  int   count = 0;
+  int   write = 0;
+  bool  isempty = true;
+
+  switch(section)
+    {
+      case UI_SYSTEM_SECTIONID_MEMORIA :
+        {
+          if(element_hdr) element_hdr->GetText()->Set(__L("Consumo de memoria"));
+
+          element_chart->SetChartType(UI_ELEMENT_STATISTICSCHART_TYPE_AREA);
+          element_chart->SetTitle(__L("RAM %"));
+          if(element_chart->GetColor()) element_chart->GetColor()->SetFromString(__L("163,113,247"));
+
+          hardwareinfomutex->Lock();
+            count = ramhistory_count;
+            write = ramhistory_write;
+            for(int c=0; c<count; c++)
+              {
+                int index = write - count + c;
+                if(index < 0) index += UI_SYSTEM_RAMHISTORY_MAX;
+                samples[c] = ramhistory_samples[index % UI_SYSTEM_RAMHISTORY_MAX];
+              }
+          hardwareinfomutex->UnLock();
+
+          if(count >= 2)
+            {
+              isempty = false;
+              element_chart->SetSerieFromSamples(__L("RAM"), samples, count, 163, 113, 247);
+            }
+           else
+            {
+              element_chart->ClearData();
+            }
+        }
+        break;
+
+      case UI_SYSTEM_SECTIONID_DISCO :
+        {
+          if(element_hdr) element_hdr->GetText()->Set(__L("Uso por volumen"));
+
+          element_chart->SetTitle(__L("Disco %"));
+          if(element_chart->GetColor()) element_chart->GetColor()->SetFromString(__L("210,153,34"));
+
+          XSTRING labelcopies[UI_SYSTEM_DISK_SLOT_MAX];
+          XCHAR*  labels[UI_SYSTEM_DISK_SLOT_MAX];
+          float   values[UI_SYSTEM_DISK_SLOT_MAX];
+          int     nslots = 0;
+
+          hardwareinfomutex->Lock();
+            nslots = disk_slot_count;
+            if(nslots > UI_SYSTEM_DISK_SLOT_MAX) nslots = UI_SYSTEM_DISK_SLOT_MAX;
+            for(int c=0; c<nslots; c++)
+              {
+                labelcopies[c].Set(disk_slot_name[c].Get());
+                labels[c] = labelcopies[c].Get();
+                values[c] = disk_slot_level[c];
+              }
+          hardwareinfomutex->UnLock();
+
+          if(nslots >= 1)
+            {
+              isempty = false;
+              element_chart->SetColumnsFromValues(__L("Disco"), labels, values, nslots, 210, 153, 34);
+            }
+           else
+            {
+              element_chart->ClearData();
+            }
+        }
+        break;
+
+      case UI_SYSTEM_SECTIONID_CPU :
+      default :
+        {
+          if(element_hdr) element_hdr->GetText()->Set(__L("Historico de CPU"));
+
+          element_chart->SetChartType(UI_ELEMENT_STATISTICSCHART_TYPE_LINES);
+          element_chart->SetTitle(__L("CPU %"));
+          if(element_chart->GetColor()) element_chart->GetColor()->SetFromString(__L("56,139,253"));
+
+          hardwareinfomutex->Lock();
+            count = cpuhistory_count;
+            write = cpuhistory_write;
+            for(int c=0; c<count; c++)
+              {
+                int index = write - count + c;
+                if(index < 0) index += UI_SYSTEM_CPUHISTORY_MAX;
+                samples[c] = cpuhistory_samples[index % UI_SYSTEM_CPUHISTORY_MAX];
+              }
+          hardwareinfomutex->UnLock();
+
+          if(count >= 2)
+            {
+              isempty = false;
+              element_chart->SetSerieFromSamples(__L("CPU"), samples, count, 56, 139, 253);
+            }
+           else
+            {
+              element_chart->ClearData();
+            }
+        }
+        break;
+    }
+
+  if(element_empty)
+    {
+      element_empty->SetVisible(isempty);
+      GEN_USERINTERFACE.Elements_SetToRedraw(element_empty, false);
+    }
+
+  if(element_hdr) GEN_USERINTERFACE.Elements_SetToRedraw(element_hdr, false);
+
+  element_chart->SetMustReDraw(true);
+  GEN_USERINTERFACE.Elements_SetToRedraw(element_chart, false);
+
+  hardwareinfomutex->Lock();
+    lastchartrebuild_second = actualsecond;
+  hardwareinfomutex->UnLock();
+
+  return true;
+
+  #endif
 }
 
 
@@ -1894,6 +2174,9 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
 
   currentsectionID = sectionID;
 
+  chart_force_rebuild = true;
+  HistoryChart_Apply(true);
+
   return true;
 }
 
@@ -2135,6 +2418,23 @@ void UI_SYSTEM::Clean()
       disk_slot_name[s].Empty();
       disk_slot_used[s].Empty();
       disk_slot_total[s].Empty();
+    }
+
+  cpuhistory_count                = 0;
+  cpuhistory_write                = 0;
+  ramhistory_count                = 0;
+  ramhistory_write                = 0;
+  lastchartrebuild_second         = 0;
+  chart_force_rebuild             = true;
+
+  for(int c=0; c<UI_SYSTEM_CPUHISTORY_MAX; c++)
+    {
+      cpuhistory_samples[c] = 0.0f;
+    }
+
+  for(int c=0; c<UI_SYSTEM_RAMHISTORY_MAX; c++)
+    {
+      ramhistory_samples[c] = 0.0f;
     }
 
   cpu_temperature_str.Empty();
