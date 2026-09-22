@@ -755,6 +755,10 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
   // Fase 1/3/4/5/6 UIScale: design canvas = dashboard authoring size.
   // Priority: GEN_UI_SCALE env (test override, disables autofit) → autofit from window → manual ini scale.
   // Fase 6: min hit-target 44 design px (expand IsWithin only; paint AABB unchanged).
+  //
+  // Track P / Fase 5.3 Android: keep canvas at design size (Ini_Graphics SetWidth/Height). Fit to the
+  // native surface is GLES letterbox + MapWindowToCanvas — NOT UIScale Present. Force scale=1.0 so
+  // Windows-style Present stays identity and we never double-letterbox.
   {
     UI_LAYOUT* dashboard = GEN_USERINTERFACE.Layouts_Get(__L("dashboard"));
     if(dashboard)
@@ -765,7 +769,7 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
         bool   useenv     = false;
         double demoscale  = (double)APPFLOW_CFG.GetUIScale();
         bool   doautofit  = APPFLOW_CFG.GetUIScaleAutofit();
-        #ifdef _WIN32
+
         {
           char* envscale = getenv("GEN_UI_SCALE");
           if(envscale && envscale[0])
@@ -775,8 +779,20 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
               doautofit = false;
             }
         }
-        #endif
 
+        #ifdef ANDROID
+        (void)doautofit;
+        (void)useenv;
+        // Platform letterbox = autofit. Keep UIScale Present off (scale 1).
+        dashboard->SetUIScaleAutofit(true);
+        dashboard->SetUIScaleForFit(UI_LAYOUT_UISCALE_DEFAULT);
+        GEN_USERINTERFACE.UIScale_PrepareLayout(dashboard);
+        if(screen)
+          {
+            XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[UI_System] Android UIScale=1.0 design=%dx%d (GLES letterbox fits device)"),
+                              dashboard->GetDesignWidth(), dashboard->GetDesignHeight());
+          }
+        #else
         if(doautofit && !useenv)
           {
             GEN_USERINTERFACE.Layouts_ApplyFitUIScale(dashboard);
@@ -785,6 +801,7 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
           {
             GEN_USERINTERFACE.Layouts_SetUIScale(dashboard, demoscale);
           }
+        #endif
 
         SubscribeEvent(GRPXEVENT_TYPE_SCREEN_CHANGESIZE, screen);
       }
@@ -2447,6 +2464,23 @@ void UI_SYSTEM::HandleEvent_Graphics(GRPXEVENT* event)
                                                 UI_LAYOUT* dashboard = GEN_USERINTERFACE.Layouts_Get(__L("dashboard"));
                                                 if(dashboard && dashboard->IsUIScaleActive())
                                                   {
+                                                    #ifdef ANDROID
+                                                    // Track P: keep design canvas; GLES letterbox follows the new
+                                                    // native surface. Do not ApplyFitUIScale against a resized
+                                                    // framebuffer (would fight platform present + MapWindowToCanvas).
+                                                    if(screen->GetWidth() != dashboard->GetDesignWidth() ||
+                                                       screen->GetHeight() != dashboard->GetDesignHeight())
+                                                      {
+                                                        screen->SetWidth(dashboard->GetDesignWidth());
+                                                        screen->SetHeight(dashboard->GetDesignHeight());
+                                                      }
+                                                    dashboard->SetUIScaleAutofit(true);
+                                                    dashboard->SetUIScaleForFit(UI_LAYOUT_UISCALE_DEFAULT);
+                                                    GEN_USERINTERFACE.UIScale_PrepareLayout(dashboard);
+                                                    GEN_USERINTERFACE.Update();
+                                                    XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[UI_System] Android config: keep design %dx%d UIScale=1.0"),
+                                                                      dashboard->GetDesignWidth(), dashboard->GetDesignHeight());
+                                                    #else
                                                     if(dashboard->GetUIScaleAutofit())
                                                       {
                                                         GEN_USERINTERFACE.Layouts_ApplyFitUIScale(dashboard);
@@ -2466,6 +2500,7 @@ void UI_SYSTEM::HandleEvent_Graphics(GRPXEVENT* event)
                                                                       dashboard->GetUIScale(),
                                                                       dashboard->GetUIScaleAutofit() ? 1 : 0,
                                                                       screen->GetWidth(), screen->GetHeight());
+                                                    #endif
                                                   }
                                               }
                                               break;

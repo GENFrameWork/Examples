@@ -2,81 +2,39 @@
    UI_System - "Monitor del Sistema" presentation layer
    Companion stylesheet for dashboard.xml
 
-   SCOPE
+   SCOPE (alineado al motor — Track D.1; detalle en GEN/UserInterface/GEN_UI_CSS_Lite_Roadmap.md)
    -----
-   Only the BASE properties of UI_ELEMENT reach a stylesheet, because UI_MANAGER::GetLayoutElement_Base
-   is the only builder that reads the cascaded UI_STYLE bag. Type-specific attributes (sizefont, level,
-   thickness, gradientcolor, gradientmode, linecolor, roundcap, startangle, sweepangle, allocationtext,
-   progressrect, imageempty/imagefull, offsetstart/offsetend) are read straight from the XML node by the
-   per-type builders and are ignored here. They live in dashboard.xml.
+   UI_MANAGER::GetLayoutElement_Base lee el bag cascaded para propiedades BASE de UI_ELEMENT.
+   Builders tipados leen claves propias (level, thickness, gradient*, imageempty/full, offset*,
+   startangle, sweepangle, ...) desde XML y/o el mismo bag cuando el builder las honra.
 
        reachable : color, background-color / bckgrdcolor, roundrect, visible, scroll, margin,
                    padding(+longhands), border-width, border-color, border-radius(+longhands),
                    box-shadow, direction, role, blink, transition, extra, xpos, ypos, width, height,
-                   text-align / textalignment, display (flex only), flex-direction, justify-content,
-                   gap / row-gap / column-gap, flex-wrap, align-content, align-items, flex-grow,
-                   flex-shrink, flex-basis, align-self
-       flexbox   : Phase 4 ("migración del ejemplo") -- "display: flex" makes an element a real flex
-                   container, laid out by the NEW engine (UI_LAYOUTENGINE, wired into UI_MANAGER::
-                   CreateLayouts() -- see its own SCOPE ADDENDUM) instead of the legacy absolute xpos/
-                   ypos math. ".footer" below is the first user of it. Grid (grid-template-columns/rows,
-                   grid-column/row) is NOT wired yet -- a later sub-step of this same increment.
-                   "margin" accepts the CSS 4-value TOP,RIGHT,BOTTOM,LEFT form when a stylesheet is present,
-                   plus longhands margin-top/right/bottom/left (override the shorthand, same as padding-*).
-                   Layouts WITHOUT a stylesheet keep the historical LEFT,RIGHT,UP,DOWN 4-value order and
-                   ignore margin-* longhands so UI_Options stays pixel-identical.
-       painted   : border-* / box-shadow are consumed by Draw_Form only (its fill/stroke/shadow geometry
-                   comes straight from the element's own VisibleRect -- see UI_SKINCANVAS::Draw_Form()).
-                   "padding" is NOT one of them, despite reading like it should be: it never reaches
-                   Draw_Form at all (confirmed by reading the function in full, Phase 4 card-header sub-
-                   step). Its only real effect anywhere in the engine is as a LAYOUT inset for CHILDREN --
-                   UI_SKINCANVAS::CalculePosition()'s "father padding delta" step for legacy-positioned
-                   nested elements, and UI_LAYOUTENGINE::BuildTree()/PackFlexLine() for flex ones -- so on
-                   an element with no children (every ".card"/".inner-box"/".tile" panel before this sub-
-                   step) it is a pure no-op, silently inert rather than drawn as an inset border. On other
-                   widget types border-* / box-shadow parse cleanly and are simply not drawn yet. text-align
-                   is consumed by Draw_Text only (UI_ELEMENT_TEXT); on other widget types it parses cleanly and is
-                   simply not read. "sizefont" (and "font-family": GEN's canvas loads a single vector
-                   font per skin, so there is no per-element font switch to reach) stay XML-only.
-       units     : xpos/ypos/width/height accept a trailing "%" (Step 4, relative units), resolved
-                   against the father element's own already-resolved box. Only meaningful on an
-                   element that actually HAS a father (an XML child of another <element>, not a
-                   direct child of <layout>) -- ".footer"'s children (Phase 4) are the first real
-                   nesting in this file, but they are flex items positioned by the new engine, not by
-                   xpos/ypos/"%", so "%" itself is still undemonstrated here; it stays documented for
-                   the day something needs it.
-       inline    : a "style=" XML attribute (Step 6) is a per-element override that wins over both the
-                   plain XML attributes and any rule in THIS file (class, id, or :root) -- the same
-                   precedence HTML's own inline style has. It takes the same bare "prop: value; ..."
-                   grammar a rule body uses (see UI_CSSPARSER::ParseInlineDeclarations()), so anything
-                   reachable through a class here is reachable inline too. var(...) is NOT expanded
-                   inside "style=" (it is parsed standalone, outside this stylesheet's variable table),
-                   so an inline override needs a literal value. dashboard.xml's "brand_version" element
-                   uses it to demonstrate the override winning over ".brand-dim".
-       transition : "transition: <milliseconds>" (Step 7) tweens color/background-color between their old and
-                   new value whenever a pseudo-class state change (":hover"/":preselect", ":selected",
-                   ":active"/":disabled") re-resolves them, instead of jumping instantly. Deliberately minimal,
-                   like the rest of this parser's grammar: one duration, no property list, no easing keyword --
-                   see UI_ELEMENT::ReapplyStyleVisual()/UpdateTransition(). 0 (unset) is the original instant
-                   jump, unchanged for every rule that does not opt in. Applied to ".nav-hit" below, so the
-                   hover wash now fades in/out instead of snapping.
+                   text-align / textalignment, display (flex | grid), flex-*, gap / row-gap /
+                   column-gap, align-*, justify-*, flex-grow/shrink/basis, align-self,
+                   grid-template-columns/rows, grid-column-span / grid-row-span,
+                   sizefont / font-size (Text + TextBox vía cascade + Reapply en Text)
+       flexbox   : "display: flex" -> UI_LAYOUTENGINE (CreateLayouts RunLayout). Footer, sidebar-nav,
+                   card-header, card bodies usan flex.
+       grid      : "display: grid" + grid-template-* / spans están en el MISMO RunLayout
+                   (ApplyFlowLayoutRecursive). Demo: form.cards-grid (fila superior de 3 cards).
+                   Layouts XML-only ignoran grid (sin stylesheet / sin display:grid en el árbol).
+       margin    : Con stylesheet = CSS TRBL + longhands. Sin stylesheet = LEFT,RIGHT,UP,DOWN histórico
+                   (UI_Options) y sin longhands.
+       painted   : border fill/stroke + radius: Draw_Form (y menús que delegan). box-shadow: form;
+                   image/animation (DrawElementBoxShadow); progressradial = halo anular.
+                   padding = solo inset de layout para hijos (no marco pintado).
+                   text-align: Draw_Text. font-family: un vector por skin (no hay switch por elemento).
+       units     : % / em / rem / vw / vh / calc en xpos/ypos/width/height/padding/margin/gap/
+                   row-gap/column-gap/flex-basis cuando hay stylesheet (Fase 8 + Track L.2).
+                   Resolución en CARGA (no resize).
+       inline    : style="" gana sobre XML y reglas de hoja. var(...) NO se expande en inline.
+       transition : "transition: <ms>" en color/background-color ante :hover/:selected/...
 
-   PITFALL, LEARNED THE HARD WAY (Phase 4, card-header sub-step): this whole header is one single C-style
-   comment block, and prose that happens to contain an asterisk immediately followed by a slash ends that
-   block right there -- silently. Everything after (including the "at-import" line a few lines below) got fed
-   to the RULE parser instead, which choked its way through real content as malformed "rules" until re-syncing
-   much later in the file -- with the net effect that EVERY var(--x) reference resolved to nothing (theme.css's
-   ":root" never got absorbed) and every card/footer/sidebar panel, and every ".card-title" caption, painted
-   fully transparent. No error surfaced anywhere visible (XTRACE_PRINTCOLOR's warnings are compiled in but
-   were not visible in this build). The culprit was the phrase "border-", asterisk, slash, "box-shadow" a few
-   paragraphs up, fixed by spacing it out like its other use two lines above that. Moral: never let an asterisk
-   and a slash land adjacent in prose inside a CSS comment -- this note is itself written to avoid the same
-   trap, describing the two characters in words rather than typing them next to each other.
+   PITFALL: en comentarios CSS, no escribir asterisco pegado a barra (cierra el bloque en silencio).
 
-   ALPHA CONVENTION
-   ----------------
-   In "R,G,B,A" the fourth component is a PERCENTAGE 0..100 (over 100 clamps to opaque). "R,G,B" with
-   no fourth component is opaque. "#RRGGBBAA" takes a true 0..255 byte.
+   ALPHA: R,G,B,A con A = porcentaje 0..100. "#RRGGBBAA" = byte 0..255.
    =================================================================================================== */
 
 
@@ -151,7 +109,10 @@ form.sidebar-nav {
   border-width:     0;
   display:          flex;
   flex-direction:   column;
-  row-gap:          8;
+  /* Track L.2: rem gap (0.5rem = 8px at --root-font-size 16). Same visual as former row-gap: 8. */
+  row-gap:          0.5rem;
+  /* Fase 8 demo: rem padding against :root --root-font-size. */
+  padding-top:      0.5rem;
 }
 
 form.nav-row {
@@ -344,15 +305,17 @@ button.nav-hit:selected:hover {
   background-color: var(--nav-band);
 }
 
-.nav-label   { color: var(--text-muted);   }
+.nav-label   { color: var(--text-muted); font-size: 16; }
 form.nav-row:selected .nav-label { color: var(--accent-blue); }
 
 .brand       { color: var(--text-normal);  }
 .brand-dim   { color: var(--text-muted);   }
 
 
-/* Colour and sizefont. sizefont may also come from CSS (Phase 1 typed Reapply on Text). */
-.card-title    { color: var(--text-strong);  }
+/* Track D.2: titles via CSS font-size (alias of sizefont). Default 17; -lg 19; -sm 16. */
+.card-title     { color: var(--text-strong); font-size: 17; }
+.card-title-lg  { font-size: 19; }
+.card-title-sm  { font-size: 16; }
 
 .value-temp    { color: var(--accent-red);    }
 .value-ram     { color: var(--accent-purple); }
@@ -375,7 +338,21 @@ form.nav-row:selected .nav-label { color: var(--accent-blue); }
 .label-dim     { color: var(--text-muted);    }
 .label-accent  { color: var(--accent-blue);   }
 
-.foot          { color: var(--text-muted);    }
+.foot          { color: var(--text-muted); font-size: 14; }
+
+
+/* --- Cards grid (Track L.1) -----------------------------------------------------------------------
+   Top row of three equal cards. Bottom row stays absolute (datetime/history share one slot).
+   -------------------------------------------------------------------------------------------------- */
+
+form.cards-grid {
+  background-color: 0,0,0,0;
+  border-width:     0;
+  display:          grid;
+  grid-template-columns: 376 376 376;
+  /* Track L.2: 1.375rem = 22px at root 16 (same as former column-gap: 22). */
+  column-gap:       1.375rem;
+}
 
 
 /* --- Progress widgets -----------------------------------------------------------------------------

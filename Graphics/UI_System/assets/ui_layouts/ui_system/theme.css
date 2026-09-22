@@ -36,4 +36,7 @@
 
   /* Depth. Black at a low percentage reads as a shadow; over ~60% it reads as a solid block. */
   --shadow-card:    0,0,0,40;
+
+  /* Fase 8: rem basis for UI_LENGTH (GetLayoutElement_Base BuildLengthContext). Plain number in design px. */
+  --root-font-size: 16;
 }

@@ -74,42 +74,42 @@
       <element name="nav-resumen-row" type="form" class="nav-row" style="margin: 24,0,0,0;" width="210" height="48">
         <element name="nav-resumen-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-resumen-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_home.svg</element>
-        <element name="nav-resumen-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Resumen</element>
+        <element name="nav-resumen-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Resumen</element>
       </element>
       <element name="nav-cpu-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-cpu-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-cpu-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_cpu.svg</element>
-        <element name="nav-cpu-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">CPU</element>
+        <element name="nav-cpu-text" type="text" class="nav-label" style="margin: 0,0,0,14;">CPU</element>
       </element>
       <element name="nav-memoria-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-memoria-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-memoria-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_memory.svg</element>
-        <element name="nav-memoria-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Memoria</element>
+        <element name="nav-memoria-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Memoria</element>
       </element>
       <element name="nav-red-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-red-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-red-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_net.svg</element>
-        <element name="nav-red-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Red</element>
+        <element name="nav-red-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Red</element>
       </element>
       <element name="nav-disco-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-disco-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-disco-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_disk.svg</element>
-        <element name="nav-disco-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Disco</element>
+        <element name="nav-disco-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Disco</element>
       </element>
       <element name="nav-procesos-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-procesos-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-procesos-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_process.svg</element>
-        <element name="nav-procesos-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Procesos</element>
+        <element name="nav-procesos-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Procesos</element>
       </element>
       <element name="nav-alertas-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-alertas-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-alertas-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_alert.svg</element>
-        <element name="nav-alertas-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Alertas</element>
+        <element name="nav-alertas-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Alertas</element>
       </element>
       <element name="nav-configuracion-row" type="form" class="nav-row" width="210" height="48">
         <element name="nav-configuracion-accent" type="form" class="nav-accent-mark" width="4" height="48"></element>
         <element name="nav-configuracion-icon" type="image" style="margin: 0,0,0,22;" width="44" height="44">icons/nav_config.svg</element>
-        <element name="nav-configuracion-text" type="text" class="nav-label" style="margin: 0,0,0,14;" sizefont="16">Configuracion</element>
+        <element name="nav-configuracion-text" type="text" class="nav-label" style="margin: 0,0,0,14;">Configuracion</element>
       </element>
       </element>
     </element>
@@ -171,14 +171,14 @@
          quietly shrinking every icon and gap to disguise it. -->
     <element name="footer_bg" type="form" class="footer" xpos="0" ypos="900" width="1440" height="44">
       <element name="footer_equipo_icon" type="image" style="margin: 0,0,0,24; flex-shrink: 0;"   width="36" height="36">icons/foot_computer.svg</element>
-      <element name="footer_equipo_text" type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_EQUIPO]</element>
+      <element name="footer_equipo_text" type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;">#[FOOTER_EQUIPO]</element>
       <element name="footer_so_icon"     type="image" style="margin: 0,0,0,28; flex-shrink: 0;"  width="36" height="36">icons/foot_gear.svg</element>
-      <element name="footer_so_text"     type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_SO]</element>
+      <element name="footer_so_text"     type="text"  class="foot" style="margin: 0,0,0,16; flex-shrink: 0;">#[FOOTER_SO]</element>
       <element name="footer_divider_2"   type="form"  class="hr-line" style="margin: 0,0,0,28; flex-shrink: 0;" width="1" height="24"></element>
       <!-- Invisible spacer pushes Uptime flush right; padding-left:210 on form.footer keeps Equipo clear of the sidebar. -->
       <element name="footer_spacer"      type="form"  style="flex-grow: 1; background-color: 0,0,0,0; border-width: 0;" width="0" height="0"></element>
       <element name="footer_uptime_icon" type="image" style="margin: 0,0,0,0; flex-shrink: 0;"  width="36" height="36">icons/foot_clock.svg</element>
-      <element name="footer_uptime_text" type="text"  class="foot" style="margin: 0,24,0,16; flex-shrink: 0;" sizefont="14">#[FOOTER_UPTIME]</element>
+      <element name="footer_uptime_text" type="text"  class="foot" style="margin: 0,24,0,16; flex-shrink: 0;">#[FOOTER_UPTIME]</element>
     </element>
 
     <!-- Cards
@@ -207,11 +207,13 @@
          center" on "card-header" (row height = the icon's own 48, "form.card-header" in dashboard.css) replaces
          each title's individually hand-picked ypos, using the SAME real-height-independent centering already
          proven for "footer"/"nav-row" rather than re-deriving one more hand-pinned offset per card. -->
-    <element name="card_cpu_temp"   type="form" class="card" xpos="238"  ypos="460" width="376" height="390">
+    <!-- Track L.1: top row of three cards in CSS grid (same 238/460 origin; 376 cols + 22 gap). -->
+    <element name="cards_grid" type="form" class="cards-grid" xpos="238" ypos="460" width="1172" height="390">
+    <element name="card_cpu_temp"   type="form" class="card" width="376" height="390">
       <!-- Longhands demo (Phase C): same inset as margin: 12,0,0,24 -- easier to read than TRBL shorthand. -->
       <element name="card-header" type="form" class="card-header" style="margin-top: 12; margin-left: 24;" width="328" height="48">
         <element name="temp_hdr_icon" type="image" width="48" height="48">icons/card_thermo.svg</element>
-        <element name="temp_hdr_text" type="text" class="card-title" style="margin-left: 10;" sizefont="19">Temperatura CPU</element>
+        <element name="temp_hdr_text" type="text" class="card-title card-title-lg" style="margin-left: 10;">Temperatura CPU</element>
       </element>
       <!-- "temp_hdr_icon"/"temp_hdr_text" (icon at card-relative 24,12; title 82 from the card's left edge,
            a 10px gap from the icon) moved into "card_cpu_temp" itself as a nested "card-header" ; see this
@@ -300,10 +302,10 @@
         </element>
       </element>
     </element>
-    <element name="card_cpu_usage"  type="form" class="card" xpos="636"  ypos="460" width="376" height="390">
+    <element name="card_cpu_usage"  type="form" class="card" width="376" height="390">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="cpu_hdr_icon" type="image" width="48" height="48">icons/card_cpu.svg</element>
-        <element name="cpu_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="19">Uso actual de CPU</element>
+        <element name="cpu_hdr_text" type="text" class="card-title card-title-lg" style="margin: 0,0,0,10;">Uso actual de CPU</element>
       </element>
       <!-- Restored Phase-pre-0 radial card (kept for production CPU usage). Chart moved to card_cpu_history. -->
       <element name="card-body" type="form" class="flex-col cpu-usage-body" width="232" height="310">
@@ -319,10 +321,10 @@
         </element>
       </element>
     </element>
-    <element name="card_ram"        type="form" class="card" xpos="1034" ypos="460" width="376" height="390">
+    <element name="card_ram"        type="form" class="card" width="376" height="390">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="ram_hdr_icon" type="image" width="48" height="48">icons/card_ram.svg</element>
-        <element name="ram_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Consumo de memoria RAM</element>
+        <element name="ram_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;">Consumo de memoria RAM</element>
       </element>
       <!-- Phase 4 ("migración del ejemplo", fifth sub-step: "card bodies"): nested into "card_ram" as a real XML
            child. Structure: "card-body" (flex row) = [ram_usage_radial] + [right-col (flex column) =
@@ -376,11 +378,12 @@
         </element>
       </element>
     </element>
+    </element><!-- /cards_grid -->
     <!-- Bottom-left slot: Fecha/hora is ALWAYS present. History stacks on top for CPU / Memoria / Disco. -->
     <element name="card_datetime"   type="form" class="card" xpos="238"  ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="dt_hdr_icon" type="image" width="48" height="48">icons/card_calendar.svg</element>
-        <element name="dt_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Fecha y hora del sistema</element>
+        <element name="dt_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;">Fecha y hora del sistema</element>
       </element>
       <element name="datetime_box" type="form" class="inner-box" style="margin: 36,0,0,24; display: flex; flex-direction: column; align-items: center; justify-content: center;" width="328" height="200">
         <element name="system_date" type="text" class="value-date" style="text-align: center;" sizefont="32">#[SYSTEM_DATE]</element>
@@ -395,7 +398,7 @@
     <element name="card_cpu_history" type="form" class="card" xpos="238"  ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="cpuhist_hdr_icon" type="image" width="48" height="48">icons/card_cpu.svg</element>
-        <element name="cpuhist_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Historico de CPU</element>
+        <element name="cpuhist_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;">Historico de CPU</element>
       </element>
       <element name="card-body" type="form" class="flex-col cpu-history-body" width="328" height="270">
         <element name="cpu_history_chart" type="statisticschart" class="cpu-history-chart"
@@ -407,7 +410,7 @@
     <element name="card_disk"       type="form" class="card" xpos="636"  ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="disk_hdr_icon" type="image" width="48" height="48">icons/card_disk.svg</element>
-        <element name="disk_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="17">Almacenamiento del sistema</element>
+        <element name="disk_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;">Almacenamiento del sistema</element>
       </element>
 
       <!-- Primary volume display (RAM-like). Kept high so the bottom band hosts cycle buttons. -->
@@ -450,7 +453,7 @@
     <element name="card_connection" type="form" class="card" xpos="1034" ypos="828" width="376" height="346">
       <element name="card-header" type="form" class="card-header" style="margin: 12,0,0,24;" width="328" height="48">
         <element name="conn_hdr_icon" type="image" width="48" height="48">icons/card_wifi.svg</element>
-        <element name="conn_hdr_text" type="text" class="card-title" style="margin: 0,0,0,10;" sizefont="16">Estado de la conexion a internet</element>
+        <element name="conn_hdr_text" type="text" class="card-title card-title-sm" style="margin: 0,0,0,10;">Estado de la conexion a internet</element>
       </element>
       <!-- Distribucion del prototipo: fila [badge|Conectado] arriba; debajo quality/IP/IP publica
            alineados al borde izquierdo del badge; icono de red a la derecha. Compacto (sin scroll). -->
