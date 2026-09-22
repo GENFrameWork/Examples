@@ -35,6 +35,8 @@
 /*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 #define UI_SYSTEMCFG_SECTIONGENERAL    __L("general")
+#define UI_SYSTEMCFG_UISCALE           __L("uiscale")
+#define UI_SYSTEMCFG_UISCALE_AUTOFIT   __L("uiscale_autofit")
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
@@ -49,6 +51,12 @@ class UI_SYSTEM_CFG : public APPFLOWCFG
     bool                            DoVariableMapping                       (); 
     bool                            DoDefault                               ();  
 
+    float                           GetUIScale                              ();
+    void                            SetUIScale                              (float scale);
+
+    bool                            GetUIScaleAutofit                       ();
+    void                            SetUIScaleAutofit                       (bool autofit);
+
   private:
                                     UI_SYSTEM_CFG                           (XCHAR* namefile);
                                     UI_SYSTEM_CFG                           (UI_SYSTEM_CFG const&);        
@@ -59,6 +67,9 @@ class UI_SYSTEM_CFG : public APPFLOWCFG
     void                            Clean                                   ();
 
     static UI_SYSTEM_CFG*           instance;
+
+    float                           uiscale;
+    bool                            uiscale_autofit;
 };
 
 

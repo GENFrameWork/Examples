@@ -38,6 +38,7 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
@@ -76,6 +77,7 @@
 
 #include "UI_XEvent.h"
 #include "UI_Manager.h"
+#include "UI_Layout.h"
 #include "UI_Element.h"
 #include "UI_Element_Text.h"
 #include "UI_Element_Form.h"
@@ -326,8 +328,11 @@ bool UI_SYSTEM::AppProc_FirstUpdate()
   inpdevice = GEN_INPMANAGER.GetDevice(INPDEVICE_TYPE_KEYBOARD);
   if(inpdevice)
     {
-      button[UI_SYSTEM_BUTTON_ESC]      = inpdevice->GetButton(INPBUTTON_ID_ESCAPE);
-      button[UI_SYSTEM_BUTTON_F5]       = inpdevice->GetButton(INPBUTTON_ID_F5);
+      button[UI_SYSTEM_BUTTON_ESC]            = inpdevice->GetButton(INPBUTTON_ID_ESCAPE);
+      button[UI_SYSTEM_BUTTON_F5]             = inpdevice->GetButton(INPBUTTON_ID_F5);
+      button[UI_SYSTEM_BUTTON_ZOOM_IN]        = inpdevice->GetButton(INPBUTTON_ID_ADD);
+      button[UI_SYSTEM_BUTTON_ZOOM_OUT]       = inpdevice->GetButton(INPBUTTON_ID_SUBTRACT);
+      button[UI_SYSTEM_BUTTON_ZOOM_OUT_MINUS] = inpdevice->GetButton(INPBUTTON_ID_MINUS);
 
       button[UI_SYSTEM_BUTTON_MOUSE]    = inpdevice->GetButton(INPBUTTON_ID_MOUSE_RIGHT);
     }
@@ -595,6 +600,16 @@ bool UI_SYSTEM::UpdateInput()
                                                 HardwareInfo_RequestForced();
                                                 break;
 
+                  case UI_SYSTEM_BUTTON_ZOOM_IN        :
+                  case UI_SYSTEM_BUTTON_ZOOM_OUT       :
+                  case UI_SYSTEM_BUTTON_ZOOM_OUT_MINUS :
+                                                {
+                                                  double delta = UI_LAYOUT_UISCALE_STEP;
+                                                  if(c != UI_SYSTEM_BUTTON_ZOOM_IN) delta = -UI_LAYOUT_UISCALE_STEP;
+                                                  UserInterface_AdjustUIScale(delta);
+                                                }
+                                                break;
+
                   case UI_SYSTEM_BUTTON_ESC   : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
                                                 break;
                 }
@@ -635,6 +650,12 @@ bool UI_SYSTEM::Ini_Graphics(GRPSCREEN* screen)
   //--------------------------------------------------------------------------------------
 
   GetMainScreen()->CreateViewport(GRPVIEWPORT_ID_MAIN , 0.0f, 0.0f, (float)screen->GetWidth()   , (float)screen->GetHeight(), 0, 0, (screen->GetWidth()), (screen->GetHeight()));
+
+  // Fase 5: allow window growth beyond design for autofit/pillarbox demos (WM_GETMINMAXINFO uses viewport max).
+  {
+    GRPVIEWPORT* mainvp = GetMainScreen()->GetViewport(0);
+    if(mainvp) mainvp->SetMaxSize(3840.0f, 2160.0f);
+  }
 
   //--------------------------------------------------------------------------------------
   // Load the dashboard as early as possible: SCREEN_CREATING (which is what is being handled right
@@ -688,7 +709,10 @@ bool UI_SYSTEM::Ini_Graphics(GRPSCREEN* screen)
 bool UI_SYSTEM::Ini_UserInterface(bool on)
 {  
   if(!on)
-    { 
+    {
+      GRPSCREEN* screen = GetMainScreen();
+      if(screen) UnSubscribeEvent(GRPXEVENT_TYPE_SCREEN_CHANGESIZE, screen);
+
       GEN_USERINTERFACE.SubscribeOutputEvents(false, this, &GEN_USERINTERFACE.GetInstance());
       GEN_USERINTERFACE.SubscribeInputEvents(false);
       GEN_USERINTERFACE.DelInstance();
@@ -727,6 +751,44 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
     {
       return false;
     }
+
+  // Fase 1/3/4/5/6 UIScale: design canvas = dashboard authoring size.
+  // Priority: GEN_UI_SCALE env (test override, disables autofit) → autofit from window → manual ini scale.
+  // Fase 6: min hit-target 44 design px (expand IsWithin only; paint AABB unchanged).
+  {
+    UI_LAYOUT* dashboard = GEN_USERINTERFACE.Layouts_Get(__L("dashboard"));
+    if(dashboard)
+      {
+        dashboard->SetDesignSize(1440, 900);
+        dashboard->SetMinHitSize(UI_LAYOUT_MINHITSIZE_DEFAULT);
+
+        bool   useenv     = false;
+        double demoscale  = (double)APPFLOW_CFG.GetUIScale();
+        bool   doautofit  = APPFLOW_CFG.GetUIScaleAutofit();
+        #ifdef _WIN32
+        {
+          char* envscale = getenv("GEN_UI_SCALE");
+          if(envscale && envscale[0])
+            {
+              demoscale = atof(envscale);
+              useenv    = true;
+              doautofit = false;
+            }
+        }
+        #endif
+
+        if(doautofit && !useenv)
+          {
+            GEN_USERINTERFACE.Layouts_ApplyFitUIScale(dashboard);
+          }
+         else
+          {
+            GEN_USERINTERFACE.Layouts_SetUIScale(dashboard, demoscale);
+          }
+
+        SubscribeEvent(GRPXEVENT_TYPE_SCREEN_CHANGESIZE, screen);
+      }
+  }
 
   GEN_USERINTERFACE.SubscribeInputEvents(true);
   GEN_USERINTERFACE.SubscribeOutputEvents(true, this, &GEN_USERINTERFACE.GetInstance());   
@@ -2075,7 +2137,21 @@ bool UI_SYSTEM::UserInterface_ElementSelected(UI_ELEMENT* element)
       case UI_ELEMENT_CHROMEROLE_MINIMIZE : if(GetMainScreen()) GetMainScreen()->Minimize(true);
                                             break;
 
-      case UI_ELEMENT_CHROMEROLE_MAXIMIZE : if(GetMainScreen()) GetMainScreen()->Maximize(true);
+      case UI_ELEMENT_CHROMEROLE_MAXIMIZE : { // Toggle grow ↔ restore. Enable autofit so maximize uses the screen.
+                                              UI_LAYOUT* dashboard = GEN_USERINTERFACE.Layouts_Get(__L("dashboard"));
+                                              if(dashboard && dashboard->IsUIScaleActive())
+                                                {
+                                                  dashboard->SetUIScaleAutofit(true);
+                                                  APPFLOW_CFG.SetUIScaleAutofit(true);
+                                                }
+                                              if(GetMainScreen())
+                                                {
+                                                  if(GetMainScreen()->IsClientSizeAtMaximum())
+                                                    GetMainScreen()->Maximize(false);
+                                                   else
+                                                    GetMainScreen()->Maximize(true);
+                                                }
+                                            }
                                             break;
 
       case UI_ELEMENT_CHROMEROLE_CLOSE    : SetExitType(APPFLOWBASE_EXITTYPE_BY_USER);
@@ -2177,6 +2253,34 @@ bool UI_SYSTEM::UserInterface_SelectSection(UI_SYSTEM_SECTIONID sectionID)
   chart_force_rebuild = true;
   HistoryChart_Apply(true);
 
+  return true;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool UI_SYSTEM::UserInterface_AdjustUIScale(double delta)
+* @brief      Fase 4: runtime zoom (+/−). Clamps, reclama paint, persists to ui_system.ini.
+* @ingroup    EXAMPLES
+*
+* @param[in]  delta : Scale step (typically ±UI_LAYOUT_UISCALE_STEP).
+*
+* @return     bool : true if applied.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool UI_SYSTEM::UserInterface_AdjustUIScale(double delta)
+{
+  UI_LAYOUT* dashboard = GEN_USERINTERFACE.Layouts_Get(__L("dashboard"));
+  if(!dashboard) return false;
+
+  double next = dashboard->GetUIScale() + delta;
+  if(!GEN_USERINTERFACE.Layouts_SetUIScale(dashboard, next)) return false;
+
+  APPFLOW_CFG.SetUIScale((float)dashboard->GetUIScale());
+  APPFLOW_CFG.SetUIScaleAutofit(false);
+  APPFLOW_CFG.Save();
+
+  XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[UI_System] UIScale -> %.2f (manual)"), dashboard->GetUIScale());
   return true;
 }
 
@@ -2329,6 +2433,40 @@ void UI_SYSTEM::HandleEvent_Graphics(GRPXEVENT* event)
                                                 if(!screen) break;
                                                                                               
                                                 Ini_Graphics(screen);                                         
+                                              }
+                                              break;
+
+      case GRPXEVENT_TYPE_SCREEN_CHANGESIZE : { GRPSCREEN* screen = event->GetScreen();
+                                                if(!screen) break;
+
+                                                // Live resize runs inside Windows' modal drag loop: UpdateSize has
+                                                // already recreated empty canvas buffers. Without an immediate UI
+                                                // paint here, WM_SIZE's UpdateViewports() presents black until the
+                                                // main loop runs again (mouse-up). Also: never Save() the ini on
+                                                // every size tick — that stalls the drag.
+                                                UI_LAYOUT* dashboard = GEN_USERINTERFACE.Layouts_Get(__L("dashboard"));
+                                                if(dashboard && dashboard->IsUIScaleActive())
+                                                  {
+                                                    if(dashboard->GetUIScaleAutofit())
+                                                      {
+                                                        GEN_USERINTERFACE.Layouts_ApplyFitUIScale(dashboard);
+                                                        APPFLOW_CFG.SetUIScale((float)dashboard->GetUIScale());
+                                                        APPFLOW_CFG.SetUIScaleAutofit(true);
+                                                      }
+                                                     else
+                                                      {
+                                                        // Manual zoom: still refresh present offsets for the new
+                                                        // framebuffer size (letterbox/pillarbox).
+                                                        GEN_USERINTERFACE.UIScale_PrepareLayout(dashboard);
+                                                      }
+
+                                                    GEN_USERINTERFACE.Update();
+
+                                                    XTRACE_PRINTCOLOR(XTRACE_COLOR_BLUE, __L("[UI_System] UIScale size -> %.2f autofit=%d (%dx%d)"),
+                                                                      dashboard->GetUIScale(),
+                                                                      dashboard->GetUIScaleAutofit() ? 1 : 0,
+                                                                      screen->GetWidth(), screen->GetHeight());
+                                                  }
                                               }
                                               break;
     }

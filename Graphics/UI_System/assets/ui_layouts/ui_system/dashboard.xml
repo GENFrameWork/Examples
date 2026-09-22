@@ -4,6 +4,13 @@
   UI_System - "Monitor del Sistema" dashboard
   Canvas 1440 x 900. The custom window chrome owns y 0..46, so all content starts at y >= 46.
 
+  DESIGN PX / UISCALE (Opción A)
+  ==============================
+    Authors work in design pixels (1440x900). UI_LAYOUT holds designWidth/Height + uiScale
+    (default 1.0). Opt-in: this layout has a <stylesheet>, so IsUIScaleActive() is true.
+    Layouts without stylesheet (e.g. UI_Options) ignore UIScale and stay XML-only.
+    scale=1.0 must remain visually identical to the Fase 0 baseline.
+
   COORDINATE CONVENTION
   =====================
     ROOT element   : ypos = BOTTOM edge, measured downwards from the top of the screen.

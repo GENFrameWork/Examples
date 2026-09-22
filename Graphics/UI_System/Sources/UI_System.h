@@ -94,6 +94,9 @@ enum UI_SYSTEM_BUTTONS
 {
   UI_SYSTEM_BUTTON_ESC                      = 0 ,
   UI_SYSTEM_BUTTON_F5                           ,
+  UI_SYSTEM_BUTTON_ZOOM_IN                      ,
+  UI_SYSTEM_BUTTON_ZOOM_OUT                     ,
+  UI_SYSTEM_BUTTON_ZOOM_OUT_MINUS               ,
 
   UI_SYSTEM_BUTTON_MOUSE                        ,
 
@@ -222,6 +225,7 @@ class UI_SYSTEM : public APPFLOWGRAPHICS, public XFSMACHINE
     bool                            UserInterface_CFGChromes                (GRPSCREEN* screen);    
 
     bool                            UserInterface_SelectSection             (UI_SYSTEM_SECTIONID sectionID);
+    bool                            UserInterface_AdjustUIScale             (double delta);
 
     void                            HandleEvent_UserInterface               (UI_XEVENT* event);
     void                            HandleEvent_Graphics                    (GRPXEVENT* event);
