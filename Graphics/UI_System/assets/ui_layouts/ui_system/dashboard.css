@@ -29,6 +29,7 @@
        units     : % / em / rem / vw / vh / calc en xpos/ypos/width/height/padding/margin/gap/
                    row-gap/column-gap/flex-basis cuando hay stylesheet (Fase 8 + Track L.2).
                    Resolución en CARGA (no resize).
+       @media    : Track B — (min-width|max-width) [and ...] en carga vs designwidth (no resize).
        inline    : style="" gana sobre XML y reglas de hoja. var(...) NO se expande en inline.
        transition : "transition: <ms>" en color/background-color ante :hover/:selected/...
 
@@ -352,6 +353,18 @@ form.cards-grid {
   grid-template-columns: 376 376 376;
   /* Track L.2: 1.375rem = 22px at root 16 (same as former column-gap: 22). */
   column-gap:       1.375rem;
+}
+
+
+/* --- Track B: @media (load-time vs design width) ---------------------------------------------------
+   Evaluated once at CreateLayouts against layout designwidth (1440). Not re-run on window resize (L.3).
+   max-width:1500 matches the dashboard design canvas → wider card column-gap as a visible proof.
+   -------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 1500px) {
+  form.cards-grid {
+    column-gap: 2rem;   /* 32px at root 16 — wider than the 22px default above */
+  }
 }
 
 

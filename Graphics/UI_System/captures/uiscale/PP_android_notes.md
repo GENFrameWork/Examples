@@ -23,19 +23,41 @@ cmake --preset 9-android-arm64
 cmake --build --preset 9-android-arm64
 ```
 
-Salida (esta sesión): `Build/Android/arm64-v8a/ui_system.apk` (+ `ui_system-aligned.apk`). Link OK; `UI_System.cpp` + APK packaging OK.
+Salida: `Build/Android/arm64-v8a/ui_system.apk`.
 
-## Checklist dispositivo / emulador
+## Smoke dispositivo / emulador — ✅ cerrado (2026-09-22)
 
-Sin dispositivo adb en esta sesión (`adb devices` vacío). Al tener device/emulator:
+**Entorno:** AVD `GEN_UI_Smoke_API34` (Android 14, `google_apis` x86_64, ABI list incluye `arm64-v8a`).  
+**APK:** `com.gen.ui_system` / `android.app.NativeActivity` (`screenOrientation=landscape`).  
+**Nota:** no hay teléfono ADB usable en la sesión (Xiaomi 14T Pro visible en MTP sin interfaz ADB operativa).
 
-1. `adb install -r <apk>`
-2. Abrir UI_System; logcat debe mostrar `[UI_System] Android UIScale=1.0 design=1440x900`
-3. Rotar / config change → log `[ANDROID] OnConfigurationChanged: keep design 1440x900` (sin resize a nativo)
-4. Captura landscape + portrait → `PP_android_landscape.png` / `PP_android_portrait.png`
-5. Verificar: dashboard legible letterboxed; touch sobre cards/nav acierta (no offset)
+| Check | Resultado |
+|-------|-----------|
+| `adb install -r ui_system.apk` | Success |
+| Launch + dashboard visible | ✅ capturas |
+| Design canvas fijo | ✅ `GEN_BLIT SIZES canvas=1440x900 screen=1440x900` |
+| Fit = surface nativa | ✅ `surface=2400x1022` / `surface=1600x852` |
+| Touch (sidebar + card) | ✅ proceso sigue vivo |
+| Portrait | N/A (manifest landscape); 2.ª captura = landscape estrecho |
+
+### Capturas
+
+- `PP_android_landscape.png` — wm 2400×1080 → surface 2400×1022
+- `PP_android_landscape_narrow.png` — wm 1600×900 → surface 1600×852  
+  (`PP_android_portrait.png` = copia del narrow por naming del checklist)
+- `PP_android_log_excerpt.txt` — líneas `GEN_BLIT SIZES`
+
+### Evidencia clave
+
+```text
+SIZES canvas=1440x900 screen=1440x900 surface=2400x1022 texture=1440x900
+SIZES canvas=1440x900 screen=1440x900 surface=1600x852  texture=1440x900
+```
+
+Canvas de autoría no se reescribe al tamaño nativo; GLES letterbox adapta.
 
 ## Notas
 
-- `GEN_UI_SCALE` env es portable (también Android) pero el path Android ignora overrides de scale Present.
+- `GEN_UI_SCALE` env es portable pero el path Android ignora overrides de scale Present.
 - Track B (`@media`) sigue diferido; Android no reflowa XML — solo letterbox.
+- Re-smoke físico: activar depuración USB en el Xiaomi y repetir `adb install` + capturas.

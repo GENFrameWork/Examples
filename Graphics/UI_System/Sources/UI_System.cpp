@@ -42,6 +42,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "UI_StyleSheet.h"
+
 #include "VersionFrameWork.h"
 
 #include "XPath.h"
@@ -765,6 +767,10 @@ bool UI_SYSTEM::Ini_UserInterface(bool on)
       {
         dashboard->SetDesignSize(1440, 900);
         dashboard->SetMinHitSize(UI_LAYOUT_MINHITSIZE_DEFAULT);
+        if(UI_STYLESHEET* sheet = dashboard->GetStyleSheet())
+          {
+            sheet->SetMediaViewport(1440, 900);
+          }
 
         bool   useenv     = false;
         double demoscale  = (double)APPFLOW_CFG.GetUIScale();

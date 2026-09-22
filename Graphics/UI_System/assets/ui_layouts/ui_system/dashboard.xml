@@ -60,7 +60,7 @@
 
   <stylesheet>dashboard.css</stylesheet>
 
-  <layout name="dashboard" backgroundcolor="13,17,23">
+  <layout name="dashboard" backgroundcolor="13,17,23" designwidth="1440" designheight="900">
 
     <!-- ==========================================================================================
          SURFACES  (drawn first, everything else sits on top)
